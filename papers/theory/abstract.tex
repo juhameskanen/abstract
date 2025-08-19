@@ -1,0 +1,44 @@
+% !TeX root = abstract.tex
+\documentclass{book}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\renewcommand{\arraystretch}{1.3}
+\usepackage[backend=biber]{biblatex} % or use natbib if you prefer
+\addbibresource{../references.bib}
+\usepackage{tikz}
+\usepackage{tipa}
+\usetikzlibrary{decorations.pathreplacing,calc,positioning}
+\usetikzlibrary{positioning,calc}
+
+\begin{document}
+
+\tableofcontents
+
+\include{introduction}
+\include{singularity}
+%\include{paper2}
+%\include{time}
+%\include{paper_1b}
+%\include{paper1c}
+%\include{paper3}
+%\include{paper8}
+%\include{paper4}
+%\include{paper5}
+%\include{paper6}
+%\include{paper7}
+
+% Example citation (replace 'examplekey' with an actual key from your references.bib)
+\nocite{*}
+
+% Print the bibliography
+\printbibliography
+
+\end{document}
+

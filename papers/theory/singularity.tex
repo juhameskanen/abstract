@@ -1,0 +1,189 @@
+\chapter{The Nature of Black Hole Singularities}
+
+\section{Introduction}
+
+In classical general relativity, black hole singularities can take two distinct forms depending on their angular momentum. 
+Non-rotating (Schwarzschild) black holes possess a point-like singularity at the center, whereas rotating (Kerr) black holes 
+feature a ring-shaped singularity lying in the equatorial plane.
+
+In this work, we investigate both singularities from an information-theoretic perspective. The guiding hypothesis, 
+which we term the Methodological Epilogue, is that geometric spacetime and computational simulation can be viewed as 
+two equivalent interpretations of a single underlying informational structure. 
+Within this framework, entropy serves as the unifying quantity, allowing geometric and computational descriptions to be 
+mapped onto one another.
+
+The central question we pursue is whether this reformulation yields predictions beyond those of GR. Specifically, 
+we ask whether approaching singularities as information-theoretic phenomena—rather than merely as geodesic 
+endpoints—provides new insights into their structure, dynamics, or physical interpretation. To explore this, 
+we develop both analytic reasoning and numerical simulations of collapsing dust clouds 
+in Schwarzschild spacetime, interpreted through entropy and information flow.
+
+
+\section{Methods}
+
+We model black hole evolution through computational simulation. 
+Instead of measuring thermodynamic entropy, we compute the Shannon entropy of the 
+\emph{bitstrings} that encode the discretized particle positions and spacetime geometry in memory.  
+This bitstring entropy directly quantifies the informational variability of the simulated spacetime image, 
+and is the central observable linking computation and geometry.
+
+
+\subsection*{Definition: Execution Trace}
+
+\begin{quote}
+\textbf{Execution Trace.}  
+Let \( \mathcal{M} \) denote the set of all memory locations in a deterministic computing system, including registers and control flags. 
+A \emph{machine state} \( s \in \mathcal{S} \) is a complete assignment of values to all elements of \( \mathcal{M} \).
+
+Let \( P = (I_1, I_2, \dots, I_n) \) be a finite sequence of deterministic instructions, where each instruction induces a transition:
+\[
+I_k : \mathcal{S} \rightarrow \mathcal{S}
+\]
+
+Then the \emph{execution trace} \( T \) of program \( P \) is the ordered sequence of states:
+\[
+T = (s_0, s_1, \dots, s_n), \quad \text{where } s_{k+1} = I_{k+1}(s_k).
+\]
+
+The execution trace captures the total informational content of the computation.
+Any simulated phenomenon is necessarily embedded in this trace. 
+In practice, we restrict to the \emph{bitstring sub-trace} that encodes the discretized spacetime geometry.
+\end{quote}
+
+
+
+\subsection{Mapping Bitstrings to Geometry}
+
+Let a geometric state be encoded as a bitstring $b \in \{0,1\}^L$. Each such bitstring represents 
+the discretized positions of all particles in the simulated dust cloud.
+
+Let:
+\[
+  \mathcal{C} = \{0,1\}^{3k}
+\]
+be the space of 3D geometric configurations. Define:
+\[
+  f : \mathcal{C} \to \mathbb{Z}^3, \quad f(b) = (\phi(b_1), \phi(b_2), \phi(b_3)),
+\]
+where $\phi : \{0,1\}^k \to \mathbb{Z}$ decodes fixed-length binary segments into integers. 
+This discretization introduces finite resolution but suffices to define entropy across state sequences. 
+
+
+\section{Entropy Collapse and Geometric Singularity}
+
+We define the Shannon entropy of a bitstring $b \in \{0,1\}^L$ as:
+\[
+  H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
+\]
+where $p_0$ and $p_1$ are the empirical frequencies of $0$- and $1$-bits in $b$.
+
+Over a sequence of states (the bitstring sub-trace), the entropy is computed for each frame, yielding 
+an \emph{entropy trajectory} that reflects the collapse of information variability as particles fall toward the singularity. 
+
+
+\section{Simulations}
+
+Two different metrics were studied: Schwarzchild and Kerr. Particle trajectories were tracked 
+through the event horizon as far as the numerically reasonable, and then frozen.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/schwarzschild.png}
+  \caption{Entropy signature of bitstrings derived from trajectories integrated with Painlevé–Gullstrand coordinates.}
+  \label{fig:schwarzschild_metric}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/kerr.png}
+  \caption{Entropy signature of bitstrings derived from trajectories integrated with Kerr metric.}
+  \label{fig:ker_metric}
+\end{figure}
+
+
+All the simulations show a monotonic decrease in bitwise entropy as particles fall inward. 
+The extrapolated entropy approaches zero as the particles approach the singularity.
+
+
+We define the following lemma:
+
+\section{Lemma: Entropy-Singularity}
+
+\begin{quote}
+  \textbf{Entropy--Singularity Lemma (Fundamental Statement):} \\
+  Let $b_t \in \{0,1\}^L$ be the bitstring representation of the simulated geometry at time $t$. 
+  If $H(b_t) \to 0$, then the decoded geometry $f(b_t)$ degenerates to a singleton set. That is:
+  \[
+    H(b_t) \to 0 \quad \Rightarrow \quad \exists p \in \mathbb{Z}^3 \text{ such that } f(b_t) = p \ \ \forall t.
+  \]
+\end{quote}
+
+
+
+\subsection*{Proof of Entropy-Singularity Lemma}
+
+\begin{proof}
+If $H(b_t)=0$, then the bitstring consists entirely of repeated bits. 
+This corresponds to a single repeated encoded state $b^\ast$. 
+For any mapping $f:\{0,1\}^L \to \mathbb{Z}^3$, we have 
+$f(b_t)=(f(b^\ast),f(b^\ast),\dots)$, so the image set is $\{f(b^\ast)\}$. 
+Thus the geometric representation degenerates to a single point, regardless of the choice of $f$.
+\end{proof}
+
+
+This result is representation-invariant: any dataset of zero entropy corresponds to a single repeated state, 
+and any geometric mapping of that state must yield a single point. 
+Thus, zero informational variability implies geometric collapse, independently of coordinate system, 
+numerical encoding, or representation scheme.
+
+section*{Conclusion}
+
+In general relativity, a singularity is traditionally interpreted as a boundary of the spacetime manifold, where 
+curvature invariants diverge and geodesics terminate incompletely. By applying information-theoretic methods, 
+we have shown that singularities can be reinterpreted as the geometric manifestation of an information state of zero entropy.
+
+At zero entropy, no geometric structures can emerge, and consequently, no particle-like degrees of freedom exist. 
+Following from this, singularities do not correspond to points of infinite density; rather, they are points where gravity 
+itself vanishes, as no information exists to encode spacetime or particles.
+
+Thus, rather than representing points of infinite density, singularities can be understood as regions of zero density. 
+
+
+\section{Discussion}
+
+We have considered both static (Schwarzschild) and rotating (Kerr) black holes. 
+The Entropy–Singularity Lemma is expected to hold in general, dynamic settings, 
+since it depends only on the information-theoretic property of vanishing entropy, 
+independent of the details of spacetime evolution.
+
+Our simulations confirm the Entropy–Singularity Lemma in a computational context. 
+Although the global thermodynamic entropy of the black hole increases (consistent with the second law), 
+the local bitstring entropy encoding spatial geometry decreases toward the singularity. 
+This reflects a narrowing of accessible informational states and growing determinism in geometry.
+
+This distinction does not contradict thermodynamics. Rather, it separates global physical entropy 
+from local representational entropy used in encoding spacetime. 
+Our findings suggest that entropy provides a fundamental informational scale, 
+with zero entropy corresponding to a collapse of space.
+
+From this perspective, gravitational singularities can be interpreted not as edges of spacetime, 
+but as well-defined geometric objects: point-like singularities in non-rotating black holes and 
+ring-shaped singularities in rotating black holes.
+
+
+\section{Bitstring Encoding}
+
+
+To serialize a geometric state into a bitstring $b \in \{0,1\}^L$:
+\begin{enumerate}
+  \item Quantize continuous coordinates: $\mathbb{R} \to \mathbb{Z}$
+  \item Convert integers to binary strings of fixed width $k$
+  \item Concatenate binary segments into a full state bitstring
+\end{enumerate}
+
+To compute entropy:
+\[
+  H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
+\]
+where $p_0$ and $p_1$ are empirical frequencies of bits in $b$.
+
