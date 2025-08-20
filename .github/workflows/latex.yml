@@ -12,11 +12,7 @@ jobs:
     strategy:
       matrix:
         paper:
-          - theory
-          - paper1
-          - paper2
-          - paper3
-          - paper4
+          - paper0
 
     steps:
       - uses: actions/checkout@v4
