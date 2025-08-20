@@ -1,27 +1,28 @@
-# fixed_simulation.py
+"""
+blackhole.py 
+Base classes for black hole simulations
+"""
+
 from __future__ import annotations
-from abc import ABC, abstractmethod
+from abc import  abstractmethod
 from dataclasses import dataclass
 from typing import List, Tuple
 import math
-from typing import Optional
 import matplotlib.pyplot as plt
 import numpy as np
-
-
 
 
 # Helpers: spherical <-> cartesian (for output plotting)
 def sph_from_cart(pos: np.ndarray) -> tuple:
     x, y, z = pos
     r = np.linalg.norm(pos)
-    theta = 0.0 if r == 0.0 else math.acos(z / (r + 1e-16))
-    phi = math.atan2(y, x)
+    theta = 0.0 if r == 0.0 else np.acos(z / (r + 1e-16))
+    phi = np.atan2(y, x)
     return r, theta, phi
 
 def cart_from_sph(r: float, theta: float, phi: float) -> np.ndarray:
-    s, c = math.sin(theta), math.cos(theta)
-    return np.array([r * s * math.cos(phi), r * s * math.sin(phi), r * c], dtype=np.float64)
+    s, c = np.sin(theta), np.cos(theta)
+    return np.array([r * s * np.cos(phi), r * s * np.sin(phi), r * c], dtype=np.float64)
 
 
 
@@ -83,14 +84,16 @@ def rk4_step(pos: np.ndarray, vel: np.ndarray, accel_fn, dt: float) -> Tuple[np.
     return pos_new, vel_new
 
 
-class BaseDustCloud:
-    """Base dust cloud that evolves particles in Cartesian coordinates.
+class DustCloud:
+    """Dust cloud that evolves particles in Cartesian coordinates.
 
     Subclasses must implement `acceleration(pos, vel) -> np.ndarray`.
     """
 
-    def __init__(self, particles: List[Particle]) -> None:
-        self.particles = particles
+    def __init__(self, n: int, r0: float, spacing: float, bh: BlackHole,
+                    tangential_fraction: float = 0.8, radial_fraction: float = 0.15,
+                    rng_seed: int = 42) -> None:
+        self.particles = self.make_particles(n, r0, spacing, bh, tangential_fraction, radial_fraction)
 
     def acceleration(self, pos: np.ndarray, vel: np.ndarray) -> np.ndarray:
         """Return acceleration vector for a given particle state.
@@ -106,10 +109,75 @@ class BaseDustCloud:
         """
         pass
 
-    # ---------- entropy ----------
+    @staticmethod
+    def make_particles(n: int, r0: float, spacing: float, bh: BlackHole,
+                    tangential_fraction: float = 0.8, radial_fraction: float = 0.15,
+                    rng_seed: int = 42) -> List[Particle]:
+        """Generate particles with initial positions and velocities around a black hole.
+
+        Particles are initialized in approximately spherical shells with some
+        tangential (circular) and radial velocity components. The distribution of
+        positions is randomized over solid angle, and the velocities are chosen to
+        reflect orbital and infall dynamics near the black hole.
+
+        Args:
+            n (int): Number of particles to generate.
+            r0 (float): Initial radial distance of the first particle from the black hole.
+            spacing (float): Radial spacing between consecutive particles.
+            bh (BlackHole): Black hole object providing the gravitational mass.
+            tangential_fraction (float, optional): Fraction of the local circular
+                orbital speed assigned to the tangential velocity component.
+                Defaults to 0.8.
+            radial_fraction (float, optional): Fraction of the local escape speed
+                assigned to the inward radial velocity component. Defaults to 0.15.
+            rng_seed (int, optional): Random seed for reproducibility. Defaults to 42.
+
+        Returns:
+            List[Particle]: A list of initialized Particle objects with positions
+            and velocities in Cartesian coordinates.
+
+        Notes:
+            - Positions are distributed randomly over the sphere at increasing radii.
+            - Velocities are set by combining an inward radial infall component
+            and a tangential orbital component.
+            - The system uses Newtonian approximations (not full GR).
+        """
+        rng = np.random.default_rng(rng_seed)
+        rs = [r0 + i * spacing for i in range(n)]
+        thetas = np.arccos(1 - 2 * rng.random(n))
+        phis = 2 * np.pi * rng.random(n)
+
+        particles: List[Particle] = []
+        for r, theta, phi in zip(rs, thetas, phis):
+            # Cartesian position
+            x = r * np.sin(theta) * np.cos(phi)
+            y = r * np.sin(theta) * np.sin(phi)
+            z = r * np.cos(theta)
+            pos = np.array([x, y, z], dtype=np.float64)
+
+            # radial and tangential unit vectors
+            rhat = pos / (np.linalg.norm(pos) + 1e-12)
+            # choose a perpendicular direction for tangential
+            rand_vec = rng.normal(size=3)
+            tang = np.cross(rhat, rand_vec)
+            tang /= (np.linalg.norm(tang) + 1e-12)
+
+            # speeds
+            v_circ = np.sqrt(bh.mass / r)      # circular speed magnitude
+            v_radial = np.sqrt(2 * bh.mass / r) * radial_fraction
+
+            vel_vec = (-rhat * v_radial) + (tang * v_circ * tangential_fraction)
+
+            particles.append(Particle(x=float(x), y=float(y), z=float(z),
+                                    vx=float(vel_vec[0]), vy=float(vel_vec[1]), vz=float(vel_vec[2])))
+        return particles
+
+
     @staticmethod
     def bit_entropy(positions_1d: np.ndarray, scale: float = 1000.0) -> float:
-        """Bitwise Shannon entropy of scaled positions (1D array of scalars)."""
+        """Bitwise Shannon entropy of particle positions (1D array of scalars).
+        Quantize to nonnegative integers and concantenate to bistring to avoid 
+        entropy emerging from numeric representation e.g. floating points"""
         if positions_1d.size == 0:
             return 0.0
         # map to nonnegative ints
@@ -157,7 +225,7 @@ class DustCloudSimulation:
         self.radii = radii_steps_n.T  # (N, steps)
 
         # entropy time series (one scalar per time step)
-        ent = []
+        ent : float = []
         for i in range(radii_steps_n.shape[0]):
             ent.append(self.cloud.bit_entropy(radii_steps_n[i, :]))
         self.entropies = np.array(ent)
