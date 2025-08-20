@@ -94,6 +94,7 @@ class DustCloud:
                     tangential_fraction: float = 0.8, radial_fraction: float = 0.15,
                     rng_seed: int = 42) -> None:
         self.particles = self.make_particles(n, r0, spacing, bh, tangential_fraction, radial_fraction)
+        self.radius = r0 + spacing * n * 1.2
 
     def acceleration(self, pos: np.ndarray, vel: np.ndarray) -> np.ndarray:
         """Return acceleration vector for a given particle state.
@@ -193,12 +194,10 @@ class DustCloud:
         return float(ent)
 
 
-
-
 class DustCloudSimulation:
-    """Run a BaseDustCloud (cartesian) and provide visualizations."""
+    """DustCloud simulation (cartesian) and visualizations."""
 
-    def __init__(self, cloud: BaseDustCloud, dt: float, max_t: float, tolerance: float = 1e-8) -> None:
+    def __init__(self, cloud: DustCloud, dt: float, max_t: float, tolerance: float = 1e-8) -> None:
         self.cloud = cloud
         self.dt = float(dt)
         self.max_t = float(max_t)
@@ -249,6 +248,12 @@ class DustCloudSimulation:
         for j in range(0, N, max(1, int(every_n))):
             traj = positions[:, j, :]  # (steps, 3)
             traj_ax.plot(traj[:, 0], traj[:, 1], traj[:, 2], lw=0.8, alpha=0.8)
+        
+        limit = self.cloud.radius
+        traj_ax.set_xlim(-limit, limit)
+        traj_ax.set_ylim(-limit, limit)
+        traj_ax.set_zlim(-limit, limit)
+
         traj_ax.set_xlabel('X')
         traj_ax.set_ylabel('Y')
         traj_ax.set_zlabel('Z')
@@ -272,7 +277,7 @@ class DustCloudSimulation:
         """2D radial trajectories + entropy plot (backwards-compatible)."""
         if self.times is None or self.radii is None or self.entropies is None:
             raise RuntimeError("Call run() before visualize().")
-
+        limit = self.cloud.radius
         times = self.times
         radii = self.radii
         ent = self.entropies
@@ -282,6 +287,7 @@ class DustCloudSimulation:
         for j in range(0, radii.shape[0], max(1, int(every_n))):
             ax.plot(times, radii[j], lw=0.8, alpha=0.9)
         ax.axhline(y=self.cloud.bh.radius, linestyle="--", label=f"r_h = {self.cloud.bh.radius:.3g}")
+        ax.set_ylim(0, limit)
         ax.set_xlabel("t")
         ax.set_ylabel("r")
         ax.set_title((title + " — " if title else "") + "Trajectories")
