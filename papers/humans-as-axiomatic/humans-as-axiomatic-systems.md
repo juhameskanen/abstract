@@ -124,7 +124,6 @@ The universe is fundamentally informational. Time and pain are emergent, interna
 - Price, H. (1996). *Time’s Arrow and Archimedes’ Point: New Directions for the Physics of Time*.  
 - Tegmark, M. (2007). *The Mathematical Universe*.  
 
----
 
 ---
 
