@@ -1,9 +1,9 @@
-name: Sync docs to Wiki
+name: Mirror repo to Wiki
 
 on:
   push:
     branches:
-      - main   # or whatever branch you want to sync from
+      - main   # or master if that's your default branch
 
 jobs:
   sync:
@@ -19,12 +19,18 @@ jobs:
         run: |
           git clone "https://github.com/${{ github.repository }}.wiki.git" wiki
 
-      - name: Sync docs folder into wiki
+      - name: Mirror repo content into wiki
         run: |
-          rsync -av --delete docs/ wiki/
-          # Rename docs/index.md -> Home.md if you want a landing page
-          if [ -f "wiki/index.md" ]; then
-            mv wiki/index.md wiki/Home.md
+          # Clear old wiki contents
+          rsync -av --delete \
+            --exclude '.git' \
+            --exclude 'wiki' \
+            --exclude '.github' \
+            ./ wiki/
+
+          # Rename README.md -> Home.md
+          if [ -f "README.md" ]; then
+            mv wiki/README.md wiki/Home.md
           fi
 
       - name: Commit & push changes
@@ -33,5 +39,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Sync docs from main branch" || echo "No changes"
+          git commit -m "Mirror repo contents to wiki" || echo "No changes"
           git push
