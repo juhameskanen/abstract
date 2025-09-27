@@ -15,9 +15,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Clone wiki repo
+      - name: Clone wiki repo (with token)
         run: |
-          git clone "https://github.com/${{ github.repository }}.wiki.git" wiki
+          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
 
       - name: Mirror repo content into wiki
         run: |
