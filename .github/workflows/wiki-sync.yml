@@ -1,4 +1,4 @@
-name: Sync repo to Wiki
+name: Sync Repo to Wiki
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main  # change if your default branch is master
 
 jobs:
-  sync:
+  sync-wiki:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,36 +20,43 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.WIKI_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-
-          # Start ssh-agent and add key
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
-
-          # Add GitHub to known_hosts
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Clone wiki via SSH
-        run: git clone git@github.com:juhakm/abstract.wiki.git wiki
+        run: git clone git@github.com:${{ github.repository }}.wiki.git wiki
 
-      - name: Mirror repo content to wiki
+      - name: Mirror repo to wiki
         run: |
+          # Copy all files except .git, .github, and wiki folder
           rsync -av --delete \
             --exclude '.git' \
-            --exclude 'wiki' \
             --exclude '.github' \
+            --exclude 'wiki' \
             ./ wiki/
 
-          # Rename README.md -> Home.md
-          if [ -f "README.md" ]; then
-            mv wiki/README.md wiki/Home.md
-          fi
+          # Flatten Markdown pages in papers/* for wiki
+          find wiki/papers -type f -name "*.md" | while read file; do
+            folder=$(basename $(dirname "$file"))
+            name=$(basename "$file")
+            mv "$file" "wiki/${folder}_${name}"
+          done
 
-      - name: Fix wiki links (.md → no extension)
+          # Remove empty directories after flattening
+          find wiki/papers -type d -empty -delete
+
+      - name: Fix internal wiki links
         run: |
+          # Links to other Markdown pages in papers/*
           find wiki -name "*.md" -type f -print0 | \
-            xargs -0 sed -i 's/](\([^)]*\)\.md)/](\1)/g'
+            xargs -0 sed -i 's#](papers/\([^/]*\)/\([^)]*\)\.md)#](\1_\2)#g'
 
-      - name: Commit & push changes
+          # Remove .md extensions globally (wiki style)
+          find wiki -name "*.md" -type f -print0 | \
+            xargs -0 sed -i 's/]\(\([^)]*\)\)\.md]/](\1)/g'
+
+      - name: Commit & push wiki
         run: |
           cd wiki
           git config user.name "github-actions[bot]"
