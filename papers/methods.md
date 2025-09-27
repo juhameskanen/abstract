@@ -1,6 +1,9 @@
 
 # Methodological Epilogue
 
+Juha Meskanen
+Abstract Researcher
+
 ## Abstract
 
 We are embedded inside the system we study; this creates a methodological problem for claims of total understanding.  
