@@ -129,6 +129,6 @@ The Methodological Epilogue proposes a conservative route: rather than claim abs
 
 ---
 
-[⬆ Up](toc.md) | [⬅ Previous](#) | [Humans as Axiomatic Systems ➡](humans-as-axiomatic/humans-as-axiomatic-systems.md)
+[⬆ Up](toc.md) | [⬅ Previous](#) | [Next ➡](humans-as-axiomatic/humans-as-axiomatic-systems.md)
 
 *© 2024 The Abstract Universe Project. All rights reserved.*
