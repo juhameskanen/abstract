@@ -3,7 +3,7 @@
 ## Contents
 
 - [Methods](methods.md)
-- [Humans as Axiomatic Systems](humans-as-axiomatic/humans-as-axiomatic-systems.md)
+- [The Informational Derivation of Reality](humans-as-axiomatic/humans-as-axiomatic-systems.md)
 
 ---
 
