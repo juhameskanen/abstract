@@ -1,7 +1,6 @@
 # The Abstract Universe Project
 
 ## Contents
-- [Introduction ➡](introduction.md)
 - [Papers ➡](papers/toc.md)
 - [CHANGELOG ➡](CHANGELOG.md)
 
