@@ -1,8 +1,8 @@
 
 # Methodological Epilogue
 
-Juha Meskanen
-Abstract Researcher
+*Juha Meskanen*   
+*Abstract Researcher*
 
 ## Abstract
 
