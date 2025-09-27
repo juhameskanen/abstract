@@ -21,17 +21,21 @@ jobs:
 
       - name: Mirror repo content into wiki
         run: |
-          # Clear old wiki contents
           rsync -av --delete \
             --exclude '.git' \
             --exclude 'wiki' \
             --exclude '.github' \
             ./ wiki/
 
-          # Rename README.md -> Home.md
+          # Rename README.md -> Home.md for wiki landing page
           if [ -f "README.md" ]; then
             mv wiki/README.md wiki/Home.md
           fi
+
+      - name: Fix wiki links (.md → no extension)
+        run: |
+          find wiki -name "*.md" -type f -print0 | \
+            xargs -0 sed -i 's/](\([^)]*\)\.md)/](\1)/g'
 
       - name: Commit & push changes
         run: |
