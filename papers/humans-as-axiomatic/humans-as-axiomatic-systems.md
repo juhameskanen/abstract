@@ -127,6 +127,6 @@ The universe is fundamentally informational. Time and pain are emergent, interna
 
 ---
 
-[⬆ Up](../toc.md) | [⬅ Previous](../methods.md) | [ Next ➡](../time-as-computation/time-as-computation.md)
+[⬆ Up](../toc.md) | [⬅ Previous](../methods.md) | [ Next ➡](#)
 
 *© 2025 The Abstract Universe Project. All rights reserved.*
