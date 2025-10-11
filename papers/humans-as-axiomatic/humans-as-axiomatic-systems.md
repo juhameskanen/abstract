@@ -1,9 +1,5 @@
 # The Informational Derivation of Reality: Consciousness, Time, and Ontological Equivalence
 
-*Juha Meskanen*  
-*Abstract Researcher*  
-
-
 ## Abstract
 
 This paper presents a formal derivation of the nature of consciousness and subjective time based on four observable axioms concerning DNA and physical laws. By applying the **Church-Turing Thesis** and the principle of **Causal Functionalism**, we conclude that a perfectly simulated human is necessitated to experience consciousness and pain. Thought experiments involving computational optimization and multi-threading demonstrate that time and subjective experience must be emergent properties of the system's **internal informational structure**, independent of external execution speed. This leads directly to an **Informational Ontology**, where the computer running the simulation and the resulting simulated universe are two ontologically equivalent interpretations of the same fundamental data, necessitating the reality of all possible informational arrangements ($\large 2^n$). The analysis bypasses the philosophical **Hard Problem of Consciousness** by asserting that pain's causal efficacy ($A_4$) renders the Philosophical Zombie logically impossible within this framework.
