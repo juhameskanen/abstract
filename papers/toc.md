@@ -4,6 +4,7 @@
 
 - [Methodological Epilogue](methods.md)
 - [The Informational Derivation of Reality](humans-as-axiomatic/humans-as-axiomatic-systems.md)
+- [Emergence of Time in a Static Quantum Multiverse](emergence-of-time.md)
 
 ---
 
