@@ -2,7 +2,7 @@
 
 ## Abstract
 
-We propose an **Algorithmic Selection Principle (ASP)** to resolve the **Problem of Time** and the issue of **infinities (renormalization)** in canonical quantum gravity. By adopting an Everetian interpretation of the timeless **Wheeler-DeWitt (WdW)** equation, the universe is described by a static superposition over all 3-geometries and matter fields, residing in a high-dimensional configuration space (superspace). We argue that conscious observers most likely find themselves emerged in the branches of the universal wavefunction $\Psi$ that are **most compressible** in the sense of Algorithmic Information Theory. The macroscopic smoothness of spacetime and the predictable flow of time are thus not fundamental properties, but rather the low-complexity artifacts of the dominant, highly regular sub-ensembles of the static multiverse that permit the formation of complex, information-processing structures (observers). We interpret the initial singularity as a **pure informational state** (zero entropy). Observer existence is the **self-selection filter**, which traces permutations through configuration space compatible with the observer algorithm (e.g., DNA). Entropy increases along these paths because they are statistically favored for sustaining complex observers, while all other permutations are irrelevant to the conscious observer.
+We propose an **Algorithmic Selection Principle (ASP)** to resolve the **Problem of Time** and the issue of **infinities (renormalization)** in canonical quantum gravity. By adopting an Everetian interpretation of the timeless **Wheeler-DeWitt (WdW)** equation, the universe is described by a static superposition over all 3-geometries and matter fields, residing in a high-dimensional configuration space (superspace). We argue that conscious observers most likely find themselves emerged in the branches of the universal wavefunction $\Psi$ that are **most compressible** in the sense of Algorithmic Information Theory. The macroscopic smoothness of spacetime and the predictable flow of time are thus not fundamental properties, but rather the low-complexity artifacts of the dominant, highly regular sub-ensembles of the static multiverse that permit the formation of complex, information-processing structures (observers). Observer existence is the **self-selection filter**, which traces permutations through configuration space compatible with the observer algorithm (e.g., DNA). These paths are statistically favored for sustaining complex observers, while all other permutations are irrelevant to the observer.
 
 The observed physics, including finite (renormalized) expectation values, is therefore a self-selection effect.
 
@@ -106,7 +106,9 @@ $$
 
 Consider a single photon and a minimal observer (detector, information-processing system, or hypothetical device). The ASP applies to the **joint system**, evaluating compressibility of the relational history:
 
-$K(S_{\text{photon+observer}} \mid \Psi) \text{ minimal} \;\;\; \Longrightarrow \;\;\; \text{dominant experienced history.} $
+$$
+K(S_{\text{photon+observer}} \mid \Psi) \text{ minimal} \;\;\; \Longrightarrow \;\;\; \text{dominant experienced history.}
+$$
 
 - Only these sequences are relevant to conscious experience.  
 - Paths that do not preserve the observer algorithm exist in $\Psi$, but are **not experienced**.  
@@ -170,11 +172,14 @@ In this framework, the **observer filter (e.g., DNA algorithm)** is the central 
 
 ## 5. Discussion: Algorithmic Selection Relative to Observer
 
+
 Consider a minimal example: photon + hypothetical minimal observer (a measuring device, a detector, or even a simple information-processing system).
 
 Then the ASP applies: the joint system (photon + observer) is evaluated for compressibility of the relational history.
 
-$ K(S_{\text{photon+observer}} \mid \Psi) \text{ minimal} \;\;\; \Longrightarrow \;\;\; \text{dominant experienced history.} $
+$$
+K(S_{\text{photon+observer}} \mid \Psi) \text{ minimal} \;\;\; \Longrightarrow \;\;\; \text{dominant experienced history.}
+$$
 
 - **No observer → no selection:** A lone photon in $\Psi$ has all possible paths equally weighted; the notion of “most compressible” is meaningless **without an observer** to define which sequences matter.  
 - **Selection is relational:** The ASP is fundamentally about **observer + environment sequences**, not isolated systems. Compressibility is measured **relative to the observer**.  
@@ -185,6 +190,8 @@ $ K(S_{\text{photon+observer}} \mid \Psi) \text{ minimal} \;\;\; \Longrightarrow
     - These paths are **high-complexity**, requiring long programs to describe.  
     - According to the ASP, they are **exponentially suppressed**: $P(S) \propto 2^{-K(S)}$.  
     - Therefore, we are **extremely unlikely to observe them**, and they do not contribute to the experienced history.
+
+
 
 
 ## References
