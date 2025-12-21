@@ -75,7 +75,7 @@ $$
 \large \text{Optimization}(T_{\text{alg}}) \rightarrow T_{\text{data}} \implies E_{\text{int}}(T_{\text{alg}}) \equiv E_{\text{int}}(T_{\text{data}})
 $$
 
-If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum code/data ratio for subjective experience. This minimum rate would be a **new, non-physical constant** imposed on $A_2$, leading to a contradiction.
+If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum code/data ratio for subjective experience. This minimum ratio would be a **new, non-physical constant** imposed on $A_2$, leading to a contradiction.
 
 $$
 \large
