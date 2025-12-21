@@ -1,7 +1,7 @@
 # The Informational Derivation of Reality: Consciousness, Time, and Ontological Equivalence
 
 **Author:** Juha Meskanen  
-**Date:** July 2024
+**Date:** July 2025
 
 ## Abstract
 
@@ -143,13 +143,13 @@ The perception of time and pain is a consequence of the observer’s **internal 
 
 The universe is fundamentally informational. Time and pain are emergent, internal properties of informational structures, not dependent on external runtime or substrate.
 
+---
+
 ## References
 
-- Church, A., & Turing, A. (1936). *On Computable Numbers, with an Application to the Entscheidungsproblem*.  
-- Putnam, H. (1975). *The Nature of Mental States*.  
-- Chalmers, D. (1996). *The Conscious Mind: In Search of a Fundamental Theory*.  
-- Price, H. (1996). *Time’s Arrow and Archimedes’ Point: New Directions for the Physics of Time*.  
-- Tegmark, M. (2007). *The Mathematical Universe*.  
+1. Church, A. & Turing, A. (1936). *On Computable Numbers*.  
+2. Putnam, H. (1975). *Philosophy and Our Mental Life*.  
+3. Chalmers, D. (1996). *The Conscious Mind: In Search of a Fundamental Theory*.  
 
 
 ---
