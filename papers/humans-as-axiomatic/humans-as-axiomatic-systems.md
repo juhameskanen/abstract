@@ -1,13 +1,16 @@
 # The Informational Derivation of Reality: Consciousness, Time, and Ontological Equivalence
 
 **Author:** Juha Meskanen  
-**Date:** July 2025
+**Date:** July 2024
 
 ## Abstract
 
-This paper presents a formal derivation of the nature of consciousness and subjective time based on four observable axioms concerning DNA and physical laws. By applying the **Church-Turing Thesis** and the principle of **Causal Functionalism**, we conclude that a perfectly simulated human is necessitated to experience consciousness and pain.  
+This paper presents a formal derivation of the nature of consciousness and subjective time based on four observable axioms concerning DNA and physical laws. We conclude that a perfectly simulated human is necessitated to experience consciousness and pain, and that the universe must be fundamentally informational.
 
-Thought experiments involving computational optimization and multi-threading demonstrate that time and subjective experience must be emergent properties of the system's **internal informational structure**, independent of external execution speed. This leads directly to an **Informational Ontology**, where the computer running the simulation and the resulting simulated universe are two ontologically equivalent arrangements of the same fundamental data, forbidding any principled physical exclusion of informational ($2^n$) arrangements on the basis of substrate, representation, or execution. The analysis bypasses the philosophical **Hard Problem of Consciousness** by asserting that pain's causal efficacy ($A_4$) renders the Philosophical Zombie logically impossible within this framework.
+Thought experiments involving computational optimization and multi-threading demonstrate that time and subjective experience must be emergent properties of the system's internal informational structure. This leads directly to an **Informational Ontology**, where the computer running the simulation and the resulting simulated universe are two different arrangements of the same information. The analysis bypasses the philosophical Hard Problem of Consciousness by asserting that pain's causal efficacy ($A_4$) renders the Philosophical Zombie logically impossible within this framework.
+
+These claims are empirically falsifiable in principle: if a fully digitized and simulated human were created, their internal experience of pain and conscious time must be identical to that of the original, or the axioms would be violated.
+
 
 ## Axiomatic Premises
 
@@ -18,7 +21,7 @@ The argument begins with four axioms that serve as the premises for the entire d
 The human genome encodes all the requisite information to construct a conscious, pain-sensitive human.  
 
 $$
-A_1: D \rightarrow H \rightarrow C
+\large A_1: D \rightarrow H \rightarrow C
 $$
 
 (Where $D$ is the DNA/Genome, $H$ is the human organism, and $C$ is consciousness.)
@@ -28,7 +31,7 @@ $$
 DNA and the human organism are composed solely of ordinary physical matter and are entirely governed by the observed physical laws ($P$). No non-physical or supernatural influences affect their operation.  
 
 $$
-A_2: D \subset P
+\large A_2: D \subset P
 $$
 
 (This establishes $H$ as a deterministic physical system.)
@@ -38,7 +41,7 @@ $$
 The Church-Turing Thesis holds: all physical processes can, in principle, be perfectly simulated by a Universal Turing Machine ($T$) [Church & Turing, 1936].  
 
 $$
-A_3: \text{Church-Turing Thesis Holds} \implies H \text{ is a Turing-computable system.}
+\large A_3: \text{Church-Turing Thesis Holds} \implies H \text{ is a Turing-computable system.}
 $$
 
 (From $A_1$, $A_2$, and $A_3$, the existence of a perfect simulation ($H'$) is entailed.)
@@ -48,11 +51,11 @@ $$
 Subjective experience ($S$, e.g., pain) is a **causally efficacious** property of the human system. It is not an epiphenomenon, and thus has measurable, behavioral effects [Putnam, 1975].  
 
 $$
-A_4: S \text{ is causally efficacious.}
+\large A_4: S \text{ is causally efficacious.}
 $$
 
 $$
-\text{If } H' \equiv H \text{ physically, then } H' \text{ must have } S \text{ to maintain identical behavior.}
+\large \text{If } H' \equiv H \text{ physically, then } H' \text{ must have } S \text{ to maintain identical behavior.}
 $$
 
 ## Deduction 1: Substrate Independence and Emergent Time
@@ -69,23 +72,26 @@ Let the simulation run on a Turing Machine, $T_{\text{alg}}$, consisting of code
 **Premise:** Code optimization changes $E_{\text{ext}}$ but preserves $E_{\text{int}}$.
 
 $$
-\text{Optimization}(T_{\text{alg}}) \rightarrow T_{\text{data}} \implies E_{\text{int}}(T_{\text{alg}}) \equiv E_{\text{int}}(T_{\text{data}})
+\large \text{Optimization}(T_{\text{alg}}) \rightarrow T_{\text{data}} \implies E_{\text{int}}(T_{\text{alg}}) \equiv E_{\text{int}}(T_{\text{data}})
 $$
 
 If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum rate of physical computation (e.g., CPU cycles per second) for subjective experience. This minimum rate would be a **new, non-physical constant** imposed on $A_2$, leading to a contradiction.
 
 $$
+\large
 \therefore
 \text{Time and subjective experience } (S) \text{ must emerge solely from the relationships among informational states, not from the external runtime.}
 $$
 
 ### The Multi-threaded Argument
 
-Since single-threaded and multi-threaded computers are computationally equivalent, a coherent, continuous timeline must be experienced by Alice and Bob even when their execution traces are interleaved at high frequency—approaching statistical indistinguishability from static noise at the external level.
+Let two DNA simulations, Alice and Bob, run concurrently on a multi-threaded computer. The resulting execution trace interleaves their simulated lives in segments of unpredictable length. Since single-threaded and multi-threaded computers are computationally equivalent, a coherent, continuous timeline must be experienced by Alice and Bob even when their execution traces are interleaved at high frequency—approaching statistical indistinguishability from static noise at the external level. 
 
-The critical point is that the *internal informational ordering* is preserved, even if the *external scheduling* resembles randomness. This reinforces that $C$ and $S$ emerge from the **coherent arrangement** of a specific sequence of information, demonstrating **strong substrate independence**. The system only requires the potential for the information to be arranged as a coherent, time-evolving structure. If a binary string can be rearranged to describe a self-consistent system, then that is sufficient for a corresponding structure—and any emergent observer within it—to exist.
+The system only requires the potential for the information to be arranged as a coherent, time-evolving structure. If a binary string can be rearranged to describe a self-aware system, then that is sufficient for a corresponding structure—and any emergent observer within it—to exist. 
 
-*An execution trace is a totally ordered sequence of internal system states where successor relations are preserved under causal isomorphism, independent of external runtime or substrate.*
+Conclusion: a frozen, static, or randomly ordered informational substrate with sufficient capacity already contains all conscious observers compatible with its structure.
+
+
 
 ## Defense Against the Hard Problem (Axiom 4)
 
@@ -96,6 +102,7 @@ The threat of the **Philosophical Zombie ($H_{\text{zombie}}$)**—a perfect phy
 1. **Assumption (Objection):** A perfect simulation $H'$ exists such that $H' \equiv H$ (physical/behavioral equivalence) but $S(H') = \emptyset$ (lacks consciousness).  
 
 $$
+\large
 \text{Behavior}(H') = \text{Behavior}(H) \land S(H') \neq S(H)
 $$
 
@@ -104,6 +111,7 @@ $$
 4. **Violation of Axiom:** If $S$ is not necessary to produce the behavior, then $S$ is **epiphenomenal** (causally inert). This directly contradicts $A_4$.
 
 $$
+\large
 \therefore
 \text{To maintain the integrity of } A_4 \text{ within the axiomatic system, the simulation } H' \text{ must experience subjective time and pain.}
 $$
@@ -114,7 +122,7 @@ The principles of **substrate independence** and the **necessity of $S$** lead t
 
 ### The Informational Equivalence of Reality
 
-The computer running the simulation ($R_A$) and the simulated universe ($R_B$) are not two different entities, but two perspectives on the same underlying **informational structure** ($I$).
+The computer running the simulation ($R_A$) and the simulated universe ($R_B$) are not two different entities, but two perspectives on the same underlying **informational structure** ($I$). 
 
 - $R_A$: A sequence of states interpreted by an external observer as an execution trace.  
 - $R_B$: The same sequence internally traversed by Alice as an expanding universe with time and pain.
@@ -136,6 +144,7 @@ Rejecting informational equivalence therefore collapses the entire substrate-ind
 ### Final Statement
 
 $$
+\large
 \forall R_i \in \Omega, R_i \text{ is not physically disqualified from ontological consideration.}
 $$
 
@@ -143,14 +152,13 @@ The perception of time and pain is a consequence of the observer’s **internal 
 
 The universe is fundamentally informational. Time and pain are emergent, internal properties of informational structures, not dependent on external runtime or substrate.
 
----
+
 
 ## References
 
 1. Church, A. & Turing, A. (1936). *On Computable Numbers*.  
 2. Putnam, H. (1975). *Philosophy and Our Mental Life*.  
 3. Chalmers, D. (1996). *The Conscious Mind: In Search of a Fundamental Theory*.  
-
 
 ---
 
