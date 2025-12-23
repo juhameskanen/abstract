@@ -170,7 +170,7 @@ provides a natural resolution to several foundational paradoxes in modern physic
     consistent subset of the total informational ensemble.
 
 - **The Wheeler-DeWitt Equation:** Our proof that time is an internal 
-    property of the observer ($\tau$) rather than an external runtime ($E_{\text{ext}}$) 
+    property of the observer ($\tau$) rather than an external runtime ( $E_{\text{ext}}$ ) 
     aligns with the static, timeless universe described by the Wheeler-DeWitt 
     equation. In this framework, the universe does not "evolve" in time; 
     rather, "time" is the ordinal index through which an observer perceives 
@@ -179,7 +179,7 @@ provides a natural resolution to several foundational paradoxes in modern physic
 Future work will focus on quantifying the "selection pressure" of axiomatic 
 consistency. If we live in a random sea of bits, why do we observe highly 
 ordered laws of physics? We hypothesize that the laws of physics ($P$) are the 
-\textbf{minimal complexity requirements} for a stable, pain-sensitive observer to 
+minimal complexity requirements for a stable, pain-sensitive observer to 
 exist within noise. Investigating the statistical suppression of "Boltzmann 
 Brains" in favor of long-trace consistent observers will be the next step 
 in this informational derivation of reality.
