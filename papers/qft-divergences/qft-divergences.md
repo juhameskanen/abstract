@@ -1,5 +1,4 @@
-# Emergent Information-Theoretic Suppression of QFT Divergences  
-## A QBitwave Approach
+# Information-Theoretic Suppression of QFT Divergences  
 
 **Juha Meskanen**  
 <https://meskanen.com>  
@@ -10,7 +9,7 @@
 
 ## Abstract
 
-We investigate the ultraviolet divergences of quantum field theory (QFT) from an information-theoretic perspective, employing the QBitwave framework in which the wavefunction emerges as a minimal, compressible program reproducing the underlying bitstring configuration of a field. By interpreting high-frequency modes as incompressible states with vanishing amplitude, we show that one-loop integrals are naturally regularized without imposing external cutoffs. Numerical simulations confirm that the QBitwave amplitude-weighted integrals remain finite and flat across momentum space, while standard integrals diverge.
+We investigate the ultraviolet divergences of quantum field theory (QFT) from an information-theoretic perspective in which the wavefunction emerges as a minimal, compressible program reproducing the underlying bitstring configuration of a field. By interpreting high-frequency modes as incompressible states with vanishing amplitude, we show that one-loop integrals are naturally regularized without imposing external cutoffs. Numerical simulations confirm that the QBitwave amplitude-weighted integrals remain finite and flat across momentum space, while standard integrals diverge.
 
 
 
@@ -37,10 +36,10 @@ $$
 $$
 
 
+### 2.2 Wavefunction Reconstruction
 
-### 2.2 QBitwave Wavefunction Reconstruction
-
-Given a bitstring $\mathbf{b}$, the QBitwave class constructs a normalized complex amplitude array $\psi(\mathbf{b})$ representing the minimal program reproducing $\mathbf{b}$. Compression-based weights are derived from amplitude norms:
+Given a bitstring $\mathbf{b}$, the QBitwave class constructs a normalized complex amplitude array $\psi(\mathbf{b})$ representing the minimal program reproducing $\mathbf{b}$. 
+Compression-based weights are derived from amplitude norms:
 
 $$
 w(\mathbf{b}) = \|\psi(\mathbf{b})\|^2.
@@ -53,18 +52,11 @@ $$
 The one-loop integral for a lattice momentum cutoff $k_{\text{cut}}$ is computed as:
 
 $$
-I_{\text{std}}(k_{\text{cut}}) =
-\frac{1}{N_{\text{realizations}}}
-\sum_{r=1}^{N_{\text{realizations}}}
-\frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}},
+I_{\text{std}}(k_{\text{cut}}) = \frac{1}{N_{\text{realizations}}} \sum_{r=1}^{N_{\text{realizations}}} \frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}},
 $$
 
 $$
-I_{\text{info}}(k_{\text{cut}}) =
-\frac{1}{N_{\text{realizations}}}
-\sum_{r=1}^{N_{\text{realizations}}}
-w(\mathbf{b}_r)
-\frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}}.
+I_{\text{info}}(k_{\text{cut}}) = \frac{1}{N_{\text{realizations}}} \sum_{r=1}^{N_{\text{realizations}}} w(\mathbf{b}_r) \frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}}.
 $$
 
 Here $I_{\text{std}}$ is the conventional integral and $I_{\text{info}}$ is the QBitwave-weighted integral.
@@ -108,7 +100,7 @@ The bitstring Shannon entropy, averaged over realizations, rises from near zero 
 To validate the QBitwave suppression, we performed a Metropolis–Hastings MCMC simulation of the lattice field. The simulation parameters are summarized below.
 
 | Parameter            | Symbol      | Value                |
-||-|-|
+|-                      |-            |-                     |
 | Lattice Sites       | $N$         | 128                  |
 | Encoding Resolution | $n$         | 8 bits/site          |
 | Mass                | $m$         | 1.0                  |
