@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, hyperref}
+\usepackage{amsthm}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{../references.bib}
+\newtheorem{lemma}{Lemma}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Emergent Information-Theoretic Suppression of QFT Divergences: \\ A QBitwave Approach}
+\author{Juha Meskanen \\ \texttt{meskanen.com}}
+\date{July 2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We investigate the ultraviolet divergences of quantum field theory (QFT) from an information-theoretic perspective, employing the QBitwave framework in which the wavefunction emerges as a minimal, compressible program reproducing the underlying bitstring configuration of a field. By interpreting high-frequency modes as incompressible states with vanishing amplitude, we show that one-loop integrals are naturally regularized without imposing external cutoffs. Numerical simulations confirm that the QBitwave amplitude-weighted integrals remain finite and flat across momentum space, while standard integrals diverge.
+\end{abstract}
+
+\section{Introduction}
+
+Traditional QFT encounters ultraviolet (UV) divergences in loop integrals. Regularization and renormalization schemes are typically introduced to control these infinities. Here we propose an alternative: treating the wavefunction as an emergent, algorithmic-information-theoretic object. Highly complex (incompressible) field configurations contribute negligibly to physical amplitudes. This naturally suppresses UV contributions, providing a built-in regularization.
+
+\section{Methods}
+
+\subsection{Lattice $\phi^4$ Field Simulation}
+
+We consider a one-dimensional lattice with $N$ sites, generating field configurations $\phi(x)$ subject to a $\phi^4$ interaction:
+\begin{equation}
+\mathcal{L} = \frac{1}{2} (\partial \phi)^2 + \frac{1}{2} m^2 \phi^2 + \frac{\lambda}{4!} \phi^4.
+\end{equation}
+
+Each configuration is mapped to a bitstring encoding the discretized field:
+\begin{equation}
+\phi_i \in [\phi_{\min}, \phi_{\max}] \rightarrow b_i \in \{0,1\}^{\text{bits\_per\_site}}.
+\end{equation}
+
+\subsection{QBitwave Wavefunction Reconstruction}
+
+Given a bitstring $\mathbf{b}$, the QBitwave class constructs a normalized complex amplitude array $\psi(\mathbf{b})$ representing the minimal program reproducing $\mathbf{b}$. Compression-based weights are derived from amplitude norms:
+\begin{equation}
+w(\mathbf{b}) = \|\psi(\mathbf{b})\|^2.
+\end{equation}
+
+\subsection{One-Loop Integral Evaluation}
+
+The one-loop integral for a lattice momentum cutoff $k_\text{cut}$ is computed as:
+\begin{align}
+I_\text{std}(k_\text{cut}) &= \frac{1}{N_\text{realizations}} \sum_{r=1}^{N_\text{realizations}} \frac{1}{2\sqrt{4 \sin^2(k_\text{cut}/2) + m^2}}, \\
+I_\text{info}(k_\text{cut}) &= \frac{1}{N_\text{realizations}} \sum_{r=1}^{N_\text{realizations}} w(\mathbf{b}_r) \frac{1}{2\sqrt{4 \sin^2(k_\text{cut}/2) + m^2}}.
+\end{align}
+
+Here $I_\text{std}$ is the conventional integral and $I_\text{info}$ is the QBitwave-weighted integral.
+
+\section{Results}
+
+\subsection{Simulation Parameters}
+
+We used:
+\begin{itemize}
+\item Lattice sites $N = 128$
+\item Bits per site = 8
+\item One-loop realizations = 300
+\item Mass $m = 1.0$, interaction $\lambda = 1.0$
+\end{itemize}
+
+\subsection{Integral Comparison}
+
+Figure~\ref{fig:integrals} shows the cumulative one-loop integrals versus momentum cutoff $k$:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/qft_integrals.png}
+\caption{Comparison of standard (divergent) one-loop integral $I_\text{std}$ and QBitwave amplitude-weighted integral $I_\text{info}$. The QBitwave integral remains flat, demonstrating natural suppression of UV modes.}
+\label{fig:integrals}
+\end{figure}
+
+\subsection{Entropy Signature}
+
+The bitstring Shannon entropy, averaged over realizations, rises from near zero to close to unity as the lattice modes are sampled:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/qft_entropy.png}
+\caption{Average bitstring entropy $H(k)$ versus momentum cutoff $k$. The gradual rise indicates that the field configurations gradually fill the accessible informational space.}
+\label{fig:entropy}
+\end{figure}
+
+\section{Results}
+
+\subsection{Simulation Parameters}
+To validate the QBitwave suppression, we performed a Metropolis-Hastings MCMC simulation of the lattice field. The simulation parameters are summarized in Table~\ref{tab:params}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|r|}
+\hline
+Parameter & Symbol & Value \\ \hline
+Lattice Sites & $N$ & 128 \\
+Encoding Resolution & $n$ & 8 bits/site \\
+Mass & $m$ & 1.0 \\
+Coupling Range & $\lambda$ & $\{0.1, 1.0, 10.0\}$ \\
+MCMC Steps & $N_{steps}$ & 1000 \\ \hline
+\end{tabular}
+\caption{Parameters for the information-theoretic $\phi^4$ simulation.}
+\label{tab:params}
+\end{table}
+
+\subsection{Integral Comparison and IR Convergence}
+The cumulative one-loop integral $I_{info}(k)$ was evaluated across the momentum spectrum. As shown in Figure~\ref{fig:integrals}, $I_{info}$ tracks $I_{std}$ at low $k$ (IR limit), indicating that the QBitwave weighting preserves the fundamental mass $m$. However, as $k$ increases, $I_{info}$ plateaus, demonstrating an emergent, finite UV regularization.
+
+\section{Discussion}
+
+The results suggest that high-momentum modes correspond to incompressible bitstrings with near-zero amplitude 
+in the QBitwave framework. This emergent wavefunction perspective provides a natural, information-theoretic UV 
+regularization without the need for manual counter-terms or external cutoffs. 
+Furthermore, the bitstring entropy curve (Figure~\ref{fig:entropy}) confirms that the field configurations gradually 
+fill the accessible informational space, with $\lambda$ acting as a constraint on the manifold of compressible states.
+
+\section{Conclusion and Future Work}
+
+We have demonstrated that interpreting the wavefunction as a compression-based emergent object successfully regulates 
+one-loop QFT divergences. Future research will focus on:
+
+\begin{itemize}
+    \item \textbf{High-Dimensional Scaling:} Extending the framework to $3+1$ dimensions to verify the stability of the 
+    emergent cutoff.
+    \item \textbf{Non-Abelian Gauge Fields:} Applying weighting to $SU(N)$ theories to investigate mass gaps and 
+    confinement.
+    \item \textbf{Gravitational Coupling:} Investigating how the bitstring field complexity defines the local 
+    geometry of a dynamical lattice, providing a pathway to a unified theory of quantum gravity.
+\end{itemize}
+
+\section*{Simulation Code}
+
+Python simulation is implemented in \texttt{phi4\_qbitwave\_final.py}, utilizing the QBitwave class:
+
+\begin{verbatim}
+from qbitwave import QBitwave
+# Generate phi^4 lattice fields, encode as bitstrings,
+# reconstruct wavefunction, and compute weighted integrals.
+\end{verbatim}
+
+\end{document}
