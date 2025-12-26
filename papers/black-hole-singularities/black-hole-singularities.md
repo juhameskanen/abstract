@@ -1,19 +1,21 @@
 # Black Hole Singularities as Zero Entropy States
 
-*The Abstract Universe Project, 2025*
+*Juha Meskanen*   
+*https://meskanen.com*   
+*Copyright 2019*    
 
----
 
 ## Abstract
 
 We investigate black hole singularities from an information-theoretic perspective,  
 viewing geometric spacetime and computational simulation as two equivalent interpretations  
-of an underlying informational structure. We introduce the notion of **execution-trace entropy**,  
+of an underlying informational structure. We introduce the notion of execution-trace entropy,  
 the Shannon entropy of a fixed encoding of the simulated spatial configuration, and show that  
 it decreases monotonically as particles approach the singularity. Our results indicate that singularities  
-should be understood as well-defined, smooth informational fixed points corresponding to zero-entropy states.
+should be understood as well-defined, smooth informational fixed points corresponding to zero-entropy states.  
+Infinities signal overcounting of informationally indistinguishable configurations; when physical measure is 
+defined by information content, singularities and divergences collapse into smooth zero-measure limits.
 
----
 
 ## Introduction
 
@@ -25,7 +27,6 @@ Our central question is whether approaching singularities as information-theoret
 provides new insights into their structure and physical interpretation. To explore this,  
 we develop both analytic reasoning and numerical simulations of collapsing dust clouds.
 
----
 
 ## Methods
 
@@ -82,7 +83,6 @@ It measures the number of distinguishable configurations encoded in a determinis
 
 Over a sequence of states (the bitstring sub-trace), the entropy trajectory reflects the collapse of distinguishable geometric states as particles fall toward the singularity.
 
----
 
 ## Simulations
 
@@ -105,7 +105,6 @@ $$
 
 then the set of distinguishable geometric configurations collapses to a single equivalence class under $f$. That is, the geometry degenerates to a unique configuration.
 
----
 
 ## Discussion
 
@@ -130,7 +129,6 @@ To encode geometry:
 
 Entropy is then computed as above. The collapse of this entropy directly reflects the loss of distinguishable structure.
 
----
 
 ## Conclusion
 
@@ -138,7 +136,6 @@ Black hole simulations cannot directly resolve classical singularities due to nu
 However, execution-trace entropy analysis reveals that singularities correspond to zero-entropy states: well-defined, smooth informational fixed points with no internal structure.  
 This reframes singularities as informational phenomena rather than divergent densities, supporting the broader information-theoretic interpretation of spacetime.
 
----
 
 ## Simulation Code
 
