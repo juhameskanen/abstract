@@ -37,10 +37,10 @@ $$
 $$
 
 
-
 ### 2.2 QBitwave Wavefunction Reconstruction
 
-Given a bitstring $\mathbf{b}$, the QBitwave class constructs a normalized complex amplitude array $\psi(\mathbf{b})$ representing the minimal program reproducing $\mathbf{b}$. Compression-based weights are derived from amplitude norms:
+Given a bitstring $\mathbf{b}$, the QBitwave class constructs a normalized complex amplitude array $\psi(\mathbf{b})$ representing the minimal program reproducing $\mathbf{b}$. 
+Compression-based weights are derived from amplitude norms:
 
 $$
 w(\mathbf{b}) = \|\psi(\mathbf{b})\|^2.
@@ -53,18 +53,11 @@ $$
 The one-loop integral for a lattice momentum cutoff $k_{\text{cut}}$ is computed as:
 
 $$
-I_{\text{std}}(k_{\text{cut}}) =
-\frac{1}{N_{\text{realizations}}}
-\sum_{r=1}^{N_{\text{realizations}}}
-\frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}},
+I_{\text{std}}(k_{\text{cut}}) = \frac{1}{N_{\text{realizations}}} \sum_{r=1}^{N_{\text{realizations}}} \frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}},
 $$
 
 $$
-I_{\text{info}}(k_{\text{cut}}) =
-\frac{1}{N_{\text{realizations}}}
-\sum_{r=1}^{N_{\text{realizations}}}
-w(\mathbf{b}_r)
-\frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}}.
+I_{\text{info}}(k_{\text{cut}}) = \frac{1}{N_{\text{realizations}}} \sum_{r=1}^{N_{\text{realizations}}} w(\mathbf{b}_r) \frac{1}{2\sqrt{4 \sin^2(k_{\text{cut}}/2) + m^2}}.
 $$
 
 Here $I_{\text{std}}$ is the conventional integral and $I_{\text{info}}$ is the QBitwave-weighted integral.
