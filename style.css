@@ -9,3 +9,142 @@
 .mjx-chtml {
   padding: 0.5em 0;
 }
+
+* { 
+font-family: arial, verdana, geneva, helvetica, sans-serif;
+font-size: 12px;
+}
+
+body {
+background-color: #ffffff;
+color: #000000;
+margin-top: 0px;
+margin-left: 0px;
+margin-right: 0px;
+padding: 0px;
+border: 0px solid #000;
+}
+
+h1 {
+font-size: 20px;  
+color: #506070;
+clear: both;
+
+}
+
+h2 {
+font-size: 18px;  
+color: #506070;
+clear: both;
+}
+
+h3 {
+font-size: 16px;  
+color: #506070;
+clear: both;
+}
+
+h4 {
+font-size: 14px;  
+color: #506070;
+clear: both;
+}
+
+h5 {
+font-size: 12px;  
+color: #405060;
+clear: both;
+}
+
+.chaptitle { 
+margin: 9px 0px 0px 15px;
+}
+
+.valikko {
+margin-top: 120px;
+}
+
+td.otsikko {
+font-weight: bold;
+font-size: 13px;  
+padding-left: 10;
+padding-right: 10;
+padding-top: 1;
+padding-bottom: 1;
+vertical-align: top;
+}
+
+.otsikko {
+font-weight: bold;
+font-size: 13px;  
+}
+
+td.even {
+background: #f0f0f0;
+padding-left: 10;
+padding-right: 10;
+padding-top: 1;
+padding-bottom: 1;
+}
+
+td.odd {
+background: #ffffff;
+padding-left: 10;
+padding-right: 10;
+padding-top: 1;
+padding-bottom: 1;
+}
+
+table.pelaajat {
+border: 0;
+}
+
+a:link {
+color: #445566;
+}
+
+a:visited {
+color: #000050;
+}
+
+a:active {
+color: #a000ff;
+}
+
+a:hover {
+color: #000;
+}
+
+.bodytext {
+color: #000000;
+margin-top: 10px;
+margin-left: 10px;
+margin-right: 10px;
+padding: 0px;
+border: 0px solid #000;
+}
+
+img.floatLeft { 
+   float: left; 
+   margin: 4px; 
+}
+
+img.floatRight { 
+    float: right; 
+    margin: 4px; 
+}
+
+img.breakFloat { 
+    float: right; 
+    clear: both;
+}
+
+hr.breakFloat {
+    color: #eeeeee
+    height: 2;
+}
+
+p.breakFloat { 
+    clear: both;
+}
+
