@@ -3,7 +3,7 @@
 % --- Packages ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{amsmath, amssymb, amsthm}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -14,42 +14,100 @@
 \setlength{\parskip}{1em}
 
 % --- Document Metadata ---
-\title{\textbf{Einstein Equations as Probability Laws: \\ A Semiclassical Information-Theoretic Approach}}
+\title{\textbf{Spacetime Curvature at the Singularity}}
 \author{Juha Meskanen}
-\date{June 2021}
+\date{December 2025}
 
 \begin{document}
 
 \maketitle
 
-\section{Motivation}
+\section*{Abstract}
+This paper explores the hypothesis that the interior geometry of a black hole is not a pathological singularity but a smooth well-defined point.
+We argue that if a zero-entropy state is information-free, it cannot define individual particles.
+This concept has profound implications for understanding spacetime curvature at the black hole's core.
+
+\section{Introduction}
+The standard Schwarzschild solution predicts infinite curvature at the singularity. To reconcile these views, we replace the interior solution with a lognormal-shaped distribution of effective curvature, anchored at zero entropy. 
+
+In the semi-classical gravity framework, the Einstein field equations are
+\[
+G_{\mu\nu} = 8 \pi G \, \langle \hat{T}_{\mu\nu} \rangle,
+\]
+where $\langle \hat{T}_{\mu\nu} \rangle$ is the expectation value of the stress-energy tensor in a given quantum state. 
+
+If the singularity corresponds to a zero-entropy state --- i.e., no distinguishable microstates, no matter, and no structures --- then
+\[
+\langle \hat{T}_{\mu\nu} \rangle = 0,
+\]
+and the Einstein equations reduce to the vacuum form,
+\[
+G_{\mu\nu} = 0,
+\]
+describing a well-defined geometry.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/schwarzschild_lognormal.png}
+    \caption{Schwarzschild metric as a probabilistic particle distribution: probability density vanishes at the singularity.}
+    \label{fig:schwarzschild-lognormal}
+\end{figure}
+
+\section{Conclusions}
+This construction is admittedly arbitrary in form, but it has the virtue of dissolving the singularity, preserving information, and yielding well-behaved particle trajectories inside the horizon.
+
+The lognormal distribution suggests that the probability of particles existing rises sharply just outside this zero-entropy state. This means there is a massive concentration of information in the region immediately surrounding the singularity. This could be a testable prediction for a future theory of quantum gravity.
+
+Unlike black holes, where the interior is hidden behind an event horizon, the primordial singularity of our universe is observable indirectly. The early universe leaves its imprint on the cosmic microwave background (CMB) and large-scale structure. From an information-theoretic perspective:
+\begin{itemize}
+    \item The Big Bang corresponds to a zero-entropy state, where no emergent particles or structures exist.
+    \item As entropy increases, geometric structure unfolds, producing particles whose abundances follow a lognormal distribution.
+    \item The probability distribution of curvature or matter density peaks at intermediate scales, reflecting the mode of the lognormal distribution.
+    \item These statistical peaks could, in principle, leave observable signatures in the CMB, encoding information about the early universe’s geometry.
+\end{itemize}
+
+Thus, while black hole interiors remain inaccessible, the cosmological singularity provides a natural laboratory for testing predictions of the information-theoretic framework.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/cmb.png}
+    \caption{Emergence of Structures from Increasing Entropy (Lognormal Distribution).}
+    \label{fig:cmb}
+\end{figure}
+
+
+
+\section{\textbf{Einstein Equations as Probability Laws: \\ A Semiclassical Information-Theoretic Approach}}
+
+\subsection{Motivation}
 \begin{itemize}
     \item \textbf{Geometric Entropy:} The discovery that while total physical entropy increases, the geometric space of a collapsing black hole can be understood as a geometric interpretation of information with decreasing entropy. Conversely, the Big Bang represents increasing entropy.
     \item \textbf{Emergent Laws:} Wavefunctions and General Relativity are emergent features arising from information serving as optimal compression algorithms.
 \end{itemize}
 
-\section{Core Concept: From Einstein to Probability}
+\subsection{Core Concept: From Einstein to Probability}
 Let worldlines be random paths $\gamma$ on a manifold $M$. We define a probability distribution on paths centered on General Relativity (GR):
 \[
 \mathbb{P}[\gamma] \propto \exp\!\left( -\frac{1}{2}\int_\gamma \frac{\|a_\gamma(\tau)-a_{\rm GR}(\tau)\|^2}{\sigma^2(\mathcal{I}(x(\tau)))}\, d\tau \right)
 \]
 where $a_\gamma$ is the stochastic 4-acceleration, $a_{\rm GR}$ is the GR geodesic acceleration, and $\sigma(\mathcal{I})$ is a scale-dependent noise amplitude depending on a curvature invariant $\mathcal{I}$ (e.g., the Kretschmann scalar $K=R_{abcd}R^{abcd}$).
 
-\section{Multiplicative (Lognormal) Kinematics}
+\subsection{Multiplicative (Lognormal) Kinematics}
 For any coordinate that shrinks under attraction (such as the radial coordinate $r$ in Schwarzschild geometry), we evolve the system multiplicatively in proper time:
 \[
 \ln r(\tau+\Delta\tau) = \ln r(\tau) + \mu(r)\,\Delta\tau + \sigma(\mathcal{I}(r))\,\sqrt{\Delta\tau}\,\xi
 \]
 with $\xi \sim \mathcal{N}(0,1)$. Consequently, increments of $\ln r$ are Gaussian, making the radial steps lognormal. The drift $\mu(r)$ is calibrated so that the most probable trajectory recovers the GR geodesic.
 
-\section{Noise Suppression: The Entropy--Singularity Lemma}
+\subsection{Noise Suppression: The Entropy--Singularity Lemma}
 \begin{quote}
 \textit{Vanishing entropy corresponds to a collapsing geometry, i.e., a geometric singularity.}
 \end{quote}
 
 If entropy counts accessible microstates, then at the singularity there are none left ($S \to 0$). Therefore, the probability of particle emission or fluctuation at the singularity must vanish.
 
-\subsection{Entropy as a Function of Curvature}
+**Entropy as a Function of Curvature**
+
 Let $I$ be a curvature invariant. We define a coarse-grained entropy $S(I)$ such that:
 \[
 S(I) \ge 0, \quad S(I) \xrightarrow[I\to 0]{} S_0 > 0, \quad S(I) \xrightarrow[I\to \infty]{} 0
@@ -60,7 +118,8 @@ S(I) = S_0 \exp\!\left[-(I/I_P)^m\right], \quad m > 0
 \]
 where $I_P \sim \ell_P^{-4}$ sets the Planck curvature scale.
 
-\subsection{Noise Amplitude and Probability Voids}
+**Noise Amplitude and Probability Voids**
+
 We set the noise variance proportional to entropy: $\sigma^2(I) = \kappa\, S(I)$.
 \begin{itemize}
     \item \textbf{Far from the singularity ($I \ll I_P$):} $\sigma^2(I) \approx \sigma_0^2$. GR with finite fluctuations is recovered.
@@ -68,7 +127,7 @@ We set the noise variance proportional to entropy: $\sigma^2(I) = \kappa\, S(I)$
 \end{itemize}
 The singularity becomes a \textbf{probability void}. There is no stochastic flux into the singular region because there are no available microstates to support existence.
 
-\section{Stress-Energy as a Bitflip Field}
+\subsection{Stress-Energy as a Bitflip Field}
 We tie matter to information via a Poisson--lognormal field of bitflips per 4-volume:
 \begin{align*}
 N(x)\mid\Lambda(x) &\sim \mathrm{Poisson}(\Lambda(x)) \\
@@ -79,7 +138,7 @@ Mapping flips to local stress-energy $T_{ab}[N]$, we take Einstein-in-expectatio
 G_{ab}(x) = 8\pi G\,\mathbb{E}[T_{ab}[N]] + \text{(finite fluctuation terms)}
 \]
 
-\section{Einstein to Probability Dictionary}
+\subsection{Einstein to Probability Dictionary}
 \begin{center}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{p{4cm} l}
@@ -91,5 +150,16 @@ G_{ab}(x) = 8\pi G\,\mathbb{E}[T_{ab}[N]] + \text{(finite fluctuation terms)}
 \textbf{Kinematics:} & $\Delta \ln r = \mu(r)\Delta + \sigma(\mathcal{I})\sqrt{\Delta}\,\xi$ \\
 \end{tabular}
 \end{center}
+
+
+\section{Future Work}
+Fully probabilistic information theoretical model of black hole, based on semiclassical-gravity:
+\begin{itemize}
+    \item Entropy relative to surface area of the event horizon.
+    \item \href{einstein_as_probability.pdf}{Einstein Equation as Probability Law}.
+\end{itemize}
+
+\section*{Simulation Code}
+The implementation is available in \texttt{simulations/schwarzschild\_lognormal.py}.
 
 \end{document}
