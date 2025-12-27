@@ -1,0 +1,45 @@
+name: Build and Deploy HTML (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Convert LaTeX to HTML
+        run: |
+          mkdir -p html
+          for paper in emergence-of-time humans-as-axiomatic black-hole-singularities qft-divergences; do
+            mkdir -p html/$paper
+            for texfile in papers/$paper/*.tex; do
+              pandoc "$texfile" \
+                --from=latex \
+                --to=html5 \
+                --mathjax \
+                --standalone \
+                --metadata title="$paper" \
+                -o "html/$paper/index.html"
+            done
+          done
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: html
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

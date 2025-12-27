@@ -1,0 +1,81 @@
+name: Build and Upload PDFs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        paper:
+          - emergence-of-time
+          - humans-as-axiomatic
+          - black-hole-singularities
+          - qft-divergences
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install minimal LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-science \
+            texlive-bibtex-extra \
+            biber \
+            latexmk \
+            lmodern \
+            ghostscript \
+            fonts-freefont-otf \
+            fonts-lmodern
+
+      - name: Compile LaTeX to PDF
+        working-directory: papers/${{ matrix.paper }}
+        run: |
+          mkdir -p ../../pdf/${{ matrix.paper }}
+          for texfile in *.tex; do
+            latexmk -pdf -interaction=nonstopmode -halt-on-error "$texfile"
+            cp "${texfile%.tex}.pdf" ../../pdf/${{ matrix.paper }}/
+          done
+
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.paper }}-pdfs
+          path: pdf/${{ matrix.paper }}/*.pdf
+
+  upload-sftp:
+    name: Upload PDFs to Personal Site
+    runs-on: ubuntu-latest
+    needs: build-pdf
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all-pdfs
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Add SFTP host key
+        run: |
+          mkdir -p ~/.ssh
+          echo "realsoft.fi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJblFT50zmX8ME8kVqM1ElGu4SHUSkFlqFMD7tycDXqb" >> ~/.ssh/known_hosts
+
+      - name: Upload PDFs via SFTP
+        env:
+          FTP_USER: ${{ secrets.SFTP_USER }}
+          FTP_PASS: ${{ secrets.SFTP_PASS }}
+        run: |
+          find all-pdfs -name '*.pdf' -exec \
+            curl -k --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T {} ftp://realsoft.fi \;
