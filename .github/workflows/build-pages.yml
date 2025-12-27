@@ -3,6 +3,10 @@ name: Build and Deploy HTML (GitHub Pages)
 on:
   push:
     branches: [main]
+  # This triggers the build automatically after the PDF workflow completes successfully
+  workflow_run:
+    workflows: ["Build and Upload PDFs"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -13,6 +17,8 @@ permissions:
 jobs:
   build-html:
     runs-on: ubuntu-latest
+    # Only run if triggered by push/dispatch, OR if the PDF workflow finished successfully
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
 
@@ -25,7 +31,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc jq
 
-      - name: Convert LaTeX to HTML
+      - name: Download all PDF Artifacts
+        # We use this specific action to download artifacts from the previous workflow run
+        uses: actions/download-artifact@v4
+        with:
+          path: all-pdfs
+          pattern: pdf-*
+          merge-multiple: false
+
+      - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
           if [ ! -f papers.json ]; then
             echo "FATAL ERROR: papers.json not found."
@@ -34,27 +48,40 @@ jobs:
 
           mkdir -p html
           touch html/.nojekyll
-          echo "<html><head><title>Research Index</title></head><body><h1>Research Papers</h1><ul>" > html/index.html
+          
+          # Start the index page
+          echo "<html><head><title>Research Index</title></head><body>" > html/index.html
+          echo "<h1>Research Papers</h1><ul>" >> html/index.html
 
           PAPERS=$(jq -r '.[]' papers.json)
 
           for paper in $PAPERS; do
             if [ -d "papers/$paper" ]; then
               mkdir -p html/$paper
-              echo "<li><a href='./$paper/'>$paper</a></li>" >> html/index.html
               
-              # --- Asset Migration ---
-              # Copy figures if they exist
+              # --- 1. Handle PDF Integration ---
+              PDF_LINK_HTML=""
+              # Check if a PDF artifact exists for this paper in the downloaded folder
+              if [ -d "all-pdfs/pdf-$paper" ]; then
+                # Copy the first PDF found in that paper's artifact folder
+                cp all-pdfs/pdf-$paper/*.pdf html/$paper/paper.pdf
+                PDF_LINK_HTML=" | <a href='./$paper/paper.pdf'>[PDF]</a>"
+              fi
+
+              # Add to index list
+              echo "<li><a href='./$paper/'>$paper</a>$PDF_LINK_HTML</li>" >> html/index.html
+              
+              # --- 2. Asset Migration ---
               if [ -d "papers/$paper/figures" ]; then
                 cp -r "papers/$paper/figures" "html/$paper/"
               fi
               
-              # Copy simulations if they exist
               if [ -d "papers/$paper/simulations" ]; then
                 cp -r "papers/$paper/simulations" "html/$paper/"
               fi
 
-              # Convert .tex to .html
+              # --- 3. Convert .tex to .html ---
+              # Note: We removed the --metadata title flag so Pandoc uses the \title{} in your .tex
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
                 pandoc "$texfile" \
@@ -68,6 +95,7 @@ jobs:
               shopt -u nullglob
             fi
           done
+          
           echo "</ul></body></html>" >> html/index.html
 
       - name: Upload Pages artifact

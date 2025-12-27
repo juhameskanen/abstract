@@ -15,10 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        # jq converts the json file into a single line for the matrix
         run: echo "matrix=$(jq -c . papers.json)" >> $GITHUB_OUTPUT
 
-  # Job 2: Build PDFs in parallel using the dynamic matrix
+  # Job 2: Build PDFs in parallel
   build-pdf:
     needs: setup
     runs-on: ubuntu-latest
@@ -48,42 +47,19 @@ jobs:
       - name: Compile LaTeX to PDF
         working-directory: papers/${{ matrix.paper }}
         run: |
-          mkdir -p ../../pdf/${{ matrix.paper }}
+          # Create a local directory for output
+          mkdir -p ../../pdf-output
           for texfile in *.tex; do
+            # -f forces completion even if cross-references aren't perfect yet
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$texfile"
-            cp "${texfile%.tex}.pdf" ../../pdf/${{ matrix.paper }}/
+            # Move result to the output folder
+            cp "${texfile%.tex}.pdf" ../../pdf-output/
           done
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.paper }}-pdfs
-          path: pdf/${{ matrix.paper }}/*.pdf
-
-  # Job 3: Final SFTP Upload
-  upload-sftp:
-    name: Upload PDFs to Personal Site
-    runs-on: ubuntu-latest
-    needs: build-pdf
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: all-pdfs
-
-      - name: Add SFTP host key
-        run: |
-          mkdir -p ~/.ssh
-          echo "realsoft.fi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJblFT50zmX8ME8kVqM1ElGu4SHUSkFlqFMD7tycDXqb" >> ~/.ssh/known_hosts
-
-      - name: Upload PDFs via SFTP
-        env:
-          FTP_USER: ${{ secrets.SFTP_USER }}
-          FTP_PASS: ${{ secrets.SFTP_PASS }}
-        run: |
-          # Finds all PDFs downloaded from the build-pdf job and uploads them
-          find all-pdfs -name '*.pdf' -exec \
-            curl -k --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T {} ftp://realsoft.fi/public_html/pdfs/ \;
+          # This name is crucial: it allows build-pages.yml to find it
+          name: pdf-${{ matrix.paper }}
+          path: pdf-output/*.pdf
+          retention-days: 1  # Short retention as it's just a temporary hand-off
