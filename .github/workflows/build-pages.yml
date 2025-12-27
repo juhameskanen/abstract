@@ -31,23 +31,31 @@ jobs:
             echo "FATAL ERROR: papers.json not found."
             exit 1
           fi
+
           mkdir -p html
           touch html/.nojekyll
-          
-          # Create the header for the landing page
-          echo "<html><head><title>Research Papers</title></head><body><h1>Research Papers</h1><ul>" > html/index.html
+          echo "<html><head><title>Research Index</title></head><body><h1>Research Papers</h1><ul>" > html/index.html
 
-          # Parse the papers.json and loop through each entry
-          for paper in $(jq -r '.[]' papers.json); do
-            echo "Processing paper: $paper"
-            
+          PAPERS=$(jq -r '.[]' papers.json)
+
+          for paper in $PAPERS; do
             if [ -d "papers/$paper" ]; then
               mkdir -p html/$paper
-              
-              # Add this paper to the landing page list
               echo "<li><a href='./$paper/'>$paper</a></li>" >> html/index.html
               
-              # Find and convert .tex files in that directory
+              # --- Asset Migration ---
+              # Copy figures if they exist
+              if [ -d "papers/$paper/figures" ]; then
+                cp -r "papers/$paper/figures" "html/$paper/"
+              fi
+              
+              # Copy simulations if they exist
+              if [ -d "papers/$paper/simulations" ]; then
+                cp -r "papers/$paper/simulations" "html/$paper/"
+              fi
+
+              # Convert .tex to .html
+              shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
                 pandoc "$texfile" \
                   -s \
@@ -58,12 +66,9 @@ jobs:
                   --metadata title="$paper" \
                   -o "html/$paper/index.html"
               done
-            else
-              echo "Warning: Directory papers/$paper not found."
+              shopt -u nullglob
             fi
           done
-          
-          # Close the landing page HTML
           echo "</ul></body></html>" >> html/index.html
 
       - name: Upload Pages artifact
