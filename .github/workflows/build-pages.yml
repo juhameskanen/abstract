@@ -27,6 +27,10 @@ jobs:
 
       - name: Convert LaTeX to HTML
         run: |
+          if [ ! -f papers.json ]; then
+            echo "FATAL ERROR: papers.json not found."
+            exit 1
+          fi
           mkdir -p html
           touch html/.nojekyll
           
