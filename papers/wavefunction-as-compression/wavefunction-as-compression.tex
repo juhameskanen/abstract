@@ -1,0 +1,104 @@
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% --- Page Setup ---
+\geometry{letterpaper, margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% --- Document Metadata ---
+\title{\textbf{The Wave Function as a Compression Algorithm}}
+\author{Juha Meskanen}
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Abstract}
+We propose that the abstract, deterministic evolution of the wavefunction is not a primary physical entity but rather the residual of the cosmic compression process itself. In this view, the quantum mechanical description is the universe's most efficient method for information storage. Physics, therefore, is the study of the most probable, compressed informational output of a fundamentally abstract system. To test this hypothesis, we present a computational simulation that investigates the properties of coefficient dynamics derived from compression-optimal bases in a controlled, linear quantum system.
+
+\section{Theoretical Framework}
+Our theory rests on three fundamental assumptions:
+
+\subsection*{Assumption 1: The Universe is fundamentally abstract and informational.}
+The cosmos is fundamentally a geometric interpretation of information characterized by ``white noise,'' representing the myriad of virtual particles and ephemeral fluctuations at the quantum foam level—short-lived, small, random informational structures. However, interspersed within this randomness are sections that encode profound \textbf{symmetries}.
+
+\subsection*{Assumption 2: Maximally Compressed States}
+In any set of information, the number of highly compressed sequences (those with low Kolmogorov complexity) will statistically dominate over purely random, incompressible sequences in terms of \textit{persistence} and \textit{structure}. Maximum compression implies maximum probability. Predictable information compresses well, which explains why we find ourselves in a universe that is the most probable one, governed by predictable laws of physics.
+
+\subsection*{Assumption 3: The Wave Function as the Compression Algorithm}
+The \textbf{wave function $\psi$ is the universal compression algorithm} of the cosmos. The deterministic evolution described by quantum mechanics, which governs the behavior of microstructures, is the direct consequence of this algorithm's operation.
+
+\section{Computational Simulation}
+To explore the ``wave function-as-compression-coefficients'' idea, we designed a simulation to test its predictions in a linear regime.
+
+\subsection{Simulation Setup}
+We consider a 1D lattice with $N=64$ sites. We simulate the time evolution of a single-particle tight-binding model, which is a standard representation of a particle hopping between nearest-neighbor sites. This model is governed by a nearest-neighbor hopping Hamiltonian, resulting in complex wave functions $\psi(t)$ over $T=200$ timesteps.
+
+The simulated time evolution adheres to the Schrödinger equation:
+\[
+i\hbar \frac{\partial}{\partial t} \psi(x,t) = H \psi(x,t)
+\]
+where $H$ is the tight-binding Hamiltonian. For simplicity, we set $\hbar=1$.
+
+From the complex wave function $\psi_t$ at each timestep $t$, we generate ``observed frames'' in two variants:
+\begin{enumerate}
+    \item \textbf{Real part:} $x_t = \text{Re}(\psi_t)$
+    \item \textbf{Intensity (probability density):} $x_t = |\psi_t|^2$
+\end{enumerate}
+
+\subsection{Data Processing and Analysis}
+\begin{enumerate}
+    \item \textbf{Principal Component Analysis (PCA):} We applied PCA to the dataset of frames $\{x_t\}_{t=1}^{T}$. PCA finds an orthogonal basis that best captures the variance in the data. We projected the data onto the top 8 principal components, yielding coefficient vectors $\{c_t\}$ where $c_t \in \mathbb{R}^8$.
+    \item \textbf{Linear Propagator Fitting:} Assuming the compression process generates deterministic evolution in the coefficient space, we fit a linear propagator matrix $G$ between successive vectors using least squares:
+    \[
+    c_{t+1} \approx G c_t
+    \]
+    \item \textbf{Unitarity and Hermiticity Test:} We test if the propagator $G$ is approximately unitary ($G^\dagger G \approx I$) and if the generator $H_{gen} = -i \log G$ is approximately Hermitian ($H_{gen}^\dagger \approx H_{gen}$).
+\end{enumerate}
+
+\subsection{Results and Plots}
+The simulation produced the following key visualizations:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-1.png}
+    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-2.png} \\
+    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-3.png}
+    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-4.png}
+    \caption{PCA components (real part) 1 through 4.}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-5.png}
+    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-6.png}
+    \caption{Left: Singular values of fitted propagator $G$. Right: Reconstruction MSE vs number of PCA components.}
+\end{figure}
+
+\subsection{Positive Support}
+The simulation yielded significant positive support for the hypothesis. In a clean, linear-unitary toy model, a compression-optimal linear basis produces coefficient dynamics that are demonstrably \textbf{near-unitary} and possess a \textbf{near-Hermitian generator}. This behavior precisely matches the predictions of our informational theory.
+
+\section{Discussion and Caveats}
+While the simulation provides compelling initial support, we acknowledge several limitations:
+\begin{itemize}
+    \item \textbf{Linearity Assumption:} PCA is a linear transform. If the relationship between bitstrings and amplitudes is nonlinear, future work should explore \textbf{autoencoders}.
+    \item \textbf{Decoherence:} The model neglects the effects of open quantum systems.
+    \item \textbf{Access to Amplitude:} In physical experiments, only probability densities are directly observable.
+\end{itemize}
+
+\section{Conclusion}
+We propose that reality can be viewed as a geometric interpretation of information, with the wave function acting as a universal compression algorithm. Finiteness observed in physics is not merely a boundary condition, but the computational signature of the universal compression process. The universe does not deal in infinities because infinities cannot be efficiently stored or propagated by a maximally compressing system.
+
+\section*{Simulation Software}
+The underlying logic for this model is implemented in \texttt{wavefunction-as-compression.py}.
+
+\end{document}
