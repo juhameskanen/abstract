@@ -42,7 +42,7 @@ jobs:
                 -s \
                 --from=latex \
                 --to=html5 \
-                --mathjax \
+		--mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                 --metadata title="$paper" \
                 -o "html/$paper/index.html"
             done
