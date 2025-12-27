@@ -27,19 +27,29 @@ jobs:
         run: |
           mkdir -p html
           touch html/.nojekyll
+          
+          # Create a simple landing page so you don't get a 404
+          echo "<html><body><h1>Research Papers</h1><ul>" > html/index.html
+
           for paper in emergence-of-time humans-as-axiomatic black-hole-singularities qft-divergences; do
             mkdir -p html/$paper
-            # Find the main tex file (adjust if your naming convention differs)
+            
+            # Add a link to the landing page
+            echo "<li><a href='./$paper/'>$paper</a></li>" >> html/index.html
+            
             for texfile in papers/$paper/*.tex; do
               pandoc "$texfile" \
                 -s \
-                --from latex \
-                --to html5 \
+                --from=latex \
+                --to=html5 \
                 --mathjax \
                 --metadata title="$paper" \
                 -o "html/$paper/index.html"
             done
           done
+          
+          echo "</ul></body></html>" >> html/index.html
+
 
 
       - name: Upload Pages artifact
