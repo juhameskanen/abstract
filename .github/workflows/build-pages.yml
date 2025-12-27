@@ -26,6 +26,7 @@ jobs:
       - name: Convert LaTeX to HTML
         run: |
           mkdir -p html
+	  touch html/.nojekyll
           for paper in emergence-of-time humans-as-axiomatic black-hole-singularities qft-divergences; do
             mkdir -p html/$paper
             for texfile in papers/$paper/*.tex; do
