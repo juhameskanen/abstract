@@ -42,7 +42,7 @@ which captures the number of distinguishable geometric configurations encoded in
 Let \(\mathcal{M}\) denote the set of all memory locations in a deterministic computing system. 
 A \emph{machine state} \(\mathcal{S} \in \mathcal{M}\) is a complete assignment of values 
 to all memory elements. Let \(\mathcal{P} = (I_1, I_2, \dots, I_n)\) be a finite sequence of deterministic instructions, 
-with \(I_k : \mathcal{S} \rightarrow \mathcal{S}$. The \emph{execution trace} \(\mathcal{T}\) of program \(\mathcal{P}\) 
+with \(I_k : \mathcal{S} \rightarrow \mathcal{S} \). The \emph{execution trace} \(\mathcal{T}\) of program \(\mathcal{P}\) 
 is the ordered sequence of states
 \[
 \mathcal{T} = (s_0, s_1, \dots, s_n), \quad s_{k+1} = I_{k+1}(s_k).
@@ -53,7 +53,7 @@ In practice, we focus on the \emph{bitstring sub-trace} that encodes spatial geo
 
 \subsection{Mapping Geometry to Bitstrings}
 
-Let a geometric state be encoded as a bitstring \(b \in \{0,1\}^L$, representing the discretized positions 
+Let a geometric state be encoded as a bitstring \(b \in \{0,1\}^L \), representing the discretized positions 
 of all particles in the dust cloud. Let
 \[
 C = \{0,1\}^{3k}
@@ -74,7 +74,7 @@ To quantify distinguishable configurations, we compute the Shannon entropy of th
 H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
 \]
 
-where \(p_0\) and \(p_1\) are the empirical frequencies of 0- and 1-bits in \(b$. 
+where \(p_0\) and \(p_1\) are the empirical frequencies of 0- and 1-bits in \(b \). 
 
 \textbf{Important clarification:} This entropy is \emph{not} thermodynamic entropy or ensemble Shannon entropy. 
 It measures the number of distinguishable configurations encoded in a deterministic simulation at a given timestep.
@@ -101,12 +101,12 @@ Extrapolation indicates that entropy approaches zero at the singularity.
 
 \subsection{Lemma: Vanishing Execution-Trace Entropy Implies Geometric Singularity}
 
-Let \(\mathcal{B}_t \subset \{0,1\}^L\) denote the set of bitstrings encoding geometry over a finite time window near \(t$. 
+Let \(\mathcal{B}_t \subset \{0,1\}^L\) denote the set of bitstrings encoding geometry over a finite time window near \(t \). 
 If
 \[
 H(\mathcal{B}_t) \to 0,
 \]
-then the set of distinguishable geometric configurations collapses to a single equivalence class under \(f$. That is, the geometry degenerates to a unique configuration.
+then the set of distinguishable geometric configurations collapses to a single equivalence class under \(f \). That is, the geometry degenerates to a unique configuration.
 
 \section{Discussion}
 
@@ -126,7 +126,7 @@ This state is smooth (no relational variation) but singular in that it supports 
 To encode geometry:
 
 \begin{enumerate}
-    \item Quantize continuous coordinates: \(\mathbb{R} \to \mathbb{Z}$
+    \item Quantize continuous coordinates: \(\mathbb{R} \to \mathbb{Z} \)
     \item Convert integers to fixed-width binary strings
     \item Concatenate binary segments into a full state bitstring
 \end{enumerate}
