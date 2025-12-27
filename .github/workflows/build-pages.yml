@@ -63,7 +63,6 @@ jobs:
                   --to=html5 \
                   --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                   -c "/abstract/style.css" \
-                  --metadata title="$paper" \
                   -o "html/$paper/index.html"
               done
               shopt -u nullglob
