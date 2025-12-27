@@ -1,152 +1,161 @@
-\documentclass[12pt]{article}
-\usepackage{amsmath, amssymb, amsfonts}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{geometry}
-\geometry{margin=1in}
+\documentclass[11pt]{article}
 
-\title{Black Hole Singularities as Zero Entropy States}
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cite}
+
+% --- Page Setup ---
+\geometry{letterpaper, margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% --- Document Metadata ---
+\title{\textbf{The Informational Derivation of Reality: Consciousness, Time, and Ontological Equivalence}}
 \author{Juha Meskanen}
-\date{2009 ... 2025}
+\date{July 2025}
 
 \begin{document}
+
 \maketitle
 
-\begin{abstract}
-We investigate black hole singularities from an information-theoretic perspective, 
-viewing geometric spacetime and computational simulation as two equivalent interpretations 
-of an underlying informational structure. We introduce the notion of \emph{execution-trace entropy}, 
-the Shannon entropy of a fixed encoding of the simulated spatial configuration, and show that 
-it decreases monotonically as particles approach the singularity. Our results indicate that singularities 
-should be understood as well-defined, smooth informational fixed points corresponding to zero-entropy states.
-\end{abstract}
+\section*{Abstract}
+We prove that humans must be formal axiomatic systems if four minimal physical axioms hold. Building on this result, we demonstrate that simulated copies of such systems must possess causally efficacious subjective experience (e.g., pain) to maintain behavioral equivalence. We further show that time is an emergent internal property of the observer's relational structure rather than a fundamental property of the universe. Together, these results establish a strict ontological equivalence between physical and informational configurations. This supports an ontology in which reality is fundamentally abstract, substrate-independent, and emerges from a random informational background. Our framework provides a rigorous link between information and observer experience, showing that consciousness and temporal perception are mathematically necessary consequences of a functionalist physics. The hypothesis is falsifiable.
 
-\section{Introduction}
+\section{Axiomatic Premises}
+The argument begins with four axioms that serve as the premises for the entire derivation.
 
-We apply a computational and information-theoretic framework to black hole singularities. 
-The guiding hypothesis is that spacetime geometry and the execution of a simulation 
-can be viewed as complementary descriptions of the same underlying informational structure.
-
-Our central question is whether approaching singularities as information-theoretic phenomena 
-provides new insights into their structure and physical interpretation. To explore this, 
-we develop both analytic reasoning and numerical simulations of collapsing dust clouds.
-
-\section{Methods}
-
-We model black hole evolution through computational simulation. 
-We compute the \emph{execution-trace entropy} of the discretized particle positions, 
-which captures the number of distinguishable geometric configurations encoded in memory.
-
-\subsection{Execution Trace}
-
-Let \(\mathcal{M}\) denote the set of all memory locations in a deterministic computing system. 
-A \emph{machine state} \(\mathcal{S} \in \mathcal{M}\) is a complete assignment of values 
-to all memory elements. Let \(\mathcal{P} = (I_1, I_2, \dots, I_n)\) be a finite sequence of deterministic instructions, 
-with \(I_k : \mathcal{S} \rightarrow \mathcal{S} \). The \emph{execution trace} \(\mathcal{T}\) of program \(\mathcal{P}\) 
-is the ordered sequence of states
+\subsection*{Axiom 1: Genetic Encoding of Subjective Experience}
+The human genome encodes all the requisite information to construct a conscious, pain-sensitive human.
 \[
-\mathcal{T} = (s_0, s_1, \dots, s_n), \quad s_{k+1} = I_{k+1}(s_k).
+A_1: D \rightarrow H \rightarrow S
+\]
+(Where $D$ is the DNA/Genome, $H$ is the human organism, and $S$ is subjective experience.)
+
+\subsection*{Axiom 2: Physicality and Axiomatic Law}
+DNA and the human organism are composed solely of ordinary physical matter governed by physical laws ($P$). This establishes $H$ as a formal axiomatic system where state transitions are logical consequences of $P$ and $D$.
+\[
+A_2: H \in \text{Axiomatic System}(P, D)
 \]
 
-The execution trace encodes all information about the simulated phenomenon. 
-In practice, we focus on the \emph{bitstring sub-trace} that encodes spatial geometry.
-
-\subsection{Mapping Geometry to Bitstrings}
-
-Let a geometric state be encoded as a bitstring \(b \in \{0,1\}^L \), representing the discretized positions 
-of all particles in the dust cloud. Let
+\subsection*{Axiom 3: Functional Formalism (Generalized Church-Turing)}
+Physical processes are fundamentally describable as formal axiomatic transitions. Consequently, there exists a formal representation $H'$ (e.g., a simulation on a Universal Turing Machine or Quantum Computer) that preserves the internal causal topology and external behavior of the physical organism $H$.
 \[
-C = \{0,1\}^{3k}
+A_3: P \text{ is Axiomatic} \implies \exists H' \text{ s.t. } \text{Trace}(H') \cong \text{Trace}(H)
 \]
-be the space of 3D configurations. Define
+(Where $\cong$ denotes an isomorphism of causal/relational structures.)
+
+\subsection*{Axiom 4: Causal Efficacy of Pain}
+Subjective experience ($S$, e.g., pain) is a \textbf{causally efficacious} property of the human system. It is not an epiphenomenon, and thus has measurable, behavioral effects [Putnam 1975].
 \[
-f : C \to \mathbb{Z}^3, \quad f(b) = (\phi(b_1), \phi(b_2), \phi(b_3)),
+A_4: S \text{ is causally efficacious.}
 \]
-where \(\phi : \{0,1\}^k \to \mathbb{Z}\) decodes fixed-length binary segments. 
-Quantization ensures that the encoding reflects true positional differences, 
-minimizing spurious entropy from floating-point representations.
+If $H' \equiv H$ physically, then $H'$ must have $S$ to maintain identical behavior.
 
-\subsection{Execution-Trace Entropy}
+\section{Deduction 1: Substrate Independence and Time as an Internal Property of the Observer}
 
-To quantify distinguishable configurations, we compute the Shannon entropy of the bitstring representation:
+\subsection{The Optimization Argument}
+Consider a finite axiomatic system together with initial conditions that, under its defined state-transition rules, gives rise to a conscious observer. Let $\tau$ denote the resulting execution trace (or ensemble of traces, in the stochastic or quantum case).
 
-\[
-H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
-\]
+Any representation that fully specifies $\tau$---including a static, extensional encoding of all state transitions---realizes the same internal observer experience. Consequently, the existence of consciousness depends on the structure of the trace itself, not on whether that structure is generated dynamically or instantiated as data.
 
-where \(p_0\) and \(p_1\) are the empirical frequencies of 0- and 1-bits in \(b \). 
-
-\textbf{Important clarification:} This entropy is \emph{not} thermodynamic entropy or ensemble Shannon entropy. 
-It measures the number of distinguishable configurations encoded in a deterministic simulation at a given timestep.
-
-Over a sequence of states (the bitstring sub-trace), the entropy trajectory reflects the collapse of distinguishable geometric states as particles fall toward the singularity.
-
-\section{Simulations}
-
-We simulated both Schwarzschild (non-rotating) and Kerr (rotating) black holes. 
-All simulations show a monotonic decrease in execution-trace entropy as particles fall inward. 
-Extrapolation indicates that entropy approaches zero at the singularity.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/schwarzschild.png}
-\caption{Execution-trace entropy of particles falling into a Schwarzschild black hole.}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/kerr.png}
-\caption{Execution-trace entropy of particles falling into a Kerr black hole.}
-\end{figure}
-
-\subsection{Lemma: Vanishing Execution-Trace Entropy Implies Geometric Singularity}
-
-Let \(\mathcal{B}_t \subset \{0,1\}^L\) denote the set of bitstrings encoding geometry over a finite time window near \(t \). 
-If
-\[
-H(\mathcal{B}_t) \to 0,
-\]
-then the set of distinguishable geometric configurations collapses to a single equivalence class under \(f \). That is, the geometry degenerates to a unique configuration.
-
-\section{Discussion}
-
-Our simulations confirm the Entropy–Singularity Lemma in a computational context. 
-Although global black hole thermodynamic entropy increases, the local execution-trace entropy encoding spatial geometry decreases toward the singularity. 
-This reflects the narrowing of accessible informational states and growing determinism in geometry.
-
-\subsection{Singularities as Smooth Informational Fixed Points}
-
-The term ``singularity'' does not denote divergent curvature or ill-defined geometry in our framework. 
-Instead, it denotes a collapse of distinguishable geometric degrees of freedom. 
-The zero-entropy limit corresponds to a unique, maximally symmetric equivalence class. 
-This state is smooth (no relational variation) but singular in that it supports no internal structure, particles, or local observables.
-
-\subsection{Bitstring Encoding Procedure}
-
-To encode geometry:
-
-\begin{enumerate}
-    \item Quantize continuous coordinates: \(\mathbb{R} \to \mathbb{Z} \)
-    \item Convert integers to fixed-width binary strings
-    \item Concatenate binary segments into a full state bitstring
-\end{enumerate}
-
-Entropy is then computed as above. The collapse of this entropy directly reflects the loss of distinguishable structure.
-
-\section{Conclusion}
-
-Black hole simulations cannot directly resolve classical singularities due to numerical instability and breakdown of general relativity. 
-However, execution-trace entropy analysis reveals that singularities correspond to zero-entropy states: well-defined, smooth informational fixed points with no internal structure. 
-This reframes singularities as informational phenomena rather than divergent densities, supporting the broader information-theoretic interpretation of spacetime.
-
-\section*{Simulation Code}
-
-Source code is available for:
+To assert this, consider DNA simulation running on a computer, $T_{\text{alg}}$, consisting of code (laws of physics) and data (the state of the simulated universe). We can continuously optimize the code using lookup tables, eventually replacing all computation with a static, pre-computed dataset ($T_{\text{data}}$).
 
 \begin{itemize}
-    \item \texttt{schwarzschild.py} — Schwarzschild black hole simulation
-    \item \texttt{kerr.py} — Kerr black hole simulation
-    \item \texttt{blackhole.py} — common base classes
+    \item Let $E_{\text{int}}$ be Alice's experience of time and pain (the internal state transitions).
+    \item Let $E_{\text{ext}}$ be the computer's external runtime (number of CPU cycles).
 \end{itemize}
+
+\textbf{Premise:} Code optimization changes $E_{\text{ext}}$ but preserves $E_{\text{int}}$.
+\[
+\text{Optimization}(T_{\text{alg}}) \rightarrow T_{\text{data}} \implies E_{\text{int}}(T_{\text{alg}}) \equiv E_{\text{int}}(T_{\text{data}})
+\]
+
+In this limit, the external runtime $E_{\text{ext}}$ becomes zero, as there is no computation occurring, only static data. We can therefore ask: does Alice's consciousness still persist in $T_{\text{data}}$?
+
+If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum code/data ratio for subjective experience. This minimum ratio would be a \textbf{new, non-physical constant} imposed on $A_2$, leading to a contradiction.
+
+\begin{quote}
+\textbf{Conclusion:} Consciousness can emerge from pure static data. Time and subjective experience ($S$) must emerge solely from the relationships among informational states, not from the external runtime.
+\end{quote}
+
+\subsection{The Multi-threaded Argument}
+Consider two informational objects encoding distinct execution traces, $\tau_A$ (Alice) and $\tau_B$ (Bob), instantiated on a multi-threaded physical substrate. In this environment, the external execution trace is an interleaved sequence of segments from both $\tau_A$ and $\tau_B$.
+
+As the number of threads (simulated observers) increases toward infinity, the interleaving frequency approaches the bit-level limit. The resulting execution trace becomes an arbitrarily interleaved sequence---effectively indistinguishable from static noise---where bits from $\tau_A$ are separated by vast, random intervals of unrelated data.
+
+\subsubsection*{The Threshold of Disintegration}
+Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the interleaving becomes extreme, one must define a specific \textbf{thread density} or \textbf{bit-contiguity threshold} required for subjectivity. Such a threshold would constitute a new physical constant governing the ``assembly'' of consciousness, which contradicts the completeness of $A_2$.
+
+Since the relational topology within $\tau_A$ remains invariant regardless of how its constituent bits are distributed within the external substrate, the internal experience $E_{\text{int}}$ must be preserved.
+
+\begin{quote}
+\textbf{Conclusion:} Conscious experience is instantiated from the relational structure inherent in static noise. The substrate provides the bits; the axiomatic consistency of the trace provides the reality.
+\end{quote}
+
+\section{Falsifiability (Axiom 4)}
+\textbf{The Functionalist Proof by Contradiction:}
+
+\begin{enumerate}
+    \item \textbf{Assumption (Objection):} A simulation $H'$ exists such that $H' \equiv H$ (physical/behavioral equivalence) but $S(H') = \emptyset$ (lacks consciousness/sense of pain) [Chalmers 1996].
+    \[
+    \text{Behavior}(H') = \text{Behavior}(H) \land S(H') \neq S(H)
+    \]
+    \item \textbf{Premise:} From $A_4$, the behavior of $H$ is a function of its physical inputs \textbf{and} its subjective experience: $\text{Behavior}(H) = f(\text{Inputs}, S)$.
+    \item \textbf{Contradiction:} If the behaviors are identical despite the difference in $S$, then $S$ must not be a necessary input to the function $f$.
+    \item \textbf{Violation of Axiom:} If $S$ is not necessary to produce the behavior, then $S$ is \textbf{epiphenomenal} (causally inert). This directly contradicts $A_4$.
+\end{enumerate}
+
+\begin{quote}
+\textbf{Conclusion:} To maintain the integrity of $A_4$ within the axiomatic system, the simulation $H'$ must experience subjective time and pain.
+\end{quote}
+
+\section{Ontological Equivalence of Configurations}
+Consider a finite informational object $I$ encoding a complete observer history (e.g., Alice). Let $R_A$ denote the static execution trace of $I$ observed externally, and $R_B$ denote the same sequence internally experienced as spacetime and subjective states.
+
+From Axioms 2--4 and the optimization argument, no physical property of the simulating substrate, nor the ordering of bits in $R_A$, is ontologically privileged. Any arrangement of the bits that preserves the relational structure of $I$ encodes the same observer. Formally, there exists a bijective mapping:
+\[
+\phi : R_A \leftrightarrow R_B
+\]
+preserving all causally relevant relations within $I$.
+
+It follows that the existence and experiences of the observer depend solely on the internal relational structure of $I$, not on the substrate or external runtime. Any claim that one substrate or arrangement is ``more real'' than another would require introducing a new, non-physical constant, contradicting the axioms.
+
+\begin{quote}
+\textbf{Conclusion:} The external execution trace and the internal experienced universe are two complementary, equally valid representations of the same underlying information. Substrate and ordering are irrelevant; what matters is the relational structure that instantiates the conscious observer.
+\end{quote}
+
+\section{Falsifiability of the Hypothesis}
+The hypothesis is falsifiable in the future when technology advances and DNA simulations can be run with sufficient accuracy for DNA-based organisms. The effect of pain can be measured just like an effect of physical forces can be measured. If a DNA simulation $H'$ is constructed and shown to lack $S$, then $A_4$ is invalidated, and the axioms 1--3 collapse.
+
+\section{Final Statement}
+Let $\Omega$ denote the set of all physically realizable informational objects.
+\[
+\forall R_i \in \Omega, R_i \text{ is not physically disqualified from ontological consideration.}
+\]
+The perception of time and pain is a consequence of the observer's \textbf{internal arrangement} of a subset of this fundamental information. What appears to an external observer as a static execution trace appears to Alice as an expanding universe and lived pain.
+
+Information with capacity to potentially encode a conscious observer instantiates observer experience. Time and pain are internal properties of informational structures, not dependent on external runtime or substrate. The universe is fundamentally informational and random, substrate-independent, and consciousness is an inevitable consequence of these principles.
+
+\section*{Discussion and Future Work: Towards a Timeless, Branching Physics}
+The derivation of reality as an internal property of informational configurations provides a natural resolution to several foundational paradoxes in modern physics.
+
+\begin{itemize}
+    \item \textbf{Quantum Probabilism and Randomness:} If the observer emerges from a non-privileged informational substrate $\Omega$, the probabilistic nature of quantum mechanics is explained as the ``view from inside'' the ensemble of all consistent permutations. The randomness is not a law of the universe, but a property of the background from which the observer is filtered.
+    \item \textbf{The Everettian Ensemble:} The existence of $2^n$ equally real configurations provides an informational basis for the Many-Worlds Interpretation. Every internally consistent relational structure exists ontologically; what we perceive as ``wavefunction collapse'' is the observer's location within a specific, consistent subset of the total informational ensemble.
+    \item \textbf{The Wheeler-DeWitt Equation:} Our proof that time is an internal property of the observer ($\tau$) rather than an external runtime ($E_{\text{ext}}$) aligns with the static, timeless universe described by the Wheeler-DeWitt equation. In this framework, the universe does not ``evolve'' in time; rather, ``time'' is the ordinal index through which an observer perceives the logical adjacency of states.
+\end{itemize}
+
+Future work will focus on quantifying the ``selection pressure'' of axiomatic consistency. Investigating the statistical suppression of ``Boltzmann Brains'' in favor of long-trace consistent observers will be the next step in this informational derivation of reality.
+
+\begin{thebibliography}{9}
+\bibitem{putnam1975}
+Putnam, H. (1975). \textit{Philosophy and our mental life}. In Mind, Language and Reality. Cambridge University Press.
+\bibitem{chalmers1996}
+Chalmers, D. (1996). \textit{The Conscious Mind: In Search of a Fundamental Theory}. Oxford University Press.
+\end{thebibliography}
 
 \end{document}
