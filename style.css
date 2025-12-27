@@ -1,0 +1,11 @@
+/* Allow horizontal scrolling for long equations on small screens */
+.math.display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+/* Optional: Add a bit of padding so subscripts don't get clipped */
+.mjx-chtml {
+  padding: 0.5em 0;
+}
