@@ -4,19 +4,28 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  build-pdf:
+  # Job 1: Extract paper list from JSON
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        # jq converts the json file into a single line for the matrix
+        run: echo "matrix=$(jq -c . papers.json)" >> $GITHUB_OUTPUT
 
+  # Job 2: Build PDFs in parallel using the dynamic matrix
+  build-pdf:
+    needs: setup
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        paper:
-          - emergence-of-time
-          - humans-as-axiomatic
-          - black-hole-singularities
-          - qft-divergences
-
+        paper: ${{ fromJson(needs.setup.outputs.matrix) }}
+    
     steps:
       - uses: actions/checkout@v4
 
@@ -51,6 +60,7 @@ jobs:
           name: ${{ matrix.paper }}-pdfs
           path: pdf/${{ matrix.paper }}/*.pdf
 
+  # Job 3: Final SFTP Upload
   upload-sftp:
     name: Upload PDFs to Personal Site
     runs-on: ubuntu-latest
@@ -59,13 +69,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download artifacts
+      - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: all-pdfs
-
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Add SFTP host key
         run: |
@@ -77,5 +84,6 @@ jobs:
           FTP_USER: ${{ secrets.SFTP_USER }}
           FTP_PASS: ${{ secrets.SFTP_PASS }}
         run: |
+          # Finds all PDFs downloaded from the build-pdf job and uploads them
           find all-pdfs -name '*.pdf' -exec \
-            curl -k --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T {} ftp://realsoft.fi \;
+            curl -k --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T {} ftp://realsoft.fi/public_html/pdfs/ \;
