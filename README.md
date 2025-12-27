@@ -1,10 +1,10 @@
 # The Abstract Universe Project
 
 ## Contents
-- [Papers ➡](papers/toc.md)
+- [Papers](https://juhakm.github.io/abstract/)
 - [CHANGELOG ➡](CHANGELOG.md)
 
 ---
 
-*© 2024 The Abstract Universe Project. All rights reserved.*
+*© 2001 ... 2024 The Abstract Universe Project. All rights reserved.*
 
