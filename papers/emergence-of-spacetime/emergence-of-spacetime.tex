@@ -7,6 +7,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\newcommand{\pdflink}[1]{} % By default, do nothing
 
 % --- Page Setup ---
 \geometry{letterpaper, margin=1in}
@@ -22,8 +23,16 @@
 
 \maketitle
 
-\section{Introduction}
+\section{Abstract}
 Building on the concept that black hole singularities are zero-entropy states, we investigate a complementary hypothesis: the expansion of the universe is a manifestation of increasing entropy. This abstract presents a computational model that simulates the evolution of an expanding universe. We monitor the emergence and growth of spacetime, directly correlating its expansion with a corresponding increase in the system's entropy.
+
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{paper.pdf}{Download PDF Version}
+\end{center}
+\fi
+
 
 \section{Entropy as a Driver of Expansion}
 We define an execution trace $S_t$, $t = 0 \ldots n$, where each $S_t$ is a binary string of fixed length $L$. Beginning from a state of zero Shannon entropy (an all-zero string), we evolve $S_t$ via random bit-flip mutations that incrementally increase its entropy.

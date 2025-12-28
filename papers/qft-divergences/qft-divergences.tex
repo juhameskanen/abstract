@@ -7,6 +7,7 @@
 \newtheorem{lemma}{Lemma}
 \usepackage{geometry}
 \geometry{margin=1in}
+\newcommand{\pdflink}[1]{} % By default, do nothing
 
 \title{Emergent Information-Theoretic Suppression of QFT Divergences: \\ A QBitwave Approach}
 \author{Juha Meskanen \\ \texttt{meskanen.com}}
@@ -18,6 +19,13 @@
 \begin{abstract}
 We investigate the ultraviolet divergences of quantum field theory (QFT) from an information-theoretic perspective, employing the QBitwave framework in which the wavefunction emerges as a minimal, compressible program reproducing the underlying bitstring configuration of a field. By interpreting high-frequency modes as incompressible states with vanishing amplitude, we show that one-loop integrals are naturally regularized without imposing external cutoffs. Numerical simulations confirm that the QBitwave amplitude-weighted integrals remain finite and flat across momentum space, while standard integrals diverge.
 \end{abstract}
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{paper.pdf}{Download PDF Version}
+\end{center}
+\fi
+
 
 \section{Introduction}
 Traditional QFT encounters ultraviolet (UV) divergences in loop integrals. Regularization and renormalization schemes are typically introduced to control these infinities. Here we propose an alternative: treating the wavefunction as an emergent, algorithmic-information-theoretic object. Highly complex (incompressible) field configurations contribute negligibly to physical amplitudes. This naturally suppresses UV contributions, providing a built-in regularization.

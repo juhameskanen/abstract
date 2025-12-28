@@ -7,6 +7,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\newcommand{\pdflink}[1]{} % By default, do nothing
 
 % --- Page Setup ---
 \geometry{letterpaper, margin=1in}
@@ -24,6 +25,14 @@
 
 \section*{Abstract}
 We extend our previous informational theory of quantum gravity, in which observers and particles emerge from compressible informational structures, to a fully \textbf{self-consistent, affine Gaussian blob model}. Each blob is now defined not only by its center, but by its full \textbf{covariance matrix}, allowing arbitrary \textbf{scaling, skewing, and rotation}. Candidate blob configurations are evaluated according to the \textbf{compressibility of their full history}, and the most compressible configurations dominate the probability distribution of observer-realized worlds. In this formulation, high-frequency divergences are naturally suppressed by compressibility, providing an emergent mechanism that prevents singular collapse. Iterative resampling of particle positions and blob updates produces trajectories that approximate \textbf{GR-like geodesics} in the emergent informational metric, establishing a direct link between \textbf{compression-maximizing configurations} and classical gravitational behavior.
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{paper.pdf}{Download PDF Version}
+\end{center}
+\fi
+
+
 
 \section{Introduction}
 In prior work, we demonstrated that probabilistic gravity and inertia emerge from the dominance of compressible trajectories of Gaussian blobs in a 2D particle field. While these blobs captured gravity-like attraction and emergent QM-like behavior, their fixed isotropic shapes limited the simulation’s ability to reproduce \textbf{general relativistic geodesics}, where matter dynamically shapes spacetime geometry.

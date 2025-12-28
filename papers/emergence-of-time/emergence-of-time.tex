@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{physics}
 \usepackage[backend=biber]{biblatex}
+\newcommand{\pdflink}[1]{} % By default, do nothing
 
 \addbibresource{references.bib}
 
@@ -31,6 +32,13 @@ expectation values are emergent features of compression-optimal histories, while
 singularities correspond to vanishing-information configurations that are algorithmically
 suppressed and observationally inaccessible.
 \end{abstract}
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{paper.pdf}{Download PDF Version}
+\end{center}
+\fi
+
 
 \section{Ontological Framework}
 

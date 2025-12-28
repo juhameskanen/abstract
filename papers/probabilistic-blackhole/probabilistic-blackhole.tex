@@ -7,6 +7,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\newcommand{\pdflink}[1]{} % By default, do nothing
 
 % --- Page Setup ---
 \geometry{letterpaper, margin=1in}
@@ -26,6 +27,13 @@
 This paper explores the hypothesis that the interior geometry of a black hole is not a pathological singularity but a smooth well-defined point.
 We argue that if a zero-entropy state is information-free, it cannot define individual particles.
 This concept has profound implications for understanding spacetime curvature at the black hole's core.
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{paper.pdf}{Download PDF Version}
+\end{center}
+\fi
+
 
 \section{Introduction}
 The standard Schwarzschild solution predicts infinite curvature at the singularity. To reconcile these views, we replace the interior solution with a lognormal-shaped distribution of effective curvature, anchored at zero entropy. 
