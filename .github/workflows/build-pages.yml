@@ -3,7 +3,6 @@ name: Build and Deploy HTML (GitHub Pages)
 on:
   push:
     branches: [main]
-  # Triggers after PDF workflow completes
   workflow_run:
     workflows: ["Build and Upload PDFs"]
     types: [completed]
@@ -17,7 +16,6 @@ permissions:
 jobs:
   build-html:
     runs-on: ubuntu-latest
-    # Run on push/dispatch, or if the PDF workflow was successful
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
@@ -52,7 +50,6 @@ jobs:
           touch html/.nojekyll
           cp style.css html/style.css
           
-          # Generate index.html header
           cat <<EOF > html/index.html
 <html>
 <head>
@@ -65,45 +62,32 @@ jobs:
 EOF
 
           PAPERS=$(jq -r '.[]' papers.json)
-          # Anchor the bibliography path
           BIB_PATH=$(pwd)/papers/references.bib
 
           for paper in $PAPERS; do
             if [ -d "papers/$paper" ]; then
               mkdir -p "html/$paper"
               
-              # Handle PDF Integration
               PDF_LINK_HTML=""
               if [ -d "all-pdfs/pdf-$paper" ]; then
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/paper.pdf"
                 PDF_LINK_HTML=" | <a href='./$paper/paper.pdf'>[PDF]</a>"
               fi
 
-              # Add entry to the index list
               echo "    <li><a href='./$paper/'>$paper</a>$PDF_LINK_HTML</li>" >> html/index.html
               
-              # Asset Migration
               [ -d "papers/$paper/figures" ] && cp -r "papers/$paper/figures" "html/$paper/"
               [ -d "papers/$paper/simulations" ] && cp -r "papers/$paper/simulations" "html/$paper/"
 
-              # Convert LaTeX to HTML
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
-                pandoc "$texfile" \
-                  -s \
-                  --from=latex \
-                  --to=html5 \
-                  --citeproc \
-                  --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                  --bibliography="$BIB_PATH" \
-                  -c "../style.css" \
-                  -o "html/$paper/index.html"
+                # Run pandoc without breaking YAML indentation
+                pandoc "$texfile" -s --from=latex --to=html5 --citeproc --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" --bibliography="$BIB_PATH" -c "../style.css" -o "html/$paper/index.html"
               done
               shopt -u nullglob
             fi
           done
           
-          # Close index.html
           echo "  </ul></body></html>" >> html/index.html
 
       - name: Upload Pages artifact
