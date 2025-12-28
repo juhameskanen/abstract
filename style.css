@@ -1,64 +1,72 @@
+/* --- Base Layout & Typography --- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
+  /* Default Light Mode Colors */
+  background-color: #fcfcfc;
+  color: #333;
+}
+
 /* --- MathJax / LaTeX Handling --- */
 .math.display {
   overflow-x: auto;
   overflow-y: hidden;
   max-width: 100%;
-  padding: 1em 0; /* Space out equations */
+  padding: 1em 0;
 }
 
 .mjx-chtml {
   padding: 0.5em 0;
 }
 
-/* --- Base Layout --- */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6; /* Critical for reading long theories */
-  color: #333;
-  max-width: 800px; /* Prevents lines from being too wide to read */
-  margin: 0 auto;
-  padding: 2em;
-  background-color: #fcfcfc;
-}
-
-/* --- Typography --- */
+/* --- Heading Hierarchy --- */
 h1, h2, h3, h4 {
   color: #506070;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
-  font-weight: 600;
 }
 
-h1 { font-size: 1.6em; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
-h2 { font-size: 1.4em; }
-h3 { font-size: 1.2em; }
-h4 { font-size: 1.1em; }
-h5 { font-size: 1em; color: #405060; font-style: italic; }
+h1 { font-size: 1.8em; border-bottom: 1px solid #eee; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.3em; }
 
 /* --- Links --- */
-a {
-  text-decoration: none;
-  transition: color 0.2s ease;
+a:link { color: #445566; text-decoration: none; }
+a:visited { color: #607090; }
+a:hover { text-decoration: underline; color: #000; }
+
+/* -----------------------------------------------------------
+   DARK MODE SINGULARITY
+   This activates automatically if the user's OS is in Dark Mode
+----------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212; /* Deep space black */
+    color: #e0e0e0;            /* Soft white text */
+  }
+
+  h1, h2, h3, h4 {
+    color: #8899aa;            /* Muted blue-grey headings */
+    border-bottom-color: #333;
+  }
+
+  a:link { color: #88aadd; }   /* Brighter blue for visibility */
+  a:visited { color: #aaaaff; }
+  a:hover { color: #fff; }
+
+  /* Ensure math equations don't look too harsh */
+  .mjx-chtml {
+    filter: brightness(0.9);
+  }
+
+  /* Code blocks or preformatted text */
+  pre, code {
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+    border: 1px solid #333;
+  }
 }
-
-a:link { color: #445566; }
-a:visited { color: #505080; }
-a:hover { color: #000; text-decoration: underline; }
-a:active { color: #a000ff; }
-
-/* --- Special Touches --- */
-.bodytext {
-  text-align: justify; /* Common in academic papers */
-  hyphens: auto;
-}
-
-/* Style for your generated PDF links */
-.pdf-link {
-  font-weight: bold;
-  font-family: monospace;
-  background: #f0f4f8;
-  padding: 2px 5px;
-  border-radius: 3px;
-}
-
