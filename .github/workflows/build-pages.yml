@@ -33,33 +33,21 @@ jobs:
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: build-pdf.yml
+          run_id: ${{ github.event.workflow_run.id || github.run_id }}
           name: pdf-.*
           name_is_regexp: true
           path: all-pdfs
-          workflow_conclusion: success
           search_artifacts: true
 
       - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
-          if [ ! -f papers.json ]; then
-            echo "FATAL ERROR: papers.json not found."
-            exit 1
-          fi
-
+          if [ ! -f papers.json ]; then echo "No papers.json found"; exit 1; fi
           mkdir -p html
           touch html/.nojekyll
           cp style.css html/style.css
           
-          cat <<EOF > html/index.html
-<html>
-<head>
-  <title>Research Index</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="bodytext">
-  <h1>Research Papers</h1>
-  <ul>
-EOF
+          # Use single quotes for the echo to protect the double quotes inside
+          echo '<html><head><title>Research Index</title><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>Research Papers</h1><ul>' > html/index.html
 
           PAPERS=$(jq -r '.[]' papers.json)
           BIB_PATH=$(pwd)/papers/references.bib
@@ -68,26 +56,27 @@ EOF
             if [ -d "papers/$paper" ]; then
               mkdir -p "html/$paper"
               
-              PDF_LINK_HTML=""
+              PDF_LINK=""
               if [ -d "all-pdfs/pdf-$paper" ]; then
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/paper.pdf"
-                PDF_LINK_HTML=" | <a href='./$paper/paper.pdf'>[PDF]</a>"
+                PDF_LINK=" | <a href='./$paper/paper.pdf'>[PDF]</a>"
               fi
 
-              echo "    <li><a href='./$paper/'>$paper</a>$PDF_LINK_HTML</li>" >> html/index.html
+              echo "<li><a href='./$paper/'>$paper</a>$PDF_LINK</li>" >> html/index.html
               
               [ -d "papers/$paper/figures" ] && cp -r "papers/$paper/figures" "html/$paper/"
               [ -d "papers/$paper/simulations" ] && cp -r "papers/$paper/simulations" "html/$paper/"
 
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
+                # Pandoc call on a single line to avoid backslash/indentation issues
                 pandoc "$texfile" -s --from=latex --to=html5 --citeproc --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" --bibliography="$BIB_PATH" -c "../style.css" -o "html/$paper/index.html"
               done
               shopt -u nullglob
             fi
           done
           
-          echo "  </ul></body></html>" >> html/index.html
+          echo '</ul></body></html>' >> html/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
