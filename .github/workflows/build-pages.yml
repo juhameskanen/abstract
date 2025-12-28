@@ -56,7 +56,7 @@ jobs:
           echo "<h1>Research Papers</h1><ul>" >> html/index.html
 
           PAPERS=$(jq -r '.[]' papers.json)
-
+          BIB_PATH=$(pwd)/papers/references.bib
           for paper in $PAPERS; do
             if [ -d "papers/$paper" ]; then
               mkdir -p html/$paper
@@ -83,7 +83,6 @@ jobs:
               fi
 
               # --- 3. Convert .tex to .html ---
-              # Note: We removed the --metadata title flag so Pandoc uses the \title{} in your .tex
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
                 pandoc "$texfile" \
@@ -92,7 +91,7 @@ jobs:
                   --to=html5 \
                   --citeproc \
                   --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                  --bibliography="../../papers/references.bib" \
+                  --bibliography="$BIB_PATH" \
                   -c "/abstract/style.css" \
                   -o "html/$paper/index.html"
               done
