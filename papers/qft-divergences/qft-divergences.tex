@@ -23,8 +23,8 @@ We investigate the ultraviolet divergences of quantum field theory (QFT) from an
 Traditional QFT encounters ultraviolet (UV) divergences in loop integrals. Regularization and renormalization schemes are typically introduced to control these infinities. Here we propose an alternative: treating the wavefunction as an emergent, algorithmic-information-theoretic object. Highly complex (incompressible) field configurations contribute negligibly to physical amplitudes. This naturally suppresses UV contributions, providing a built-in regularization.
 
 \section{Methods}
-\subsection{Lattice $\phi^4$ Field Simulation}
-We consider a one-dimensional lattice with $N$ sites, generating field configurations $\phi(x)$ subject to a $\phi^4$ interaction:
+\subsection{Lattice \(\phi^4\) Field Simulation}
+We consider a one-dimensional lattice with \(N\)  sites, generating field configurations \(\phi(x)\)  subject to a \(\phi^4\)  interaction:
 \begin{equation}
 \mathcal{L} = \frac{1}{2} (\partial \phi)^2 + \frac{1}{2} m^2 \phi^2 + \frac{\lambda}{4!} \phi^4.
 \end{equation}
@@ -35,13 +35,13 @@ Each configuration is mapped to a bitstring encoding the discretized field:
 \end{equation}
 
 \subsection{QBitwave Wavefunction Reconstruction}
-Given a bitstring $\mathbf{b}$, the QBitwave class constructs a normalized complex amplitude array $\psi(\mathbf{b})$ representing the minimal program reproducing $\mathbf{b}$. Compression-based weights are derived from amplitude norms:
+Given a bitstring \(\mathbf{b}\) , the QBitwave class constructs a normalized complex amplitude array \(\psi(\mathbf{b})\)  representing the minimal program reproducing \(\mathbf{b}\) . Compression-based weights are derived from amplitude norms:
 \begin{equation}
 w(\mathbf{b}) = \|\psi(\mathbf{b})\|^2.
 \end{equation}
 
 \subsection{One-Loop Integral Evaluation}
-The one-loop integral for a lattice momentum cutoff $k_\text{cut}$ is computed as:
+The one-loop integral for a lattice momentum cutoff \(k_\text{cut}\)  is computed as:
 \begin{align}
 I_\text{std}(k_\text{cut}) &= \frac{1}{N_\text{realizations}} \sum_{r=1}^{N_\text{realizations}} \frac{1}{2\sqrt{4 \sin^2(k_\text{cut}/2) + m^2}}, \\
 I_\text{info}(k_\text{cut}) &= \frac{1}{N_\text{realizations}} \sum_{r=1}^{N_\text{realizations}} w(\mathbf{b}_r) \frac{1}{2\sqrt{4 \sin^2(k_\text{cut}/2) + m^2}}.
@@ -56,23 +56,23 @@ To validate the QBitwave suppression, we performed a Metropolis-Hastings MCMC si
 \begin{tabular}{|l|c|r|}
 \hline
 Parameter & Symbol & Value \\ \hline
-Lattice Sites & $N$ & 128 \\
-Encoding Resolution & $n$ & 8 bits/site \\
-Mass & $m$ & 1.0 \\
-Coupling Range & $\lambda$ & $\{0.1, 1.0, 10.0\}$ \\
-MCMC Steps & $N_{steps}$ & 1000 \\ \hline
+Lattice Sites & \(N\)  & 128 \\
+Encoding Resolution & \(n\)  & 8 bits/site \\
+Mass & \(m\)  & 1.0 \\
+Coupling Range & \(\lambda\)  & \(\{0.1, 1.0, 10.0\}\)  \\
+MCMC Steps & \(N_{steps}\)  & 1000 \\ \hline
 \end{tabular}
-\caption{Parameters for the information-theoretic $\phi^4$ simulation.}
+\caption{Parameters for the information-theoretic \(\phi^4\)  simulation.}
 \label{tab:params}
 \end{table}
 
 \subsection{Integral Comparison}
-Figure~\ref{fig:integrals} shows the cumulative one-loop integrals versus momentum cutoff $k$:
+Figure~\ref{fig:integrals} shows the cumulative one-loop integrals versus momentum cutoff \(k\) :
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/qft_integrals.png}
-\caption{Comparison of standard (divergent) one-loop integral $I_\text{std}$ and QBitwave amplitude-weighted integral $I_\text{info}$.}
+\caption{Comparison of standard (divergent) one-loop integral \(I_\text{std}\)  and QBitwave amplitude-weighted integral \(I_\text{info}\) .}
 \label{fig:integrals}
 \end{figure}
 
@@ -82,7 +82,7 @@ The bitstring Shannon entropy, averaged over realizations, rises from near zero 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/qft_entropy.png}
-\caption{Average bitstring entropy $H(k)$ versus momentum cutoff $k$.}
+\caption{Average bitstring entropy \(H(k)\)  versus momentum cutoff \(k\) .}
 \label{fig:entropy}
 \end{figure}
 
@@ -94,15 +94,14 @@ This emergent wavefunction perspective provides a natural, information-theoretic
 We have demonstrated that interpreting the wavefunction as a compression-based emergent object successfully regulates one-loop QFT divergences.
 Future research will focus on:
 \begin{itemize}
-    \item \textbf{High-Dimensional Scaling:} Extending the framework to $3+1$ dimensions.
-    \item \textbf{Non-Abelian Gauge Fields:} Applying weighting to $SU(N)$ theories.
-    \item \textbf{Gravitational Coupling:} Investigating how bitstring complexity defines local geometry.
+    \item \textbf{High-Dimensional Scaling:} Extending the framework to \(3+1\)  dimensions.
+    \item \textbf{Non-Abelian Gauge Fields:} Applying weighting to \(SU(N)\) theories.
 \end{itemize}
 
 \section*{Simulation Code}
 
 \begin{itemize}
-\item \href{simulations/phi4\_qbitwave\_mcmc_2.py}{phi4\_qbitwave\_mcmc_2.py: UV suppression in Quantum Field Theory}
+\item \href{simulations/phi4\_qbitwave\_mcmc\_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
 \end{itemize}
 
 
