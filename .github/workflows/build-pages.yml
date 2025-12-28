@@ -1,12 +1,11 @@
 name: Build and Deploy HTML (GitHub Pages)
 
 on:
-  push:
-    branches: [main]
+  # REMOVED 'push' from here to stop the race condition
   workflow_run:
     workflows: ["Build and Upload PDFs"]
     types: [completed]
-  workflow_dispatch:
+  workflow_dispatch: # Keeps the manual "Run" button just in case
 
 permissions:
   contents: read
@@ -16,7 +15,8 @@ permissions:
 jobs:
   build-html:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    # This 'if' ensures it only runs if the PDF job actually succeeded
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
 
@@ -33,20 +33,20 @@ jobs:
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: build-pdf.yml
-          run_id: ${{ github.event.workflow_run.id || github.run_id }}
-          name: pdf-.*
-          name_is_regexp: true
+          # Specifically targets the run that just finished
+          run_id: ${{ github.event.workflow_run.id }}
           path: all-pdfs
-          search_artifacts: true
+          # This is the fail-safe if the API is slow
+          search_artifacts: true 
 
       - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
-          if [ ! -f papers.json ]; then echo "No papers.json found"; exit 1; fi
+          if [ ! -f papers.json ]; then echo "papers.json missing"; exit 1; fi
           mkdir -p html
           touch html/.nojekyll
           cp style.css html/style.css
           
-          # Use single quotes for the echo to protect the double quotes inside
+          # HTML Header
           echo '<html><head><title>Research Index</title><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>Research Papers</h1><ul>' > html/index.html
 
           PAPERS=$(jq -r '.[]' papers.json)
@@ -56,6 +56,7 @@ jobs:
             if [ -d "papers/$paper" ]; then
               mkdir -p "html/$paper"
               
+              # PDF check - targets the folder structure created by download-artifact
               PDF_LINK=""
               if [ -d "all-pdfs/pdf-$paper" ]; then
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/paper.pdf"
@@ -69,7 +70,6 @@ jobs:
 
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
-                # Pandoc call on a single line to avoid backslash/indentation issues
                 pandoc "$texfile" -s --from=latex --to=html5 --citeproc --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" --bibliography="$BIB_PATH" -c "../style.css" -o "html/$paper/index.html"
               done
               shopt -u nullglob
