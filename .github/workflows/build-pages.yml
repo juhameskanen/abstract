@@ -3,7 +3,7 @@ name: Build and Deploy HTML (GitHub Pages)
 on:
   push:
     branches: [main]
-  # This triggers the build automatically after the PDF workflow completes successfully
+  # Triggers after PDF workflow completes
   workflow_run:
     workflows: ["Build and Upload PDFs"]
     types: [completed]
@@ -17,7 +17,7 @@ permissions:
 jobs:
   build-html:
     runs-on: ubuntu-latest
-    # Only run if triggered by push/dispatch, OR if the PDF workflow finished successfully
+    # Run on push/dispatch, or if the PDF workflow was successful
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
@@ -34,11 +34,11 @@ jobs:
       - name: Download all PDF Artifacts
         uses: dawidd6/action-download-artifact@v3
         with:
-          workflow: build-pdf.yml 
+          workflow: build-pdf.yml
           name: pdf-.*
           name_is_regexp: true
           path: all-pdfs
-          workflow_conclusion: success 
+          workflow_conclusion: success
           search_artifacts: true
 
       - name: Convert LaTeX to HTML and Integrate PDFs
@@ -51,39 +51,42 @@ jobs:
           mkdir -p html
           touch html/.nojekyll
           cp style.css html/style.css
-	  
-          # Start the index page
-          echo '<html><head><title>Research Index</title><link rel="stylesheet" href="style.css"></head><body>' > html/index.html
-          echo "<h1>Research Papers</h1><ul>" >> html/index.html
+          
+          # Generate index.html header
+          cat <<EOF > html/index.html
+<html>
+<head>
+  <title>Research Index</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bodytext">
+  <h1>Research Papers</h1>
+  <ul>
+EOF
 
           PAPERS=$(jq -r '.[]' papers.json)
+          # Anchor the bibliography path
           BIB_PATH=$(pwd)/papers/references.bib
+
           for paper in $PAPERS; do
             if [ -d "papers/$paper" ]; then
-              mkdir -p html/$paper
+              mkdir -p "html/$paper"
               
-              # --- 1. Handle PDF Integration ---
+              # Handle PDF Integration
               PDF_LINK_HTML=""
-              # Check if a PDF artifact exists for this paper in the downloaded folder
               if [ -d "all-pdfs/pdf-$paper" ]; then
-                # Copy the first PDF found in that paper's artifact folder
-                cp all-pdfs/pdf-$paper/*.pdf html/$paper/paper.pdf
+                cp all-pdfs/pdf-$paper/*.pdf "html/$paper/paper.pdf"
                 PDF_LINK_HTML=" | <a href='./$paper/paper.pdf'>[PDF]</a>"
               fi
 
-              # Add to index list
-              echo "<li><a href='./$paper/'>$paper</a>$PDF_LINK_HTML</li>" >> html/index.html
+              # Add entry to the index list
+              echo "    <li><a href='./$paper/'>$paper</a>$PDF_LINK_HTML</li>" >> html/index.html
               
-              # --- 2. Asset Migration ---
-              if [ -d "papers/$paper/figures" ]; then
-                cp -r "papers/$paper/figures" "html/$paper/"
-              fi
-              
-              if [ -d "papers/$paper/simulations" ]; then
-                cp -r "papers/$paper/simulations" "html/$paper/"
-              fi
+              # Asset Migration
+              [ -d "papers/$paper/figures" ] && cp -r "papers/$paper/figures" "html/$paper/"
+              [ -d "papers/$paper/simulations" ] && cp -r "papers/$paper/simulations" "html/$paper/"
 
-              # --- 3. Convert .tex to .html ---
+              # Convert LaTeX to HTML
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
                 pandoc "$texfile" \
@@ -100,7 +103,8 @@ jobs:
             fi
           done
           
-          echo "</ul></body></html>" >> html/index.html
+          # Close index.html
+          echo "  </ul></body></html>" >> html/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
