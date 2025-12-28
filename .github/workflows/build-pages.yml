@@ -45,7 +45,7 @@ jobs:
           # 1. Start the main index.html
           echo '<html><head><title>The Abstract Universe Theory (AUT)</title><meta name="color-scheme" content="light dark"><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>Research Papers</h1><ul>' > html/index.html
 
-          # 2. Load papers into a Bash Array for index-based navigation
+          # 2. Load papers into a Bash Array
           PAPER_ARRAY=($(jq -r '.[]' papers.json))
           NUM_PAPERS=${#PAPER_ARRAY[@]}
           BIB_PATH=$(pwd)/papers/references.bib
@@ -81,27 +81,27 @@ jobs:
               shopt -u nullglob
 
               # --- START NAVIGATION INJECTION ---
-              PREV_HTML=""
-              NEXT_HTML=""
-
-              # Calculate Previous Link
-              if [ $i -gt 0 ]; then
-                prev_paper="${PAPER_ARRAY[$((i-1))]}"
-                PREV_HTML="<a href='../$prev_paper/'>&larr; Previous</a>"
-              fi
-
-              # Calculate Next Link
-              if [ $i -lt $((NUM_PAPERS-1)) ]; then
-                next_paper="${PAPER_ARRAY[$((i+1))]}"
-                NEXT_HTML="<a href='../$next_paper/'>Next &rarr;</a>"
-              fi
-
-              # Build the footer string
-              FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Theory Project.</i></div>"
-              
-              # Inject footer before </body> tag in the generated file
+              # We only proceed if pandoc actually created the file
               if [ -f "html/$paper/index.html" ]; then
-                sed -i "s|</body>|$FOOTER</body>|" "html/$paper/index.html"
+                PREV_HTML=""
+                NEXT_HTML=""
+
+                # Find Neighbors
+                if [ $i -gt 0 ]; then
+                  prev_paper="${PAPER_ARRAY[$((i-1))]}"
+                  PREV_HTML="<a href='../$prev_paper/'>&larr; Previous</a>"
+                fi
+
+                if [ $i -lt $((NUM_PAPERS-1)) ]; then
+                  next_paper="${PAPER_ARRAY[$((i+1))]}"
+                  NEXT_HTML="<a href='../$next_paper/'>Next &rarr;</a>"
+                fi
+
+                FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Theory Project.</i></div>"
+                
+                # Robust injection: strip closing tags, append footer, re-close
+                sed -i 's|</body></html>||g' "html/$paper/index.html"
+                echo "$FOOTER</body></html>" >> "html/$paper/index.html"
               fi
               # --- END NAVIGATION INJECTION ---
             fi
