@@ -32,16 +32,15 @@ jobs:
           sudo apt-get install -y pandoc jq
 
       - name: Download all PDF Artifacts
-        # We use this specific action to download artifacts from the previous workflow run
-        uses: actions/download-artifact@v4
+        uses: dawidd6/action-download-artifact@v3
         with:
+          workflow: build-pdf.yml 
+          name: pdf-.*
+          name_is_regexp: true
           path: all-pdfs
-          pattern: 'pdf-*'
-          merge-multiple: false
-          # look at the run that triggered this one
-          run-id: ${{ github.event.workflow_run.id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          
+          workflow_conclusion: success 
+          search_artifacts: true
+
       - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
           if [ ! -f papers.json ]; then
