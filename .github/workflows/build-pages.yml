@@ -50,7 +50,8 @@ jobs:
 
           mkdir -p html
           touch html/.nojekyll
-          
+          cp style.css html/style.css
+	  
           # Start the index page
           echo "<html><head><title>Research Index</title></head><body>" > html/index.html
           echo "<h1>Research Papers</h1><ul>" >> html/index.html
@@ -92,7 +93,7 @@ jobs:
                   --citeproc \
                   --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                   --bibliography="$BIB_PATH" \
-                  -c "/abstract/style.css" \
+                  -c "../style.css" \
                   -o "html/$paper/index.html"
               done
               shopt -u nullglob
