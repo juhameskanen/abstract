@@ -48,28 +48,36 @@ jobs:
       - name: Compile LaTeX to PDF
         working-directory: papers/${{ matrix.paper }}
         run: |
-          mkdir -p ../../pdf-output
+          # Create output dir at the absolute root of the workspace
+          # $GITHUB_WORKSPACE is the safest way to reference the root
+          mkdir -p "$GITHUB_WORKSPACE/pdf-output"
           
           find . -name "*.tex" ! -name "_*" | while read -r texfile; do
+            echo "Compiling $texfile..."
+            
             dir_path=$(dirname "$texfile")
             base_name=$(basename "$texfile" .tex)
             
-            # Step inside the folder (Main or Supplementary)
+            # Enter the directory where the .tex file lives
             cd "$dir_path"
             
-            # Ensure local figures are available if they exist
-            # (In some CI environments, staying in the sub-dir is enough, 
-            # but this ensures the LaTeX path is clean)
+            # Compile
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
             
-            # Move result to output with naming logic
+            # Determine output filename
             if [ "$dir_path" == "." ]; then
-              cp "$base_name.pdf" ../../../pdf-output/
+              dest_name="$base_name.pdf"
             else
+              # Replace slashes with dashes for a flat file structure in output
+              # e.g. ./supplementary/proofs.tex -> supplementary-proofs.pdf
               clean_dir=$(echo "$dir_path" | sed 's|./||; s|/|-|g')
-              cp "$base_name.pdf" ../../../pdf-output/"$clean_dir-$base_name.pdf"
+              dest_name="$clean_dir-$base_name.pdf"
             fi
             
+            # Copy to the absolute path of the output directory
+            cp "$base_name.pdf" "$GITHUB_WORKSPACE/pdf-output/$dest_name"
+            
+            # Return to the paper root for the next iteration
             cd - > /dev/null
           done
 
