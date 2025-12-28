@@ -44,22 +44,36 @@ jobs:
             fonts-freefont-otf \
             fonts-lmodern
 
+
       - name: Compile LaTeX to PDF
         working-directory: papers/${{ matrix.paper }}
         run: |
-          # Create a local directory for output
           mkdir -p ../../pdf-output
-          for texfile in *.tex; do
-            # -f forces completion even if cross-references aren't perfect yet
-            latexmk -pdf -interaction=nonstopmode -halt-on-error "$texfile"
-            # Move result to the output folder
-            cp "${texfile%.tex}.pdf" ../../pdf-output/
+          
+          # Find all .tex files in this paper's folder and subfolders
+          # We ignore files starting with _ (common for includes/partials)
+          find . -name "*.tex" ! -name "_*" | while read -r texfile; do
+            echo "Compiling $texfile..."
+            
+            # Extract directory and filename
+            dir_path=$(dirname "$texfile")
+            base_name=$(basename "$texfile" .tex)
+            
+            # Run latexmk inside the specific sub-directory to handle relative paths
+            cd "$dir_path"
+            latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
+            
+            # Move the resulting PDF to a flattened output dir, 
+            # prefixing with sub-dir name if it's supplementary
+            if [ "$dir_path" == "." ]; then
+              cp "$base_name.pdf" ../../../pdf-output/
+            else
+              # e.g., supplementary-proofs.pdf
+              clean_dir=$(echo "$dir_path" | sed 's|./||; s|/|-|g')
+              cp "$base_name.pdf" ../../../pdf-output/"$clean_dir-$base_name.pdf"
+            fi
+            
+            # Go back to the paper root for the next iteration
+            cd - > /dev/null
           done
 
-      - name: Upload PDF artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          # This name is crucial: it allows build-pages.yml to find it
-          name: pdf-${{ matrix.paper }}
-          path: pdf-output/*.pdf
-          retention-days: 1  # Short retention as it's just a temporary hand-off
