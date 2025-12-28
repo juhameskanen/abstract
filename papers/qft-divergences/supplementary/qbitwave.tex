@@ -1,15 +1,23 @@
-\documentclass[11pt]{article}
-\usepackage{amsmath, amssymb, amsthm}
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, hyperref}
+\usepackage{amsthm}
+\usepackage[backend=biber]{biblatex}
+\usepackage{graphicx}
+\addbibresource{../references.bib} 
+\newtheorem{lemma}{Lemma}
+\usepackage{geometry}
+\geometry{margin=1in}
+\newcommand{\pdflink}[1]{} % By default, do nothing
 \usepackage{listings}
-\usepackage{hyperref}
+
 \lstset{
     basicstyle=\ttfamily\small,
     breaklines=true
 }
 
 \title{Supplementary Material: \\ The \texttt{QBitwave} Framework}
-\author{(Your Name)\\(Affiliation)}
-\date{}
+\author{Juha Meskanen}
+\date{2019 ... 2024}
 
 \begin{document}
 \maketitle
