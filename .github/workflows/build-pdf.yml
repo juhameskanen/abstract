@@ -81,4 +81,10 @@ jobs:
             cd - > /dev/null
           done
 
-
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          # This name is crucial: it allows build-pages.yml to find it
+          name: pdf-${{ matrix.paper }}
+          path: pdf-output/*.pdf
+          retention-days: 1  # Short retention as it's just a temporary hand-off 
