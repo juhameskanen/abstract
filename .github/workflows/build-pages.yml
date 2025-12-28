@@ -90,6 +90,7 @@ jobs:
                   -s \
                   --from=latex \
                   --to=html5 \
+                  --citeproc \
                   --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                   --bibliography="../../papers/references.bib" \
                   -c "/abstract/style.css" \
