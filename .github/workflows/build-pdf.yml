@@ -50,30 +50,27 @@ jobs:
         run: |
           mkdir -p ../../pdf-output
           
-          # Find all .tex files in this paper's folder and subfolders
-          # We ignore files starting with _ (common for includes/partials)
           find . -name "*.tex" ! -name "_*" | while read -r texfile; do
-            echo "Compiling $texfile..."
-            
-            # Extract directory and filename
             dir_path=$(dirname "$texfile")
             base_name=$(basename "$texfile" .tex)
             
-            # Run latexmk inside the specific sub-directory to handle relative paths
+            # Step inside the folder (Main or Supplementary)
             cd "$dir_path"
+            
+            # Ensure local figures are available if they exist
+            # (In some CI environments, staying in the sub-dir is enough, 
+            # but this ensures the LaTeX path is clean)
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
             
-            # Move the resulting PDF to a flattened output dir, 
-            # prefixing with sub-dir name if it's supplementary
+            # Move result to output with naming logic
             if [ "$dir_path" == "." ]; then
               cp "$base_name.pdf" ../../../pdf-output/
             else
-              # e.g., supplementary-proofs.pdf
               clean_dir=$(echo "$dir_path" | sed 's|./||; s|/|-|g')
               cp "$base_name.pdf" ../../../pdf-output/"$clean_dir-$base_name.pdf"
             fi
             
-            # Go back to the paper root for the next iteration
             cd - > /dev/null
           done
+
 

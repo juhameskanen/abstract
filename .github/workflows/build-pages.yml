@@ -57,21 +57,38 @@ jobs:
             if [ -d "papers/$paper" ]; then
               mkdir -p "html/$paper"
               
-              # PDF Integration
-              PDF_LINK=""
+              # --- RECURSIVE ASSET COPYING ---
+              # Find all 'figures' and 'simulations' directories anywhere in the paper folder
+              # and copy them while preserving the sub-path structure.
+              cd "papers/$paper"
+              find . -type d \( -name "figures" -o -name "simulations" \) -exec cp -r --parents {} "../../html/$paper/" \;
+              cd ../..
+
+              # --- PDF DISCOVERY & LINKING ---
+              PDF_LINKS=""
               if [ -d "all-pdfs/pdf-$paper" ]; then
-                cp all-pdfs/pdf-$paper/*.pdf "html/$paper/paper.pdf"
-                PDF_LINK=" | <a href='./$paper/paper.pdf'>[PDF]</a>"
+                # Copy all built PDFs (Main and Supplementary) to the paper's HTML folder
+                cp all-pdfs/pdf-$paper/*.pdf "html/$paper/"
+                
+                # Sort PDFs so the main one (index.pdf or $paper.pdf) likely comes first
+                for pdf_file in $(ls all-pdfs/pdf-$paper/*.pdf | sort); do
+                  fname=$(basename "$pdf_file")
+                  # Labeling logic
+                  if [[ "$fname" == "index.pdf" || "$fname" == "$paper.pdf" ]]; then
+                    PDF_LINKS+=" | <a href='./$paper/$fname' title='Main Paper'>[PDF]</a>"
+                  else
+                    # Clean up supplementary names for the UI
+                    display_name=$(echo "$fname" | sed 's/supplementary-//; s/.pdf//; s/-/ /g')
+                    PDF_LINKS+=" | <a href='./$paper/$fname' title='Supplementary Material'>[Supp: $display_name]</a>"
+                  fi
+                done
               fi
 
               # Add entry to main index
-              echo "<li><a href='./$paper/'>$paper</a>$PDF_LINK</li>" >> html/index.html
+              echo "<li><a href='./$paper/'>$paper</a>$PDF_LINKS</li>" >> html/index.html
               
-              # Assets
-              [ -d "papers/$paper/figures" ] && cp -r "papers/$paper/figures" "html/$paper/"
-              [ -d "papers/$paper/simulations" ] && cp -r "papers/$paper/simulations" "html/$paper/"
-
-              # Run Pandoc
+              # --- RUN PANDOC ---
+              # We focus on the root index.tex for the HTML version
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
                 pandoc "$texfile" -s -M ishtml=true --from=latex --to=html5 --citeproc \
@@ -80,34 +97,20 @@ jobs:
               done
               shopt -u nullglob
 
-              # --- START NAVIGATION INJECTION ---
-              # We only proceed if pandoc actually created the file
+              # --- NAVIGATION INJECTION ---
               if [ -f "html/$paper/index.html" ]; then
                 PREV_HTML=""
                 NEXT_HTML=""
-
-                # Find Neighbors
-                if [ $i -gt 0 ]; then
-                  prev_paper="${PAPER_ARRAY[$((i-1))]}"
-                  PREV_HTML="<a href='../$prev_paper/'>&larr; Previous</a>"
-                fi
-
-                if [ $i -lt $((NUM_PAPERS-1)) ]; then
-                  next_paper="${PAPER_ARRAY[$((i+1))]}"
-                  NEXT_HTML="<a href='../$next_paper/'>Next &rarr;</a>"
-                fi
+                [ $i -gt 0 ] && PREV_HTML="<a href='../${PAPER_ARRAY[$((i-1))]}/'>&larr; Previous</a>"
+                [ $i -lt $((NUM_PAPERS-1)) ] && NEXT_HTML="<a href='../${PAPER_ARRAY[$((i+1))]}/'>Next &rarr;</a>"
 
                 FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Theory Project.</i></div>"
-                
-                # Robust injection: strip closing tags, append footer, re-close
                 sed -i 's|</body></html>||g' "html/$paper/index.html"
                 echo "$FOOTER</body></html>" >> "html/$paper/index.html"
               fi
-              # --- END NAVIGATION INJECTION ---
             fi
           done
           
-          # Close main index
           echo '</ul></body></html>' >> html/index.html
 
       - name: Upload Pages artifact
