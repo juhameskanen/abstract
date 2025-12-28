@@ -43,7 +43,7 @@ jobs:
           cp style.css html/style.css
           
           # 1. Start the main index.html
-          echo '<html><head><title>The Abstract Universe Theory (AUT)</title><meta name="color-scheme" content="light dark"><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>Research Papers</h1><ul>' > html/index.html
+          echo '<html><head><title>The Abstract Universe Theory (AUT)</title><meta name="color-scheme" content="light dark"><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>The Abstract Universe Theory (AUT)</h1><h2>Research Papers</h2><ul>' > html/index.html
 
           # 2. Load papers into a Bash Array
           PAPER_ARRAY=($(jq -r '.[]' papers.json))
