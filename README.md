@@ -1,4 +1,4 @@
-# The Abstract Universe Project
+# The Abstract Universe Theory (AUT)
 
 ## Contents
 - [Papers](https://juhakm.github.io/abstract/)
@@ -6,5 +6,5 @@
 
 ---
 
-*© 2001 ... 2024 The Abstract Universe Project. All rights reserved.*
+*© 2001 ... 2025 The Abstract Universe Theory. All rights reserved.*
 
