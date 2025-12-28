@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Toy Model of Quantum-Gravity}
+\author{The Abstract Universe Project}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a toy informational model of quantum gravity in which physical laws are emergent consequences of a maximally compressed informational universe. Observers are treated as compressed Gaussian wavefunction structures, whose probability of existence is proportional to their informational multiplicity. Particles are generated from a probabilistic field influenced by all observers, and candidate trajectories are selected according to a compressibility-based cost function. Through this selection process, smooth, deterministic motion naturally emerges, providing an informational explanation for inertia. The simulation demonstrates that law-like, predictable behavior arises from the statistical dominance of compressed observers, supporting the broader hypothesis that both Quantum Mechanics and General Relativity can be interpreted as emergent from optimal information compression.
+\end{abstract}
+
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{paper.pdf}{Download PDF Version}
+\end{center}
+\fi
+
+\section{Introduction}
+
+The search for a unified theory of everything has been a central pursuit in modern physics. However, traditional approaches often begin with a set of assumed fundamental laws. This paper proposes an alternative framework where the laws themselves are not fundamental but are emergent from a more primitive, informational substrate.
+
+The key idea is that existence itself is biased toward compression. Observers are not passive; their probability of existing is directly tied to how efficiently their informational structure can be described. This leads to the following chain of reasoning:
+
+\subsection*{The Compression–Existence Principle}
+
+\begin{itemize}
+    \item \textbf{Compression increases multiplicity:} An observer that can be described with fewer bits can be described in vastly more ways within the underlying informational substrate.
+    \item \textbf{Multiplicity increases probability:} The more copies of an observer exist, the higher the probability that any given observer will be one of them.
+    \item \textbf{Probability selects predictable worlds:} Observers therefore overwhelmingly find themselves in worlds where their own informational structure is maximally compressible.
+    \item \textbf{Predictability manifests as physical law:} Smooth, regular, law-like behavior (e.g., inertia) is the kind of information that compresses best. Consequently, the laws of physics that we observe are not fundamental givens, but statistical artifacts of compression dominance.
+\end{itemize}
+
+In short: you observe smooth, predictable physical laws because only in such worlds can compressed observers proliferate and dominate the measure of existence. Quantum Mechanics, General Relativity, and others can be pictured as the most efficient compression algorithms.
+
+\section{Theoretical Framework}
+
+\subsection{Wavefunctions as Observer Templates}
+
+An observer is defined as a compressed informational structure. In our 2D model, this structure is a parametric complex wavefunction, $\psi(x,t)$, representing a soft disk or Gaussian shell:
+
+\begin{equation}
+\psi(x,t) = A \exp\big(-2\sigma^2 (r - R)^2\big)\,\exp\big(-i(\omega t - \phi)\big)
+\end{equation}
+
+Here, $r = \|x - c\|$ is the radial distance from the center $c$, $A$ is the amplitude, $R$ is the radius of the shell, $\sigma$ is its width, $\omega$ is its frequency, and $\phi$ is its phase.
+
+\subsection{Observer Filtering}
+
+An observer emerges from the underlying random noise field by applying a filter. This is modeled by a Gaussian observer window, $O_j(x)$, which smoothly weights the influence of particles based on their proximity to the observer’s center:
+
+\begin{equation}
+O_j(x) = \exp\big(-2\sigma_{\text{obs}}^2 \|x - c_j\|^2\big)
+\end{equation}
+
+\subsection{Probabilistic Field and Particle Generation}
+
+The random noise is represented by a large number of particles. These particles are not governed by forces but are probabilistically resampled from a total probability density function (PDF). This PDF is generated from the interference pattern of all observer wavefunctions:
+
+\begin{equation}
+P(x) = \big|\Psi_{\text{total}}(x,t)\big|^2 = \left|\sum_j \psi_j(x,t)\right|^2
+\end{equation}
+
+Each step of the simulation involves resampling particles from this emergent field, which is a direct consequence of the collective influence of all observers.
+
+\subsection{Compression and Emergent Inertia}
+
+The central prediction of the theory is the generation of deterministic motion through a selection process guided by informational compressibility. We model this as follows:
+
+\subsubsection*{Soft Assignment}
+Particles are "softly" assigned to observers using weights proportional to both the observer’s filter function and the local probability density:
+
+\begin{equation}
+W_j(x) \propto O_j(x)\cdot |\psi_j(x)|^2
+\end{equation}
+
+\subsubsection*{Candidate Generation}
+For each observer, a set of potential next positions (candidates) is generated based on the local particle distribution. Each candidate corresponds to a small perturbation in the observer’s wavefunction parameters, such as phase $\phi$ or frequency $f$. While the formal Everettian view would require consideration of all possible arrangements of information, this approximation via finite candidate sets is justified by computational tractability and the concentration of probability mass.
+
+\subsubsection*{Compressibility Cost}
+The choice among candidates is determined by an informational cost function derived from the \textbf{principle of minimal description length (MDL)}. The change in description length when moving from state $s_t$ to $s_{t+1}$ is:
+
+\begin{equation}
+\Delta C_j = \mathcal{K}(s_{t+1}) - \mathcal{K}(s_t)
+\end{equation}
+
+We approximate the compressibility cost function using the Shannon entropy of the change in velocity vector $\Delta v$:
+
+\begin{equation}
+\text{Cost}_j(\Delta v) = H(\Delta v) \approx \Delta \phi^2 + \Delta f^2
+\end{equation}
+
+\subsubsection*{Emergent Inertia}
+The observer selects the candidate trajectory with the lowest cost. Continuity of velocity emerges because it is informationally optimal. In this framework, inertia is not a fundamental law but a by-product of the system’s bias toward minimal description length.
+
+\section{Simulation Model}
+
+The simulation is implemented in Python and consists of several key classes:
+
+\begin{itemize}
+    \item \textbf{Wavefunction:} Represents the parametric Gaussian shell.
+    \item \textbf{ObserverWindow:} A Gaussian function used for soft assignment.
+    \item \textbf{WavefunctionGravitySim:} The main simulation class that computes total PDF, resamples particle positions, and uses candidate selection to implement informational inertia.
+\end{itemize}
+
+\section{Results and Discussion}
+
+The simulation successfully demonstrates the emergence of inertial, law-like behavior. Observers, initially placed in a random configuration, quickly begin to move in smooth, predictable paths.
+
+\subsection*{Metrics}
+\begin{enumerate}
+    \item \textbf{Trajectory Smoothness:} Observed trajectories exhibit significantly lower variance compared to random baseline motion.
+    \item \textbf{Entropy Rate of Motion:} The Shannon entropy $H(\Delta v)$ decreases over time as trajectories stabilize.
+    \item \textbf{Compressibility Trend:} The cumulative cost function $\sum_t \text{Cost}_j(\Delta v_t)$ decreases monotonically.
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/quantum_gravity.png}
+    \caption{Emergent gravity and Quantum Mechanics: Visualization of the informational selection process.}
+\end{figure}
+
+\section{Conclusion}
+
+This work supports the \textbf{Compression–Existence Principle}: the more compressible an observer, the greater their multiplicity; the greater their multiplicity, the higher their probability of existence. What we call the “laws of physics” are emergent regularities selected because only such compressed observers dominate the measure of existence.
+
+\section*{Future Work}
+Future work will focus on extending this model to simulations in which both Quantum Mechanics and General Relativity emerge as the most probable compressible outcome of random selection and observer filters.
+
+
+\section*{Simulation Software}
+
+\begin{itemize}
+\item \href{simulations/quantum-gravity.py}{quantum-gravity.py: Quantum-gravity}
+\end{itemize}
+
+
+\end{document}
