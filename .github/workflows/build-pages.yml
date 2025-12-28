@@ -47,7 +47,7 @@ jobs:
           cp style.css html/style.css
           
           # HTML Header
-          echo '<html><head><title>Research Index</title><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>Research Papers</h1><ul>' > html/index.html
+          echo '<html><head><title>The Abstract Universe Theory (AUT)</title><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>Research Papers</h1><ul>' > html/index.html
 
           PAPERS=$(jq -r '.[]' papers.json)
           BIB_PATH=$(pwd)/papers/references.bib
