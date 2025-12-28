@@ -145,6 +145,42 @@ P(i) = |\psi_i|^2.
 The Born rule is not an independent axiom, but the unique probability assignment compatible with
 algorithmic compression, compositional consistency, and observer persistence in Hilbert space.
 
+
+
+\subsection{Physical Meaning of the Born Weight}
+
+Multiplicity explains why the squared norm ($P = |\psi|^2$) is the correct measure selected by the optimal decoding rule.
+
+\subsubsection{Lemma: Quadratic Scaling in Linear Encoding}
+In any linear wave-based encoding scheme, the number of distinguishable microstates $\Omega$ consistent with a macroscopic wave constraint scales with the squared norm of the amplitude. Following Parseval's Theorem, the total energy (or informational "power") of a signal in Hilbert space is:
+\begin{equation}
+E = \int | \psi(x) |^2 dx
+\end{equation}
+In our framework, "Power" is equivalent to the **bandwidth of the execution trace**. A higher amplitude $A$ provides a quadratically larger state-space volume for microstate permutations that remain consistent with the observer's template. Thus, the multiplicity of observer-instances is $M \propto |\psi|^2$.
+
+\subsubsection{The Universal Prior and Self-Locating Uncertainty}
+Applying a universal prior (Solomonoff) over the ensemble $\Omega$, the probability $P$ of an observer finding themselves in state $S$ is defined by its Kolmogorov Complexity $\mathcal{K}(S)$:
+\begin{equation}
+P(S) \propto 2^{-\mathcal{K}(S) + c}
+\end{equation}
+where $c$ is a constant determined by the choice of universal Turing machine. This represents \textit{self-locating uncertainty}: the observer is not "choosing" a path, but is statistically distributed across all consistent bit-string permutations.
+
+\subsubsection{Derivation of the Born Weight}
+By combining the multiplicity of the linear wave-template with the universal prior, the relative measure of observer density across configuration space is:
+\begin{equation}
+P(\text{Alice} \in \psi) = \frac{|\psi|^2}{\int |\psi|^2 dx}
+\end{equation}
+This normalization reflects the relative density of observer-instances, not a stochastic collapse of the wavefunction.
+
+\subsubsection{The Vanishing Measure of Divergences}
+This derivation provides a natural "soft cutoff" for the infinities of Quantum Field Theory. While divergent states exist mathematically, their description length $\mathcal{K}$ explodes. Since:
+\begin{equation}
+\lim_{\mathcal{K} \to \infty} 2^{-\mathcal{K}} = 0
+\end{equation}
+the measure of observers inhabiting divergent branches is zero. Physical laws appear smooth and renormalized because only finite, highly-compressible (low-$\mathcal{K}$) branches possess sufficient multiplicity to be "lived."
+
+
+
 \section{Singularities and Renormalization}
 
 Configurations corresponding to classical singularities or ultraviolet divergences possess

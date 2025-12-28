@@ -15,15 +15,9 @@
 
 
 \begin{abstract}
-  Building on the ontological equivalence of physical and informational configurations established in Paper~I,
-  we investigate black hole singularities from an information-theoretic perspective,
-  viewing geometric spacetime and computational simulation as two equivalent interpretations
-  of an underlying informational structure. We introduce the notion of execution-trace entropy,
-  the Shannon entropy of a fixed encoding of the simulated spatial configuration, and show that
-  it decreases monotonically as particles approach the singularity. Our results indicate that singularities
-  should be understood as well-defined, smooth informational fixed points corresponding to zero-information states.
-  Infinities signal overcounting of informationally indistinguishable configurations; when physical measure is 
-  defined by information content, singularities and divergences collapse into smooth zero-measure limits.
+Building on the ontological equivalence of physical and informational configurations established in Paper I, we investigate black hole singularities from an information-theoretic perspective, viewing geometric spacetime and computational simulation as two equivalent interpretations of an underlying informational structure.
+
+Standard General Relativity (GR) simulations cannot be executed to the point of singularity formation due to the fundamental breakdown of GR and the resulting numerical divergences. However, by analyzing the simulation’s execution trace of infalling dust particles, we observe a monotonic drop in Shannon entropy as they approach the center. Even where the geometric description fails, the informational trend remains clear. Extrapolating this entropy decay leads to an inevitable conclusion: the geometric singularity is a state of zero information. Thus, the breakdown of spacetime is not a mathematical error, but the physical manifestation of information exhaustion. We demonstrate that singularities can be successfully studied through an information-theoretic lens where traditional geometry fails.
 \end{abstract}
 
 \ifdefined\ishtml
@@ -88,16 +82,13 @@ H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
 
 where \(p_0\) and \(p_1\) are the empirical frequencies of 0- and 1-bits in \(b\). 
 
-\textbf{Important clarification:} This entropy is \emph{not} thermodynamic entropy or ensemble Shannon entropy. 
-It measures the number of distinguishable configurations encoded in a deterministic simulation at a given timestep.
-
 Over a sequence of states (the bitstring sub-trace), the entropy trajectory reflects the collapse of distinguishable geometric states as particles fall toward the singularity.
 
 \section{Simulations}
 
 We simulated both Schwarzschild (non-rotating) and Kerr (rotating) black holes. 
 All simulations show a monotonic decrease in execution-trace entropy as particles fall inward. 
-Extrapolation indicates that entropy approaches zero at the singularity.
+Extrapolation indicates that the singularity corresponds to zero entropy state.
 
 \begin{figure}[h!]
 \centering
@@ -126,13 +117,6 @@ Our simulations confirm the Entropy–Singularity Lemma in a computational conte
 Although global black hole thermodynamic entropy increases, the local execution-trace entropy encoding spatial geometry decreases toward the singularity. 
 This reflects the narrowing of accessible informational states and growing determinism in geometry.
 
-\subsection{Singularities as Smooth Informational Fixed Points}
-
-The term ``singularity'' does not denote divergent curvature or ill-defined geometry in our framework. 
-Instead, it denotes a collapse of distinguishable geometric degrees of freedom. 
-The zero-entropy limit corresponds to a unique, maximally symmetric equivalence class. 
-This state is smooth (no relational variation) but singular in that it supports no internal structure, particles, or local observables.
-
 \subsection{Bitstring Encoding Procedure}
 
 To encode geometry:
@@ -147,13 +131,12 @@ Entropy is then computed as above. The collapse of this entropy directly reflect
 
 \section{Conclusion}
 
-Black hole simulations cannot directly resolve classical singularities due to numerical instability and breakdown of general relativity. 
-However, execution-trace entropy analysis reveals that singularities correspond to zero-entropy states: well-defined, smooth informational fixed points with no internal structure. 
-This reframes singularities as informational phenomena rather than divergent densities, supporting the broader information-theoretic interpretation of spacetime.
+Singularities might not be pathological or broken regions of spacetime. Instead, they are perfectly well-defined, smooth geometric
+objects—points—precisely because the system has exhausted the informational capacity required to support any complex structure, volume, or
+fluctuation. By viewing the breakdown of spacetime through an information-theoretic lens, we replace physical divergence with
+informational convergence, offering a bridge between computational reality and gravitational collapse.
 
 \section*{Simulation Code}
-
-Source code is available for:
 
 \begin{itemize}
     \item \href{simulations/schwarzschild.py}{schwarzschild.py: Schwarzschild black hole simulation}
