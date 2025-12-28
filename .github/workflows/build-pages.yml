@@ -53,7 +53,7 @@ jobs:
           cp style.css html/style.css
 	  
           # Start the index page
-          echo "<html><head><title>Research Index</title></head><body>" > html/index.html
+          echo "<html><head><title>Research Index</title><link rel="stylesheet" href="style.css"></head><body>" > html/index.html
           echo "<h1>Research Papers</h1><ul>" >> html/index.html
 
           PAPERS=$(jq -r '.[]' papers.json)
