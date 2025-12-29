@@ -13,13 +13,18 @@
 from a Static Wheeler--DeWitt Universe}
 
 \author{Juha Meskanen}
-\date{December 2025}
+\date{2024}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}  
-We extend the informational framework introduced in prior work to show that \textbf{ontological equivalence} between informational configurations inevitably arises from the combinatorial structure of finite bitstrings. A system of \(n\) bits generates \(2^n\) Everettian configurations, all formally equivalent at the ontological level. By defining a relational ordering of these configurations, we identify an emergent \emph{ordinal time} within the otherwise static Wheeler--DeWitt multiverse. Observer-experienced reality is then dominated by histories that minimize algorithmic description length, providing a unified mechanism for the emergence of time, unitarity, quantum probabilities, and the suppression of divergences. This work formalizes the connection between bitstring combinatorics, Everettian branching, and observer-relative relational histories, demonstrating that the flow of time and physical laws are algorithmically selected features of a fundamentally timeless informational universe.  
+  TODO
+  Building on the ontological equivalence of physical and informational configurations established in Paper I, we derive a model of the universe
+  based on elational ordering of these configurations. We identify an emergent \emph{ordinal time} within the static Wheeler--DeWitt multiverse.
+  Observer-experienced reality is then dominated by histories that minimize algorithmic description length providing a unified mechanism for the emergence of time,
+  unitarity, quantum probabilities, and the suppression of divergences.
+  Observers most likely find them from maximally compressed permutations, as those are numerously dominant and hence most probable.
 \end{abstract}
 
 \ifdefined\ishtml
@@ -27,9 +32,42 @@ We extend the informational framework introduced in prior work to show that \tex
 \small \href{emergence-of-time.pdf}{Download PDF Version}
 \end{center}
 \fi
-
-
 \section{Ontological Framework}
+
+We consider the universe as a static informational object \(U\) consisting of \(n\) bits. All physically and observer-relevant structures are encoded within this data. Observers are particular configurations \(O \subset U\) whose internal structure allows them to encode a sense of temporal ordering. 
+
+Since \(U\) is atemporal, time cannot be fundamental. We define an observer's experience of time as the \emph{ordering of configurations} that preserves the internal correlations of \(O\). Let
+\begin{equation}
+\mathcal{C}(O) = \{\pi : \pi \text{ is a permutation of configurations in } U \text{ consistent with } O \}
+\end{equation}
+denote the set of orderings compatible with the observer's internal structure. Only permutations in \(\mathcal{C}(O)\) correspond to possible temporal experiences for \(O\).
+
+In this sense, the universe is a timeless informational structure. Dynamics emerge from the correlations inherent in the static data, as experienced by observers through specific orderings of configurations. Arbitrary orderings that destroy these correlations are structurally incompatible with observer experience.
+
+\section{Emergence of Wave-Like Structure from Compressibility}
+
+Among all observer-consistent orderings \(\mathcal{C}(O)\), those that are highly compressible are combinatorially dominant. Let \(K(\pi)\) denote the Kolmogorov complexity of a permutation \(\pi\). Then
+\begin{equation}
+\#\{\pi \in \mathcal{C}(O) \,|\, K(\pi) \text{ minimal}\} \gg
+\#\{\pi \in \mathcal{C}(O) \,|\, K(\pi) \text{ high}\}.
+\end{equation}
+This dominance is purely structural: it reflects the number of permutations consistent with observer continuity, not any stochastic selection or prior. Our Python simulations confirm that, across a wide range of ensembles, compressible permutations vastly outnumber incompressible ones.
+
+The wavefunction arises as the minimal linear encoding that preserves correlations across these compressible orderings. Superposition naturally appears because linear combinations of compressible orderings remain compressible and maintain the correlations necessary for observer-consistent experience. Interference phenomena reflect the overlap between different orderings within this linear encoding.
+
+The effective Born weights emerge from the combinatorial multiplicity of orderings corresponding to particular outcomes. Specifically, the squared amplitude of a component in the linear encoding reflects the relative number of permutations consistent with that outcome. Observers therefore experience quantum probabilities not as fundamental randomness, but as a direct consequence of the structural abundance of compressible, observer-consistent orderings.
+
+\subsection{Summary}
+
+\begin{itemize}
+    \item The universe is a static informational substrate; time is an emergent property of observers embedded within it.
+    \item Observers experience temporal order through permutations of configurations compatible with their internal structure.
+    \item Maximal compressibility combinatorially dominates among observer-consistent orderings, explaining the smoothness of observed physics.
+    \item Wave-like phenomena and the Born rule arise naturally as linear encodings reflecting the multiplicity of compressible orderings, without invoking fundamental probability or external selection.
+\end{itemize}
+
+
+\section{Wheeler-DeWitt}
 
 We adopt the canonical formulation of quantum gravity, in which the universal state
 \( \Psi[h_{ij}(\mathbf{x}),\phi(\mathbf{x})] \) satisfies the Wheeler--DeWitt (WdW) equation
@@ -48,9 +86,8 @@ arise from correlations internal to \( \Psi \), rather than from external tempor
 
 \section{Algorithmic Selection Principle}
 
-\paragraph{Algorithmic Selection Principle (ASP).}
-\emph{Among all relational histories consistent with the universal state \( \Psi \), observer-experienced
-reality is dominated by histories whose total description length is minimal.}
+Among all relational histories consistent with the universal state \( \Psi \), observer-experienced
+permutation is dominated by histories whose total description length is minimal.
 
 Let \( S \) denote a relational history induced by a particular factorization and ordering of
 configurations. The relative weight of \( S \) is
@@ -66,12 +103,9 @@ where \( K(S) \) is the Kolmogorov complexity (or minimal description length) of
 
 \subsection{Wavefunction as Optimal Encoding}
 
-The complex wavefunction
-\( \psi \) emerges as the minimal encoding that supports linear superposition, phase coherence,
-and stable composition of subsystems.
+We assume the wavefunction \( \psi \) emerges as the minimal encoding of reality with an observer.
 
-Highly irregular configurations require longer descriptions and are suppressed under ASP,
-leading to an effective low-frequency, smooth structure.
+Highly irregular configurations require longer descriptions and are suppressed under ASP, leading to an effective low-frequency, smooth structure.
 
 \subsection{Unitarity from Informational Stability}
 
@@ -174,7 +208,7 @@ This derivation provides a natural "soft cutoff" for the infinities of Quantum F
 \begin{equation}
 \lim_{\mathcal{K} \to \infty} 2^{-\mathcal{K}} = 0
 \end{equation}
-the measure of observers inhabiting divergent branches is zero. Physical laws appear smooth and renormalized because only finite, highly-compressible (low-$\mathcal{K}$) branches possess sufficient multiplicity to be "lived."
+the measure of observers inhabiting divergent branches is zero. Physical laws appear smooth and renormalized because only finite, highly-compressible (low-$\mathcal{K}$) branches possess sufficient multiplicity resulting high probability of existence.
 
 
 
