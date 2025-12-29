@@ -17,14 +17,19 @@
 % --- Document Metadata ---
 \title{\textbf{The Informational Derivation of Reality: Consciousness, Time, and Ontological Equivalence}}
 \author{Juha Meskanen}
-\date{July 2025}
+\date{2009}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  We show that human observers are formal axiomatic systems whose properties can be fully mapped to informational structures. From this, we demonstrate that any simulation preserving the internal causal logic of such a system must instantiate subjective experience; to do otherwise would break the behavioral equivalence of the system. We further prove that temporal experience is not a fundamental property of the universe but an emergent, internal property of the observer’s relational structure. These results establish a strict \textbf{ontological equivalence}: the physical brain and the informational simulation are merely different arrangements of the same finite information set. Reality is therefore fundamentally abstract and substrate-independent, emerging from an ensemble of informational configurations rather than from a distinguished physical substrate. The framework is explicitly falsifiable.
+  We show that humans must be formal axiomatic systems if only four assumptions hold.
+  From this, we show that simulated humans must instantiate subjective experience, and time is not a fundamental property of the universe
+  but an emergent, internal property of the observer. These results establish a strict \textbf{ontological equivalence}:
+  the computer and the virtual simulated universe are not causally related, but merely different arrangements of the same finite information set.
+  Reality is therefore fundamentally abstract and substrate-independent, emerging from an ensemble of informational configurations rather than from a physical substrate.
+  The resulting claims are falsifiable.
 \end{abstract}
 
   
@@ -38,40 +43,39 @@
 The argument begins with four axioms that serve as the premises for the entire derivation.
 
 \subsection*{Axiom 1: Genetic Encoding of Subjective Experience}
-The human genome encodes all the requisite information to construct a conscious, pain-sensitive human.
+The human genome encodes sufficient information to construct a conscious, pain-sensitive human.
 \[
 A_1: D \rightarrow H \rightarrow S
 \]
 (Where $D$ is the DNA/Genome, $H$ is the human organism, and $S$ is subjective experience.)
 
 \subsection*{Axiom 2: Physicality and Axiomatic Law}
-DNA and the human organism are composed solely of ordinary physical matter governed by physical laws ($P$). This establishes $H$ as a formal axiomatic system where state transitions are logical consequences of $P$ and $D$.
+DNA and the human organism are composed solely of ordinary physical matter governed by physical laws ($P$).
+
 \[
 A_2: H \in \text{Axiomatic System}(P, D)
 \]
 
-\subsection*{Axiom 3: Functional Formalism (Generalized Church-Turing)}
-Physical processes are fundamentally describable as formal axiomatic transitions. Consequently, there exists a formal representation $H'$ (e.g., a simulation on a Universal Turing Machine or Quantum Computer) that preserves the internal causal topology and external behavior of the physical organism $H$.
+\subsection*{Axiom 3: Generalized Church-Turing Thesis Holds}
+
 \[
 A_3: P \text{ is Axiomatic} \implies \exists H' \text{ s.t. } \text{Trace}(H') \cong \text{Trace}(H)
 \]
 (Where $\cong$ denotes an isomorphism of causal/relational structures.)
 
 \subsection*{Axiom 4: Causal Efficacy of Pain}
-Subjective experience ($S$, e.g., pain) is a \textbf{causally efficacious} property of the human system. It is not an epiphenomenon, and thus has measurable, behavioral effects [Putnam 1975].
+Subjective experience ($S$, e.g., pain) is a \textbf{causally efficacious} property of the human system. It is not an epiphenomenon, and thus has measurable, behavioral effects.
 \[
 A_4: S \text{ is causally efficacious.}
 \]
-If $H' \equiv H$ physically, then $H'$ must have $S$ to maintain identical behavior.
+If $H' \equiv H$, then $H'$ must have $S$ to maintain identical behavior.
 
 \section{Deduction 1: Substrate Independence and Time as an Internal Property of the Observer}
 
 \subsection{The Optimization Argument}
-Consider a finite axiomatic system together with initial conditions that, under its defined state-transition rules, gives rise to a conscious observer. Let $\tau$ denote the resulting execution trace (or ensemble of traces, in the stochastic or quantum case).
 
-Any representation that fully specifies $\tau$---including a static, extensional encoding of all state transitions---realizes the same internal observer experience. Consequently, the existence of consciousness depends on the structure of the trace itself, not on whether that structure is generated dynamically or instantiated as data.
-
-To assert this, consider DNA simulation running on a computer, $T_{\text{alg}}$, consisting of code (laws of physics) and data (the state of the simulated universe). We can continuously optimize the code using lookup tables, eventually replacing all computation with a static, pre-computed dataset ($T_{\text{data}}$).
+Consider DNA simulation running on a computer, $T_{\text{alg}}$, consisting of code (laws of physics) and data (the state of the simulated universe).
+We can gradually optimize the code using lookup tables, eventually replacing all computation with a static, pre-computed dataset ($T_{\text{data}}$).
 
 \begin{itemize}
     \item Let $E_{\text{int}}$ be Alice's experience of time and pain (the internal state transitions).
@@ -83,26 +87,30 @@ To assert this, consider DNA simulation running on a computer, $T_{\text{alg}}$,
 \text{Optimization}(T_{\text{alg}}) \rightarrow T_{\text{data}} \implies E_{\text{int}}(T_{\text{alg}}) \equiv E_{\text{int}}(T_{\text{data}})
 \]
 
-In this limit, the external runtime $E_{\text{ext}}$ becomes zero, as there is no computation occurring, only static data. We can therefore ask: does Alice's consciousness still persist in $T_{\text{data}}$?
+In this limit, the external runtime \(E_{\text{ext}}\) becomes zero in the sense that no state transitions are executed; the complete execution trace exists as static data.
+We can therefore ask: does Alice's consciousness still persist in $T_{\text{data}}$?
 
-If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum code/data ratio for subjective experience. This minimum ratio would be a \textbf{new, non-physical constant} imposed on $A_2$, leading to a contradiction.
+If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum code/data ratio for subjective experience.
+This minimum ratio would be a \textbf{new, non-physical constant} imposed on $A_2$, leading to a contradiction.
 
 \begin{quote}
-\textbf{Conclusion:} Consciousness can emerge from pure static data. Time and subjective experience ($S$) must emerge solely from the relationships among informational states, not from the external runtime.
+  \textbf{Conclusion:} Consciousness can emerge from pure static data.
+  Time and subjective experience ($S$) must emerge solely from the relationships among informational states, not from the external runtime.
 \end{quote}
 
 \subsection{The Multi-threaded Argument}
-Consider two informational objects encoding distinct execution traces, $\tau_A$ (Alice) and $\tau_B$ (Bob), instantiated on a multi-threaded physical substrate. In this environment, the external execution trace is an interleaved sequence of segments from both $\tau_A$ and $\tau_B$.
+Consider a multi-threading computer running two DNA simulations, $\tau_A$ (Alice) and $\tau_B$ (Bob) concurrently with minimal thread length (one CPU cycle per thread).
+The execution trace of the computer is then an interleaved sequence of segments from both $\tau_A$ and $\tau_B$. 
+As the number of threads (simulated observers) increases toward infinity, the resulting execution trace approaches white noise. As a result
+bits from $\tau_A$ are separated by vast intervals of unrelated data.
 
-As the number of threads (simulated observers) increases toward infinity, the interleaving frequency approaches the bit-level limit. The resulting execution trace becomes an arbitrarily interleaved sequence---effectively indistinguishable from static noise---where bits from $\tau_A$ are separated by vast, random intervals of unrelated data.
-
-\subsubsection*{The Threshold of Disintegration}
+\subsubsection*{The Threshold of Subjective Continuity}
 Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the interleaving becomes extreme, one must define a specific \textbf{thread density} or \textbf{bit-contiguity threshold} required for subjectivity. Such a threshold would constitute a new physical constant governing the ``assembly'' of consciousness, which contradicts the completeness of $A_2$.
 
 Since the relational topology within $\tau_A$ remains invariant regardless of how its constituent bits are distributed within the external substrate, the internal experience $E_{\text{int}}$ must be preserved.
 
 \begin{quote}
-\textbf{Conclusion:} Conscious experience is instantiated from the relational structure inherent in static noise. The substrate provides the bits; the axiomatic consistency of the trace provides the reality.
+\textbf{Conclusion:} Conscious experience arises entirely from the relational structure encoded in static white noise, without requiring any external computation or observation.
 \end{quote}
 
 \section{Falsifiability (Axiom 4)}
@@ -123,22 +131,29 @@ Since the relational topology within $\tau_A$ remains invariant regardless of ho
 \end{quote}
 
 \section{Ontological Equivalence of Configurations}
-Consider a finite informational object $I$ encoding a complete observer history (e.g., Alice). Let $R_A$ denote the static execution trace of $I$ observed externally, and $R_B$ denote the same sequence internally experienced as spacetime and subjective states.
+Consider a simulation $I$ encoding a complete observer history (e.g., Alice). Let $R_A$ of length $n$ bits denote the static execution trace of $I$ observed externally,
+and $R_B$ denote the same sequence internally experienced as spacetime and subjective states. Static data does not encode an intrinsic temporal ordering,
+and hence one cannot argue that one created the other.
+The relationship between $R_A$ and $I$ must therefore be representational rather than causal. $R_A$ and $I$ are two arrangements of the same information of $n$ bits, capable of describing $2^n$ different configurations in total.
 
-From Axioms 2--4 and the optimization argument, no physical property of the simulating substrate, nor the ordering of bits in $R_A$, is ontologically privileged. Any arrangement of the bits that preserves the relational structure of $I$ encodes the same observer. Formally, there exists a bijective mapping:
+
+From Axioms 2--4 and the optimization argument, no physical property of the simulating substrate, nor the ordering of bits in $R_A$, is ontologically privileged.
+Any arrangement of the bits that preserves the relational structure of $I$ encodes the same observer. Formally, there exists a bijective mapping:
 \[
 \phi : R_A \leftrightarrow R_B
 \]
 preserving all causally relevant relations within $I$.
 
-It follows that the existence and experiences of the observer depend solely on the internal relational structure of $I$, not on the substrate or external runtime. Any claim that one substrate or arrangement is ``more real'' than another would require introducing a new, non-physical constant, contradicting the axioms.
+It follows that the existence and experiences of the observer depend solely on the internal relational structure of $I$, not on the substrate or external runtime.
+Any claim that one substrate or arrangement is ``more real'' than another would require introducing a new, non-physical constant, contradicting the axioms.
 
 \begin{quote}
-\textbf{Conclusion:} The external execution trace and the internal experienced universe are two complementary, equally valid representations of the same underlying information. Substrate and ordering are irrelevant; what matters is the relational structure that instantiates the conscious observer.
+  \textbf{Conclusion:} The external execution trace and the internal experienced universe are two complementary, equally valid representations of the same underlying information.
 \end{quote}
 
 \section{Falsifiability of the Hypothesis}
-The hypothesis is falsifiable in the future when technology advances and DNA simulations can be run with sufficient accuracy for DNA-based organisms. The effect of pain can be measured just like an effect of physical forces can be measured. If a DNA simulation $H'$ is constructed and shown to lack $S$, then $A_4$ is invalidated, and the axioms 1--3 collapse.
+The hypothesis is falsifiable in the future when technology advances and DNA simulations can be run with sufficient accuracy for DNA-based organisms.
+The effect of pain can be measured just like an effect of physical forces can be measured. If a DNA simulation $H'$ is constructed and shown to lack $S$, then $A_4$ is invalidated, and the axioms 1--3 collapse.
 
 
 \section{Final Statement: Ontological Equivalence}
@@ -150,20 +165,47 @@ Let $\Omega = \{0, 1\}^n$ denote the ensemble of all possible $n$-bit configurat
 
 The perception of time and pain is an emergent consequence of an observer's \textbf{internal arrangement} of these bits. What appears to a global, external observer as a static execution trace—a frozen bit-string—is experienced by the internal structure (Alice) as a dynamic progression and lived experience. 
 
-Any configuration with the capacity to encode a self-referential algorithm instantiates experience. Consciousness is the inevitable internal property of structured information, independent of substrate or external "runtime." The universe is fundamentally an algorithmic ensemble, and the transition from "Abstract" to "Real" is simply a measure of internal redundancy.
+Any configuration describing a conscious human in time instantiates subjective experience, including sense of pain, provided Axiom-4 holds.
+
+Consciousness is the internal property of structured information, independent of substrate or external "runtime." 
 
 
+\section*{Discussion}
 
-\section*{Discussion and Future Work: Towards a Timeless, Branching Physics}
+\subsection{The Hard Problem of Consciousness and the Hollow Simulation Objection}
+
+A common objection to functionalist and computational accounts of mind is the so-called \emph{hard problem of consciousness} \cite{chalmers1996}.
+In this context, it is often claimed that a simulated human, even if behaviorally and functionally identical to a biological human, could nevertheless be ``hollow''—that is, it could lack subjective experience while still producing identical outward behavior.
+
+Formally, this objection asserts the possibility of a system $H'$ such that
+\[
+\text{Behavior}(H') = \text{Behavior}(H) \quad \text{and} \quad S(H') = \emptyset,
+\]
+where $H$ is a biological human and $S$ denotes subjective experience.
+
+Within the present axiomatic framework, this possibility is excluded. By Axiom~2, the biological human $H$ is a formal axiomatic system whose state transitions are fully determined by physical law and initial conditions. By Axiom~3, there exists a formal representation $H'$ whose execution trace is isomorphic to that of $H$, preserving all causally relevant internal relations. By Axiom~4, subjective experience is a causally efficacious component of the system, contributing to observable behavior.
+
+If $H'$ were to lack subjective experience while remaining behaviorally identical to $H$, then subjective experience would not be a necessary input to the causal function generating behavior. This would render subjective experience epiphenomenal, directly contradicting Axiom~4. 
+
+
+\subsection{Quantum Computers}
+
+We have considered two thought experiments run on classical computers. If conscious experience can be duplicated on classical computers, we argue it can also be
+duplicated on quantum computers.
+
+This follows directly from substrate independence: quantum computation represents an alternative physical realization of the same formal state-transition structure.
+
+
+\subsection{Future Work}
+
 The derivation of reality as an internal property of informational configurations provides a natural resolution to several foundational paradoxes in modern physics.
 
 \begin{itemize}
     \item \textbf{Quantum Probabilism and Randomness:} If the observer emerges from a non-privileged informational substrate $\Omega$, the probabilistic nature of quantum mechanics is explained as the ``view from inside'' the ensemble of all consistent permutations. The randomness is not a law of the universe, but a property of the background from which the observer is filtered.
     \item \textbf{The Everettian Ensemble:} The existence of $2^n$ equally real configurations provides an informational basis for the Many-Worlds Interpretation. Every internally consistent relational structure exists ontologically; what we perceive as ``wavefunction collapse'' is the observer's location within a specific, consistent subset of the total informational ensemble.
-    \item \textbf{The Wheeler-DeWitt Equation:} Our proof that time is an internal property of the observer ($\tau$) rather than an external runtime ($E_{\text{ext}}$) aligns with the static, timeless universe described by the Wheeler-DeWitt equation. In this framework, the universe does not ``evolve'' in time; rather, ``time'' is the ordinal index through which an observer perceives the logical adjacency of states.
+    \item \textbf{The Wheeler-DeWitt Equation:} Our proof that time is an internal property of the observer ($\tau$) rather than an external runtime ($E_{\text{ext}}$) aligns with the static, timeless universe described by the Wheeler-DeWitt equation. In this framework, the universe does not ``evolve'' in time; rather, ``time'' is an internal ordinal index through which an observer traverses the logical adjacency of states.
 \end{itemize}
 
-Future work will focus on quantifying the ``selection pressure'' of axiomatic consistency. Investigating the statistical suppression of ``Boltzmann Brains'' in favor of long-trace consistent observers will be the next step in this informational derivation of reality.
 
 \begin{thebibliography}{9}
 \bibitem{putnam1975}
