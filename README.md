@@ -1,7 +1,7 @@
 # The Abstract Universe Theory (AUT)
 
 ## Contents
-- [Papers](https://juhakm.github.io/abstract/)
+- [Papers](https://juhameskanen.github.io/abstract/)
 - [CHANGELOG ➡](CHANGELOG.md)
 
 ---
