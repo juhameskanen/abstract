@@ -1,82 +1,228 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
+\input{../common.tex}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\newcommand{\pdflink}[1]{} % By default, do nothing
+\title{Algorithmic Selection of Time and Quantum Structure \\
+from a Static Wheeler--DeWitt Universe}
 
-\geometry{letterpaper, margin=1in}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1em}
-
-\title{\textbf{The Algorithmic Universe: A Synthesis of Ontological Equivalence, Wavefunction Compression, and Zero-Entropy Boundaries}}
-\author{Juha Meskanen}
 \date{2024}
 
 \begin{document}
-
 \maketitle
 
-\begin{abstract}
-We present a unified theory of everything derived from seven informational pillars. We show that reality is the geometric interpretation of a maximally compressed execution trace. By defining the observer as a formal axiomatic system, we derive the emergence of spacetime from entropy growth and the Born Rule from algorithmic parsimony. Our framework resolves the ultraviolet divergences of QFT and the singularities of General Relativity by identifying them as states of informational exhaustion (zero entropy). 
+\begin{abstract}  
+  Building on the ontological equivalence of physical and informational configurations established in Paper I, we derive a model of the universe
+  based on elational ordering of these configurations. We identify an emergent \emph{ordinal time} within the static Wheeler--DeWitt multiverse.
+  Observer-experienced reality is then dominated by histories that minimize algorithmic description length providing a unified mechanism for the emergence of time,
+  unitarity, quantum probabilities, and the suppression of divergences. Observers most likely find them from maximally compressed permutations,
+  as those are numerously dominant and hence most probable.
 \end{abstract}
-
 
 \ifdefined\ishtml
 \begin{center}
 \small \href{emergence-of-time.pdf}{Download PDF Version}
 \end{center}
 \fi
+\section{Ontological Framework}
 
-\section{The Axiomatic Foundation}
-As established in \textit{Meskanen (2009)}, if a human observer is a formal axiomatic system, reality must be substrate-independent. We define a \textbf{Pre-Reality} $\mathbf{P}$ where nothing is forbidden. Within $\mathbf{P}$, a finite informational structure $\mathcal{C} \cong \{0,1\}^n$ coexists as a static Wheeler-DeWitt superspace. Time is not a fundamental pillar but an emergent ordinal index of the observer’s internal state transitions.
+We consider the universe as a static informational object \(U\) consisting of \(n\) bits. All physically and observer-relevant structures are encoded within this data. Observers are particular configurations \(O \subset U\) whose internal structure allows them to encode a sense of temporal ordering. 
 
-\section{The Principle of Maximal Compression}
-According to Solomonoff’s Prior, the probability $P$ of a specific experience is dominated by its Kolmogorov complexity $K$: $P \approx 2^{-K}$. Observers do not inhabit random worlds; they are filtered into the most "probable" subsets of $\mathcal{C}$---those that are maximally compressible. 
+Since \(U\) is atemporal, time cannot be fundamental. We define an observer's experience of time as the \emph{ordering of configurations} that preserves the internal correlations of \(O\). Let
+\begin{equation}
+\mathcal{C}(O) = \{\pi : \pi \text{ is a permutation of configurations in } U \text{ consistent with } O \}
+\end{equation}
+denote the set of orderings compatible with the observer's internal structure. Only permutations in \(\mathcal{C}(O)\) correspond to possible temporal experiences for \(O\).
 
+In this sense, the universe is a timeless informational structure. Dynamics emerge from the correlations inherent in the static data, as experienced by observers through specific orderings of configurations. Arbitrary orderings that destroy these correlations are structurally incompatible with observer experience.
 
-\section{The Wavefunction as an Optimal Transform}
-We posited that the wavefunction $\Psi$ is the universal compression transform. Simulations (\textit{Meskanen, Dec 2025}) using Principal Component Analysis (PCA) on lattice configurations demonstrate that compression-optimal bases naturally reproduce near-unitary evolution and Hermitian generators. The "waving" of reality is the informational equivalent of the Discrete Cosine Transform, providing the most efficient basis for representing the execution trace.
+\section{Emergence of Wave-Like Structure from Compressibility}
 
+Among all observer-consistent orderings \(\mathcal{C}(O)\), those that are highly compressible are combinatorially dominant. Let \(K(\pi)\) denote the Kolmogorov complexity of a permutation \(\pi\). Then
+\begin{equation}
+\#\{\pi \in \mathcal{C}(O) \,|\, K(\pi) \text{ minimal}\} \gg
+\#\{\pi \in \mathcal{C}(O) \,|\, K(\pi) \text{ high}\}.
+\end{equation}
+This dominance is purely structural: it reflects the number of permutations consistent with observer continuity, not any stochastic selection or prior. Our Python simulations confirm that, across a wide range of ensembles, compressible permutations vastly outnumber incompressible ones.
 
-\section{Cosmological Emergence and Singularities}
-The universe begins at a zero-entropy boundary ($H=0$), which is the most probable "seed" in the Solomonoff distribution. As entropy increases via bit-flips, spacetime "unfolds" geometrically.
-\begin{itemize}
-    \item \textbf{Expansion:} Cosmic expansion is the geometric interpretation of increasing informational entropy.
-    \item \textbf{Singularities:} Gravitational singularities (\textit{Meskanen, 2019}) are not points of infinite density but states of informational exhaustion. As configurations approach a singularity, the execution-trace entropy $H(b) \to 0$. 
-\end{itemize}
+The wavefunction arises as the minimal linear encoding that preserves correlations across these compressible orderings. Superposition naturally appears because linear combinations of compressible orderings remain compressible and maintain the correlations necessary for observer-consistent experience. Interference phenomena reflect the overlap between different orderings within this linear encoding.
 
-\subsection{Perspectival Dynamics and the Arrow of Time}
-Time is defined as the discrete ordinal index $t \in \mathbb{N}$ of an observer's walk through the configuration space $\mathcal{C}$. We posit that the perceived expansion of the universe is not a global evolution, but a property of the observer's self-location on the "entropy hill." 
+The effective Born weights emerge from the combinatorial multiplicity of orderings corresponding to particular outcomes. Specifically, the squared amplitude of a component in the linear encoding reflects the relative number of permutations consistent with that outcome. Observers therefore experience quantum probabilities not as fundamental randomness, but as a direct consequence of the structural abundance of compressible, observer-consistent orderings.
 
-Observers self-locating on the low-entropy gradient perceive a "Big Bang" and expansion, while those on the high-entropy gradient perceive a "Black Hole" and collapse. Both are symmetric readings of the same static informational object. The arrow of time is thus an emergent filter: we perceive the direction that maximizes the probability of continued existence through algorithmic redundancy.
-
-\section{The Information-Theoretic Born Rule}
-The Born Rule ($p_i = |\psi_i|^2$) is derived as the unique probability measure that preserves the informational integrity of the $2^n$ configurations during the compression-to-experience mapping. Any deviation from the $L^2$ norm introduces algorithmic waste, making such "worlds" exponentially unlikely to be observed.
-
-\section{Suppression of QFT Divergences}
-In our "QBitwave" framework, high-frequency modes correspond to incompressible, high-entropy bitstrings. Because these states have maximal $K$, their amplitudes vanish in the universal distribution. This providing a built-in UV-regularization mechanism for QFT integrals without the need for manual counter-terms.
-
-
-\section{Conclusion: The Geometry of Information}
-Physics is the study of the most probable representations of a static informational set. Gravity, time, and matter are not fundamental; they are the geometric interpretations of the algorithmic selection pressure that favors order over chaos. The universe does not deal in infinities because infinities cannot be efficiently stored or propagated.
-
-\section*{Supplementary Materials}
+\subsection{Summary}
 
 \begin{itemize}
-\item \href{reading-timeless-univesre.pdf}{Reading timeless universe}
+    \item The universe is a static informational substrate; time is an emergent property of observers embedded within it.
+    \item Observers experience temporal order through permutations of configurations compatible with their internal structure.
+    \item Maximal compressibility combinatorially dominates among observer-consistent orderings, explaining the smoothness of observed physics.
+    \item Wave-like phenomena and the Born rule arise naturally as linear encodings reflecting the multiplicity of compressible orderings, without invoking fundamental probability or external selection.
 \end{itemize}
 
 
+\section{Wheeler-DeWitt}
 
-\begin{thebibliography}{9}
-\bibitem{meskanen2009} Meskanen, J. (2009). The Informational Derivation of Reality.
-\bibitem{meskanen2025a} Meskanen, J. (July 2025). Emergent Suppression of QFT Divergences.
-\bibitem{meskanen2025b} Meskanen, J. (Dec 2025). The Wave Function as a Compression Algorithm.
-\bibitem{meskanen2025c} Meskanen, J. (Dec 2025). Theory of Everything: Seven Pillars.
-\end{thebibliography}
+We adopt the canonical formulation of quantum gravity, in which the universal state
+\( \Psi[h_{ij}(\mathbf{x}),\phi(\mathbf{x})] \) satisfies the Wheeler--DeWitt (WdW) equation
+\begin{equation}
+\hat{H}\Psi = 0,
+\end{equation}
+and contains no fundamental time parameter \cite{DeWitt1967}. We interpret \( \Psi \) in an
+Everettian sense as a static superposition over all admissible 3-geometries and matter field
+configurations:
+\begin{equation}
+\ket{\Psi} = \sum_i c_i \ket{h_i,\phi_i}.
+\end{equation}
+
+In this view, the universe is a timeless informational structure. Any notion of dynamics must
+arise from correlations internal to \( \Psi \), rather than from external temporal evolution.
+
+\section{Algorithmic Selection Principle}
+
+Among all relational histories consistent with the universal state \( \Psi \), observer-experienced
+permutation is dominated by histories whose total description length is minimal.
+
+Let \( S \) denote a relational history induced by a particular factorization and ordering of
+configurations. The relative weight of \( S \) is
+\begin{equation}
+P(S) \propto 2^{-K(S)},
+\end{equation}
+where \( K(S) \) is the Kolmogorov complexity (or minimal description length) of \( S \)
+\cite{Kolmogorov1965}.
+
+
+
+\section{Emergence of Quantum Structure}
+
+\subsection{Wavefunction as Optimal Encoding}
+
+We assume the wavefunction \( \psi \) emerges as the minimal encoding of reality with an observer.
+
+Highly irregular configurations require longer descriptions and are suppressed under ASP, leading to an effective low-frequency, smooth structure.
+
+\subsection{Unitarity from Informational Stability}
+
+Persistence of observer identity requires that successive encodings preserve total information
+content. In a linear representation space, this restricts admissible transformations to
+norm-preserving maps. Continuous norm preservation uniquely selects unitary evolution, with a
+Hermitian generator \( \hat{H} \), yielding
+\begin{equation}
+i\hbar \frac{\partial}{\partial t}\psi = \hat{H}\psi.
+\end{equation}
+
+\section{The Born Rule from Algorithmic Optimality}
+
+We now strengthen the derivation of the Born rule by identifying it as the \emph{unique decoding
+rule} compatible with algorithmic selection and observer persistence.
+
+\subsection{Problem Statement}
+
+Let \( \psi \in \mathcal{H} \) be the observer's compressed encoding of relational correlations.
+A probability rule assigns to each outcome \( i \) a weight
+\begin{equation}
+P(i) = f(|\psi_i|),
+\end{equation}
+where \( f \) is a non-negative function.
+
+We seek the unique \( f \) compatible with the following physically motivated constraints.
+
+\subsection{Constraints}
+
+\paragraph{(C1) Additivity under coarse-graining}
+If outcomes \( i \) and \( j \) are grouped,
+\begin{equation}
+P(i \cup j) = P(i) + P(j).
+\end{equation}
+
+\paragraph{(C2) Composition consistency}
+For independent subsystems \( A \) and \( B \),
+\begin{equation}
+P(i_A, j_B) = P(i_A) P(j_B).
+\end{equation}
+
+\paragraph{(C3) Basis invariance}
+Probabilities must be invariant under unitary change of basis.
+
+\paragraph{(C4) Reconstruction optimality}
+The decoding rule must minimize mean squared reconstruction error between encoded and decoded
+histories. This is the unique optimal decoder for finite observers using lossy compression.
+
+\subsection{Uniqueness of the Squared Norm}
+
+Constraints (C1) and (C2) imply that \( f(x) \) must be quadratic in amplitude magnitude:
+\begin{equation}
+f(x) = k x^2.
+\end{equation}
+
+Constraint (C3) excludes dependence on phase or basis-dependent quantities.
+
+Constraint (C4) selects the \( L^2 \) norm uniquely: among all \( L^p \) norms, only \( p = 2 \)
+yields linear projections, orthogonality preservation, and stable error minimization under
+compression.
+
+Normalization fixes \( k = 1 \), yielding
+\begin{equation}
+P(i) = |\psi_i|^2.
+\end{equation}
+
+\paragraph{Conclusion.}
+The Born rule is not an independent axiom, but the unique probability assignment compatible with
+algorithmic compression, compositional consistency, and observer persistence in Hilbert space.
+
+
+
+\subsection{Physical Meaning of the Born Weight}
+
+Multiplicity explains why the squared norm ($P = |\psi|^2$) is the correct measure selected by the optimal decoding rule.
+
+\subsubsection{Lemma: Quadratic Scaling in Linear Encoding}
+In any linear wave-based encoding scheme, the number of distinguishable microstates $\Omega$ consistent with a macroscopic wave constraint scales with the squared norm of the amplitude. Following Parseval's Theorem, the total energy (or informational "power") of a signal in Hilbert space is:
+\begin{equation}
+E = \int | \psi(x) |^2 dx
+\end{equation}
+In our framework, "Power" is equivalent to the **bandwidth of the execution trace**. A higher amplitude $A$ provides a quadratically larger state-space volume for microstate permutations that remain consistent with the observer's template. Thus, the multiplicity of observer-instances is $M \propto |\psi|^2$.
+
+\subsubsection{The Universal Prior and Self-Locating Uncertainty}
+Applying a universal prior (Solomonoff) over the ensemble $\Omega$, the probability $P$ of an observer finding themselves in state $S$ is defined by its Kolmogorov Complexity $\mathcal{K}(S)$:
+\begin{equation}
+P(S) \propto 2^{-\mathcal{K}(S) + c}
+\end{equation}
+where $c$ is a constant determined by the choice of universal Turing machine. This represents \textit{self-locating uncertainty}: the observer is not "choosing" a path, but is statistically distributed across all consistent bit-string permutations.
+
+\subsubsection{Derivation of the Born Weight}
+By combining the multiplicity of the linear wave-template with the universal prior, the relative measure of observer density across configuration space is:
+\begin{equation}
+P(\text{Alice} \in \psi) = \frac{|\psi|^2}{\int |\psi|^2 dx}
+\end{equation}
+This normalization reflects the relative density of observer-instances, not a stochastic collapse of the wavefunction.
+
+\subsubsection{The Vanishing Measure of Divergences}
+This derivation provides a natural "soft cutoff" for the infinities of Quantum Field Theory. While divergent states exist mathematically, their description length $\mathcal{K}$ explodes. Since:
+\begin{equation}
+\lim_{\mathcal{K} \to \infty} 2^{-\mathcal{K}} = 0
+\end{equation}
+the measure of observers inhabiting divergent branches is zero. Physical laws appear smooth and renormalized because only finite, highly-compressible (low-$\mathcal{K}$) branches possess sufficient multiplicity resulting high probability of existence.
+
+
+
+\section{Singularities and Renormalization}
+
+Configurations corresponding to classical singularities in GR, or ultraviolet divergences in QFT possess
+vanishing or ill-defined informational structure. Such states require maximal description length
+and are exponentially suppressed under ASP. Their observational probability is zero.
+
+Renormalization in quantum field theory arises as a direct consequence: high-frequency modes are
+algorithmically incompressible and do not contribute to dominant observer-compatible histories.
+Effective field theories are therefore maximal-compressibility approximations to the static
+informational substrate.
+
+\section{Discussion}
+
+Spacetime geometry, time, quantum probabilities, and classicality emerge as features of
+algorithmically typical correlations within a timeless universal state. Singularities and
+divergences mark the boundaries of informational accessibility, not physical breakdowns.
+
+The Algorithmic Selection Principle shifts the explanatory burden from fundamental dynamics to
+informational selection, providing a unified resolution of the problem of time, the origin of
+quantum probabilities, and the absence of observable infinities.
+
+\printbibliography
 
 \end{document}
