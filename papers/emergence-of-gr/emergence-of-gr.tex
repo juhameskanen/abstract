@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+\input{../common.tex}
+\addbibresource{../references.bib}
+
+\title{The Algorithmic Origin of Gravitation: Geodesics as MDL Paths in Configuration Space}
+\author{Juha Meskanen}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  We demonstrate that the curvature of spacetime and the resulting geodesic motion of particles can be derived from the Minimal Description Length (MDL) principle.
+  By treating the universe as a static ensemble of bitstrings, we show that an observer's trajectory is statistically biased toward configurations of high structural density.
+  We prove that the shortest path in Kolmogorov space is mathematically equivalent to a geodesic in a Riemannian manifold, providing a first-principles derivation of gravity from algorithmic information theory.
+\end{abstract}
+
+\section{Introduction}
+General Relativity describes gravity as geometry.
+Here, we describe geometry as information.
+If the distribution of microstructures follows a log-normal distribution as established in Paper I, the "cost" of maintaining observer-integrity varies across the ensemble.
+
+\section{The Informational Metric}
+We define the metric tensor $g_{\mu\nu}$ not as a fundamental property of a vacuum, but as the second variation of the algorithmic complexity $K$ of the local configuration:
+\begin{equation}
+    g_{\mu\nu} \approx \frac{\partial^2 K}{\partial x^\mu \partial x^\nu}
+\end{equation}
+
+\section{Simulation Results}
+Using a Python-based ensemble simulation, we show that an agent minimizing its transition complexity $K(x_{t+1}|x_t)$ follows a path that reproduces the Schwarzschild-like curvature around a central mass motif.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/geodesic_from_mdl.png}
+    \caption{Geometric mapping of Minimum Description Length in configuration space}
+    \label{fig:geodesic-from_mdl}
+\end{figure}
+
+
+\section*{Simulation Code}
+
+\begin{itemize}
+    \item \href{simulations/lognormal\_pressure\_2.py}{lognormal\_pressure\_2.py}
+\end{itemize}
+
+
+\printbibliography
+\end{document}
