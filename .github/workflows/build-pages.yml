@@ -62,7 +62,6 @@ jobs:
               find . -type d \( -name "figures" -o -name "simulations" \) -exec cp -r --parents {} "../../html/$paper/" \;
               cd ../..
 
-
               # --- RECURSIVE HTML & PDF INTEGRATION ---
               MAIN_PDF_LINK=""
               SUPP_LIST=""
@@ -71,14 +70,9 @@ jobs:
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/"
               fi
 
-              # Search for ALL tex files in the paper folder and its subfolders
-              # We exclude common.tex if it exists inside a paper folder
-              find "papers/$paper" -name "*.tex" ! -name "common.tex" | while read -r texfile; do
+              # Using process substitution < <() to keep variables in the current shell
+              while read -r texfile; do
                 base_name=$(basename "$texfile" .tex)
-                
-                # Determine if this is the main paper or a supplement
-                # Logic: if it's in the root of the paper folder, it's the main paper.
-                # If it's in a subfolder (like /supplementary/), it's a supplement.
                 rel_path=${texfile#papers/$paper/}
                 
                 if [[ "$rel_path" == "$base_name.tex" ]]; then
@@ -87,18 +81,16 @@ jobs:
                   out_file="$out_dir/index.html"
                   MAIN_PDF_LINK=" | <a href='./$paper/$base_name.pdf' title='Main Paper'>[PDF]</a>"
                 else
-                  # SUPPLEMENTARY PAPER (nested in a folder)
+                  # SUPPLEMENTARY PAPER (nested)
                   out_dir="html/$paper/$base_name"
                   mkdir -p "$out_dir"
                   out_file="$out_dir/index.html"
                   
-                  # Clean up name for the sub-list display
                   display_name=$(echo "$base_name" | sed 's/supplementary-//; s/-/ /g')
                   SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/$base_name.pdf'>[PDF]</a></li>"
                 fi
 
-                # Adjust CSS path based on directory depth
-                # Main paper: ../style.css | Supplement: ../../style.css
+                # Path for CSS
                 css_path="../style.css"
                 [[ "$out_dir" == *"/"*/* ]] && css_path="../../style.css"
 
@@ -106,18 +98,18 @@ jobs:
                 --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                 --bibliography="$BIB_PATH" -c "$css_path" -o "$out_file"
 
-                # Navigation for supplements only
+                # Navigation injection for supplements
                 if [[ "$out_dir" == *"/"*/* && -f "$out_file" ]]; then
                   DOWNLOAD_HTML="<p><a href='../$base_name.pdf'>[Download PDF Version]</a></p>"
                   BACK_LINK="<hr><a href='../'>&larr; Back to Paper</a>"
                   sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file"
                 fi
-              done
-
-              shopt -u nullglob
+              done < <(find "papers/$paper" -name "*.tex" ! -name "common.tex")
 
               # Add to TOC
-              [ -n "$SUPP_LIST" ] && SUPP_LIST="<ul>$SUPP_LIST</ul>"
+              if [ -n "$SUPP_LIST" ]; then
+                SUPP_LIST="<ul>$SUPP_LIST</ul>"
+              fi
               echo "<li><a href='./$paper/'>$paper</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
 
               # Main paper navigation footer
