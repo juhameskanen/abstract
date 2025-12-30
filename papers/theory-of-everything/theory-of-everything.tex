@@ -29,19 +29,22 @@
     \small \text{(Quantization of potential into a static configuration space)} \\
     \downarrow \\
     \mathcal{T} = \{ \sigma_1, \sigma_2, \dots, \sigma_{n!} \} \\
-    \small \text{(Emergence of time as permutations/paths through $\mathcal{C}$)} \\
+    \small \text{(Permutation Space: The set of all possible histories)} \\
     \downarrow \\
-    K(\gamma) = \text{Minimal Description Length of path } \gamma \\
-    \small \text{(The Algorithmic Metric)} \\
+    \mathcal{T}_{\text{obs}} = \{ \gamma \in \mathcal{T} \mid \text{Observer}(\gamma) = 1 \} \\
+    \small \text{(\textbf{Observer Filter}: Selection of paths containing stable informational recursions)} \\
+    \downarrow \\
+    K(\gamma) = \text{Minimal Description Length of path } \gamma \in \mathcal{T}_{\text{obs}} \\
+    \small \text{(The Algorithmic Metric: Favoring smooth, predictable "stories")} \\
     \downarrow \\
     \Psi(\gamma) \propto 2^{-K(\gamma)/2} \\
-    \small \text{(The Wavefunction as the optimal encoding of the ensemble)} \\
+    \small \text{(The \textbf{Spectral Realization}: Wavefunction as the optimal encoding of the ensemble)} \\
     \downarrow \\
     P(\gamma) = |\Psi(\gamma)|^2 \\
-    \small \text{(The Born Rule as a Solomonoff Prior)} \\
+    \small \text{(The Born Rule: Probability as the relative bit-weight of the rendered experience)} \\
     \downarrow \\
     \rho(\mathbf{s}) \sim \text{Lognormal}(\mu, \sigma^2) \\
-    \small \text{(Distribution of microstructures in bit-mutation space)} \\
+    \small \text{(Distribution of microstructure motifs in bit-mutation space)} \\
     \downarrow \\
     \delta \int K(\gamma) \, d\lambda = 0 \implies \text{Geodesics} \\
     \small \text{(Gravitation as the geometric interpretation of the selection pressure)}
@@ -62,6 +65,9 @@ We represent the structure of a world as a configuration space $\mathcal{C} \con
 
 \subsection*{Pillar 4: The Emergence of Time}
 Time is not a fundamental dimension but a permutation of configurations. An observer's "history" is a specific path $\gamma$ through $\mathcal{C}$.
+
+\subsection*{The Observer Filter: $\mathcal{T}_{obs}$}
+The vast majority of configurations in $\mathcal{C}$ represent algorithmic "white noise" with no capacity for informational recursion. We define the subset of paths $\mathcal{T}_{obs}$ as those containing stable, self-referential structures. Only paths in $\mathcal{T}_{obs}$ possess a subjective "inside," where the algorithmic processing of states is realized as experience. This filter explains the apparent "fine-tuning" of the universe: we do not find ourselves in a chaotic world because chaos, by definition, lacks the structure to support an observer.
 
 \subsection*{Pillar 5: The Observer Filter}
 Only permutations capable of supporting stable, self-referential informational structures (observers) are realized as "experienced" reality.
