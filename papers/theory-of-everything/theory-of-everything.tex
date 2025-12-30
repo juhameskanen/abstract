@@ -10,9 +10,7 @@
 \maketitle
 
 \begin{abstract}
-  We present a formal derivation of physical reality emerging from a boundary-condition of nothing. By applying the Algorithmic Selection Principle (ASP) and
-  Minimal Description Length (MDL) criteria to a static configuration ensemble, we demonstrate that the laws of physics emerge as necessary
-  informational artifacts. 
+  We present a formal derivation of physical reality emerging from a boundary-condition of nothing. 
 \end{abstract}
 
 \ifdefined\ishtml
@@ -28,25 +26,25 @@
     \mathbf{P} = \{ \text{Infinite Potential} \} \\
     \downarrow \\
     \mathcal{C} \cong \{0, 1\}^n \\
-    \text{\small (Quantization of potential into a static configuration space)} \\
+    \small \text{(Quantization of potential into a static configuration space)} \\
     \downarrow \\
     \mathcal{T} = \{ \sigma_1, \sigma_2, \dots, \sigma_{n!} \} \\
-    \text{\small (Emergence of time as permutations/paths through $\mathcal{C}$)} \\
+    \small \text{(Emergence of time as permutations/paths through $\mathcal{C}$)} \\
     \downarrow \\
     K(\gamma) = \text{Minimal Description Length of path } \gamma \\
-    \text{\small (The Algorithmic Metric)} \\
+    \small \text{(The Algorithmic Metric)} \\
     \downarrow \\
     \Psi(\gamma) \propto 2^{-K(\gamma)/2} \\
-    \text{\small (The Wavefunction as the optimal encoding of the ensemble)} \\
+    \small \text{(The Wavefunction as the optimal encoding of the ensemble)} \\
     \downarrow \\
     P(\gamma) = |\Psi(\gamma)|^2 \\
-    \text{\small (The Born Rule as a Solomonoff Prior)} \\
+    \small \text{(The Born Rule as a Solomonoff Prior)} \\
     \downarrow \\
     \rho(\mathbf{s}) \sim \text{Lognormal}(\mu, \sigma^2) \\
-    \text{\small (Distribution of microstructures in bit-mutation space)} \\
+    \small \text{(Distribution of microstructures in bit-mutation space)} \\
     \downarrow \\
     \delta \int K(\gamma) \, d\lambda = 0 \implies \text{Geodesics} \\
-    \text{\small (Gravitation as the geometric interpretation of the selection pressure)}
+    \small \text{(Gravitation as the geometric interpretation of the selection pressure)}
 \end{gather*}
 
 \newpage
@@ -69,15 +67,15 @@ Time is not a fundamental dimension but a permutation of configurations. An obse
 Only permutations capable of supporting stable, self-referential informational structures (observers) are realized as "experienced" reality.
 
 \subsection*{Pillar 6: The Algorithmic Selection Principle (ASP)}
-Path selection is governed by Kolmogorov complexity $K(H)$. Sequences with high compressibility (low $K$) are preferred. This suppresses "chaotic" or "infinite" paths, leading to an emergent finite physics:
+Path selection is governed by Kolmogorov complexity $K(H)$. Sequences with high compressibility (low $K$) are preferred. This suppresses "chaotic" or "infinite" paths, leading to an emergent finite, predictable physics:
 \[ H_{\text{MDL}} = \arg\min_H K(H) \]
 
 \subsection*{Pillar 7: The Wavefunction as Optimal Encoding}
-The wavefunction $\Psi$ is the most efficient compression of the path ensemble. Interference and superposition are artifacts of this maximally efficient encoding. The Born Rule emerges naturally:
+The wavefunction $\Psi$ is the most efficient compression of the path ensemble. Interference and superposition are artifacts of this maximally efficient encoding. The Born Rule is emergent:
 \[ P(\gamma) \propto 2^{-K(\gamma)} \sim |\Psi(\gamma)|^2 \]
 
 \subsection*{Pillar 8: Emergent Gravitation}
-Microstructures emerge according to a log-normal distribution relative to bit-flip mutations. In 3D space, this density gradient is interpreted as spacetime curvature. An observer "falls" toward higher density (lower MDL cost). Geodesics are simply the most compressible paths through the configuration ensemble.
+Microstructures emerge according to a log-normal distribution relative to bit-flip mutations. In 3D space, this density gradient is interpreted as spacetime curvature. An observer "falls" toward higher density (lower MDL cost). Geodesics are the most compressible paths through the configuration ensemble.
 
 \end{document}
 \printbibliography
