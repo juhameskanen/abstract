@@ -1,4 +1,41 @@
-- name: Convert LaTeX to HTML and Integrate PDFs
+name: Build and Deploy HTML (GitHub Pages)
+
+on:
+  workflow_run:
+    workflows: ["Build and Upload PDFs"]
+    types: [completed]
+  workflow_dispatch: 
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-html:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    environment:
+      name: github-pages
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc jq
+
+      - name: Download all PDF Artifacts
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: build-pdf.yml
+          run_id: ${{ github.event.workflow_run.id }}
+          path: all-pdfs
+          search_artifacts: true 
+
+      - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
           if [ ! -f papers.json ]; then echo "papers.json missing"; exit 1; fi
           mkdir -p html
@@ -29,7 +66,6 @@
               MAIN_PDF_LINK=""
               SUPP_LIST=""
               
-              # Pre-copy PDFs to the paper folder so they are accessible
               if [ -d "all-pdfs/pdf-$paper" ]; then
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/"
               fi
@@ -38,7 +74,6 @@
               for texfile in papers/$paper/*.tex; do
                 base_name=$(basename "$texfile" .tex)
                 
-                # Determine output path: index.tex goes to paper root, others to subfolders
                 if [[ "$base_name" == "index" || "$base_name" == "$paper" ]]; then
                   out_dir="html/$paper"
                   out_file="$out_dir/index.html"
@@ -47,45 +82,37 @@
                   out_dir="html/$paper/$base_name"
                   mkdir -p "$out_dir"
                   out_file="$out_dir/index.html"
-                  
-                  # Create display name for the sub-list
                   display_name=$(echo "$base_name" | sed 's/supplementary-//; s/-/ /g')
                   SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/$base_name.pdf'>[PDF]</a></li>"
                 fi
 
-                # Run Pandoc for this specific file
-                # Note: css path changes if we are in a sub-sub-folder
+                # Adjust CSS path based on depth
                 css_path="../style.css"
-                [[ "$out_dir" == *"/"*/* ]] && css_path="../../style.css"
+                if [[ "$out_dir" == *"/"*/* ]]; then css_path="../../style.css"; fi
 
                 pandoc "$texfile" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                 --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                 --bibliography="$BIB_PATH" -c "$css_path" -o "$out_file"
 
-                # Inject Download Link and Navigation back to parent
-                if [ -f "$out_file" ]; then
+                # Navigation for supplements
+                if [[ "$out_dir" == *"/"*/* && -f "$out_file" ]]; then
                   DOWNLOAD_HTML="<p><a href='../$base_name.pdf'>[Download PDF Version]</a></p>"
                   BACK_LINK="<hr><a href='../'>&larr; Back to Paper</a>"
-                  
-                  # If it's a supplement, add the back link; otherwise use your existing footer logic later
-                  if [[ "$out_dir" == *"/"*/* ]]; then
-                    sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file"
-                  fi
+                  sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file"
                 fi
               done
               shopt -u nullglob
 
-              # Add entry to main index
+              # Add to TOC
               [ -n "$SUPP_LIST" ] && SUPP_LIST="<ul>$SUPP_LIST</ul>"
               echo "<li><a href='./$paper/'>$paper</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
 
-              # --- MAIN PAPER NAVIGATION INJECTION ---
+              # Main paper navigation footer
               if [ -f "html/$paper/index.html" ]; then
                 PREV_HTML=""
                 NEXT_HTML=""
                 [ $i -gt 0 ] && PREV_HTML="<a href='../${PAPER_ARRAY[$((i-1))]}/'>&larr; Previous</a>"
                 [ $i -lt $((NUM_PAPERS-1)) ] && NEXT_HTML="<a href='../${PAPER_ARRAY[$((i+1))]}/'>Next &rarr;</a>"
-
                 FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Project.</i></div>"
                 sed -i 's|</body></html>||g' "html/$paper/index.html"
                 echo "$FOOTER</body></html>" >> "html/$paper/index.html"
@@ -94,3 +121,11 @@
           done
           
           echo '</ul></body></html>' >> html/index.html
+
+      - name: Upload Pages artifact
+        uses: upload-pages-artifact@v3
+        with:
+          path: html
+
+      - name: Deploy to GitHub Pages
+        uses: deploy-pages@v4
