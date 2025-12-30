@@ -10,7 +10,7 @@
 \maketitle
 
 \begin{abstract}
-  We present a formal derivation of physical reality emerging from a boundary-condition of nothing. 
+  A formal derivation of physical reality.
 \end{abstract}
 
 \ifdefined\ishtml
@@ -19,34 +19,33 @@
 \end{center}
 \fi
 
-
-\section{The Algorithmic Cascade}
+\section{The Cascade}
 
 \begin{gather*}
-    \mathbf{P} = \{ \text{Infinite Potential} \} \\
+    \mathbf{P} = \{ \text{Infinite Potential - the set of all informational structures} \} \\
     \downarrow \\
     \mathcal{C} \cong \{0, 1\}^n \\
     \small \text{(Quantization of potential into a static configuration space)} \\
     \downarrow \\
-    \mathcal{T} = \{ \sigma_1, \sigma_2, \dots, \sigma_{n!} \} \\
+    \mathcal{T} = \{ \sigma_1, \sigma_2, \dots, \sigma_{(2^n)!} \} \\
     \small \text{(Permutation Space: The set of all possible histories)} \\
     \downarrow \\
     \mathcal{T}_{\text{obs}} = \{ \gamma \in \mathcal{T} \mid \text{Observer}(\gamma) = 1 \} \\
     \small \text{(\textbf{Observer Filter}: Selection of paths containing stable informational recursions)} \\
     \downarrow \\
-    K(\gamma) = \text{Minimal Description Length of path } \gamma \in \mathcal{T}_{\text{obs}} \\
-    \small \text{(The Algorithmic Metric: Favoring smooth, predictable "stories")} \\
+    \mathcal{L}(\gamma) = \text{Minimal Spectral Encoding Length of path } \gamma \in \mathcal{T}_{\text{obs}} \\
+    \small \text{(Favoring paths that admit efficient spectral representation)} \\
     \downarrow \\
-    \Psi(\gamma) \propto 2^{-K(\gamma)/2} \\
-    \small \text{(The \textbf{Spectral Realization}: Wavefunction as the optimal encoding of the ensemble)} \\
+    \Psi(\gamma) \propto 2^{-\mathcal{L}(\gamma)/2} \\
+    \small \text{(The \textbf{Spectral Realization}: Wavefunction as the optimal compression of the path ensemble)} \\
     \downarrow \\
     P(\gamma) = |\Psi(\gamma)|^2 \\
-    \small \text{(The Born Rule: Probability as the relative bit-weight of the rendered experience)} \\
+    \small \text{(The Born Rule: Probability as the relative weight of the rendered experience)} \\
     \downarrow \\
     \rho(\mathbf{s}) \sim \text{Lognormal}(\mu, \sigma^2) \\
     \small \text{(Distribution of microstructure motifs in bit-mutation space)} \\
     \downarrow \\
-    \delta \int K(\gamma) \, d\lambda = 0 \implies \text{Geodesics} \\
+    \delta \int \mathcal{L}(\gamma) \, d\lambda = 0 \implies \text{Geodesics} \\
     \small \text{(Gravitation as the geometric interpretation of the selection pressure)}
 \end{gather*}
 
@@ -55,52 +54,56 @@
 \section{The Eight Pillars}
 
 \subsection*{Pillar 1: The Pre-Reality}
-The boundary condition $\mathbf{P}$ is the totality of all possibilities. It is the absolute no-boundary state where no logic, time, or information exists, as no distinctions have been realized.
+Reality begins as abstract information itself, with no privileged representation, alphabet, ordering, geometry, or probability measure.
+Any concrete encoding (binary, ternary, continuous, or otherwise) is a matter of convenience rather than ontology.
+Entropy, time, and physical law arise only relative to observer-defined representations and coarse-grainings.
 
 \subsection*{Pillar 2: The Observer Exists}
-Since $\mathbf{P}$ excludes nothing, it must contain finite informational subsets. The existence of a structured world requires no external cause; it is a necessary subset of the infinite potential.
+Since $\mathbf{P}$ excludes nothing, it must contain finite informational subsets.
+The existence of a structured world requires no external cause; it is a necessary subset of the infinite potential.
 
 \subsection*{Pillar 3: The Static Multiverse}
-We represent the structure of a world as a configuration space $\mathcal{C} \cong \{0, 1\}^n$. Each bitstring $\mathbf{s}$ is a static state. There is no motion, only the coexistence of all potential states.
+We represent the structure of a world as a configuration space $\mathcal{C} \cong \{0, 1\}^n$. Each bitstring $\mathbf{s}$ is a static state.
+There is no motion, only the coexistence of all potential states.
+Binary set is not fundamental, it is chosen only as convenient basis.
 
 \subsection*{Pillar 4: The Emergence of Time}
-Time is not a fundamental dimension but a permutation of configurations. An observer's "history" is a specific path $\gamma$ through $\mathcal{C}$.
+Time is not a fundamental dimension but a permutation of configurations.
 
-\subsection*{The Observer Filter: $\mathcal{T}_{obs}$}
-The vast majority of configurations in $\mathcal{C}$ represent algorithmic "white noise" with no capacity for informational recursion. We define the subset of paths $\mathcal{T}_{obs}$ as those containing stable, self-referential structures. Only paths in $\mathcal{T}_{obs}$ possess a subjective "inside," where the algorithmic processing of states is realized as experience. This filter explains the apparent "fine-tuning" of the universe: we do not find ourselves in a chaotic world because chaos, by definition, lacks the structure to support an observer.
+\subsection*{Pillar 5: The Observer Filter: $\mathcal{T}_{obs}$}
+Only paths in $\mathcal{T}_{\text{obs}}$ possess a subjective "inside," where the algorithmic processing of states is realized as experience.
+An observer's "history" is a specific path $\gamma$ through $\mathcal{C}$.
 
-\subsection*{Pillar 5: The Observer Filter}
-Only permutations capable of supporting stable, self-referential informational structures (observers) are realized as "experienced" reality.
-
-\subsection*{Pillar 6: The Algorithmic Selection Principle (ASP)}
-Path selection is governed by Kolmogorov complexity $K(H)$. Sequences with high compressibility (low $K$) are preferred. This suppresses "chaotic" or "infinite" paths, leading to an emergent finite, predictable physics:
-\[ H_{\text{MDL}} = \arg\min_H K(H) \]
+\subsection*{Pillar 6: The Spectral Selection Principle (SSP)}
+Path selection is governed by their compressibility in a spectral basis.
+Paths with efficient spectral representations dominate the measure, leading to an emergent finite, predictable physics:
+\[ H_{\text{MDL}} = \arg\min_H \mathcal{L}(H) \]
 
 \subsection*{Pillar 7: The Wavefunction as Optimal Encoding}
-The wavefunction $\Psi$ is the most efficient compression of the path ensemble. Interference and superposition are artifacts of this maximally efficient encoding. The Born Rule is emergent:
-\[ P(\gamma) \propto 2^{-K(\gamma)} \sim |\Psi(\gamma)|^2 \]
-
+The wavefunction $\Psi$ is the most efficient spectral compression of the path ensemble.
+Interference and superposition are artifacts of this maximally efficient encoding.
+The Born Rule is emergent:
+\[ P(\gamma) \propto 2^{-\mathcal{L}(\gamma)} \sim |\Psi(\gamma)|^2 \]
 
 \subsection*{Pillar 8 --- Emergent Gravitation: The Log-Normal Pressure}
 
 Physical gravitation is the macroscopic manifestation of the statistical density gradient of microstructure motifs within the configuration ensemble.
 
 \begin{enumerate}
-    \item \textbf{Microstructure Distribution:} The emergence of microstructures follows a log-normal distribution $L(d)$ as a function of bit-flip mutations (minimal Shannon entropy increase):
+    \item \textbf{Microstructure Distribution:} The emergence of microstructures is approximated by a log-normal distribution $L(d)$ as a function of bit-flip mutations (minimal Shannon entropy increase):
     \[ L(d) = \frac{1}{d\sigma\sqrt{2\pi}} e^{-\frac{(\ln d - \mu)^2}{2\sigma^2}} \]
     
     \item \textbf{3D Geometric Projection:} In three-dimensional space, the density $\rho$ of these motifs undergoes geometric dilution, yielding the probability pressure:
     \[ \rho(r) \propto \frac{L(r)}{r^2} \]
     
-  \item \textbf{The Geodesic as MDL:} An observer "falls" toward configurations that maximize the availability of required microstructures.
-    This minimizes the innovation cost of the observer's continued existence. The resulting trajectory $\gamma$ satisfies the Minimal Description Length (MDL) criterion:
-    \[ \delta \int_{\gamma} K(\text{state}) \, ds = 0 \]
+    \item \textbf{The Geodesic as MDL:} An observer "falls" toward configurations that maximize the availability of required microstructures.
+    This minimizes the innovation cost of the observer's continued existence.
+    The resulting trajectory $\gamma$ satisfies the Minimal Spectral Description criterion:
+    \[ \delta \int_{\gamma} \mathcal{L}(\text{state}) \, ds = 0 \]
 \end{enumerate}
 
-Spacetime curvature is thus a geometric interpretation of the selection pressure exerted by the Algorithmic Selection Principle.
-The "Singularity" at $d \to 0$ represents an algorithmic limit where the density of realizable microstructures drops to zero, rendering the center unreachable.
+Spacetime curvature is thus a geometric interpretation of the selection pressure exerted by the Spectral Selection Principle.
+The "Singularity" at $d \to 0$ represents a limit where the density of realizable microstructures drops to zero, rendering the center unreachable.
 
 \end{document}
 \printbibliography
-
-
