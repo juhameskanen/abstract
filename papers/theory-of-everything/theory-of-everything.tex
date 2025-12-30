@@ -74,8 +74,25 @@ Path selection is governed by Kolmogorov complexity $K(H)$. Sequences with high 
 The wavefunction $\Psi$ is the most efficient compression of the path ensemble. Interference and superposition are artifacts of this maximally efficient encoding. The Born Rule is emergent:
 \[ P(\gamma) \propto 2^{-K(\gamma)} \sim |\Psi(\gamma)|^2 \]
 
-\subsection*{Pillar 8: Emergent Gravitation}
-Microstructures emerge according to a log-normal distribution relative to bit-flip mutations. In 3D space, this density gradient is interpreted as spacetime curvature. An observer "falls" toward higher density (lower MDL cost). Geodesics are the most compressible paths through the configuration ensemble.
+
+\subsection*{Pillar 8 --- Emergent Gravitation: The Log-Normal Pressure}
+
+Physical gravitation is the macroscopic manifestation of the statistical density gradient of microstructure motifs within the configuration ensemble.
+
+\begin{enumerate}
+    \item \textbf{Microstructure Distribution:} The emergence of microstructures follows a log-normal distribution $L(d)$ as a function of bit-flip mutations (minimal Shannon entropy increase):
+    \[ L(d) = \frac{1}{d\sigma\sqrt{2\pi}} e^{-\frac{(\ln d - \mu)^2}{2\sigma^2}} \]
+    
+    \item \textbf{3D Geometric Projection:} In three-dimensional space, the density $\rho$ of these motifs undergoes geometric dilution, yielding the probability pressure:
+    \[ \rho(r) \propto \frac{L(r)}{r^2} \]
+    
+  \item \textbf{The Geodesic as MDL:} An observer "falls" toward configurations that maximize the availability of required microstructures.
+    This minimizes the innovation cost of the observer's continued existence. The resulting trajectory $\gamma$ satisfies the Minimal Description Length (MDL) criterion:
+    \[ \delta \int_{\gamma} K(\text{state}) \, ds = 0 \]
+\end{enumerate}
+
+Spacetime curvature is thus a geometric interpretation of the selection pressure exerted by the Algorithmic Selection Principle.
+The "Singularity" at $d \to 0$ represents an algorithmic limit where the density of realizable microstructures drops to zero, rendering the center unreachable.
 
 \end{document}
 \printbibliography
