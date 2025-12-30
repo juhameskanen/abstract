@@ -65,27 +65,34 @@ jobs:
               cd ../..
 
               # --- PDF DISCOVERY & LINKING ---
-              PDF_LINKS=""
+              MAIN_PDF_LINK=""
+              SUPP_LIST=""
+              
               if [ -d "all-pdfs/pdf-$paper" ]; then
-                # Copy all built PDFs (Main and Supplementary) to the paper's HTML folder
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/"
                 
-                # Sort PDFs so the main one (index.pdf or $paper.pdf) likely comes first
                 for pdf_file in $(ls all-pdfs/pdf-$paper/*.pdf | sort); do
                   fname=$(basename "$pdf_file")
-                  # Labeling logic
+                  
                   if [[ "$fname" == "index.pdf" || "$fname" == "$paper.pdf" ]]; then
-                    PDF_LINKS+=" | <a href='./$paper/$fname' title='Main Paper'>[PDF]</a>"
+                    # Store the Main PDF link separately
+                    MAIN_PDF_LINK=" | <a href='./$paper/$fname' title='Main Paper'>[PDF]</a>"
                   else
-                    # Clean up supplementary names for the UI
+                    # Build a sub-list of supplementary items
                     display_name=$(echo "$fname" | sed 's/supplementary-//; s/.pdf//; s/-/ /g')
-                    PDF_LINKS+=" | <a href='./$paper/$fname' title='Supplementary Material'>[Supp: $display_name]</a>"
+                    SUPP_LIST+="<li><a href='./$paper/$fname' title='Supplementary Material'>$display_name</a></li>"
                   fi
                 done
               fi
 
               # Add entry to main index
-              echo "<li><a href='./$paper/'>$paper</a>$PDF_LINKS</li>" >> html/index.html
+              # If we have supplements, wrap them in a <ul>
+              if [ -n "$SUPP_LIST" ]; then
+                SUPP_LIST="<ul>$SUPP_LIST</ul>"
+              fi
+
+              echo "<li><a href='./$paper/'>$paper</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
+
               
               # --- RUN PANDOC ---
               # We focus on the root index.tex for the HTML version
@@ -104,7 +111,7 @@ jobs:
                 [ $i -gt 0 ] && PREV_HTML="<a href='../${PAPER_ARRAY[$((i-1))]}/'>&larr; Previous</a>"
                 [ $i -lt $((NUM_PAPERS-1)) ] && NEXT_HTML="<a href='../${PAPER_ARRAY[$((i+1))]}/'>Next &rarr;</a>"
 
-                FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Theory Project.</i></div>"
+                FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Project.</i></div>"
                 sed -i 's|</body></html>||g' "html/$paper/index.html"
                 echo "$FOOTER</body></html>" >> "html/$paper/index.html"
               fi
