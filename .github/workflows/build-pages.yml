@@ -1,41 +1,4 @@
-name: Build and Deploy HTML (GitHub Pages)
-
-on:
-  workflow_run:
-    workflows: ["Build and Upload PDFs"]
-    types: [completed]
-  workflow_dispatch: 
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build-html:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
-    environment:
-      name: github-pages
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc jq
-
-      - name: Download all PDF Artifacts
-        uses: dawidd6/action-download-artifact@v3
-        with:
-          workflow: build-pdf.yml
-          run_id: ${{ github.event.workflow_run.id }}
-          path: all-pdfs
-          search_artifacts: true 
-
-      - name: Convert LaTeX to HTML and Integrate PDFs
+- name: Convert LaTeX to HTML and Integrate PDFs
         run: |
           if [ ! -f papers.json ]; then echo "papers.json missing"; exit 1; fi
           mkdir -p html
@@ -57,54 +20,66 @@ jobs:
             if [ -d "papers/$paper" ]; then
               mkdir -p "html/$paper"
               
-              # --- RECURSIVE ASSET COPYING ---
-              # Find all 'figures' and 'simulations' directories anywhere in the paper folder
-              # and copy them while preserving the sub-path structure.
+              # --- ASSET COPYING ---
               cd "papers/$paper"
               find . -type d \( -name "figures" -o -name "simulations" \) -exec cp -r --parents {} "../../html/$paper/" \;
               cd ../..
 
-              # --- PDF DISCOVERY & LINKING ---
+              # --- RECURSIVE HTML & PDF INTEGRATION ---
               MAIN_PDF_LINK=""
               SUPP_LIST=""
               
+              # Pre-copy PDFs to the paper folder so they are accessible
               if [ -d "all-pdfs/pdf-$paper" ]; then
                 cp all-pdfs/pdf-$paper/*.pdf "html/$paper/"
-                
-                for pdf_file in $(ls all-pdfs/pdf-$paper/*.pdf | sort); do
-                  fname=$(basename "$pdf_file")
-                  
-                  if [[ "$fname" == "index.pdf" || "$fname" == "$paper.pdf" ]]; then
-                    # Store the Main PDF link separately
-                    MAIN_PDF_LINK=" | <a href='./$paper/$fname' title='Main Paper'>[PDF]</a>"
-                  else
-                    # Build a sub-list of supplementary items
-                    display_name=$(echo "$fname" | sed 's/supplementary-//; s/.pdf//; s/-/ /g')
-                    SUPP_LIST+="<li><a href='./$paper/$fname' title='Supplementary Material'>$display_name</a></li>"
-                  fi
-                done
               fi
 
-              # Add entry to main index
-              # If we have supplements, wrap them in a <ul>
-              if [ -n "$SUPP_LIST" ]; then
-                SUPP_LIST="<ul>$SUPP_LIST</ul>"
-              fi
-
-              echo "<li><a href='./$paper/'>$paper</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
-
-              
-              # --- RUN PANDOC ---
-              # We focus on the root index.tex for the HTML version
               shopt -s nullglob
               for texfile in papers/$paper/*.tex; do
+                base_name=$(basename "$texfile" .tex)
+                
+                # Determine output path: index.tex goes to paper root, others to subfolders
+                if [[ "$base_name" == "index" || "$base_name" == "$paper" ]]; then
+                  out_dir="html/$paper"
+                  out_file="$out_dir/index.html"
+                  MAIN_PDF_LINK=" | <a href='./$paper/$base_name.pdf' title='Main Paper'>[PDF]</a>"
+                else
+                  out_dir="html/$paper/$base_name"
+                  mkdir -p "$out_dir"
+                  out_file="$out_dir/index.html"
+                  
+                  # Create display name for the sub-list
+                  display_name=$(echo "$base_name" | sed 's/supplementary-//; s/-/ /g')
+                  SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/$base_name.pdf'>[PDF]</a></li>"
+                fi
+
+                # Run Pandoc for this specific file
+                # Note: css path changes if we are in a sub-sub-folder
+                css_path="../style.css"
+                [[ "$out_dir" == *"/"*/* ]] && css_path="../../style.css"
+
                 pandoc "$texfile" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                 --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                --bibliography="$BIB_PATH" -c "../style.css" -o "html/$paper/index.html"
+                --bibliography="$BIB_PATH" -c "$css_path" -o "$out_file"
+
+                # Inject Download Link and Navigation back to parent
+                if [ -f "$out_file" ]; then
+                  DOWNLOAD_HTML="<p><a href='../$base_name.pdf'>[Download PDF Version]</a></p>"
+                  BACK_LINK="<hr><a href='../'>&larr; Back to Paper</a>"
+                  
+                  # If it's a supplement, add the back link; otherwise use your existing footer logic later
+                  if [[ "$out_dir" == *"/"*/* ]]; then
+                    sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file"
+                  fi
+                fi
               done
               shopt -u nullglob
 
-              # --- NAVIGATION INJECTION ---
+              # Add entry to main index
+              [ -n "$SUPP_LIST" ] && SUPP_LIST="<ul>$SUPP_LIST</ul>"
+              echo "<li><a href='./$paper/'>$paper</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
+
+              # --- MAIN PAPER NAVIGATION INJECTION ---
               if [ -f "html/$paper/index.html" ]; then
                 PREV_HTML=""
                 NEXT_HTML=""
@@ -119,11 +94,3 @@ jobs:
           done
           
           echo '</ul></body></html>' >> html/index.html
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: html
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
