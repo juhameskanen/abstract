@@ -25,6 +25,24 @@ We define the metric tensor $g_{\mu\nu}$ not as a fundamental property of a vacu
     g_{\mu\nu} \approx \frac{\partial^2 K}{\partial x^\mu \partial x^\nu}
 \end{equation}
 
+\subsection{Mathematical Equivalence of MDL and Geodesics}
+We define the informational distance between two states in the configuration ensemble as the infinitesimal Kolmogorov complexity $dK$.
+In the limit of a continuous observer trace, the path $\gamma$ is selected by minimizing the total description length:
+\begin{equation}
+    S_{MDL} = \int_{\gamma} K(\text{state}_{t+dt} | \text{state}_t)
+\end{equation}
+By invoking the identity between the second derivative of algorithmic complexity and the Fisher Information Metric $g_{ij}$, we find:
+\begin{equation}
+    S_{MDL} \approx \int \sqrt{g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu} dt
+\end{equation}
+The path that minimizes the description length ($S_{MDL}$) is identically the path that satisfies the geodesic equation in a Riemannian manifold:
+\begin{equation}
+    \frac{d^2 x^\mu}{ds^2} + \Gamma^\mu_{\alpha\beta} \frac{dx^\alpha}{ds} \frac{dx^\beta}{ds} = 0
+\end{equation}
+where the Christoffel symbols $\Gamma$ represent the "informational gradients" of the log-normal distribution of microstructures.
+
+
+
 \section{Simulation Results}
 Using a Python-based ensemble simulation, we show that an agent minimizing its transition complexity $K(x_{t+1}|x_t)$ follows a path that reproduces the Schwarzschild-like curvature around a central mass motif.
 
