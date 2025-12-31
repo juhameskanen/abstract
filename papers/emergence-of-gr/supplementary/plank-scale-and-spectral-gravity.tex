@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\input{../../common.tex}
+\addbibresource{../../references.bib}
+
+\title{Planck Scale and Spectral Gravity}
+\author{Juha Meskanen}
+
+\begin{document}
+\maketitle
+
+
+\section{The Planck Scale as the Nyquist Frequency}  
+In signal processing, the Nyquist frequency \(f_\mathrm{Nyquist} = f_s/2\) is the highest frequency that can be resolved given a sampling rate \(f_s\). Frequencies above \(f_\mathrm{Nyquist}\) are aliased and indistinguishable.  
+
+In the Abstract Universe:
+
+\begin{itemize}
+    \item \textbf{Sampling Rate:} The rate of bit-flips along observer-compatible paths in configuration space \(\mathcal{C}\).  
+    \item \textbf{Planck Limit:} The highest frequency resolvable in the spectral wavefunction \(\Psi(\gamma)\).  
+    \item \textbf{Consequence:} Structures smaller than the Planck length or evolving faster than the Planck time cannot be resolved by \(\Psi\); they are mathematically unrepresentable and effectively non-existent for any observer.
+\end{itemize}
+
+\section{Discrete Time from Spectral Updates}  
+Let \(\gamma = (s_1, s_2, \dots)\) be an observer path through \(\mathcal{C}\), with each \(s_i\) an \(n\)-bit configuration.  
+
+Define a spectral encoding length \(\mathcal{L}(\gamma)\). Updates to \(\mathcal{L}\) occur only when significant motifs (observer-relevant patterns) change along the path.  
+
+\[
+t_{i+1} - t_i = 
+\begin{cases}
+1, & \text{if a motif update occurs} \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+Thus, \textbf{time emerges discretely}, with “ticks” corresponding to spectral transitions along observer-compatible paths.  
+
+\section{Spectral Density and the Inverse-Square Law}  
+Let a “mass” be a localized cluster of reusable microstructure motifs in configuration space. The number of configurations at distance \(r\) that can reference these motifs grows with the surface area of a 3D sphere:
+
+\[
+A(r) = 4 \pi r^2
+\]
+
+Consequently, the density of spectral-compatible configurations falls as:
+
+\[
+\rho(r) \propto \frac{1}{r^2} \, L(d)
+\]
+
+where \(L(d)\) is the log-normal distribution of motif distances \(d\).  
+
+Observer paths minimize spectral cost \(\mathcal{L}(\gamma)\) and are biased toward regions of high \(\rho(r)\). In the continuum limit, the variational principle
+
+\[
+\delta \int_\gamma \mathcal{L}(\text{state}) \, ds = 0
+\]
+
+reproduces classical geodesics in 3D space, giving rise to an effective inverse-square law of interaction.  
+
+\section{Connection to Quantum Gravity and Path Integrals}  
+Summing over all observer-compatible paths weighted by their spectral amplitude:
+
+\[
+\langle \mathcal{O} \rangle = \sum_{\gamma \in \mathcal{T}_{\mathrm{obs}}} \mathcal{O}(\gamma) \, 2^{-\mathcal{L}(\gamma)}
+\]
+
+reproduces a path-integral formalism. In this framework:
+
+\begin{itemize}
+    \item \textbf{Everettian view:} All observer-compatible paths exist simultaneously; probabilities emerge from spectral weighting.  
+    \item \textbf{Wheeler–DeWitt view:} Configuration space is timeless; time is induced along the observer path \(\gamma\).  
+    \item \textbf{Classical limit:} Low-\(\mathcal{L}\) paths dominate, yielding smooth geodesics in agreement with General Relativity.
+\end{itemize}
+
+\secton{Summary}  
+The Planck scale, discrete time, and gravity emerge naturally from:
+
+\begin{enumerate}
+    \item The maximal resolvable spectral frequency (Nyquist-Planck analogy).  
+    \item Discrete spectral updates along observer paths.  
+    \item Statistical bias of observer paths toward high-density microstructure regions, producing effective inverse-square laws.  
+\end{enumerate}
+
+In this view, gravitation is not a fundamental force but a statistical-geometric phenomenon rooted in the spectral structure of observer-compatible paths in configuration space.
+
+\printbibliography
+\end{document}
