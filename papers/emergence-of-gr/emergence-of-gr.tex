@@ -48,22 +48,31 @@ A Python-based ensemble simulation demonstrates that agents minimizing $\mathcal
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/geodesic_from_spectral.png}
-    \caption{Minimal Spectral Path mapping in configuration space}
-    \label{fig:geodesic-from-spectral}
+    \includegraphics[width=0.8\textwidth]{figures/geodesic_from_mdl.png}
+    \caption{Minimal MDL path without memory}
+    \label{fig:geodesic-from-mdl}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/geodesic_from_spectral_memory.png}
-    \caption{Observer with memory minimizing spectral description of state transitions}
-    \label{fig:geodesic-from-spectral-memory}
+    \includegraphics[width=0.8\textwidth]{figures/geodesic_from_mdl_memory.png}
+    \caption{Minimal MDL path with memory }
+    \label{fig:geodesic-from-mdl-memory}
 \end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/geodesic_from_spectral.png}
+    \caption{Minimal Spectral Path}
+    \label{fig:geodesic-from-spectral}
+\end{figure}
+
 
 \section*{Simulation Code}
 \begin{itemize}
+    \item \href{simulations/geodesic_from_mdl.py}{geodesic\_from\_mdl.py}
+    \item \href{simulations/geodesic_from_mdl_memory.py}{geodesic\_from\_mdl\_memory.py} 
     \item \href{simulations/geodesic_from_spectral.py}{geodesic\_from\_spectral.py}
-    \item \href{simulations/geodesic_from_spectral_memory.py}{geodesic\_from\_spectral\_memory.py} 
 \end{itemize}
 
 \section{Planck Scale and the Nyquist Analogy}
