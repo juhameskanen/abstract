@@ -14,7 +14,12 @@
 \begin{abstract}
 Building on the ontological equivalence of physical and informational configurations established in Paper I, we investigate black hole singularities from an information-theoretic perspective, viewing geometric spacetime and computational simulation as two equivalent interpretations of an underlying informational structure.
 
-Standard General Relativity (GR) cannot be executed to the point of singularity formation due to numerical divergences and the breakdown of the manifold description. However, by analyzing the simulation’s execution trace of infalling dust particles, we observe a monotonic drop in Shannon entropy as they approach the center. While the geometric description of GR fails, the informational trend remains continuous. Extrapolating this entropy decay suggests that the singularity is a state of zero Shannon entropy, corresponding to a single, well-defined informational state. We propose that the "singularity" is not a point of infinite curvature, but a state of informational exhaustion where the lack of internal variety prevents the emergence of the microstructures we interpret as matter and energy. This perspective allows the singularity to be treated as a smooth, finite limit within an informational manifold, bypassing the limitations of standard GR.
+Standard General Relativity (GR) cannot be executed to the point of singularity formation due to numerical divergences and the breakdown of the manifold description.
+However, by analyzing the simulation’s execution trace of infalling dust particles, we observe a monotonic drop in Shannon entropy as they approach the center.
+While the geometric description of GR fails, the informational trend remains continuous.
+Extrapolating this entropy decay suggests that the singularity is a state of zero Shannon entropy, corresponding to a single, well-defined informational state.
+We propose that the "singularity" is not a point of infinite curvature, but a state of informational exhaustion where the lack of internal variety prevents the emergence of the microstructures we interpret as matter and energy.
+This perspective allows the singularity to be treated as a smooth, finite limit within an informational manifold, bypassing the limitations of standard GR.
 \end{abstract}
 
 \ifdefined\ishtml
@@ -108,48 +113,30 @@ H(\mathcal{B}_t) \to 0,
 \]
 then the set of distinguishable geometric configurations collapses to a single equivalence class under \(f\). That is, the geometry degenerates to a unique configuration.
 
-\section{Discussion: The Divergence of Geometry vs. The Convergence of Information}
 
-Our simulations confirm the Entropy–Singularity Lemma in a computational context. 
-Although global black hole thermodynamic entropy increases, the local execution-trace entropy encoding spatial geometry decreases toward the singularity. 
-This reflects the narrowing of accessible informational states and growing determinism in geometry.
+\section{Discussion}
 
-The primary conflict between the results presented here and the standard consensus of General Relativity (GR) lies in the interpretation of the singularity.
-In the geometric framework of GR, the singularity is characterized by infinite curvature---a mathematical divergence where the manifold itself ceases to exist.
-However, our analysis of the simulation's execution trace reveals an alternative, non-pathological end-state.
+Our results show a clear divergence between geometric and informational descriptions of gravitational collapse.
+While the geometric formulation of General Relativity becomes singular and ill-defined, the informational description
+remains well-behaved: the execution-trace entropy decreases monotonically and converges to zero.
 
-\subsection{Divergence as a Modeling Artifact}
+This convergence implies that, near the classical singularity, the set of distinguishable geometric configurations
+collapses to a single informational state. In this limit, all microstate diversity vanishes ($W=1$), and the Shannon
+entropy is exactly zero. Any faithful geometric decoding of such information yields the same object: a single point.
 
-In standard physics, a divergence is rarely treated as a physical reality; rather, it is viewed as a signal that the underlying model has reached the limit of its applicability.
-We argue that the "infinite curvature" predicted by GR is a consequence of treating spacetime as a continuous, differentiable manifold down to zero volume.
-By contrast, the informational mapping used in our simulation treats the system as a collection of discrete states. 
+From this perspective, the singularity is not a region of infinite curvature, but a state of informational exhaustion.
+The apparent breakdown of spacetime reflects not a physical inconsistency, but the absence of internal informational
+structure required to support distinguishable geometry, matter, or temporal evolution.
 
-As the infalling particles converge, the number of possible microstates $W$ decreases. In the limit, the system reaches a singular state where $W=1$.
-At this point, the Shannon entropy, defined as:
+\section{Conclusion}
 
-\begin{equation}
-    H = -\sum_{i=1}^{n} p_i \log p_i
-\end{equation}
+In General Relativity, singularities signal the breakdown of the spacetime manifold.
+In the information-theoretic view developed here, they instead correspond to perfectly well-defined
+zero-entropy states.
 
-collapses to exactly zero. 
-
-\subsection{The Faithfulness of the Execution Trace}
-A common critique of computational models is that they are merely approximations of continuous physics. However, we contend that the \textit{execution trace} of a simulation
-is a faithful representation of the system's logic. Every bit in the simulation represents a physical degree of freedom, and every instruction cycle represents an
-ordinal step in the system's evolution. 
-
-Because the simulation can successfully map the transition from high-entropy (distributed particles) to zero-entropy (a single geometric point) without numerical
-overflow or logical breakdown, it provides a more robust description of the "singularity" than the equations that diverge.
-The simulation does not break; it simply reaches its most compressed, minimal-information state.
-
-\subsection{Redefining the Singularity as Informational Exhaustion}
-We propose that the singularity is not a point of infinite gravity, but a state of \textbf{informational exhaustion}. In this state, the absence of internal
-variety means there is no information left to describe curvature, matter, or time.
-This results in a smooth end-state: a singular, well-defined point in the informational ensemble that is perfectly consistent with the rest of the manifold,
-but lacks the bit-depth to manifest as physical complexity. 
-
-This suggests that the "breakdown" of spacetime is not a physical catastrophe, but a phase transition into a state of absolute informational simplicity,
-providing a finite limit where GR erroneously predicts infinity.
+Gravitational collapse does not produce infinite complexity, but eliminates it.
+The singularity is therefore not a pathological object, but the simplest possible one:
+a unique informational configuration whose geometric manifestation is a point.
 
 
 \subsection{Bitstring Encoding Procedure}
@@ -164,12 +151,6 @@ To encode geometry:
 
 Entropy is then computed as above. The collapse of this entropy directly reflects the loss of distinguishable structure.
 
-\section{Conclusion}
-
-Singularities might not be pathological or broken regions of spacetime. Instead, they are perfectly well-defined, smooth geometric
-objects—points—precisely because the system has exhausted the informational capacity required to support any complex structure, volume, or
-fluctuation. By viewing the breakdown of spacetime through an information-theoretic lens, we replace physical divergence with
-informational convergence, offering a bridge between computational reality and gravitational collapse.
 
 \section*{Simulation Code}
 
