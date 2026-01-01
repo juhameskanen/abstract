@@ -62,8 +62,10 @@ If $H' \equiv H$, then $H'$ must have $S$ to maintain identical behavior.
 
 \subsection{The Optimization Argument}
 
-Consider DNA simulation running on a computer, $T_{\text{alg}}$, consisting of code (laws of physics) and data (the state of the simulated universe).
-We can gradually optimize the code using lookup tables, eventually replacing all computation with a static, pre-computed dataset ($T_{\text{data}}$).
+\subsection{The Optimization Argument}
+
+Consider a DNA simulation running on a computer, denoted by $T_{\text{alg}}$, consisting of code (the laws of physics) and data (the state of the simulated universe).
+We may gradually optimize the code by introducing lookup tables, eventually replacing all computation with a static, precomputed dataset, denoted by $T_{\text{data}}$.
 
 \begin{itemize}
     \item Let $E_{\text{int}}$ be Alice's experience of time and pain (the internal state transitions).
@@ -87,18 +89,17 @@ This minimum ratio would be a \textbf{new, non-physical constant} imposed on $A_
 \end{quote}
 
 \subsection{The Multi-threaded Argument}
-Consider a multi-threading computer running two DNA simulations, $\tau_A$ (Alice) and $\tau_B$ (Bob) concurrently with minimal thread length (one CPU cycle per thread).
-The execution trace of the computer is then an interleaved sequence of segments from both $\tau_A$ and $\tau_B$. 
-As the number of threads (simulated observers) increases toward infinity, the resulting execution trace approaches white noise. As a result
-bits from $\tau_A$ are separated by vast intervals of unrelated data.
+
+Consider a multi-threaded computer running two DNA simulations, $\tau_A$ (Alice) and $\tau_B$ (Bob), concurrently, with a minimal time slice of one CPU cycle per thread.
+The execution trace of the computer is then an interleaved sequence of segments drawn from both $\tau_A$ and $\tau_B$.
+As the number of threads (simulated observers) increases without bound, the resulting execution trace asymptotically approaches white noise.
+Consequently, bits originating from $\tau_A$ are separated by increasingly large intervals of unrelated data.
 
 \subsubsection*{The Threshold of Subjective Continuity}
-Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the interleaving becomes extreme, one must define a specific \textbf{thread density} or \textbf{bit-contiguity threshold} required for subjectivity. Such a threshold would constitute a new physical constant governing the ``assembly'' of consciousness, which contradicts the completeness of $A_2$.
-
-Since the relational topology within $\tau_A$ remains invariant regardless of how its constituent bits are distributed within the external substrate, the internal experience $E_{\text{int}}$ must be preserved.
+Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the interleaving becomes extreme, one must define a specific \textbf{thread density} or \textbf{bit-contiguity threshold} required for subjectivity. Such a threshold would constitute a new physical constant, which contradicts the completeness of $A_2$.
 
 \begin{quote}
-\textbf{Conclusion:} Conscious experience arises entirely from the relational structure encoded in static white noise, without requiring any external computation or observation.
+\textbf{Conclusion:} Conscious experience can arise from static white noise, without requiring any external computation or observation.
 \end{quote}
 
 \section{Falsifiability (Axiom 4)}
@@ -119,11 +120,14 @@ Since the relational topology within $\tau_A$ remains invariant regardless of ho
 \end{quote}
 
 \section{Ontological Equivalence of Configurations}
-Consider a simulation $I$ encoding a complete observer history (e.g., Alice). Let $R_A$ of length $n$ bits denote the static execution trace of $I$ observed externally,
-and $R_B$ denote the same sequence internally experienced as spacetime and subjective states. Static data does not encode an intrinsic temporal ordering,
-and hence one cannot argue that one created the other.
-The relationship between $R_A$ and $I$ must therefore be representational rather than causal. $R_A$ and $I$ are two arrangements of the same information of $n$ bits, capable of describing $2^n$ different configurations in total.
 
+Let $I$ be a simulation encoding a complete observer history (e.g., Alice). 
+Let $R_A$, of length $n$ bits, denote the static execution trace of $I$ as observed externally, 
+and let $R_B$ denote the same sequence as internally experienced as spacetime and subjective states. 
+Static data does not encode an intrinsic temporal ordering; therefore, one cannot argue that one gives rise to the other. 
+The relationship between $R_A$ and $I$ must thus be representational rather than causal. 
+$R_A$ and $I$ are two arrangements of the same information, consisting of $n$ bits, 
+and are therefore capable of describing up to $2^n$ distinct configurations.
 
 From Axioms 2--4 and the optimization argument, no physical property of the simulating substrate, nor the ordering of bits in $R_A$, is ontologically privileged.
 Any arrangement of the bits that preserves the relational structure of $I$ encodes the same observer. Formally, there exists a bijective mapping:
