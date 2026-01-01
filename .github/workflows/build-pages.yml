@@ -50,7 +50,7 @@ jobs:
           NUM_PAPERS=${#PAPER_ARRAY[@]}
           BIB_PATH=$(pwd)/papers/references.bib
           PAPERS_ROOT=$(pwd)/papers
-	  
+
           # 3. Process each paper
           for i in "${!PAPER_ARRAY[@]}"; do
             paper="${PAPER_ARRAY[$i]}"
@@ -76,7 +76,6 @@ jobs:
                 base_name=$(basename "$texfile" .tex)
                 rel_path=${texfile#papers/$paper/}
                 tex_dir=$(dirname "$texfile")
-		
                 if [[ "$rel_path" == "$base_name.tex" ]]; then
                   # MAIN PAPER (at the root)
                   out_dir="html/$paper"
