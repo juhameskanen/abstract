@@ -87,7 +87,7 @@ jobs:
                   out_file="$out_dir/index.html"
                   
                   display_name=$(echo "$base_name" | sed 's/supplementary-//; s/-/ /g')
-                  SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/$base_name.pdf'>[PDF]</a></li>"
+                  SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/supplementary-$base_name.pdf'>[PDF]</a></li>"
                 fi
 
                 # Path for CSS
