@@ -106,7 +106,7 @@ jobs:
 
                 # Add navigation to supplements
                 if [[ "$out_file_abs" == *"$base_name/index.html" && -f "$out_file_abs" ]]; then
-                  DOWNLOAD_HTML="<p><a href='../$base_name.pdf'>[Download PDF Version]</a></p>"
+                  DOWNLOAD_HTML="<p><a href='$base_name.pdf'>[Download PDF Version]</a></p>"
                   BACK_LINK="<hr><a href='../'>&larr; Back to Paper</a>"
                   sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file_abs"
                 fi
