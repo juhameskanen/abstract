@@ -72,9 +72,8 @@ jobs:
               # e.g. ./supplementary/proofs.tex -> supplementary-proofs.pdf
               # clean_dir=$(echo "$dir_path" | sed 's|./||; s|/|-|g')
               # dest_name="$clean_dir-$base_name.pdf"
-              main_dir=$(echo "$file_path" | cut -d'/' -f2)   # pdf-qft-divergences
-              file_base=$(basename "$file_path" .tex)         # qbitwave
-              dest_name="all-pdfs/$main_dir/$file_base.pdf" 
+              base_name_no_ext=$(basename "$dir_path" .tex)
+              dest_name="$base_name_no_ext.pdf"
             fi
             
             # Copy to the absolute path of the output directory
