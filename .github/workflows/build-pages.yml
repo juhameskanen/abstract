@@ -95,10 +95,12 @@ jobs:
                 css_path="../style.css"
                 [[ "$out_dir" == *"/"*/* ]] && css_path="../../style.css"
 
-                pandoc "$texfile" -s -M ishtml=true --from=latex --to=html5 --citeproc \
+                # --- RUN PANDOC FROM THE TEX FILE'S DIRECTORY ---
+                pushd "$tex_dir" > /dev/null
+                pandoc "$(basename "$texfile")" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                 --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                --resource-path=".:$tex_dir:$PAPERS_ROOT" \
-                --bibliography="$BIB_PATH" -c "$css_path" -o "$out_file"
+                --bibliography="$BIB_PATH" -c "$css_rel" -o "$out_file"
+                popd > /dev/null
 
                 # Navigation injection for supplements
                 if [[ "$out_dir" == *"/"*/* && -f "$out_file" ]]; then
