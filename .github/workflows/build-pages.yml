@@ -42,93 +42,92 @@ jobs:
           touch html/.nojekyll
           cp style.css html/style.css
           
-          # 1. Start the main index.html
+          # 1. Setup Absolute Paths
+          ROOT_DIR=$(pwd)
+          BIB_PATH="$ROOT_DIR/papers/references.bib"
+          
           echo '<html><head><title>The Abstract Universe Theory (AUT)</title><meta name="color-scheme" content="light dark"><link rel="stylesheet" href="style.css"></head><body class="bodytext"><h1>The Abstract Universe Theory (AUT)</h1><h2>Research Papers</h2><ul>' > html/index.html
 
-          # 2. Load papers into a Bash Array
           PAPER_ARRAY=($(jq -r '.[]' papers.json))
           NUM_PAPERS=${#PAPER_ARRAY[@]}
-          BIB_PATH=$(pwd)/papers/references.bib
-          PAPERS_ROOT=$(pwd)/papers
 
           # 3. Process each paper
           for i in "${!PAPER_ARRAY[@]}"; do
             paper="${PAPER_ARRAY[$i]}"
             
             if [ -d "papers/$paper" ]; then
-              mkdir -p "html/$paper"
+              PAPER_HTML_DIR="$ROOT_DIR/html/$paper"
+              mkdir -p "$PAPER_HTML_DIR"
               
-              # --- ASSET COPYING ---
-              cd "papers/$paper"
-              find . -type d \( -name "figures" -o -name "simulations" \) -exec cp -r --parents {} "../../html/$paper/" \;
-              cd ../..
-
-              # --- RECURSIVE HTML & PDF INTEGRATION ---
-              MAIN_PDF_LINK=""
-              SUPP_LIST=""
-              
+              # Copy PDFs (Artifacts)
               if [ -d "all-pdfs/pdf-$paper" ]; then
-                cp all-pdfs/pdf-$paper/*.pdf "html/$paper/"
+                cp all-pdfs/pdf-$paper/*.pdf "$PAPER_HTML_DIR/"
               fi
 
-              # Using process substitution < <() to keep variables in the current shell
+              MAIN_PDF_LINK=""
+              SUPP_LIST=""
+
+              # Process all tex files inside papers/paper-name/
               while read -r texfile; do
                 base_name=$(basename "$texfile" .tex)
                 rel_path=${texfile#papers/$paper/}
-                tex_dir=$(dirname "$texfile")
+                tex_dir_abs="$(cd "$(dirname "$texfile")" && pwd)"
+                
                 if [[ "$rel_path" == "$base_name.tex" ]]; then
-                  # MAIN PAPER (at the root)
-                  out_dir="html/$paper"
-                  out_file="$out_dir/index.html"
+                  # --- MAIN PAPER ---
+                  out_file_abs="$PAPER_HTML_DIR/index.html"
                   MAIN_PDF_LINK=" | <a href='./$paper/$base_name.pdf' title='Main Paper'>[PDF]</a>"
+                  css_rel="../style.css"
+                  
+                  # Copy root figures
+                  [ -d "papers/$paper/figures" ] && cp -r "papers/$paper/figures" "$PAPER_HTML_DIR/"
                 else
-                  # SUPPLEMENTARY PAPER (nested)
-                  out_dir="html/$paper/$base_name"
-                  mkdir -p "$out_dir"
-                  out_file="$out_dir/index.html"
+                  # --- SUPPLEMENTARY PAPER ---
+                  # Use the same flat structure: html/paper/supplement-name/index.html
+                  out_dir_abs="$PAPER_HTML_DIR/$base_name"
+                  mkdir -p "$out_dir_abs"
+                  out_file_abs="$out_dir_abs/index.html"
                   
                   display_name=$(echo "$base_name" | sed 's/supplementary-//; s/-/ /g')
-                  SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/supplementary-$base_name.pdf'>[PDF]</a></li>"
+                  SUPP_LIST+="<li><a href='./$paper/$base_name/'>$display_name</a> | <a href='./$paper/$base_name.pdf'>[PDF]</a></li>"
+                  css_rel="../../style.css"
+                  
+                  # Copy local figures for the supplement
+                  [ -d "$tex_dir_abs/figures" ] && cp -r "$tex_dir_abs/figures" "$out_dir_abs/"
                 fi
 
-                # Path for CSS
-                css_path="../style.css"
-                [[ "$out_dir" == *"/"*/* ]] && css_path="../../style.css"
-
-                # --- RUN PANDOC FROM THE TEX FILE'S DIRECTORY ---
-                pushd "$tex_dir" > /dev/null
+                # --- RUN PANDOC ---
+                # We move into the tex directory so \input{../common.tex} works perfectly
+                pushd "$tex_dir_abs" > /dev/null
                 pandoc "$(basename "$texfile")" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                 --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                --bibliography="$BIB_PATH" -c "$css_rel" -o "$out_file"
+                --bibliography="$BIB_PATH" -c "$css_rel" -o "$out_file_abs"
                 popd > /dev/null
 
-                # Navigation injection for supplements
-                if [[ "$out_dir" == *"/"*/* && -f "$out_file" ]]; then
+                # Add navigation to supplements
+                if [[ "$out_file_abs" == *"$base_name/index.html" && -f "$out_file_abs" ]]; then
                   DOWNLOAD_HTML="<p><a href='../$base_name.pdf'>[Download PDF Version]</a></p>"
                   BACK_LINK="<hr><a href='../'>&larr; Back to Paper</a>"
-                  sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file"
+                  sed -i "s|</body>|$DOWNLOAD_HTML $BACK_LINK </body>|g" "$out_file_abs"
                 fi
-              done < <(find "papers/$paper" -name "*.tex" ! -name "common.tex")
+              done < <(find "papers/$paper" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex")
 
-              # Add to TOC
-              if [ -n "$SUPP_LIST" ]; then
-                SUPP_LIST="<ul>$SUPP_LIST</ul>"
-              fi
+              # Update Main TOC
+              [ -n "$SUPP_LIST" ] && SUPP_LIST="<ul>$SUPP_LIST</ul>"
               echo "<li><a href='./$paper/'>$paper</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
 
-              # Main paper navigation footer
-              if [ -f "html/$paper/index.html" ]; then
+              # Footer logic
+              if [ -f "$PAPER_HTML_DIR/index.html" ]; then
                 PREV_HTML=""
                 NEXT_HTML=""
                 [ $i -gt 0 ] && PREV_HTML="<a href='../${PAPER_ARRAY[$((i-1))]}/'>&larr; Previous</a>"
                 [ $i -lt $((NUM_PAPERS-1)) ] && NEXT_HTML="<a href='../${PAPER_ARRAY[$((i+1))]}/'>Next &rarr;</a>"
-                FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2025 The Abstract Universe Project.</i></div>"
-                sed -i 's|</body></html>||g' "html/$paper/index.html"
-                echo "$FOOTER</body></html>" >> "html/$paper/index.html"
+                FOOTER="<hr><div class='nav-footer'><a href='../'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2026 The Abstract Universe Project.</i></div>"
+                sed -i 's|</body></html>||g' "$PAPER_HTML_DIR/index.html"
+                echo "$FOOTER</body></html>" >> "$PAPER_HTML_DIR/index.html"
               fi
             fi
           done
-          
           echo '</ul></body></html>' >> html/index.html
 
       - name: Upload Pages artifact
