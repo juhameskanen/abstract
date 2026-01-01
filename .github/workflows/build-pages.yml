@@ -49,7 +49,8 @@ jobs:
           PAPER_ARRAY=($(jq -r '.[]' papers.json))
           NUM_PAPERS=${#PAPER_ARRAY[@]}
           BIB_PATH=$(pwd)/papers/references.bib
-
+          PAPERS_ROOT=$(pwd)/papers
+	  
           # 3. Process each paper
           for i in "${!PAPER_ARRAY[@]}"; do
             paper="${PAPER_ARRAY[$i]}"
@@ -74,7 +75,8 @@ jobs:
               while read -r texfile; do
                 base_name=$(basename "$texfile" .tex)
                 rel_path=${texfile#papers/$paper/}
-                
+                tex_dir=$(dirname "$texfile")
+		
                 if [[ "$rel_path" == "$base_name.tex" ]]; then
                   # MAIN PAPER (at the root)
                   out_dir="html/$paper"
@@ -96,6 +98,7 @@ jobs:
 
                 pandoc "$texfile" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                 --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
+                --resource-path=".:$tex_dir:$PAPERS_ROOT" \
                 --bibliography="$BIB_PATH" -c "$css_path" -o "$out_file"
 
                 # Navigation injection for supplements
