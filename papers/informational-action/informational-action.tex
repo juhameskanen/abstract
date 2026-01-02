@@ -12,72 +12,57 @@
 \maketitle
 
 \begin{abstract}
-We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined over discrete execution traces. 
-Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral entropy} computed from local bit-encoded wavefunction segments. 
-We interpret the wavefunction as a \emph{minimal program of nature}, compressing the underlying information such that smoother, simpler waveforms dominate statistical measure. 
-Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. 
-This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle.
+We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined over discrete execution traces. Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral entropy} computed from local bit-encoded wavefunction segments. We interpret the wavefunction as a \emph{minimal description of nature}, compressing the underlying information such that smoother, simpler waveforms dominate statistical measure. Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle.
 \end{abstract}
 
-\textbf{Keywords:} Geodesics, Informational Action, Spectral Entropy, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Minimal Program, Discrete Path Optimization
+\textbf{Keywords:} Geodesics, Informational Action, Spectral Entropy, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Minimal Description Length, Discrete Path Optimization
 
 \section{Introduction}
-The principle of least action occupies a foundational role in classical and quantum physics. 
-In Euclidean quantum gravity, the action functional governs the weighting of paths in a path integral formulation, while in classical general relativity geodesics extremize proper distance or action. 
-Information-theoretic approaches have long suggested that entropy, complexity, or information content may play a fundamental role in physical law. 
-However, most prior work draws conceptual analogies rather than providing explicit constructive equivalence.
+The principle of least action occupies a foundational role in classical and quantum physics. In Euclidean quantum gravity, the action functional governs the weighting of paths in a path integral formulation, while in classical general relativity geodesics extremize proper distance or action. Information-theoretic approaches have long suggested that entropy, complexity, or information content may play a fundamental role in physical law. However, most prior work draws conceptual analogies rather than providing explicit constructive equivalence.
 
-Here, we explore the notion that the wavefunction itself is a \emph{compression system for the universe}: any set of information can be arranged into many possible wavefunctions, and simple, smooth wavefunctions admit vastly more representations. 
-Thus, smoother, lower-entropy wavefunctions dominate statistical measure, realizing a form of minimal-program principle akin to Kolmogorov complexity but with well-defined size and smoothness constraints.
+Here, we explore the notion that the wavefunction itself is a \emph{compression system for the universe}: any set of information can be arranged into many possible wavefunctions, and simple, smooth wavefunctions admit vastly more representations. Thus, smoother, lower-entropy wavefunctions dominate statistical measure, realizing a form of minimal-description principle akin to Kolmogorov complexity but with well-defined size and smoothness constraints.
 
-We investigate whether a purely informational cost functional, defined independently of geometry, can recover classical geodesic behavior. 
-Our approach is algorithmic and discrete: paths are selected step-by-step by minimizing either Euclidean action or \emph{phase-coherent spectral entropy} over local execution traces. 
-Remarkably, we find strong agreement between the two resulting paths, suggesting that minimal-program wavefunctions naturally encode geodesic structure.
+We investigate whether a purely informational cost functional, defined independently of geometry, can recover classical geodesic behavior. Our approach is algorithmic and discrete: paths are selected step-by-step by minimizing either Euclidean action or \emph{phase-coherent spectral entropy} over local execution traces. Remarkably, we find strong agreement between the two resulting paths, suggesting that minimal descriptions naturally encode geodesic structure.
 
 \section{Geometric Setup}
-We consider a two-dimensional spatial domain embedded in a three-dimensional height field, representing a curved metric surface. 
-The surface is constructed as a superposition of Gaussian hills and valleys with added stochastic noise. 
-Let $\phi(x,y)$ denote the surface height. 
-The classical Euclidean action for a path $\gamma$ proceeding in the $x$ direction is approximated locally by
+We consider a two-dimensional spatial domain embedded in a three-dimensional height field, representing a curved metric surface. The surface is constructed as a superposition of Gaussian hills and valleys with added stochastic noise. Let $\phi(x,y)$ denote the surface height. The classical Euclidean action for a path $\gamma$ proceeding in the $x$ direction is approximated locally by
 \begin{equation}
 I_E \approx \sum_x \left( \nabla_x \phi \right)^2,
 \end{equation}
-where the gradient is discretized on a grid. 
-At each step, the next path position is chosen from a local neighborhood to minimize the incremental contribution to $I_E$.
+where the gradient is discretized on a grid. At each step, the next path position is chosen from a local neighborhood to minimize the incremental contribution to $I_E$.
 
-\section{Informational Cost Functional as Minimal Program}
-Independently of geometry, we define an informational cost functional based on local spectral properties of bit-encoded surface segments. 
-For each candidate path segment, the local surface values are thresholded relative to a local mean to produce a binary sequence, interpreted as a discrete ``wavefunction.'' 
-A real Fourier transform is applied to compute the power spectral density (PSD) of the segment.
+\section{Informational Action as Minimal Description}
+We propose that the classical trajectory emerges from an underlying principle of \emph{Minimal Description}. In this framework, the physical path is not determined by geometric distance, but by the efficiency with which the bit-encoded substrate can represent the state. We define the informational action $S_I$ as the integral of an informational Lagrangian $\mathcal{L}_I$:
 
-The spectral entropy is computed as
 \begin{equation}
-H = -\sum_k p_k \log_2 p_k,
+S_I = \int_{\gamma} \mathcal{L}_I(\Psi, \dot{\Psi}) \, dt = \int_{\gamma} \left[ \mathcal{H}(\Psi) + \alpha \, \mathcal{D}(\Psi, \dot{\Psi}) \right] dt
 \end{equation}
-where $p_k$ is the normalized power in frequency mode $k$. 
-Lower entropy corresponds to smoother, more compressible waveforms, representing simpler programs in informational space.
 
-To ensure smooth propagation along the path, we introduce a \emph{phase coherence} term capturing the variance of Fourier phase angles between consecutive bit-blocks. 
-The total informational cost is then
+where the Lagrangian is partitioned into two fundamental terms: the spectral complexity and the phase incoherence.
+
+\subsection{Spectral Entropy ($\mathcal{H}$)}
+The first term, $\mathcal{H}$, quantifies the informational cost to describe the local state. For a discrete bit-segment $\Psi$, we compute the normalized power spectral density (PSD) via a real Fourier transform. The probability $p_k$ of a frequency mode $k$ is given by:
 \begin{equation}
-C = H + \lambda \, \mathrm{Var}(\theta),
+p_k = \frac{|A_k|^2}{\sum_j |A_j|^2}
 \end{equation}
-where $\theta$ denotes the spectral phase angles and $\lambda$ is a tunable weight. 
-Minimizing this cost favors paths that are both compressible and phase-stable, effectively producing a ``quantum geodesic'' that is a minimal-program representation of the underlying surface in informational space.
+The spectral entropy is defined as:
+\begin{equation}
+\mathcal{H} = -\sum_{k} p_k \log_2 p_k
+\end{equation}
+Lower entropy corresponds to smoother waveforms, representing a more compressed minimal description.
+
+\subsection{Phase Incoherence and Quantum Infidelity ($\mathcal{D}$)}
+To ensure the continuity of the emergent description, we introduce a transport cost $\mathcal{D}$. This term penalizes rapid phase slips between consecutive execution traces. We utilize the complex inner product to measure the overlap between the current state $\Psi_t$ and the candidate state $\Psi_{t+dt}$ in Hilbert space:
+\begin{equation}
+\mathcal{D} = 1 - \frac{|\langle \Psi_t | \Psi_{t+dt} \rangle|}{\|\Psi_t\| \|\Psi_{t+dt}\|}
+\end{equation}
+This formulation is mathematically equivalent to the \emph{Fubini-Study metric}, defining the infinitesimal distance between points in projective Hilbert space. It effectively imparts informational inertia, favoring descriptions that maintain phase-stability over time.
 
 \section{Path-Finding Algorithm}
-Both the Euclidean and informational methods employ the same local path-finding structure. 
-Starting from a fixed boundary condition, the path advances column by column. 
-At each step, three candidate positions are evaluated, and the one minimizing the respective cost functional is selected. 
-
-No geometric information is used in the informational method beyond the raw surface samples; likewise, no informational quantities appear in the Euclidean action.
+Both methods employ the same local path-finding structure. Starting from a fixed boundary condition, the path advances column by column. At each step, three candidate positions are evaluated, and the one minimizing the respective cost functional is selected. No geometric information is used in the informational method; likewise, no informational quantities appear in the Euclidean action.
 
 \section{Results}
-Across multiple randomly generated surfaces and noise realizations, the paths selected by Euclidean action minimization and phase-coherent spectral entropy minimization are nearly identical. 
-Minor deviations occur primarily near regions of high curvature or noise, but the global path structure remains consistent. 
-
-Heatmap visualizations of the accumulated action and informational cost reveal correlated cost landscapes, with minima aligned along similar valleys of the surface. 
-Incorporating phase coherence significantly improves alignment of the QBitwave path with the Euclidean geodesic, especially in regions with ambiguous local gradients.
+Across multiple randomly generated surfaces, the paths selected by Euclidean action minimization and minimal description (QBitwave) are nearly identical. Incorporating phase coherence ($\mathcal{D}$) significantly improves alignment, especially in regions with ambiguous local gradients.
 
 \begin{figure}[h!]
 \centering
@@ -94,47 +79,25 @@ Incorporating phase coherence significantly improves alignment of the QBitwave p
 
 
 \subsection*{Systematic Noise Study}
-To further explore the relationship between geometric action and informational cost, we conducted a parameter sweep using the program \texttt{entropy\_action\_comparison.py}. 
-Here, paths were generated as simple sinusoidal metrics with varying levels of Gaussian noise. 
-For each noise level, we computed the Euclidean action (sum of squared gradients) and the spectral entropy of bit-encoded segments, along with a compressibility measure representing informational ``weight'' of the path. 
-At low noise, both measures correlate strongly, reproducing the PoC results. 
-As noise increases, the Euclidean action rises monotonically, while the phase-coherent spectral entropy exhibits a saturation effect due to finite-resolution encoding and phase-stability constraints. 
-This divergence illustrates that informational cost can impose natural cutoffs or stability constraints, reflecting the dominance of simpler, smoother wavefunctions as minimal programs.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/informational-saturation.png}
-\caption{Systematic noise sweep using \texttt{entropy\_action\_comparison.py}. 
-The Euclidean action (red) increases monotonically with noise. 
-The phase-coherent spectral entropy (blue) initially tracks the action but saturates at higher noise levels due to finite-resolution bit encoding and phase-stability effects. 
-The dashed line represents the compressibility measure of the informational path, highlighting the minimal-program dominance of smooth, low-entropy wavefunctions.}
-\end{figure}
+A parameter sweep shows that at low noise, both measures correlate strongly. As noise increases, Euclidean action rises monotonically, while the informational action exhibits a saturation effect due to finite-resolution encoding. This divergence illustrates that informational cost imposes natural cutoffs, reflecting the dominance of smooth wavefunctions as minimal descriptions.
 
 \section{Discussion}
-The observed correspondence suggests that classical geodesics may be understood as paths of minimum informational cost, where information is quantified in terms of spectral complexity and phase stability of local execution traces. 
-The minimal-program perspective implies that simpler, smoother wavefunctions dominate measure and naturally align with Euclidean geodesics. 
-Unlike prior entropic or informational interpretations of gravity, this result is constructive and algorithmic.
+The observed correspondence suggests that classical geodesics may be understood as paths of minimum informational description. The minimal-description perspective implies that simpler wavefunctions dominate measure and naturally align with Euclidean geodesics. 
 
-While this work does not constitute a theory of quantum gravity or a unification framework, it provides concrete evidence that geometric action and phase-coherent informational measures can coincide in nontrivial settings, supporting the broader hypothesis that spacetime dynamics may emerge from informational principles.
-
-\section{Limitations and Future Work}
-The present study is limited to two-dimensional surfaces and heuristic discretizations. 
-Future work should extend the method to full two-dimensional geodesics, higher-dimensional manifolds, and continuous limits. 
-Formal analytical relationships between Euclidean action, spectral entropy, phase variance, and minimal-program dominance remain open questions.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Geometric Quantity} & \textbf{Informational Equivalent} \\ \hline
+Potential Energy ($V$) & Spectral Entropy ($\mathcal{H}$) \\ \hline
+Kinetic Energy ($T$) & Quantum Infidelity ($\mathcal{D}$) \\ \hline
+Action ($S$) & Total Description Length ($\sum \mathcal{L}_I$) \\ \hline
+Geodesic & Optimal Compression Trace \\ \hline
+\end{tabular}
+\caption{Correspondences between Geometric and Informational measures.}
+\end{table}
 
 \section{Conclusion}
-We have demonstrated that minimizing phase-coherent spectral entropy over discrete execution traces can recover classical geodesic paths on curved surfaces. 
-Interpreting the wavefunction as a minimal program of nature, this result strengthens the case for information-theoretic foundations of physical law and motivates further investigation into informational formulations of action principles.
-
-\section*{Acknowledgments}
-The author thanks collaborators and open-source contributors whose tools made this work possible.
-
-\section*{Supplementary Materials}
-\begin{itemize}
-\item \href{simulations/geodesic_from_information.py}{geodesic\_from\_information.py: PoC demonstration of informational geodesics on 2D surfaces}
-\item \href{simulations/entropy_action_comparison.py}{entropy\_action\_comparison.py: Systematic study of Euclidean action vs. spectral entropy across noise levels and resolutions}
-\item \href{simulations/phi4\_qbitwave\_mcmc\_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
-\item \href{supplementary-qbitwave.pdf}{QBitwave supplementary paper}
-\end{itemize}
+We have demonstrated that minimizing phase-coherent spectral entropy can recover classical geodesic paths. Interpreting the wavefunction as a minimal description of nature strengthens the case for information-theoretic foundations of physical law.
 
 \end{document}
