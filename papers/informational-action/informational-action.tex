@@ -78,15 +78,33 @@ Incorporating phase coherence significantly improves alignment of the QBitwave p
 
 \begin{figure}[h!]
 \centering
+\includegraphics[width=0.7\textwidth]{figures/fields.png}
+\caption{Heatmaps of normalized Euclidean action (left) and informational cost including phase coherence (right).}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
 \includegraphics[width=0.7\textwidth]{figures/path-comparison.png}
 \caption{Comparison of paths obtained via Euclidean action (red) and phase-coherent spectral entropy (blue).}
 \end{figure}
 
+
+\subsection*{Systematic Noise Study}
+To further explore the relationship between geometric action and informational cost, we conducted a parameter sweep using the program \texttt{entropy\_action\_comparison.py}. 
+Here, paths were generated as simple sinusoidal metrics with varying levels of Gaussian noise. 
+For each noise level, we computed the Euclidean action (sum of squared gradients) and the spectral entropy of bit-encoded segments, along with a compressibility measure representing informational ``weight'' of the path. 
+At low noise, both measures correlate strongly, reproducing the PoC results. 
+As noise increases, the Euclidean action rises monotonically, reflecting growing geometric irregularity, while the spectral entropy exhibits a saturation effect due to phase coherence and finite-resolution encoding. 
+This divergence illustrates that informational metrics can impose natural cutoffs or stability constraints not captured by purely geometric action, providing additional insight into how information-theoretic principles might regulate path selection in complex environments.
+
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/fields.png}
-\caption{Heatmaps of normalized Euclidean action (left) and informational cost including phase coherence (right).}
+\includegraphics[width=0.7\textwidth]{figures/informational-saturation.png}
+\caption{Informational saturation}
 \end{figure}
+
+
 
 \section{Discussion}
 The observed correspondence suggests that classical geodesics may be understood as paths of minimum informational cost, where information is quantified in terms of spectral complexity and phase stability of local execution traces. 
