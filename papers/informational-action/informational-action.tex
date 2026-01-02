@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib}
+
+\title{Recovering Classical Geodesics from Spectral Entropy Minimization}
+
+\date{2001}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined over discrete execution traces.
+Specifically, we compare Euclidean action minimization with minimization of spectral entropy computed from local bit-encoded wavefunction segments.
+Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries.
+This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle.
+\end{abstract}
+
+\section{Introduction}
+The principle of least action occupies a foundational role in classical and quantum physics.
+In Euclidean quantum gravity, the action functional governs the weighting of paths in a path integral formulation, while in classical general relativity geodesics extremize proper distance or action.
+In parallel, information-theoretic approaches to physics have long suggested that entropy, complexity, or information content may play a fundamental role in physical law.
+However, most prior work draws conceptual or variational analogies rather than providing explicit constructive equivalence.
+
+In this work, we investigate whether a purely informational cost functional, defined independently of geometry, can recover classical geodesic behavior.
+Our approach is algorithmic and discrete: paths are selected step-by-step by minimizing either Euclidean action or spectral entropy over local execution traces.
+Remarkably, we find strong agreement between the two resulting paths.
+
+\section{Geometric Setup}
+We consider a two-dimensional spatial domain embedded in a three-dimensional height field, representing a curved metric surface.
+The surface is constructed as a superposition of Gaussian hills and valleys with added stochastic noise.
+Let $\phi(x,y)$ denote the surface height.
+The classical Euclidean action for a path $\gamma$ proceeding in the $x$ direction is approximated locally by
+\begin{equation}
+I_E \approx \sum_x \left( \nabla_x \phi \right)^2,
+\end{equation}
+where the gradient is discretized on a grid.
+
+At each step, the next path position is chosen from a local neighborhood to minimize the incremental contribution to $I_E$.
+
+\section{Informational Cost Functional}
+Independently, we define an informational cost based on spectral entropy.
+For each candidate path segment, the local surface values are encoded into a binary sequence by thresholding relative to a local mean.
+This bitstring is interpreted as a discrete wavefunction, from which a power spectral density is computed via a real Fourier transform.
+
+The spectral entropy is then defined as
+\begin{equation}
+H = -\sum_k p_k \log_2 p_k,
+\end{equation}
+where $p_k$ is the normalized power in frequency mode $k$. Lower entropy corresponds to more compressible, smoother waveforms.
+
+To ensure continuity between steps, we introduce a coherence penalty based on overlap between consecutive spectral amplitude vectors.
+The total informational cost is the sum of spectral entropy and a weighted coherence term.
+
+\section{Path-Finding Algorithm}
+Both the Euclidean and informational methods employ the same local path-finding structure.
+Starting from a fixed boundary condition, the path advances column by column.
+At each step, three candidate positions are evaluated, and the one minimizing the respective cost functional is selected.
+
+Importantly, no geometric information is used in the informational method beyond the raw surface samples; likewise, no informational quantities appear in the Euclidean action.
+
+\section{Results}
+Across multiple randomly generated surfaces and noise realizations, we observe that the paths selected by Euclidean action minimization and spectral entropy minimization are nearly identical.
+Minor deviations occur primarily near regions of high curvature or noise, but the global path structure remains consistent.
+
+Heatmap visualizations of the accumulated action and entropy further reveal correlated cost landscapes, with minima aligned along similar valleys of the surface.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/path-comparison.png}
+\caption{Paths}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/fields.png}
+\caption{Heatmaps }
+\end{figure}
+
+
+\section{Discussion}
+The observed correspondence suggests that classical geodesics may be understood as paths of minimum informational cost, where information is quantified in terms of spectral complexity of local execution traces.
+Unlike prior entropic or informational interpretations of gravity, this result is constructive and algorithmic.
+
+While this work does not constitute a theory of quantum gravity or a unification framework, it provides concrete evidence that geometric action and
+informational measures can coincide in nontrivial settings. This supports the broader hypothesis that spacetime dynamics may emerge from informational principles.
+
+\section{Limitations and Future Work}
+The present study is limited to two-dimensional surfaces and heuristic discretizations.
+Future work should extend the method to full two-dimensional geodesics, higher-dimensional manifolds, and continuous limits.
+A formal analytical relationship between Euclidean action and spectral entropy also remains an open question.
+
+\section{Conclusion}
+We have demonstrated that minimizing spectral entropy over discrete execution traces can recover classical geodesic paths on curved surfaces.
+This result strengthens the case for information-theoretic foundations of physical law and motivates further investigation into informational formulations of action principles.
+
+\section*{Acknowledgments}
+The author thanks collaborators and open-source contributors whose tools made this work possible.
+
+
+\section*{Supplementary Materials}
+
+\begin{itemize}
+\item \href{simulations/phi4\_qbitwave\_mcmc\_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
+\item \href{simulations/entropy\_action\_comparison.py}{entropy\_action\_comparison.py}
+\item \href{supplementary-qbitwave.pdf}{QBitwave supplementary paper}
+\end{itemize}
+
+
+\end{document}
