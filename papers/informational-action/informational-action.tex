@@ -5,14 +5,18 @@
 
 \title{Classical Geodesics as Minimal-Entropy Trajectories in Informational Space}
 
-\date{2024}
+\date{2022}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined over discrete execution traces. Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral entropy} computed from local bit-encoded wavefunction segments. We interpret the wavefunction as a \emph{minimal description of nature}, compressing the underlying information such that smoother, simpler waveforms dominate statistical measure. Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle.
+We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined over discrete execution traces. 
+Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral entropy} computed from local bit-encoded wavefunction segments. 
+We interpret the wavefunction as a \emph{minimal description of nature}, compressing the underlying information such that smoother, simpler waveforms dominate statistical measure. 
+Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. 
+This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle.
 \end{abstract}
 
 \textbf{Keywords:} Geodesics, Informational Action, Spectral Entropy, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Minimal Description Length, Discrete Path Optimization
@@ -98,10 +102,21 @@ Geodesic & Optimal Compression Trace \\ \hline
 \end{table}
 
 \section{Conclusion}
-We have demonstrated that minimizing phase-coherent spectral entropy can recover classical geodesic paths. 
+We have demonstrated that minimizing phase-coherent spectral entropy can recover classical geodesic paths.
 
-This result, together with the \textbf{Entropy-Singularity Lemma}, represents two sides of the same coin: regions of vanishing entropy contain no microstructure, while entropy-minimizing trajectories naturally avoid high-entropy, singular configurations. 
+This result, together with the \textbf{Entropy-Singularity Lemma}, represents two sides of the same coin: regions of vanishing entropy contain no microstructure, while entropy-minimizing trajectories naturally avoid high-entropy, singular configurations.
 
 Taken together, these principles imply that spacetime singularities and divergences are automatically suppressed by the informational structure of the universe.
+
+\section*{Acknowledgments}
+The author thanks collaborators and open-source contributors whose tools made this work possible.
+
+\section*{Supplementary Materials}
+\begin{itemize}
+\item \href{simulations/geodesic_from_information.py}{geodesic\_from\_information.py: PoC demonstration of informational geodesics on 2D surfaces}
+\item \href{simulations/entropy_action_comparison.py}{entropy\_action\_comparison.py: Systematic study of Euclidean action vs. spectral entropy across noise levels and resolutions}
+\item \href{simulations/phi4\_qbitwave\_mcmc\_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
+\item \href{supplementary-qbitwave.pdf}{QBitwave supplementary paper}
+\end{itemize}
 
 \end{document}
