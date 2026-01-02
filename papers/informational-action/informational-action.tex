@@ -85,6 +85,17 @@ Across multiple randomly generated surfaces, the paths selected by Euclidean act
 \subsection*{Systematic Noise Study}
 A parameter sweep shows that at low noise, both measures correlate strongly. As noise increases, Euclidean action rises monotonically, while the informational action exhibits a saturation effect due to finite-resolution encoding. This divergence illustrates that informational cost imposes natural cutoffs, reflecting the dominance of smooth wavefunctions as minimal descriptions.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/informational-saturation.png}
+\caption{Systematic noise sweep using \texttt{entropy\_action\_comparison.py}. 
+The Euclidean action (red) increases monotonically with noise. 
+The phase-coherent spectral entropy (blue) initially tracks the action but saturates at higher noise levels due to finite-resolution bit encoding and phase-stability effects. 
+The dashed line represents the compressibility measure of the informational path, highlighting the minimal-program dominance of smooth, low-entropy wavefunctions.}
+\end{figure}
+
+
+
 \section{Discussion}
 The observed correspondence suggests that classical geodesics may be understood as paths of minimum informational description. The minimal-description perspective implies that simpler wavefunctions dominate measure and naturally align with Euclidean geodesics. 
 
