@@ -1,4 +1,4 @@
-# The Abstract Universe Theory (AUT)
+# The Abstract Universe Project (AUP)
 
 ## Contents
 - [Papers](https://juhameskanen.github.io/abstract/)

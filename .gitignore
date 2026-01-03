@@ -29,6 +29,7 @@ env/
 *.lot
 *.gz
 *.bcf
+*.bcf-SAVE-ERROR
 *.run.xml
 *.pdf
 *.mp4
