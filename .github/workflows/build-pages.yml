@@ -37,42 +37,48 @@ jobs:
 
       - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
-          if [ ! -f papers.json ]; then echo "papers.json missing"; exit 1; fi
-          mkdir -p html
-          touch html/.nojekyll
-          cp style.css html/style.css
+          if [ ! -f papers.json ]; then
+            echo "papers.json missing"
+            exit 1
+          fi
 
           ROOT_DIR=$(pwd)
+          HTML_ROOT="$ROOT_DIR/html"
           BIB_PATH="$ROOT_DIR/papers/references.bib"
+
+          mkdir -p "$HTML_ROOT"
+          touch "$HTML_ROOT/.nojekyll"
+          cp "$ROOT_DIR/style.css" "$HTML_ROOT/"
 
           # Start index
           TITLE=$(jq -r '.title' papers.json)
-          echo "<html><head><title>$TITLE</title><meta name='color-scheme' content='light dark'><link rel='stylesheet' href='style.css'></head><body class='bodytext'><h1>$TITLE</h1>" > html/index.html
+          echo "<html><head><title>$TITLE</title><meta name='color-scheme' content='light dark'><link rel='stylesheet' href='style.css'></head><body class='bodytext'><h1>$TITLE</h1>" > "$HTML_ROOT/index.html"
 
-          # Recursive function to process JSON items
+          # Recursive function to process items
           process_items() {
             ITEMS_JSON="$1"
             PARENT_SLUG="$2"
 
-            echo "<ul>" >> html/index.html
+            echo "<ul>" >> "$HTML_ROOT/index.html"
             echo "$ITEMS_JSON" | jq -c '.[]' | while read -r item; do
               TITLE=$(echo "$item" | jq -r '.title')
               SLUG=$(echo "$item" | jq -r '.slug')
 
-              # Full slug path for nested items
+              # Full slug path
               if [ -z "$PARENT_SLUG" ]; then
                 FULL_SLUG="$SLUG"
               else
                 FULL_SLUG="$PARENT_SLUG/$SLUG"
               fi
 
-              # HTML folder
-              HTML_DIR="html/$FULL_SLUG"
+              HTML_DIR="$HTML_ROOT/$FULL_SLUG"
               mkdir -p "$HTML_DIR"
 
-              # Find flattened PDF
+              TEX_DIR="$ROOT_DIR/papers/$FULL_SLUG"
               SAFE_SLUG=$(echo "$FULL_SLUG" | sed 's|/|-|g')
-              PDF_FILE=$(find all-pdfs -type f -name "*$SAFE_SLUG*.pdf" | head -n1)
+
+              # Copy flattened PDF if it exists
+              PDF_FILE=$(find "$ROOT_DIR/all-pdfs" -type f -name "*$SAFE_SLUG*.pdf" | head -n1)
               PDF_LINK=""
               if [ -n "$PDF_FILE" ]; then
                 cp "$PDF_FILE" "$HTML_DIR/"
@@ -81,35 +87,35 @@ jobs:
               fi
 
               # Convert all .tex files in the papers folder
-              TEX_DIR="papers/$FULL_SLUG"
               if [ -d "$TEX_DIR" ]; then
                 find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
                   BASE=$(basename "$tex" .tex)
-                  CSS_REL=$(realpath --relative-to="$HTML_DIR" style.css)
                   [ -d "$TEX_DIR/figures" ] && cp -r "$TEX_DIR/figures" "$HTML_DIR/"
-                  (cd "$(dirname "$tex")" && pandoc "$BASE.tex" -s -M ishtml=true --from=latex --to=html5 --citeproc \
+                  CSS_REL=$(realpath --relative-to="$HTML_DIR" "$ROOT_DIR/style.css")
+                  mkdir -p "$HTML_DIR"
+                  pandoc "$tex" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                     --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                    --bibliography="$BIB_PATH" -c "$CSS_REL" -o "$HTML_DIR/index.html")
+                    --bibliography="$BIB_PATH" -c "$CSS_REL" -o "$HTML_DIR/index.html"
                 done
               fi
 
-              echo "<li><a href='./$FULL_SLUG/'>$TITLE</a>$PDF_LINK" >> html/index.html
+              echo "<li><a href='./$FULL_SLUG/'>$TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
 
-              # Process children recursively
+              # Recursively process children
               CHILDREN=$(echo "$item" | jq -c '.children // []')
               if [ "$(echo "$CHILDREN" | jq 'length')" -gt 0 ]; then
                 process_items "$CHILDREN" "$FULL_SLUG"
               fi
 
-              echo "</li>" >> html/index.html
+              echo "</li>" >> "$HTML_ROOT/index.html"
             done
-            echo "</ul>" >> html/index.html
+            echo "</ul>" >> "$HTML_ROOT/index.html"
           }
 
           # Loop over top-level sections
           jq -c '.sections[]' papers.json | while read -r section; do
             SECTION_TITLE=$(echo "$section" | jq -r '.title')
-            echo "<h2>$SECTION_TITLE</h2>" >> html/index.html
+            echo "<h2>$SECTION_TITLE</h2>" >> "$HTML_ROOT/index.html"
             ITEMS=$(echo "$section" | jq -c '.items')
             process_items "$ITEMS" ""
           done
