@@ -1,10 +1,10 @@
 name: Build and Deploy HTML (GitHub Pages)
 
 on:
-  workflow_dispatch:
   workflow_run:
     workflows: ["Build and Upload PDFs"]
     types: [completed]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,31 +12,22 @@ permissions:
   id-token: write
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: set-matrix
-        run: |
-          MATRIX=$(jq -c '[.sections[].items[] as $i | $i.slug as $s | (if ($i.children? | length > 0) then $i.children[] | "\($s)/\(.slug)" else $s end)]' papers.json)
-          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
-
   build-html:
-    needs: setup
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Install dependencies
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc jq
 
-      - name: Download all PDF artifacts
+      - name: Download all PDF Artifacts
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: build-pdf.yml
@@ -44,89 +35,90 @@ jobs:
           path: all-pdfs
           search_artifacts: true
 
-      - name: Convert LaTeX to HTML and integrate PDFs
+      - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
-          ROOT=$(pwd)
-          HTML_DIR="$ROOT/html"
-          mkdir -p "$HTML_DIR"
-          touch "$HTML_DIR/.nojekyll"
-          cp style.css "$HTML_DIR/"
+          if [ ! -f papers.json ]; then
+            echo "papers.json missing"
+            exit 1
+          fi
 
-          echo '<html><head><title>The Abstract Universe Project (AUP)</title>
-          <meta name="color-scheme" content="light dark">
-          <link rel="stylesheet" href="style.css"></head><body class="bodytext">
-          <h1>The Abstract Universe Project (AUP)</h1>' > "$HTML_DIR/index.html"
+          ROOT_DIR=$(pwd)
+          HTML_ROOT="$ROOT_DIR/html"
+          BIB_PATH="$ROOT_DIR/papers/references.bib"
+
+          mkdir -p "$HTML_ROOT"
+          touch "$HTML_ROOT/.nojekyll"
+          cp "$ROOT_DIR/style.css" "$HTML_ROOT/"
+
+          # Start index
+          TITLE=$(jq -r '.title' papers.json)
+          echo "<html><head><title>$TITLE</title><meta name='color-scheme' content='light dark'><link rel='stylesheet' href='style.css'></head><body class='bodytext'><h1>$TITLE</h1>" > "$HTML_ROOT/index.html"
 
           # Recursive function to process items
           process_items() {
             ITEMS_JSON="$1"
-            PARENT_PATH="$2"
-            echo "<ul>" >> "$HTML_DIR/index.html"
+            PARENT_SLUG="$2"
+
+            echo "<ul>" >> "$HTML_ROOT/index.html"
             echo "$ITEMS_JSON" | jq -c '.[]' | while read -r item; do
               TITLE=$(echo "$item" | jq -r '.title')
               SLUG=$(echo "$item" | jq -r '.slug')
-              if [ -z "$PARENT_PATH" ]; then
+
+              # Full slug path
+              if [ -z "$PARENT_SLUG" ]; then
                 FULL_SLUG="$SLUG"
               else
-                FULL_SLUG="$PARENT_PATH/$SLUG"
+                FULL_SLUG="$PARENT_SLUG/$SLUG"
               fi
 
-              TEX_DIR="$ROOT/papers/$FULL_SLUG"
-              TARGET_HTML="$HTML_DIR/$FULL_SLUG"
-              mkdir -p "$TARGET_HTML"
+              HTML_DIR="$HTML_ROOT/$FULL_SLUG"
+              mkdir -p "$HTML_DIR"
 
-              # Copy PDF from artifact
-              PDF_SRC=$(find "$ROOT/all-pdfs/${FULL_SLUG}" -type f -name "*.pdf" | head -n1)
-              if [ -n "$PDF_SRC" ]; then
-                cp "$PDF_SRC" "$TARGET_HTML/"
-                PDF_FILE=$(basename "$PDF_SRC")
-              else
-                PDF_FILE=""
+              TEX_DIR="$ROOT_DIR/papers/$FULL_SLUG"
+              SAFE_SLUG=$(echo "$FULL_SLUG" | sed 's|/|-|g')
+
+              # Copy flattened PDF if it exists
+              PDF_FILE=$(find "$ROOT_DIR/all-pdfs" -type f -name "*$SAFE_SLUG*.pdf" | head -n1)
+              PDF_LINK=""
+              if [ -n "$PDF_FILE" ]; then
+                cp "$PDF_FILE" "$HTML_DIR/"
+                PDF_BASENAME=$(basename "$PDF_FILE")
+                PDF_LINK=" | <a href='./$PDF_BASENAME'>[PDF]</a>"
               fi
 
-              # Convert .tex files to HTML
+              # Convert all .tex files in the papers folder
               if [ -d "$TEX_DIR" ]; then
-                for tex in $(find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex"); do
+                find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
                   BASE=$(basename "$tex" .tex)
-                  CSS_PATH=$(python3 -c "import os; d='$FULL_SLUG'.count('/'); print('../'*d + 'style.css')")
-                  pandoc "$tex" --from=latex --to=html5 --citeproc \
+                  [ -d "$TEX_DIR/figures" ] && cp -r "$TEX_DIR/figures" "$HTML_DIR/"
+                  CSS_REL=$(realpath --relative-to="$HTML_DIR" "$HTML_ROOT/style.css")
+                  mkdir -p "$HTML_DIR"
+                  pandoc "$tex" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                     --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                    --bibliography="$ROOT/papers/references.bib" \
-                    -c "$CSS_PATH" -o "$TARGET_HTML/index.html"
-
-                  # PDF link in HTML
-                  if [ -n "$PDF_FILE" ]; then
-                    sed -i "s|</body>|<p><a href='./$PDF_FILE'>[PDF]</a></p></body>|" "$TARGET_HTML/index.html"
-                  fi
+                    --bibliography="$BIB_PATH" -c "$CSS_REL" -o "$HTML_DIR/index.html"
                 done
               fi
 
-              # TOC entry
-              if [ -n "$PDF_FILE" ]; then
-                echo "<li><a href='./$FULL_SLUG/'>$TITLE</a> | <a href='./$FULL_SLUG/$PDF_FILE'>[PDF]</a>" >> "$HTML_DIR/index.html"
-              else
-                echo "<li><a href='./$FULL_SLUG/'>$TITLE</a>" >> "$HTML_DIR/index.html"
-              fi
+              echo "<li><a href='./$FULL_SLUG/'>$TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
 
               # Recursively process children
               CHILDREN=$(echo "$item" | jq -c '.children // []')
               if [ "$(echo "$CHILDREN" | jq 'length')" -gt 0 ]; then
                 process_items "$CHILDREN" "$FULL_SLUG"
               fi
-              echo "</li>" >> "$HTML_DIR/index.html"
+
+              echo "</li>" >> "$HTML_ROOT/index.html"
             done
-            echo "</ul>" >> "$HTML_DIR/index.html"
+            echo "</ul>" >> "$HTML_ROOT/index.html"
           }
 
-          # Process top-level sections
-          for section in $(jq -c '.sections[]' papers.json); do
+          # Loop over top-level sections
+          jq -c '.sections[]' papers.json | while read -r section; do
             SECTION_TITLE=$(echo "$section" | jq -r '.title')
-            echo "<h2>$SECTION_TITLE</h2>" >> "$HTML_DIR/index.html"
+            echo "<h2>$SECTION_TITLE</h2>" >> "$HTML_ROOT/index.html"
             ITEMS=$(echo "$section" | jq -c '.items')
             process_items "$ITEMS" ""
           done
-
-          echo "</body></html>" >> "$HTML_DIR/index.html"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
