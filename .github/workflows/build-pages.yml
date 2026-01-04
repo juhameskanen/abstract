@@ -91,7 +91,7 @@ jobs:
                 find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
                   BASE=$(basename "$tex" .tex)
                   [ -d "$TEX_DIR/figures" ] && cp -r "$TEX_DIR/figures" "$HTML_DIR/"
-                  CSS_REL=$(realpath --relative-to="$HTML_DIR" "$ROOT_DIR/style.css")
+                  CSS_REL=$(realpath --relative-to="$HTML_DIR" "$HTML_ROOT/style.css")
                   mkdir -p "$HTML_DIR"
                   pandoc "$tex" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                     --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
