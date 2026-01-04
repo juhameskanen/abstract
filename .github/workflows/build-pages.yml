@@ -35,9 +35,10 @@ jobs:
           path: all-pdfs
           search_artifacts: true
 
+
+
       - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
-          # Updated path to papers/papers.json
           if [ ! -f papers/papers.json ]; then
             echo "papers/papers.json missing"
             exit 1
@@ -45,14 +46,13 @@ jobs:
 
           ROOT_DIR=$(pwd)
           HTML_ROOT="$ROOT_DIR/html"
-          # Bibliography is now inside the papers folder
           BIB_PATH="$ROOT_DIR/papers/references.bib"
 
           mkdir -p "$HTML_ROOT"
           touch "$HTML_ROOT/.nojekyll"
           cp "$ROOT_DIR/style.css" "$HTML_ROOT/"
 
-          # 1. Flatten list (updated path to papers/papers.json)
+          # 1. Flatten list
           FLAT_PAPERS_JSON=$(jq -c '
             [
               .sections[].items[] as $item |
@@ -84,16 +84,17 @@ jobs:
               TEX_DIR="$ROOT_DIR/papers/$FULL_SLUG"
               SAFE_SLUG="${FULL_SLUG//\//-}"
 
-              # Copy PDF
+              # PDF Handling
               PDF_FILE=$(find "$ROOT_DIR/all-pdfs" -type f -name "*$SAFE_SLUG*.pdf" | head -n1)
-              PDF_LINK=""
+              PDF_LINK_TOC=""
               if [ -n "$PDF_FILE" ]; then
                 cp "$PDF_FILE" "$HTML_DIR/"
                 PDF_BASENAME=$(basename "$PDF_FILE")
-                PDF_LINK=" | <a href='./$PDF_BASENAME' target='_blank'>[PDF]</a>"
+                # Link for the main Table of Contents
+                PDF_LINK_TOC=" | <a href='./$FULL_SLUG/$PDF_BASENAME' target='_blank'>[PDF]</a>"
               fi
 
-              # Nav Footer
+              # Nav Footer logic
               CURRENT_INDEX=$(echo "$FLAT_PAPERS_JSON" | jq -r "map(.slug == \"$FULL_SLUG\") | index(true)")
               DEPTH=$(echo "$FULL_SLUG" | tr -cd '/' | wc -c)
               TO_ROOT=".."
@@ -101,13 +102,11 @@ jobs:
               
               PREV_HTML="[Start]"
               NEXT_HTML="[End]"
-
               if [ "$CURRENT_INDEX" != "null" ] && [ "$CURRENT_INDEX" -gt 0 ]; then
                 P_SLUG=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX - 1].slug")
                 P_TITLE=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX - 1].title")
                 PREV_HTML="<a href='$TO_ROOT/$P_SLUG/'>&larr; $P_TITLE</a>"
               fi
-
               TOTAL=$(echo "$FLAT_PAPERS_JSON" | jq 'length')
               if [ "$CURRENT_INDEX" != "null" ] && [ "$CURRENT_INDEX" -lt $((TOTAL - 1)) ]; then
                 N_SLUG=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX + 1].slug")
@@ -118,6 +117,7 @@ jobs:
               FOOTER_FILE="/tmp/footer-$SAFE_SLUG.html"
               echo "<hr><div class='nav-footer'><a href='$TO_ROOT/index.html'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2026 The Abstract Universe Theory Project.</i></div>" > "$FOOTER_FILE"
 
+              # Pandoc Conversion
               if [ -d "$TEX_DIR" ]; then
                 find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
                   ABS_BIB=$(realpath "$BIB_PATH")
@@ -125,7 +125,6 @@ jobs:
                   FILE_DIR=$(dirname "$(realpath "$tex")")
                   FILE_NAME=$(basename "$tex")
 
-                  # Sync assets
                   [ -d "$FILE_DIR/figures" ] && cp -r "$FILE_DIR/figures" "$HTML_DIR/"
                   [ -d "$FILE_DIR/simulations" ] && cp -r "$FILE_DIR/simulations" "$HTML_DIR/"
                   find "$FILE_DIR" -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.pdf" -o -iname "*.svg" \) -exec cp {} "$HTML_DIR/" \;
@@ -138,7 +137,10 @@ jobs:
                 done
               fi
 
+              # Add to Main Table of Contents
               echo "<li><a href='./$FULL_SLUG/'>$ITEM_TITLE</a>$PDF_LINK_TOC" >> "$HTML_ROOT/index.html"
+
+              # Recurse for children
               CHILDREN=$(echo "$item" | jq -c '.children // []')
               if [ "$(echo "$CHILDREN" | jq 'length')" -gt 0 ]; then
                 process_items "$CHILDREN" "$FULL_SLUG"
