@@ -93,8 +93,7 @@ jobs:
                 find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
                   # Get absolute paths to global assets
                   ABS_BIB=$(realpath "$BIB_PATH")
-                  ABS_STYLE=$(realpath "$HTML_ROOT/style.css")
-                  
+                  CSS_REL=$(realpath --relative-to="$HTML_DIR" "$HTML_ROOT/style.css")
                   # Get the directory of the specific file (e.g., .../supplementary/)
                   FILE_DIR=$(dirname "$(realpath "$tex")")
                   FILE_NAME=$(basename "$tex")
@@ -106,7 +105,7 @@ jobs:
                     pandoc "$FILE_NAME" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                       --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                       --bibliography="$ABS_BIB" \
-                      -c "$ABS_STYLE" \
+                      -c "$CSS_REL" \
                       -o "$HTML_DIR/index.html"
                       
                   popd > /dev/null
