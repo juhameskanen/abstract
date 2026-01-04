@@ -50,6 +50,19 @@ jobs:
           touch "$HTML_ROOT/.nojekyll"
           cp "$ROOT_DIR/style.css" "$HTML_ROOT/"
 
+          # 1. Flatten all papers into a global list for Prev/Next navigation
+          # This follows the same structure as your build matrix
+          FLAT_PAPERS_JSON=$(jq -c '
+            [
+              .sections[].items[] as $item |
+              $item.slug as $slug |
+              if ($item.children? | length > 0) then
+                $item.children[] | {slug: "\($slug)/\(.slug)", title: .title}
+              else
+                {slug: $slug, title: .title}
+              end
+            ]' papers.json)
+
           # Start index
           TITLE=$(jq -r '.title' papers.json)
           echo "<html><head><title>$TITLE</title><meta name='color-scheme' content='light dark'><link rel='stylesheet' href='style.css'></head><body class='bodytext'><h1>$TITLE</h1>" > "$HTML_ROOT/index.html"
@@ -61,10 +74,9 @@ jobs:
 
             echo "<ul>" >> "$HTML_ROOT/index.html"
             echo "$ITEMS_JSON" | jq -c '.[]' | while read -r item; do
-              TITLE=$(echo "$item" | jq -r '.title')
+              ITEM_TITLE=$(echo "$item" | jq -r '.title')
               SLUG=$(echo "$item" | jq -r '.slug')
 
-              # Full slug path
               if [ -z "$PARENT_SLUG" ]; then
                 FULL_SLUG="$SLUG"
               else
@@ -73,11 +85,10 @@ jobs:
 
               HTML_DIR="$HTML_ROOT/$FULL_SLUG"
               mkdir -p "$HTML_DIR"
-
               TEX_DIR="$ROOT_DIR/papers/$FULL_SLUG"
               SAFE_SLUG=$(echo "$FULL_SLUG" | sed 's|/|-|g')
 
-              # Copy flattened PDF if it exists
+              # PDF Linking logic
               PDF_FILE=$(find "$ROOT_DIR/all-pdfs" -type f -name "*$SAFE_SLUG*.pdf" | head -n1)
               PDF_LINK=""
               if [ -n "$PDF_FILE" ]; then
@@ -86,47 +97,62 @@ jobs:
                 PDF_LINK=" | <a href='./$PDF_BASENAME'>[PDF]</a>"
               fi
 
+              # --- NAV FOOTER GENERATION ---
+              CURRENT_INDEX=$(echo "$FLAT_PAPERS_JSON" | jq -r "map(.slug == \"$FULL_SLUG\") | index(true)")
+              PREV_HTML="[Start]"
+              NEXT_HTML="[End]"
+              
+              # Calculate path back to root (for TOC and relative Prev/Next)
+              DEPTH=$(echo "$FULL_SLUG" | tr -cd '/' | wc -c)
+              TO_ROOT=".."
+              for ((i=0; i<DEPTH; i++)); do TO_ROOT="../$TO_ROOT"; done
 
-              # Convert all .tex files in the papers folder
+              if [ "$CURRENT_INDEX" != "null" ] && [ "$CURRENT_INDEX" -gt 0 ]; then
+                P_SLUG=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX - 1].slug")
+                P_TITLE=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX - 1].title")
+                PREV_HTML="<a href='$TO_ROOT/$P_SLUG/'>&larr; $P_TITLE</a>"
+              fi
+
+              TOTAL=$(echo "$FLAT_PAPERS_JSON" | jq 'length')
+              if [ "$CURRENT_INDEX" != "null" ] && [ "$CURRENT_INDEX" -lt $((TOTAL - 1)) ]; then
+                N_SLUG=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX + 1].slug")
+                N_TITLE=$(echo "$FLAT_PAPERS_JSON" | jq -r ".[$CURRENT_INDEX + 1].title")
+                NEXT_HTML="<a href='$TO_ROOT/$N_SLUG/'>$N_TITLE &rarr;</a>"
+              fi
+
+              FOOTER_FILE="/tmp/footer-$SAFE_SLUG.html"
+              echo "<hr><div class='nav-footer'><a href='$TO_ROOT/index.html'>&uarr; Up (TOC)</a> | $PREV_HTML | $NEXT_HTML <br><br><i>© 2026 The Abstract Universe Theory Project.</i></div>" > "$FOOTER_FILE"
+              # --- END NAV FOOTER ---
+
               if [ -d "$TEX_DIR" ]; then
-                # Find all tex files relative to TEX_DIR
                 find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
-                  # Get absolute paths to global assets
                   ABS_BIB=$(realpath "$BIB_PATH")
                   CSS_REL=$(realpath --relative-to="$HTML_DIR" "$HTML_ROOT/style.css")
-                  # Get the directory of the specific file (e.g., .../supplementary/)
                   FILE_DIR=$(dirname "$(realpath "$tex")")
                   FILE_NAME=$(basename "$tex")
-              
-                  # GO DEEP: Enter the exact folder where the .tex file sits
+
                   pushd "$FILE_DIR" > /dev/null
-                    
-                    # Now ../../common.tex matches the file system perfectly
                     pandoc "$FILE_NAME" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                       --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                       --bibliography="$ABS_BIB" \
                       -c "$CSS_REL" \
+                      -A "$FOOTER_FILE" \
                       -o "$HTML_DIR/index.html"
-                      
                   popd > /dev/null
                 done
               fi
 
+              echo "<li><a href='./$FULL_SLUG/'>$ITEM_TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
 
-              echo "<li><a href='./$FULL_SLUG/'>$TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
-
-              # Recursively process children
               CHILDREN=$(echo "$item" | jq -c '.children // []')
               if [ "$(echo "$CHILDREN" | jq 'length')" -gt 0 ]; then
                 process_items "$CHILDREN" "$FULL_SLUG"
               fi
-
               echo "</li>" >> "$HTML_ROOT/index.html"
             done
             echo "</ul>" >> "$HTML_ROOT/index.html"
           }
 
-          # Loop over top-level sections
           jq -c '.sections[]' papers.json | while read -r section; do
             SECTION_TITLE=$(echo "$section" | jq -r '.title')
             echo "<h2>$SECTION_TITLE</h2>" >> "$HTML_ROOT/index.html"
