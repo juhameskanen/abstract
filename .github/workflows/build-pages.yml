@@ -88,17 +88,18 @@ jobs:
 
               # Convert all .tex files in the papers folder
               if [ -d "$TEX_DIR" ]; then
-                find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
+                pushd "$TEX_DIR" > /dev/null
+                find . -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
                   BASE=$(basename "$tex" .tex)
-                  [ -d "$TEX_DIR/figures" ] && cp -r "$TEX_DIR/figures" "$HTML_DIR/"
+                  [ -d "./figures" ] && cp -r "./figures" "$HTML_DIR/"
                   CSS_REL=$(realpath --relative-to="$HTML_DIR" "$HTML_ROOT/style.css")
                   mkdir -p "$HTML_DIR"
-                  pushd "$TEX_DIR" > /dev/null
                   pandoc "$tex" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                     --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
+                    --resource-path="$ROOT_DIR/papers:$ROOT_DIR/papers/$(dirname "$FULL_SLUG")" \
                     --bibliography="$BIB_PATH" -c "$CSS_REL" -o "$HTML_DIR/index.html"
-                  popd > /dev/null
                 done
+                popd > /dev/null
               fi
 
               echo "<li><a href='./$FULL_SLUG/'>$TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
