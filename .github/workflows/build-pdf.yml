@@ -8,7 +8,7 @@ on:
 
 jobs:
   # ------------------------------------------------------------
-  # Job 1: Flatten papers.json into full slug paths
+  # Job 1: Flatten papers/papers.json into full slug paths
   # ------------------------------------------------------------
   setup:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
 
       - id: set-matrix
         run: |
-          # Flatten all slugs including children, prepending parent slug
+          # Flatten all slugs including children from the PAPERS folder
           MATRIX=$(jq -c '
             [
               .sections[].items[] as $item |
@@ -31,7 +31,7 @@ jobs:
                   $slug
                 end
               )
-            ]' papers.json)
+            ]' papers/papers.json)
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
   # ------------------------------------------------------------
@@ -86,9 +86,10 @@ jobs:
             BASE_NAME=$(basename "$texfile" .tex)
 
             cd "$DIR_PATH"
+            # Use -bibtex flag if you use citations in the papers
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
 
-            # Flatten PDF filename: replace slashes / with dashes -
+            # Flatten PDF filename
             SAFE_SLUG="${{ matrix.paper }}"
             SAFE_SLUG="${SAFE_SLUG//\//-}"
             OUT_NAME="$SAFE_SLUG-$BASE_NAME.pdf"
@@ -99,11 +100,8 @@ jobs:
 
       - name: Upload PDF artifacts
         run: |
-          # Sanitize artifact name
           SAFE_NAME="${{ matrix.paper }}"
           SAFE_NAME="${SAFE_NAME//\//-}"
-          echo "Uploading artifact pdf-$SAFE_NAME"
-          # Export to environment for upload action
           echo "ARTIFACT_NAME=pdf-$SAFE_NAME" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v4
