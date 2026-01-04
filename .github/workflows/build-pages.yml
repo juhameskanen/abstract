@@ -138,8 +138,7 @@ jobs:
                 done
               fi
 
-              echo "<li><a href='./$FULL_SLUG/'>$ITEM_TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
-
+              echo "<li><a href='./$FULL_SLUG/'>$ITEM_TITLE</a>$PDF_LINK_TOC" >> "$HTML_ROOT/index.html"
               CHILDREN=$(echo "$item" | jq -c '.children // []')
               if [ "$(echo "$CHILDREN" | jq 'length')" -gt 0 ]; then
                 process_items "$CHILDREN" "$FULL_SLUG"
