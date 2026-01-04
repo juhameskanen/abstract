@@ -88,19 +88,26 @@ jobs:
             cd "$DIR_PATH"
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
 
-            # Determine flattened output filename
-            REL_PATH="${{ matrix.paper }}" # the slug with parent paths
-            REL_PATH_SAFE="${REL_PATH//\//-}" # replace slashes with dashes
-            OUT_NAME="$REL_PATH_SAFE-$BASE_NAME.pdf"
+            # Flatten PDF filename: replace slashes / with dashes -
+            SAFE_SLUG="${{ matrix.paper }}"
+            SAFE_SLUG="${SAFE_SLUG//\//-}"
+            OUT_NAME="$SAFE_SLUG-$BASE_NAME.pdf"
 
             cp "$BASE_NAME.pdf" "$PDF_OUT/$OUT_NAME"
             cd - > /dev/null
           done
 
       - name: Upload PDF artifacts
-        uses: actions/upload-artifact@v4
+        run: |
+          # Sanitize artifact name
+          SAFE_NAME="${{ matrix.paper }}"
+          SAFE_NAME="${SAFE_NAME//\//-}"
+          echo "Uploading artifact pdf-$SAFE_NAME"
+          # Export to environment for upload action
+          echo "ARTIFACT_NAME=pdf-$SAFE_NAME" >> $GITHUB_ENV
+
+      - uses: actions/upload-artifact@v4
         with:
-          # Artifact name must not contain slashes
-          name: pdf-${{ matrix.paper//\//- }}
+          name: ${{ env.ARTIFACT_NAME }}
           path: pdf-output/*.pdf
           retention-days: 1

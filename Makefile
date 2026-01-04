@@ -13,10 +13,11 @@ LATEXMK := latexmk -pdf -interaction=nonstopmode -halt-on-error
 PANDOC := pandoc -s -M ishtml=true --from=latex --to=html5 --citeproc \
           --mathjax=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
 
-# Flatten all slugs from papers.json (including children)
-PAPERS := $(shell jq -r '[.sections[].items[], .sections[].items[]?.children[]?] | .[].slug' papers.json)
+# -- Flattened paper list (full slugs) --
 
-# -- Phony Targets -- 
+PAPERS := $(shell jq -r '[.sections[].items[] as $$item | $$item.slug as $$slug | (if ($$item.children? | length > 0) then $$item.children[] | "\($$slug)/\(.slug)" else $$slug end)] | .[]' papers.json)
+
+# -- Phony Targets --
 
 .PHONY: all pdf html clean distclean list-papers
 
@@ -37,20 +38,17 @@ $(PDF_OUT):
 	mkdir -p $(PDF_OUT)
 
 pdf-paper:
-	@cd $(PAPERS_DIR)/$(PAPER) && \
-	find . -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read tex; do \
+	@SLUG_DIR=$(PAPERS_DIR)/$(PAPER); \
+	if [ ! -d "$$SLUG_DIR" ]; then echo "Folder $$SLUG_DIR does not exist"; exit 1; fi; \
+	find "$$SLUG_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
 		echo "Compiling $$tex"; \
 		dir=$$(dirname "$$tex"); \
 		base=$$(basename "$$tex" .tex); \
 		cd "$$dir"; \
-		$(LATEXMK) "$$(basename "$$tex")"; \
-		if [ "$$dir" = "." ]; then \
-			dest="$$base.pdf"; \
-		else \
-			clean=$$(echo "$$dir" | sed 's|./||; s|/|-|g'); \
-			dest="$$clean-$$base.pdf"; \
-		fi; \
-		cp "$$base.pdf" "$(ROOT_DIR)/$(PDF_OUT)/$$dest"; \
+		$(LATEXMK) "$$base.tex"; \
+		# Flatten PDF filename: replace / with - in slug \
+		safe_name=$$(echo "$(PAPER)" | sed 's|/|-|g'); \
+		cp "$$base.pdf" "$(ROOT_DIR)/$(PDF_OUT)/$$safe_name-$$base.pdf"; \
 		cd - > /dev/null; \
 	done
 
@@ -62,7 +60,6 @@ html: pdf
 	touch $(HTML_OUT)/.nojekyll
 	cp $(STYLE_CSS) $(HTML_OUT)/style.css
 	$(MAKE) html-index
-	@# Build HTML for each slug
 	@for paper in $(PAPERS); do \
 		echo "==> Building HTML for $$paper"; \
 		$(MAKE) html-paper PAPER=$$paper; \
@@ -70,38 +67,51 @@ html: pdf
 	@echo '</body></html>' >> $(HTML_OUT)/index.html
 
 html-index:
-	@PROJECT_TITLE="$$(jq -r '.title' papers.json)"; \
+	@PROJECT_TITLE=$$(jq -r '.title' papers.json); \
 	echo "<html><head><title>$$PROJECT_TITLE</title>" \
 	     "<meta name='color-scheme' content='light dark'>" \
 	     "<link rel='stylesheet' href='style.css'></head>" \
-	     "<body class='bodytext'><h1>$$PROJECT_TITLE</h1>" \
-	     > $(HTML_OUT)/index.html; \
-	echo "" >> $(HTML_OUT)/index.html
+	     "<body class='bodytext'><h1>$$PROJECT_TITLE</h1>" > $(HTML_OUT)/index.html; \
+	# Loop over sections \
+	jq -c '.sections[]' papers.json | while read -r section; do \
+		section_title=$$(echo $$section | jq -r '.title'); \
+		echo "<h2>$$section_title</h2>" >> $(HTML_OUT)/index.html; \
+		items=$$(echo $$section | jq -c '.items'); \
+		$(MAKE) html-list ITEMS="$$items" PARENT=""; \
+	done
 
-html-paper:
-	@paper=$(PAPER); \
-	html_dir=$(HTML_OUT)/$$paper; \
-	mkdir -p $$html_dir; \
-	cp $(PDF_OUT)/*$$paper*.pdf $$html_dir/ 2>/dev/null || true; \
-	TEX_DIR=$(PAPERS_DIR)/$$paper; \
-	if [ -d "$$TEX_DIR" ]; then \
-		find "$$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
-			base=$$(basename "$$tex" .tex); \
-			out="$${html_dir}/index.html"; \
-			css="../style.css"; \
-			[ -d "$$TEX_DIR/figures" ] && cp -r "$$TEX_DIR/figures" "$$html_dir/"; \
-			echo "Converting $$tex..."; \
-			(cd "$$(dirname "$$tex")" && $(PANDOC) "$$(basename "$$tex")" \
-				--bibliography="$(BIB_FILE)" \
-				-c "$$css" \
-				-o "$$out") || exit 1; \
-		done; \
-	fi; \
-	TITLE=$$(jq -r --arg slug "$$paper" '[.sections[].items[], .sections[].items[]?.children[]?] | .[] | select(.slug == $$slug) | .title' papers.json); \
-	PDF_FILE=$$(ls $$html_dir/*.pdf 2>/dev/null | head -n1); \
-	PDF_LINK=""; \
-	[ -n "$$PDF_FILE" ] && PDF_LINK=" | <a href='./$$(basename "$$PDF_FILE")'>[PDF]</a>"; \
-	echo "<li><a href='./$$paper/'>$$TITLE</a>$$PDF_LINK</li>" >> $(HTML_OUT)/index.html
+# Recursive function to handle hierarchy
+html-list:
+	@echo "$$ITEMS" | jq -c '.[]' | while read -r item; do \
+		title=$$(echo $$item | jq -r '.title'); \
+		slug=$$(echo $$item | jq -r '.slug'); \
+		full_path="$$( [ -z "$(PARENT)" ] && echo "$$slug" || echo "$(PARENT)/$$slug" )"; \
+		html_dir="$(HTML_OUT)/$$full_path"; \
+		mkdir -p "$$html_dir"; \
+		# Copy PDF if exists \
+		PDF_FILE=$$(find $(PDF_OUT) -type f -name "*$$(echo "$$full_path" | sed 's|/|-|g')*.pdf" | head -n1); \
+		PDF_LINK=""; \
+		[ -n "$$PDF_FILE" ] && PDF_LINK=" | <a href='./$$(basename "$$PDF_FILE")'>[PDF]</a>" && cp "$$PDF_FILE" "$$html_dir/"; \
+		# Convert .tex files \
+		TEX_DIR="$(PAPERS_DIR)/$$full_path"; \
+		if [ -d "$$TEX_DIR" ]; then \
+			find "$$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
+				base=$$(basename "$$tex" .tex); \
+				out="$$html_dir/index.html"; \
+				css_rel=$$(realpath --relative-to="$$html_dir" "$(STYLE_CSS)"); \
+				[ -d "$$TEX_DIR/figures" ] && cp -r "$$TEX_DIR/figures" "$$html_dir/"; \
+				(cd "$$(dirname "$$tex")" && $(PANDOC) "$$base.tex" --bibliography="$(BIB_FILE)" -c "$$css_rel" -o "$$out"); \
+			done; \
+		fi; \
+		# Write link to index \
+		echo "<li><a href='./$$full_path/'>$$title</a>$$PDF_LINK" >> $(HTML_OUT)/index.html; \
+		# Process children recursively \
+		children=$$(echo $$item | jq -c '.children'); \
+		if [ "$$(echo "$$children" | jq 'length')" -gt 0 ]; then \
+			$(MAKE) html-list ITEMS="$$children" PARENT="$$full_path"; \
+		fi; \
+		echo "</li>" >> $(HTML_OUT)/index.html; \
+	done
 
 # -- Cleanup --
 
@@ -113,7 +123,7 @@ clean:
 distclean: clean
 	rm -rf $(PDF_OUT) $(HTML_OUT)
 
-# -- Install build tools -- 
+# -- Install build tools --
 
 prerequisites:
 	sudo apt-get install jq pandoc latexmk biber
