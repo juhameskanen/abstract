@@ -131,10 +131,8 @@ jobs:
                   FILE_DIR=$(dirname "$(realpath "$tex")")
                   FILE_NAME=$(basename "$tex")
 
-                  if [ -d "$FILE_DIR/figures" ]; then
-                    cp -r "$FILE_DIR/figures" "$HTML_DIR/"
-                  fi
-                  
+                  [ -d "$FILE_DIR/figures" ] && cp -r "$FILE_DIR/figures" "$HTML_DIR/"
+                  [ -d "$FILE_DIR/simulations" ] && cp -r "$FILE_DIR/simulations" "$HTML_DIR/"
                   find "$FILE_DIR" -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.pdf" -o -iname "*.svg" \) -exec cp {} "$HTML_DIR/" \;
 
                   pushd "$FILE_DIR" > /dev/null
