@@ -35,7 +35,7 @@ jobs:
           path: all-pdfs
           search_artifacts: true
 
-      - name: Convert LaTeX to HTML and Integrate PDFs
+      - name: Build HTML
         run: |
           set -e
 
@@ -50,7 +50,6 @@ jobs:
 
           ROOT_DIR=$(pwd)
           BIB_PATH="$ROOT_DIR/papers/references.bib"
-
           PROJECT_TITLE=$(jq -r '.title' papers.json)
 
           echo "<html><head>
@@ -61,111 +60,83 @@ jobs:
           <body class='bodytext'>
           <h1>$PROJECT_TITLE</h1>" > html/index.html
 
-          # ---- Flatten paper order for prev/next navigation ----
-          mapfile -t PAPER_SLUGS < <(jq -r '.sections[].items[].slug' papers.json)
-          NUM_PAPERS=${#PAPER_SLUGS[@]}
-
+          # -------------------------------------------------
+          # Flatten slugs for previous/next navigation
+          # -------------------------------------------------
+          mapfile -t ALL_SLUGS < <(jq -r '[.sections[].items[], .sections[].items[]?.children[]?] | .[].slug' papers.json)
           declare -A SLUG_INDEX
-          for i in "${!PAPER_SLUGS[@]}"; do
-            SLUG_INDEX["${PAPER_SLUGS[$i]}"]=$i
+          for i in "${!ALL_SLUGS[@]}"; do
+            SLUG_INDEX["${ALL_SLUGS[$i]}"]=$i
           done
 
-          SECTION_COUNT=$(jq '.sections | length' papers.json)
+          # -------------------------------------------------
+          # Function: Recursively render sections/items
+          # -------------------------------------------------
+          render_items() {
+            local items_json="$1"
+            echo "<ul>"
+            local len=$(echo "$items_json" | jq 'length')
+            for ((i=0;i<len;i++)); do
+              title=$(echo "$items_json" | jq -r ".[$i].title")
+              slug=$(echo "$items_json" | jq -r ".[$i].slug")
+              children=$(echo "$items_json" | jq ".[$i].children // empty")
 
-          # ---- Build hierarchical TOC + pages ----
-          for ((s=0; s<SECTION_COUNT; s++)); do
-            SECTION_TITLE=$(jq -r ".sections[$s].title" papers.json)
-            echo "<h2>$SECTION_TITLE</h2><ul>" >> html/index.html
+              # Create HTML directory
+              HTML_DIR="$ROOT_DIR/html/$slug"
+              mkdir -p "$HTML_DIR"
 
-            ITEM_COUNT=$(jq ".sections[$s].items | length" papers.json)
-
-            for ((i=0; i<ITEM_COUNT; i++)); do
-              PAPER_TITLE=$(jq -r ".sections[$s].items[$i].title" papers.json)
-              PAPER_SLUG=$(jq -r ".sections[$s].items[$i].slug" papers.json)
-
-              PAPER_SRC_DIR="$ROOT_DIR/papers/$PAPER_SLUG"
-              PAPER_HTML_DIR="$ROOT_DIR/html/$PAPER_SLUG"
-
-              if [ ! -d "$PAPER_SRC_DIR" ]; then
-                echo "Warning: papers/$PAPER_SLUG not found, skipping"
-                continue
+              # Copy PDFs if artifacts exist
+              if [ -d "all-pdfs/pdf-$slug" ]; then
+                cp all-pdfs/pdf-$slug/*.pdf "$HTML_DIR/" || true
               fi
 
-              mkdir -p "$PAPER_HTML_DIR"
-
-              # ---- Copy PDFs ----
-              if [ -d "all-pdfs/pdf-$PAPER_SLUG" ]; then
-                cp all-pdfs/pdf-$PAPER_SLUG/*.pdf "$PAPER_HTML_DIR/" || true
+              # Build all tex files in this directory
+              TEX_DIR="$ROOT_DIR/papers/$slug"
+              if [ -d "$TEX_DIR" ]; then
+                while read -r texfile; do
+                  base_name=$(basename "$texfile" .tex)
+                  out_file="$HTML_DIR/index.html"
+                  pushd "$(dirname "$texfile")" > /dev/null
+                  pandoc "$(basename "$texfile")" -s -M ishtml=true \
+                    --from=latex --to=html5 --citeproc \
+                    --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
+                    --bibliography="$BIB_PATH" -c "../style.css" \
+                    -o "$out_file"
+                  popd > /dev/null
+                done < <(find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex")
               fi
 
-              MAIN_PDF_LINK=""
-              SUPP_LIST=""
-
-              while read -r texfile; do
-                base_name=$(basename "$texfile" .tex)
-                rel_path=${texfile#papers/$PAPER_SLUG/}
-                tex_dir_abs="$(cd "$(dirname "$texfile")" && pwd)"
-
-                if [[ "$rel_path" == "$base_name.tex" ]]; then
-                  # ---- Main paper ----
-                  out_file_abs="$PAPER_HTML_DIR/index.html"
-                  MAIN_PDF_LINK=" | <a href='./$PAPER_SLUG/$base_name.pdf'>[PDF]</a>"
-                  css_rel="../style.css"
-
-                  [ -d "$PAPER_SRC_DIR/figures" ] && cp -r "$PAPER_SRC_DIR/figures" "$PAPER_HTML_DIR/"
-                else
-                  # ---- Supplement ----
-                  out_dir_abs="$PAPER_HTML_DIR/$base_name"
-                  mkdir -p "$out_dir_abs"
-                  out_file_abs="$out_dir_abs/index.html"
-                  css_rel="../../style.css"
-
-                  display_name=$(echo "$base_name" | sed 's/^supplementary-//; s/-/ /g')
-                  SUPP_LIST+="<li><a href='./$PAPER_SLUG/$base_name/'>$display_name</a> | <a href='./$PAPER_SLUG/$base_name.pdf'>[PDF]</a></li>"
-
-                  [ -d "$tex_dir_abs/figures" ] && cp -r "$tex_dir_abs/figures" "$out_dir_abs/"
-                fi
-
-                pushd "$tex_dir_abs" > /dev/null
-                pandoc "$(basename "$texfile")" -s -M ishtml=true \
-                  --from=latex --to=html5 --citeproc \
-                  --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                  --bibliography="$BIB_PATH" \
-                  -c "$css_rel" \
-                  -o "$out_file_abs"
-                popd > /dev/null
-
-                if [[ "$out_file_abs" == *"/$base_name/index.html" ]]; then
-                  sed -i "s|</body>|<p><a href='../$base_name.pdf'>[Download PDF]</a></p><hr><a href='../'>&larr; Back to Paper</a></body>|" "$out_file_abs"
-                fi
-
-              done < <(find "$PAPER_SRC_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex")
-
-              # ---- TOC entry ----
-              [ -n "$SUPP_LIST" ] && SUPP_LIST="<ul>$SUPP_LIST</ul>"
-              echo "<li><a href='./$PAPER_SLUG/'>$PAPER_TITLE</a>$MAIN_PDF_LINK$SUPP_LIST</li>" >> html/index.html
-
-              # ---- Footer navigation ----
-              idx=${SLUG_INDEX[$PAPER_SLUG]}
-              PREV=""
-              NEXT=""
-
-              [ $idx -gt 0 ] && PREV="<a href='../${PAPER_SLUGS[$((idx-1))]}/'>&larr; Previous</a>"
-              [ $idx -lt $((NUM_PAPERS-1)) ] && NEXT="<a href='../${PAPER_SLUGS[$((idx+1))]}/'>Next &rarr;</a>"
-
-              if [ -f "$PAPER_HTML_DIR/index.html" ]; then
-                sed -i 's|</body></html>||' "$PAPER_HTML_DIR/index.html"
-                echo "<hr>
-                <div class='nav-footer'>
-                <a href='../'>&uarr; Up (TOC)</a> | $PREV | $NEXT
-                <br><br><i>© 2026 The Abstract Universe Project.</i>
-                </div>
-                </body></html>" >> "$PAPER_HTML_DIR/index.html"
+              # Link to PDF (main PDF = any PDF in folder)
+              PDF_LINK=""
+              if compgen -G "$HTML_DIR/*.pdf" > /dev/null; then
+                pdf_file=$(ls "$HTML_DIR"/*.pdf | head -n1)
+                pdf_name=$(basename "$pdf_file")
+                PDF_LINK=" | <a href='./$pdf_name'>[PDF]</a>"
               fi
 
+              echo "<li><a href='./$slug/'>$title</a>$PDF_LINK"
+
+              # Recurse if children exist
+              if [ "$children" != "" ]; then
+                child_json=$(echo "$children" | jq -c '.')
+                render_items "$child_json"
+              fi
+
+              echo "</li>"
             done
+            echo "</ul>"
+          }
 
-            echo "</ul>" >> html/index.html
+          # -------------------------------------------------
+          # Render all sections
+          # -------------------------------------------------
+          SECTION_COUNT=$(jq '.sections | length' papers.json)
+          for ((s=0; s<SECTION_COUNT; s++)); do
+            section_title=$(jq -r ".sections[$s].title" papers.json)
+            items_json=$(jq -c ".sections[$s].items" papers.json)
+
+            echo "<h2>$section_title</h2>" >> html/index.html
+            render_items "$items_json" >> html/index.html
           done
 
           echo "</body></html>" >> html/index.html

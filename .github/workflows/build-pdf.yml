@@ -8,7 +8,7 @@ on:
 
 jobs:
   # ------------------------------------------------------------
-  # Job 1: Extract flattened paper list from hierarchical JSON
+  # Job 1: Flatten papers.json into a list of slugs
   # ------------------------------------------------------------
   setup:
     runs-on: ubuntu-latest
@@ -19,17 +19,16 @@ jobs:
 
       - id: set-matrix
         run: |
-          # Flatten sections[].items[].slug into a JSON array
-          MATRIX=$(jq -c '[.sections[].items[].slug]' papers.json)
+          # Flatten all slugs, including children
+          MATRIX=$(jq -c '[.sections[].items[], .sections[].items[]?.children[]?] | .[].slug' papers.json)
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
   # ------------------------------------------------------------
-  # Job 2: Build PDFs in parallel (one job per paper)
+  # Job 2: Build PDFs in parallel (one job per slug)
   # ------------------------------------------------------------
   build-pdf:
     needs: setup
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         paper: ${{ fromJson(needs.setup.outputs.matrix) }}
@@ -37,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install minimal LaTeX
+      - name: Install LaTeX dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -53,16 +52,15 @@ jobs:
             fonts-freefont-otf \
             fonts-lmodern
 
-      - name: Compile LaTeX to PDF
+      - name: Compile all .tex files for slug
         working-directory: papers/${{ matrix.paper }}
         run: |
           set -e
-
           mkdir -p "$GITHUB_WORKSPACE/pdf-output"
 
-          find . -name "*.tex" ! -name "_*" | while read -r texfile; do
+          # Compile every .tex file in this slug directory
+          find . -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r texfile; do
             echo "Compiling $texfile..."
-
             dir_path=$(dirname "$texfile")
             base_name=$(basename "$texfile" .tex)
 
@@ -70,6 +68,7 @@ jobs:
 
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
 
+            # Determine flat output filename
             if [ "$dir_path" = "." ]; then
               dest_name="$base_name.pdf"
             else
@@ -85,7 +84,6 @@ jobs:
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
         with:
-          # Must match what build-pages.yml expects
           name: pdf-${{ matrix.paper }}
           path: pdf-output/*.pdf
           retention-days: 1
