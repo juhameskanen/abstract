@@ -77,22 +77,14 @@ jobs:
               TEX_DIR="$ROOT_DIR/papers/$FULL_SLUG"
               SAFE_SLUG=$(echo "$FULL_SLUG" | sed 's|/|-|g')
 
-
-              # Copy PDF from artifact
-              PDF_SRC=$(find "$ROOT/all-pdfs" -type f -name "*$(basename $FULL_SLUG)*.pdf" | head -n1)
-              if [ -n "$PDF_SRC" ]; then
-                # Determine relative path from HTML folder
-                REL_PATH=$(realpath --relative-to="$TARGET_HTML" "$PDF_SRC")
-                PDF_FILE="$REL_PATH"
-              else
-                PDF_FILE=""
-              fi
-
-              # PDF link in HTML
+              # Copy flattened PDF if it exists
+              PDF_FILE=$(find "$ROOT_DIR/all-pdfs" -type f -name "*$SAFE_SLUG*.pdf" | head -n1)
+              PDF_LINK=""
               if [ -n "$PDF_FILE" ]; then
-                sed -i "s|</body>|<p><a href='$PDF_FILE'>[PDF]</a></p></body>|" "$TARGET_HTML/index.html"
+                cp "$PDF_FILE" "$HTML_DIR/"
+                PDF_BASENAME=$(basename "$PDF_FILE")
+                PDF_LINK=" | <a href='./$PDF_BASENAME'>[PDF]</a>"
               fi
-
 
               # Convert all .tex files in the papers folder
               if [ -d "$TEX_DIR" ]; then
