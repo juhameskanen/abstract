@@ -19,9 +19,10 @@ jobs:
 
       - id: set-matrix
         run: |
-          # Flatten all slugs, including children, as a proper JSON array
-          MATRIX=$(jq -c '[.sections[].items[], .sections[].items[]?.children[]?] | map(.slug)' papers.json)
+          # Flatten slugs, including children with parent path
+          MATRIX=$(jq -c '[.sections[].items[] as $item | $item.slug as $slug | (if ($item.children? | length > 0) then $item.children[] | "\($slug)/\(.slug)" else $slug end)]' papers.json)
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
 
 
   # ------------------------------------------------------------
