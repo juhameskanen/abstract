@@ -7,36 +7,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ------------------------------------------------------------
-  # Job 1: Flatten papers.json into full slug paths
-  # ------------------------------------------------------------
   setup:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-
       - id: set-matrix
         run: |
-          # Flatten all slugs including children, prepending parent slug
-          MATRIX=$(jq -c '
-            [
-              .sections[].items[] as $item |
-              $item.slug as $slug |
-              (
-                if ($item.children? | length > 0) then
-                  $item.children[] | "\($slug)/\(.slug)"
-                else
-                  $slug
-                end
-              )
-            ]' papers.json)
+          # Flatten all slugs recursively with parent path
+          MATRIX=$(jq -c '[.sections[].items[] as $i | $i.slug as $s | (if ($i.children? | length > 0) then $i.children[] | "\($s)/\(.slug)" else $s end)]' papers.json)
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
-  # ------------------------------------------------------------
-  # Job 2: Build PDFs in parallel
-  # ------------------------------------------------------------
   build-pdf:
     needs: setup
     runs-on: ubuntu-latest
@@ -63,51 +45,26 @@ jobs:
             fonts-freefont-otf \
             fonts-lmodern
 
-      - name: Compile all .tex files for slug
+      - name: Compile PDFs
         run: |
           set -e
-          echo "Building PDFs for slug: ${{ matrix.paper }}"
+          ROOT="$GITHUB_WORKSPACE"
+          TEX_DIR="$ROOT/papers/${{ matrix.paper }}"
+          OUTPUT_DIR="$ROOT/pdf-output/${{ matrix.paper }}"
+          mkdir -p "$OUTPUT_DIR"
 
-          ROOT_DIR=$(pwd)
-          PDF_OUT="$ROOT_DIR/pdf-output"
-          mkdir -p "$PDF_OUT"
-
-          # Folder for this paper
-          SLUG_DIR="$ROOT_DIR/papers/${{ matrix.paper }}"
-          if [ ! -d "$SLUG_DIR" ]; then
-            echo "ERROR: Folder '$SLUG_DIR' does not exist"
-            exit 1
-          fi
-
-          # Compile all .tex files in this folder
-          find "$SLUG_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r texfile; do
-            echo "Compiling $texfile..."
-            DIR_PATH=$(dirname "$texfile")
-            BASE_NAME=$(basename "$texfile" .tex)
-
-            cd "$DIR_PATH"
-            latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
-
-            # Flatten PDF filename: replace slashes / with dashes -
-            SAFE_SLUG="${{ matrix.paper }}"
-            SAFE_SLUG="${SAFE_SLUG//\//-}"
-            OUT_NAME="$SAFE_SLUG-$BASE_NAME.pdf"
-
-            cp "$BASE_NAME.pdf" "$PDF_OUT/$OUT_NAME"
+          find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r texfile; do
+            BASE=$(basename "$texfile" .tex)
+            DIR=$(dirname "$texfile")
+            cd "$DIR"
+            latexmk -pdf -interaction=nonstopmode -halt-on-error "$BASE.tex"
+            cp "$BASE.pdf" "$OUTPUT_DIR/"
             cd - > /dev/null
           done
 
       - name: Upload PDF artifacts
-        run: |
-          # Sanitize artifact name
-          SAFE_NAME="${{ matrix.paper }}"
-          SAFE_NAME="${SAFE_NAME//\//-}"
-          echo "Uploading artifact pdf-$SAFE_NAME"
-          # Export to environment for upload action
-          echo "ARTIFACT_NAME=pdf-$SAFE_NAME" >> $GITHUB_ENV
-
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: pdf-output/*.pdf
+          name: pdf-${{ matrix.paper }}
+          path: pdf-output/${{ matrix.paper }}/*.pdf
           retention-days: 1

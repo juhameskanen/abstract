@@ -20,9 +20,8 @@ jobs:
       - uses: actions/checkout@v4
       - id: set-matrix
         run: |
-          # Flatten all slugs recursively with parent path
-          MATRIX=$(jq -c '[.sections[].items[] as $i | $i.slug as $s | (if ($i.children? | length > 0) then $i.children[] | "\($s)/\(.slug)" else $s end)] | .[]' papers.json)
-          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          MATRIX=$(jq -c '[.sections[].items[] as $i | $i.slug as $s | (if ($i.children? | length > 0) then $i.children[] | "\($s)/\(.slug)" else $s end)]' papers.json)
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
   build-html:
     needs: setup
@@ -37,7 +36,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc jq
 
-      - name: Download PDF artifacts
+      - name: Download all PDF artifacts
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: build-pdf.yml
@@ -72,13 +71,12 @@ jobs:
                 FULL_SLUG="$PARENT_PATH/$SLUG"
               fi
 
-              # Paths
               TEX_DIR="$ROOT/papers/$FULL_SLUG"
               TARGET_HTML="$HTML_DIR/$FULL_SLUG"
               mkdir -p "$TARGET_HTML"
 
-              # Copy PDF artifact (preserve hierarchy)
-              PDF_SRC=$(find "$ROOT/all-pdfs" -type f -name "*$(basename $SLUG)*.pdf" | head -n1)
+              # Copy PDF from artifact
+              PDF_SRC=$(find "$ROOT/all-pdfs/${FULL_SLUG}" -type f -name "*.pdf" | head -n1)
               if [ -n "$PDF_SRC" ]; then
                 cp "$PDF_SRC" "$TARGET_HTML/"
                 PDF_FILE=$(basename "$PDF_SRC")
@@ -86,24 +84,24 @@ jobs:
                 PDF_FILE=""
               fi
 
-              # Convert .tex files to HTML in the same folder
+              # Convert .tex files to HTML
               if [ -d "$TEX_DIR" ]; then
                 for tex in $(find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex"); do
                   BASE=$(basename "$tex" .tex)
-                  [ -d "$(dirname $TARGET_HTML)/figures" ] && cp -r "$TEX_DIR/figures" "$TARGET_HTML/"
-                  CSS_PATH=$(python3 -c "import os; depth='$FULL_SLUG'.count('/'); print('../'*depth + 'style.css')")
+                  CSS_PATH=$(python3 -c "import os; d='$FULL_SLUG'.count('/'); print('../'*d + 'style.css')")
                   pandoc "$tex" --from=latex --to=html5 --citeproc \
                     --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                     --bibliography="$ROOT/papers/references.bib" \
                     -c "$CSS_PATH" -o "$TARGET_HTML/index.html"
-                  # PDF link
+
+                  # PDF link in HTML
                   if [ -n "$PDF_FILE" ]; then
                     sed -i "s|</body>|<p><a href='./$PDF_FILE'>[PDF]</a></p></body>|" "$TARGET_HTML/index.html"
                   fi
                 done
               fi
 
-              # Add TOC entry
+              # TOC entry
               if [ -n "$PDF_FILE" ]; then
                 echo "<li><a href='./$FULL_SLUG/'>$TITLE</a> | <a href='./$FULL_SLUG/$PDF_FILE'>[PDF]</a>" >> "$HTML_DIR/index.html"
               else
