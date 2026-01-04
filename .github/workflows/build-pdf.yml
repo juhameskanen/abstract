@@ -7,24 +7,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Job 1: Extract paper list from JSON
+  # ------------------------------------------------------------
+  # Job 1: Extract flattened paper list from hierarchical JSON
+  # ------------------------------------------------------------
   setup:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-      - id: set-matrix
-        run: echo "matrix=$(jq -c . papers.json)" >> $GITHUB_OUTPUT
 
-  # Job 2: Build PDFs in parallel
+      - id: set-matrix
+        run: |
+          # Flatten sections[].items[].slug into a JSON array
+          MATRIX=$(jq -c '[.sections[].items[].slug]' papers.json)
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+  # ------------------------------------------------------------
+  # Job 2: Build PDFs in parallel (one job per paper)
+  # ------------------------------------------------------------
   build-pdf:
     needs: setup
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         paper: ${{ fromJson(needs.setup.outputs.matrix) }}
-    
+
     steps:
       - uses: actions/checkout@v4
 
@@ -44,47 +53,39 @@ jobs:
             fonts-freefont-otf \
             fonts-lmodern
 
-
       - name: Compile LaTeX to PDF
         working-directory: papers/${{ matrix.paper }}
         run: |
-          # Create output dir at the absolute root of the workspace
-          # $GITHUB_WORKSPACE is the safest way to reference the root
+          set -e
+
           mkdir -p "$GITHUB_WORKSPACE/pdf-output"
-          
+
           find . -name "*.tex" ! -name "_*" | while read -r texfile; do
             echo "Compiling $texfile..."
-            
+
             dir_path=$(dirname "$texfile")
             base_name=$(basename "$texfile" .tex)
-            
-            # Enter the directory where the .tex file lives
+
             cd "$dir_path"
-            
-            # Compile
+
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
-            
-            # Determine output filename
-            if [ "$dir_path" == "." ]; then
+
+            if [ "$dir_path" = "." ]; then
               dest_name="$base_name.pdf"
             else
-              # Replace slashes with dashes for a flat file structure in output
-              # e.g. ./supplementary/proofs.tex -> supplementary-proofs.pdf
-              clean_dir=$(echo "$dir_path" | sed 's|./||; s|/|-|g')
+              clean_dir=$(echo "$dir_path" | sed 's|^\./||; s|/|-|g')
               dest_name="$clean_dir-$base_name.pdf"
             fi
-            
-            # Copy to the absolute path of the output directory
+
             cp "$base_name.pdf" "$GITHUB_WORKSPACE/pdf-output/$dest_name"
-            
-            # Return to the paper root for the next iteration
+
             cd - > /dev/null
           done
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
         with:
-          # This name is crucial: it allows build-pages.yml to find it
+          # Must match what build-pages.yml expects
           name: pdf-${{ matrix.paper }}
           path: pdf-output/*.pdf
-          retention-days: 1  # Short retention as it's just a temporary hand-off 
+          retention-days: 1
