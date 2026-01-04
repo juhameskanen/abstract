@@ -94,7 +94,8 @@ jobs:
                   [ -d "./figures" ] && cp -r "./figures" "$HTML_DIR/"
                   CSS_REL=$(realpath --relative-to="$HTML_DIR" "$HTML_ROOT/style.css")
                   mkdir -p "$HTML_DIR"
-                  export TEXINPUTS="$ROOT_DIR/papers:"
+                  cp -f "$ROOT_DIR/papers/common.tex" .
+                  cp -f "$ROOT_DIR/papers/glossary.tex" .
                   pandoc "$tex" -s -M ishtml=true --from=latex --to=html5 --citeproc \
                     --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
                     --bibliography="$BIB_PATH" -c "$CSS_REL" -o "$HTML_DIR/index.html"
