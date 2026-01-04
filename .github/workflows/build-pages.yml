@@ -145,9 +145,16 @@ jobs:
                   popd > /dev/null
                 done
               fi
-
-              echo "<li><a href='./$FULL_SLUG/'>$ITEM_TITLE</a>$PDF_LINK" >> "$HTML_ROOT/index.html"
-
+              
+              # Inside the while loop for items, updating the main index.html
+              if [ -n "$PDF_FILE" ]; then
+                # Link from the ROOT index needs to point into the subfolder
+                INDEX_PDF_LINK=" | <a href='./$FULL_SLUG/$PDF_BASENAME'>[PDF]</a>"
+              else
+                INDEX_PDF_LINK=""
+              fi
+              
+              echo "<li><a href='./$FULL_SLUG/'>$ITEM_TITLE</a>$INDEX_PDF_LINK" >> "$HTML_ROOT/index.html"
               CHILDREN=$(echo "$item" | jq -c '.children // []')
               if [ "$(echo "$CHILDREN" | jq 'length')" -gt 0 ]; then
                 process_items "$CHILDREN" "$FULL_SLUG"
