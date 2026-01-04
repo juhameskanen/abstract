@@ -6,7 +6,7 @@
       "items": [
         {
           "title": "Informational Derivation of Reality",
-          "slug": "informational-derivation-of-reality"
+          "slug": "informational-derivation-of-reality",
         },
         {
           "title": "Singularities as Zero-Entropy States",
@@ -22,7 +22,7 @@
       "title": "Quantum Gravity Program",
       "items": [
         {
-          "title": "Gravity from Noise",
+          "title": "Probabilistic Blackhole",
           "slug": "probabilistic-blackhole"
         },
         {
@@ -32,6 +32,16 @@
         {
           "title": "Quantum Gravity II",
           "slug": "quantum-gravity-2"
+        }
+        {
+          "title": "QFT Divergences",
+            "slug": "qft-divergences",
+	    "children": [
+            {
+              "title": "QBitwave",
+              "slug": "supplementary"
+            }
+	    }
         }
       ]
     },
