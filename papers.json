@@ -1,15 +1,56 @@
-[
-    "informational-derivation-of-reality",
-    "methods",
-    "black-hole-singularities",
-    "emergence-of-spacetime",
-    "probabilistic-blackhole",
-    "wavefunction-as-compression",
-    "informational-action",
-    "qft-divergences",
-    "quantum-gravity",
-    "quantum-gravity-2",
-    "emergence-of-time",
-    "emergence-of-gr",
-    "theory-of-everything"
-]
+{
+  "title": "The Abstract Universe Project (AUP)",
+  "sections": [
+    {
+      "title": "Core Papers",
+      "items": [
+        {
+          "title": "Informational Derivation of Reality",
+          "slug": "informational-derivation-of-reality"
+        },
+        {
+          "title": "Singularities as Zero-Entropy States",
+          "slug": "black-hole-singularities"
+        },
+        {
+          "title": "Emergence of Spacetime",
+          "slug": "emergence-of-spacetime"
+        }
+      ]
+    },
+    {
+      "title": "Quantum Gravity Program",
+      "items": [
+        {
+          "title": "Gravity from Noise",
+          "slug": "probabilistic-blackhole"
+        },
+        {
+          "title": "Quantum Gravity I",
+          "slug": "quantum-gravity"
+        },
+        {
+          "title": "Quantum Gravity II",
+          "slug": "quantum-gravity-2"
+        }
+      ]
+    },
+    {
+      "title": "Foundations",
+      "items": [
+        {
+          "title": "Wavefunction as Compression",
+          "slug": "wavefunction-as-compression"
+        },
+        {
+          "title": "Emergence of Time",
+          "slug": "emergence-of-time"
+        },
+        {
+          "title": "Theory of Everything",
+          "slug": "theory-of-everything"
+        }
+      ]
+    }
+  ]
+}
