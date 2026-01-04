@@ -9,11 +9,12 @@ HTML_OUT := html
 BIB_FILE := $(ROOT_DIR)/papers/references.bib
 STYLE_CSS := style.css
 
-PAPERS := $(shell jq -r '.[]' papers.json)
-
 LATEXMK := latexmk -pdf -interaction=nonstopmode -halt-on-error
 PANDOC := pandoc -s -M ishtml=true --from=latex --to=html5 --citeproc \
           --mathjax=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
+
+# Flatten all slugs from papers.json (including children)
+PAPERS := $(shell jq -r '[.sections[].items[], .sections[].items[]?.children[]?] | .[].slug' papers.json)
 
 # -- Phony Targets -- 
 
@@ -24,8 +25,7 @@ all: pdf html
 list-papers:
 	@echo "$(PAPERS)"
 
-
-# -- PDF BUILD (equivalent to build-pdf.yml) --
+# -- PDF BUILD --
 
 pdf: $(PDF_OUT)
 	@for paper in $(PAPERS); do \
@@ -38,7 +38,7 @@ $(PDF_OUT):
 
 pdf-paper:
 	@cd $(PAPERS_DIR)/$(PAPER) && \
-	find . -name "*.tex" ! -name "_*" | while read tex; do \
+	find . -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read tex; do \
 		echo "Compiling $$tex"; \
 		dir=$$(dirname "$$tex"); \
 		base=$$(basename "$$tex" .tex); \
@@ -54,9 +54,7 @@ pdf-paper:
 		cd - > /dev/null; \
 	done
 
-
-# -- HTML BUILD (equivalent to build-pages.yml) --
-
+# -- HTML BUILD --
 
 html: pdf
 	rm -rf $(HTML_OUT)
@@ -64,59 +62,46 @@ html: pdf
 	touch $(HTML_OUT)/.nojekyll
 	cp $(STYLE_CSS) $(HTML_OUT)/style.css
 	$(MAKE) html-index
+	@# Build HTML for each slug
 	@for paper in $(PAPERS); do \
 		echo "==> Building HTML for $$paper"; \
 		$(MAKE) html-paper PAPER=$$paper; \
 	done
-	@echo '</ul></body></html>' >> $(HTML_OUT)/index.html
+	@echo '</body></html>' >> $(HTML_OUT)/index.html
 
 html-index:
-	@echo '<html><head><title>The Abstract Universe Theory (AUT)</title>' \
-	      '<meta name="color-scheme" content="light dark">' \
-	      '<link rel="stylesheet" href="style.css"></head>' \
-	      '<body class="bodytext"><h1>The Abstract Universe Theory (AUT)</h1>' \
-	      '<h2>Research Papers</h2><ul>' \
-	      > $(HTML_OUT)/index.html
+	@PROJECT_TITLE="$$(jq -r '.title' papers.json)"; \
+	echo "<html><head><title>$$PROJECT_TITLE</title>" \
+	     "<meta name='color-scheme' content='light dark'>" \
+	     "<link rel='stylesheet' href='style.css'></head>" \
+	     "<body class='bodytext'><h1>$$PROJECT_TITLE</h1>" \
+	     > $(HTML_OUT)/index.html; \
+	echo "" >> $(HTML_OUT)/index.html
 
 html-paper:
 	@paper=$(PAPER); \
-	html_paper_dir=$(HTML_OUT)/$$paper; \
-	mkdir -p $$html_paper_dir; \
-	cp $(PDF_OUT)/*$$paper*.pdf $$html_paper_dir/ 2>/dev/null || true; \
-	echo "" > supp_list.tmp; \
-	echo "MAIN_PDF=''" > main_pdf.tmp; \
-	find $(PAPERS_DIR)/$$paper -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
-		base=$$(basename "$$tex" .tex); \
-		rel=$${tex#$(PAPERS_DIR)/$$paper/}; \
-		dir_abs=$$(cd "$$(dirname "$$tex")" && pwd); \
-		if [ "$$rel" = "$$base.tex" ]; then \
-			out="$(ROOT_DIR)/$$html_paper_dir/index.html"; \
+	html_dir=$(HTML_OUT)/$$paper; \
+	mkdir -p $$html_dir; \
+	cp $(PDF_OUT)/*$$paper*.pdf $$html_dir/ 2>/dev/null || true; \
+	TEX_DIR=$(PAPERS_DIR)/$$paper; \
+	if [ -d "$$TEX_DIR" ]; then \
+		find "$$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
+			base=$$(basename "$$tex" .tex); \
+			out="$${html_dir}/index.html"; \
 			css="../style.css"; \
-			[ -d "$(PAPERS_DIR)/$$paper/figures" ] && cp -r "$(PAPERS_DIR)/$$paper/figures" "$$html_paper_dir/"; \
-			echo "MAIN_PDF=' | <a href=\"./$$paper/$$base.pdf\">[PDF]</a>'" > main_pdf.tmp; \
-		else \
-			outdir="$(ROOT_DIR)/$$html_paper_dir/$$base"; \
-			out="$$outdir/index.html"; \
-			mkdir -p "$$outdir"; \
-			css="../../style.css"; \
-			[ -d "$$dir_abs/figures" ] && cp -r "$$dir_abs/figures" "$$outdir/"; \
-			echo "<li><a href='./$$paper/$$base/'>$$base</a> | <a href='./$$paper/supplementary-$$base.pdf'>[PDF]</a></li>" >> supp_list.tmp; \
-		fi; \
-		echo "Converting $$tex..."; \
-		(cd "$$dir_abs" && $(PANDOC) "$$(basename "$$tex")" \
-			--bibliography="$(BIB_FILE)" \
-			-c "$$css" \
-			-o "$$out") || exit 1; \
-	done || exit 1; \
-	SUPP_LIST=$$(cat supp_list.tmp); \
-	source main_pdf.tmp; \
-	if [ -n "$$SUPP_LIST" ]; then \
-		echo "<li><a href='./$$paper/'>$$paper</a>$$MAIN_PDF<ul>$$SUPP_LIST</ul></li>" >> $(HTML_OUT)/index.html; \
-	else \
-		echo "<li><a href='./$$paper/'>$$paper</a>$$MAIN_PDF</li>" >> $(HTML_OUT)/index.html; \
+			[ -d "$$TEX_DIR/figures" ] && cp -r "$$TEX_DIR/figures" "$$html_dir/"; \
+			echo "Converting $$tex..."; \
+			(cd "$$(dirname "$$tex")" && $(PANDOC) "$$(basename "$$tex")" \
+				--bibliography="$(BIB_FILE)" \
+				-c "$$css" \
+				-o "$$out") || exit 1; \
+		done; \
 	fi; \
-	rm -f supp_list.tmp main_pdf.tmp
-
+	TITLE=$$(jq -r --arg slug "$$paper" '[.sections[].items[], .sections[].items[]?.children[]?] | .[] | select(.slug == $$slug) | .title' papers.json); \
+	PDF_FILE=$$(ls $$html_dir/*.pdf 2>/dev/null | head -n1); \
+	PDF_LINK=""; \
+	[ -n "$$PDF_FILE" ] && PDF_LINK=" | <a href='./$$(basename "$$PDF_FILE")'>[PDF]</a>"; \
+	echo "<li><a href='./$$paper/'>$$TITLE</a>$$PDF_LINK</li>" >> $(HTML_OUT)/index.html
 
 # -- Cleanup --
 
@@ -130,5 +115,5 @@ distclean: clean
 
 # -- Install build tools -- 
 
-prequisities:
+prerequisites:
 	sudo apt-get install jq pandoc latexmk biber
