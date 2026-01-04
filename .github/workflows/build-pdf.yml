@@ -8,7 +8,7 @@ on:
 
 jobs:
   # ------------------------------------------------------------
-  # Job 1: Flatten papers.json into a list of slugs
+  # Job 1: Flatten papers.json into full slug paths
   # ------------------------------------------------------------
   setup:
     runs-on: ubuntu-latest
@@ -19,14 +19,23 @@ jobs:
 
       - id: set-matrix
         run: |
-          # Flatten slugs, including children with parent path
-          MATRIX=$(jq -c '[.sections[].items[] as $item | $item.slug as $slug | (if ($item.children? | length > 0) then $item.children[] | "\($slug)/\(.slug)" else $slug end)]' papers.json)
+          # Flatten all slugs including children, prepending parent slug
+          MATRIX=$(jq -c '
+            [
+              .sections[].items[] as $item |
+              $item.slug as $slug |
+              (
+                if ($item.children? | length > 0) then
+                  $item.children[] | "\($slug)/\(.slug)"
+                else
+                  $slug
+                end
+              )
+            ]' papers.json)
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
-
-
   # ------------------------------------------------------------
-  # Job 2: Build PDFs in parallel (one job per slug)
+  # Job 2: Build PDFs in parallel
   # ------------------------------------------------------------
   build-pdf:
     needs: setup
@@ -55,37 +64,43 @@ jobs:
             fonts-lmodern
 
       - name: Compile all .tex files for slug
-        working-directory: papers/${{ matrix.paper }}
         run: |
           set -e
-          mkdir -p "$GITHUB_WORKSPACE/pdf-output"
+          echo "Building PDFs for slug: ${{ matrix.paper }}"
 
-          # Compile every .tex file in this slug directory
-          find . -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r texfile; do
+          ROOT_DIR=$(pwd)
+          PDF_OUT="$ROOT_DIR/pdf-output"
+          mkdir -p "$PDF_OUT"
+
+          # Folder for this paper
+          SLUG_DIR="$ROOT_DIR/papers/${{ matrix.paper }}"
+          if [ ! -d "$SLUG_DIR" ]; then
+            echo "ERROR: Folder '$SLUG_DIR' does not exist"
+            exit 1
+          fi
+
+          # Compile all .tex files in this folder
+          find "$SLUG_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r texfile; do
             echo "Compiling $texfile..."
-            dir_path=$(dirname "$texfile")
-            base_name=$(basename "$texfile" .tex)
+            DIR_PATH=$(dirname "$texfile")
+            BASE_NAME=$(basename "$texfile" .tex)
 
-            cd "$dir_path"
-
+            cd "$DIR_PATH"
             latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
 
-            # Determine flat output filename
-            if [ "$dir_path" = "." ]; then
-              dest_name="$base_name.pdf"
-            else
-              clean_dir=$(echo "$dir_path" | sed 's|^\./||; s|/|-|g')
-              dest_name="$clean_dir-$base_name.pdf"
-            fi
+            # Determine flattened output filename
+            REL_PATH="${{ matrix.paper }}" # the slug with parent paths
+            REL_PATH_SAFE="${REL_PATH//\//-}" # replace slashes with dashes
+            OUT_NAME="$REL_PATH_SAFE-$BASE_NAME.pdf"
 
-            cp "$base_name.pdf" "$GITHUB_WORKSPACE/pdf-output/$dest_name"
-
+            cp "$BASE_NAME.pdf" "$PDF_OUT/$OUT_NAME"
             cd - > /dev/null
           done
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pdf-${{ matrix.paper }}
+          # Artifact name must not contain slashes
+          name: pdf-${{ matrix.paper//\//- }}
           path: pdf-output/*.pdf
           retention-days: 1

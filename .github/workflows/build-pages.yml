@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Build and Upload PDFs"]
     types: [completed]
-  workflow_dispatch:
+  workflow_dispatch: 
 
 permissions:
   contents: read
@@ -33,93 +33,67 @@ jobs:
           workflow: build-pdf.yml
           run_id: ${{ github.event.workflow_run.id }}
           path: all-pdfs
-          search_artifacts: true
+          search_artifacts: true 
 
-      - name: Build HTML
+      - name: Convert LaTeX to HTML and Integrate PDFs
         run: |
-          set -e
-
-          if [ ! -f papers.json ]; then
-            echo "papers.json missing"
-            exit 1
-          fi
-
           mkdir -p html
           touch html/.nojekyll
           cp style.css html/style.css
 
           ROOT_DIR=$(pwd)
           BIB_PATH="$ROOT_DIR/papers/references.bib"
+          INDEX_FILE="$ROOT_DIR/html/index.html"
+
+          # --- Start index ---
           PROJECT_TITLE=$(jq -r '.title' papers.json)
+          echo "<html><head><title>$PROJECT_TITLE</title>" \
+               "<meta name='color-scheme' content='light dark'>" \
+               "<link rel='stylesheet' href='style.css'></head>" \
+               "<body class='bodytext'><h1>$PROJECT_TITLE</h1>" \
+               > "$INDEX_FILE"
 
-          echo "<html><head>
-          <title>$PROJECT_TITLE</title>
-          <meta name='color-scheme' content='light dark'>
-          <link rel='stylesheet' href='style.css'>
-          </head>
-          <body class='bodytext'>
-          <h1>$PROJECT_TITLE</h1>" > html/index.html
-
-          # -------------------------------------------------
-          # Flatten slugs for previous/next navigation
-          # -------------------------------------------------
-          mapfile -t ALL_SLUGS < <(jq -r '[.sections[].items[], .sections[].items[]?.children[]?] | .[].slug' papers.json)
-          declare -A SLUG_INDEX
-          for i in "${!ALL_SLUGS[@]}"; do
-            SLUG_INDEX["${ALL_SLUGS[$i]}"]=$i
-          done
-
-          # -------------------------------------------------
-          # Function: Recursively render sections/items
-          # -------------------------------------------------
-          render_items() {
-            local items_json="$1"
+          # --- Recursive function to process items ---
+          generate_list() {
+            local parent_path=$1
+            local items_json=$2
             echo "<ul>"
-            local len=$(echo "$items_json" | jq 'length')
-            for ((i=0;i<len;i++)); do
-              title=$(echo "$items_json" | jq -r ".[$i].title")
-              slug=$(echo "$items_json" | jq -r ".[$i].slug")
-              children=$(echo "$items_json" | jq ".[$i].children // empty")
+            echo "$items_json" | jq -c '.[]' | while read -r item; do
+              title=$(echo "$item" | jq -r '.title')
+              slug=$(echo "$item" | jq -r '.slug')
+              full_path="$parent_path/$slug"
 
-              # Create HTML directory
-              HTML_DIR="$ROOT_DIR/html/$slug"
-              mkdir -p "$HTML_DIR"
+              html_dir="$ROOT_DIR/html/$full_path"
+              mkdir -p "$html_dir"
 
-              # Copy PDFs if artifacts exist
-              if [ -d "all-pdfs/pdf-$slug" ]; then
-                cp all-pdfs/pdf-$slug/*.pdf "$HTML_DIR/" || true
-              fi
-
-              # Build all tex files in this directory
-              TEX_DIR="$ROOT_DIR/papers/$slug"
-              if [ -d "$TEX_DIR" ]; then
-                while read -r texfile; do
-                  base_name=$(basename "$texfile" .tex)
-                  out_file="$HTML_DIR/index.html"
-                  pushd "$(dirname "$texfile")" > /dev/null
-                  pandoc "$(basename "$texfile")" -s -M ishtml=true \
-                    --from=latex --to=html5 --citeproc \
-                    --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-                    --bibliography="$BIB_PATH" -c "../style.css" \
-                    -o "$out_file"
-                  popd > /dev/null
-                done < <(find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex")
-              fi
-
-              # Link to PDF (main PDF = any PDF in folder)
+              # Copy PDF if exists
+              PDF_FILE=$(find all-pdfs/pdf-* -type f -name "*$slug*.pdf" | head -n1)
               PDF_LINK=""
-              if compgen -G "$HTML_DIR/*.pdf" > /dev/null; then
-                pdf_file=$(ls "$HTML_DIR"/*.pdf | head -n1)
-                pdf_name=$(basename "$pdf_file")
-                PDF_LINK=" | <a href='./$pdf_name'>[PDF]</a>"
+              [ -n "$PDF_FILE" ] && PDF_LINK=" | <a href='./$(basename "$PDF_FILE")'>[PDF]</a>"
+              [ -n "$PDF_FILE" ] && cp "$PDF_FILE" "$html_dir/"
+
+              # Convert all tex files in this directory
+              TEX_DIR="$ROOT_DIR/papers/$full_path"
+              if [ -d "$TEX_DIR" ]; then
+                find "$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do
+                  base=$(basename "$tex" .tex)
+                  out="$html_dir/index.html"
+                  css_rel=$(realpath --relative-to="$html_dir" "$ROOT_DIR/style.css")
+                  [ -d "$TEX_DIR/figures" ] && cp -r "$TEX_DIR/figures" "$html_dir/"
+                  (cd "$(dirname "$tex")" && \
+                    pandoc "$(basename "$tex")" -s -M ishtml=true --from=latex --to=html5 \
+                    --citeproc --bibliography="$BIB_PATH" -c "$css_rel" -o "$out") || exit 1
+                done
               fi
 
-              echo "<li><a href='./$slug/'>$title</a>$PDF_LINK"
+              # Print item link in index
+              echo "<li><a href='./$full_path/'>$title</a>$PDF_LINK"
 
-              # Recurse if children exist
-              if [ "$children" != "" ]; then
-                child_json=$(echo "$children" | jq -c '.')
-                render_items "$child_json"
+              # Recursively process children
+              has_children=$(echo "$item" | jq '.children | length // 0')
+              if [ "$has_children" -gt 0 ]; then
+                children=$(echo "$item" | jq -c '.children')
+                generate_list "$full_path" "$children"
               fi
 
               echo "</li>"
@@ -127,24 +101,12 @@ jobs:
             echo "</ul>"
           }
 
-          # -------------------------------------------------
-          # Render all sections
-          # -------------------------------------------------
-          SECTION_COUNT=$(jq '.sections | length' papers.json)
-          for ((s=0; s<SECTION_COUNT; s++)); do
-            section_title=$(jq -r ".sections[$s].title" papers.json)
-            items_json=$(jq -c ".sections[$s].items" papers.json)
-
-            echo "<h2>$section_title</h2>" >> html/index.html
-            render_items "$items_json" >> html/index.html
+          # --- Loop over sections ---
+          jq -c '.sections[]' papers.json | while read -r section; do
+            section_title=$(echo "$section" | jq -r '.title')
+            echo "<h2>$section_title</h2>" >> "$INDEX_FILE"
+            items=$(echo "$section" | jq -c '.items')
+            generate_list "" "$items" >> "$INDEX_FILE"
           done
 
-          echo "</body></html>" >> html/index.html
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: html
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+          echo "</body></html>" >> "$INDEX_FILE"
