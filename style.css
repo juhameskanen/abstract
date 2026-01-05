@@ -31,8 +31,8 @@ h1, h2, h3, h4 {
 }
 
 h1 { font-size: 1.8em; border-bottom: 1px solid #eee; }
-h2 { font-size: 1.5em; }
-h3 { font-size: 1.3em; }
+h2 { font-size: 1.4em; }
+h3 { font-size: 1.1em; }
 
 /* --- Links --- */
 a:link { color: #445566; text-decoration: none; }

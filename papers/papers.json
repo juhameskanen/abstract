@@ -2,7 +2,7 @@
   "title": "The Abstract Universe Project (AUP)",
   "sections": [
     {
-      "title": "Highly Scientific Papers",
+      "title": "Strikingly Scientific Papers",
       "items": [
         {
           "title": "A Study in Significant Whitespace in YAML and Mental Collapse",
@@ -41,16 +41,6 @@
         {
           "title": "Quantum Gravity II",
           "slug": "quantum-gravity-2"
-        },
-        {
-          "title": "QFT Divergences",
-            "slug": "qft-divergences",
-	    "children": [
-            {
-              "title": "QBitwave",
-              "slug": "supplementary"
-            }
-	    ]
         }
       ]
     },
@@ -62,8 +52,28 @@
           "slug": "wavefunction-as-compression"
         },
         {
+          "title": "QFT Divergences",
+            "slug": "qft-divergences",
+	    "children": [
+            {
+              "title": "QBitwave",
+              "slug": "supplementary"
+            }
+	    ]
+        },
+        {
           "title": "Emergence of Time",
           "slug": "emergence-of-time"
+        },
+        {
+          "title": "Emergence of GR",
+            "slug": "emergence-of-gr",
+	    "children": [
+            {
+              "title": "Plank Scale and Specral Gravity",
+              "slug": "supplementary"
+            }
+	    ]
         },
         {
           "title": "Theory of Everything",
