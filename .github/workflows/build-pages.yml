@@ -28,11 +28,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc jq
 
-      - name: Download PDF Artifacts
-        uses: actions/download-artifact@v4
+      - name: Download all PDF Artifacts
+        uses: dawidd6/action-download-artifact@v3
         with:
-          name: all-pdfs
-          path: pdf-output
+          workflow: build-pdf.yml
+          run_id: ${{ github.event.workflow_run.id }}
+          path: all-pdfs
+          search_artifacts: true
 
       - name: Run HTML Build Script
         run: |
