@@ -12,16 +12,16 @@
 \maketitle
 
 \begin{abstract}
-We extend our informational quantum-gravity framework by introducing affine Gaussian blobs, which are fully characterized by center, covariance, and internal phase parameters. Each blob’s candidate configurations are evaluated according to the compressibility of its entire history, and the most compressible configurations dominate the probability measure of observer-realized worlds. Iterative resampling of particle positions from the emergent density field, combined with history-aware blob updates, produces trajectories that approximate general-relativistic geodesics. High-frequency divergences are naturally suppressed by the information-theoretic cost of abrupt changes, yielding smooth curvature akin to spacetime warping. This formulation unifies the emergence of inertia, quantum interference, and classical gravitational behavior under a single informational principle of maximal compressibility.
+We extend our informational quantum-gravity framework by introducing affine Gaussian blobs, 
+which are fully characterized by center, covariance, and internal phase parameters. 
+Each blob’s candidate configurations are evaluated according to the compressibility of its entire history, 
+and the most compressible configurations dominate the probability measure of observer-realized worlds. 
+Iterative resampling of particle positions from the emergent density field, combined with history-aware blob updates, 
+produces trajectories that approximate general-relativistic geodesics. High-frequency divergences are naturally 
+suppressed by the information-theoretic cost of abrupt changes, yielding smooth curvature akin to spacetime warping. 
+This formulation unifies the emergence of inertia, quantum interference, and classical gravitational behavior 
+under a single informational principle of maximal compressibility.
 \end{abstract}
-
-
-\ifdefined\ishtml
-\begin{center}
-\small \href{quantum-gravity-covariance.pdf}{Download PDF Version}
-\end{center}
-\fi
-
 
 
 \section{Introduction}
@@ -70,6 +70,22 @@ The simulation proceeds through iterative loops analogous to solving Einstein’
     \]
 \end{enumerate}
 
+
+\ifdefined\ishtml
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/quantum_gravity_2.gif}
+    \caption{Simulation of emergent gravity and Quantum Mechanics}
+\end{figure}
+\else
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/quantum_gravity_2.png}
+    \caption{Emergent gravity and Quantum Mechanics: Visualization of the informational selection process.}
+\end{figure}
+\fi
+
+
 \section{Emergent GR-Like Behavior}
 Particle trajectories follow geodesics of the emergent density field. High-frequency divergences are automatically suppressed because abrupt changes in $\mathbf{\Sigma}_i(t)$ are informationally costly. Collapsing blobs are stretched dynamically, producing smooth curvature analogous to spacetime warping in GR. Trajectories far from high-density blobs remain nearly straight, reproducing asymptotically flat space.
 
@@ -80,8 +96,8 @@ By extending Gaussian blobs to full affine transformations and evaluating config
 \section*{Simulation Software}
 
 \begin{itemize}
-\item \href{simulations/quantum-gravity.py}{quantum-gravity.py: Quantum-gravity}
 \item \href{simulations/quantum-gravity2.py}{quantum-gravity2.py: Quantum-gravity 2}
+\item Qbitwave python package
 \end{itemize}
 
 
