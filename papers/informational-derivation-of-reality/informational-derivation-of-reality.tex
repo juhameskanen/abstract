@@ -14,10 +14,9 @@
 \begin{abstract}
   We show that humans must be formal axiomatic systems if only four assumptions hold.
   From this, we proof that simulated humans must instantiate subjective experience, and time is not a fundamental property of the universe
-  but an emergent, internal property of the observer. These results establish a strict \textbf{ontological equivalence}:
-  the computer and the virtual simulated universe are not causally related, but merely different arrangements of the same finite information set.
-  Reality is therefore fundamentally abstract and substrate-independent, emerging from an ensemble of informational configurations rather than from a physical substrate.
-  The resulting claims are falsifiable.
+  but an emergent, internal property of the observer. We derive that the computer and the simulated observer are not causally related,
+  but merely different arrangements of information. From these we show that the universe is fundamentally abstract and substrate-independent,
+  emerging from information rather than from a physical substrate. The resulting claims are falsifiable.
 \end{abstract}
 
   
@@ -31,18 +30,18 @@
 The argument begins with four axioms that serve as the premises for the entire derivation.
 
 \subsection*{Axiom 1: Genetic Encoding of Subjective Experience}
-The human genome encodes sufficient information to construct a conscious, pain-sensitive human.
+DNA is the blueprint of a conscious, pain-sensitive human. 
 \[
 A_1: D \rightarrow H \rightarrow S
 \]
 (Where $D$ is the DNA/Genome, $H$ is the human organism, and $S$ is subjective experience.)
 
 \subsection*{Axiom 2: Physicality and Axiomatic Law}
-DNA and the human organism are composed solely of ordinary physical matter governed by physical laws ($P$).
-
+DNA, the human organism, and the surrounding environment are composed solely of ordinary physical matter governed by physical laws ($P$).
 \[
-A_2: H \in \text{Axiomatic System}(P, D)
+A_2: (H, U) \in \text{Axiomatic System}(P, D)
 \]
+(Where $U$ denotes the physical environment required to support $H$, and $P$ denotes the governing physical laws.)
 
 \subsection*{Axiom 3: Generalized Church-Turing Thesis Holds}
 
@@ -51,12 +50,12 @@ A_3: P \text{ is Axiomatic} \implies \exists H' \text{ s.t. } \text{Trace}(H') \
 \]
 (Where $\cong$ denotes an isomorphism of causal/relational structures.)
 
-\subsection*{Axiom 4: Causal Efficacy of Pain}
-Subjective experience ($S$, e.g., pain) is a \textbf{causally efficacious} property of the human system. It is not an epiphenomenon, and thus has measurable, behavioral effects.
+\subsection*{Axiom 4: Pain Affects Behavior}
+A human with subjective experience ($S$, e.g., pain) behaves differently than the same human without it.
 \[
-A_4: S \text{ is causally efficacious.}
+H + S \neq H
 \]
-If $H' \equiv H$, then $H'$ must have $S$ to maintain identical behavior.
+If a simulation $H'$ is identical to $H$ in behavior, it must also include $S$.
 
 \section{Deduction 1: Substrate Independence and Time as an Internal Property of the Observer}
 
@@ -78,12 +77,12 @@ One can gradually optimize the code by introducing lookup tables, eventually rep
 In this limit, the external runtime \(E_{\text{ext}}\) becomes zero in the sense that no state transitions are executed; the complete execution trace exists as static data.
 One can therefore ask: does Alice's consciousness still persist in $T_{\text{data}}$?
 
-If consciousness were to cease in $T_{\text{data}}$, it would imply that $E_{\text{int}}$ depends on $E_{\text{ext}}$, which necessitates a minimum code/data ratio for subjective experience.
-This minimum ratio would be a \textbf{new, non-physical constant} imposed on $A_2$, leading to a contradiction.
+If consciousness were to cease in $T_{\text{data}}$, it would necessitates a minimum code/data ratio for subjective experience.
+This minimum ratio would be a new, non-physical constant imposed on $A_2$, leading to a contradiction.
 
 \begin{quote}
   \textbf{Conclusion:} Consciousness can emerge from pure static data.
-  Time and subjective experience ($S$) must emerge solely from the relationships among informational states, not from the external runtime.
+  Time and subjective experience ($S$) must emerge solely from information.
 \end{quote}
 
 \subsection{The Multi-threaded Argument}
@@ -91,13 +90,14 @@ This minimum ratio would be a \textbf{new, non-physical constant} imposed on $A_
 Consider a multi-threaded computer running two DNA simulations, $\tau_A$ (Alice) and $\tau_B$ (Bob), concurrently, with a minimal time slice of one CPU cycle per thread.
 The execution trace of the computer is then an interleaved sequence of segments drawn from both $\tau_A$ and $\tau_B$.
 As the number of threads (simulated observers) increases without bound, the resulting execution trace asymptotically approaches white noise.
-Consequently, bits originating from $\tau_A$ are separated by increasingly large intervals of unrelated data.
+Consequently, each bit originating from $\tau_A$ are separated by increasingly large intervals of unrelated data.
 
-\subsubsection*{The Threshold of Subjective Continuity}
-Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the interleaving becomes extreme, one must define a specific \textbf{thread density} or \textbf{bit-contiguity threshold} required for subjectivity. Such a threshold would constitute a new physical constant, which contradicts the completeness of $A_2$.
+Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the number of threads increases, one must define a
+specific thread density or bit-contiguity threshold required for subjectivity. Such a threshold would constitute a new physical constant,
+which contradicts the completeness of $A_2$.
 
 \begin{quote}
-\textbf{Conclusion:} Conscious experience can arise from static white noise, without requiring any external computation or observation.
+\textbf{Conclusion:} Conscious experience can arise from static white noise.
 \end{quote}
 
 \section{The Functionalist Proof by Contradiction}
@@ -121,7 +121,7 @@ Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ v
 Let $I$ be a simulation encoding a complete observer history (e.g., Alice). 
 Let $R_A$, of length $n$ bits, denote the static execution trace of $I$ as observed externally, 
 and let $R_B$ denote the same sequence as internally experienced as spacetime and subjective states. 
-Static data does not encode an intrinsic temporal ordering; therefore, one cannot argue that one gives rise to the other. 
+Static data $R_A$ does not encode an intrinsic temporal ordering; therefore, one cannot argue that one gives rise to the other. 
 The relationship between $R_A$ and $I$ must thus be representational rather than causal. 
 $R_A$ and $I$ are two arrangements of the same information, consisting of $n$ bits, 
 and are therefore capable of describing up to $2^n$ distinct configurations.
@@ -148,7 +148,7 @@ The effect of pain can be measured just like an effect of physical forces can be
 
 \section*{Discussion}
 
-\subsection{The Hard Problem of Consciousness and the Hollow Simulation Objection}
+\subsection{The Hollow Simulation Objection}
 
 A common objection to functionalist and computational accounts of mind is the so-called \emph{hard problem of consciousness} \cite{Chalmers1996}.
 In this context, it is often claimed that a simulated human, even if behaviorally and functionally identical to a biological human, could nevertheless be ``hollow''—that is, it could lack subjective experience while still producing identical outward behavior.
@@ -159,18 +159,23 @@ Formally, this objection asserts the possibility of a system $H'$ such that
 \]
 where $H$ is a biological human and $S$ denotes subjective experience.
 
-Within the present axiomatic framework, this possibility is excluded. By Axiom~2, the biological human $H$ is a formal axiomatic system whose state transitions are fully determined by physical law and initial conditions. By Axiom~3, there exists a formal representation $H'$ whose execution trace is isomorphic to that of $H$, preserving all causally relevant internal relations. By Axiom~4, subjective experience is a causally efficacious component of the system, contributing to observable behavior.
+By Axiom~2, the biological human $H$ is a formal axiomatic system whose state transitions are fully determined by physical law and initial conditions. By Axiom~3, there exists a formal representation $H'$ whose execution trace is isomorphic to that of $H$, preserving all causally relevant internal relations. By Axiom~4, subjective experience is a causally efficacious component of the system, contributing to observable behavior.
 
 If $H'$ were to lack subjective experience while remaining behaviorally identical to $H$, then subjective experience would not be a necessary input to the causal function generating behavior. This would render subjective experience epiphenomenal, directly contradicting Axiom~4. 
 
 \subsection{Quantum Computers}
 
 We have considered two thought experiments run on classical computers. If conscious experience can be duplicated on classical computers, we argue it can also be
-duplicated on quantum computers.
+duplicated on quantum computers. This follows directly from substrate independence: quantum computation represents an alternative physical realization of the same formal state-transition structure.
 
-This follows directly from substrate independence: quantum computation represents an alternative physical realization of the same formal state-transition structure.
+\subsection*{Numerical Precision and Consciousness}
 
+As long as physical laws are instantiated with sufficient fidelity for DNA and organismal processes to operate, the observer remains conscious.
 
+Let $\epsilon$ denote the numerical error in simulating physical law. As long as $\epsilon \leq \epsilon_{\text{DNA}}$, sufficient to reproduce all DNA-mediated processes, the simulated observer $H'$ remains conscious; any smaller $\epsilon_{\min}$ required to preserve consciousness would constitute a new physical constant, contradicting $A_2$:
+\[
+\epsilon \leq \epsilon_{\text{DNA}} \implies S(H') \neq \emptyset
+\]
 
 \section{Conclusions}
 
