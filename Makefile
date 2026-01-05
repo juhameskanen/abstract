@@ -1,134 +1,50 @@
-SHELL := /bin/bash
-
 # -- Configuration --
-
-ROOT_DIR := $(shell pwd)
-PAPERS_DIR := papers
-PDF_OUT := pdf-output
-HTML_OUT := html
-BIB_FILE := $(ROOT_DIR)/papers/references.bib
-STYLE_CSS := style.css
-
-LATEXMK := latexmk -pdf -interaction=nonstopmode -halt-on-error
-PANDOC := pandoc -s -M ishtml=true --from=latex --to=html5 --citeproc \
-          --mathjax=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
+SCRIPTS_DIR := scripts
+PDF_OUT     := pdf-output
+HTML_OUT    := html
+PAPERS_JSON := papers/papers.json
 
 # -- Phony Targets --
+.PHONY: all pdf html clean distclean help
 
-.PHONY: all pdf html clean distclean list-papers
-
+# Default target: build everything
 all: pdf html
 
-# ------------------------------------------------------------
-# PDF BUILD
-# ------------------------------------------------------------
+# 1. Build PDFs
+# This calls your specialized script which handles the jq-flattening and latexmk
+pdf:
+	@echo "==> Building PDFs via $(SCRIPTS_DIR)/build-pdfs.sh..."
+	@chmod +x $(SCRIPTS_DIR)/build-pdf.sh
+	@./$(SCRIPTS_DIR)/build-pdf.sh
 
-pdf: $(PDF_OUT)
-	@echo "Building PDFs..."
-	@jq -r '[.sections[].items[] as $$item | $$item.slug as $$slug | (if ($$item.children? | length > 0) then $$item.children[] | "\($$slug)/\(.slug)" else $$slug end)] | .[]' papers.json | while read -r SLUG; do \
-		echo "==> Building PDFs for $$SLUG"; \
-		$(MAKE) pdf-paper PAPER="$$SLUG"; \
-	done
-
-$(PDF_OUT):
-	mkdir -p $(PDF_OUT)
-
-pdf-paper:
-	@SLUG=$(PAPER); \
-	FULL_DIR=$(PAPERS_DIR)/$$SLUG; \
-	if [ ! -d "$$FULL_DIR" ]; then echo "ERROR: Folder $$FULL_DIR not found"; exit 1; fi; \
-	find "$$FULL_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
-		echo "Compiling $$tex"; \
-		DIR_PATH=$$(dirname "$$tex"); \
-		BASE_NAME=$$(basename "$$tex" .tex); \
-		cd "$$DIR_PATH"; \
-		$(LATEXMK) "$$BASE_NAME.tex"; \
-		SAFE_SLUG=$$(echo "$$SLUG" | sed 's|/|-|g'); \
-		DEST_NAME="$$SAFE_SLUG-$$BASE_NAME.pdf"; \
-		cp "$$BASE_NAME.pdf" "$(ROOT_DIR)/$(PDF_OUT)/$$DEST_NAME"; \
-		cd - > /dev/null; \
-	done
-
-# ------------------------------------------------------------
-# HTML BUILD
-# ------------------------------------------------------------
-
+# 2. Build HTML
+# Depends on 'pdf' so that the HTML script finds the files in $(PDF_OUT)
 html: pdf
-	rm -rf $(HTML_OUT)
-	mkdir -p $(HTML_OUT)
-	touch $(HTML_OUT)/.nojekyll
-	cp $(STYLE_CSS) $(HTML_OUT)/
+	@echo "==> Building HTML via $(SCRIPTS_DIR)/build-pages.sh..."
+	@chmod +x $(SCRIPTS_DIR)/build-pages.sh
+	@./$(SCRIPTS_DIR)/build-pages.sh
 
-	@# Start index.html
-	TITLE=$$(jq -r '.title' papers.json); \
-	echo "<html><head><title>$$TITLE</title><meta name='color-scheme' content='light dark'><link rel='stylesheet' href='style.css'></head><body class='bodytext'><h1>$$TITLE</h1>" > $(HTML_OUT)/index.html
+# -- Cleanup --
 
-	@# Recursive function
-	process_items() { \
-		ITEMS_JSON="$1"; \
-		PARENT_SLUG="$2"; \
-		echo "<ul>" >> $(HTML_OUT)/index.html; \
-		echo "$$ITEMS_JSON" | jq -c '.[]' | while read -r item; do \
-			TITLE=$$(echo "$$item" | jq -r '.title'); \
-			SLUG=$$(echo "$$item" | jq -r '.slug'); \
-			if [ -z "$$PARENT_SLUG" ]; then \
-				FULL_SLUG="$$SLUG"; \
-			else \
-				FULL_SLUG="$$PARENT_SLUG/$$SLUG"; \
-			fi; \
-			HTML_DIR="$(HTML_OUT)/$$FULL_SLUG"; \
-			mkdir -p "$$HTML_DIR"; \
-			TEX_DIR="$(PAPERS_DIR)/$$FULL_SLUG"; \
-			SAFE_SLUG=$$(echo "$$FULL_SLUG" | sed 's|/|-|g'); \
-			PDF_FILE=$$(find $(PDF_OUT) -type f -name "*$$SAFE_SLUG*.pdf" | head -n1); \
-			PDF_LINK=""; \
-			if [ -n "$$PDF_FILE" ]; then \
-				cp "$$PDF_FILE" "$$HTML_DIR/"; \
-				PDF_BASENAME=$$(basename "$$PDF_FILE"); \
-				PDF_LINK=" | <a href='./$$PDF_BASENAME'>[PDF]</a>"; \
-			fi; \
-			# Convert all .tex files if folder exists \
-			if [ -d "$$TEX_DIR" ]; then \
-				find "$$TEX_DIR" -name "*.tex" ! -name "common.tex" ! -name "glossary.tex" | while read -r tex; do \
-					BASE=$$(basename "$$tex" .tex); \
-					[ -d "$$TEX_DIR/figures" ] && cp -r "$$TEX_DIR/figures" "$$HTML_DIR/"; \
-					CSS_REL=$$(realpath --relative-to="$$HTML_DIR" "$(ROOT_DIR)/style.css"); \
-					mkdir -p "$$HTML_DIR"; \
-					$(PANDOC) "$$tex" -o "$$HTML_DIR/index.html" --bibliography="$(BIB_FILE)" -c "$$CSS_REL"; \
-				done; \
-			fi; \
-			echo "<li><a href='./$$FULL_SLUG/'>$$TITLE</a>$$PDF_LINK" >> $(HTML_OUT)/index.html; \
-			CHILDREN=$$(echo "$$item" | jq -c '.children // []'); \
-			if [ "$$(echo "$$CHILDREN" | jq 'length')" -gt 0 ]; then \
-				process_items "$$CHILDREN" "$$FULL_SLUG"; \
-			fi; \
-			echo "</li>" >> $(HTML_OUT)/index.html; \
-		done; \
-		echo "</ul>" >> $(HTML_OUT)/index.html; \
-	}; \
-	# Run for each top-level section \
-	jq -c '.sections[]' papers.json | while read -r section; do \
-		SECTION_TITLE=$$(echo "$$section" | jq -r '.title'); \
-		echo "<h2>$$SECTION_TITLE</h2>" >> $(HTML_OUT)/index.html; \
-		ITEMS=$$(echo "$$section" | jq -c '.items'); \
-		process_items "$$ITEMS" ""; \
-	done
-
-# ------------------------------------------------------------
-# Cleanup
-# ------------------------------------------------------------
-
+# Removes LaTeX build artifacts from the source folders
 clean:
-	find $(PAPERS_DIR) -type f \( -name "*.aux" -o -name "*.bbl" -o -name "*.bcf" \
+	@echo "Cleaning up LaTeX build artifacts..."
+	@find papers -type f \( -name "*.aux" -o -name "*.bbl" -o -name "*.bcf" \
 		-o -name "*.blg" -o -name "*.log" -o -name "*.out" \
-		-o -name "*.run.xml" -o -name "*.toc" \) -delete
+		-o -name "*.run.xml" -o -name "*.toc" -o -name "*.fdb_latexmk" \
+		-o -name "*.fls" \) -delete
 
+# Removes the generated output directories entirely
 distclean: clean
-	rm -rf $(PDF_OUT) $(HTML_OUT)
+	@echo "Removing generated folders ($(PDF_OUT) and $(HTML_OUT))..."
+	@rm -rf $(PDF_OUT) $(HTML_OUT)
 
-# ------------------------------------------------------------
-# Install build tools
-# ------------------------------------------------------------
-
-prerequisites:
-	sudo apt-get install jq pandoc latexmk biber
+# Helper for common commands
+help:
+	@echo "The Abstract Universe Project - Build System"
+	@echo "-------------------------------------------"
+	@echo "make all       - Build both PDFs and HTML"
+	@echo "make pdf       - Build PDFs only"
+	@echo "make html      - Build HTML only (includes PDF linking)"
+	@echo "make clean     - Remove LaTeX temp files"
+	@echo "make distclean - Remove all generated output"
