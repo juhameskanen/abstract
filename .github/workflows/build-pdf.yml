@@ -22,8 +22,8 @@ jobs:
 
       - name: Run PDF Build Script
         run: |
-          chmod +x scripts/build_pdfs.sh
-          ./scripts/build_pdfs.sh
+          chmod +x scripts/build-pdf.sh
+          ./scripts/build-pdf.sh
 
       - name: Upload All PDFs
         uses: actions/upload-artifact@v4
