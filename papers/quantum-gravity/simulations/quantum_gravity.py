@@ -365,7 +365,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Probabilistic Gravity Simulation with MDL Inertia")
     parser.add_argument("--sigma", type=float, default=0.12, help="Blob sigma")
     parser.add_argument("--particles", type=int, default=8192, help="Number of particles")
-    parser.add_argument("--steps", type=int, default=400, help="Number of steps")
+    parser.add_argument("--steps", type=int, default=200, help="Number of steps")
     args = parser.parse_args()
 
     sim = WavefunctionGravitySim(
