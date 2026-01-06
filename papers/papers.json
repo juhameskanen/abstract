@@ -14,15 +14,15 @@
       "title": "Core Papers",
       "items": [
         {
-          "title": "Informational Derivation of Reality",
+          "title": "Paper-1: Informational Derivation of Reality",
           "slug": "informational-derivation-of-reality"
         },
         {
-          "title": "Singularities as Zero-Entropy States",
+          "title": "Paper-2: Singularities as Zero-Entropy States",
           "slug": "black-hole-singularities"
         },
         {
-          "title": "Emergence of Spacetime",
+          "title": "Paper-3: Emergence of Spacetime",
           "slug": "emergence-of-spacetime"
 	}
       ]

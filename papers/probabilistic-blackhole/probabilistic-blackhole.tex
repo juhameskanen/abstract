@@ -12,10 +12,10 @@
 \maketitle
 
 \begin{abstract}
-  Building on the identification of zero-entropy singularities (Paper~II) and the emergence of structure from increasing entropy (Paper~III), this paper explores the hypothesis that the interior geometry of a black hole is smooth and information-free, rather than pathological.
-  We model the interior as a zero-entropy state in which no distinguishable microstructures exist, and propose a lognormal distribution for effective curvature and particle density just outside this state.
-  In this framework, the singularity becomes a probability void: fluctuations and particle trajectories vanish at zero entropy, while emergent structures accumulate at finite distance.
-  We further outline a probabilistic mapping from information-theoretic bitflips to semiclassical stress-energy, connecting stochastic matter fields to Einstein’s equations in expectation.
+  Building on the identification of zero-entropy singularities (Paper~II) and the observation that structures emerge from increasing entropy (Paper~III),
+  this paper explores the connection between emergent microstructure density in an information-theoretic view and matter-energy in General Relativity.
+  We implement a probabilistic mapping from information-theoretic bitflips to semiclassical stress-energy, providing a framework in which stochastic matter
+  fields determine the spacetime metric in expectation through Einstein’s equations.
 \end{abstract}
 
   
@@ -27,7 +27,8 @@
 
 
 \section{Introduction}
-The standard Schwarzschild solution predicts infinite curvature at the singularity. To reconcile these views, we replace the interior solution with a lognormal-shaped distribution of effective curvature, anchored at zero entropy. 
+The standard Schwarzschild solution predicts infinite curvature at the singularity.
+To reconcile these views, we replace the interior solution with a lognormal-shaped distribution of effective curvature, anchored at zero entropy. 
 
 In the semi-classical gravity framework, the Einstein field equations are
 \[
@@ -52,13 +53,15 @@ describing a well-defined geometry.
     \label{fig:schwarzschild-lognormal}
 \end{figure}
 
-\section{Conclusions}
+\section{Discussion}
 Fitting of lognormal to singularity and event horizon is arbitrary in form, but it has the virtue of dissolving the singularity, preserving information, and
 yielding well-behaved particle trajectories inside the horizon.
 
-The lognormal distribution suggests that the probability of particles existing rises sharply just outside this zero-entropy state. This means there is a massive concentration of information in the region immediately surrounding the singularity. This could be a testable prediction for a future theory of quantum gravity.
+The lognormal distribution suggests that the probability of particles existing rises sharply just outside this zero-entropy state.
+This means there is a massive concentration of information in the region immediately surrounding the singularity. This could be a testable prediction for a future theory of quantum gravity.
 
-Unlike black holes, where the interior is hidden behind an event horizon, the primordial singularity of our universe is observable indirectly. The early universe leaves its imprint on the cosmic microwave background (CMB) and large-scale structure. From an information-theoretic perspective:
+Unlike black holes, where the interior is hidden behind an event horizon, the primordial singularity of our universe is observable indirectly.
+The early universe leaves its imprint on the cosmic microwave background (CMB) and large-scale structure. From an information-theoretic perspective:
 \begin{itemize}
     \item The Big Bang corresponds to a zero-entropy state, where no emergent particles or structures exist.
     \item As entropy increases, geometric structure unfolds, producing particles whose abundances follow a lognormal distribution.
@@ -68,12 +71,13 @@ Unlike black holes, where the interior is hidden behind an event horizon, the pr
 
 Thus, while black hole interiors remain inaccessible, the cosmological singularity provides a natural laboratory for testing predictions of the information-theoretic framework.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/cmb.png}
-    \caption{Emergence of Structures from Increasing Entropy (Lognormal Distribution).}
-    \label{fig:cmb}
-\end{figure}
+
+\section{Conclusion}
+
+Even with a perfectly fitted metric derived from emergent microstructure densities, the overall spacetime geometry remains effectively indistinguishable
+from the classical GR solution at all radii outside an extremely small neighborhood near the singularity.
+The singularity itself is a zero-entropy fixed point, corresponding to a smooth, information-free vacuum. Any modifications to the metric near the center are
+secondary refinements and do not alter the essential causal or geometric structure predicted by General Relativity.
 
 
 
@@ -152,11 +156,7 @@ G_{ab}(x) = 8\pi G\,\mathbb{E}[T_{ab}[N]] + \text{(finite fluctuation terms)}
 \end{center}
 
 
-\section{Future Work}
-Fully probabilistic information theoretical model of black hole, based on semiclassical-gravity:
-\begin{itemize}
-    \item Entropy relative to surface area of the event horizon.
-\end{itemize}
+
 
 \section*{Simulation Code}
 

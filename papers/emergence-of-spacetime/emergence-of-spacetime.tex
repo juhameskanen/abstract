@@ -12,9 +12,8 @@
 \maketitle
 
 \begin{abstract}
-  Building on the ontological equivalence of informational and physical configurations (Paper~I) and the identification of black hole singularities as zero-entropy fixed points (Paper~II),
-  we investigate the emergence and expansion of spacetime as a consequence of increasing entropy.
-  Using a minimal computational model, we evolve a zero-entropy bitstring through random mutations, interpreting its states as geometric structures in three-dimensional space.
+  Building on the conclusion of Paper II—that collapsing spacetime geometry corresponds to vanishing entropy—we investigate the time-reversed process. We hypothesize that the emergence and expansion of spacetime are consequences of increasing entropy. Using a minimal computational model, we evolve a zero-entropy bitstring through random mutations,
+  interpreting its states as geometric structures in three-dimensional space.
   As the system’s entropy increases, spacetime unfolds, and hierarchical particle-like structures emerge, reproducing key features of matter organization and relative scale invariance.
   Our results suggest that cosmic expansion can be understood as a geometric manifestation of increasing informational entropy, with complexity and structure arising naturally from simple, initially smooth states.
   This framework reinforces the informational perspective on spacetime and provides a formal, falsifiable link between entropy growth and the emergence of matter and geometry.
@@ -29,9 +28,11 @@
 
 
 \section{Entropy as a Driver of Expansion}
+
+\subsection{Geometric Particle filter}
+
 We define an execution trace $S_t$, $t = 0 \ldots n$, where each $S_t$ is a binary string of fixed length $L$. Beginning from a state of zero Shannon entropy (an all-zero string), we evolve $S_t$ via random bit-flip mutations that incrementally increase its entropy.
 
-\subsection{Geometric filter}
 Each $S_t$ is geometrically interpreted through various decoding schemes $D: \{0,1\}^L \to \mathbb{R}^d$. This mapping results in geometric points representing the 3D Spacetime fabric.
 
 We define a hierarchy of elementary structures emerging from the spacetime fabric as follows:
@@ -62,6 +63,7 @@ We extract and count the number of these elementary structures at each timestep.
     \item At higher entropy, elementary particles, atoms and molecules begin to appear, with their counts following lognormal-like trend.
 \end{itemize}
 
+
 \subsection{Recursive pattern matching}
 An alternative definition of emergent particles is given by recursive bit-pattern detection. Here, the execution trace $S_t$ itself is treated as a one dimensional candidate space of particles, with no explicit geometric mapping required.
 
@@ -82,24 +84,23 @@ By counting the number of recursive particles at each entropy level, we again ob
     \label{fig:entropy-matter}
 \end{figure}
 
-\section{Conclusions}
-These models are minimal and arbitrary, and as such incapable to serve as any faithful models of the real universe. However, they do reveal a few interesting features.
+\section{Discussion}
 
 A central question in cosmology is why the universe began in such an exceptionally ordered state. Traditional approaches assume that the initial state is not perfectly smooth, constrained only by quantum uncertainty. However, in the informational framework presented here, the apparent necessity of an initially ``rough'' state is removed.
 
-Beginning from a perfectly smooth, zero-entropy configuration, the universe develops complexity through the unfolding of bitstring information under selection filters. This mechanism naturally produces particle-like microstructures, whose statistical properties follow lognormal distributions. A central implication of this is that the singularity at zero entropy is neither undefined nor pathological. At this boundary condition, there is no information and no emergent particles, nor can falling particles ever reach the singularity---the probability a particle finding themselves from the singularity is zero.
+Beginning from a perfectly smooth, zero-entropy configuration, the universe develops complexity through the unfolding of bitstring information under selection filters. This mechanism naturally produces particle-like microstructures, whose statistical properties follow lognormal distributions. A central implication of this is that the singularity at zero entropy is neither undefined nor pathological.
+
+In this sense, the vanishing-entropy limit implies a form of geometric smoothness that is independent of any particular coordinate system or dynamical description. With no information available to define distinguishable microstructures, the singular state cannot encode physical irregularities, even if classical general relativity breaks down. This aligns naturally with the Hartle–Hawking no-boundary proposal, in which the initial singularity is replaced by a smooth, featureless Euclidean geometry.
+
+
+\section{Conclusions}
 
 The expansion of the universe and the increase of entropy might be two sides of the same coin---two distinct arrangements of the same information. The universe expands because its entropy increases. Expanding universe is geometric interpretation of information of increasing entropy.
 
-\section{Future work}
-Although this study presents only a minimal toy model of our universe, it demonstrates how a universe like ours could arise. At the same time, it leaves several important open questions:
-\begin{enumerate}
-    \item How can the structures that emerge from random bit flips attract each other (gravity), and ``wave'' according to quantum mechanical wave function?
-    \item If a singularity corresponds to a state of vanishing entropy --- and is therefore incapable of supporting well-defined particles, with spacetime being smooth rather than singular as usually assumed --- then perhaps high-energy effects, such as those attributed to virtual particles in semi-classical gravity, could also be interpreted in this way.
-\end{enumerate}
+
 
 \section{Simulation Software}
-The underlying logic for this model is implemented in \texttt{emergence\_of\_spacetime.py}.
+
 
 \begin{itemize}
 \item \href{simulations/emergence\_of\_spacetime.py}{emergence\_of\_spacetime.py: Expansion as geometric interpretation of increasing entropy}
