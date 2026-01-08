@@ -1,0 +1,44 @@
+\documentclass[11pt]{book}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\newcommand{\entropy}{S}
+\newcommand{\opponent}{my wife}
+\newcommand{\aside}[1]{[\emph{\opponent}: ``#1'']}
+\newcommand{\paper}[1]{[\emph{}: ``#1'']}
+
+
+
+\graphicspath{{cover/}{chapters/}{chapters/figures/}{../common/}}
+
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib}
+
+\begin{document}
+
+% --- COVER (PDF page 1) ---
+\input{cover/cover}
+
+% --- FRONT MATTER ---
+\frontmatter
+\input{chapters/preface}
+\tableofcontents
+
+% --- MAIN CONTENT ---
+\mainmatter
+\input{chapters/introduction}
+\input{chapters/database-software}
+\input{chapters/soul}
+\input{chapters/magic}
+\input{chapters/dna}
+\input{chapters/humans-as-axiomatic-systems}
+\input{chapters/dna-simulation}
+
+% --- BACK MATTER ---
+\backmatter
+\printbibliography
+
+\end{document}

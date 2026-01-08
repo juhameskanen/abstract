@@ -1,0 +1,223 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{chalmers1995facing}{article}{}
+      \name{author}{1}{}{%
+        {{hash=dd40036cdd95b093c7f871fe3bd7b74a}{%
+           family={Chalmers},
+           familyi={C\bibinitperiod},
+           given={David\bibnamedelima J},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{fullhash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{bibnamehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{authorbibnamehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{authornamehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{authorfullhash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \field{extraname}{1}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Consciousness Studies}
+      \field{number}{3}
+      \field{title}{Facing up to the problem of consciousness}
+      \field{volume}{2}
+      \field{year}{1995}
+      \field{pages}{200\bibrangedash 219}
+      \range{pages}{20}
+    \endentry
+    \entry{Chalmers2015}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=dd40036cdd95b093c7f871fe3bd7b74a}{%
+           family={Chalmers},
+           familyi={C\bibinitperiod},
+           given={David\bibnamedelima J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=6a46e3c8534eb4596d7b306e1f2583d4}{%
+           family={Alter},
+           familyi={A\bibinitperiod},
+           given={Torin},
+           giveni={T\bibinitperiod}}}%
+        {{hash=ebcfbafe406d32b7c289b6c238f06c6f}{%
+           family={Nagasawa},
+           familyi={N\bibinitperiod},
+           given={Yujin},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{fullhash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{bibnamehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{authorbibnamehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{authornamehash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{authorfullhash}{dd40036cdd95b093c7f871fe3bd7b74a}
+      \strng{editorbibnamehash}{6c7dc36c268dd13e279367a45305c5e2}
+      \strng{editornamehash}{6c7dc36c268dd13e279367a45305c5e2}
+      \strng{editorfullhash}{6c7dc36c268dd13e279367a45305c5e2}
+      \field{extraname}{2}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Consciousness in the Physical World: Perspectives on Russellian Monism}
+      \field{title}{Panpsychism and Panprotopsychism}
+      \field{year}{2015}
+      \field{pages}{246\bibrangedash 276}
+      \range{pages}{31}
+    \endentry
+    \entry{faizal2025}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9b88cc581233275f8fc7656c8b793bd8}{%
+           family={Faizal},
+           familyi={F\bibinitperiod},
+           given={Firstname},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{9b88cc581233275f8fc7656c8b793bd8}
+      \strng{fullhash}{9b88cc581233275f8fc7656c8b793bd8}
+      \strng{bibnamehash}{9b88cc581233275f8fc7656c8b793bd8}
+      \strng{authorbibnamehash}{9b88cc581233275f8fc7656c8b793bd8}
+      \strng{authornamehash}{9b88cc581233275f8fc7656c8b793bd8}
+      \strng{authorfullhash}{9b88cc581233275f8fc7656c8b793bd8}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal Name}
+      \field{number}{YY}
+      \field{title}{Title of the Article}
+      \field{volume}{XX}
+      \field{year}{2025}
+      \field{pages}{pp\bibrangedash pp}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.XXXX/XXXXXXXXXX
+      \endverb
+    \endentry
+    \entry{Goff2019}{book}{}
+      \name{author}{1}{}{%
+        {{hash=bf9a83e1bbe1e0f2de292c14854dd927}{%
+           family={Goff},
+           familyi={G\bibinitperiod},
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Pantheon}%
+      }
+      \strng{namehash}{bf9a83e1bbe1e0f2de292c14854dd927}
+      \strng{fullhash}{bf9a83e1bbe1e0f2de292c14854dd927}
+      \strng{bibnamehash}{bf9a83e1bbe1e0f2de292c14854dd927}
+      \strng{authorbibnamehash}{bf9a83e1bbe1e0f2de292c14854dd927}
+      \strng{authornamehash}{bf9a83e1bbe1e0f2de292c14854dd927}
+      \strng{authorfullhash}{bf9a83e1bbe1e0f2de292c14854dd927}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Galileo's Error: Foundations for a New Science of Consciousness}
+      \field{year}{2019}
+    \endentry
+    \entry{penrose1994shadows}{book}{}
+      \name{author}{1}{}{%
+        {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%
+           family={Penrose},
+           familyi={P\bibinitperiod},
+           given={Roger},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{fullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{bibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{authorbibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{authornamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{authorfullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Shadows of the Mind: A Search for the Missing Science of Consciousness}
+      \field{year}{1994}
+    \endentry
+    \entry{Strawson2006}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8b050b0b3c4e861b8b6a46211810e349}{%
+           family={Strawson},
+           familyi={S\bibinitperiod},
+           given={Galen},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b050b0b3c4e861b8b6a46211810e349}
+      \strng{fullhash}{8b050b0b3c4e861b8b6a46211810e349}
+      \strng{bibnamehash}{8b050b0b3c4e861b8b6a46211810e349}
+      \strng{authorbibnamehash}{8b050b0b3c4e861b8b6a46211810e349}
+      \strng{authornamehash}{8b050b0b3c4e861b8b6a46211810e349}
+      \strng{authorfullhash}{8b050b0b3c4e861b8b6a46211810e349}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Consciousness Studies}
+      \field{number}{10-11}
+      \field{title}{Realistic Monism: Why Physicalism Entails Panpsychism}
+      \field{volume}{13}
+      \field{year}{2006}
+      \field{pages}{3\bibrangedash 31}
+      \range{pages}{29}
+    \endentry
+    \entry{Whitehead1929}{book}{}
+      \name{author}{1}{}{%
+        {{hash=9131dcc0b7c52c07d7d95e489ba0a0f6}{%
+           family={Whitehead},
+           familyi={W\bibinitperiod},
+           given={Alfred\bibnamedelima North},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Macmillan}%
+      }
+      \strng{namehash}{9131dcc0b7c52c07d7d95e489ba0a0f6}
+      \strng{fullhash}{9131dcc0b7c52c07d7d95e489ba0a0f6}
+      \strng{bibnamehash}{9131dcc0b7c52c07d7d95e489ba0a0f6}
+      \strng{authorbibnamehash}{9131dcc0b7c52c07d7d95e489ba0a0f6}
+      \strng{authornamehash}{9131dcc0b7c52c07d7d95e489ba0a0f6}
+      \strng{authorfullhash}{9131dcc0b7c52c07d7d95e489ba0a0f6}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Corrected Edition, Free Press, 1978}
+      \field{title}{Process and Reality}
+      \field{year}{1929}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

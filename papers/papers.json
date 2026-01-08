@@ -84,6 +84,15 @@
           "slug": "theory-of-everything"
         }
       ]
+    },
+    {
+      "title": "The Books",
+      "items": [
+        {
+          "title": "Good Heavens, Dogs? Hell No, Gogs!",
+          "slug": "ghd"
+        }
+      ]
     }
   ]
 }
