@@ -15,7 +15,7 @@ The **Abstract Universe Project (AUP)** is an ongoing research and simulation fr
 AUP aims to:
 
 1. Formulate a **model of everything**
-2. Demonstrate, via simulations, how **entropy and observer constraints give rise to physics**
+2. Demonstrate, via simulations, how only minimal principles give rise to physics.
 3. Provide a **rigorous, testable framework** for a Theory of Everything (TOE) that unifies gravity and quantum mechanics as manifestations of information structures
 
 This is a research-in-progress project. Many simulations and book chapters are in draft form and will be refined over time.
