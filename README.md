@@ -6,7 +6,7 @@ The **Abstract Universe Project (AUP)** is an ongoing research and simulation fr
 ## Contents
 
 * [Pages](https://juhameskanen.github.io/abstract/) – LaTeX and HTML versions of all papers
-* [Papers](abstract/) – LaTeX and python simulation source code for all papers
+* [Papers]([abstract](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
 
 
