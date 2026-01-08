@@ -103,11 +103,6 @@ All project content—including papers, simulations, and documentation—is prop
 This project builds on decades of work in different branches of physics e.g. information theory, mathematical physics, and computational simulation. Special thanks to contributors who assist in validating theoretical models and simulations.
 
 
-## CI
-
-- [![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml)
-- [![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml)
-
 ---
 
 *© 2001 ... 2025 The Abstract Universe Project. All rights reserved.*
