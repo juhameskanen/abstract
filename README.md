@@ -1,11 +1,11 @@
 # The Abstract Universe Project (AUP)
 
-The **Abstract Universe Project (AUP)** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything - a theory in which spacetime, consciousness, and physical phenomena emerge from noise as the most probable configuration. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+The **Abstract Universe Project (AUP)** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything - a theory in which spacetime, quantum mechanics, consciousness, and physical phenomena emerge from noise as the most probable outcome. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
 
 
 ## Contents
 
-* [Pages](https://juhameskanen.github.io/abstract/) – LaTeX and HTML versions of all papers
+* [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
 
@@ -15,7 +15,7 @@ The **Abstract Universe Project (AUP)** is an ongoing research and simulation fr
 AUP aims to:
 
 1. Formulate a **model of everything**
-2. Demonstrate, via simulations, how only minimal principles give rise to physics.
+2. Demonstrate, via simulations, how only two minimal principles give rise to physics.
 3. Provide a **rigorous, testable framework** for a Theory of Everything (TOE) that unifies gravity and quantum mechanics as manifestations of information structures
 
 This is a research-in-progress project. Many simulations and book chapters are in draft form and will be refined over time.
@@ -96,12 +96,6 @@ Please follow standard GitHub workflow: fork → branch → pull request. Ensure
 
 *© 2001–2025 The Abstract Universe Project. All rights reserved.*
 All project content—including papers, simulations, and documentation—is proprietary. Usage for academic study and non-commercial research is permitted with proper citation.
-
-
-## Acknowledgements
-
-This project builds on decades of work in different branches of physics e.g. information theory, mathematical physics, and computational simulation. Special thanks to contributors who assist in validating theoretical models and simulations.
-
 
 ---
 
