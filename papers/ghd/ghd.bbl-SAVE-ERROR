@@ -142,6 +142,17 @@
       \field{title}{Galileo's Error: Foundations for a New Science of Consciousness}
       \field{year}{2019}
     \endentry
+    \entry{lastactionhero1993}{misc}{}
+      \list{publisher}{1}{%
+        {Columbia Pictures}%
+      }
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labeltitlesource}{title}
+      \field{note}{Starring Arnold Schwarzenegger}
+      \field{title}{Last Action Hero}
+      \field{year}{1993}
+    \endentry
     \entry{penrose1994shadows}{book}{}
       \name{author}{1}{}{%
         {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%

@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \input{../common.tex}
 \input{../glossary.tex}
-\input{../ladders.tex}
+
 \addbibresource{../references.bib}
 
 \title{The  Derivation  of Reality}
@@ -12,7 +12,7 @@
 \maketitle
 
 \begin{abstract}
-  A formal derivation of physical reality.
+  A formal derivation of theory of.
 \end{abstract}
 
 \ifdefined\ishtml
@@ -21,55 +21,151 @@
 \end{center}
 \fi
 
+\section{D–\(\psi\)–G trinity}
 
-\section{Core Commuting Diagram}
 
 \[
-\begin{CD}
-\mathcal{I}_n @>{\Pi_G}>> G(\mathcal{I}_n) \\
-@V{\Pi_D}VV @AA{\psi}A \\
-D(\mathcal{I}_n)
-\end{CD}
+\begin{tikzcd}[row sep=6em, column sep=6em]
+& \psi(\mathcal{I}_n) 
+    \arrow[dl, bend left=25, "\text{Born rule: compress}"'] 
+    \arrow[dr, bend right=25, "\text{GR mapping: compress}"] & \\
+D(\mathcal{I}_n) 
+    \arrow[ur, bend left=25, dashed, "\text{decompress?}"'] 
+    \arrow[rr, bend left=15, no head] & & 
+G(\mathcal{I}_n) 
+    \arrow[ul, bend right=25, dashed, "\text{decompress?}"]
+\end{tikzcd}
 \]
 
-Commuting condition:
 
+% ---- Commuting conditions ----
 \[
-\Pi_G = \psi \circ \Pi_D
-\]
-
-or equivalently:
-
-\[
-\Pi_D = \psi^{-1} \circ \Pi_G
-\]
-
-Here $\mathcal{I}_n$ denotes the finite $n$-bit informational configuration space. 
-The maps $\Pi_D$ and $\Pi_G$ are representation projections into discrete and geometric descriptions, respectively, 
-while $\psi$ is a structure-preserving transform between those representations. 
-The diagram commuting expresses that discrete, spectral, and geometric descriptions are not sequential layers of reality, 
-but mutually consistent projections of the same underlying informational object.
-
-
-Visually aesthetic:
-
-\[
-\begin{CD}
-& \mathcal{I}_n & \\
-@V{\Pi_D}VV @. @VV{\Pi_G}V \\
-D(\mathcal{I}_n) @>{\psi}>> G(\mathcal{I}_n)
-\end{CD}
-\]
-
-\textbf{Axiom (Representational Equivalence).}
+\Pi_G \circ \psi^{-1} \circ \Pi_D \circ \psi^{-1} = \mathrm{id}_{G(\mathcal{I}_n)}, 
 \quad
-\text{All physical descriptions are projections of a single finite informational structure }
-\mathcal{I}_n,
-\text{ related by commuting representation maps.}
+\Pi_D \circ \psi^{-1} \circ \Pi_G \circ \psi^{-1} = \mathrm{id}_{D(\mathcal{I}_n)}
+\]
+
+% ---- Explanatory text ----
+Each vertex of the triangle represents a mutually equivalent projection of the same underlying informational configuration space $\mathcal{I}_n$: 
+\begin{itemize}
+    \item $D(\mathcal{I}_n)$: discrete representation,
+    \item $\psi(\mathcal{I}_n)$: spectral/compression representation,
+    \item $G(\mathcal{I}_n)$: geometric representation.
+\end{itemize}
+Connecting lines are structure-preserving maps connecting the representations. 
+The curved arrows illustrate invertible, commuting transformations between representations. 
+The diagram formalizes that no representation is fundamental; all are mutually consistent projections of the same informational object.
+
+\vspace{1em}
+\noindent
+
+
+\subsection{Discrete–Spectral Correspondence}
+
+\[
+\begin{array}{ccc}
+\text{Discrete Configuration (D)} & \longleftrightarrow & \text{Spectral Wavefunction (}\Psi\text{)} \\
+\{0,1\}^{n_\mathrm{bits}} & & \{ A_k e^{i \phi_k} \}_{k=1}^{n_\mathrm{freq}} \\
+\text{\small (Raw informational bits)} & & \text{\small (Amplitude + phase of n frequencies)} \\
+n_\mathrm{bits} \approx n_\mathrm{freq} \times \text{precision per mode} & & 
+\end{array}
+\]
 
 
 
-\Ladders
+\subsection{Spectral Ladder ($\psi$)}
+
+\textbf{Observer Emergence Principle (Spectral Form):} 
+Among the ensemble of all possible wavefunctions \(\Psi\) over configuration space \(\mathcal{C}\), 
+the observer-compatible paths \(\gamma \in \mathcal{T}_{\mathrm{obs}}\) are overwhelmingly likely to occur in 
+the \emph{minimal-length} wavefunctions, due to algorithmic (Salomonoff) weighting:
+\[
+\Psi(\gamma) \propto 2^{-\mathcal{L}(\gamma)/2},
+\]
+where \(\mathcal{L}(\gamma)\) is the minimal spectral encoding length of \(\gamma\). 
+High-entropy, incompressible wavefunctions exist but carry exponentially negligible measure; 
+thus, the observer emerges almost certainly in the simplest, smoothest, low-entropy wavefunctions.
+
+
+\[
+\begin{array}{c}
+\mathcal{T}_{\mathrm{obs}} =
+\{ \gamma \in \mathcal{S} \mid \mathrm{Observer}(\gamma)=1 \} \\
+\text{\small (Same observer paths from D; basis for compression)} \\
+\downarrow \\
+\mathcal{L}(\gamma) = \text{Minimal spectral encoding length of } \gamma \in \mathcal{T}_{\mathrm{obs}} \\
+\text{\small (Wavefunction as compression: smooth, predictable, low-entropy paths favored)} \\
+\downarrow \\
+\Psi(\gamma) = \frac{2^{-\mathcal{L}(\gamma)/2}}{\sqrt{\sum_{\gamma' \in \mathcal{T}_{\mathrm{obs}}} 2^{-\mathcal{L}(\gamma')}}} \\
+\text{\small (Normalized wavefunction: encodes all observer-compatible paths)} \\
+\downarrow \\
+P(\gamma) = |\Psi(\gamma)|^2 \\
+\text{\small (Born measure: relative likelihood of path \(\gamma\))} \\
+\downarrow \\
+\delta \int_{\gamma} \mathcal{L}(\text{state}) \, d\lambda = 0 \;\;\Longrightarrow\;\; \text{Geodesics} \\
+\text{\small (Minimal-description principle produces paths identical to classical action extrema)}
+\end{array}
+\]
+
+
+\newpage
+
+\subsection{G-Ladder: Geometric Representation}
+
+\begin{gather*}
+\mathcal{T}_{\mathrm{obs}} \subset \mathcal{S} \\
+\small \text{(Observer-compatible paths through configuration space)} \\
+\downarrow \\
+\mathcal{I}(\gamma_\lambda) \xrightarrow{\;\Pi_G\;} \mathcal{M}_\lambda \subset \mathbb{R}^d \\
+\small \text{(Geometric projection } \lambda\text{)} \\
+\downarrow \\
+\rho_\lambda(x) \;\text{nonuniform} \\
+\small \text{(Emergent density variations from reusable microstructure)} \\
+\downarrow \\
+\delta \int_{\gamma} \mathcal{L}_{\mathrm{geom}} \, d\lambda = 0 \\
+\small \text{(Geodesics as minimal-description trajectories)} \\
+\end{gather*}
+
+
+
+\newpage
+
+
+\section{Discrete Ladder ($D$)}
+
+\[
+\begin{array}{c}
+\mathbf{P} = \text{Raw informational potential} \\
+\text{\small (Infinite unstructured possibilities; no preferred encoding)} \\
+\downarrow \\
+\mathcal{C} \cong \{0,1\}^{\le \infty} \\
+\text{\small (Discrete configuration space; convenient static representation)} \\
+\downarrow \\
+\mathcal{S} = \{ (s_1,\dots,s_T) \mid s_i \in \mathcal{C} \} \\
+\text{\small (Space of all finite/semi-infinite paths through configuration space)} \\
+\downarrow \\
+\mathcal{T}_{\mathrm{obs}} =
+\{ \gamma \in \mathcal{S} \mid \mathrm{Observer}(\gamma)=1 \} \\
+\text{\small (Observer Filter: selects paths with stable informational recursion)} \\
+\downarrow \\
+\mathcal{L}(\gamma) = \text{Minimal spectral encoding length of } \gamma \in \mathcal{T}_{\mathrm{obs}} \\
+\text{\small (Compression–geometry duality: favors smooth, predictable, and compressible histories)} \\
+\downarrow \\
+\Psi(\gamma) = \frac{2^{-\mathcal{L}(\gamma)/2}}{\sqrt{\sum_{\gamma' \in \mathcal{T}_{\mathrm{obs}}} 2^{-\mathcal{L}(\gamma')}}} \\
+\text{\small (Spectral realization: wavefunction encodes optimal compression of observer paths)} \\
+\downarrow \\
+P(\gamma) = |\Psi(\gamma)|^2 \\
+\text{\small (Born measure: relative probability of experienced histories)} \\
+\downarrow \\
+\rho(\mathbf{s}) \sim \mathrm{Lognormal}(\mu,\sigma^2) \\
+\text{\small (Emergent statistical density of reusable microstructure motifs; seeds classical-looking matter)} \\
+\downarrow \\
+\delta \int_{\gamma} \mathcal{L}(\text{state}) \, d\lambda = 0 \;\;\Longrightarrow\;\; \text{Geodesics} \\
+\text{\small (Gravitation as geometric manifestation of compression pressure; GR emerges from observer-consistent paths)}
+\end{array}
+\]
+
+
 
 \newpage
 
@@ -141,17 +237,6 @@ The correct containment relation is:
 \text{permutations of } \mathcal{C}.
 \]
 
-\subsection{Observer Filtering and Measure}
-
-Among all possible paths, only a vanishing subset supports persistent observers.
-These form the observer-compatible set $\mathcal{T}_{\mathrm{obs}}$.
-
-Observer paths with high stepwise novelty---such as Boltzmann-brain-like trajectories involving random jumps across configuration space---are not forbidden.
-They are logically and ontologically possible.
-However, they carry exponentially suppressed measure.
-
-The distinction is not one of possibility, but of typicality.
-Paths that do not compress well have negligible weight under any reasonable description-length-based measure.
 
 \subsection{Time as Induced Ordering}
 
@@ -163,6 +248,19 @@ From regularities along these paths, they infer a past and extrapolate a future.
 Cosmology, dynamics, and causality are therefore models of the path structure, not of the full configuration space.
 
 This resolves the Wheeler--DeWitt timelessness without introducing external time or dynamics.
+
+
+\subsection{Observer Filtering and Measure}
+
+Among all possible paths, only a vanishing subset supports persistent observers.
+These form the observer-compatible set $\mathcal{T}_{\mathrm{obs}}$.
+
+Observer paths with high stepwise novelty---such as Boltzmann-brain-like trajectories involving random jumps across configuration space---are logically and ontologically possible.
+However, they carry exponentially suppressed measure.
+
+The distinction is not one of possibility, but of typicality.
+Paths that do not compress well have negligible weight under any reasonable description-length-based measure.
+
 
 \subsection{Wavefunction as Compression}
 
