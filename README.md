@@ -1,6 +1,6 @@
 # The Abstract Universe Project (AUP)
 
-The **Abstract Universe Project (AUP)** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything - a theory in which spacetime, quantum mechanics, consciousness, and physical phenomena emerge from noise as the most probable outcome. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+The **Abstract Universe Project (AUP)** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges from noise as the most compressible and therefore most probable and predictable outcome. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
 
 
 ## Contents
