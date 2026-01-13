@@ -28,7 +28,7 @@
       ]
     },
     {
-      "title": "Quantum Gravity Program",
+      "title": "Emergent Gravity Program",
       "items": [
         {
           "title": "Probabilistic Blackhole",
@@ -39,11 +39,11 @@
           "slug": "informational-action"
         },
         {
-          "title": "Quantum Gravity I",
+          "title": "Emergent Gravity I",
           "slug": "quantum-gravity"
         },
         {
-          "title": "Quantum Gravity II",
+          "title": "Emergent Gravity II",
           "slug": "quantum-gravity-2"
         }
       ]

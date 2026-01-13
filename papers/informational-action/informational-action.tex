@@ -12,7 +12,7 @@
 \maketitle
 
 \begin{abstract}
-We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined over discrete execution traces. 
+  We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined in bitstring. 
 Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral entropy} computed from local bit-encoded wavefunction segments. 
 We interpret the wavefunction as a \emph{minimal description of nature}, compressing the underlying information such that smoother, simpler waveforms dominate statistical measure. 
 Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. 
@@ -22,11 +22,9 @@ This result supports the hypothesis that classical spacetime dynamics may emerge
 \textbf{Keywords:} Geodesics, Informational Action, Spectral Entropy, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Minimal Description Length, Discrete Path Optimization
 
 \section{Introduction}
-The principle of least action occupies a foundational role in classical and quantum physics. In Euclidean quantum gravity, the action functional governs the weighting of paths in a path integral formulation, while in classical general relativity geodesics extremize proper distance or action. Information-theoretic approaches have long suggested that entropy, complexity, or information content may play a fundamental role in physical law. However, most prior work draws conceptual analogies rather than providing explicit constructive equivalence.
-
 Here, we explore the notion that the wavefunction itself is a \emph{compression system for the universe}: any set of information can be arranged into many possible wavefunctions, and simple, smooth wavefunctions admit vastly more representations. Thus, smoother, lower-entropy wavefunctions dominate statistical measure, realizing a form of minimal-description principle akin to Kolmogorov complexity but with well-defined size and smoothness constraints.
 
-We investigate whether a purely informational cost functional, defined independently of geometry, can recover classical geodesic behavior. Our approach is algorithmic and discrete: paths are selected step-by-step by minimizing either Euclidean action or \emph{phase-coherent spectral entropy} over local execution traces. Remarkably, we find strong agreement between the two resulting paths, suggesting that minimal descriptions naturally encode geodesic structure.
+We investigate whether a purely informational cost functional, defined independently of geometry, can recover classical geodesic behavior. Our approach is algorithmic and discrete: paths are selected step-by-step by minimizing \emph{phase-coherent spectral entropy} over local execution traces. Remarkably, we find strong agreement between the two resulting paths, suggesting that minimal descriptions naturally encode geodesic structure.
 
 \section{Geometric Setup}
 We consider a two-dimensional spatial domain embedded in a three-dimensional height field, representing a curved metric surface. The surface is constructed as a superposition of Gaussian hills and valleys with added stochastic noise. Let $\phi(x,y)$ denote the surface height. The classical Euclidean action for a path $\gamma$ proceeding in the $x$ direction is approximated locally by
@@ -60,7 +58,7 @@ To ensure the continuity of the emergent description, we introduce a transport c
 \begin{equation}
 \mathcal{D} = 1 - \frac{|\langle \Psi_t | \Psi_{t+dt} \rangle|}{\|\Psi_t\| \|\Psi_{t+dt}\|}
 \end{equation}
-This formulation is mathematically equivalent to the \emph{Fubini-Study metric}, defining the infinitesimal distance between points in projective Hilbert space. It effectively imparts informational inertia, favoring descriptions that maintain phase-stability over time.
+This formulation is mathematically equivalent to the \emph{Fubini-Study metric}, defining the infinitesimal distance between points in projective Hilbert space. It effectively imparts informational inertia, favoring descriptions that maintain phase-stability over time. The purpose is to find the optimal wavefunction (maximal compression). 
 
 \section{Path-Finding Algorithm}
 Both methods employ the same local path-finding structure. Starting from a fixed boundary condition, the path advances column by column. At each step, three candidate positions are evaluated, and the one minimizing the respective cost functional is selected. No geometric information is used in the informational method; likewise, no informational quantities appear in the Euclidean action.
@@ -119,8 +117,6 @@ This result, together with the \textbf{Entropy-Singularity Lemma}, represents tw
 
 Taken together, these principles imply that spacetime singularities and divergences are automatically suppressed by the informational structure of the universe.
 
-\section*{Acknowledgments}
-The author thanks collaborators and open-source contributors whose tools made this work possible.
 
 \section*{Supplementary Materials}
 \begin{itemize}
