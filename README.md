@@ -1,6 +1,6 @@
-# The Abstract Universe Project (AUP)
+# The $D-\psi-G$ Trinity
 
-The **Abstract Universe Project (AUP)** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges from noise as the most compressible and therefore most probable and predictable outcome. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+The **$D-\psi-G$ Trinity** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
 
 
 ## Contents
@@ -12,18 +12,18 @@ The **Abstract Universe Project (AUP)** is an ongoing research and simulation fr
 
 ## Purpose
 
-AUP aims to:
+$D-\psi-G$ aims to:
 
 1. Formulate a **model of everything**
-2. Demonstrate, via simulations, how only two minimal principles give rise to physics.
-3. Provide a **rigorous, testable framework** for a Theory of Everything (TOE) that unifies gravity and quantum mechanics as manifestations of information structures
+2. Demonstrate, via simulations, how only two minimal principles give rise to universes with physics.
+3. Provide a **rigorous, testable framework** for a Theory of Everything (ToE) that unifies gravity and quantum mechanics as manifestations of information structures
 
 This is a research-in-progress project. Many simulations and book chapters are in draft form and will be refined over time.
 
 
 ## Continuous Integration
 
-AUP uses GitHub Actions for automated builds:
+$D-\psi-G$ uses GitHub Actions for automated builds:
 
 * [![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
 * [![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
@@ -94,10 +94,10 @@ Please follow standard GitHub workflow: fork → branch → pull request. Ensure
 
 ## License
 
-*© 2001–2025 The Abstract Universe Project. All rights reserved.*
+*© 2001–2025 The $D-\psi-G$ Project. All rights reserved.*
 All project content—including papers, simulations, and documentation—is proprietary. Usage for academic study and non-commercial research is permitted with proper citation.
 
 ---
 
-*© 2001 ... 2025 The Abstract Universe Project. All rights reserved.*
+*© 2001 ... 2025 The $D-\psi-G$ Project. All rights reserved.*
 
