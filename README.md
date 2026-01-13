@@ -98,5 +98,5 @@ All project content—including papers, simulations, and documentation—is prop
 
 ---
 
-*© Copyright 2001 ... 2025 - the $D-\psi-G$ Trinity. All rights reserved.*
+©Copyright 2001 ... 2025 - the $D-\psi-G$ Trinity. All rights reserved.*
 
