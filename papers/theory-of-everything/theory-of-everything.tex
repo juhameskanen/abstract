@@ -432,7 +432,54 @@ where $\mathcal{O}$ is any observable depending on path configurations.
 \paragraph{5. Summary:}  
 Gravitation is thus not a fundamental force but a statistical-geometric phenomenon:  
 \emph{classical geodesics are the trajectories of minimal spectral encoding length through configuration space, weighted by observer-compatible path measure.}  
+Gravitation is geometric view to the information.
 
+
+\section{Dimensional Optimality of Observer Boundaries}
+
+Why three space dimensions?
+
+\begin{lemma}[Dimensional Optimality of Observer Boundaries]
+Let $D$ be an execution trace representing a bounded, persistent observer. Consider the set of all geometric encodings $G_d$ of $D$ in $d$ spatial dimensions. Let $L(G_d)$ denote the minimal description length (MDL) required to encode both the observer's interior and its boundary $\partial \Omega_d$. Then the total description length satisfies:
+\[
+L(G_2) > L_{\min}^\text{obs} \quad \text{(insufficient capacity for stable boundaries)}
+\]
+\[
+L(G_3) = \min_d L(G_d)
+\]
+\[
+L(G_4) > L(G_3) \quad \text{(superlinear boundary cost)}
+\]
+Consequently, under the MDL-induced measure 
+\[
+\mu(G_d) \propto e^{-L(G_d)},
+\] 
+three-dimensional geometric encodings dominate, and observers are overwhelmingly likely to be embedded in three spatial dimensions.
+\end{lemma}
+
+\begin{proof}[Sketch]
+\begin{enumerate}
+    \item \textbf{Boundary scaling:} In $d$ dimensions, the observer boundary is $(d-1)$-dimensional. Let $R$ denote a characteristic linear size of the observer. The approximate encoding cost of the boundary scales as:
+    \[
+    L_\text{boundary}(d) \sim C \cdot R^{\,d-1}.
+    \]
+    This dominates the total encoding cost for higher $d$ due to superlinear growth of boundary complexity.
+    
+    \item \textbf{Lower dimensions insufficient:} In $d=2$, boundaries are 1D curves. Topological fragility, self-intersections, and insufficient degrees of freedom prevent stable encoding of persistent, localized structures. Consequently, $L(G_2)$ is effectively infinite for complex observers.
+
+    \item \textbf{Optimality in three dimensions:} In $d=3$, boundaries are 2D surfaces. These surfaces admit sufficient topological and geometric flexibility to encode observer interiors with minimal redundancy while maintaining stability and locality. Hence, $L(G_3)$ is minimal among all $d$.
+
+    \item \textbf{Measure dominance:} Under the MDL-induced measure,
+    \[
+    \mu(G_d) \propto e^{-L(G_d)},
+    \]
+    the measure is exponentially concentrated on $d=3$, making three-dimensional geometric encodings overwhelmingly probable for observers.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+This lemma does not imply that 3D space is necessary, only that MDL-weighted measures overwhelmingly favor 3D observer-compatible geometries. Higher-dimensional encodings exist but are exponentially suppressed in the measure.
+\end{remark}
 
 
 \printbibliography
