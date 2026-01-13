@@ -94,10 +94,9 @@ Please follow standard GitHub workflow: fork → branch → pull request. Ensure
 
 ## License
 
-*© 2001–2025 The $D-\psi-G$ Project. All rights reserved.*
 All project content—including papers, simulations, and documentation—is proprietary. Usage for academic study and non-commercial research is permitted with proper citation.
 
 ---
 
-*© 2001 ... 2025 The $D-\psi-G$ Project. All rights reserved.*
+*© Copyright 2001 ... 2025 - the $D-\psi-G$ Trinity. All rights reserved.*
 
