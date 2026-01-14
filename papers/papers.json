@@ -1,12 +1,26 @@
 {
-  "title": "The Abstract Universe Project (AUP)",
+  "title": "The D-A-G Project",
   "sections": [
     {
-      "title": "Strikingly Scientific Papers",
+      "title": "The Theory",
       "items": [
         {
-          "title": "A Study in Significant Whitespace in YAML and Mental Collapse",
-          "slug": "yaml-paradox"
+          "title": "D-Psi-G",
+          "slug": "theory-of-everything",
+	  "children": [
+            {
+              "title": "Philosophy",
+              "slug": "philosophy"
+            },
+            {
+              "title": "Ladders of Emergence",
+              "slug": "ladders"
+            },
+            {
+              "title": "Geometric Dimensions",
+              "slug": "dimensions"
+            }
+          ]
         }
       ]
     },
@@ -78,24 +92,15 @@
               "slug": "supplementary"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "title": "Less Scientific Papers",
+      "items": [
         {
-          "title": "D-Psi-G",
-          "slug": "theory-of-everything",
-	  "children": [
-            {
-              "title": "Philsophy",
-              "slug": "philosophy"
-            },
-            {
-              "title": "Ladders of Emergence",
-              "slug": "ladders"
-            },
-            {
-              "title": "Geometric Dimensions",
-              "slug": "dimensions"
-            }
-          ]
+          "title": "A Study in Significant Whitespace in YAML and Mental Collapse",
+          "slug": "yaml-paradox"
         }
       ]
     },
