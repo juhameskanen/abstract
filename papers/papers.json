@@ -80,8 +80,22 @@
           ]
         },
         {
-          "title": "Theory of Everything",
-          "slug": "theory-of-everything"
+          "title": "D-Psi-G",
+          "slug": "theory-of-everything",
+	  "children": [
+            {
+              "title": "Philsophy",
+              "slug": "philosophy"
+            },
+            {
+              "title": "Ladders of Emergence",
+              "slug": "ladders"
+            },
+            {
+              "title": "Geometric Dimensions",
+              "slug": "dimensions"
+            }
+          ]
         }
       ]
     },
