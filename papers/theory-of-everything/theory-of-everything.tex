@@ -14,173 +14,27 @@
 
 \ifdefined\ishtml
 \begin{center}
-\small \href{theory-of-everything.pdf}{Download PDF Version}
+\small \href{theory-of-everything-theory-of-everything.pdf}{Download PDF Version}
 \end{center}
 \fi
 
-\section{Trinity}
+\section{Motivation}
 
+The persistent failure to derive a unified theory of quantum gravity suggests that no such fundamental theory exists in the conventional sense. Instead, both quantum behavior and spacetime geometry emerge as consequences of observer-compatible informational constraints.
 
-\[
-\begin{tikzcd}[row sep=6em, column sep=6em]
-& \psi(\mathcal{I}_n) 
-    \arrow[dl, bend left=25, "\text{Born rule: compress}"'] 
-    \arrow[dr, bend right=25, "\text{GR mapping: compress}"] & \\
-D(\mathcal{I}_n) 
-    \arrow[ur, bend left=25, dashed, "\text{decompress?}"'] 
-    \arrow[rr, bend left=15, no head] & & 
-G(\mathcal{I}_n) 
-    \arrow[ul, bend right=25, dashed, "\text{decompress?}"]
-\end{tikzcd}
-\]
+Observers arise only in configurations that simultaneously satisfy three conditions:
 
+\textbf{Maximal compression:}
+Observer histories must admit minimal description length, which maximizes their measure and enforces smooth, law-like dynamics.
 
-\textbf{Commuting conditions}
+\textbf{Minimal sufficient implementation:}
+These histories must be instantiated at finite resolution. Discrete structures—particles provide the minimal representation approximating analytically defined smooth representation.
 
-\[
-\Pi_G \circ \psi^{-1} \circ \Pi_D \circ \psi^{-1} = \mathrm{id}_{G(\mathcal{I}_n)}, 
-\quad
-\Pi_D \circ \psi^{-1} \circ \Pi_G \circ \psi^{-1} = \mathrm{id}_{D(\mathcal{I}_n)}
-\]
+\textbf{Well-defined boundaries:}
+Observers must maintain a stable inside–outside distinction to preserve identity and prevent informational dissolution. Geometry supplies the only known mechanism for enforcing such boundaries.
 
+What appear as quantum amplitudes and gravitational dynamics are not fundamental laws, but statistical manifestations of compression, realization, and boundary preservation acting in concert.
 
-Each vertex of the triangle represents a mutually equivalent projection of the same underlying informational configuration space $\mathcal{I}_n$: 
-\begin{itemize}
-    \item $D(\mathcal{I}_n)$: discrete representation,
-    \item $\psi(\mathcal{I}_n)$: analytic representation,
-    \item $G(\mathcal{I}_n)$: geometric representation.
-\end{itemize}
-Connecting lines are structure-preserving maps connecting the representations. 
-The curved arrows illustrate invertible, commuting transformations between representations. 
-The diagram formalizes that no representation is fundamental; all are mutually consistent projections of the same informational object.
-
-\vspace{1em}
-\noindent
-
-
-\section{Three Descriptive Paradigms of Information}
-
-We identify three and only three irreducible descriptive paradigms of information:
-\begin{enumerate}
-    \item Discrete (set-theoretic),
-    \item Analytical (spectral, wavefunction compressed),
-    \item Geometric.
-\end{enumerate}
-
-These paradigms are mutually equivalent, descriptively irreducible, and jointly sufficient to express all internally meaningful informational structure.
-Physical theories may privilege one paradigm for convenience, but no paradigm is fundamental.
-The consistency between them replaces the role traditionally assigned to physical laws.
-
-This triadic structure provides a natural foundation for unifying quantum theory, spacetime geometry, and observer emergence within a single informational framework.
-
-Translations between these paradigms preserve informational content but not descriptive primitives.
-This establishes their equivalence without ontological hierarchy.
-
-Observers emerge as configurations that are simultaneously well-defined across all three paradigms.
-
-
-\section{Paradigms and Descriptions }
-
-The three entities are orthogonal functional roles, not alternative encodings of the same role.
-
-\begin{enumerate}
-\item The analytic (wavefunction) ensures existence with high measure (optimal compression algorithm)
-\item The discrete (particles) is the finite rasteriation of the wavefunction.
-\item The geometric ensures separation, persistence, and identity.
-\end{enumerate}
-  
-Geometry is the only known mechanism for implementing an inside–outside invariant.
-
-\subsection{1. Analytic Representation ($\psi$)}
-
-\textbf{Observer Emergence Principle (Spectral Form):} 
-Among the ensemble of all possible wavefunctions \(\Psi\) over configuration space \(\mathcal{C}\), 
-the observer-compatible paths \(\gamma \in \mathcal{T}_{\mathrm{obs}}\) are overwhelmingly likely to occur in 
-the \emph{minimal-length} wavefunctions, due to algorithmic (Salomonoff) weighting:
-\[
-\Psi(\gamma) \propto 2^{-\mathcal{L}(\gamma)/2},
-\]
-where \(\mathcal{L}(\gamma)\) is the minimal spectral encoding length of \(\gamma\). 
-High-entropy, incompressible wavefunctions exist but carry exponentially negligible measure; 
-thus, the observer emerges almost certainly in the simplest, smoothest, low-entropy wavefunctions.
-
-
-\[
-\begin{array}{c}
-\mathcal{T}_{\mathrm{obs}} =
-\{ \gamma \in \mathcal{S} \mid \mathrm{Observer}(\gamma)=1 \} \\
-\text{\small (Same observer paths from D; basis for compression)} \\
-\downarrow \\
-\mathcal{L}(\gamma) = \text{Minimal spectral encoding length of } \gamma \in \mathcal{T}_{\mathrm{obs}} \\
-\text{\small (Wavefunction as compression: smooth, predictable, low-entropy paths favored)} \\
-\downarrow \\
-\Psi(\gamma) = \frac{2^{-\mathcal{L}(\gamma)/2}}{\sqrt{\sum_{\gamma' \in \mathcal{T}_{\mathrm{obs}}} 2^{-\mathcal{L}(\gamma')}}} \\
-\text{\small (Normalized wavefunction: encodes all observer-compatible paths)} \\
-\downarrow \\
-P(\gamma) = |\Psi(\gamma)|^2 \\
-\text{\small (Born measure: relative likelihood of path \(\gamma\))} \\
-\downarrow \\
-\delta \int_{\gamma} \mathcal{L}(\text{state}) \, d\lambda = 0 \;\;\Longrightarrow\;\; \text{Geodesics} \\
-\text{\small (Minimal-description principle produces paths identical to classical action extrema)}
-\end{array}
-\]
-
-
-
-\subsection{2. Discrete Representation ($D$)}
-
-\[
-\begin{array}{c}
-\mathbf{P} = \text{Raw informational potential} \\
-\text{\small (Infinite unstructured possibilities; no preferred encoding)} \\
-\downarrow \\
-\mathcal{C} \cong \{0,1\}^{\le \infty} \\
-\text{\small (Discrete configuration space; convenient static representation)} \\
-\downarrow \\
-\mathcal{S} = \{ (s_1,\dots,s_T) \mid s_i \in \mathcal{C} \} \\
-\text{\small (Space of all finite/semi-infinite paths through configuration space)} \\
-\downarrow \\
-\mathcal{T}_{\mathrm{obs}} =
-\{ \gamma \in \mathcal{S} \mid \mathrm{Observer}(\gamma)=1 \} \\
-\text{\small (Observer Filter: selects paths with stable informational recursion)} \\
-\downarrow \\
-\mathcal{L}(\gamma) = \text{Minimal spectral encoding length of } \gamma \in \mathcal{T}_{\mathrm{obs}} \\
-\text{\small (Compression–geometry duality: favors smooth, predictable, and compressible histories)} \\
-\downarrow \\
-\Psi(\gamma) = \frac{2^{-\mathcal{L}(\gamma)/2}}{\sqrt{\sum_{\gamma' \in \mathcal{T}_{\mathrm{obs}}} 2^{-\mathcal{L}(\gamma')}}} \\
-\text{\small (Spectral realization: wavefunction encodes optimal compression of observer paths)} \\
-\downarrow \\
-P(\gamma) = |\Psi(\gamma)|^2 \\
-\text{\small (Born measure: relative probability of experienced histories)} \\
-\downarrow \\
-\end{array}
-\]
-
-
-
-
-\subsection{3. Geometric Representation $G$}
-
-\textbf{Under construction}
-
-\begin{gather*}
-\mathcal{T}_{\mathrm{obs}} \subset \mathcal{S} \\
-\small \text{(Observer-compatible paths through configuration space)} \\
-\downarrow \\
-\mathcal{I}(\gamma_\lambda) \xrightarrow{\;\Pi_G\;} \mathcal{M}_\lambda \subset \mathbb{R}^d \\
-\small \text{(Geometric projection } \lambda\text{)} \\
-\downarrow \\
-\rho(\mathbf{s}) \sim \mathrm{Lognormal}(\mu,\sigma^2) \\
-\small \text{(Emergent density variations from reusable microstructure)} \\
-\downarrow \\
-\delta \int_{\gamma} \mathcal{L}(\text{state}) \, d\lambda = 0 \;\;\Longrightarrow\;\; \text{Geodesics} \\
-\text{\small (Gravitation as geometric manifestation of compression pressure; GR emerges from observer-consistent paths)}
-\delta \int_{\gamma} \mathcal{L}_{\mathrm{geom}} \, d\lambda = 0 \\
-\small \text{(Geodesics as minimal-description trajectories)} \\
-\end{gather*}
-
-
-\newpage
 
 
 
@@ -306,13 +160,9 @@ Our experience of smooth physics is not imposed by law, but emerges from combina
 
 \subsection{General Relativity}
 
-Emerges as geometric projection of information.  Information of the observer, from survivals point of view
+Emerges as geometric interpretation of information. Information of the observer, from survivals point of view
 must not leak out. We must have well defined boundary of information, and that's why we have a sense of
 3D body.
-
-Universe is constant self selection filter and GR and QM are the filters. Thanks to QM we are the most probable (compressible, minimal) descriptions of consciousness,
-and thanks to GR our information doesn't leak out.
-
 
 
 \printbibliography
