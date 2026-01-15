@@ -11,14 +11,16 @@ mkdir -p "$PDF_OUT_DIR"
 MAP=$(jq -r '
   .sections[].items[] as $item |
   $item.slug as $slug |
-  (
-    if ($item.children? | length > 0) then
-      $item.children[] | "\($slug)/\(.slug)"
-    else
-      $slug
-    end
-  )
+  # Output the parent slug first
+  $slug, 
+  # Then output children if they exist
+  (if ($item.children? | length > 0) then 
+     $item.children[] | "\($slug)/\(.slug)" 
+   else 
+     empty 
+   end)
 ' "$JSON_FILE")
+
 
 # 2. Iterate through each slug and compile
 for SLUG in $MAP; do

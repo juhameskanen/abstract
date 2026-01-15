@@ -3,55 +3,154 @@
 \input{../../glossary.tex}
 \addbibresource{../../references.bib} 
 
+\title{Dimensional Optimality of Observer Boundaries}
+
 \date{2024}
 
 \begin{document}
 \maketitle
 
-\section{Dimensional Optimality of Observer Boundaries}
+\section{Motivation}
 
+We treat geometry as the means of enforcing a well defined inside–outside separation and preventing uncontrolled information mixing with the environment.
+Given that geometry is required, we apply a minimum description length (MDL) principle to evaluate which geometric realizations are most probable.
+The central claim is that three spatial dimensions are not necessary, but are optimal for realizing bounded, persistent observers with well-defined interior and exterior regions.
 
-Why three space dimensions?
+The central claim is that three spatial dimensions are not necessary, but are \emph{optimal} for encoding bounded, persistent observers with well-defined interior/exterior separation.
 
-\begin{lemma}[Dimensional Optimality of Observer Boundaries]
-Let $D$ be an execution trace representing a bounded, persistent observer. Consider the set of all geometric encodings $G_d$ of $D$ in $d$ spatial dimensions. Let $L(G_d)$ denote the minimal description length (MDL) required to encode both the observer's interior and its boundary $\partial \Omega_d$. Then the total description length satisfies:
+\section{Setup}
+
+Let $D$ denote an execution trace representing a bounded, persistent observer. By an observer we mean an information-processing system satisfying:
+\begin{enumerate}
+    \item Persistence over time,
+    \item A well-defined interior state,
+    \item A boundary separating internal from external information,
+    \item Multiple concurrent internal processes (e.g.\ signaling, energy intake, waste removal).
+\end{enumerate}
+
+Let $G_d$ denote a geometric encoding of $D$ in $d$ spatial dimensions, and let $L(G_d)$ denote the minimal description length required to encode:
+\begin{itemize}
+    \item The observer interior,
+    \item The observer boundary $\partial \Omega_d$,
+    \item The routing of internal processes within the geometry.
+\end{itemize}
+
+We consider the MDL-induced measure:
 \[
-L(G_2) > L_{\min}^\text{obs} \quad \text{(insufficient capacity for stable boundaries)}
+\mu(G_d) \propto e^{-L(G_d)}.
 \]
+
+The question is which spatial dimension $d$ minimizes $L(G_d)$.
+
+\section{Main Claim}
+
+\textbf{Claim.} For execution traces corresponding to bounded, persistent observers,
 \[
-L(G_3) = \min_d L(G_d)
+L(G_3) = \min_d L(G_d),
 \]
+and therefore three-dimensional geometric encodings dominate the MDL-induced measure.
+
+Lower-dimensional encodings exist but incur prohibitively large description length, while higher-dimensional encodings introduce superfluous geometric degrees of freedom without compensating reduction in encoding cost.
+
+\section{Sketch of Argument}
+
+\subsection{Boundary and routing costs}
+
+In $d$ spatial dimensions, the observer boundary $\partial \Omega_d$ is $(d-1)$-dimensional. For an observer of characteristic linear size $R$, the boundary encoding cost scales as:
 \[
-L(G_4) > L(G_3) \quad \text{(superlinear boundary cost)}
+L_{\text{boundary}}(d) \sim C_1 R^{\,d-1}.
 \]
-Consequently, under the MDL-induced measure 
+
+However, boundary size alone does not determine optimality. A critical additional cost arises from the routing of multiple independent internal processes within the observer.
+
+Let $k$ denote the number of concurrent internal flows (e.g.\ circulation, signaling, energy transport). Let $C_d(k)$ denote the minimal description length required to embed $k$ disjoint routing channels in $d$ dimensions without mutual interference.
+
+\subsection{One-dimensional encodings}
+
+In $d=1$, all internal processes are totally ordered. No two independent channels can bypass each other without intersection. As a result:
+\[
+C_1(k) = \infty \quad \text{for } k > 1.
+\]
+Thus, one-dimensional encodings cannot support complex observers.
+
+\subsection{Two-dimensional encodings}
+
+In $d=2$, boundaries are one-dimensional curves, and internal routing is constrained by planar topology. While disjoint routing is possible in principle, each additional internal channel forces global coordination to avoid intersections.
+
+As $k$ grows, the description length required to specify non-intersecting routes grows superlinearly:
+\[
+C_2(k) \sim \exp(k),
+\]
+due to unavoidable crossings, global constraints, and topological fragility. Small perturbations require large-scale boundary and routing updates, dramatically increasing MDL cost.
+
+Thus, while two-dimensional observers are not impossible, their geometric encodings are overwhelmingly inefficient.
+
+\subsection{Three-dimensional encodings}
+
+In $d=3$, boundaries are two-dimensional surfaces, and volumetric separation becomes possible. Independent internal processes can be routed through disjoint tunnels, layers, and cavities with purely local specification.
+
+As a result:
+\[
+C_3(k) \sim O(k),
+\]
+and the total description length is minimized:
+\[
+L(G_3) \approx L_{\text{interior}} + C_1 R^2 + C_2 k.
+\]
+
+Three dimensions are the minimal spatial setting in which:
+\begin{itemize}
+    \item Stable boundaries exist,
+    \item Independent internal flows can bypass each other locally,
+    \item Boundary modifications remain local rather than global.
+\end{itemize}
+
+\subsection{Higher-dimensional encodings}
+
+For $d>3$, routing complexity does not improve further: $C_d(k) \sim O(k)$. However, boundary encoding costs grow rapidly:
+\[
+L_{\text{boundary}}(d) \sim R^{\,d-1},
+\]
+and additional geometric degrees of freedom must be explicitly specified, increasing MDL without providing functional benefit.
+
+Thus:
+\[
+L(G_d) > L(G_3) \quad \text{for } d > 3.
+\]
+
+\section{Measure Concentration}
+
+Under the MDL-induced measure:
 \[
 \mu(G_d) \propto e^{-L(G_d)},
-\] 
-three-dimensional geometric encodings dominate, and observers are overwhelmingly likely to be embedded in three spatial dimensions.
-\end{lemma}
+\]
+even modest differences in description length lead to exponential suppression. Since $L(G_3)$ is minimal, three-dimensional encodings overwhelmingly dominate the measure.
 
-\begin{proof}[Sketch]
-\begin{enumerate}
-    \item \textbf{Boundary scaling:} In $d$ dimensions, the observer boundary is $(d-1)$-dimensional. Let $R$ denote a characteristic linear size of the observer. The approximate encoding cost of the boundary scales as:
-    \[
-    L_\text{boundary}(d) \sim C \cdot R^{\,d-1}.
-    \]
-    This dominates the total encoding cost for higher $d$ due to superlinear growth of boundary complexity.
-    
-    \item \textbf{Lower dimensions insufficient:} In $d=2$, boundaries are 1D curves. Topological fragility, self-intersections, and insufficient degrees of freedom prevent stable encoding of persistent, localized structures. Consequently, $L(G_2)$ is effectively infinite for complex observers.
+This explains why observers most likely find themselves embedded in three spatial dimensions, without invoking anthropic selection or special physical laws.
 
-    \item \textbf{Optimality in three dimensions:} In $d=3$, boundaries are 2D surfaces. These surfaces admit sufficient topological and geometric flexibility to encode observer interiors with minimal redundancy while maintaining stability and locality. Hence, $L(G_3)$ is minimal among all $d$.
 
-    \item \textbf{Measure dominance:} Under the MDL-induced measure,
-    \[
-    \mu(G_d) \propto e^{-L(G_d)},
-    \]
-    the measure is exponentially concentrated on $d=3$, making three-dimensional geometric encodings overwhelmingly probable for observers.
-\end{enumerate}
-\end{proof}
+\section{Related Work and Novelty}
 
-MDL-weighted measures overwhelmingly favor 3D observer-compatible geometries. Higher-dimensional encodings exist but are exponentially suppressed in the measure.
+The question of why observers find themselves embedded in three spatial dimensions has been approached from multiple perspectives, but none capture the information-theoretic, MDL-based argument presented here.
+
+In physics, dimensional constraints have been considered in the context of planetary stability, inverse-square laws, and the propagation of forces \cite{penrose2010, hawking1996nature, hawking1988}. Such arguments are contingent on the dynamics of specific physical laws and do not generalize to abstract observers or to the informational structure of existence.
+
+In computational models, one- and two-dimensional cellular automata have been used to investigate the emergence of localized persistent structures \cite{zuse1970calculating, lloyd2006, deutsch1997}. It is well-known that one-dimensional automata cannot support multiple disjoint information channels without interference, and that two-dimensional systems face rapidly growing coordination complexity for multi-channel routing. Three-dimensional automata allow volumetric separation and more efficient routing, but prior work has largely remained confined to specific CA rules and has not formalized an MDL-based measure over geometric embeddings.
+
+From the perspective of theoretical computer science, the embedding of graphs and routing of disjoint channels in low-dimensional spaces has been studied extensively \cite{LiVitanyi, Solomonoff1964, Chaitin1975}. These results highlight that 1D and 2D topologies incur high or even unbounded cost for independent flows, while 3D embeddings permit linear-cost local routing. However, previous work treats these results in the context of abstract networks or circuits, rather than as a general principle governing observer existence.
+
+Our contribution extends these insights by framing observers as bounded execution traces with multiple internal processes and a required inside–outside separation. Geometry is treated not as an optional representational choice but as a **necessary structural vertex** in a trinity of analytic (wavefunction), discrete (particles), and geometric components, each of which is essential to the existence and stability of the observer. Using a minimum description length (MDL) measure over possible geometric embeddings, we show that three spatial dimensions are optimal: they minimize the total description length required to encode the interior, boundary, and routing of internal processes. Lower-dimensional embeddings incur exponentially higher description length, while higher-dimensional embeddings introduce redundant degrees of freedom without reducing routing complexity. This combination of information-theoretic formalism, MDL measure, and the trinary observer structure is, to our knowledge, not present in prior literature and establishes a new explanatory framework for the emergence of three-dimensional space for observers.
+
+
+
+
+\section{Conclusion}
+
+Three spatial dimensions are not required for observers to exist, but they are optimal for encoding bounded, persistent observers with well-defined interior boundaries and multiple concurrent internal processes.
+
+Under an MDL-based measure over geometric encodings, three-dimensional space emerges as the overwhelmingly probable setting for observers.
+
+
 
 
 \end{document}
