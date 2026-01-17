@@ -1,6 +1,32 @@
 # The $D-\psi-G$ Trinity
 
-The **$D-\psi-G$ Trinity** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+## The Goal
+
+The **$D-\psi-G$ Trinity** is an ongoing research and simulation framework exploring the deep nature of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+
+
+## The Movie Analogy: A Physics of Information
+
+Imagine $n$ bits of information. These bits can be arranged in $2^n$ possible states, producing $(2^n)!$ permutations. Almost all such permutations are chaotic, incoherent noise. However, within this library, there exists a cluster of permutations that tell the story of an evolving universe, from the Big Bang to the emergence of observers.
+
+If you were to draw a movie of reality at random, you are most likely to find yourself in one that is highly compressible. In information theory, predictable data compresses best; therefore, universes with stable, elegant, and predictable laws of physics occupy a much larger share of the probability space than wildly chaotic ones. 
+
+We are not inhabitant of a miracle—we are simply experiencing the most efficient encoding of an observer's existence.
+
+### The Three Constraints of Reality
+
+Our observed world is defined by three essential constraints that allow for persistent, conscious entities:
+
+- **1. Optimal Compression ($\psi$)**
+The reason the microcosmos appears "wavy" is that we are observing the universe's compression algorithm. Just as one can study the pixels of an MPEG-compressed movie and find them following abstract cosine functions, we find wavefunctions ($\psi$). Quantum waves are not "stuff"; they are the complex spectral compression of information, capturing patterns and correlations in the most compact description possible.
+
+- **2. Minimal Representation ($D$)**
+To avoid redundant computational overhead, the underlying smooth information is represented by discrete, finite entities: **particles**. These act as the "macro-blocks" of reality, providing a way for the universe to instantiate complex structures without the need for infinite resolution.
+
+- **3. Geometric Filtering ($G$)**
+Spacetime geometry acts as a stabilizer. It enforces stable "inside/outside" boundaries (locality), preventing observer information from dissolving into the surrounding environment. Without this geometric filtering, memory would vanish, physical structures would disintegrate, and the persistent "self" required for consciousness could not exist.
+
+Our world is the movie from which we, as intelligent observers, are most likely to find ourselves playing a role. It is the configuration where maximal compression, minimal instantiation, and well defined boundaries intersect to allow us to observe itself.
 
 
 ## Contents
@@ -38,45 +64,6 @@ The [project wiki](https://github.com/juhameskanen/abstract/wiki) contains:
 * Research notes and derivations
 * Discussion of ongoing and planned chapters
 
-
-## Structure
-
-```
-.
-├── papers/            # LaTeX source and simulations
-├── CHANGELOG.md       # Version history
-├── README.md          # Project overview (this file)
-└── LICENSE.md         # Licensing information
-```
-
-
-## Getting Started
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/juhameskanen/abstract.git
-   cd abstract
-   ```
-
-2. **Install dependencies**
-   Most simulations require Python ≥ 3.11 with `numpy`, `matplotlib`, and `networkx`. Install via:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run a simulation**
-
-   ```bash
-   python simulations/entropy_simulation.py
-   ```
-
-4. **Build papers**
-
-   ```bash
-   make
-   ```
 
 > Note: Many simulations and chapters are in draft stage; behavior may be updated frequently.
 
