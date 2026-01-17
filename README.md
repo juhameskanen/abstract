@@ -1,4 +1,4 @@
-# The $D-\psi-G$ Trinity
+# The Abstract Universe Project (pronounced Dee-Psit Theory)
 
 ## The Goal
 
@@ -11,7 +11,7 @@ Imagine $n$ bits of information. These bits can be arranged in $2^n$ possible st
 
 If you were to draw a "movie" of reality at random, you are most likely to find yourself in one that is highly compressible. In information theory, predictable data compresses best; therefore, universes with stable, elegant, and predictable laws of physics occupy a much larger share of the probability space than wildly chaotic ones. 
 
-We are not inhabitants of a miracle—we are simply experiencing the most efficient encoding of an observer's existence. We are living in a movie in which the "pixels" appear to follow not just a JPEG/MPEG compressed cosine function, but an even more effective **wave function**.
+No special initial conditions are required. We are simply experiencing the most efficient encoding of an observer's existence. We are living in a movie in which the "pixels" appear to follow not just a JPEG/MPEG compressed cosine function, but an even more effective **wave function**.
 
 
 For a configuration to allow persistent, intelligent, conscious entities to survive, it must satisfy three essential constraints:
@@ -27,6 +27,21 @@ Spacetime geometry acts as a stabilizer. It enforces stable "inside/outside" bou
 
 Our world is the "movie" from which we, as intelligent observers, are most likely to find ourselves playing a role. It is the configuration where maximal compression, minimal instantiation, and geometric stability intersect to allow life to observe itself.
 
+
+### Gravity
+
+Gravity emerges as a bias in the space of descriptions toward configurations with higher structural richness and stability.
+Regions we call “massive” correspond to areas of configuration space where vastly more observer-compatible descriptions exist.
+
+Because grounded, structured configurations admit many more stable continuations than empty or dilute ones, observer paths are statistically drawn toward them.
+This bias appears, from within the movie, as an attractive force.
+
+There exist permutations in which an observer is merged with the surrounding matter, but these lack the **Geometric Filter (G)**—the stable inside/outside boundary required for memory and identity.
+Such paths do not support persistent conscious observers and therefore carry negligible observer-weighted measure.
+
+You do not fall because a force pushes you.
+You find yourself on the surface because that is where the largest number of describable, stable observer histories exist.
+Gravity is not imposed; it is the statistical geometry of observer persistence.
 
 
 ## Contents
