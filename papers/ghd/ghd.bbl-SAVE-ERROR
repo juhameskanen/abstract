@@ -89,35 +89,6 @@
       \field{pages}{246\bibrangedash 276}
       \range{pages}{31}
     \endentry
-    \entry{faizal2025}{article}{}
-      \name{author}{1}{}{%
-        {{hash=9b88cc581233275f8fc7656c8b793bd8}{%
-           family={Faizal},
-           familyi={F\bibinitperiod},
-           given={Firstname},
-           giveni={F\bibinitperiod}}}%
-      }
-      \strng{namehash}{9b88cc581233275f8fc7656c8b793bd8}
-      \strng{fullhash}{9b88cc581233275f8fc7656c8b793bd8}
-      \strng{bibnamehash}{9b88cc581233275f8fc7656c8b793bd8}
-      \strng{authorbibnamehash}{9b88cc581233275f8fc7656c8b793bd8}
-      \strng{authornamehash}{9b88cc581233275f8fc7656c8b793bd8}
-      \strng{authorfullhash}{9b88cc581233275f8fc7656c8b793bd8}
-      \field{sortinit}{F}
-      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal Name}
-      \field{number}{YY}
-      \field{title}{Title of the Article}
-      \field{volume}{XX}
-      \field{year}{2025}
-      \field{pages}{pp\bibrangedash pp}
-      \range{pages}{-1}
-      \verb{doi}
-      \verb 10.XXXX/XXXXXXXXXX
-      \endverb
-    \endentry
     \entry{Goff2019}{book}{}
       \name{author}{1}{}{%
         {{hash=bf9a83e1bbe1e0f2de292c14854dd927}{%
@@ -152,30 +123,6 @@
       \field{note}{Starring Arnold Schwarzenegger}
       \field{title}{Last Action Hero}
       \field{year}{1993}
-    \endentry
-    \entry{penrose1994shadows}{book}{}
-      \name{author}{1}{}{%
-        {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%
-           family={Penrose},
-           familyi={P\bibinitperiod},
-           given={Roger},
-           giveni={R\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Oxford University Press}%
-      }
-      \strng{namehash}{f51dfd339a12125d0f82a2d93e66d9b7}
-      \strng{fullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
-      \strng{bibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
-      \strng{authorbibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
-      \strng{authornamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
-      \strng{authorfullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Shadows of the Mind: A Search for the Missing Science of Consciousness}
-      \field{year}{1994}
     \endentry
     \entry{Strawson2006}{article}{}
       \name{author}{1}{}{%
