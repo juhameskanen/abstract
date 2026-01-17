@@ -1,6 +1,47 @@
-# The $D-\psi-G$ Trinity
+# The Abstract Universe Project (AUP) 
 
-The **$D-\psi-G$ Trinity** is an ongoing research and simulation framework exploring a unified information-theoretic model of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+## The Goal
+
+This is an ongoing research and simulation framework exploring the deep nature of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+
+
+## The Movie Analogy: A Physics of Information
+
+Imagine $n$ bits of information. These bits can be arranged in $2^n$ possible states, producing $(2^n)!$ permutations. Almost all such permutations are chaotic, incoherent noise. However, within this library, there exists a cluster of permutations that tell the story of an evolving universe—from the Big Bang to the emergence of observers.
+
+If you were to draw a "movie" of reality at random, you are most likely to find yourself in one that is highly compressible. In information theory, predictable data compresses best; therefore, universes with stable, elegant, and predictable laws of physics occupy a much larger share of the probability space than wildly chaotic ones. 
+
+No special initial conditions are required. We are simply experiencing the most efficient encoding of an observer's existence. We are living in a movie in which the "pixels" appear to follow not just a JPEG/MPEG compressed cosine function, but an even more effective **wave function**.
+
+
+For a configuration to allow persistent, intelligent, conscious entities to survive, it must satisfy three essential constraints:
+
+- **1. Optimal Compression ($\psi$)**
+The reason the microcosmos appears "wavy" is that we are observing the universe's compression algorithm. Just as a zoomed-in digital photo reveals the abstract patterns of its encoding, we see wavefunctions ($\psi$) because they are the most efficient spectral representation of information.
+
+- **2. Minimal Representation ($D$)**
+To avoid redundant computational overhead, the underlying smooth information is represented by discrete, finite entities: **particles**. These act as the "macro-blocks" of reality, providing a way for the universe to instantiate complex structures without the need for infinite resolution.
+
+- **3. Geometric Filtering ($G$)**
+Spacetime geometry acts as a stabilizer. It enforces stable "inside/outside" boundaries, preventing observer information from dissolving into the surrounding environment. Without this geometric filtering, memory would vanish and the persistent "self" required for consciousness could not exist.
+
+Our world is the "movie" from which we, as intelligent observers, are most likely to find ourselves playing a role. It is the configuration where maximal compression, minimal instantiation, and geometric stability intersect to allow life to observe itself.
+
+
+### Gravity
+
+Gravity emerges as a bias in the space of descriptions toward configurations with higher structural richness and stability.
+Regions we call “massive” correspond to areas of configuration space where vastly more observer-compatible descriptions exist.
+
+Because grounded, structured configurations admit many more stable continuations than empty or dilute ones, observer paths are statistically drawn toward them.
+This bias appears, from within the movie, as an attractive force.
+
+There exist permutations in which an observer is merged with the surrounding matter, but these lack the **Geometric Filter (G)**—the stable inside/outside boundary required for memory and identity.
+Such paths do not support persistent conscious observers and therefore carry negligible observer-weighted measure.
+
+You do not fall because a force pushes you.
+You find yourself on the surface because that is where the largest number of describable, stable observer histories exist.
+Gravity is not imposed; it is the statistical geometry of observer persistence.
 
 
 ## Contents
@@ -39,45 +80,6 @@ The [project wiki](https://github.com/juhameskanen/abstract/wiki) contains:
 * Discussion of ongoing and planned chapters
 
 
-## Structure
-
-```
-.
-├── papers/            # LaTeX source and simulations
-├── CHANGELOG.md       # Version history
-├── README.md          # Project overview (this file)
-└── LICENSE.md         # Licensing information
-```
-
-
-## Getting Started
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/juhameskanen/abstract.git
-   cd abstract
-   ```
-
-2. **Install dependencies**
-   Most simulations require Python ≥ 3.11 with `numpy`, `matplotlib`, and `networkx`. Install via:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run a simulation**
-
-   ```bash
-   python simulations/entropy_simulation.py
-   ```
-
-4. **Build papers**
-
-   ```bash
-   make
-   ```
-
 > Note: Many simulations and chapters are in draft stage; behavior may be updated frequently.
 
 
@@ -98,5 +100,5 @@ All project content—including papers, simulations, and documentation—is prop
 
 ---
 
-©Copyright 2001 ... 2025 - the $D-\psi-G$ Trinity. All rights reserved.*
+©Copyright 2001 ... 2025 - The Abstract Universe Project. All rights reserved.*
 
