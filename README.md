@@ -1,8 +1,8 @@
-# The Abstract Universe Project (pronounced Dee-Psit Theory)
+# The Abstract Universe Project (AUP) 
 
 ## The Goal
 
-The **$D-\psi-G$ Trinity** is an ongoing research and simulation framework exploring the deep nature of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+This is an ongoing research and simulation framework exploring the deep nature of reality. It develops a formal theory of everything (ToE) - a theory in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
 
 
 ## The Movie Analogy: A Physics of Information
@@ -100,5 +100,5 @@ All project content—including papers, simulations, and documentation—is prop
 
 ---
 
-©Copyright 2001 ... 2025 - the $D-\psi-G$ Trinity. All rights reserved.*
+©Copyright 2001 ... 2025 - The Abstract Universe Project. All rights reserved.*
 
