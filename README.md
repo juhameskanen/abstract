@@ -14,7 +14,7 @@ If you were to draw a "movie" of reality at random, you are most likely to find 
 No special initial conditions are required. We are simply experiencing the most efficient encoding of an observer's existence. We are living in a movie in which the "pixels" appear to follow not just a JPEG/MPEG compressed cosine function, but an even more effective **wave function**.
 
 
-For a configuration to allow persistent, intelligent, conscious entities to survive, it must satisfy three essential constraints:
+Compression alone is not sufficient. For a configuration to allow persistent, intelligent, conscious entities to survive, it must satisfy three essential constraints: $D-\psi-G$
 
 - **1. Optimal Compression ($\psi$)**
 The reason the microcosmos appears "wavy" is that we are observing the universe's compression algorithm. Just as a zoomed-in digital photo reveals the abstract patterns of its encoding, we see wavefunctions ($\psi$) because they are the most efficient spectral representation of information.
@@ -23,7 +23,7 @@ The reason the microcosmos appears "wavy" is that we are observing the universe'
 To avoid redundant computational overhead, the underlying smooth information is represented by discrete, finite entities: **particles**. These act as the "macro-blocks" of reality, providing a way for the universe to instantiate complex structures without the need for infinite resolution.
 
 - **3. Geometric Filtering ($G$)**
-Spacetime geometry acts as a stabilizer. It enforces stable "inside/outside" boundaries, preventing observer information from dissolving into the surrounding environment. Without this geometric filtering, memory would vanish and the persistent "self" required for consciousness could not exist.
+Spacetime geometry enforces stable "inside/outside" boundaries. It is required to prevent observer information from dissolving into the surrounding environment. Without this geometric filtering, memory would vanish and the persistent "self" required for consciousness could not exist.
 
 Our world is the "movie" from which we, as intelligent observers, are most likely to find ourselves playing a role. It is the configuration where maximal compression, minimal instantiation, and geometric stability intersect to allow life to observe itself.
 
@@ -34,14 +34,11 @@ Gravity emerges as a bias in the space of descriptions toward configurations wit
 Regions we call “massive” correspond to areas of configuration space where vastly more observer-compatible descriptions exist.
 
 Because grounded, structured configurations admit many more stable continuations than empty or dilute ones, observer paths are statistically drawn toward them.
-This bias appears, from within the movie, as an attractive force.
+This bias appears as an attractive force.
 
 There exist permutations in which an observer is merged with the surrounding matter, but these lack the **Geometric Filter (G)**—the stable inside/outside boundary required for memory and identity.
 Such paths do not support persistent conscious observers and therefore carry negligible observer-weighted measure.
 
-You do not fall because a force pushes you.
-You find yourself on the surface because that is where the largest number of describable, stable observer histories exist.
-Gravity is not imposed; it is the statistical geometry of observer persistence.
 
 
 ## Contents
@@ -53,9 +50,9 @@ Gravity is not imposed; it is the statistical geometry of observer persistence.
 
 ## Purpose
 
-$D-\psi-G$ aims to:
+The Abstract Universe Project aims to:
 
-1. Formulate a **model of everything**
+1. Formulate a **theory of everything**
 2. Demonstrate, via simulations, how only two minimal principles give rise to universes with physics.
 3. Provide a **rigorous, testable framework** for a Theory of Everything (ToE) that unifies gravity and quantum mechanics as manifestations of information structures
 
@@ -64,7 +61,7 @@ This is a research-in-progress project. Many simulations and book chapters are i
 
 ## Continuous Integration
 
-$D-\psi-G$ uses GitHub Actions for automated builds:
+The project uses GitHub Actions for automated builds:
 
 * [![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
 * [![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
