@@ -7,26 +7,26 @@ The **$D-\psi-G$ Trinity** is an ongoing research and simulation framework explo
 
 ## The Movie Analogy: A Physics of Information
 
-Imagine $n$ bits of information. These bits can be arranged in $2^n$ possible states, producing $(2^n)!$ permutations. Almost all such permutations are chaotic, incoherent noise. However, within this library, there exists a cluster of permutations that tell the story of an evolving universe, from the Big Bang to the emergence of observers.
+Imagine $n$ bits of information. These bits can be arranged in $2^n$ possible states, producing $(2^n)!$ permutations. Almost all such permutations are chaotic, incoherent noise. However, within this library, there exists a cluster of permutations that tell the story of an evolving universe—from the Big Bang to the emergence of observers.
 
-If you were to draw a movie of reality at random, you are most likely to find yourself in one that is highly compressible. In information theory, predictable data compresses best; therefore, universes with stable, elegant, and predictable laws of physics occupy a much larger share of the probability space than wildly chaotic ones. 
+If you were to draw a "movie" of reality at random, you are most likely to find yourself in one that is highly compressible. In information theory, predictable data compresses best; therefore, universes with stable, elegant, and predictable laws of physics occupy a much larger share of the probability space than wildly chaotic ones. 
 
-We are not inhabitant of a miracle—we are simply experiencing the most efficient encoding of an observer's existence.
+We are not inhabitants of a miracle—we are simply experiencing the most efficient encoding of an observer's existence. We are living in a movie in which the "pixels" appear to follow not just a JPEG/MPEG compressed cosine function, but an even more effective **wave function**.
 
-### The Three Constraints of Reality
 
-Our observed world is defined by three essential constraints that allow for persistent, conscious entities:
+For a configuration to allow persistent, intelligent, conscious entities to survive, it must satisfy three essential constraints:
 
 - **1. Optimal Compression ($\psi$)**
-The reason the microcosmos appears "wavy" is that we are observing the universe's compression algorithm. Just as one can study the pixels of an MPEG-compressed movie and find them following abstract cosine functions, we find wavefunctions ($\psi$). Quantum waves are not "stuff"; they are the complex spectral compression of information, capturing patterns and correlations in the most compact description possible.
+The reason the microcosmos appears "wavy" is that we are observing the universe's compression algorithm. Just as a zoomed-in digital photo reveals the abstract patterns of its encoding, we see wavefunctions ($\psi$) because they are the most efficient spectral representation of information.
 
 - **2. Minimal Representation ($D$)**
 To avoid redundant computational overhead, the underlying smooth information is represented by discrete, finite entities: **particles**. These act as the "macro-blocks" of reality, providing a way for the universe to instantiate complex structures without the need for infinite resolution.
 
 - **3. Geometric Filtering ($G$)**
-Spacetime geometry acts as a stabilizer. It enforces stable "inside/outside" boundaries (locality), preventing observer information from dissolving into the surrounding environment. Without this geometric filtering, memory would vanish, physical structures would disintegrate, and the persistent "self" required for consciousness could not exist.
+Spacetime geometry acts as a stabilizer. It enforces stable "inside/outside" boundaries, preventing observer information from dissolving into the surrounding environment. Without this geometric filtering, memory would vanish and the persistent "self" required for consciousness could not exist.
 
-Our world is the movie from which we, as intelligent observers, are most likely to find ourselves playing a role. It is the configuration where maximal compression, minimal instantiation, and well defined boundaries intersect to allow us to observe itself.
+Our world is the "movie" from which we, as intelligent observers, are most likely to find ourselves playing a role. It is the configuration where maximal compression, minimal instantiation, and geometric stability intersect to allow life to observe itself.
+
 
 
 ## Contents
