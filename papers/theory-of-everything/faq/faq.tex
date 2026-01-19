@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{lipsum} % for placeholder text
+\input{../../common.tex}
+\input{../../glossary.tex}
+\input{../../faq_setup.tex}
+\addbibresource{../../references.bib} 
+
+\title{Frequently Asked Questions}
+\date{2001 -- 2025}
+
+\begin{document}
+\maketitle
+
+
+\faqTOCStart{FAQ Index}
+\item \hyperref[faq:origin]{Where did all the matter in the universe come from?}
+\item \hyperref[faq:why-something]{Why does abstract information exist?}
+\item \hyperref[faq:qbism]{Does \IaMe support QBism?}
+\item \hyperref[faq:godel]{How does Gödel incompleteness affect the theory?}
+\item \hyperref[faq:simulation]{Are we living in a simulation}
+\item \hyperref[faq:recursive-simulation]{Is the recursive simulation hypothesis supported within the theory?}
+\item \hyperref[faq:death]{Why do we die?}
+\faqTOCFinish
+
+
+\begin{faq}{Where did all the matter in the universe come from?}
+\label{faq:origin}
+\answer{
+This question implicitly assumes a temporal ordering and an external origin, but both time and causality are emergent properties of observers within the universe (as established in Paper~1). In the underlying informational substrate, the universe is abstract and timeless. It exists because there are no constraints forbidding it. 
+}
+\end{faq}
+
+
+\begin{faq}{Why does abstract information exist?}
+\label{faq:why-something}
+Asking why there is something abstract rather than nothing is like asking why “heads” rather than “tails” — both possibilities exist, but only one can be observed. The observer necessarily finds itself in the branch that exists.
+\end{faq}
+
+\begin{faq}{Does \IaMe support QBism?}{Does the theory support the QBism view that our observations shape quantum phenomena?}
+\label{faq:qbism}
+\answer{Yes. In \IaMe, the observer is an informational structure and is most likely to find themselves in configurations that preserve their reasoning and decision-making capabilities. Observers with reasoning have a higher probability of persistence than those without. As a result, reasoning statistically biases which configurations an observer experiences next. Quantum mechanics emerges from these informational rules, so it may appear that observation or decisions “change” the quantum state, even though all evolution is fully contained within the underlying substrate.}
+\end{faq}
+
+
+\begin{faq}{How does Gödel incompleteness affect the theory?}{Does Gödel’s theorem limit a fully self-contained ToE?}
+\label{faq:godel}
+\answer{Gödel’s incompleteness theorems constrain formal systems capable of arithmetic, but a ToE aims for ontological closure, not formal deductive completeness. Observer reasoning may encounter Gödel-style limits internally, but these are limitations on embedded observers’ formal reasoning, not on the underlying informational substrate itself.}
+\end{faq}
+
+\begin{faq}{Are we living in a simulation?}{Does the theory imply that our universe is a simulation run by some external agent?}
+\label{faq:simulation}
+\answer{
+  In the popular formulation, the simulation hypothesis posits an external simulator operating in a higher-level physical reality. Recent work has argued that such hypotheses are not fully consistent with observed features of our universe, placing strong constraints on externally run simulations \cite{faizal2025}. \cite{Vazza2025SimulationConstraints} approaches the simulation hypothesis from a very different perspective, with astrophysical constraints.
+  Regardless of the technical details, this approach merely shifts the explanatory burden: one must then explain the origin and laws of the simulator itself. 
+
+In this framework, such meta-theories are rejected. A genuine Theory of Everything cannot rely on an external system, as a ``theory of everything minus the simulator'' is not a theory of everything. Instead, we assume informational ontological equivalence: simulated and non-simulated realities are not ontologically distinct. The universe is not running \emph{on} something else; rather, all structures, including observers and apparent physical laws, arise within a single abstract informational substrate. In this sense, the question of whether we are ``in a simulation'' is ill-posed.
+}
+\end{faq}
+
+
+\begin{faq}{Is the recursive simulation hypothesis supported within the theory?}{Can observers or humans within the theory simulate themselves, and are nested simulations possible?}
+\label{faq:recursive-simulation}
+\answer{
+Yes, but only in a restricted and precisely defined sense.
+
+Within the theory, observers are informational structures. Any such structure capable of reasoning can, in principle, construct formal systems, Turing machines, and simulations of itself. This has already occurred: humans have defined universal computation and have begun simulating simplified versions of biological, cognitive, and physical processes. Since biological information (including DNA) can be encoded digitally without loss of information, simulated humans can be axiomatic copies of real humans at the informational level.
+
+These sub-simulations do not require a separate ontological substrate. They correspond simply to different configurations within the same underlying informational space (e.g., subsets of $2^n$). In this limited sense, recursive simulation is supported.
+
+However, the theory places a fundamental constraint on unbounded recursive simulation: \textbf{entropy}.
+
+While it is logically possible to define a simulation of observers, it is informationally expensive to \emph{realize} one. Extracting, encoding, and maintaining the information required to faithfully describe even a single human genome is already nontrivial. Scaling this to billions of humans, each composed of billions of cells, embedded in a universe containing astronomical numbers of particles and interactions, rapidly exhausts available informational resources.
+
+As a result, recursive simulations necessarily degrade. They must either:
+\begin{enumerate}[label=-]
+\item omit detail,
+\item compress aggressively (thereby losing fidelity),
+\item restrict scope, or
+\item terminate.
+\end{enumerate}
+
+Thus, while recursive simulation is logically admissible and internally consistent with the theory, it is \emph{entropically unstable}. Deep, high-fidelity, indefinitely nested simulations are not generically expected to persist.
+
+In summary: recursive simulation is permitted in principle, but strongly constrained in practice. The theory predicts shallow, lossy, or short-lived recursive simulations—not infinite, fully faithful simulation stacks.
+}
+\end{faq}
+
+
+\begin{faq}{Why do we die?}
+\label{faq:death}
+\answer{The phenomenon of death can be understood in terms of the information content of an observer. As time progresses, an observer accumulates information in the form of memories, knowledge, and physical structure. During early life, this accumulation typically increases the probability of persistence: improved reasoning, learned skills, and adaptive behaviors make it more likely that the observer continues to exist. However, as the information content grows, the number of future configurations compatible with the continued existence of that observer decreases. Eventually, the set of configurations becomes exhausted, and the observer ceases to exist. In this sense, death arises naturally from the finite combinatorial possibilities available to complex informational structures.
+\end{faq}
+
+\end{document}

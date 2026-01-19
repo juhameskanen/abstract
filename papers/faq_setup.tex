@@ -1,0 +1,51 @@
+
+%----------------------------------------
+% FAQ Environment with colored boxes
+%----------------------------------------
+\newcounter{faqctr}
+\setcounter{faqctr}{0}
+
+% Question box style
+\tcbset{
+    faqquestion/.style={
+        colback=gray!15, colframe=gray!50, 
+        fonttitle=\bfseries, coltitle=black, 
+        boxrule=0.5pt, arc=4pt, top=2pt, bottom=2pt, left=4pt, right=4pt
+    },
+    faqanswer/.style={
+        colback=blue!5, colframe=blue!50, 
+        fonttitle=\bfseries, coltitle=black, 
+        boxrule=0.5pt, arc=4pt, top=2pt, bottom=2pt, left=4pt, right=4pt
+    }
+}
+
+% FAQ environment
+\newenvironment{faq}[3][]{%
+    \refstepcounter{faqctr}%
+    \medskip%
+    \tcbset{faqquestion}%
+    \begin{tcolorbox}[title={Q\thefaqctr: #2}]%
+    \ifx&#1&\else\textit{#1}\par\medskip\fi
+    #3%
+    \end{tcolorbox}%
+    \medskip%
+}{\medskip}
+
+% Answer command
+\newcommand{\answer}[1]{%
+    \tcbset{faqanswer}%
+    \begin{tcolorbox}[title={A:}]%
+    #1%
+    \end{tcolorbox}%
+}
+
+
+\newcommand{\faqTOCStart}[1]{%
+    \section*{#1}%
+    \addcontentsline{toc}{section}{#1}%
+    \begin{enumerate}[label=Q\arabic*:,leftmargin=1.5em]%
+}
+
+\newcommand{\faqTOCFinish}{%
+    \end{enumerate}%
+}
