@@ -14,6 +14,8 @@ __pycache__/
 venv/
 .venv/
 env/
+html/
+pdf-files/
 
 # LaTeX auxiliary files
 *.aux
@@ -29,10 +31,12 @@ env/
 *.lot
 *.gz
 *.bcf
-*.bcf-SAVE-ERROR
 *.run.xml
 *.pdf
 *.mp4
+*.html
+*.pdf
+*-SAVE-ERROR
 
 # OS files
 *.DS_Store
