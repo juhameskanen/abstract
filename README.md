@@ -1,5 +1,9 @@
 # The Abstract Universe Project (AUP) 
 
+
+![D-ψ-G Formalism](figures/aup.svg)
+
+
 ## Purpose
 
 Many today have given up on the Theory of Everything. This project is not among them. We believe we can not only solve *how* the universe works, but also *what* it truly is.  
