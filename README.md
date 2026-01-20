@@ -1,8 +1,14 @@
 # The Abstract Universe Project (AUP) 
 
-## The Goal
+## Purpose
 
-This is an ongoing research and simulation framework exploring the deep nature of reality. It develops a formal theory of everything (ToE) in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims.
+Many today have given up on the Theory of Everything. This project is not among them. We believe we can not only solve *how* the universe works, but also *what* it truly is.  
+
+This project is a playground for serious physics, Python, LaTeX, and the GitHub ecosystem—where rigor meets curiosity and joy. Code, simulations, and explorations tackle deep questions about reality, entropy, and abstract structures, all while having fun along the way (YAML excluded!) 
+
+## Goal
+
+To explore the deep nature of reality, and to develop a formal theory of everything (ToE) in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims. 
 
 
 ## Contents
@@ -10,17 +16,8 @@ This is an ongoing research and simulation framework exploring the deep nature o
 * [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
+* [LICENSE ➡](LICENCE.md) – Licence 
 
-
-## Purpose
-
-The Abstract Universe Project aims to:
-
-1. Formulate a **theory of everything**
-2. Demonstrate, via simulations, how only two minimal principles give rise to universes with physics.
-3. Provide a **rigorous, testable framework** for a Theory of Everything (ToE) that unifies gravity and quantum mechanics as manifestations of information structures
-
-This is a research-in-progress project. Many simulations and book chapters are in draft form and will be refined over time.
 
 
 ## Continuous Integration
@@ -41,12 +38,19 @@ The [project wiki](https://github.com/juhameskanen/abstract/wiki) contains:
 * Discussion of ongoing and planned chapters
 
 
-> Note: Many simulations and chapters are in draft stage; behavior may be updated frequently.
+## The Current State
+
+**Under Construction** - material is being collected from other resources and converted from different formats to github ecosystem.
+
+Many simulations and chapters are in draft stage; behavior may be updated frequently based on the current phase of authorial chaos. 
+
+This is a research-in-progress project. Many simulations and chapters are in draft and their content evolves frequently as research progresses.
+
 
 
 ## Contributing
 
-Contributions are welcome, especially:
+Contributions are generally not expected, but welcomed anyway, especially:
 
 * Additional simulations demonstrating theoretical claims
 * Corrections, clarifications, or expansions of draft chapters
