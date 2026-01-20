@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="The Abstract Universe Project" />
+  <meta name="dcterms.date" content="2022-01-01" />
+  <title>Emergent Gravity II</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Emergent Gravity II</h1>
+<p class="author">The Abstract Universe Project</p>
+<p class="date">2022</p>
+<div class="abstract">
+<div class="abstract-title">Abstract</div>
+<p>We extend our informational quantum-gravity framework by introducing
+affine Gaussian blobs, which are fully characterized by center,
+covariance, and internal phase parameters. Each blob’s candidate
+configurations are evaluated according to the compressibility of its
+entire history, and the most compressible configurations dominate the
+probability measure of observer-realized worlds. Iterative resampling of
+particle positions from the emergent density field, combined with
+history-aware blob updates, produces trajectories that approximate
+general-relativistic geodesics. High-frequency divergences are naturally
+suppressed by the information-theoretic cost of abrupt changes, yielding
+smooth curvature akin to spacetime warping. This formulation unifies the
+emergence of inertia, quantum interference, and classical gravitational
+behavior under a single informational principle of maximal
+compressibility.</p>
+</div>
+</header>
+<h1 id="introduction">Introduction</h1>
+<p>In prior work, we demonstrated that probabilistic gravity and inertia
+emerge from the dominance of compressible trajectories of Gaussian blobs
+in a 2D particle field. While these blobs captured gravity-like
+attraction and emergent QM-like behavior, their fixed isotropic shapes
+limited the simulation’s ability to reproduce <strong>general
+relativistic geodesics</strong>, where matter dynamically shapes
+spacetime geometry.</p>
+<p>Here, we extend the blob model to include <strong>full affine
+transformations</strong>—i.e., the center, scaling, skew, and rotation
+of each blob—and define a self-consistent iterative update:</p>
+<ol>
+<li><p>Particle positions are resampled according to the probability
+density induced by all blobs.</p></li>
+<li><p>Each blob is updated to maximize the compressibility of its full
+history relative to the observed particle distribution.</p></li>
+<li><p>This process iterates until a self-consistent configuration
+emerges.</p></li>
+</ol>
+<h1 id="blob-representation-as-wavefunctions">Blob Representation as
+Wavefunctions</h1>
+<p>Each blob <span class="math inline">\(i\)</span> is represented as a
+<strong>complex-valued wavefunction</strong> <span
+class="math inline">\(\psi_i(\mathbf{x})\)</span>, encoding the center,
+covariance, and internal phase/frequency structure of the blob: <span
+class="math display">\[\psi_i(\mathbf{x}) = A_i \exp\Big[-\frac{1}{2}
+(\mathbf{x}-\mathbf{\mu}_i)^\top \mathbf{\Sigma}_i^{-1}
+(\mathbf{x}-\mathbf{\mu}_i) + i \phi_i(\mathbf{x}) \Big]\]</span>
+Where:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{\mu}_i \in
+\mathbb{R}^d\)</span> is the blob center.</p></li>
+<li><p><span class="math inline">\(\mathbf{\Sigma}_i \in \mathbb{R}^{d
+\times d}\)</span> is the covariance matrix, encoding <strong>scaling,
+skew, and rotation</strong>.</p></li>
+<li><p><span class="math inline">\(\phi_i(\mathbf{x})\)</span> is a
+local phase function.</p></li>
+<li><p><span class="math inline">\(A_i\)</span> is a normalization
+factor.</p></li>
+</ul>
+<h2 id="total-particle-density-from-wavefunctions">Total Particle
+Density from Wavefunctions</h2>
+<p>The total particle density <span
+class="math inline">\(\rho(\mathbf{x})\)</span> is computed from the
+squared magnitude of the sum of all wavefunctions: <span
+class="math display">\[\psi_{\rm total}(\mathbf{x}) = \sum_i
+\psi_i(\mathbf{x}), \quad \rho(\mathbf{x}) = |\psi_{\rm
+total}(\mathbf{x})|^2\]</span> This formulation naturally captures
+interference effects while ensuring <span
+class="math inline">\(\rho(\mathbf{x}) \ge 0\)</span>, suitable for
+particle resampling.</p>
+<h2 id="affine-transformations-and-compression">Affine Transformations
+and Compression</h2>
+<p>The covariance <span class="math inline">\(\mathbf{\Sigma}_i\)</span>
+allows each blob to undergo scaling, skewing, and rotation. Each blob
+maintains a memory of its past wavefunction parameters <span
+class="math inline">\(\mathcal{H}_i\)</span>. Candidate updates are
+evaluated by the <strong>Minimum Description Length (MDL)</strong> cost
+of the evolution of the mean, covariance, and phase: <span
+class="math display">\[\mathcal{C}[\mathcal{H}_i \cup (\mu, \Sigma,
+\phi)] = \text{MDL cost of trajectory evolution}\]</span></p>
+<h1 id="iterative-self-consistency">Iterative Self-Consistency</h1>
+<p>The simulation proceeds through iterative loops analogous to solving
+Einstein’s equations:</p>
+<ol>
+<li><p><strong>Resample Particles:</strong> Draw positions <span
+class="math inline">\(\{\mathbf{x}_j\}\)</span> from <span
+class="math inline">\(\rho(\mathbf{x})\)</span>.</p></li>
+<li><p><strong>Update Blobs:</strong> Compute the MLE estimate of mean
+and covariance, adjusted by history cost: <span
+class="math display">\[(\mathbf{\mu}_i^{\text{new}},
+\mathbf{\Sigma}_i^{\text{new}}) = \arg\min_{\mu, \Sigma} \Big[ - \sum_j
+\log \mathcal{N}(\mathbf{x}_j \,|\, \mu, \Sigma) +
+\mathcal{C}[\mathcal{H}_i \cup (\mu, \Sigma)] \Big]\]</span></p></li>
+</ol>
+<figure>
+<img src="figures/quantum_gravity_2.gif" style="width:80.0%" />
+<figcaption>Simulation of emergent gravity and Quantum
+Mechanics</figcaption>
+</figure>
+<figure>
+<img src="figures/quantum_gravity_2.png" style="width:80.0%" />
+<figcaption>Emergent gravity and Quantum Mechanics: Visualization of the
+informational selection process.</figcaption>
+</figure>
+<h1 id="emergent-gr-like-behavior">Emergent GR-Like Behavior</h1>
+<p>Particle trajectories follow geodesics of the emergent density field.
+High-frequency divergences are automatically suppressed because abrupt
+changes in <span class="math inline">\(\mathbf{\Sigma}_i(t)\)</span> are
+informationally costly. Collapsing blobs are stretched dynamically,
+producing smooth curvature analogous to spacetime warping in GR.
+Trajectories far from high-density blobs remain nearly straight,
+reproducing asymptotically flat space.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>By extending Gaussian blobs to full affine transformations and
+evaluating configurations via compressibility over their histories, we
+achieve a unified probabilistic emergence of inertia, quantum mechanics,
+and General Relativity. This demonstrates that spacetime dynamics can be
+recovered from the informational principle of maximum
+compressibility.</p>
+<h1 class="unnumbered" id="simulation-software">Simulation Software</h1>
+<ul>
+<li><p><a href="simulations/quantum-gravity2.py">quantum-gravity2.py:
+Quantum-gravity 2</a></p></li>
+<li><p>Qbitwave python package</p></li>
+</ul>
+<div class="thebibliography">
+<p><span>9</span> Chaitin, G. J. <em>Algorithmic Information
+Theory</em>. Cambridge University Press, 1987. Kolmogorov, A. N.
+<em>Three Approaches to the Quantitative Definition of Information</em>.
+1965. Bennett, C. H. <em>The Thermodynamics of Computation</em>, Int. J.
+Theor. Phys., 1982. Tegmark, M. <em>Our Mathematical Universe</em>.
+Knopf, 2014.</p>
+</div>
+<hr><div class='nav-footer'><a href="../index.html">&uarr; Up (TOC)</a> | <a href="../quantum-gravity/index.html">&larr; Emergent Gravity I</a> | <a href="../wavefunction-as-compression/index.html">Wavefunction as Compression &rarr;</a> <br><br><i>&copy; 2026 The Abstract Universe Project.</i></div>
+</body>
+</html>

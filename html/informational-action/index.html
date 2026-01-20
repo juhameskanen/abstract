@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="The Abstract Universe Project" />
+  <meta name="dcterms.date" content="2022-01-01" />
+  <title>Geodesics as Minimal-Entropy Trajectories in Informational Space</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Geodesics as Minimal-Entropy Trajectories in
+Informational Space</h1>
+<p class="author">The Abstract Universe Project</p>
+<p class="date">2022</p>
+<div class="abstract">
+<div class="abstract-title">Abstract</div>
+<p>We present a constructive proof-of-concept demonstrating that
+classical geodesic paths on a curved surface can be recovered by
+minimizing an informational cost functional defined in bitstring.
+Specifically, we compare Euclidean action minimization with minimization
+of a <em>phase-coherent spectral entropy</em> computed from local
+bit-encoded wavefunction segments. We interpret the wavefunction as a
+<em>minimal description of nature</em>, compressing the underlying
+information such that smoother, simpler waveforms dominate statistical
+measure. Without assuming any prior equivalence between geometric and
+informational principles, we show that both methods select nearly
+identical paths across a range of noisy, nontrivial geometries. This
+result supports the hypothesis that classical spacetime dynamics may
+emerge from an underlying informational principle.</p>
+</div>
+</header>
+<p><strong>Keywords:</strong> Geodesics, Informational Action, Spectral
+Entropy, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action,
+Minimal Description Length, Discrete Path Optimization</p>
+<h1 id="introduction">Introduction</h1>
+<p>Here, we explore the notion that the wavefunction itself is a
+<em>compression system for the universe</em>: any set of information can
+be arranged into many possible wavefunctions, and simple, smooth
+wavefunctions admit vastly more representations. Thus, smoother,
+lower-entropy wavefunctions dominate statistical measure, realizing a
+form of minimal-description principle akin to Kolmogorov complexity but
+with well-defined size and smoothness constraints.</p>
+<p>We investigate whether a purely informational cost functional,
+defined independently of geometry, can recover classical geodesic
+behavior. Our approach is algorithmic and discrete: paths are selected
+step-by-step by minimizing <em>phase-coherent spectral entropy</em> over
+local execution traces. Remarkably, we find strong agreement between the
+two resulting paths, suggesting that minimal descriptions naturally
+encode geodesic structure.</p>
+<h1 id="geometric-setup">Geometric Setup</h1>
+<p>We consider a two-dimensional spatial domain embedded in a
+three-dimensional height field, representing a curved metric surface.
+The surface is constructed as a superposition of Gaussian hills and
+valleys with added stochastic noise. Let <span
+class="math inline">\(\phi(x,y)\)</span> denote the surface height. The
+classical Euclidean action for a path <span
+class="math inline">\(\gamma\)</span> proceeding in the <span
+class="math inline">\(x\)</span> direction is approximated locally by
+<span class="math display">\[I_E \approx \sum_x \left( \nabla_x \phi
+\right)^2,\]</span> where the gradient is discretized on a grid. At each
+step, the next path position is chosen from a local neighborhood to
+minimize the incremental contribution to <span
+class="math inline">\(I_E\)</span>.</p>
+<h1 id="informational-action-as-minimal-description">Informational
+Action as Minimal Description</h1>
+<p>We propose that the classical trajectory emerges from an underlying
+principle of <em>Minimal Description</em>. In this framework, the
+physical path is not determined by geometric distance, but by the
+efficiency with which the bit-encoded substrate can represent the state.
+We define the informational action <span
+class="math inline">\(S_I\)</span> as the integral of an informational
+Lagrangian <span class="math inline">\(\mathcal{L}_I\)</span>:</p>
+<p><span class="math display">\[S_I = \int_{\gamma} \mathcal{L}_I(\Psi,
+\dot{\Psi}) \, dt = \int_{\gamma} \left[ \mathcal{H}(\Psi) + \alpha \,
+\mathcal{D}(\Psi, \dot{\Psi}) \right] dt\]</span></p>
+<p>where the Lagrangian is partitioned into two fundamental terms: the
+spectral complexity and the phase incoherence.</p>
+<h2 id="spectral-entropy-mathcalh">Spectral Entropy (<span
+class="math inline">\(\mathcal{H}\)</span>)</h2>
+<p>The first term, <span class="math inline">\(\mathcal{H}\)</span>,
+quantifies the informational cost to describe the local state. For a
+discrete bit-segment <span class="math inline">\(\Psi\)</span>, we
+compute the normalized power spectral density (PSD) via a real Fourier
+transform. The probability <span class="math inline">\(p_k\)</span> of a
+frequency mode <span class="math inline">\(k\)</span> is given by: <span
+class="math display">\[p_k = \frac{|A_k|^2}{\sum_j |A_j|^2}\]</span> The
+spectral entropy is defined as: <span class="math display">\[\mathcal{H}
+= -\sum_{k} p_k \log_2 p_k\]</span> Lower entropy corresponds to
+smoother waveforms, representing a more compressed minimal
+description.</p>
+<h2 id="phase-incoherence-and-quantum-infidelity-mathcald">Phase
+Incoherence and Quantum Infidelity (<span
+class="math inline">\(\mathcal{D}\)</span>)</h2>
+<p>To ensure the continuity of the emergent description, we introduce a
+transport cost <span class="math inline">\(\mathcal{D}\)</span>. This
+term penalizes rapid phase slips between consecutive execution traces.
+We utilize the complex inner product to measure the overlap between the
+current state <span class="math inline">\(\Psi_t\)</span> and the
+candidate state <span class="math inline">\(\Psi_{t+dt}\)</span> in
+Hilbert space: <span class="math display">\[\mathcal{D} = 1 -
+\frac{|\langle \Psi_t | \Psi_{t+dt} \rangle|}{\|\Psi_t\|
+\|\Psi_{t+dt}\|}\]</span> This formulation is mathematically equivalent
+to the <em>Fubini-Study metric</em>, defining the infinitesimal distance
+between points in projective Hilbert space. It effectively imparts
+informational inertia, favoring descriptions that maintain
+phase-stability over time. The purpose is to find the optimal
+wavefunction (maximal compression).</p>
+<h1 id="path-finding-algorithm">Path-Finding Algorithm</h1>
+<p>Both methods employ the same local path-finding structure. Starting
+from a fixed boundary condition, the path advances column by column. At
+each step, three candidate positions are evaluated, and the one
+minimizing the respective cost functional is selected. No geometric
+information is used in the informational method; likewise, no
+informational quantities appear in the Euclidean action.</p>
+<h1 id="results">Results</h1>
+<p>Across multiple randomly generated surfaces, the paths selected by
+Euclidean action minimization and minimal description (QBitwave) are
+nearly identical. Incorporating phase coherence (<span
+class="math inline">\(\mathcal{D}\)</span>) significantly improves
+alignment, especially in regions with ambiguous local gradients.</p>
+<figure>
+<img src="figures/fields.png" style="width:100.0%" />
+<figcaption>Heatmaps of normalized Euclidean action (left) and
+informational cost including phase coherence (right).</figcaption>
+</figure>
+<figure>
+<img src="figures/path-comparison.png" style="width:100.0%" />
+<figcaption>Comparison of paths obtained via Euclidean action (red) and
+phase-coherent spectral entropy (blue).</figcaption>
+</figure>
+<h2 class="unnumbered" id="systematic-noise-study">Systematic Noise
+Study</h2>
+<p>A parameter sweep shows that at low noise, both measures correlate
+strongly. As noise increases, Euclidean action rises monotonically,
+while the informational action exhibits a saturation effect due to
+finite-resolution encoding. This divergence illustrates that
+informational cost imposes natural cutoffs, reflecting the dominance of
+smooth wavefunctions as minimal descriptions.</p>
+<figure>
+<img src="figures/informational-saturation.png" style="width:100.0%" />
+<figcaption>Systematic noise sweep using
+<code>entropy_action_comparison.py</code>. The Euclidean action (red)
+increases monotonically with noise. The phase-coherent spectral entropy
+(blue) initially tracks the action but saturates at higher noise levels
+due to finite-resolution bit encoding and phase-stability effects. The
+dashed line represents the compressibility measure of the informational
+path, highlighting the minimal-program dominance of smooth, low-entropy
+wavefunctions.</figcaption>
+</figure>
+<h1 id="discussion">Discussion</h1>
+<p>The observed correspondence suggests that classical geodesics may be
+understood as paths of minimum informational description. The
+minimal-description perspective implies that simpler wavefunctions
+dominate measure and naturally align with Euclidean geodesics.</p>
+<table>
+<caption>Correspondences between Geometric and Informational
+measures.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Geometric Quantity</strong></th>
+<th style="text-align: left;"><strong>Informational
+Equivalent</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Potential Energy (<span
+class="math inline">\(V\)</span>)</td>
+<td style="text-align: left;">Spectral Entropy (<span
+class="math inline">\(\mathcal{H}\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kinetic Energy (<span
+class="math inline">\(T\)</span>)</td>
+<td style="text-align: left;">Quantum Infidelity (<span
+class="math inline">\(\mathcal{D}\)</span>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Action (<span
+class="math inline">\(S\)</span>)</td>
+<td style="text-align: left;">Total Description Length (<span
+class="math inline">\(\sum \mathcal{L}_I\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Geodesic</td>
+<td style="text-align: left;">Optimal Compression Trace</td>
+</tr>
+</tbody>
+</table>
+<h1 id="conclusion">Conclusion</h1>
+<p>We have demonstrated that minimizing phase-coherent spectral entropy
+can recover classical geodesic paths.</p>
+<p>This result, together with the <strong>Entropy-Singularity
+Lemma</strong>, represents two sides of the same coin: regions of
+vanishing entropy contain no microstructure, while entropy-minimizing
+trajectories naturally avoid high-entropy, singular configurations.</p>
+<p>Taken together, these principles imply that spacetime singularities
+and divergences are automatically suppressed by the informational
+structure of the universe.</p>
+<h1 class="unnumbered" id="supplementary-materials">Supplementary
+Materials</h1>
+<ul>
+<li><p><a
+href="simulations/geodesic_from_information.py">geodesic_from_information.py:
+PoC demonstration of informational geodesics on 2D surfaces</a></p></li>
+<li><p><a
+href="simulations/entropy_action_comparison.py">entropy_action_comparison.py:
+Systematic study of Euclidean action vs. spectral entropy across noise
+levels and resolutions</a></p></li>
+<li><p><a
+href="simulations/phi4_qbitwave_mcmc_2.py">phi4_qbitwave_mcmc_2.py: UV
+suppression in Quantum Field Theory</a></p></li>
+<li><p><a href="supplementary-qbitwave.pdf">QBitwave supplementary
+paper</a></p></li>
+</ul>
+<hr><div class='nav-footer'><a href="../index.html">&uarr; Up (TOC)</a> | <a href="../probabilistic-blackhole/index.html">&larr; Probabilistic Blackhole</a> | <a href="../quantum-gravity/index.html">Emergent Gravity I &rarr;</a> <br><br><i>&copy; 2026 The Abstract Universe Project.</i></div>
+</body>
+</html>

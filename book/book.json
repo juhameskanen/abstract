@@ -1,0 +1,75 @@
+{
+  "title": "The Abstract Universe Project (AUP)",
+  "sections": [
+    {
+      "title": "Highly Scientific Papers",
+      "items": [
+        {
+          "title": "A Study in Significant Whitespace in YAML and Mental Collapse",
+          "slug": "yaml-paradox"
+        }
+      ]
+    },
+    {
+      "title": "Core Papers",
+      "items": [
+        {
+          "title": "Informational Derivation of Reality",
+          "slug": "informational-derivation-of-reality"
+        },
+        {
+          "title": "Singularities as Zero-Entropy States",
+          "slug": "black-hole-singularities"
+        },
+        {
+          "title": "Emergence of Spacetime",
+          "slug": "emergence-of-spacetime"
+        }
+      ]
+    },
+    {
+      "title": "Quantum Gravity Program",
+      "items": [
+        {
+          "title": "Probabilistic Blackhole",
+          "slug": "probabilistic-blackhole"
+        },
+        {
+          "title": "Quantum Gravity I",
+          "slug": "quantum-gravity"
+        },
+        {
+          "title": "Quantum Gravity II",
+          "slug": "quantum-gravity-2"
+        },
+        {
+          "title": "QFT Divergences",
+            "slug": "qft-divergences",
+	    "children": [
+            {
+              "title": "QBitwave",
+              "slug": "supplementary"
+            }
+	    ]
+        }
+      ]
+    },
+    {
+      "title": "Foundations",
+      "items": [
+        {
+          "title": "Wavefunction as Compression",
+          "slug": "wavefunction-as-compression"
+        },
+        {
+          "title": "Emergence of Time",
+          "slug": "emergence-of-time"
+        },
+        {
+          "title": "Theory of Everything",
+          "slug": "theory-of-everything"
+        }
+      ]
+    }
+  ]
+}

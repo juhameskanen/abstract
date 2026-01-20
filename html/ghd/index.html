@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="The Abstract Universe Project" />
+  <title>Good Heavens, Dogs? Hell No, Gogs!</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Good Heavens, Dogs? Hell No, Gogs!</h1>
+<p class="author">The Abstract Universe Project</p>
+</header>
+<div class="titlepage">
+<p><strong>Good Heavens, Dogs?</strong></p>
+<p><strong>Hell No, Gods!</strong></p>
+<p>Juha Meskanen</p>
+<p><span class="smallcaps">Universal Edition</span></p>
+</div>
+<h1 class="unnumbered" id="foreword">Foreword</h1>
+<p>Anyone?</p>
+<h1 class="unnumbered" id="preface">Preface</h1>
+<h2 class="unnumbered" id="origins">Origins</h2>
+<p>The spark that ignited this project was not a flash of inspiration,
+but a painful accident. My highly respected dentist recommended the
+precautionary removal of a wisdom tooth: “Problems might be expected,
+and they will only get worse over time,” he warned. Trusting his
+expertise, I followed his advice, and soon I was one tooth—and a few
+hundred dollars—lighter.</p>
+<p>But the problems got worse anyway. The socket refused to heal,
+leaving the nerves exposed. With the Christmas holidays in full swing,
+all dentists were off duty, and for days it felt as though the ache had
+expanded from one tooth to engulf my entire head.</p>
+<p>In that haze of pain, my thoughts turned irrational. First, I
+condemned the sugar industry for ruining people’s precious teeth with
+such a toxic product. My dentist became the next object of blame, and
+before long, even the government education system stood accused of
+failing in its duty to train competent dentists.</p>
+<p>Eventually, of course, the holiday ended, the clinic reopened, and
+the original mistake was repaired. Relief came quickly. Yet what
+remained was a question I had pondered many times with my colleagues:
+could pain ever be implemented as software?</p>
+<p>My colleague, apparently blessed with better teeth, believed it was
+possible. With sensors, firmware, and code, a robot might be made to
+simulate agony. I disagreed. To behave as if in pain is not the same as
+to feel pain, I argued.</p>
+<p>It was this missing “pain function” in the standard library of
+<code>C/C++</code> that planted the seed of an obsession. That seed has
+grown, over years of trial and error, into the pages that follow.</p>
+<h2 class="unnumbered" id="method-and-approach">Method and Approach</h2>
+<p>The conclusions presented here have been developed using typical
+software design methods and tools. Code, like theory, must ultimately
+work. Programs written according to these principles run reliably; they
+do not succeed by persuasion, but by execution.</p>
+<p>No program is without flaws. Bugs are inevitable. In the same way,
+some arguments here may contain errors. But I trust that, as with good
+software, the imperfections will not obscure the larger structure, nor
+the promise of the approach.</p>
+<p>This book attempts to weave together threads from physics and
+computation while consciously avoiding philosophy. Every conclusion
+drawn is backed by a simulation whenever possible.</p>
+<h2 class="unnumbered" id="formal-theory">Formal Theory</h2>
+<p>This book is based on a set of formal papers written in the language
+of academic research, with definitions, theorems, proofs, and
+simulations. Many of the concepts were initially developed and verified
+through programming, then systematically converted into formal
+mathematics.</p>
+<p>The two strands are designed to support each other. The papers
+provide rigor; the book provides perspective. Together they form a
+record of an unusual journey: from a very personal question about the
+nature of pain, through simulations of information and collapsing dust
+clouds, to a model that seeks to unify entropy, geometry, and
+consciousness under a single informational framework.</p>
+<h2 class="unnumbered" id="acknowledgments">Acknowledgments</h2>
+<p>I extend my gratitude to my loving wife, who patiently endured
+countless nights beside me as I typed away on my noisy laptop,
+determined to complete this book. Despite the disturbance to her sleep,
+she remained remarkably understanding and supportive.</p>
+<p>I owe a deep debt of gratitude to my brother, whose unwavering
+patience has been central to my journey with programming and,
+ultimately, to the completion of this book. Without his enduring support
+(and constructive criticism), I might never have ventured into this
+field, let alone finished such an ambitious project. I also owe him an
+apology for all the fishing trips I disrupted by insisting he listen to
+my theories.</p>
+<p>Special thanks (or perhaps blame, offered in good humor) go to Andy
+Jones for his invaluable contribution. His gift of <em>The Structure of
+Space and Time</em>, based on lectures by Roger Penrose and Stephen
+Hawking at the University of Cambridge in 1995, proved transformative.
+Without that “gift,” I might never have developed the bipolar obsession
+necessary to see this work through to the end.</p>
+<p>I also wish to express my appreciation to those who generously shared
+their insights beyond my own expertise. Though they prefer to remain
+unnamed (for whatever reason), their contributions have enriched both
+the content and the quality of this work in ways I cannot overstate.</p>
+<p>Finally, a few lines of gratitude go to my dog, Raju (R.I.P.), my
+loyal hunting companion, with whom I shared many memorable hare
+(R.I.P. as well) hunts.</p>
+<h1 id="introduction">Introduction</h1>
+<h2 id="advances-in-science">Advances in Science</h2>
+<p>During the past centuries, physics has achieved remarkable success in
+unifying a large number of partial theories into two powerful
+frameworks: Quantum Mechanics and General Relativity. The equations in
+both theories match all observations with remarkable precision, limited
+only by current technological capabilities. Those capabilities
+themselves have reached a level that would have seemed almost
+inconceivable only a few decades ago.</p>
+<p>Gravitational-wave observatories such as LIGO can detect distortions
+of spacetime smaller than a proton’s diameter, measuring relative
+changes in length caused by distant black-hole mergers billions of
+light-years away. Atomic clocks, exploiting the quantum structure of
+atoms, now keep time so precisely that they would lose or gain less than
+a second over the age of the universe, and are sensitive enough to
+register differences in gravitational potential corresponding to changes
+in height of mere centimeters.</p>
+<p>Elsewhere, quantum electrodynamics predicts the magnetic moment of
+the electron to a precision verified to many decimal places, making it
+one of the most accurately tested theories in all of science.
+Interferometers routinely resolve wavelengths far smaller than the
+structures they probe, while particle accelerators recreate conditions
+not seen since the earliest moments after the Big Bang. Even the global
+positioning systems that guide everyday navigation rely on relativistic
+corrections so precise that neglecting them would lead to
+kilometer-scale errors within a single day.</p>
+<p>The theoretical descriptions of nature have become so accurate that
+reality itself now serves as the experimental apparatus for testing
+them. Physical law is no longer merely inferred from observation; it is
+continuously confirmed, corrected, and operationalized by technologies
+that depend on its validity to function at all. The theories have
+escaped the confines of paper and chalk and become embedded in the
+technological fabric of modern civilization. An obvious example is
+computation. From the quantum-mechanical behavior of transistors to the
+relativistic corrections required for satellite navigation, our deepest
+physical theories now operate continuously and invisibly inside machines
+that process information at planetary scale. Computation is no longer
+merely a tool for studying nature; it has become a physical process in
+its own right, governed by energy constraints, thermodynamics, noise,
+and quantum limits.</p>
+<p>This trajectory has culminated in the rise of artificial intelligence
+systems of unprecedented complexity. These systems are not programmed in
+the traditional sense but are shaped through optimization processes that
+resemble physical evolution more than logical deduction. Trained on vast
+datasets and executed on hardware operating near fundamental physical
+limits, they exhibit behaviors—learning, abstraction, creativity—that
+were once considered exclusively biological. Remarkably, their success
+does not rely on new physical laws, but on exploiting known ones at
+scale, transforming raw energy into structured information with
+extraordinary efficiency.</p>
+<p>In addition to significantly enhancing our understanding of how the
+universe works, science has also bestowed upon humanity a vast array of
+practical applications. These range from the development of
+microprocessors to the creation of GPS systems, not to mention nuclear
+bombs.</p>
+<p>Science has much to celebrate.</p>
+<h2 id="the-elusive-theory-of-everything">The Elusive Theory of
+Everything</h2>
+<p>Following the success of unifying partial theories into two grand
+pillars—General Relativity (GR) and Quantum Mechanics (QM)—it appeared
+certain that the unification process would eventually reach the ultimate
+goal of physics: a Theory of Everything. This would be a single equation
+capable of describing the entire universe. To date, however, this has
+not happened. Despite overwhelming evidence supporting both theories,
+they remain fundamentally incompatible; they cannot both be correct.</p>
+<p>Historically, most attempts at unification assume that the quantum
+description is more fundamental, so it is General Relativity that should
+be modified, because everything else has already been quantized. Matter
+fields—electrons, photons, quarks—all obey quantum field theory.
+Spacetime might simply be another field awaiting quantization, and
+several facts appear to support this view.</p>
+<p>First, GR breaks down at small scales. Near singularities or at the
+Planck length, curvature becomes infinite. This signals a failure of the
+continuum picture, not of quantum mechanics. The intuition is therefore
+to quantize gravity to remove these divergences, just as quantizing
+electromagnetism resolved the ultraviolet catastrophe.</p>
+<p>However, despite decades of research, no single framework has yet
+succeeded in combining the principles of quantum mechanics with the
+geometric description of spacetime provided by General Relativity.</p>
+<h3 id="semiclassical-gravity">Semiclassical Gravity</h3>
+<p>One of the earliest attempts to bridge the quantum–classical divide
+is <em>semiclassical gravity</em>. In this approach, matter is treated
+as fully quantum, while spacetime remains classical. To make the
+Einstein field equations workable, the operator-valued stress–energy
+tensor of quantum matter is replaced by its expectation value—the
+renormalized average of the energy and momentum calculated over the
+quantum state of the matter fields. This resulting set of ordinary
+numbers can then be inserted into the equations governing curvature.</p>
+<p>Semiclassical gravity is remarkably successful. It accurately
+describes a wide range of phenomena, from laboratory experiments to
+astrophysical observations and cosmology. It even predicts striking
+effects such as Hawking radiation in black holes. Yet its very success
+also exposes its conceptual limitation: the approach is <em>ad hoc</em>.
+Spacetime geometry is treated as classical while matter is quantum. The
+theory works well for everything we can observe, but it does not answer
+any of the deeper question, like what is the physics at the sigularity
+of a black hole.</p>
+<h3 id="perturbative-quantum-gravity">Perturbative Quantum Gravity</h3>
+<p>A natural next step is <em>perturbative quantum gravity</em>, where
+spacetime is expanded around a simple background—typically flat or
+slightly curved—and the perturbations are treated as quantum fields.
+This approach is conceptually straightforward and extends the familiar
+machinery of quantum field theory to gravity.</p>
+<p>However, it quickly runs into a fundamental problem: gravity is
+<em>nonrenormalizable</em>. Unlike the Standard Model, where infinities
+in quantum corrections can be controlled through renormalization,
+attempts to remove infinities in perturbative quantum gravity fail. The
+equations produce uncontrolled divergences, and no systematic procedure
+yields finite, predictive results. The techniques that work
+spectacularly well for matter fields simply break down for spacetime
+itself.</p>
+<h3 id="nonperturbative-and-geometric-approaches">Nonperturbative and
+Geometric Approaches</h3>
+<p>In response to the failure of perturbative quantization, researchers
+have developed nonperturbative frameworks that do not assume a fixed
+background geometry. A leading example is Loop Quantum Gravity (LQG),
+which models spacetime as a discrete combinatorial structure of spin
+networks. LQG is mathematically rigorous and fully
+background-independent, offering a conceptually clean quantization of
+geometry.</p>
+<p>However, it seems major obstacles still remain. Deriving a smooth
+classical spacetime limit is nontrivial, and embedding standard particle
+physics into the LQG framework remains unresolved.</p>
+<h3 id="string-theory-a-unified-but-unverified-framework">String Theory:
+A Unified but Unverified Framework</h3>
+<p>Another major avenue is string theory, in which point particles are
+replaced by one-dimensional strings. Gravity emerges as one of the
+vibrational modes of the string, and the framework unifies all
+fundamental forces in principle. String theory deals with deep
+mathematical and abstract structures, dualities, extra dimensions,
+black-hole entropy counting, just to name a few.</p>
+<p>However, significant challenges remain also with the string theory.
+It relies on supersymmetry, which has not been observed experimentally.
+The theory admits an enormous landscape of possible vacuum states—often
+estimated at around <span
+class="math inline">\(10^{500}\)</span>—raising concerns about
+predictivity and falsifiability. Extra spatial dimensions are required,
+typically assumed to be compactified at extremely small scales, yet they
+remain empirically undetected. Direct experimental tests of string-scale
+physics are effectively out of reach.</p>
+<p>Also, one might ask what a theory as flexible as string theory is
+good for. Ask any question and one of those <span
+class="math inline">\(10^{500}\)</span> worlds include the answer. A
+theory sufficiently flexible to accommodate all observations risks
+explaining none.</p>
+<h3 id="emergent-and-holographic-approaches">Emergent and Holographic
+Approaches</h3>
+<p>A more radical class of ideas treats gravity and spacetime as
+emergent rather than fundamental. This perspective arose from puzzles at
+the intersection of gravity, thermodynamics, and quantum theory. Black
+holes behave as thermodynamic objects, possessing entropy proportional
+to horizon area and emitting thermal radiation. These results suggest a
+deep link between geometry, information, and statistical mechanics.</p>
+<p>The observation that gravitational entropy scales with area rather
+than volume led to the holographic principle: the idea that the degrees
+of freedom of a region of spacetime may be encoded on its boundary.
+Holographic dualities further support this view, showing that spacetime
+geometry and gravitational dynamics can emerge from nongravitational
+quantum theories.</p>
+<h4 id="from-geometry-to-bitstring">From Geometry to Bitstring</h4>
+<p>The holographic principle argues that a three-dimensional universe
+can be described by a two-dimensional theory (<span
+class="math inline">\(N \rightarrow N-1\)</span>). This is actually
+quite surprising result. Everything that happens in the universe
+(whether it had four dimensions or eleveven, can be described by its
+<span class="math inline">\(N-1\)</span> dimensional surface. However,
+If <span class="math inline">\(3D\)</span> can map to <span
+class="math inline">\(2D\)</span>, why stop there?</p>
+<p>In software architecture, any <span
+class="math inline">\(N\)</span>-dimensional space is ultimately stored
+as a one-dimensional bitstring (<span class="math inline">\(N
+\rightarrow 1\)</span>). A sequence of bits has no intrinsic geometry;
+width and height are formatting conventions imposed by interpretation.
+Following this logic to its conclusion, the universe may be
+fundamentally dimensionless. Space, curvature, and connectivity are
+rendering modes of a one-dimensional sequence of axiomatic
+instructions.</p>
+<h3 id="the-simulation-hypothesis-reality-as-software">The Simulation
+Hypothesis: Reality as Software</h3>
+<p>During recent years so called simulation hypothesis has become
+increasingly popular. If the universe is fundamentally informational, it
+is tempting to conclude that we are merely a program running on some
+higher-order "hardware." In this view, the strange "quantization" of our
+world is simply the resolution of the grid, and the speed of light is
+the clock-speed of the processor.</p>
+<p>However, the simulation hypothesis feels like a philosophical "shell
+game." It merely translates the mystery of existence by one level: if we
+are a simulation, who simulated the simulators? Furthermore, it ignores
+the staggering Information Cost of reality.</p>
+<p>Consider the entropy of a single human being. To simulate even a
+single strand of DNA with perfect fidelity requires tracking billions of
+quantum interactions. To harvest enough information from a "parent
+universe" to simulate an entire "child universe" would require a
+thermodynamic overhead that seems unsustainable.</p>
+<p>Perhaps the most human explanation for the friction between General
+Relativity and Quantum Mechanics is one familiar to any software
+engineer: The universe is running on legacy code. In this view, the
+fundamental incompatibility between the smooth, geometric curves of GR
+and the discrete, probabilistic jumps of QM is not a profound mystery of
+nature, but a design bug. We often assume a "Theory of Everything" must
+be an elegant, unified masterpiece, but real-world software is rarely
+that clean. It is often a patchwork of modules written by different
+people, at different times, with different goals.</p>
+<h2 id="the-deeper-problem-unexplained-assumptions">The Deeper Problem:
+Unexplained Assumptions</h2>
+<p>In addition to problems finding unified theory of everything there is
+even more serious problem-all candidate theories rely on unexplained
+assumptions. This incompleteness can be expressed as <span
+class="math display">\[\text{ToE}_{\text{incomplete}} =
+\text{ToE}_{\text{complete}} \setminus \mathcal{A},\]</span> where <span
+class="math inline">\(\mathcal{A}\)</span> denotes the set of
+unexplained axioms.</p>
+<p>General Relativity does not tell what the spacetime is made of, it
+takes it granted. Qantum field theory assumes fields and large number of
+constants that have been experimentally defined to get the theory to
+match the measurements. String theory assumes extra dimensions and vast
+landscapes.</p>
+<p>One might expect a genuine Theory of Everything to explain -
+everything, including us intelligent (well, more or less) observers.</p>
+<h1 id="typical-software">Typical Software</h1>
+<p>It is easy to imagine a powerful computer with a huge database and
+advanced logic. Such a system could be highly efficient in its
+operations, capable of making accurate and intelligent decisions in
+nearly any imaginable situation. However, it is difficult to see how
+such a mechanically operating machine could truly feel pain.</p>
+<p>Imagine a typical software program consisting of thousands of lines
+of code. How many additional source lines would need to be added to
+transform the software into a conscious entity? Would it be the <span
+class="math inline">\(10^{14}\)</span>th line that suddenly imbues the
+system with the ability to feel pain? Could it be the introduction of a
+deeply nested loop that finally grants consciousness? Or is it the
+number of <code>if-else</code> clauses that holds the secret?</p>
+<p>Regardless of the number of loops and source lines added, it appears
+that nothing significant would occur. The software program would remain
+just that—a software program, albeit larger in size.</p>
+<h2 id="the-hard-problem-of-consciousness">The Hard Problem of
+Consciousness</h2>
+<p>A computer is a mechanical device whose operation can always be
+reduced to the manipulation of its bits and pieces. The elementary
+building blocks of the computer are typically electronic components
+equivalent to mechanical relays. The notion that a collection of relays
+connected in a network of copper wires could genuinely experience
+consciousness and perceive pain is somewhat difficult to believe. Should
+I type gently on my keyboard, fearing that striking the keys too hard
+might trigger a migraine for my laptop? Do partially broken memory chips
+introduce suffering, much like a broken tooth does for its owner? Could
+defects transform my happy computer into a suffering one, making it wish
+it were dead, or at least turned off?</p>
+<p>If software were truly capable of sensing pain, what would be the
+worst thing that could happen to it? Is it division by zero, or a
+reference to an uninitialized variable?</p>
+<pre><code>int uninitialized;
+int initialized = 3;
+
+int good = 2 * PI * initialized;   // feel good :)
+int bad  = 2 * PI * uninitialized; // feel pain :(
+int maximal_pain = 1/0;  // division by zero, maximal pain!</code></pre>
+<p>If consciousness is not solely a software issue, could it be related
+to hardware instead? For example, the graphics board controls what the
+computer renders on its screen. By writing appropriate values to memory
+addresses constituting the so-called video memory, one can turn pixels
+on and off to create images. What would be the memory addresses one has
+to poke in order to create pain?</p>
+<pre><code>// try to poke pain
+*((bool *)0x000000) = true; // argh</code></pre>
+<p>As ridiculous as these examples may be, they demonstrate the problem
+well. There is not even a hint of understanding of how pain and other
+human experiences could be implemented with software and traditional
+computers.</p>
+<p>There is, however, an even more serious hurdle. Neuroscience has made
+significant advances in studying the operation of the human brain. The
+introduction of brain imaging techniques, such as magnetic resonance
+imaging (MRI), allows researchers to examine the neurobiological
+correlates of human behaviors. What is remarkable is that human
+behaviors do not seem reducible to the mere operation of the elementary
+building blocks of the brain. It seems conscious behaviors cannot be
+explained solely through the physical processes of the brain. This is
+known as the “hard problem of consciousness” <span class="citation"
+data-cites="chalmers1995facing">(David J. Chalmers 1995)</span>.</p>
+<h2 id="organic-tissue-issue">Organic Tissue Issue</h2>
+<p>Could consciousness lurk in the fact that humans are composed of
+organic biological tissue, [<em>my wife</em>: “such as celluloid”]?,
+which is considered “alive” as opposed to non-organic matter like
+silicon? Hardly; both fat and silicon are ultimately made up of the very
+same type of subcomponents.</p>
+<p>Is all matter conscious to some degree, as panpsychism suggests?
+Could plants, trees, or even rocks have some level of
+consciousness <span class="citation"
+data-cites="Goff2019 Strawson2006 Chalmers2015 Whitehead1929">(Goff
+2019; Strawson 2006; David J. Chalmers 2015; Whitehead 1929)</span>?</p>
+<p>The best imaginable way to study whether an object is conscious is by
+torturing it with an appropriate torturing device. So let us torture
+rocks with the best possible rock-torturing device one can imagine—a
+sledgehammer. Rocks do not seem to care! This observation cannot, of
+course, prove rocks unconscious. Rocks could well be conscious, they
+just do not have the sense to feel pain. Or perhaps they do sense pain
+intensely, but they just cannot show it. They might be in everlasting
+pain, but have no mouth to scream, no legs to kick. What a terrible
+destiny!</p>
+<h2 id="proposed-sources-of-consciousness">Proposed Sources of
+Consciousness</h2>
+<p>Despite centuries of inquiry, no consensus exists regarding the
+physical or metaphysical source of consciousness. On the contrary, the
+scientific and philosophical literature presents an unusually broad and
+fragmented landscape of proposals.</p>
+<h3 id="macroscopic-and-biological-sources">Macroscopic and Biological
+Sources</h3>
+<p>The most conservative position locates consciousness at the level of
+the biological organism, specifically within the human brain. In this
+view, consciousness emerges from the coordinated activity of large
+populations of neurons, often associated with particular brain regions
+or global neural dynamics.</p>
+<p>Some theories emphasize specific neural correlates, such as the
+thalamocortical system, recurrent feedback loops, or global workspace
+architectures. Others focus on large-scale synchronization phenomena,
+such as gamma-band oscillations or integrated information across
+distributed neural networks. While these approaches differ in detail,
+they share a commitment to consciousness as a high-level emergent
+property of biological complexity.</p>
+<h3 id="cellular-and-subcellular-mechanisms">Cellular and Subcellular
+Mechanisms</h3>
+<p>Moving to smaller scales, several proposals identify consciousness
+with specific cellular or subcellular structures. Among the most
+well-known is the Orch-OR theory, which attributes conscious processes
+to quantum coherence within neuronal microtubules. Variants of this idea
+propose that cytoskeletal structures, synaptic vesicles, or other
+intracellular components play a decisive role.</p>
+<p>Related hypotheses suggest that consciousness may arise from
+biochemical signaling pathways, molecular conformational changes, or
+information-processing mechanisms operating below the level of neurons
+themselves. While such models attempt to explain qualitative experience
+by appealing to finer physical detail, they often struggle to connect
+microscopic processes to the unified, macroscopic character of conscious
+awareness.</p>
+<h3 id="fundamental-physical-substrates">Fundamental Physical
+Substrates</h3>
+<p>At the most reductionist end of the spectrum are theories that locate
+consciousness in fundamental physics. Some approaches propose that
+consciousness is tied to quantum states, wave-function collapse, or
+entanglement. Others invoke spacetime structure, suggesting that
+consciousness is associated with curvature, causal structure, or even
+singularities, such as those found in black holes.</p>
+<p>In extreme forms, these ideas border on panpsychism, the view that
+consciousness—or proto-consciousness—is a basic property of matter
+itself. In such frameworks, elementary particles may possess rudimentary
+experiential aspects, with complex consciousness arising from their
+aggregation. While philosophically attractive to some, these theories
+face the challenge of explaining how simple experiential units combine
+into the rich, unified experiences familiar to humans.</p>
+<h3 id="computational-and-informational-accounts">Computational and
+Informational Accounts</h3>
+<p>Another major class of theories treats consciousness as an
+informational or computational phenomenon. According to this view,
+consciousness is not tied to any specific physical substrate, but to
+patterns of information processing. Functionalist approaches argue that
+any system implementing the appropriate computational
+structure—biological or artificial—could, in principle, be
+conscious.</p>
+<p>Examples include theories based on integrated information, predictive
+processing, recurrent computation, or self-modeling systems. These
+accounts extend naturally to artificial intelligence, raising the
+possibility that sufficiently advanced machines could possess genuine
+subjective experience. However, they leave open the question of why
+certain computations should be accompanied by experience at all, rather
+than remaining purely formal processes.</p>
+<h3 id="cosmological-and-exotic-proposals">Cosmological and Exotic
+Proposals</h3>
+<p>Beyond mainstream science lie a variety of more speculative ideas.
+Some authors have suggested that consciousness is a property of the
+universe as a whole, associated with cosmological initial conditions,
+dark matter, or unknown forms of exotic physics. Others have proposed
+that consciousness is linked to vacuum fluctuations, zero-point energy,
+or as-yet-undiscovered fields.</p>
+<p>While these ideas often lack empirical support, their sheer diversity
+underscores the absence of a clear theoretical anchor. The fact that
+consciousness has been attributed to black holes, fundamental particles,
+neural networks, microtubules, algorithms, and the universe itself
+illustrates not explanatory abundance, but explanatory uncertainty.</p>
+<h3 id="a-pattern-of-dispersion">A Pattern of Dispersion</h3>
+<p>Taken together, these proposals reveal there is no privileged scale,
+structure, or object that has not been nominated as the source of
+consciousness by someone. The diversity of these proposals is itself a
+noteworthy empirical fact.</p>
+<h1 id="belief-systems">Belief-Systems</h1>
+<h2 id="souls">Souls</h2>
+<p>Modern science avoids the word “soul” because it cannot be tested,
+but philosophers, neuroscientists, and even some physicists continue to
+explore whether consciousness requires something beyond ordinary
+physical processes. In effect, some modern theories echo older soul-like
+concepts, even if they do not use the word.</p>
+<ul>
+<li><p><strong>Eccles &amp; Popper (Interactionist Dualism):</strong>
+John Eccles argued that consciousness cannot be explained by material
+processes alone; he proposed a non-physical “self” (similar to a soul)
+interacting with the brain.</p></li>
+<li><p><strong>Penrose &amp; Hameroff (Orch-OR theory):</strong> They
+suggested that consciousness may arise from quantum processes in neurons
+and speculated that this might connect with the idea of a soul, though
+their theory remains widely disputed.</p></li>
+<li><p><strong>David Chalmers:</strong> His formulation of the “hard
+problem of consciousness” does not invoke a soul explicitly, but it
+reopens the possibility by arguing that subjective experience appears
+irreducible to brain activity.</p></li>
+<li><p><strong>Near-death experience researchers (e.g., Pim van
+Lommel):</strong> Some argue that NDEs indicate consciousness can exist
+independently of the brain, again resonating with traditional soul
+concepts.</p></li>
+</ul>
+<p>Thus, while the term “soul” has largely dropped out of scientific
+vocabulary, the debate surrounding consciousness often returns to
+closely related conceptual territory.</p>
+<h3 id="christianity-and-the-new-testament">Christianity and the New
+Testament</h3>
+<p>If the New Testament is to be taken seriously we humans have a soul.
+The soul is described as the immaterial and eternal part of a human
+being—the part that survives death. Conscious choices are said to
+determine its ultimate destiny. But how strong is the evidence behind
+these claims? Do we have grounds for confidence in the reliability of
+the New Testament? Did Jesus of Nazareth, the central figure of
+Christianity, even exist as a historical person?</p>
+<p>The historical record is mixed. There is no direct archaeological
+evidence that can be tied unambiguously to Jesus himself: no tomb,
+inscription, or artifact that can be reliably identified as his.</p>
+<p>However, there are a few references outside the Bible. The Jewish
+historian Josephus and the Roman historian Tacitus, among others,
+mention Jesus briefly. Nearly all historians—Christian, Jewish, and
+secular—accept that Jesus existed, even if they disagree about his
+nature or significance.</p>
+<p>The New Testament itself survives in thousands of Greek manuscripts,
+far more than almost any other ancient text. None are originals, but by
+comparing them, scholars have reconstructed a highly reliable text,
+though not with complete certainty. Most textual variations are minor
+copyist errors introduced through manual transcription methods—laser
+printers being a much later invention.</p>
+<p>Thus, while the Gospels cannot be proven archaeologically in a strict
+sense, the manuscript tradition is unusually strong by the standards of
+ancient history.</p>
+<h3 id="the-gospels-as-evidence">The Gospels as Evidence</h3>
+<p>Among the four canonical Gospels, three—Matthew, Mark, and Luke—tell
+broadly the same story. These are known as the <em>Synoptic
+Gospels</em>. Their similarities and differences have been studied
+extensively:</p>
+<ul>
+<li><p>Mark contains approximately 661 verses. Roughly 600 appear in
+Matthew, and about 350 in Luke.</p></li>
+<li><p>Matthew and Luke also share around 230 verses not found in
+Mark.</p></li>
+<li><p>This overlap led scholars to propose a second, now-lost common
+source known as the “Q document” (from the German <em>Quelle</em>,
+meaning “source”).</p></li>
+<li><p>The standard <em>Two-Source Hypothesis</em> holds that Matthew
+and Luke drew from both Mark and Q.</p></li>
+</ul>
+<p>Estimated dates of composition are as follows:</p>
+<ul>
+<li><p>Mark: approximately 65–70 CE</p></li>
+<li><p>Matthew and Luke: approximately 70–90 CE</p></li>
+<li><p>John: approximately 90–100 CE</p></li>
+</ul>
+<p>These dates are inferred through handwriting analysis, linguistic
+style, and historical references. They represent educated ranges rather
+than precise timestamps. The sheer number of manuscripts and their
+relatively early composition—within one or two generations of Jesus’
+life—give the Gospels greater historical credibility than many other
+ancient texts, such as Homer’s <em>Iliad</em> or Plato’s dialogues.
+Nevertheless, they remain religious testimonies rather than neutral
+historical reports.</p>
+<h3 id="contradictions">Contradictions</h3>
+<p>Here a difficulty arises: if the New Testament conveys truth, why do
+others who worship the same God reject it?</p>
+<p>Judaism, for example, does not accept Jesus as the Messiah. From the
+Jewish perspective:</p>
+<ul>
+<li><p>Jesus did not fulfill the messianic prophecies, such as
+rebuilding the Temple, regathering the exiles, establishing universal
+peace, and inaugurating God’s kingdom on Earth.</p></li>
+<li><p>Jesus did not meet the traditional personal qualifications of the
+Messiah.</p></li>
+<li><p>The doctrines of the Trinity and the divinity of Jesus contradict
+Judaism’s emphasis on the absolute oneness of God.</p></li>
+</ul>
+<p>This raises uncomfortable questions. Jews worship the same God
+described in the Hebrew Bible. Jesus himself was Jewish. If those who
+preserved and transmitted the Hebrew Scriptures do not recognize him as
+Messiah, why should others?</p>
+<p>And what of Islam, Hinduism, Buddhism, and countless other
+traditions? These belief systems appear mutually incompatible with
+Christianity. Are they to be dismissed as false religions, with
+believers whose fate is simply unfortunate?</p>
+<h1 id="magic">Magic</h1>
+<p>If one allows even a single paranormal creature to exist, what
+prevents there being a whole flock of them?</p>
+<h2 id="paranormal-experience">Paranormal Experience</h2>
+<p>There is only one somewhat “paranormal” incident I can be certain
+of—one I experienced myself. It was a dark night when, as a young
+student, I suddenly sensed that someone had entered my room. I tried to
+get up and turn on the light, but a strange low-frequency sound (about
+50 Hz) emerged right behind my head. The harder I tried to move, the
+louder it became, until even breathing felt impossible. I gave up
+resisting—and immediately, I could breathe again. Seconds later, the
+sound (and the “visitor?”) vanished. I was free to move and found no one
+in the room. I was certain I wasn’t dreaming.</p>
+<p>Initially, I might have dismissed the incident as a hallucination,
+but later I heard an older lady describe the exact same phenomenon on a
+radio program. The only difference was that she also saw a tunnel with a
+light at the end. I never saw a tunnel, let alone a light (should I be
+worried?). Still, the buzzing sound incident stuck with me for
+years.</p>
+<p>Soon after, I found a leaflet from a religious group claiming modern
+science was a scam. It offered “proofs,” such as a case where Carbon-14
+dating supposedly showed an animal to be ancient even though it had died
+yesterday. Naturally, I believed it.</p>
+<p>As a boy, I thought my father was a smart man. Despite lacking a
+formal education due to the war, he understood complex topics—percentage
+calculus, for example. So when he told me that some people can feel
+underground water flows, I believed him too. He even suspected those
+flows could have harmful effects on people sleeping nearby. Indeed, my
+grandmother was living proof! One day, we ran our own experiment with
+divining rods. We failed to find a single water flow.</p>
+<p>Then there was my best friend, who swore by a certain paranormal
+phenomenon: two people place their hands over the head of a third,
+concentrate, and after a few minutes, they can lift them using only
+their fingertips, “defying gravity.” Finally, I thought, here was a
+chance to prove the paranormal! We gathered a group and tried. We
+concentrated with all our might, slipped our fingers under the seated
+person, and... nothing. He stayed firmly in the chair. We even switched
+roles, suspecting that one of us was subconsciously not concentrating
+hard enough, but gravity remained annoyingly consistent.</p>
+<p>Not even the classic method of altering concentration—drinking lots
+of beer—made a difference. Gravity was unimpressed. Alcohol, however,
+had other noticeable effects the next morning.</p>
+<p>One of my teachers was also convinced of spiritual creatures,
+insisting we simply lacked the senses to see them. “With our tiny human
+eyes, we can’t even see infrared!” he said. So, during my army service,
+I finally tried infrared night-vision goggles. To my disappointment: no
+glowing demons, no invisible spirits, nothing! And what could possibly
+be more infrared than Satan?</p>
+<p>Later, I discovered a university study where 32 dowsers attempted to
+locate underground water veins in a double-blind test. Not a single
+success. When I brought this up to a colleague who swore he could dowse,
+he scoffed. So I blindfolded him and asked him to repeat the trick.
+Without being able to see, he couldn’t even remember the spots he’d
+pointed out minutes earlier. Apparently, water flows are highly
+mobile—especially when your eyes are covered.</p>
+<p>I was also told that special supplements—up to and including
+LSD—could “expand the mind” to perceive truths beyond reality. After so
+many failed experiments, I wondered: how would this one be
+different?</p>
+<p>If the brain is an informational processor, then drugs do not “open a
+door” to a hidden dimension; they simply disrupt the local hardware.
+Think of the brain as a high-resolution camera lens meant to capture a
+clear image of reality. If you crack the lens or smear it with oil, the
+resulting image might look “otherworldly” or “trippy,” but you aren’t
+seeing a hidden world—you are seeing the failure of the equipment. A
+malfunctioning camera doesn’t reveal ghosts; it just produces artifacts,
+noise, and chromatic aberration. In the same way, a chemically scrambled
+brain produces “information noise” that we mistake for “spiritual
+insight.” It is a failure of the processing logic, not a breakthrough
+into new data.</p>
+<p>In the end, the only mysterious phenomenon I still cannot explain is
+that strange 50 Hz buzzing. According to my parents, I was born with
+bluish skin, likely due to a lack of oxygen during labor. Perhaps the
+other lady with the tunnel-and-light story was also born blue. That
+seems more likely than a paranormal visitor buzzing in my bedroom at
+midnight. Perhaps there is no such thing as magic—just a temporary lack
+of oxygen.</p>
+<p>And then there is James Randi’s famous <em>One Million Dollar
+Paranormal Challenge</em>. Surely a million dollars is motivation enough
+to demonstrate real magic. But no one has ever collected the prize.</p>
+<h2 id="definition-of-magic">Definition of Magic</h2>
+<p>How, then, should we define “magic”?</p>
+<p>By categorizing the natural and the supernatural, one notices that
+magical creatures all share the same trait: non-physicality. Magic
+appears to defy the laws of physics—laws based on observation and
+mathematics. Thus, in the spirit of rigorous definition:</p>
+<p><span class="math display">\[\text{Magic} \neq
+\text{Physics}\]</span></p>
+<p>By definition, magic must contradict physics, or else it would simply
+<em>be</em> physics. And since physics rests on observation and axioms,
+magic must rest on either non-axioms or non-observation. That is, it
+cannot be observed, and it cannot be explained in terms of axiomatic
+systems.</p>
+<p>Mathematics, an axiomatic system, is the study of logical reasoning.
+A non-axiomatic system, therefore, is the study of non-logical
+reasoning.</p>
+<p><span class="math display">\[\text{Magic} =
+\text{Non-sense}\]</span></p>
+<p>The best synonym for non-logical reasoning is perhaps
+<em>nonsense</em>.</p>
+<h1 id="dna">DNA</h1>
+<h2 id="dna-as-the-blueprint-of-life">DNA as the Blueprint of Life</h2>
+<p>Based on the recent scientific discoveries DNA is the blueprint of
+life, carrying the information needed to build every living organism on
+Earth. The journey to understanding it has been long and
+fascinating.</p>
+<p>In 1869, Dr. Friedrich Miescher isolated a new chemical substance
+from human white blood cells, which he called <em>nuclein</em>. This
+discovery marked the first step toward understanding the molecular basis
+of heredity. (<a
+href="https://en.wikipedia.org/wiki/Friedrich_Miescher">Friedrich
+Miescher</a>, <a
+href="https://en.wikipedia.org/wiki/Nuclein">nuclein</a>)</p>
+<p>In 1888, Theodor Boveri studied cell division and observed that tiny
+rods split alongside the cell. These rods were later named chromosomes.
+(<a href="https://en.wikipedia.org/wiki/Theodor_Boveri">Theodor
+Boveri</a>, <a
+href="https://en.wikipedia.org/wiki/Chromosome">chromosome</a>)</p>
+<p>Thomas Hunt Morgan, studying fruit flies, created the first
+chromosome maps, linking traits to specific chromosomal regions. These
+regions were called <em>genes</em>. (<a
+href="https://en.wikipedia.org/wiki/Thomas_Hunt_Morgan">Thomas Hunt
+Morgan</a>, <a href="https://en.wikipedia.org/wiki/Gene_mapping">gene
+mapping</a>)</p>
+<p>In 1928, Frederick Griffith performed his famous experiment with
+<em>Streptococcus pneumoniae</em>. By mixing heat-killed lethal bacteria
+with harmless living bacteria and injecting the mixture into mice, he
+demonstrated that some “transforming principle” from the dead bacteria
+could make the living ones lethal. This hinted at DNA as the carrier of
+hereditary information. (<a
+href="https://en.wikipedia.org/wiki/Griffith%27s_experiment">Griffith
+experiment</a>)</p>
+<p>The double-helix structure of DNA was revealed in 1953 by James
+Watson and Francis Crick, based on X-ray diffraction images captured by
+Rosalind Franklin. The mechanism of replication was confirmed in 1958 by
+the Meselson–Stahl experiment, demonstrating semi-conservative
+replication—each new DNA molecule consists of one old and one new
+strand. This showed how information is faithfully transmitted from cell
+to cell. (<a
+href="https://en.wikipedia.org/wiki/James_Watson_and_Francis_Crick">Watson
+and Crick</a>, <a
+href="https://en.wikipedia.org/wiki/Rosalind_Franklin">Rosalind
+Franklin</a>, <a
+href="https://en.wikipedia.org/wiki/Meselson%E2%80%93Stahl_experiment">Meselson–Stahl
+experiment</a>)</p>
+<h2 id="homeobox-genes">Homeobox Genes</h2>
+<p>DNA explains the blueprint, but why do cells differentiate into
+muscles, teeth, or neurons when they all share the same genome? The
+answer lies in regulatory genes.</p>
+<p>In the 1980s, Walter Gehring and colleagues discovered the
+<em>homeobox</em> genes while studying fruit flies. One mutant fly had a
+leg growing in its head, revealing eight genes that control where and
+when other genes are activated. These genes are remarkably conserved
+across species. (<a
+href="https://en.wikipedia.org/wiki/Homeobox">Homeobox</a>, <a
+href="https://en.wikipedia.org/wiki/Walter_Gehring">Walter
+Gehring</a>)</p>
+<p>A striking experiment involved transplanting a gene responsible for
+eye development from a mouse into a fruit fly embryo. The fruit fly
+developed extra, fully functioning fly eyes—not mouse eyes—demonstrating
+that the underlying genetic instructions were functionally conserved.
+This highlighted <strong>the common ancestry of all life</strong>, just
+as Charles Darwin predicted in <em>On the Origin of Species</em> (1859).
+(<a href="https://en.wikipedia.org/wiki/On_the_Origin_of_Species">On the
+Origin of Species</a>). We software developers, it appears, still have
+some catching up to do when it comes to code reusability.</p>
+<h2 id="applications">Applications</h2>
+<p>Since DNA’s discovery, research has advanced tremendously, leading to
+numerous applications:</p>
+<ul>
+<li><p><strong>Medicine:</strong> Genetic testing and DNA sequencing
+enable early detection of disorders and improved treatments. Gene
+therapy can correct faulty genes. (<a
+href="https://en.wikipedia.org/wiki/Genetic_testing">Genetic
+testing</a>, <a href="https://en.wikipedia.org/wiki/DNA_sequencing">DNA
+sequencing</a>, <a
+href="https://en.wikipedia.org/wiki/Gene_therapy">Gene
+therapy</a>)</p></li>
+<li><p><strong>Forensics:</strong> DNA analysis is invaluable in solving
+crimes. (<a
+href="https://en.wikipedia.org/wiki/Forensic_DNA_analysis">Forensic DNA
+analysis</a>)</p></li>
+<li><p><strong>Agriculture:</strong> Genetic modification improves crop
+yields, pest resistance, and nutritional content. DNA barcoding aids
+species identification, conservation, and combating wildlife
+trafficking. (<a
+href="https://en.wikipedia.org/wiki/Genetic_engineering">Genetic
+engineering</a>, <a
+href="https://en.wikipedia.org/wiki/DNA_barcoding">DNA
+barcoding</a>)</p></li>
+<li><p><strong>Evolutionary Biology:</strong> DNA sequences allow
+reconstruction of evolutionary histories with unprecedented accuracy.
+(<a
+href="https://en.wikipedia.org/wiki/Molecular_phylogenetics">Molecular
+phylogenetics</a>)</p></li>
+</ul>
+<h2 id="digitized-dna">Digitized DNA</h2>
+<p>Despite its complexity, DNA operates on surprisingly simple
+principles. Its four nucleotides—Adenine (A), Guanine (G), Cytosine (C),
+and Thymine (T)—pair specifically (A with T, C with G) in the double
+helix. This complementarity allows DNA to be replicated accurately, with
+each strand serving as a template for a new one. (<a
+href="https://en.wikipedia.org/wiki/Base_pair">Base pairing</a>, <a
+href="https://en.wikipedia.org/wiki/DNA_replication">DNA
+replication</a>)</p>
+<p>Remarkably, DNA sequences can be translated into binary code for
+computers without loss of information. Entire genomes, including the
+human genome, are now digitized. Synthetic biology has even made it
+possible to build bacterial genomes from scratch, controlling living
+cells with artificial DNA. (<a
+href="https://en.wikipedia.org/wiki/Synthetic_biology">Synthetic
+biology</a>, <a
+href="https://en.wikipedia.org/wiki/Human_Genome_Project">Human Genome
+Project</a>)</p>
+<p>One can imagine an inkjet-like printer that propels nucleotides
+instead of ink, “printing” life directly from digital DNA. While not
+commercially available yet, experiments such as those conducted by a UC
+Berkeley team in 2019 demonstrate that this is no longer pure science
+fiction. (<a
+href="https://en.wikipedia.org/wiki/Genome_synthesis">Genome
+synthesis</a>)</p>
+<h2 id="developers-angle">Developer’s Angle</h2>
+<p>It seems there is no “soul” or “fire” one would have to ignite in
+order to create life, at least for bacteria to behave as living
+organisms. Simply compose the desired structure from DNA molecules,
+place them into an appropriate environment, and one obtains “life.”</p>
+<p>Engineers might recognize parallels between cells and modern software
+development. A biological cell resembles a factory running sophisticated
+Computer-Aided Manufacturing (CAM): the genome is the software, and
+cellular machinery is the hardware executing it. Nature invented CAM
+long before humans did, and understanding DNA as both software and
+hardware provides a powerful perspective on evolution, development, and
+biotechnology.</p>
+<h1 id="why-quantum-mechanics">Why Quantum Mechanics?</h1>
+<h2 id="the-non-computable-mind">The Non-computable Mind</h2>
+<p>Sir Roger Penrose suggests a radical, and perhaps more "human,"
+alternative that consciousness is non-computable—that the human mind can
+grasp truths and perceive meanings that no formal axiomatic system (like
+a computer) ever could. Penrose, alongside anesthesiologist Stuart
+Hameroff, points toward the infinitesimal. They suggest that
+consciousness might not emerge from the "wiring" of neurons, but from
+deeper, quantum gravitational effects occurring within the tiny
+structures of the brain called microtubules. In this view, the "flash"
+of a thought is a moment of quantum collapse—a bridge between the
+wavelike potential of Hilbert space and the concrete, 3D geometric
+reality.</p>
+<p>The source of consciousness or not, Quantum Mechanics is
+extraordinarily successful at describing small-scale phenomena.</p>
+<h2 id="the-mystery-of-superposition">The Mystery of Superposition</h2>
+<p>One of the key features of QM is the superposition principle: systems
+can exist in multiple states simultaneously. Particles can be here and
+there, wave-like and particle-like, in ways classical intuition cannot
+capture.</p>
+<p>The double-slit experiment demonstrates this vividly. Sending photons
+through two slits produces an interference pattern, even when photons
+are sent one by one. Naively, one might conclude that each particle must
+pass through both slits simultaneously—but this is a misleading
+classical image. What actually propagates through both slits is the
+<em>wavefunction</em>. The particle itself is only localized upon
+detection.</p>
+<p>Superposition allows interference: the probability amplitudes of
+different paths combine, giving rise to the patterns we observe. It is
+the mathematical structure of the wavefunction that encodes all the
+information about possible outcomes.</p>
+<h2 id="identity-exclusion-and-the-quantum-address-system">Identity,
+Exclusion, and the Quantum Address System</h2>
+<p>Early intuitions suggested that particles “come and go like clouds,”
+without classical identity. In a sense, this is correct: we cannot tag
+an electron in one detector and later ask if it is the same electron in
+another detector. Classical individuality fails.</p>
+<p>Quantum mechanics imposes structure through the
+<em>wavefunction</em>. Particles of the same type are described by
+states in Hilbert space. Their “identity” resides in the **state they
+occupy**, not in a classical label. This is where the Pauli exclusion
+principle comes in: it enforces a unique occupation for fermions.</p>
+<p>Formally, consider two identical fermions with wavefunction <span
+class="math inline">\(\psi(x_1, x_2)\)</span>:</p>
+<p><span class="math display">\[\psi(x_1, x_2) = -\psi(x_2,
+x_1)\]</span></p>
+<p>If <span class="math inline">\(x_1 = x_2 = x\)</span>, then:</p>
+<p><span class="math display">\[\psi(x, x) = -\psi(x, x) \quad
+\Rightarrow \quad \psi(x, x) = 0\]</span></p>
+<p>The probability of finding two identical fermions in the same state
+vanishes. Exclusion is thus an <em>idempotency condition</em>: once a
+state is occupied, it cannot be occupied again.</p>
+<p>By contrast, bosons obey symmetric wavefunctions:</p>
+<p><span class="math display">\[\psi(x_1, x_2) = +\psi(x_2,
+x_1)\]</span></p>
+<p>They may share the same state freely, enabling phenomena such as
+Bose-Einstein condensation.</p>
+<h2 id="the-rasterization-analogy">The Rasterization Analogy</h2>
+<p>Think of a computer rendering an image on a screen. Each pixel is an
+addressable state. Drawing the same pixel twice does not create a new
+dot—it is redundant. Fermions behave similarly: Pauli exclusion prevents
+redundant occupation of a quantum “pixel.”</p>
+<p>Bosons, on the other hand, are like pixels that can accumulate
+brightness: multiple bosons increase amplitude, analogous to layering
+ink to make a color more intense.</p>
+<p>From this perspective, quantum mechanics resembles a **cosmic
+rasterization system**:</p>
+<ul>
+<li><p><strong>Geometry</strong> provides the address space:
+inside/outside, here/there.</p></li>
+<li><p><strong>Fermions</strong> enforce idempotent occupancy: each
+state gets used only once.</p></li>
+<li><p><strong>Bosons</strong> allow accumulation and coherence:
+multiple particles can enhance certain features.</p></li>
+</ul>
+<p>Randomness in quantum outcomes is analogous to **dithering** in
+graphics: the finite information in the system is smoothed out to
+produce continuous-looking macroscopic behavior, even though the
+underlying “hardware” is discrete.</p>
+<h2 id="why-quantum-mechanics-exists">Why Quantum Mechanics Exists</h2>
+<p>What is the purpose of all this? Why does the universe implement such
+a system at all?</p>
+<p>Consider the problem of preserving observers. For a complex
+informational structure (like a conscious being) to persist:</p>
+<ul>
+<li><p>States must be localized and distinguishable.</p></li>
+<li><p>Degenerate occupation must be avoided.</p></li>
+<li><p>Information must not leak away uncontrolled.</p></li>
+</ul>
+<p>Geometry ensures well-defined “inside” and “outside,” while fermionic
+exclusion enforces unique occupation. Together, they preserve the
+**identity of information**, making observers statistically
+possible.</p>
+<p>In this view, maybe Quantum Mechanics is not merely a set of strange
+rules. It is a **necessary layer of encoding**, ensuring that the
+universe can maintain persistent structures capable of observation. The
+laws of physics act as filters: only configurations that respect
+locality, identity, and distinguishability survive.</p>
+<h2 id="quantum-tunneling-the-thin-wall-leak">Quantum Tunneling: The
+"Thin Wall" Leak</h2>
+<p>In classical physics, a boundary is an impenetrable conditional
+statement: if (position &gt; wall) return;. However, in the quantum
+"rendering engine," objects are not point-sources; they are probability
+distributions.</p>
+<p>This leads to a phenomenon strikingly familiar to anyone who has
+written rendering software based a photon mapping principle. In ray
+tracing, if a geometry’s surface is too thin or the step-size of the
+calculation is too large, a photon may inadvertently "leak" to the other
+side of a boundary.</p>
+<p>Quantum tunneling is the universe’s version of this leak. Because a
+particle’s position is defined by a wavefunction (<span
+class="math inline">\(\psi\)</span>) with "tails" that extend
+infinitely, there is a non-zero probability that the state will be
+"written" on the other side of a potential barrier. What we perceive as
+a strange subatomic trick is actually a fundamental byproduct of a
+system that calculates existence based on probabilities rather than
+absolute coordinates.</p>
+<h2 id="entanglement-the-shared-pointer-bug">Entanglement: The Shared
+Pointer Bug</h2>
+<p>Entanglement is very cool feature. Two particles described by the
+same wavefunction are connectd; when one is touched, the other one get
+spookingly affected, faster than light.</p>
+<p>In software engineering, one of the most common (and frustrating)
+bugs occurs with pointers. You create two variables that you think are
+independent, but they both point to the same memory address. You modify
+Variable A, and Variable B "spookily" changes at the same time. You
+haven’t sent a signal from A to B; you’ve simply modified the shared
+data they both reference.</p>
+<p>Entanglement is the universe’s shared pointer. When two particles are
+entangled, they cease to be two independent "data objects" in Hilbert
+space. Instead, they become two different "readouts" of a single
+underlying memory address.</p>
+<p>When we measure the spin of one particle, we are accessing that
+shared address. The "spooky action at a distance" is simply the
+realization that what we thought were two separate objects are actually
+two views of the same information.</p>
+<h2 id="the-twos-complement-interpretation">The Two’s Complement
+Interpretation</h2>
+<p>This shared information can be interpreted through the lens of Two’s
+Complement logic. In a computer, the bit-string 11111111 is just a
+state. Its value depends entirely on the "observer’s" cast:</p>
+<ul>
+<li><p>Interpreted as Unsigned, it is 255.</p></li>
+<li><p>Interpreted as Signed, it is -1.</p></li>
+</ul>
+<p>The "state" is singular, but the "measurement" yields different
+results based on the context. Entangled particles exist in such a
+singular state. The universe doesn’t need to "tell" Particle B to flip
+its spin; it simply ensures that the total sum of the shared information
+remains consistent, just as a signed byte must remain a valid bit-string
+regardless of how we read it.</p>
+<h2
+id="pauli-exclusion-the-bridge-between-quantum-mechanics-and-curved-spacetime">Pauli
+Exclusion: The Bridge Between Quantum Mechanics and Curved
+Spacetime</h2>
+<p>Quantum Mechanics and General Relativity are traditionally seen as
+fundamentally incompatible. Quantum Mechanics is formulated in Hilbert
+space, with well-defined states and operators evolving on a <em>fixed
+background</em>. Probabilities, superpositions, and interference
+patterns are all defined relative to this static spacetime scaffold.</p>
+<p>By contrast, General Relativity describes spacetime itself as
+dynamic: geometry is curved, influenced by energy and momentum, and
+there is no fixed backdrop on which dynamics occur. Attempting to
+naively quantize gravity leads to divergences and inconsistencies; the
+mathematical frameworks of the two theories appear, at first glance, to
+be mutually exclusive.</p>
+<p>Yet Pauli’s exclusion principle emerges as a remarkable bridge
+between these otherwise incompatible systems. By enforcing that no two
+identical fermions may occupy the same quantum state, exclusion
+generates macroscopic effects that directly influence spacetime
+geometry. Consider the following examples:</p>
+<ul>
+<li><p><strong>White dwarfs:</strong> Electron degeneracy pressure
+resists gravitational collapse, stabilizing stars against the
+compressive force predicted by General Relativity.</p></li>
+<li><p><strong>Neutron stars:</strong> Neutron degeneracy pressure
+prevents matter from collapsing into a singularity, again enforcing
+stability in highly curved regions of spacetime.</p></li>
+</ul>
+<p>In information-theoretic terms, exclusion ensures that each quantum
+state—each “logical pixel” in Hilbert space—is uniquely occupied.
+Geometry alone cannot enforce this; quantum mechanics alone cannot
+constrain macroscopic density. Together, they preserve persistent
+structures and localized information.</p>
+<p>Formally, the antisymmetry of the fermionic wavefunction:</p>
+<p><span class="math display">\[\psi(x_1, x_2) = -\psi(x_2,
+x_1)\]</span></p>
+<p>ensures that for <span class="math inline">\(x_1 = x_2\)</span>:</p>
+<p><span class="math display">\[\psi(x, x) = 0 \quad \Rightarrow \quad
+P(x, x) = 0\]</span></p>
+<p>where <span class="math inline">\(P(x,x)\)</span> is the probability
+of two fermions occupying the same state. This mathematical idempotency
+manifests physically as degeneracy pressure, which in turn affects the
+curvature of spacetime predicted by General Relativity.</p>
+<p>Pauli exclusion appears to act as a bridge: it maps the
+<em>microscopic rules of quantum Hilbert space</em> onto <em>macroscopic
+geometric constraints</em>, enabling matter and observers to persist in
+a curved universe. In this sense, what might appear as a purely quantum
+rule is intimately linked to the structure of spacetime itself—a first
+hint that the universe’s laws are designed, or at least organized, to
+preserve information.</p>
+<h2 id="natures-dithering-solving-the-banding-problem">Nature’s
+Dithering: Solving the Banding Problem</h2>
+<p>To keep users happy, computer software utilizes a technique called
+dithering to blur out the artifacts caused by limited precision. This
+same necessity might explain the inherent "randomness" of the subatomic
+world.</p>
+<p>Imagine a rendering engine calculating the color for a specific
+pixel. The internal calculation—performed with high precision—results in
+a value of 1.8. However, the output device (the screen or the
+"classical" world we see) is limited; it only supports discrete integer
+values of 1.0 and 2.0.</p>
+<p>If the software simply rounded to the nearest value (2.0), the
+resulting image would suffer from harsh "banding"—visible steps where
+there should be smooth gradients. Nobody is happy with that.</p>
+<p>Instead, the software smears the quantization error through
+probability. It flips a weighted coin:</p>
+<ul>
+<li><p>There is an 80% probability the pixel will be rendered as
+2.0.</p></li>
+<li><p>There is a 20% probability it will be rendered as 1.0.</p></li>
+</ul>
+<p>Over many pixels (or many observations), the human eye averages these
+discrete dots back into a smooth 1.8. This unpredictability, built into
+our software to hide hardware limitations, mirrors the unpredictability
+of the microcosm.</p>
+<p>Nature, it seems, does not have infinite resources to describe every
+coordinate of the universe with infinite bits. It needs dithering to get
+rid of the "Moiré patterns" and "banding effects" that would otherwise
+occur due to the limited precision of its "output device"—the physical
+reality we inhabit.</p>
+<h2 id="cosmic-reality-show">Cosmic Reality Show?</h2>
+<p>Are we just actors in a cosmic reality show, with particles as pixels
+in a universal television apparatus?</p>
+<p>From the perspective of information, Quantum Mechanics exists to make
+the show watchable at all.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>- Superposition allows interference and encodes all possible outcomes
+in a wavefunction. - Pauli exclusion enforces identity, preventing
+degeneracy in fermionic states. - Bosons enable accumulation and
+coherence, enriching structure without enforcing identity. - Quantum
+randomness is a dithering (smoothing) mechanism at the level of observed
+macrostates. - Geometry and exclusion together provide the minimal
+infrastructure for preservation of information in observers.</p>
+<h1 id="why-general-relativity">Why General Relativity?</h1>
+<h2 id="curved-spacetime-and-gravity">Curved Spacetime and Gravity</h2>
+<p>According to General Relativity gravity is not a force in the
+traditional sense. Instead, matter and energy curve spacetime, and
+objects follow the paths dictated by that curvature. In Einstein’s
+equation:</p>
+<p><span class="math display">\[G_{\mu\nu} = \frac{8\pi G}{c^4}
+T_{\mu\nu},\]</span></p>
+<p>the distribution of mass-energy <span
+class="math inline">\(T_{\mu\nu}\)</span> determines the curvature <span
+class="math inline">\(G_{\mu\nu}\)</span>, which in turn governs the
+motion of all objects. Highly concentrated mass-energy can curve
+spacetime so intensely that the curvature formally becomes infinite—a
+singularity.</p>
+<p>Time and space are no longer absolute. Each observer measures
+intervals according to their local trajectory through curved spacetime.
+The future is already embedded in the four-dimensional geometry, though
+not all events are accessible to a given observer.</p>
+<h2 id="time-dilation-and-the-observers-perspective">Time Dilation and
+the Observer’s Perspective</h2>
+<p>A thought experiment makes this concrete. Imagine a programmer in
+orbit around a black hole, and consider a hypothetical object falling
+toward the event horizon. From the distant programmer’s perspective, the
+object slows as it approaches the horizon, never seeming to cross it. To
+the falling object, however, the rest of the universe appears to speed
+by: billions of years can pass outside while only seconds elapse
+locally.</p>
+<p>This difference is not a quirk but a fundamental property of
+spacetime itself. Time is a **personal, observer-dependent dimension**,
+and gravitational fields stretch or compress the rate at which events
+are experienced.</p>
+<h2 id="why-does-spacetime-have-this-structure">Why Does Spacetime Have
+This Structure?</h2>
+<p>But why does the universe operate in this way? Why is spacetime
+curved, time relative, and gravity geometric rather than a simple
+force?</p>
+<p>There is some analogy from computer graphics. In a ray-tracing
+renderer:</p>
+<ul>
+<li><p>Regions with complex geometry take longer to render, requiring
+multiple intersections and “is-inside” tests.</p></li>
+<li><p>Empty regions render quickly, as no details need
+evaluation.</p></li>
+</ul>
+<p>Could curvature and time dilation in the universe emerge from similar
+mechanism? Regions of high mass-energy, where many states are
+concentrated, experience slower local “processing” (time dilation),
+empty regions can evolve more freely.</p>
+<p>From this viewpoint, GR is not only a description of motion and
+gravity—it is a **computational infrastructure for the universe**,
+ensuring that observers and informational structures survive in a
+consistent, persistent environment. However, where is the computer
+running the ray tracer?</p>
+<h2 id="sense-of-geometric-space">Sense of Geometric Space</h2>
+<p>A conscious intelligent observer (without naming anyone in
+particular!) has a natural sense of 3D space. But why is it that we
+perceive ourselves living in a world of solid geometric objects? Why do
+we lack a "wavelike self" defined in the vastness of Hilbert space?</p>
+<p>Both are equally real—it just takes a good microscope and a
+double-slit experiment to prove it. So, why do we require these two
+vastly different descriptions just to define who we are?</p>
+<h1 id="science-vs.-religion">Science vs. Religion</h1>
+<p>It is not difficult to find people who do not believe in science.
+Physics would be nothing more than a religion—a belief system itself.
+Instead of believing in sacred texts, one believes in scientific
+papers.</p>
+<h2 id="practicing-physics">Practicing Physics</h2>
+<p>Physics is a field of science that is fundamentally about the study
+of observable phenomena.</p>
+<p>All fields of science, including physics, follow the so-called
+scientific method. The method defines how science is practiced. First,
+one makes observations about the phenomenon to be studied. Then one
+develops hypotheses to explain the phenomenon. In the case of physics,
+these are typically described in the language of mathematics. The new
+theory is then tested against available data. Each new observation that
+is consistent with the predictions of the theory increases the
+credibility of the theory.</p>
+<p>However, no amount of experimentation can ever prove a theory right.
+Regardless of the amount of successful experimentation so far, nothing
+guarantees that the next experiment will support the theory. A physical
+theory is always subject to falsification. Even a single contradictory
+experiment can prove the theory wrong.</p>
+<h2 id="practicing-religion">Practicing Religion</h2>
+<p>While different religions have different practices, there are some
+key elements that many of them share. These include prophecy, prayer,
+rituals and ceremonies, and moral and ethical guidelines.</p>
+<p>At the heart of all religions, however, are sacred texts and faith.
+People read these texts, memorize them, and believe them.</p>
+<p>It is important to note that rational thinking should not be applied
+to compare sacred texts to observations. Experiments should not be
+carried out to test them. This is because applying rational reasoning to
+religious texts leads to logical contradictions, and hence, doubt. Doubt
+is something between believing and not believing. All doubts are often
+related to Satan and his attempts to trick us away from the truth.</p>
+<p>For example, according to some interpretations of holy texts, the
+Earth is only some thousands of years old. However, we can observe
+annoying dinosaur fossils. Based on science, with overwhelming
+observational evidence, they have to be much older. What one observes
+would seem to be in total contradiction with what one believes.</p>
+<p>These apparent contradictions can be solved by assuming God is great
+and so far beyond everything that no human being will ever come close to
+comprehending. With our pitifully thin layer of grey brain matter, it is
+actually foolish to even try to question the holy texts. God naturally
+put those dinosaur fossils there just to test one’s faith!</p>
+<p>One can also explain many of the apparent contradictions in sacred
+texts by assuming that the sacred texts are not to be taken literally.
+One allows a suitable level of flexibility in their interpretation.</p>
+<h2 id="conclusions-1">Conclusions</h2>
+<p>Religions require total unconditional belief, and all doubt is bad.
+In science, the situation is exactly the opposite. A theory is accepted
+as a scientific theory only when there is a significant amount of
+experimental data supporting it. Theories of physics are always subject
+to experimental verification. In fact, the most complex system humans
+have ever built—the Large Hadron Collider—was constructed specifically
+to challenge existing theories.</p>
+<p>In science, one believes only what one sees, whereas in religions the
+situation is exactly the opposite.</p>
+<p>The only conclusion one can draw by comparing science and religion is
+that the two concepts are fundamentally different. Science is not a
+belief system.</p>
+<p>In fact, the most central concept in physics—consistency with
+observations—would be lethal to religions. If the claims of religions
+could be experimentally verified, there would be no room for believing
+anymore. If we saw God, we would start studying the properties of the
+system and develop mathematical laws to model them. Observation would
+turn religion into science.</p>
+<h1 id="anthropic-principle">Anthropic Principle</h1>
+<p>The “Anthropic Principle” states that the universe must be compatible
+with the existence of intelligent observers. We should not therefore
+wonder why everything appears to be so delicately adjusted to make our
+existence possible. If this wasn’t the case, then there wouldn’t be us
+either.</p>
+<p>According to Stephen Hawking, the universe contains vastly more
+galaxies than strictly needed for life to develop on one planet,
+suggesting that a strong anthropic principle (requiring life everywhere)
+is unnecessary. Only one would be enough to produce the raw materials
+and get us important humans developed.</p>
+<p>One might question this reasoning. If the probability for development
+of intelligent life happened to be extremely small, then isn’t this huge
+universe precisely what one needs to get intelligent life developed at
+least on one planet? So it actually boils down to probabilities.</p>
+<p>Even if the probability of life turned out to be high, maybe God, or
+whoever wanted to get us created, is a perfectionist and only good
+(e.g., sin-free) humans will do—which we apparently are not.</p>
+<p>Or maybe God is impatient! God doesn’t want to wait 1 400 000 000 000
+billion years. Why not create 14 billion galaxies and wait only one
+year?</p>
+<p>If there is God, then who created God? If God was never created but
+simply <em>is</em>, then why couldn’t the universe simply <em>be</em> as
+well? Both constructions would be rather magnificent to exist. However,
+if God created the universe, then God is apparently more intelligent and
+complex. Correspondingly, the probability of God is smaller than the
+probability of the universe.</p>
+<p>Can we resist the temptation to play with our genome? Researchers are
+currently trying hard to create artificial self-aware systems on all
+possible fronts. Also, it does not really matter whether God <em>just
+is</em>, or whether he was created (possibly by another God), because in
+both cases there would be God. So we might as well strip all these
+obvious and false blocks out of the code, which simplifies the diagram
+to the following form:</p>
+<pre><code>if (God exists) {
+    // God creates a man, 
+    // for his own image creates he him
+} else {
+    // man creates virtual man 
+    // for his own image creates he him
+}</code></pre>
+<p>There might soon be God, sorts of, many of them. This happens as soon
+as we get the first DNA simulations executed, or self-aware conscious AI
+systems developed. We humans will then play the role of God, and those
+simulated fellows play the role of sinful humans—trying to turn to
+science and prove God wrong.</p>
+<p>Many with a scientific state of mind dislike the strong version of
+the anthropic principle. However, if the two DNA assumptions hold, then
+everything in this universe is due to the anthropic principle.</p>
+<h1 id="why-do-we-believe">Why Do We Believe?</h1>
+<h2 id="introduction-1">Introduction</h2>
+<p>Nearly all nations and societies, even those isolated from the rest
+of the world, have developed their own spiritual deities that they
+worship. The widespread and persistent emergence of belief systems
+across cultures is too significant to dismiss as mere coincidence. This
+naturally raises the question: <em>why is belief in God so
+prevalent?</em></p>
+<h2 id="morality-and-human-nature">Morality and Human Nature</h2>
+<p>A central component of most religious belief systems is morality.
+Moral frameworks are commonly grounded in principles such as empathy,
+compassion, fairness, and recognition of the inherent value and dignity
+of others. In Christianity, for example, God is regarded as the ultimate
+source of morality. The Ten Commandments explicitly instruct believers
+to love God and to love their neighbors as themselves.</p>
+<p>Humans with a developed moral sense appear to possess an intuitive
+understanding of right and wrong. Some actions carry a mild sense of
+wrongdoing, such as telling a white lie, while others—such as committing
+a cardinal sin—are perceived as far more severe. Provided an individual
+is mentally capable (i.e., not suffering from psychosis or deemed
+<em>non compos mentis</em>), people generally have conscious awareness
+of their actions and can distinguish between moral right and wrong.</p>
+<p>Why is it considered wrong to steal food from a friend? Even in
+hunger, taking food from someone unable to defend it feels inherently
+wrong. Conscience often guides us toward sharing what we have, even when
+doing so risks our own well-being. This internal moral compass appears
+remarkably universal, suggesting that morality is deeply embedded in
+human cognition.</p>
+<h3 id="typical-rights-and-wrongs">Typical Rights and Wrongs</h3>
+<p><strong>Rights</strong></p>
+<ul>
+<li><p>Tell the truth</p></li>
+<li><p>Show love and empathy</p></li>
+<li><p>Share resources</p></li>
+<li><p>Act nobly and humbly</p></li>
+<li><p>Treat others as you would like to be treated</p></li>
+<li><p>Sacrifice for friends or the group</p></li>
+</ul>
+<p><strong>Wrongs</strong></p>
+<ul>
+<li><p>Steal</p></li>
+<li><p>Lie</p></li>
+<li><p>Behave arrogantly or selfishly</p></li>
+<li><p>Kill or cause unnecessary harm</p></li>
+</ul>
+<h2 id="morality-beyond-humans">Morality Beyond Humans</h2>
+<p>Recent advances in DNA research and behavioral science suggest that
+humans are not fundamentally distinct from other animals. This raises an
+important question: is morality unique to humans, or do other species
+exhibit proto-moral behavior?</p>
+<p>From personal experience growing up on a farm, some observations are
+illustrative. We had a dog named Raju who was remarkably perceptive and
+emotionally responsive. Every weekend, we went hunting for hares. Raju
+appeared to dream, recognize emotions, follow commands, form strong
+attachments, and even display apparent jealousy and grief when a new
+puppy joined the household.</p>
+<figure>
+<img src="figures/raju.jpg" style="width:50.0%" />
+<figcaption>Raju demonstrating early forms of empathy and attachment,
+illustrating proto-moral behavior in social animals.</figcaption>
+</figure>
+<p>These observations suggest that feelings such as empathy, attachment,
+and social awareness evolved long before humans appeared. While abstract
+reasoning and symbolic thought distinguish humans, many foundational
+social behaviors—including proto-moral instincts—are shared with other
+group-living animals.</p>
+<h2 id="the-evolutionary-basis-of-morality">The Evolutionary Basis of
+Morality</h2>
+<p>What humans describe as “right” closely aligns with behaviors that
+promote cohesion and survival in social groups. Cooperative behavior
+enhances group survival, whereas selfish or disruptive behavior
+threatens it. This leads to a concise summary:</p>
+<blockquote>
+<p><strong>Morality is the native behavior of animals living in
+groups.</strong></p>
+</blockquote>
+<p>For example, if a bear attacks, a dog loyal to its human may defend
+despite personal risk. This mirrors the Christian moral ideal: “There is
+no greater love than to give one’s life for one’s friends.” Even
+concepts of ultimate love appear to reflect deeply evolved social
+instincts.</p>
+<h2 id="humans-as-social-animals">Humans as Social Animals</h2>
+<p>Humans naturally form dense, cooperative groups, significantly
+increasing their chances of survival. Individually, humans are
+physically weak compared to many predators. Evolution therefore favored
+traits that prioritize group cohesion over individual advantage. Extreme
+examples—such as sacrificing one’s life for others—demonstrate how
+deeply social instincts are embedded in human psychology.</p>
+<h2 id="organizing-groups">Organizing Groups</h2>
+<p>Group living is advantageous only when it is effectively organized. A
+group in which every member attempts to lead independently would fail.
+Successful groups require leadership that coordinates action, allocates
+resources, and manages collective risk.</p>
+<p>Over evolutionary time, humans developed instincts to identify and
+follow capable leaders. Those who aligned with effective leadership
+survived and reproduced; those who did not were less likely to do so.
+This selective pressure embedded leadership recognition into human
+cognition.</p>
+<h3 id="the-theory-of-god">The Theory of God</h3>
+<blockquote>
+<p><strong>God is the model of the best leader we can
+imagine.</strong></p>
+</blockquote>
+<p>God embodies the attributes of an ideal leader: wisdom, justice,
+authority, and protection. Most importantly, God transcends death, the
+ultimate threat to survival. Human cognition naturally extrapolates
+principles of effective leadership to their logical extreme, yielding
+the concept of an eternal, omnipotent leader.</p>
+<h2 id="conclusions-2">Conclusions</h2>
+<p>Belief in God emerges naturally from humanity’s evolution as a social
+species. Survival depended on cooperation, social behavior, and
+effective leadership. Over time those who recognized and followed good
+leaders survived, with leader recognition ingrained in their genomes and
+instincts - moral.</p>
+<p>It is unsurprising that humans seek meaning and security in such a
+figure, even when that leader is spiritual in nature and beyond direct
+observation.</p>
+<h1 id="free-will">Free Will</h1>
+<p>If DNA is the blueprint of life and its operations can be described
+as an axiomatic system, then everything within the human experience must
+itself be axiomatic by nature. According to the Church–Turing thesis,
+humans can therefore—at least in principle—be simulated on a
+computer.</p>
+<p>Computers, in general, are deterministic systems. They do not exhibit
+truly random behavior; even a so-called “random value generator” in a
+computer is based on deterministic logic, producing values that only
+appear random to an external observer.</p>
+<p>It is evident that such a deterministic system cannot possess
+<em>free will</em> as it is typically understood. A Turing machine
+running a DNA simulation is bound to follow its logic without any
+capacity to choose otherwise. This implies that individuals within a
+simulated universe cannot possess free will either; they are constrained
+to behave according to the underlying rules of the machine executing the
+simulation.</p>
+<p>However, nothing prevents us from implementing a truly random
+generator. According to quantum mechanics, there is genuine randomness
+inherent in nature, which could, in principle, be leveraged to create an
+indeterministic computer. Could such a “quantum-boosted” machine grant
+simulated individuals free will?</p>
+<p>Consider a person contemplating whether to turn left. Suddenly, a
+completely unexpected and indeterministic event occurs: a high-energy
+particle burst emitted by the Sun. A few particles pass through critical
+brain cells, perturbing the person’s neural activity in a genuinely
+unpredictable manner. As a result, instead of turning left, the person
+decides to move forward.</p>
+<p>Does this random, unpredictable event introduce free will?</p>
+<p>The person had no control over the distant particle burst, nor over
+the manner in which it affected their internal processing. Consequently,
+the person has no more free will with this random influence than without
+it. The only effect of the random event was that the resulting decision
+became detached from the relevant information and reasoning available to
+the individual.</p>
+<p>In trivial situations, such randomness might appear harmless or even
+amusing, adding a sense of spontaneity. However, consider a scenario in
+which a person’s life is at stake. In such circumstances, the ability to
+make decisions based on relevant data is crucial. An indeterministic
+disturbance that disrupts logical reasoning does not enhance free will;
+it undermines it. We would not want to define free will as something
+that applies only to inconsequential choices. Survival depends on making
+decisions guided by meaningful information.</p>
+<p>If our decisions are not influenced by indeterministic events, then
+they are the result of deterministic reasoning. If they <em>are</em>
+influenced by such events, then they are driven by phenomena over which
+we have no control. Neither case supports the existence of free
+will.</p>
+<p>Allowing randomness to influence decisions does not introduce
+freedom; it merely replaces reasoning with noise. A coin toss is not an
+act of will.</p>
+<blockquote>
+<p><strong>Hypothesis of Free Will:</strong> There is no free will.</p>
+</blockquote>
+<p>We do not possess the freedom to decide when to commit a sin or when
+to compensate through prayer. Every conscious decision we make follows
+logical processes in which <span class="math inline">\(2 + 2\)</span>
+invariably equals <span class="math inline">\(4\)</span>. Like computer
+software, we are bound to follow our internal logic, without the
+capacity to choose otherwise.</p>
+<h1 id="wooden-computer">Wooden Computer</h1>
+<p>The brain of a computer—its central processing unit (CPU)—consists of
+a set of electric switches called transistors. The CPU does not need to
+be an electric device. Equally well, one might implement the required
+logic using a set of wooden parts, for example.</p>
+<p>In theory, one could implement a DNA simulation as a mechanically
+operating computer consisting of wooden components. Instead of using
+transistors in a silicon chip to control electrons, one could use wooden
+parts on a plywood platform to control wooden balls. When such a machine
+stepped through its logic, a virtual human would take its first steps in
+its virtual universe.</p>
+<p>What is this strange phenomenon that creates consciousness and pain
+from a jerking pile of wooden pieces?</p>
+<p>If a huge number of moving wooden components can create pain, then
+what does one moving piece of wood create?</p>
+<p>Can current physics even describe this action?</p>
+<p>No man-made device is perfect, and wooden is no exception. Friction,
+tolerances, and things like that introduce resonances and other
+unintentional vibrations to the operation of wooden . If the actual
+logic in the wooden creates a virtual universe with pain and
+consciousness, then what do these unintentional side effects create? Do
+they get reflected in some form into the created virtual world too?</p>
+<p>Would the virtual fellow in its virtual universe discover these in
+the form of strange quantum foam? Would it observe them as strange
+cosmic background radiation with 2.725 K temperature?</p>
+<p>Maybe so; at least it would be difficult to argue why large movements
+of wooden components would count, but their small resonances would
+not.</p>
+<p>How would the clock speed of the machine running the simulation
+appear in the created simulated universe? Would it observe that
+particles in its universe appear to follow some strange abstract square
+wave function, whose origin it could not explain, but which it might end
+up calling Wintel’s abstract square wave function?</p>
+<p>In addition to Turing machines, it is easy to picture other systems
+creating virtual universes. One possible source of consciousness could
+be the surface of a sea. In theory, waves and ripples of a sea could
+describe a DNA simulation in which conscious observers marvel at the
+wonderful properties of their universe (like those caused by heavy rain
+during the annual monsoon season).</p>
+<p>One could also use a thermostat to describe any procedure by
+controlling the temperature. The temperature could vary in time so that
+the thermostat would go through the binary code of the DNA procedure. Of
+course, the simulated fellow would be totally unaware of the fact that a
+trivial thermostat is responsible for the illusion of its existence.
+Obviously, the thermostat itself cannot be regarded as conscious by any
+means. Correspondingly, running such DNA simulations on any type of
+computer does not make the computer itself conscious or pain-sensitive.
+It is still the very same trivial stepping through its symbol tape
+without any choice. However, the running creates a virtual parallel
+universe in which a conscious human wonders about free will.</p>
+<p>The whole universe, with its planets and stars, could be the source
+of a consciousness.</p>
+<p>What do the five billion human beings create when walking along
+streets and passing through doors on their way to work? For example, a
+person walking through two subsequent doors implements the logical
+operation called <code>AND</code>. If one can pass through using either
+the left or right door, then one gets the <code>OR</code> operation.</p>
+<p>Could even a regular pencil and a piece of paper be the source of
+consciousness? Start writing down the evolution of DNA with pencil and
+pen, and soon virtual people suffer tooth pain in their virtual
+universe. Both pencil and ballpoint pen should work equally well. Due to
+the higher friction, the temperature of the cosmic background radiation
+in a universe created with pencil might be a bit higher though!</p>
+<p>So we can play with electrons, or even wooden components, to create
+virtual universes that duplicate the structures in our universe. Because
+the simulated fellow would be a virtual duplicate of its real-world
+counterpart, it too will start exploring its universe, sooner or later
+(we did!). It will discover that it can create things like Turing
+Machines. Sooner or later, it would build one and simulate its own
+existence. The procedure the virtual fellow uses to simulate its own
+existence is the same procedure that we real-world humans used to create
+the first simulation level. In other words:</p>
+<pre><code>virtual_1 = DNA(virtual_0)</code></pre>
+<p>And apparently this stack of nested simulations would continue
+forever, or as long as there is enough information in the sub-simulation
+to describe yet another sub-simulation. We know that the virtual fellow
+we created in our simulation, as well as the virtual fellow our
+simulated fellow created, are both virtual. We know it because we
+created it all in a Turing Machine whose deterministic operation we know
+precisely. Therefore, the above two equations can be unified into one
+equation of the form:</p>
+<pre><code>r_{n+1} = DNA(r_n);</code></pre>
+<p>The axiomatic <code>DNA()</code> procedure that maps our real world
+<span class="math inline">\(r_n\)</span> to a virtual world <span
+class="math inline">\(r_{n+1}\)</span> is exactly the same procedure
+that maps the virtual world <span class="math inline">\(r_{n+1}\)</span>
+to another virtual world <span class="math inline">\(r_{n+2}\)</span>.
+There is no single parameter in the equation that would make us real
+fellows distinctive from these simulated fellows. The only logical
+conclusion one can draw from this is that this universe of ours is
+precisely as virtual by nature as the universes we create in our
+computers. With recursive procedures, it is very difficult to argue that
+one recursion level would somehow be more real than the others. Just
+like with the case of the simulated fellow, we real-world fellows don’t
+see that it is all virtual by nature.</p>
+<p>There is apparently one very serious problem with the simulation
+hypothesis: entropy. It is an extremely difficult job to build a system
+that can simulate even one human DNA strain, let alone a complete human
+being. There are six billion of us, not to mention other animals,
+plants, bacteria, and such. Our Milky Way galaxy consists of hundreds of
+billions of stars similar to our Sun, and hundreds of billions of
+galaxies have been observed.</p>
+<p>Those sub-simulations would soon run out of information!</p>
+<p>Despite their purely virtual nature, these abstract constructions
+contain very nice features. Pain and joy are very cool properties for us
+conscious human beings. Could there even be some procedures of feelings
+that evolution hasn’t implemented yet for us? Could we have those when
+we end up in heaven?</p>
+<p>Those unknown human experiences could certainly explain the behavior
+of my wife; she is obviously running all of the procedures
+simultaneously.</p>
+<p>In one Arnold Schwarzenegger movie <span class="citation"
+data-cites="lastactionhero1993">(McTiernan 1993)</span>, people switched
+between the real world and the movie world. I never liked the movie
+because the idea felt way too absurd to me. Silly me.</p>
+<h1 id="time">Time</h1>
+<h2 id="the-problem-of-time">The Problem of Time</h2>
+<p>Time is a problem.</p>
+<p>In many equations of physics, time appears merely as a parameter. One
+can replace <span class="math inline">\(t\)</span> with <span
+class="math inline">\(-t\)</span> and the equations continue to work
+just fine. As far as the formal laws are concerned, there seems to be
+nothing that enforces a preferred direction of time.</p>
+<p>A software programmer can easily implement a model of a universe
+using modern programming languages and simulation frameworks. Such a
+simulation would typically have a time slider. The animator can move the
+slider forward or backward at will, and the simulated universe responds
+accordingly. Slide it forward and someone gets eaten by a T-Rex. Slide
+it backward and the victim walks away unharmed.</p>
+<p>In the real universe, however, there is no visible time slider. There
+is no external animator adjusting the present moment. Time flows, but
+only in one direction. We remember the past, not the future. Causes
+precede effects. Broken things do not spontaneously reassemble.</p>
+<p>Yet the fundamental equations themselves seem largely indifferent to
+this asymmetry. This tension between lived experience and formal theory
+is the core of the problem of time.</p>
+<h2 id="general-relativity-vs.-quantum-mechanics">General Relativity
+vs. Quantum Mechanics</h2>
+<p>The two most successful theories of modern physics—General Relativity
+and Quantum Mechanics—paint strikingly different pictures of time.</p>
+<p>In General Relativity, time is not an external parameter but part of
+a four-dimensional geometric structure called spacetime. Space and time
+are interwoven, and their geometry is determined dynamically by the
+distribution of mass and energy. Objects trace world-lines through this
+geometry, and what we perceive as the present is simply a
+three-dimensional cross-section of a four-dimensional structure.</p>
+<p>In this framework, there is no universal, continuously flowing time.
+Each observer measures their own proper time along their world-line.
+Different observers experience time at different rates depending on
+their motion and gravitational environment. A common interpretation of
+General Relativity—the so-called block universe view—suggests that past,
+present, and future events all coexist within the spacetime manifold.
+Whether this interpretation is ontologically correct remains a matter of
+debate, but it is consistent with the theory.</p>
+<p>Cosmological observations indicate that the universe has evolved from
+a hot, dense early state roughly 13.8 billion years ago and that its
+large-scale expansion is currently accelerating. This evolution is not
+represented as motion through time toward a single point, but as the
+unfolding of spacetime geometry itself.</p>
+<p>Quantum Mechanics offers a very different perspective. In quantum
+theory, physical systems are described by wavefunctions that encode all
+available information about their states. These wavefunctions evolve
+deterministically in time according to the Schrödinger equation, yet the
+outcomes of measurements are fundamentally probabilistic.</p>
+<p>Importantly, quantum mechanics does not render time itself
+indeterminate. The uncertainty lies in observable quantities, not in the
+existence or continuity of time. Time remains an external parameter in
+standard formulations of quantum mechanics, unlike in General Relativity
+where it is part of the dynamical structure.</p>
+<p>Some speculative theories suggest the existence of a smallest
+meaningful time scale, often associated with the Planck time, but this
+is not a prediction of quantum mechanics itself. It is an indication
+that our current theories may break down at extreme scales, and that a
+deeper framework—quantum gravity—may be required.</p>
+<p>Other approaches highlight the tension further. The Wheeler–DeWitt
+equation, for example, describes a formalism in which time does not
+appear explicitly at all. String-theoretic models allow scenarios in
+which the Big Bang is not the beginning of time, but a transition
+between different geometric phases. None of these ideas has yet produced
+a complete and experimentally verified theory.</p>
+<p>Despite their differences, both General Relativity and Quantum
+Mechanics share an important feature: their fundamental equations are
+largely time-symmetric. They do not, by themselves, explain why time
+appears to flow in one direction only.</p>
+<h2 id="strange-temporal-phenomena">Strange Temporal Phenomena</h2>
+<p>At small scales, nature exhibits behaviors that appear to challenge
+our classical intuitions about time.</p>
+<p>Quantum tunneling allows particles to appear on the other side of
+potential barriers that would be impenetrable in classical physics.
+While tunneling does involve subtle temporal behavior, it does not occur
+instantaneously or without time entirely, even if its timing is
+difficult to define precisely.</p>
+<p>Entangled particles exhibit correlations that persist across
+arbitrary distances. Measuring one particle instantaneously constrains
+the state of its partner. However, no information is transmitted faster
+than light; the correlations cannot be used for communication.</p>
+<p>Photons traveling along null geodesics experience zero proper time
+between emission and absorption. From the photon’s own perspective—if
+such a perspective could be meaningfully defined—no time elapses during
+its journey. This is a geometric property of spacetime, not a violation
+of causality.</p>
+<p>None of these phenomena, however, reverse the arrow of time. They
+stretch our intuitions, but they do not allow macroscopic objects—or
+observers—to move backward into their own past.</p>
+<h2 id="entropy-and-the-arrow-of-time">Entropy and the Arrow of
+Time</h2>
+<p>Since the fundamental equations do not impose a temporal direction,
+it is often argued that the arrow of time arises from the second law of
+thermodynamics. In an isolated system, entropy tends to increase. This
+provides a statistical distinction between past and future.</p>
+<p>Stephen Hawking famously illustrated this using a video recording. A
+film showing entropy decreasing—shattered objects reassembling, smoke
+returning to cigarettes—immediately appears unnatural. Entropy allows us
+to distinguish whether a process is running forward or backward.</p>
+<p>Entropy also underlies biological time. Living systems require
+ordered energy sources. We eat food that is highly structured and expel
+waste that is more disordered. A universe in which entropy decreased
+would not support life as we know it.</p>
+<p>Yet this explanation raises a deeper question: why should entropy
+increase at all? Why does the universe begin in a state of such
+extraordinarily low entropy?</p>
+<h2 id="information-and-time">Information and Time</h2>
+<p>A complementary way to frame the arrow of time is through
+information.</p>
+<p>In an isolated system, total information cannot be created or
+destroyed—only transformed and redistributed. This principle is implicit
+in unitarity and in modern understandings of black hole physics.</p>
+<p>From this perspective, time is not something one moves through
+freely. It is an ordering of information transformations. Each moment
+encodes the complete informational state of the universe at that
+stage.</p>
+<p>Now consider what travel to the past would imply. A macroscopic
+object appearing from the future would introduce a large amount of
+mass-energy and information into an otherwise closed system without any
+causal precursor. An <span
+class="math inline">\(80\,\mathrm{kg}\)</span> human corresponds to
+roughly <span class="math inline">\(7 \times
+10^{18}\,\mathrm{J}\)</span> of energy. Such an appearance would violate
+global information accounting and render thermodynamics meaningless.</p>
+<p>The arrow of time, then, is not merely psychological, nor purely
+statistical. It is a structural consequence of information conservation.
+The past is fixed because its information has already been distributed.
+The future appears open because multiple informational rearrangements
+remain compatible with the present.</p>
+<p>Time flows forward because it must.</p>
+<h2 id="humans-as-axiomatic-system">Humans as Axiomatic System</h2>
+<h3 id="basic-assumptions">Basic Assumptions</h3>
+<p>Let’s start with the following assumptions:</p>
+<ol>
+<li><p>DNA encodes the blueprint for consciousness.</p></li>
+<li><p>DNA obeys physical laws.</p></li>
+</ol>
+<p>It should be noted that these are observable assumptions, and as
+such, they cannot be definitively proven. However, the observational
+evidence supporting them is strong.</p>
+<p>The first assumption posits that the human genome encodes all the
+information required to construct a conscious, pain-sensitive human
+being within this universe and its observed laws of physics.</p>
+<p>The second assumption states that DNA is composed solely of ordinary
+physical matter. It is made of the same matter as everything else and is
+governed by the same physical laws, with no non-physical or supernatural
+influences affecting its operation.</p>
+<p>It then follows that humans, unlike what Roger Penrose speculates,
+must be implementations of axiomatic systems. Consequently,
+consciousness could be described using the principles of
+mathematics.</p>
+<h3 id="church-turing-thesis">Church-Turing Thesis</h3>
+<p>Let us make a third assumption:</p>
+<ol start="3">
+<li><p>Church–Turing Thesis holds.</p></li>
+</ol>
+<p>It states that all physical processes can, in principle, be simulated
+by a device known as a Turing machine. The thesis has never been
+formally proven, but if it were false, we would have good reason to
+worry about keeping our money in bank accounts.</p>
+<p>From these three assumptions it follows that humans can be simulated
+by a Turing machine—or, in its modern incarnation, a computer.</p>
+<h3 id="dna-simulation-thought-experiments">DNA Simulation Thought
+Experiments</h3>
+<p>Suppose we digitize a human genome and run it on a computer
+simulating a universe governed by the same laws of physics as our own.
+As the simulation executes, the DNA evolves into a conscious,
+pain-sensitive observer. The simulated human experiences an expanding
+universe where time flows from past to future, and tooth pain is
+real.</p>
+<h4 id="optimizing-code">Optimizing Code</h4>
+<p>All software programs consist of two kinds of information: code and
+data. In a DNA simulation, the code would describe the laws of physics,
+such as quantum mechanics and gravity. The data would include the
+digitized DNA and a sufficiently large section of the surrounding
+universe, as creating a simulated human in an empty space would likely
+lead to psychosis.</p>
+<p><span class="math display">\[|
+\text{codecodecodecodecodecodecode}|\text{datadatadatadatadatadatadatadata}|\]</span></p>
+<p>A well-known technique for optimizing slow, CPU-intensive code is to
+use lookup tables, which replace computation with precomputed data. For
+example, one can replace all <code>sqrt()</code> computations:</p>
+<pre><code>result = sqrt(arg);</code></pre>
+<p>with precomputed values:</p>
+<pre><code>result = sqrt_lookuptable[arg];</code></pre>
+<p>Empirically, software programs yield identical results regardless of
+how the result was computed. <span class="math inline">\(2+2=4\)</span>,
+and it does not matter if we replace all <span
+class="math inline">\(2+2\)</span> equations in our code with
+precomputed value of <span class="math inline">\(4\)</span>. This
+optimization therefore cannot affect the simulation’s output, nor the
+observer’s experience of time or pain. Delaying or accelerating
+computation affects only the external runtime, not the internal state
+transitions of the simulated system.</p>
+<p>However, this optimization has the effect of reducing the amount of
+code and increasing the amount of data in our DNA simulation:</p>
+<p><span class="math display">\[|
+\text{codecodecodecodecode}|\text{datadatadatadatadatadatadatadatadatadata}|\]</span></p>
+<p>Now, imagine we gradually optimize the DNA simulation by replacing
+algorithmic components (e.g., <code>sqrt()</code>) with lookup tables.
+As a consequence, the number of CPU cycles required to run the
+simulation decreases. Suppose we take this optimization to the extreme:
+all computation is replaced by a static dataset encoding the entire
+execution trace.</p>
+<p><span class="math display">\[|
+\text{datadatadatadatadatadatadatadatadatadatadatadatadatadatadata}|\]</span></p>
+<p>As a result, we don’t have anything to run in a computer. It is just
+a massive hard drive containing all procedures precomputed.</p>
+<p>Does the observer still experience time and pain?</p>
+<p>The answer, within the axiomatic model, is yes. Affirming otherwise
+would imply the existence of a new physical constant in our books of
+physics: a minimum code-data ratio required for the Church–Turing thesis
+to hold, or for consciousness to emerge.</p>
+<p>Temporal structure and pain, therefore, must emerge from the internal
+relationships among states, not from the external runtime. From the
+internal perspective of the simulated observer, time still flows from
+past to future and pain is real.</p>
+<p>As a conclusion, a static dataset can fully specify a universe
+containing conscious observers with subjective time. Consequently, time
+and pain must be properties of simulated observers, not fundamental
+properties of the universe.</p>
+<h4 id="multi-threaded-simulation">Multi-threaded Simulation</h4>
+<p>When a single DNA simulation—let’s call her Alice—runs on a computer,
+the execution trace is easy to study. Every CPU instruction drives the
+computer (and Alice) to a new state. From Alice’s perspective, time
+flows forward, and the effect of each CPU cycle can be mapped to a
+simulated particle in her world.</p>
+<p><span class="math display">\[|
+\text{Alice}|\text{Alice}|\text{Alice}|\text{Alice}|\dots|\]</span></p>
+<p>However, consider a system running multiple DNA simulations
+concurrently—say, Alice and Bob—where thread scheduling is governed by
+quantum randomness. The resulting execution trace interleaves their
+simulated lives in segments of unpredictable length.</p>
+<p><span
+class="math display">\[|\text{AliceAliceAli}|\text{BobBobB}|\text{AliceA}|\text{BobBo}|\text{Alic}|\text{BobB}\dots|\]</span></p>
+<p>Since both single- and multi-threaded computers are computationally
+equivalent, each observer must experience a coherent, continuous
+timeline.</p>
+<p>Now, let’s gradually shorten the number of CPU cycles until each
+thread is limited to running a single CPU cycle before switching. Let’s
+also add more DNA simulations, like Robert, John, and Jill. As the
+number of concurrent simulations increases, the execution trace becomes
+increasingly fragmented. Additionally, modern multi-threaded systems
+often include many extra threads for operating system tasks, such as
+listening for network requests. In the limit of infinitely many
+perfectly interleaved simulations, the execution trace approaches pure
+white noise.</p>
+<p><span class="math display">\[|\text{A}| \text{B}| \text{OS}|
+\text{R}| \text{J}| \text{OS}| \text{l}| \text{Ji}| \text{i}| \text{ce}|
+\text{b}| \text{ob}| \text{n}| \text{l}| \dots|\]</span></p>
+<p>Are the simulated observers still conscious?</p>
+<p>The answer, again within the axiomatic model, is yes. Empirically,
+multi-threaded computers function reliably regardless of how few CPU
+cycles are allocated per thread switch or how narrow the CPU’s internal
+registers are. From each observer’s internal perspective, time still
+flows from past to future.</p>
+<p>This raises an obvious question: how does each conscious, simulated
+observer know which sequences belong to them and which do not, in order
+to remain conscious?</p>
+<p>Conclusion: if there is any way to interpret the data of the
+execution trace as a "conscious observer," then that is exactly what
+happens: a conscious observer emerges. If the initial assumptions hold,
+consciousness, pain, and subjective time can emerge from static data
+that resembles pure static noise.</p>
+<h3 id="causality">Causality</h3>
+<p>It is often assumed that a virtual universe only comes into existence
+when a simulation is actively executed—that the computer must be powered
+on for the simulated world to exist. If the simulation computer is never
+started, then no simulated virtual world emerges. No consciousness,
+definitely no pain.</p>
+<p>However, pure static data (such as the full execution trace of a
+simulation) has no notion of time. The computer with its hard drive does
+not even need to be run. In fact, computation is irrelevant, as that
+information could exist even without computers to compute it. Therefore,
+one cannot argue that one created the other. What appears as static
+information, e.g., execution trace of a computer to us external
+observers, appears as an expanding universe and pain to the simulated
+human observing the data from inside. This relationship is
+representational, not causal.</p>
+<p>The computer and the simulated universe must be two sides of the same
+coin: distinct arrangements of the same underlying information. And
+there is more than just two sides on the coin. Consider an execution
+trace of <span class="math inline">\(\large N\)</span> bits. These bits
+can be arranged in <span class="math inline">\(\large 2^N\)</span> ways.
+Apparently, most of them describe chaotic universes with no conscious
+observers. One, however, describes our identical simulated twins—Alice,
+Bob, and others. And one describes something we call a computer, which
+is simulating a computationally heavy procedure—DNA.</p>
+<h3 id="philosophical-zombies">Philosophical Zombies</h3>
+<p>Current technology does not yet allow for full-scale DNA simulations.
+However, were such a capability to exist, and assuming the three initial
+axioms hold true, we would have undoubtedly digitized our DNA multiple
+times to create conscious and pain-sensitive virtual twins of
+ourselves.</p>
+<p>But would those digital twins of us truly be conscious and sense
+pain?</p>
+<p>Philosopher David Chalmers proposed the concept of a philosophical
+zombie: a hypothetical being that is physically and behaviorally
+identical to a conscious human but lacks any subjective experience. Such
+a zombie would respond to pain stimuli in the exact same way a conscious
+person does—it would cry out, flinch, and try to avoid the source of
+pain—but it would not feel anything.</p>
+<p>According to Chalmers, even with a perfect simulation, we would only
+be observing the physical processes. We still wouldn’t know if there’s a
+"ghost in the machine"—a feeling of what it’s like to be that simulated
+being. A computer could be programmed to perfectly mimic the behavior of
+a person feeling pain without actually having the experience itself.</p>
+<p>This goes back to philosopher the *hard problem of consciousness*. It
+appears that human conduct is not reducible to the operation of the
+human brain.</p>
+<h3 id="pain-hypothesis-from-philosophy-to-physics">Pain Hypothesis —
+From Philosophy to Physics</h3>
+<p>Let’s make a fourth assumption:</p>
+<ol start="5">
+<li><p>Pain has measurable effects.</p></li>
+</ol>
+<p>This assumption brings the concept of pain from philosophy to
+physics. Just like gravity, pain is assumed to have observable
+consequences that are physically detectable and measurable.
+Formally:</p>
+<p><span class="math display">\[\large
+\text{Human} \neq \text{Human + Pain}\]</span></p>
+<p>The core argument is then as follows:</p>
+<ul>
+<li><p>Axiom 1: DNA encodes the blueprint for consciousness.</p></li>
+<li><p>Axiom 2: DNA obeys physical laws. From this, it follows that
+humans must be an axiomatic system.</p></li>
+<li><p>Axiom 3: Church–Turing thesis holds. From this, it follows that
+humans can be simulated.</p></li>
+<li><p>Axiom 4: Pain has measurable effects. From this, it follows that
+the simulated copy must experience pain and be conscious. Any difference
+in their behavior would disprove one of the initial axioms.</p></li>
+</ul>
+<p>If a system’s behavior is entirely determined by its physical
+components and their interactions, a perfect copy should exhibit
+identical behavior. If a simulation is a perfect copy of those physical
+components, it must behave identically to the original. If the
+original’s behavior is driven by the experience of pain, the simulation
+must have that experience too.</p>
+<p>If consciousness and pain have measurable, physical effects, we can
+reason that in an axiomatic system, identical inputs must yield
+identical outputs. If the simulated human’s output (its behavior) is
+different from the real human’s, then the assumption that they are
+identical axiomatic systems is wrong. If their behavior is identical,
+then their internal states, including consciousness and pain, must also
+be identical. <span class="math inline">\(2+2\)</span> holds for both
+bananas and apples.</p>
+<p>Correspondingly, the P-Zombie is an impossibility. If Axioms 1–4
+hold, the P-Zombie premise collapses:</p>
+<ul>
+<li><p>Axioms 2 and 3 state the system is an axiomatic, computable
+entity.</p></li>
+<li><p>Axiom 4 states that the experience of pain (<span
+class="math inline">\(P\)</span>) has a measurable, physical
+effect.</p></li>
+</ul>
+<p>As soon as our technology allows for full-scale DNA simulations, we
+can test whether a simulated human experiences pain, and thus, whether
+this hypothesis is valid.</p>
+<h3 id="conclusions-3">Conclusions</h3>
+<p>If the four assumptions hold, then consciousness, time, and even pain
+can emerge from the structure of information alone. The universe itself
+is nothing more—or nothing less—than a vast tapestry of information.
+Observers, particles, and the flow of time are just patterns woven into
+this tapestry, emerging wherever conditions allow.</p>
+<p>Time appears to be a subjective property of us intelligent and
+conscious observers, illusion that we created in our minds rather than a
+fundamental property of the universe. The universe is informational and
+abstract by nature, and our everything in us observers can emerge even
+from static or noisy informational substrate.</p>
+<p>Where did all the matter in the universe come from? The answer
+appears to be nowhere. There is no matter more than there is numbers,
+multiplications, or square roots. The nature of everything is
+fundamentally abstract and virtual by nature.</p>
+<h1 id="spectral-complexity-and-induction">Spectral Complexity and
+Induction</h1>
+<h2 id="kolmogorov-complexity-and-algorithmic-induction">Kolmogorov
+Complexity and Algorithmic Induction</h2>
+<p>Algorithmic Kolmogorov complexity, while mathematically elegant, is
+ill-suited as a physical primitive. It is uncomputable, discontinuous,
+and defined only relative to symbolic machines. Physical systems, by
+contrast, evolve continuously, and any measure of description length
+must reflect this continuity.</p>
+<p>In this work, we replace Kolmogorov complexity with <em>spectral
+complexity</em>, defined as the number and distribution of modes
+required to represent observer-relevant information.</p>
+<h2 id="spectral-complexity">Spectral Complexity</h2>
+<p>Spectral complexity is continuous, computable, and naturally aligned
+with physical representations such as wavefunctions and fields. Smooth,
+low-bandwidth descriptions dominate the space of stable observer
+histories, providing a physically grounded basis for induction without
+invoking abstract computation.</p>
+<p>Spectral complexity is a compression principle, not a computation
+principle. It concerns the measure over representations, not execution
+on any substrate:</p>
+<p>Brains do not execute algorithms; neural networks do not “run code”;
+intelligence is not a step-by-step symbolic procedure. Biological and
+artificial neural networks are continuous, distributed, massively
+parallel dynamical systems.</p>
+<p>For example, no “for loop” runs in one’s head when seeing that <span
+class="math inline">\(2+2=4\)</span> or imagining a smooth circle. And
+yet structure is recognized, compression occurs, and prediction is
+possible. Compression is therefore embodied in structure, not performed
+as a procedure.</p>
+<h2 id="induction-as-passive-selection">Induction as Passive
+Selection</h2>
+<p>Induction in this framework is not something observers actively
+perform. It is a combinatorial consequence of the distribution of
+possible histories.</p>
+<p>Returning to the movie library analogy: observers do not select,
+evaluate, or rank movies. Instead, one simply finds oneself inside a
+particular movie. The only reason some movies dominate is that there are
+vastly more compressed descriptions encoding smooth, stable observer
+histories than there are descriptions encoding chaotic, unstructured
+ones that preserve observer identity.</p>
+<p>This is passive selection, not active inference. Existence,
+multiplicity, and measure suffice to explain why observers find
+themselves in highly structured, predictable worlds.</p>
+<p>Intelligence feels effortless because compression is already embodied
+in the structure of the world. We see smooth circles without computing
+Fourier series, we know <span class="math inline">\(2+2=4\)</span>, and
+neural networks recognize patterns without explicit rules.</p>
+<h2 id="implications">Implications</h2>
+<p>The wavefunction is already the compressed form; geometry enforces
+stable boundaries; and discreteness limits resolution. Observers are
+born into these compressed, discretized, geometrically filtered
+worlds—they do not perform compression themselves.</p>
+<p>Smooth, predictable worlds dominate observer measure because they
+admit maximal compression while preserving observer identity. Spectral
+complexity therefore provides a physically grounded replacement for
+algorithmic Kolmogorov complexity and underlies the emergence of lawful,
+comprehensible physics.</p>
+<h1 id="descriptive-paradigms-of-information">Descriptive Paradigms of
+Information</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Any informational theory that attempts to unify quantum theory,
+spacetime geometry, and the existence of observers must ultimately
+confront a prior question: <em>What is information</em>. In what ways
+can information be described at all?</p>
+<p>The purpose of this chapter is to identify and classify the
+irreducible paradigms by which information may be described, and to
+argue that these paradigms form a complete and minimal set.</p>
+<p>We adopt the most conservative starting point possible: the existence
+of information as a static structure, without assuming time evolution,
+external interpretation, or predefined physical laws. Observers, when
+they appear, are treated as substructures of this information rather
+than as external agents.</p>
+<h2 id="information-as-a-static-structure">Information as a Static
+Structure</h2>
+<p>Throughout this chapter, <em>information</em> refers to an abstract
+structure capable of supporting internal distinctions, correlations, and
+relations. No assumption is made regarding computation, execution, or
+external semantics. In particular:</p>
+<ul>
+<li><p>There is no external reader or interpreter.</p></li>
+<li><p>There is no privileged representation.</p></li>
+<li><p>There is no fundamental notion of time or process.</p></li>
+</ul>
+<p>Physical laws, observers, and regularities are understood as
+internal, self-consistent relations within this structure.</p>
+<p>The central question then becomes:</p>
+<blockquote>
+<p><em>What are the fundamentally distinct ways in which a given
+informational structure can be described?</em></p>
+</blockquote>
+<h2 id="criteria-for-a-descriptive-paradigm">Criteria for a Descriptive
+Paradigm</h2>
+<p>A descriptive paradigm is defined here as a mathematically complete
+mode of description that:</p>
+<ol>
+<li><p>Can represent arbitrary informational structures,</p></li>
+<li><p>Possesses its own internal invariants,</p></li>
+<li><p>Does not rely on another paradigm for semantic
+completeness,</p></li>
+<li><p>Is not merely a meta-language describing relations between
+descriptions.</p></li>
+</ol>
+<p>Under these criteria, many familiar mathematical frameworks (logic,
+computation, probability, category theory) do not qualify as independent
+paradigms, as they either presuppose an underlying description or
+operate at a meta-level.</p>
+<h2 id="the-three-irreducible-paradigms">The Three Irreducible
+Paradigms</h2>
+<p>We argue that exactly three such paradigms exist.</p>
+<h3 id="discrete-set-theoretic-description">Discrete (Set-Theoretic)
+Description</h3>
+<p>The discrete paradigm describes information as collections of
+distinguishable elements:</p>
+<ul>
+<li><p>Sets, sequences, graphs, bitstrings</p></li>
+<li><p>Identity, countability, combinatorial structure</p></li>
+</ul>
+<p>This paradigm answers the question:</p>
+<blockquote>
+<p><em>What is distinguishable?</em></p>
+</blockquote>
+<p>Without a discrete description, the notion of information itself
+becomes undefined, as information requires distinguishability. Particle
+descriptions, events, and symbolic representations all fall within this
+paradigm.</p>
+<h3 id="analytical-spectral-description">Analytical (Spectral)
+Description</h3>
+<p>The analytical paradigm describes information in terms of global
+correlations:</p>
+<ul>
+<li><p>Functions, amplitudes, spectra</p></li>
+<li><p>Superposition, interference, global constraints</p></li>
+</ul>
+<p>This paradigm answers the question:</p>
+<blockquote>
+<p><em>What correlations exist across the whole structure?</em></p>
+</blockquote>
+<p>Wavefunction-based descriptions in quantum theory are instances of
+this paradigm. Importantly, this description is static: it encodes
+relations, not processes. Compression and predictability arise here as
+structural properties, not computational procedures.</p>
+<h3 id="geometric-description">Geometric Description</h3>
+<p>The geometric paradigm describes information in terms of relational
+localization:</p>
+<ul>
+<li><p>Manifolds, metrics, neighborhoods, boundaries</p></li>
+<li><p>Locality, continuity, persistence</p></li>
+</ul>
+<p>This paradigm answers the question:</p>
+<blockquote>
+<p><em>What is locally related to what?</em></p>
+</blockquote>
+<p>Geometry enables the notion of bounded subsystems and stable
+structures, which is essential for the emergence of observers as
+persistent informational entities.</p>
+<h2 id="descriptive-equivalence-and-non-reducibility">Descriptive
+Equivalence and Non-Reducibility</h2>
+<p>Although all three paradigms can, in principle, be formally reduced
+to set theory, they are not descriptively reducible. Each captures
+invariants that the others do not:</p>
+<ul>
+<li><p>Discrete descriptions capture identity and countability.</p></li>
+<li><p>Analytical descriptions capture global correlation and spectral
+structure.</p></li>
+<li><p>Geometric descriptions capture locality and continuity.</p></li>
+</ul>
+<p>Translations between these paradigms preserve informational content
+but not descriptive primitives. This establishes their equivalence
+without ontological hierarchy.</p>
+<h2 id="absence-of-additional-paradigms">Absence of Additional
+Paradigms</h2>
+<p>It is natural to ask whether further independent paradigms exist.
+Common candidates fail under the criteria defined above:</p>
+<ul>
+<li><p><strong>Algebraic descriptions</strong> reduce to discrete or
+analytical structures.</p></li>
+<li><p><strong>Logical and axiomatic systems</strong> encode discrete
+syntax.</p></li>
+<li><p><strong>Probabilistic descriptions</strong> assign measures to
+existing descriptions.</p></li>
+<li><p><strong>Computational descriptions</strong> presuppose execution
+and time.</p></li>
+<li><p><strong>Category theory</strong> functions as a meta-language
+relating descriptions.</p></li>
+</ul>
+<p>No additional paradigm introduces new informational invariants beyond
+distinguishability, global correlation, and locality. Thus, the set of
+three paradigms is complete.</p>
+<h2 id="observers-as-internal-substructures">Observers as Internal
+Substructures</h2>
+<p>Within this framework, observers are not external entities but
+internally stable informational substructures. Their existence
+requires:</p>
+<ul>
+<li><p>Discrete distinguishability (identity),</p></li>
+<li><p>Analytical predictability (compression),</p></li>
+<li><p>Geometric boundaries (local persistence).</p></li>
+</ul>
+<p>The observer and the observed universe are therefore jointly
+described within the same informational structure. No paradigm is
+observer-centric; rather, observers emerge as configurations that are
+simultaneously well-defined across all three paradigms.</p>
+<h2 id="summary">Summary</h2>
+<p>We have identified three and only three irreducible descriptive
+paradigms of information:</p>
+<ol>
+<li><p>Discrete (set-theoretic),</p></li>
+<li><p>Analytical (spectral),</p></li>
+<li><p>Geometric.</p></li>
+</ol>
+<p>These paradigms are mutually equivalent, descriptively irreducible,
+and jointly sufficient to express all internally meaningful
+informational structure. Physical theories may privilege one paradigm
+for convenience, but no paradigm is fundamental. The consistency between
+them replaces the role traditionally assigned to physical laws.</p>
+<p>This triadic structure provides a natural foundation for unifying
+quantum theory, spacetime geometry, and observer emergence within a
+single informational framework.</p>
+<h2 id="dna-simulation">DNA Simulation</h2>
+<h3 id="thought-experiment">Thought Experiment</h3>
+<p>The current technology does not allow us to run full scale human DNA
+simulations yet. However, that does not prevent us from running it as a
+thought experiment. So we digitize a human genome and run it inside a
+sufficiently detailed computer simulation. We also simulate a
+sufficiently large world with it to avoid our simulated human to develop
+phsychosis in empty space. Nine months later, in simulation time, our
+virtual copy takes its first breath in its simulated world.</p>
+<h3 id="the-nature-of-the-simulated-world">The Nature of the Simulated
+World</h3>
+<p>How would such a simulated human perceive its environment? Would it
+sense the limited memory space of the computer running it? Would it be
+able to bump its head against the upper boundary of RAM and feel pain?
+Would the flipping of bits tickle its nose, or the rotation speed of a
+hard drive make it dizzy?</p>
+<p>Would it eventually discover that its entire universe is driven by
+storage devices, memory chips, and an overclocked multi-core CPU?</p>
+<h3 id="sense-of-reality">Sense of Reality</h3>
+<p>The simulated human is not created <em>within</em> our universe. It
+does not consist of real-world particles such as electrons or quarks.
+Instead, it exists entirely within a virtual universe that we simulate
+alongside it. As a result, it has no access to our physical hardware. It
+cannot observe transistors, memory cells, voltages, or processor
+clocks.</p>
+<p>The only thing the simulated human can study is the internal
+structure of its own virtual world.</p>
+<p>Within that world, there are virtual particles, virtual forces, and
+virtual laws of physics. When the simulated human bangs its head against
+a simulated wall, the simulated particles in the wall respond exactly as
+the laws of that virtual universe dictate - including pain. To the
+simulated observer, the experience is indistinguishable from how real
+particles behave when we humans bang our heads against real walls.</p>
+<p>Every measurement the simulated human performs inside its universe
+will be internally consistent. The outcomes of experiments will match
+the predictions of the simulated physical laws, just as our measurements
+match the laws of physics in our own universe.</p>
+<p>This is because both the real world and the simulated world are
+<em>axiomatic systems</em>. Mathematics does not care whether it is
+applied to apples, bananas, electrons, or bits. The statement “<span
+class="math inline">\(2 + 2 = 4\)</span>” holds regardless of the
+physical substrate that implements the system.</p>
+<p>For the simulated human, its universe is not an approximation, an
+illusion, or a shadow of reality. It is <em>reality</em>. There is no
+experiment it could perform that would reveal the presence of the
+computer running the simulation, because that computer exists outside
+the axioms of its universe.</p>
+<p>From the inside, the simulated universe would feel precisely as real
+as our universe feels to us.</p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-chalmers1995facing" class="csl-entry" role="listitem">
+Chalmers, David J. 1995. <span>“Facing up to the Problem of
+Consciousness.”</span> <em>Journal of Consciousness Studies</em> 2 (3):
+200–219.
+</div>
+<div id="ref-Chalmers2015" class="csl-entry" role="listitem">
+Chalmers, David J. 2015. <span>“Panpsychism and
+Panprotopsychism.”</span> In <em>Consciousness in the Physical World:
+Perspectives on Russellian Monism</em>, edited by Torin Alter and Yujin
+Nagasawa, 246–76. Oxford University Press.
+</div>
+<div id="ref-Goff2019" class="csl-entry" role="listitem">
+Goff, Philip. 2019. <em>Galileo’s Error: Foundations for a New Science
+of Consciousness</em>. Pantheon.
+</div>
+<div id="ref-lastactionhero1993" class="csl-entry" role="listitem">
+McTiernan, John, dir. 1993. <span>“Last Action Hero.”</span> Columbia
+Pictures.
+</div>
+<div id="ref-Strawson2006" class="csl-entry" role="listitem">
+Strawson, Galen. 2006. <span>“Realistic Monism: Why Physicalism Entails
+Panpsychism.”</span> <em>Journal of Consciousness Studies</em> 13
+(10-11): 3–31.
+</div>
+<div id="ref-Whitehead1929" class="csl-entry" role="listitem">
+Whitehead, Alfred North. 1929. <em>Process and Reality</em>. Macmillan.
+</div>
+</div>
+<hr><div class='nav-footer'><a href="../index.html">&uarr; Up (TOC)</a> | <a href="../yaml-paradox/index.html">&larr; A Study in Significant Whitespace in YAML and Mental Collapse</a> | [End] <br><br><i>&copy; 2026 The Abstract Universe Project.</i></div>
+</body>
+</html>

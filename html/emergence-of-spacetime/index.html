@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="The Abstract Universe Project" />
+  <meta name="dcterms.date" content="2012-01-01" />
+  <title>Paper-3: Emergence of Spacetime</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Paper-3: Emergence of Spacetime</h1>
+<p class="author">The Abstract Universe Project</p>
+<p class="date">2012</p>
+<div class="abstract">
+<div class="abstract-title">Abstract</div>
+<p>Building on the conclusion of Paper II—that collapsing spacetime
+geometry corresponds to vanishing entropy—we investigate the
+time-reversed process. Whereas collapsing space corresponds to vanishing
+entropy, here we hypothesize that the emergence and expansion of
+spacetime are consequences of increasing entropy. Using a minimal
+computational model, we evolve a zero-entropy bitstring through random
+mutations, interpreting its states as geometric structures in
+three-dimensional space. As the system’s entropy increases, spacetime
+unfolds, and hierarchical particle-like structures emerge, reproducing
+key features of matter organization and relative scale invariance. Our
+results suggest that cosmic expansion can be understood as a geometric
+manifestation of increasing informational entropy, with complexity and
+structure arising naturally from simple, initially smooth states.</p>
+</div>
+</header>
+<div class="center">
+<p><a href="emergence-of-spacetime-emergence-of-spacetime.pdf">Download
+PDF Version</a></p>
+</div>
+<h1 id="entropy-as-a-driver-of-expansion">Entropy as a Driver of
+Expansion</h1>
+<h2 id="geometric-particle-filter">Geometric Particle filter</h2>
+<p>We define an execution trace <span
+class="math inline">\(S_t\)</span>, <span class="math inline">\(t = 0
+\ldots n\)</span>, where each <span class="math inline">\(S_t\)</span>
+is a binary string of fixed length <span
+class="math inline">\(L\)</span>. Beginning from a state of zero Shannon
+entropy (an all-zero string), we evolve <span
+class="math inline">\(S_t\)</span> via random bit-flip mutations that
+incrementally increase its entropy.</p>
+<p>Each <span class="math inline">\(S_t\)</span> is geometrically
+interpreted through various decoding schemes <span
+class="math inline">\(D: \{0,1\}^L \to \mathbb{R}^d\)</span>. This
+mapping results in geometric points representing the 3D Spacetime
+fabric.</p>
+<p>We define a hierarchy of elementary structures emerging from the
+spacetime fabric as follows:</p>
+<p><strong>Elementary particles:</strong> Defined as pairs of 3D points
+<span class="math inline">\((p_1, p_2)\)</span> where the spatial
+separation between the points is below a threshold.</p>
+<p><strong>Atoms:</strong> Defined as triplets of elementary particles
+<span class="math inline">\((p_1, p_2, p_3)\)</span> such that: <span
+class="math display">\[0 &lt; \text{distance}(p_1, p_2) &lt;
+\text{threshold}, \quad 0 &lt; \text{distance}(p_2, p_3) &lt;
+\text{threshold}, \quad 0 &lt; \text{distance}(p_3, p_1) &lt;
+\text{threshold}\]</span> with distances approximately equal, implying a
+near-equilateral configuration.</p>
+<p><strong>Molecules:</strong> Formed when two atoms are sufficiently
+close. The center of an atom is the geometric mean of its points: <span
+class="math display">\[\text{center(atom)} = \left( \frac{x_1 + x_2 +
+x_3}{3}, \frac{y_1 + y_2 + y_3}{3}, \frac{z_1 + z_2 + z_3}{3}
+\right)\]</span> A molecule forms if the distance between two atom
+centers is below a threshold: <span
+class="math display">\[\text{distance}(\text{center}(\text{atom}_1),
+\text{center}(\text{atom}_2)) &lt; \text{threshold}\]</span></p>
+<p>The model is minmal and arbitrary, but preserves two key features
+characteristic of the real universe: (i) the hierarchical structuring of
+particles, and (ii) the fact that particle sizes do not stretch with the
+universe, only their mutual distances.</p>
+<p>We extract and count the number of these elementary structures at
+each timestep. As entropy increases through random bit flips, we observe
+the following:</p>
+<ul>
+<li><p>At zero entropy the spacetime geometry is a point, and no
+elementary particles emerge.</p></li>
+<li><p>As entropy increases, the space unfolds exponentially.</p></li>
+<li><p>At higher entropy, elementary particles, atoms and molecules
+begin to appear, with their counts following lognormal-like
+trend.</p></li>
+</ul>
+<h2 id="recursive-pattern-matching">Recursive pattern matching</h2>
+<p>An alternative definition of emergent particles is given by recursive
+bit-pattern detection. Here, the execution trace <span
+class="math inline">\(S_t\)</span> itself is treated as a one
+dimensional candidate space of particles, with no explicit geometric
+mapping required.</p>
+<p><strong>Elementary particles:</strong> Defined as short substrings
+<span class="math inline">\(p \in \{0,1\}^k\)</span> that occur within
+<span class="math inline">\(S_t\)</span>.</p>
+<p><strong>Composite particles:</strong> Formed recursively by
+concatenating previously defined particles. A composite particle <span
+class="math inline">\(P\)</span> is valid if it appears in <span
+class="math inline">\(S_t\)</span> and if its sub-patterns are
+recognized particles.</p>
+<p>This recursive pattern-matching approach captures the emergence of
+particles purely from informational redundancy, without reliance on an
+explicit geometric embedding. The hierarchy is constructed bottom-up:
+from frequent substrings (elementary particles), to composite
+concatenations (atoms), to repeated higher-order motifs (molecules).</p>
+<p>As with the geometric detection method, two key features of physical
+reality are reproduced: (i) hierarchical structuring of matter, and (ii)
+invariance of particle size with respect to global expansion.</p>
+<p>By counting the number of recursive particles at each entropy level,
+we again observe that zero entropy corresponds to no detectable
+structures, while higher entropy states give rise to exponentially
+growing numbers of particles whose abundances follow lognormal-like
+distributions.</p>
+<figure id="fig:entropy-matter">
+<img src="figures/entropy_to_matter.png" style="width:80.0%" />
+<figcaption>Structure count vs. entropy. The emergence follows a
+lognormal-like distribution.</figcaption>
+</figure>
+<h1 id="discussion">Discussion</h1>
+<p>A central question in cosmology is why the universe began in such an
+exceptionally ordered state. Traditional approaches assume that the
+initial state is not perfectly smooth, constrained only by quantum
+uncertainty. However, in the informational framework presented here, the
+apparent necessity of an initially “rough” state is removed.</p>
+<p>Beginning from a perfectly smooth, zero-entropy configuration, the
+universe develops complexity through the unfolding of bitstring
+information under selection filters. This mechanism naturally produces
+particle-like microstructures, whose statistical properties follow
+lognormal distributions. A central implication of this is that the
+singularity at zero entropy is neither undefined nor pathological.</p>
+<p>In this sense, the vanishing-entropy limit implies a form of
+geometric smoothness that is independent of any particular coordinate
+system, representation or dynamical description. With no information
+available to define distinguishable microstructures, the singular state
+cannot encode physical irregularities, even if classical general
+relativity breaks down.</p>
+<h1 id="conclusions">Conclusions</h1>
+<p>The expansion of the universe and the increase of entropy might be
+two sides of the same coin—two distinct arrangements of the same
+information. The universe expands because its entropy increases.
+Expanding universe is geometric interpretation of information of
+increasing entropy.</p>
+<h1 id="simulation-software">Simulation Software</h1>
+<ul>
+<li><p><a
+href="simulations/emergence_of_spacetime.py">emergence_of_spacetime.py:
+Expansion as geometric interpretation of increasing entropy</a></p></li>
+</ul>
+<hr><div class='nav-footer'><a href="../index.html">&uarr; Up (TOC)</a> | <a href="../black-hole-singularities/index.html">&larr; Paper-2: Singularities as Zero-Entropy States</a> | <a href="../probabilistic-blackhole/index.html">Probabilistic Blackhole &rarr;</a> <br><br><i>&copy; 2026 The Abstract Universe Project.</i></div>
+</body>
+</html>
