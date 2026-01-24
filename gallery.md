@@ -1,11 +1,6 @@
-# The Visualized Theory
+# Emergence Laboratory: Visual Demonstrations
 
-
-## Emergent Gravity
-
-<video src="gallery/emergent_gravity.mp4" controls="controls" style="max-width: 600px;"> </video>
-
-
-## Emerget Atom
-
-<video src="gallery/emergent_atom.mp4" controls="controls" style="max-width: 600px;"> </video>
+| Atomic Orbit Stability | Gravitational Phase Transition |
+| :---: | :---: |
+| <video src="https://github.com/juhameskanen/abstract/edit/main/gallery/emergent_gravity.mp4" width="350"></video> | Description |
+| <video src="https://github.com/juhameskanen/abstract/edit/main/gallery/emergent_atom.mp4" width="350"></video> | Description |
