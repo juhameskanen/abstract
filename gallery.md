@@ -1,6 +1,7 @@
 # Emergence Laboratory: Visual Demonstrations
 
-| Atomic Orbit Stability | Gravitational Phase Transition |
-| :---: | :---: |
-| <video src="https://github.com/juhameskanen/abstract/gallery/emergent_gravity.mp4" width="350"></video> | Description |
-| <video src="https://github.com/juhameskanen/abstract/gallery/emergent_atom.mp4" width="350"></video> | Description |
+### Atomic Orbit Stability
+https://raw.githubusercontent.com/juhameskanen/abstract/main/gallery/emergent_atom.mp4
+
+### Gravitational Phase Transition
+https://raw.githubusercontent.com/juhameskanen/abstract/main/gallery/emergent_gravity.mp4
