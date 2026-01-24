@@ -11,29 +11,29 @@ Despite the somewhat cheeky name, $IaM^e$ is a playground for rigorous physics, 
 
 ## The Axiom
 
-This theory discards all a priori physical constants. Instead, it starts with the only undeniable datum: The Observer exists.
+Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer exists.
 
 From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
-In $IaM^e$, reality isn't a pre-existing stage; it is the most probable informational outcome consistent with your presence. 
+
+In $IaM^e$, reality isn't a pre-existing stage; it is the most probable informational outcome including the observer as a sub-set. 
 
 
 ## Physics vs. Philosophy
 
-$IaM^e$ is a project of Physics, not philosophy. If a concept cannot be computed, simulated, or derived via mathematical induction, it does not belong here.
+$IaM^e$ is a project of Physics, not philosophy. If a concept cannot be computed, simulated, or derived via mathematical rigor, it does not belong here.
 
-However, even the most cold-blooded mathematical system requires a "bootloader." Stating "we assume nothing" is, in itself, an assumption.
-
-Furthermore, physics must be falsifiable via observation, or it is not physics but philosophy. Consequently, we take the existence of the Observer as our sole axiom. One might argue that for the observer reading this, it is the only observationally verified fact in existence; everything else is a statistical inference.
+Furthermore, physics must be falsifiable via observation, or it is not physics but philosophy. The existence of the Observer as our sole axiom is a perfect example of physics - it is an observationally verified fact. 
 
 
 ## The Simulation Gallery
 
-The core of $IaM^e$ is proving that "smooth" physics is a statistical inevitability. Every simulation must start with well defined observer, and what follows is just the most probable outcome.
+The core of $IaM^e$ is proving that "smooth" physics is a statistical inevitability. Every simulation start with well defined observer, and what follows is just the most probable outcome.
 In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physics" are not pre-set rules but the most likely attributes of the configuration for the observer.
 
 
 ## Contents
 
+* [The Visualized Theory](gallery.md) — Interactive walkthroughs of gravity, inertia, and atomic structures as emergent phenomena. 
 * [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
