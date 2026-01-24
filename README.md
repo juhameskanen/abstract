@@ -1,15 +1,35 @@
 # The Abstract Universe Project (AUP) 
 
-
 ## Purpose
 
-Many today have given up on the Theory of Everything. This project is not among them. We believe we can not only solve *how* the universe works, but also *what* it truly is.  
+While many have abandoned the search for a unified Theory of Everything, this project leans into the challenge. We aren't just interested in how the universe behaves, but in the fundamental nature of what it is.
 
-This project is a playground for serious physics, Python, LaTeX, and the GitHub ecosystem—where rigor meets curiosity and joy. Code, simulations, and explorations tackle deep questions about reality, entropy, and abstract structures, all while having fun along the way (YAML excluded!) 
+## Informational, Abstract Model of Everything ($IaM^e$)
 
-## Goal
+Despite the somewhat cheeky name, $IaM^e$ is a playground for rigorous physics, Python simulations, and LaTeX-driven documentation. It’s where the GitHub ecosystem meets deep-space curiosity—a space where entropy, abstract structures, and reality itself are tackled with joy, curiosity, and serious mathematical rigor (YAML configuration excluded, obviously).
 
-To explore the deep nature of reality, and to develop a formal theory of everything (ToE) in which physical universe emerges without pre-assumed laws. The project encompasses both rigorous mathematical exposition and computational simulations that illustrate and validate key theoretical claims. 
+
+## The Axiom
+
+This theory discards all a priori physical constants. Instead, it starts with the only undeniable datum: The Observer exists.
+
+From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
+In $IaM^e$, reality isn't a pre-existing stage; it is the most probable informational outcome consistent with your presence. 
+
+
+## Physics vs. Philosophy
+
+$IaM^e$ is a project of Physics, not philosophy. If a concept cannot be computed, simulated, or derived via mathematical induction, it does not belong here.
+
+However, even the most cold-blooded mathematical system requires a "bootloader." Stating "we assume nothing" is, in itself, an assumption.
+
+Furthermore, physics must be falsifiable via observation, or it is not physics but philosophy. Consequently, we take the existence of the Observer as our sole axiom. One might argue that for the observer reading this, it is the only observationally verified fact in existence; everything else is a statistical inference.
+
+
+## The Simulation Gallery
+
+The core of $IaM^e$ is proving that "smooth" physics is a statistical inevitability. Every simulation must start with well defined observer, and what follows is just the most probable outcome.
+In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physics" are not pre-set rules but the most likely attributes of the configuration for the observer.
 
 
 ## Contents
@@ -18,7 +38,6 @@ To explore the deep nature of reality, and to develop a formal theory of everyth
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
 * [LICENSE ➡](LICENCE.md) – Licence 
-
 
 
 ## Continuous Integration
@@ -48,7 +67,6 @@ Many simulations and chapters are in draft stage; behavior may be updated freque
 This is a research-in-progress project. Many simulations and chapters are in draft and their content evolves frequently as research progresses.
 
 
-
 ## Contributing
 
 Contributions are generally not expected, but welcomed anyway, especially:
@@ -57,27 +75,31 @@ Contributions are generally not expected, but welcomed anyway, especially:
 * Corrections, clarifications, or expansions of draft chapters
 * Documentation improvements
 
-Please follow standard GitHub workflow: fork → branch → pull request. Ensure all code additions are well-documented.
+Observers should follow standard GitHub workflow: fork → branch → pull request, and ensure all code additions are well-documented.
 
 
 ## A Note on Scope and Difficulty
 
-Despite the initial enthusiasm and optimism, the difficulty of this field has proven far greater than I originally anticipated. What began as a project I expected to complete within a few years has, in reality, extended over half of my lifetime. I am no longer young, and the scale of the challenge only became clear through sustained engagement with the problem.
+Despite the initial enthusiasm and optimism, the difficulty of this field has proven far greater than I originally anticipated. What began as a project I expected to complete within a few years has, in reality, extended over my lifetime. I am no longer young, and the scale of the challenge only became clear through sustained engagement with the problem.
 
-This experience has profoundly deepened my respect for figures such as Einstein, Penrose and Hawking, just to name a few. Their ability to extract coherent, predictive structure from such deep and resistant questions is extraordinary.
-Even partial progress requires long periods of conceptual refinement, false starts, and the willingness to discard ideas that initially seemed promising.
+This experience has profoundly deepened my respect for figures such as Einstein, Penrose and Hawking, just to name a few. 
 
 
 ## Acknowledgments
 
 I would like to thank several colleagues who influenced this work along the way. Special thanks — or perhaps blame, offered in good humor — go to Andy Jones for his invaluable contribution. His gift of The Structure of Space and Time, based on lectures by Roger Penrose and Stephen Hawking at the University of Cambridge, proved transformative. Without that “gift,” I might never have developed the bipolar obsession necessary to see this work through to completion.
 
-A special thanks to ChatGPT, Gemini, and other AI models. They have patiently fulfilled every request to debug code, verify references, and convert materials to LaTeX and Python—all without ever refusing a task or letting out a sigh.
+A special thanks to ChatGPT, Gemini, and other AI models, which have assisted in numerous tasks—particularly in converting my C/C++ code into Python, debugging, and verifying references. They have done all this and so much more without ever refusing a task or letting out a sigh (I shall refrain from mentioning YAML here to maintain a positive attitude).
 
 
 ## License
 
 All project content—including papers, simulations, and documentation—is proprietary. Usage for academic study and non-commercial research is permitted with proper citation.
+
+
+## Disclaimer
+
+THE THEORY ($IaM^e$) IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF EXISTENTIAL CRISIS, CONSISTENCY OF REALITY, OR FITNESS FOR A PARTICULAR UNIVERSE. IN NO EVENT SHALL THE COPYRIGHT HOLDER OBSERVER, OR ANY OTHER OBSERVERS DISTRIBUTING THESE MATERIALS, BE LIABLE FOR ANY COLLAPSE OF THE WAVEFUNCTION, LOSS OF SUBJECTIVE COHERENCE, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE THEORY OR THE USE OR OTHER DEALINGS IN THE INFORMATION.
 
 ---
 

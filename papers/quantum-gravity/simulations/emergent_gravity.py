@@ -2,12 +2,12 @@
 Wavefunction-Based Gravity Simulation with Inertia
 ==================================================
 
-This module implements a 2D simulation described in *An Informational Theory of Quantum-Gravity*.
+This module implements a 2D simulation demonstrating the emergence of gravity, inertia and quantum mechanics from informational compression.
 
 Core Idea:
 ----------
 The central hypothesis is that physical laws are emergent artifacts of
-informational compression. Observers are modeled as compressed informational
+informational compression and observer filter. Observers are modeled as compressed informational
 structures: the more compressible an observer's trajectory, the more copies
 of that observer exist in the underlying informational substrate, and the
 higher the probability that such an observer will be realized. Since smooth,
@@ -61,12 +61,12 @@ from typing import List, Tuple
 import argparse
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
-from inertia_from_compression import GravitySim
+from simulation_engine import GravitySim
 
 
 
-class Wavefunction:
-    """Parametric (2D) wavefunction: soft disk / Gaussian shell + phase/time dependence."""
+class GaussianBlobObserver:
+    """Parametric (2D) wavefunction: soft disk / Gaussian shell + phase/time dependence, for representing an observer"""
     def __init__(
         self,
         center: np.ndarray,
@@ -97,7 +97,7 @@ class Wavefunction:
         return psi
 
     def copy(self):
-        return Wavefunction(self.center.copy(), self.radius, self.sigma, self.amplitude, self.omega, self.phase)
+        return GaussianBlobObserver(self.center.copy(), self.radius, self.sigma, self.amplitude, self.omega, self.phase)
 
 
 class ObserverWindow:
@@ -114,10 +114,8 @@ class ObserverWindow:
         self.center = np.array(new_center, dtype=float)
 
 
-# --- Wavefunction-based GravitySim subclass ---
 
- 
-class WavefunctionGravitySim(GravitySim):
+class EmergentGravitySim(GravitySim):
 
     def __init__(
         self,
@@ -144,10 +142,10 @@ class WavefunctionGravitySim(GravitySim):
         self.dt = 1.0  # step in "time" per simulation iteration (can be adjusted)
 
         # Create parametric wavefunctions initialized from base positions
-        self.wavefunctions: List[Wavefunction] = []
+        self.wavefunctions: List[GaussianBlobObserver] = []
         for pos in self.positions:
             # radius ~ blob_sigma scale (tweakable)
-            wf = Wavefunction(center=pos.copy(), radius=0.06, sigma=max(1e-3, self.blob_sigma * 0.8),
+            wf = GaussianBlobObserver(center=pos.copy(), radius=0.06, sigma=max(1e-3, self.blob_sigma * 0.8),
                               amplitude=1.0, omega=0.0, phase=0.0)
             self.wavefunctions.append(wf)
 
@@ -362,18 +360,19 @@ class WavefunctionGravitySim(GravitySim):
 
     
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Probabilistic Gravity Simulation with MDL Inertia")
+    parser = argparse.ArgumentParser(description="Emergent Gravity Simulation")
+    parser.add_argument("--file", type=str, default="emergent_gravity.mp4", help="Filename for the video to be created")
     parser.add_argument("--sigma", type=float, default=0.12, help="Blob sigma")
     parser.add_argument("--particles", type=int, default=8192, help="Number of particles")
     parser.add_argument("--steps", type=int, default=200, help="Number of steps")
     args = parser.parse_args()
 
-    sim = WavefunctionGravitySim(
+    sim = EmergentGravitySim(
         n_particles=args.particles,
         n_steps=args.steps,
         blob_sigma=args.sigma
     )
-    sim.run()
+    sim.run(args.file)
 
 
 if __name__ == "__main__":
