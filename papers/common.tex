@@ -21,6 +21,11 @@
 \newcommand{\pdflink}[1]{}
 
 
+\hfuzz=5pt % Don't complain about small margin overlaps
+\vfuzz=5pt % Don't complain about small vertical gaps
+\hbadness=10000 % Silence "Underfull \hbox"
+\vbadness=10000 % Silence "Underfull \vbox"
+
 % --- Page Setup ---
 \geometry{letterpaper, margin=1in}
 \setlength{\parindent}{0pt}
@@ -30,4 +35,4 @@
 \defglsentryfmt{\ifglsused{\glslabel}{\glsgenentryfmt}{\textit{\glsgenentryfmt}}}
 
 % --- Author ---
-\author{$IaM^e}
+\author{$IaM^e$}

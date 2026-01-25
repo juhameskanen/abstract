@@ -28,7 +28,7 @@ msl_list = []
 for _ in range(num_samples):
     bits = np.random.randint(0, 2, N).tolist()
     q = QBitwave(bitstring=bits)
-    msl_list.append(q.wave_complexity())
+    msl_list.append(q.wave_complexity()) # Minimal Spectral Length (MSL)
 
 msl_array = np.array(msl_list)
 
