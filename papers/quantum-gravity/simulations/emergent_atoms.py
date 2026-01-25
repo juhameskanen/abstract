@@ -2,7 +2,7 @@
 Emergent atom simulation
 
 This script imports QBitwave to replace parametric wavefunctions with 
-bit-substrate emergent wavefunctions. 
+bit-substrate emergent wavefunctions.
 """
 
 import numpy as np
@@ -96,9 +96,9 @@ class EmergentGravitySim(GravitySim):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", type=str, default="emergent_gravity.mp4", help="Filename for the video to be created")
-    parser.add_argument("--particles", type=int, default=2046)
-    parser.add_argument("--steps", type=int, default=200)
-    parser.add_argument("--sigma", type=float, default=0.15)
+    parser.add_argument("--sigma", type=float, default=0.15, help="Blob sigma")
+    parser.add_argument("--particles", type=int, default=2048, help="Number of particles")
+    parser.add_argument("--steps", type=int, default=200, help
     args = parser.parse_args()
 
     sim = EmergentGravitySim(

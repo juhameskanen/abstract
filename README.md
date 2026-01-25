@@ -2,11 +2,9 @@
 
 ## Purpose
 
- We aren't just interested in how the universe behaves, but in the fundamental nature of what it is.
-
 Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled, suggesting that no fundamental theory exists in the traditional sense. 
 While many have abandoned the search for a unified Theory of Everything, this project leans into the challenge, and even extend it. The objective is not only to formulate 
-the laws governing how the universe behaves, but to understand what those laws are fundamentally describing. 
+the laws governing how the universe behaves, but to gain full understanding what those laws are fundamentally describing. 
 
 This is an ambitious goal, and the author is under no illusion about its difficulty.
 

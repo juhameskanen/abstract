@@ -36,6 +36,7 @@ Run as a script:
 
 Parameters:
 -----------
+--file        Output filename for the simulation video (MP4 format).
 --sigma       Standard deviation of Gaussian blobs (observer filter width).
 --particles   Number of particles (bits) in the system.
 --steps       Number of resampling iterations.
@@ -358,13 +359,6 @@ class GravitySim:
         """Plot density map and particle positions."""
         if self.ax_sim:
             self.ax_sim.clear()
-            #self.ax_sim.imshow(
-            #    pdf_total.reshape(grid_size, grid_size),
-            #    origin="lower",
-            #    cmap="inferno",
-            #    extent=[0, 1, 0, 1]
-            #)
-
             self.ax_sim.imshow(
                 pdf_total.reshape(grid_size, grid_size),
                 origin='lower',

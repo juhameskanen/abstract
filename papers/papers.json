@@ -25,6 +25,10 @@
               "slug": "dimensions"
             },
             {
+              "title": "Observer Probability",
+              "slug": "observer-probability"
+            },
+            {
               "title": "Frequently Asked Questions",
               "slug": "faq"
             }
