@@ -8,7 +8,18 @@ $$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gam
 Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
 
 
-## Purpose
+## A Simulation
+
+<p align="center">
+  <img src="gallery/emergent_atom.gif" width="640">
+</p>
+
+<p align="center">
+  <em>Gaussian observer filter producing quantum interference and gravitational curvature.</em>
+</p>
+
+
+## Introduction
 
 Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled, suggesting that no fundamental theory exists in the traditional sense. 
 Despite this, this project leans into the challenge, and even extends it. The objective is not only to formulate 
