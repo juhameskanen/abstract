@@ -1,4 +1,4 @@
-# The Abstract Universe Project
+# $IaM^e$
 
 
 ## The Equation
@@ -19,7 +19,34 @@ Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gam
 </p>
 
 
-## Introduction
+## Intuition
+
+Consider the space of all possible "movies" — sequences of frames, ranging from pure random noise to coherent stories, in every possible format and resolution. Let $\Gamma_O$ denote the subset of these movies that **contain an observer** $O$.
+
+If we sample a movie from the observer-conditioned ensemble, what does a typical movie look like?
+
+- Almost certainly, **not chaotic**. Random, Boltzmann-brain–like jumps are exponentially suppressed.  
+- Although incompressible histories dominate the unconstrained ensemble, conditioning on the existence of a persistent observer exponentially suppresses such histories, shifting the measure toward structured, compressible trajectories:
+
+$$
+\mathbb{P}(\gamma \mid O) \propto \exp(-\lambda \mathcal{C}_O[\gamma])
+$$
+
+- **Large Deviation Theory (LDT)** ensures that, as the length of the movie increases, the probability measure **concentrates** on histories minimizing $\mathcal{C}_O[\gamma]$.  
+- Therefore, **regularity, predictability, and law-like behavior emerge statistically** — physics appears as a natural consequence.
+
+## From Compression to Physics
+
+Formally, we can summarize the principle as:
+
+$$
+\text{Low Compression Functional } \mathcal{C}_O[\gamma] \;\Rightarrow\; \text{High Probability } \mathbb{P}(\gamma \mid O) \;\Rightarrow\; \text{Smooth, Predictable Physics}
+$$
+
+In this framework, **quantum mechanics, classical dynamics, and general relativity** are not derived axiomatically, but arise as stable, large-deviation attractors under observer-conditioned information dynamics.
+
+
+## Objective
 
 Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled, suggesting that no fundamental theory exists in the traditional sense. 
 Despite this, this project leans into the challenge, and even extends it. The objective is not only to formulate 
@@ -35,20 +62,18 @@ Despite the somewhat cheeky name, $IaM^e$ is a playground for rigorous physics, 
 
 ## The Axiom
 
-Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer exists.
+Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer (a persistent informational subsystem defining a conditional ensemble of histories, analogous to a boundary condition, reference frame, or coarse-graining constraint) exists.
 
 From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
 
 In $IaM^e$, reality isn't a pre-existing stage; it is the most probable informational outcome including the observer as a sub-set. 
 
 
-
-
 ## Physics vs. Philosophy
 
 $IaM^e$ is a project of Physics, not philosophy. If a concept cannot be computed, simulated, or derived via mathematical rigor, it does not belong here.
 
-Furthermore, physics must be falsifiable via observation, or it is not physics but philosophy. The existence of the Observer as our sole axiom is a perfect example of physics - it is an observationally verified fact. 
+Furthermore, physics must be falsifiable via observation, or it is not physics but philosophy. The existence of the Observer is treated operationally: as an empirically given informational subsystem whose persistence conditions define the ensemble under study.
 
 
 ## The Simulation Gallery
@@ -78,7 +103,6 @@ The project uses GitHub Actions for automated builds:
 
 The [project wiki](https://github.com/juhameskanen/abstract/wiki) contains:
 
-* Detailed descriptions of simulations
 * Implementation notes and algorithms
 * Research notes and derivations
 * Discussion of ongoing and planned chapters
