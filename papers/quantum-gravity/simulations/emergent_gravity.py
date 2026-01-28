@@ -365,14 +365,30 @@ def main() -> None:
     parser.add_argument("--sigma", type=float, default=0.12, help="Blob sigma")
     parser.add_argument("--particles", type=int, default=8192, help="Number of particles")
     parser.add_argument("--steps", type=int, default=200, help="Number of steps")
+    parser.add_argument("--res", type=int, default=120, help="Resolution of the output video")
+    parser.add_argument('--format', choices=['gif', 'mp4'], default='mp4', help="Output format: gif for README, mp4 for high-res")
     args = parser.parse_args()
+
+    if args.format == 'gif':
+        # Optimized for GitHub README (small file size)
+        sim_res = min(args.res, 60) 
+        sim_fps = 12
+        output_name = f"{args.file}.gif"
+        writer_type = 'pillow'
+    else:
+        # Optimized for serious review (high fidelity)
+        sim_res = args.res
+        sim_fps = 24
+        output_name = f"{args.file}.mp4"
+        writer_type = 'ffmpeg'
+
 
     sim = EmergentGravitySim(
         n_particles=args.particles,
         n_steps=args.steps,
         blob_sigma=args.sigma
     )
-    sim.run(args.file)
+    sim.run(output_name, res=sim_res, fps=sim_fps, writer=writer_type)
 
 
 if __name__ == "__main__":

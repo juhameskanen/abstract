@@ -186,7 +186,8 @@ class GravitySim:
             v = 0.0
         self.velocities.append(v)
 
-    def run(self, save_gif: str = "simulation.mp4", fps: int = 15) -> None:
+
+    def run(self, save_video: str, res : int, fps: int = 15, writer : str = "ffmpeg") -> None:
         """Run the simulation loop with density+scatter and 3-y-axis stats."""
         grid_size: int = 100
         x: np.ndarray = np.linspace(0, 1, grid_size)
@@ -298,25 +299,17 @@ class GravitySim:
 
             return self.ax_sim, self.ax_stats, line_dist, line_vel, line_acc
 
-        # Define the writer with your desired FPS
-        try:
-            # metadata is optional but good for file headers
-            writer = animation.FFMpegWriter(fps=fps, metadata=dict(artist='Gemini'), bitrate=1800)
+
+        # metadata is optional but good for file headers
+        writer = animation.FFMpegWriter(fps=fps, metadata=dict(artist='JM'), bitrate=1800)
+               
+        ani: animation.FuncAnimation = animation.FuncAnimation(
+            self.fig, update_frame, frames=self.n_steps, blit=False
+        )
+        
+        ani.save(save_video, writer=writer)
+        print(f"Simulation saved as {save_video}")
             
-            # Change the filename extension to .mp4
-            save_video = save_gif.replace(".gif", ".mp4")
-            
-            ani: animation.FuncAnimation = animation.FuncAnimation(
-                self.fig, update_frame, frames=self.n_steps, blit=False
-            )
-            
-            # Using the ffmpeg writer instead of pillow
-            ani.save(save_video, writer=writer)
-            print(f"Simulation saved as {save_video}")
-            
-        except Exception as e:
-            print(f"FFMpeg not found, falling back to GIF. Error: {e}")
-            ani.save(save_gif, writer="pillow", fps=fps)
         plt.show()
 
     def setup_axes(self) -> None:
