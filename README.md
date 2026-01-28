@@ -1,9 +1,24 @@
 # The Abstract Universe Project
 
+
+## The Theory
+
+$$
+\mathbb{P}(\gamma \mid O)
+=
+\frac{1}{Z_O}
+\exp\!\big(-\lambda\,\mathcal{C}_O[\gamma]\big),
+\qquad
+\gamma \in \Gamma_O
+$$
+
+Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
+
+
 ## Purpose
 
 Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled, suggesting that no fundamental theory exists in the traditional sense. 
-While many have abandoned the search for a unified Theory of Everything, this project leans into the challenge, and even extend it. The objective is not only to formulate 
+Despite this, this project leans into the challenge, and even extends it. The objective is not only to formulate 
 the laws governing how the universe behaves, but to gain full understanding what those laws are fundamentally describing. 
 
 This is an ambitious goal, and the author is under no illusion about its difficulty.
@@ -21,6 +36,8 @@ Stating "we assume nothing" is, in itself, an assumption. So we assume one thing
 From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
 
 In $IaM^e$, reality isn't a pre-existing stage; it is the most probable informational outcome including the observer as a sub-set. 
+
+
 
 
 ## Physics vs. Philosophy

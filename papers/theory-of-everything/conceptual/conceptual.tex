@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+\input{../common.tex}
+\input{../glossary.tex}
+
+\addbibresource{../references.bib}
+
+\title{Observer-conditioned Compressibility As A Theory Of Everything ($IaM^e$)}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+We propose a foundational framework in which physical law emerges from observer-conditioned statistical dominance rather than fundamental dynamics. Reality is taken to consist of finite informational configurations, with observers corresponding to persistent sub-sets within this space. Histories are weighted by an exponential bias toward compressible representations under an observer-internal coding scheme, naturally inducing smoothness, locality, wave-like behavior, and effective geometry. We show that what are conventionally interpreted as dynamical laws arise as large-deviation limits of a static probability measure over observer-compatible histories. In this view, quantum mechanics, spacetime geometry, and classical dynamics are emergent consequences of compression optimality and observer persistence, rather than primitive axioms.
+\end{abstract}
+
+\ifdefined\ishtml
+\begin{center}
+\small \href{theory-of-everything-hypothesis.pdf}{Download PDF Version}
+\end{center}
+\fi
+
+\section{Introduction}
+
+Modern fundamental physics rests on two highly successful but conceptually disjoint frameworks: quantum mechanics and general relativity. Both presuppose substantial mathematical structure---Hilbert spaces, smooth manifolds, differential equations---while offering limited insight into why such structures should exist at all, or why observers reliably find themselves embedded within them.
+
+In this work we pursue a more primitive starting point. We ask: what minimal assumptions are forced upon us by the mere existence of observers, and what follows from those assumptions alone? We argue that if reality is fundamentally informational and observers are finite, then physical law is not fundamental but emergent, arising from statistical dominance within a space of possible histories. The role played by energy in general relativity and by action in quantum mechanics is replaced here by a compression functional defined internally to the observer.
+
+\section{Axiomatic Starting Point}
+
+We begin with three observational axioms.
+
+\subsection{Axiom I: Information}
+
+Reality consists of finite, distinguishable configurations. Any observer-accessible state admits a finite description, and distinctions between states are well-defined. Continuum structures, if present, are emergent rather than fundamental.
+
+Formally, we assume a finite or countable configuration space $\mathcal{B}$, which may be taken without loss of generality as a set of finite bitstrings. Binary sets are not fundamental, they are chosen for sake of convenience.
+
+\subsection{Axiom $\psi$: Compression}
+
+Among all observer-compatible histories, those admitting more compact representations dominate the observer-conditioned measure. Compressibility is defined relative to an observer-internal coding. 
+Wave-like descriptions arise naturally as efficient compressed representations of structured data. Complex-valued wavefunctions are interpreted not as ontic objects but as coordinates in a compression space optimized for smoothness and spectral sparsity.
+
+\subsection{Axiom G: Geometry}
+
+Persistent observers require effective locality and bounded information leakage. These constraints induce emergent geometric structure, with dimensionality and metric properties determined by stability and compressibility requirements rather than imposed a priori.
+
+\section{Configuration Space and Observer Histories}
+
+Let $\mathcal{B}_n = {0,1}^n$ denote the space of finite informational configurations. A subset $\mathcal{O} \subset \mathcal{B}_n$ corresponds to configurations supporting an observer.
+
+An observer history is an ordered sequence
+\begin{equation}
+\gamma = (b_1, b_2, \dots, b_T), \quad b_t \in \mathcal{O},
+\end{equation}
+interpreted as an execution trace or worldline. No fundamental time parameter is assumed; the ordering is intrinsic to the history itself.
+
+\section{Compression Functional and Measure}
+
+Each history $\gamma$ admits a representation $\psi_\gamma$ in a chosen compression basis (e.g., spectral or wave-like). We define a compression functional
+\begin{equation}
+\mathcal{C}[\gamma] := \text{complexity}(\psi_\gamma),
+\end{equation}
+which may quantify spectral sparsity, smoothness, bandwidth, or description length.
+
+The central postulate is that observer-compatible histories are sampled according to the measure
+\begin{equation}
+\mathbb{P}(\gamma \mid O) \propto \exp\big(-\lambda , \mathcal{C}[\gamma]\big),
+\end{equation}
+where $\lambda$ sets the observer's resolution scale.
+
+This measure is static and global: it assigns weights to entire histories rather than generating stepwise evolution.
+
+\footnote{
+The parameters $\lambda$ and $T$ enter only through their product. In the long-history limit $T \to \infty$, even small $\lambda$ leads to exponential concentration of measure. Consequently, extended observer histories exhibit effectively deterministic dynamics: temporal persistence itself acts as a decoherence mechanism, progressively suppressing non-minimal histories.
+}
+
+\section{Emergence of Dynamics}
+
+Although the measure is defined over complete histories, observers experience effective time evolution. This arises through two mechanisms.
+
+First, finite observer memory and resolution force the compression functional to be approximately local along the history:
+\begin{equation}
+\mathcal{C}[\gamma] \approx \sum_t \mathcal{L}(b_t, b_{t+1}, \dots),
+\end{equation}
+where $\mathcal{L}$ is a local complexity density.
+
+Second, in the limit of long histories, the exponential weighting causes measure concentration around stationary points of $\mathcal{C}$. Typical observed histories therefore satisfy
+\begin{equation}
+\delta \mathcal{C}[\gamma] = 0,
+\end{equation}
+which yields Euler--Lagrange-type equations of motion. These equations are not postulated but arise as large-deviation limits of the observer-conditioned measure.
+
+Conditioning on partial histories induces an effective causal evolution:
+\begin{equation}
+\mathbb{P}(b_{t+1} \mid b_{\le t}) \propto \exp\big(-\Delta \mathcal{C}\big),
+\end{equation}
+experienced by the observer as dynamical law.
+
+
+\subsection{Large-Deviation Principle and Emergent Laws}
+
+The probability measure defined over observer-compatible histories assigns weights to entire execution traces rather than instantaneous states. While this measure is static, physically observed regularities arise through concentration phenomena in the limit of long histories.
+
+Let $\gamma_T = (b_1, \dots, b_T)$ denote an observer history of length $T$, and let $\mathcal{C}[\gamma_T]$ be the corresponding compression functional. For sufficiently large $T$, we assume extensivity,
+\begin{equation}
+\mathcal{C}[\gamma_T] \;\sim\; T \, I[\gamma],
+\end{equation}
+where $I[\gamma]$ is a rate functional depending on the coarse-grained structure of the history.
+
+The observer-conditioned measure then takes the large-deviation form
+\begin{equation}
+\mathbb{P}(\gamma_T \mid O)
+\;\asymp\;
+\exp\!\big(-\lambda T \, I[\gamma]\big),
+\end{equation}
+implying exponential concentration of measure around histories minimizing $I[\gamma]$.
+
+In this limit, physically observed histories overwhelmingly satisfy the stationarity condition
+\begin{equation}
+\delta I[\gamma] = 0,
+\end{equation}
+which defines effective equations of motion. These equations are not fundamental dynamical laws but characterize the typical behavior of histories dominating the observer-conditioned ensemble.
+
+Finite-length histories exhibit deviations from the minimizers of $I[\gamma]$, which appear to observers as fluctuations or stochastic effects. Thus, classical determinism corresponds to the infinite-history limit, while probabilistic or quantum-like behavior arises naturally at finite resolution.
+
+In this framework, physical laws are identified with the large-deviation rate equations of the compression functional, and dynamics is understood as an emergent statistical property rather than a primitive postulate.
+
+
+\section{Relation to Quantum Mechanics and Geometry}
+
+Quantum behavior emerges because multiple histories overlap in compressed representation space. Interference corresponds to representational overlap, while unitarity reflects preservation of total measure under re-encoding.
+
+Geometric notions arise because nonlocal transitions dramatically increase compression cost. Effective locality, causal cones, and metric structure are enforced statistically. Curvature corresponds to gradients in compressibility, providing an informational interpretation of gravity.
+
+\section{Interpretation and Comparison}
+
+This framework replaces fundamental dynamics with a selection principle: observers overwhelmingly find themselves in histories that are maximally compressible under their internal representation scheme. Physical laws describe typical histories, not governing rules.
+
+Unlike approaches based on universal priors or external computation, no privileged meta-language or machine is assumed. All structure is internal and observer-relative.
+
+\section{Conclusion}
+
+We have presented a theory in which information, compression, and observer persistence suffice to generate the appearance of quantum mechanics, spacetime geometry, and dynamical laws. Dynamics emerges as a statistical property of history-weighted measures, analogous to how classical motion emerges from action principles and thermodynamics from entropy maximization.
+
+In this view, a theory of everything is not a set of fundamental equations of motion, but a statement about which histories dominate under observer-conditioned compressibility.
+
+
+
+\end{document}
+
