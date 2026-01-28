@@ -84,7 +84,7 @@ In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physi
 
 ## Contents
 
-* [The Visualized Theory](gallery.md) — Interactive walkthroughs of gravity, inertia, and atomic structures as emergent phenomena. 
+* [The Visualized Theory](gallery.md) — Gallery of simulations demonstrating gravity, inertia, and atomic structures as emergent phenomena. 
 * [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
@@ -101,7 +101,7 @@ The project uses GitHub Actions for automated builds:
 
 ## Wiki
 
-The [project wiki](https://github.com/juhameskanen/abstract/wiki) contains:
+The [project wiki](https://github.com/juhameskanen/abstract/wiki) is under construction. It will contain:
 
 * Implementation notes and algorithms
 * Research notes and derivations
@@ -114,7 +114,7 @@ The [project wiki](https://github.com/juhameskanen/abstract/wiki) contains:
 
 Many simulations and chapters are in draft stage; behavior may be updated frequently based on the current phase of authorial chaos. 
 
-This is a research-in-progress project. Many simulations and chapters are in draft and their content evolves frequently as research progresses.
+This is a research-in-progress project. The content evolves frequently as research progresses.
 
 
 ## Contributing
