@@ -105,7 +105,7 @@ def main():
 
     if args.format == 'gif':
         # Optimized for GitHub README (small file size)
-        sim_res = min(args.res, 32) 
+        sim_res = min(args.res, 64) 
         sim_fps = 12
         output_name = f"{args.file}.gif"
         writer_type = 'pillow'

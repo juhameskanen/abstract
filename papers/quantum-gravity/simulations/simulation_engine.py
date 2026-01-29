@@ -51,7 +51,6 @@ import matplotlib.animation as animation
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 from matplotlib.lines import Line2D
-
 from mpl_toolkits.axes_grid1 import host_subplot
 import mpl_toolkits.axisartist as AA
 
@@ -195,6 +194,9 @@ class GravitySim:
         X, Y = np.meshgrid(x, y)
         grid_points: np.ndarray = np.column_stack([X.ravel(), Y.ravel()])
 
+        # dark background style
+        plt.style.use('dark_background')
+
         self.fig = plt.figure(figsize=(12, 6))
         self.ax_sim = self.fig.add_subplot(1, 2, 1)
 
@@ -212,6 +214,12 @@ class GravitySim:
         self.ax_stats.set_title("Distance, Velocity & Acceleration")
         self.ax_stats.grid(True)
 
+        # Set backgrounds to transparent
+        self.fig.patch.set_alpha(0.0)
+        self.ax_sim.patch.set_alpha(0.0)
+        self.ax_sim.set_facecolor('none')
+        self.ax_sim.axis('off') # This removes the white border/spines and ticks
+
         line_dist, = self.ax_stats.plot([], [], 'b-', label='Distance')
         line_vel, = self.par1.plot([], [], 'g-', label='Velocity')
         line_acc, = self.par2.plot([], [], 'r--', label='Acceleration')
@@ -219,6 +227,7 @@ class GravitySim:
         lines: List[Line2D] = [line_dist, line_vel, line_acc]
         labels: List[str] = [l.get_label() for l in lines]
         self.ax_stats.legend(lines, labels, loc='upper left')
+
 
         def update_frame(step: int) -> Tuple[Axes, Any, Line2D, Line2D, Line2D]:
             pdf_total: np.ndarray = self.compute_pdf(grid_points)
@@ -301,7 +310,7 @@ class GravitySim:
 
 
         # metadata is optional but good for file headers
-        writer = animation.FFMpegWriter(fps=fps, metadata=dict(artist='JM'), bitrate=1800)
+        writer = animation.FFMpegWriter(fps=fps, metadata=dict(artist='IaMe'), bitrate=1800)
                
         ani: animation.FuncAnimation = animation.FuncAnimation(
             self.fig, update_frame, frames=self.n_steps, blit=False

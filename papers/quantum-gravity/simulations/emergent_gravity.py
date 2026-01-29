@@ -361,12 +361,12 @@ class EmergentGravitySim(GravitySim):
     
 def main() -> None:
     parser = argparse.ArgumentParser(description="Emergent Gravity Simulation")
-    parser.add_argument("--file", type=str, default="emergent_gravity.mp4", help="Filename for the video to be created")
+    parser.add_argument("--file", type=str, default="emergent_gravity", help="Filename for the video to be created")
     parser.add_argument("--sigma", type=float, default=0.12, help="Blob sigma")
     parser.add_argument("--particles", type=int, default=8192, help="Number of particles")
     parser.add_argument("--steps", type=int, default=200, help="Number of steps")
     parser.add_argument("--res", type=int, default=120, help="Resolution of the output video")
-    parser.add_argument('--format', choices=['gif', 'mp4'], default='mp4', help="Output format: gif for README, mp4 for high-res")
+    parser.add_argument('--format', choices=['gif', 'mp4'], default='gif', help="Output format: gif for README, mp4 for high-res")
     args = parser.parse_args()
 
     if args.format == 'gif':
