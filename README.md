@@ -1,9 +1,10 @@
-# $IaM^e$
+# Informational, Abstract Model of Everything ($IaM^e$)
 
 
-## The Equation
+## The Equations
 
 $$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O$$
+$$I-\psi-G$$$
 
 Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
 
@@ -15,35 +16,8 @@ Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gam
 </p>
 
 <p align="center">
-  <em>Gaussian observer filter producing quantum interference and gravitational curvature.</em>
+  <em>Emergent forces and quantum interference.</em>
 </p>
-
-
-## Intuition
-
-Consider the space of all possible "movies" — sequences of frames, ranging from pure random noise to coherent stories, in every possible format and resolution. Let $\Gamma_O$ denote the subset of these movies that **contain an observer** $O$.
-
-If we sample a movie from the observer-conditioned ensemble, what does a typical movie look like?
-
-- Almost certainly, **not chaotic**. Random, Boltzmann-brain–like jumps are exponentially suppressed.  
-- Although incompressible histories dominate the unconstrained ensemble, conditioning on the existence of a persistent observer exponentially suppresses such histories, shifting the measure toward structured, compressible trajectories:
-
-$$
-\mathbb{P}(\gamma \mid O) \propto \exp(-\lambda \mathcal{C}_O[\gamma])
-$$
-
-- **Large Deviation Theory (LDT)** ensures that, as the length of the movie increases, the probability measure **concentrates** on histories minimizing $\mathcal{C}_O[\gamma]$.  
-- Therefore, **regularity, predictability, and law-like behavior emerge statistically** — physics appears as a natural consequence.
-
-## From Compression to Physics
-
-Formally, we can summarize the principle as:
-
-$$
-\text{Low Compression Functional } \mathcal{C}_O[\gamma] \;\Rightarrow\; \text{High Probability } \mathbb{P}(\gamma \mid O) \;\Rightarrow\; \text{Smooth, Predictable Physics}
-$$
-
-In this framework, **quantum mechanics, classical dynamics, and general relativity** are not derived axiomatically, but arise as stable, large-deviation attractors under observer-conditioned information dynamics.
 
 
 ## Objective
