@@ -15,7 +15,7 @@ Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gam
 </p>
 
 <p align="center">
-  <em>Gaussian observer filter producing quantum interference and gravitational curvature.</em>
+  <em>Emergent forces and quantum interference.</em>
 </p>
 
 
