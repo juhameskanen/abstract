@@ -364,7 +364,7 @@ class DustCloudSimulation:
                 line.set_data([], [])
                 line.set_3d_properties([])
             line_ent.set_data([], [])
-            time_marker.set_xdata(times[0])
+            time_marker.set_xdata([times[0]])
             return lines + [line_ent, time_marker]
 
         def update(frame):
@@ -376,7 +376,7 @@ class DustCloudSimulation:
                 line.set_3d_properties(traj[:, 2])
             # entropy
             line_ent.set_data(times[:frame], ent[:frame])
-            time_marker.set_xdata(times[frame])
+            time_marker.set_xdata([times[frame]])
             ax3d.view_init(elev=elev, azim=azim + 0.2 * frame)  # slow rotation
             return lines + [line_ent, time_marker]
 
@@ -388,4 +388,106 @@ class DustCloudSimulation:
         print(f"Saving animation to {save_path} ...")
         ani.save(save_path, fps=fps, dpi=180, writer="ffmpeg")
         print("Done.")
+        plt.close(fig)
+
+    def animate_density(self, save_path="collapse_density.mp4", fps=30,
+                        grid_size=128, sigma=1.2):
+        """
+        Animated 2D density heatmap of collapsing dust cloud + entropy plot.
+        """
+
+        if self.positions is None or self.entropies is None:
+            raise RuntimeError("Call run() before animate_density().")
+
+        pos = self.positions
+        ent = self.entropies
+        steps, N, _ = pos.shape
+
+        limit = self.cloud.radius
+
+        # 2D projection: use x,y plane
+        X, Y = np.meshgrid(
+            np.linspace(-limit, limit, grid_size),
+            np.linspace(-limit, limit, grid_size)
+        )
+
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
+
+        heat = ax1.imshow(np.zeros((grid_size, grid_size)),
+                        cmap="inferno",
+                        origin="lower",
+                        extent=[-limit, limit, -limit, limit],
+                        vmin=0, vmax=1)
+
+        ax1.set_title("Dust density collapse")
+        ax1.axis("off")
+
+        ax2.set_xlim(0, steps)
+        ax2.set_ylim(0, max(ent) * 1.1)
+        ax2.set_xlabel("t")
+        ax2.set_ylabel("Entropy")
+        ax2.set_title("Entropy over time")
+        ax2.grid(True, alpha=0.3)
+
+        line_ent, = ax2.plot([], [], lw=2)
+        marker = ax2.axvline(0, color="red", ls="--")
+
+        def density_frame(frame):
+            grid = np.zeros((grid_size, grid_size))
+            for j in range(N):
+                x, y = pos[frame, j, 0], pos[frame, j, 1]
+                g = np.exp(-((X-x)**2 + (Y-y)**2)/(2*sigma**2))
+                grid += g
+            grid /= grid.max() + 1e-12
+            return grid
+
+        def update(frame):
+            heat.set_data(density_frame(frame))
+            line_ent.set_data(np.arange(frame), ent[:frame])
+            marker.set_xdata([frame])
+            return heat, line_ent, marker
+
+        ani = animation.FuncAnimation(fig, update, frames=steps, blit=False)
+
+        print(f"Saving density animation -> {save_path}")
+        ani.save(save_path, fps=fps, dpi=200, writer="ffmpeg")
+        plt.close(fig)
+
+    def animate_geodesics(self, save_path : str="geodesics.mp4", fps : int=30,
+                        every_n : int=1):
+        """
+        Animated geodesic convergence diagram.
+        """
+
+        if self.positions is None:
+            raise RuntimeError("Call run() before animate_geodesics().")
+
+        pos = self.positions
+        steps, N, _ = pos.shape
+        limit = self.cloud.radius
+
+        fig, ax = plt.subplots(figsize=(6, 6))
+        ax.set_xlim(-limit, limit)
+        ax.set_ylim(-limit, limit)
+        ax.set_title("Geodesic convergence")
+        ax.set_xlabel("x")
+        ax.set_ylabel("y")
+        ax.grid(True, alpha=0.3)
+
+        lines = []
+        for j in range(0, N, max(1, int(every_n))):
+            line, = ax.plot([], [], lw=1)
+            lines.append(line)
+
+        def update(frame):
+            for idx, line in enumerate(lines):
+                j = idx * every_n
+                traj = pos[:frame, j, :]
+                line.set_data(traj[:, 0], traj[:, 1])
+            return lines
+
+        ani = animation.FuncAnimation(fig, update, frames=steps, blit=False)
+
+        print(f"Saving geodesic animation -> {save_path}")
+        ani.save(save_path, fps=fps, dpi=200, writer="ffmpeg")
         plt.close(fig)
