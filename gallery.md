@@ -52,7 +52,7 @@ This simulation demonstrates the emergence of physical phenomena from an informa
     <tr>
     <td>
       <img src="gallery/emergent_gravity.gif" width="400">
-      <br><i>Three Gaussian Blobs as observers</i>
+      <br><i>Emergent attraction and inertia</i>
     </td><td valign="top">
 Informationally complex Gaussian distributions exhibit effective gravitational attraction and inertial persistence as emergent properties of compression-optimal observer trajectories.
 Smooth, predictable observer paths admit maximal compression and therefore dominate the measure of realizable histories from which Gaussian structures are statistically expected to arise.     
