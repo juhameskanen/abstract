@@ -10,21 +10,23 @@ from typing import List, Tuple, Self
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+from numba import njit
 import matplotlib.animation as animation
 
 
-# Helpers: spherical <-> cartesian (for output plotting)
-def sph_from_cart(pos: np.ndarray) -> tuple:
-    x, y, z = pos
-    r = np.linalg.norm(pos)
-    theta = 0.0 if r == 0.0 else np.arccos(z / (r + 1e-16))
-    phi = np.arctan2(y, x)
+@njit
+def sph_from_cart(pos: np.ndarray) -> Tuple[float, float, float]:
+    x, y, z = pos[0], pos[1], pos[2]
+    r = math.sqrt(x*x + y*y + z*z)
+    theta = 0.0 if r == 0.0 else math.acos(z / (r + 1e-16))
+    phi = math.atan2(y, x)
     return r, theta, phi
 
+@njit
 def cart_from_sph(r: float, theta: float, phi: float) -> np.ndarray:
-    s, c = np.sin(theta), np.cos(theta)
-    return np.array([r * s * np.cos(phi), r * s * np.sin(phi), r * c], dtype=np.float64)
-
+    s = math.sin(theta)
+    c = math.cos(theta)
+    return np.array([r * s * math.cos(phi), r * s * math.sin(phi), r * c])
 
 
 @dataclass
@@ -174,26 +176,47 @@ class DustCloud:
                                     vx=float(vel_vec[0]), vy=float(vel_vec[1]), vz=float(vel_vec[2])))
         return particles
 
-
     @staticmethod
+    @njit
     def bit_entropy(positions_1d: np.ndarray, scale: float = 1000.0) -> float:
-        """Bitwise Shannon entropy of particle positions (1D array of scalars).
-        Quantize to nonnegative integers and concantenate to bistring to avoid 
-        entropy emerging from numeric representation e.g. floating points"""
-        if positions_1d.size == 0:
+        """Numba-optimized bitwise Shannon entropy."""
+        size = positions_1d.size
+        if size == 0:
             return 0.0
-        # map to nonnegative ints
-        ints = np.floor(np.abs(positions_1d) * scale).astype(np.uint32)
-        bits = np.unpackbits(ints.view(np.uint8)).reshape(-1)
-        p0 = np.count_nonzero(bits == 0) / bits.size
-        p1 = 1.0 - p0
+        
+        # Total bits for 32-bit quantization
+        total_bits = float(size * 32)
+        count_ones = 0
+        
+        for i in range(size):
+            # Map position to a 32-bit unsigned integer
+            # Using np.uint32() explicitly within the loop
+            val = np.uint32(abs(positions_1d[i]) * scale)
+            
+            # Population count (counting set bits)
+            # This bit-shifting approach is very efficient in Numba
+            c = 0
+            temp_val = val
+            while temp_val > 0:
+                if temp_val & np.uint32(1):
+                    c += 1
+                temp_val >>= np.uint32(1)
+            count_ones += c
+        
+        # Probabilities
+        p1 = count_ones / total_bits
+        p0 = 1.0 - p1
+        
         ent = 0.0
-        if p0 > 0:
-            ent -= p0 * np.log2(p0)
-        if p1 > 0:
-            ent -= p1 * np.log2(p1)
+        # Binary entropy formula: -p log2(p) - (1-p) log2(1-p)
+        if 0.0 < p1 < 1.0:
+            ent -= p1 * math.log2(p1)
+            ent -= p0 * math.log2(p0)
+            
         return float(ent)
 
+
+    
 
 class DustCloudSimulation:
     """DustCloud simulation (cartesian) and visualizations."""
@@ -212,26 +235,30 @@ class DustCloudSimulation:
 
     def run(self) -> Self:
         """Evolve and compute radii + entropies.
-
-        Returns:
-            times (steps,), radii (N, steps)
+        Uses the Numba-accelerated bit_entropy from the cloud instance.
         """
         times, positions = self.cloud.evolve(dt=self.dt, max_t=self.max_t, tolerance=self.tolerance)
-        # positions shape (steps, N, 3)
+        
         self.times = times
         self.positions = positions
 
-        # radii: (steps, N) -> transpose to (N, steps) for compatibility with previous plotting
-        radii_steps_n = np.linalg.norm(positions, axis=2)  # (steps, N)
-        self.radii = radii_steps_n.T  # (N, steps)
+        # Calculate radii for all particles at all steps: (steps, N)
+        radii_steps_n = np.linalg.norm(positions, axis=2)
+        self.radii = radii_steps_n.T  # Transpose for (N, steps) plotting
 
-        # entropy time series (one scalar per time step)
-        ent : float = []
-        for i in range(radii_steps_n.shape[0]):
-            ent.append(self.cloud.bit_entropy(radii_steps_n[i, :]))
-        self.entropies = np.array(ent)
+        # Compute entropy time series
+        steps = radii_steps_n.shape[0]
+        self.entropies = np.zeros(steps, dtype=np.float64)
+        
+        for i in range(steps):
+            # Correctly call the static method via the cloud instance
+            self.entropies[i] = self.cloud.bit_entropy(radii_steps_n[i, :])
 
         return self
+
+
+
+  
 
     def visualize_3d(self, every_n: int = 1, save_path: str | None = None, title: str | None = None) -> None:
         """3D trajectories + entropy subplot."""
@@ -277,7 +304,7 @@ class DustCloudSimulation:
         plt.show()
 
     def visualize(self, every_n: int = 1, save_path: str | None = None, title: str | None = None) -> None:
-        """2D radial trajectories + entropy plot (backwards-compatible)."""
+        """2D radial trajectories + entropy plot."""
         if self.times is None or self.radii is None or self.entropies is None:
             raise RuntimeError("Call run() before visualize().")
 
@@ -390,7 +417,7 @@ class DustCloudSimulation:
         print("Done.")
         plt.close(fig)
 
-    def animate_density(self, save_path="collapse_density.mp4", fps=30,
+    def animate_density(self, every_n: int = 1, save_path="collapse_density.mp4", fps=30,
                         grid_size=128, sigma=1.2):
         """
         Animated 2D density heatmap of collapsing dust cloud + entropy plot.
@@ -453,8 +480,7 @@ class DustCloudSimulation:
         ani.save(save_path, fps=fps, dpi=200, writer="ffmpeg")
         plt.close(fig)
 
-    def animate_geodesics(self, save_path : str="geodesics.mp4", fps : int=30,
-                        every_n : int=1):
+    def animate_geodesics(self, every_n: int = 1, save_path : str="geodesics.mp4", fps : int=30):
         """
         Animated geodesic convergence diagram.
         """

@@ -46,6 +46,7 @@ def main():
     args = parse_args()
 
     bh = BlackHole(mass=args.mass, spin=args.spin)
+    print(f"Blackhole with mass {args.mass} and spin {args.spin}")
 
     simulation_configs = [
         (SchwarzschildAUGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
@@ -53,7 +54,7 @@ def main():
         (SchwarzschildEFGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
          args.dt, args.max_t, args.tolerance, "Schwarzschild EF (a=0.0)"),
         (KerrIEFEquatorialGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, 0.4, 0.6),
-         args.dt, min(args.max_t, 12.0), args.tolerance, f"Kerr (a={args.spin})")
+         args.dt, args.max_t, args.tolerance, f"Kerr (a={args.spin})")
     ]
 
     results: list[DustCloudSimulation] = []
@@ -73,8 +74,8 @@ def main():
             if args.animate:
                 outfile = sim.label.replace(" ", "_").replace("(", "").replace(")", "").replace("=", "")
                 print(f"Generating animation for {sim.label} -> {outfile}")
-                sim.animate(save_path=f"{outfile}_traj.mp4", fps=args.fps,  elev=args.elev, azim = args.azim_step)
-                sim.animate_density(save_path=f"{outfile}_density.mp4", fps=args.fps, grid_size=args.grid_size, sigma=args.sigma)
+                sim.animate(save_path=f"{outfile}_traj.mp4", fps=args.fps,  elev=args.elev, azim = args.azim_step, every_n=args.every_n)
+                sim.animate_density(save_path=f"{outfile}_density.mp4", fps=args.fps, grid_size=args.grid_size, sigma=args.sigma, every_n=args.every_n)
                 sim.animate_geodesics(save_path=f"{outfile}_geodesics.mp4", fps=args.fps, every_n=args.every_n)
 
 if __name__ == "__main__":

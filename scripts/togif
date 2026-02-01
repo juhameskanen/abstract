@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+# Convert videos to gif format with the given resolution, number of frames and fps.
+# Can be used for creating and embedding inline videos to github markdown and html pages.
+# Needs ffmpeg
+# Usage:
+#   togif infile.mp4 out.gif width target_frames gif_fps
+# Example:
+#   togif input.mpg output.gif 400 200 10
+
+set -e
+export LC_ALL=C
+
+IN="$1"
+OUT="$2"
+WIDTH="$3"
+TARGET_FRAMES="$4"
+GIF_FPS="$5"
+
+if [ $# -ne 5 ]; then
+  echo "Usage: togif infile out.gif width target_frames gif_fps"
+  exit 1
+fi
+
+# Get input frame count
+TOTAL_FRAMES=$(ffprobe -v error -select_streams v:0 \
+  -count_frames -show_entries stream=nb_read_frames \
+  -of default=nokey=1:noprint_wrappers=1 "$IN")
+
+if [ -z "$TOTAL_FRAMES" ]; then
+  # fallback: estimate from duration*fps
+  INPUT_DURATION=$(ffprobe -v error -show_entries format=duration \
+    -of default=noprint_wrappers=1:nokey=1 "$IN")
+  INPUT_FPS=$(ffprobe -v 0 -select_streams v:0 -show_entries stream=r_frame_rate \
+    -of default=nokey=1:noprint_wrappers=1 "$IN" | awk -F'/' '{print $1/$2}')
+  TOTAL_FRAMES=$(awk "BEGIN {print int($INPUT_DURATION*$INPUT_FPS)}")
+fi
+
+# Compute sampling interval
+N=$(awk "BEGIN {printf \"%d\", ($TOTAL_FRAMES/$TARGET_FRAMES)}")
+if [ "$N" -lt 1 ]; then N=1; fi
+
+# Temporary palette
+PALETTE=$(mktemp /tmp/paletteXXXX.png)
+
+# Pass 1: generate palette
+ffmpeg -y -loglevel error -i "$IN" \
+  -vf "select='not(mod(n\,$N))',scale=$WIDTH:-1:flags=lanczos,palettegen" \
+  "$PALETTE"
+
+# Pass 2: generate GIF
+ffmpeg -y -loglevel error -i "$IN" -i "$PALETTE" \
+  -filter_complex "[0:v]select='not(mod(n\,$N))',scale=$WIDTH:-1:flags=lanczos,setpts=N/($GIF_FPS*TB)[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=4" \
+  -r "$GIF_FPS" \
+  -frames:v "$TARGET_FRAMES" \
+  -loop 0 \
+  "$OUT"
+
+rm -f "$PALETTE"
+
+echo "Created $OUT:"
+echo "  Width       = $WIDTH px"
+echo "  Target FPS  = $GIF_FPS"
+echo "  Target frames = $TARGET_FRAMES"
+echo "  Duration    = $(awk "BEGIN { printf \"%.2f\", $TARGET_FRAMES / $GIF_FPS }") s"
+echo "  Sampling interval = every $N frames from input"
