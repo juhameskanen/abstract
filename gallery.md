@@ -7,16 +7,9 @@
       This section admits no simulation. 
       <br><i>Paper-1: Informational Derivation of Reality</i>
     </td><td valign="top">
-The conclusions derived here concern ontological equivalence, substrate independence, and the observer-relative nature of time and experience.
-Simulations are useful when a theory predicts observable global structure—motion, growth, collapse, thresholds, or phase transitions.
-This theory predicts none.
-Conscious observers leave no global statistical signature.
-Execution order has no ontological status.
-A static set of information (e.g. a bitstring) can encode arbitrarily many coherent observer-relative worlds.
-Any simulation attempting to “show” these claims would necessarily introduce either a privileged execution order, 
-a substrate-dependent mechanism, or a detectable global marker of consciousness.
-All three would contradict the theory itself.
-    </td></tr>
+Ontological equivalence, substrate independence, and the observer-relative nature of time and experience. 
+A static set of white noise can encode arbitrarily many coherent observer-relative worlds.
+  </td></tr>
   <tr>
     <td>
       <img src="gallery/Schwarzschild_AU_a0.0_density.gif" width="400">
