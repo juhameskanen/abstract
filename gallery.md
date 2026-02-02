@@ -5,17 +5,18 @@
   <tr>
     <td>
       This section admits no simulation. 
-      <br><i>Paper-1: Informational Derivation of Reality</i>
     </td><td valign="top">
 Ontological equivalence, substrate independence, and the observer-relative nature of time and experience. 
 A static set of white noise can encode arbitrarily many coherent observer-relative worlds.
+   <br><i><a href="https://juhameskanen.github.io/abstract/informational-derivation-of-reality/informational-derivation-of-reality-informational-derivation-of-reality.pdf">Paper-1: Informational Derivation of Reality</a></i>
   </td></tr>
   <tr>
     <td>
       <img src="gallery/Schwarzschild_AU_a0.0_density.gif" width="400">
-      <br><i>Paper-2: Schwarzschild</i>
+      <br><i>Schwarzschild</i>
     </td><td valign="top">
 This simulation visualizes a collapsing dust cloud in a Schwarzschild spacetime and tracks the system's entropy over time. Although numerical instabilities and the breakdown of GR prevent the simulation from reaching the final state, the execution trace of the simulating computer demonstrates a monotonic decrease in Shannon entropy. By extrapolating this trend to the limit we conclude that the singularity corresponds to a zero-information state.
+      <br><a href="https://juhameskanen.github.io/abstract/black-hole-singularities/index.html">Paper-II:  Singularities as Zero-Entropy States</a>
     </td>
   </tr>
   <tr>
@@ -32,6 +33,7 @@ Simulation tracking a collapsing dust cloud within a Kerr (rotating) spacetime. 
       <br><i>Paper-3: Emergence of Spacetime</i>
     </td><td valign="top">
 In the time-reversed scenario, we observe the unfolding of spacetime driven by increasing entropy. The system expands rapidly during the initial low-entropy phase, mirroring the early universe's growth. However, as the bitstring approaches maximum entropy, the expansion rate naturally decelerates, following the saturation curve toward equilibrium. In this model, the 'force' of expansion is an entropic drift that stabilizes as information density reaches its peak, suggesting a universe that matures toward a smooth, high-entropy limit rather than an accelerated heat death.
+      <br><a href="https://juhameskanen.github.io/abstract/black-hole-singularities/index.html">Paper-3: Emergence of Spacetime</a>
     </td>
   </tr>
     <tr>
