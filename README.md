@@ -4,7 +4,7 @@
 ## The Equations
 
 $$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O$$
-$$D-\psi-G$$$
+$$D-\psi-G$$
 
 Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
 
