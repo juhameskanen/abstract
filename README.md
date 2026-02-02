@@ -4,25 +4,14 @@
 ## The Equations
 
 $$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O$$
-$$I-\psi-G$$$
+$$D-\psi-G$$$
 
 Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
 
 
-## A Simulation
-
-<p align="center">
-  <img src="gallery/emergent_atom.gif" width="640">
-</p>
-
-<p align="center">
-  <em>Emergent forces and quantum interference.</em>
-</p>
-
-
 ## Objective
 
-Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled, suggesting that no fundamental theory exists in the traditional sense. 
+Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled. 
 Despite this, this project leans into the challenge, and even extends it. The objective is not only to formulate 
 the laws governing how the universe behaves, but to gain full understanding what those laws are fundamentally describing. 
 
