@@ -25,7 +25,7 @@ Despite the somewhat cheeky name, $IaM^e$ is a playground for rigorous physics, 
 
 ## The Axiom
 
-Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer (a persistent informational subsystem defining a conditional ensemble of histories, analogous to a boundary condition, reference frame, or coarse-graining constraint) exists.
+Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer exists.
 
 From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
 
