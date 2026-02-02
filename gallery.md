@@ -33,7 +33,7 @@ Simulation tracking a collapsing dust cloud within a Kerr (rotating) spacetime. 
       <br><i>Paper-3: Emergence of Spacetime</i>
     </td><td valign="top">
 In the time-reversed scenario, we observe the unfolding of spacetime driven by increasing entropy. The system expands rapidly during the initial low-entropy phase, mirroring the early universe's growth. However, as the bitstring approaches maximum entropy, the expansion rate naturally decelerates, following the saturation curve toward equilibrium. In this model, the 'force' of expansion is an entropic drift that stabilizes as information density reaches its peak, suggesting a universe that matures toward a smooth, high-entropy limit rather than an accelerated heat death.
-      <br><a href="https://juhameskanen.github.io/abstract/black-hole-singularities/index.html">Paper-3: Emergence of Spacetime</a>
+      <br><a href="https://juhameskanen.github.io/abstract/emergence-of-spacetime/index.html">Paper-3: Emergence of Spacetime</a>
     </td>
   </tr>
     <tr>
