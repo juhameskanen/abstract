@@ -30,6 +30,29 @@ This question implicitly assumes a temporal ordering and an external origin, but
 Asking why there is something rather than nothing is like asking why “heads” rather than “tails” — both possibilities exist, but only one can be observed. The observer necessarily finds itself in the branch that exists.
 \end{faq}
 
+\begin{faq}{Why do particles follow a complex-valued wavefunction?}
+  The wavefunction is not a physical object in the classical sense; it is the optimal \textbf{compression algorithm}
+  for the underlying informational structure of reality. We perceive the universe as "waving" because we are observing compressed information.
+
+\noindent This process follows a deterministic logical funnel:
+\begin{center}
+    $\boxed{\text{Maximal Compression}} \rightarrow \boxed{\text{Maximal Probability}} \rightarrow \boxed{\text{Maximal Predictability}}$
+\end{center}
+
+
+According to the Gibbs measure $P(\gamma | O) \propto \exp(-\lambda C_O[\gamma])$, configurations with the lowest complexity ($C_O$) are the most
+statistically likely to exist. The "laws" of physics are simply the most probable survivors of this informational selection.
+\end{faq}    
+
+
+\begin{faq}{Why does the universe expand? Is there a link to entropy?}
+\answer{
+The universe expands because its entropy increases; space and entropy are two sides of the same coin. 
+The trajectory of the universal informational configuration toward higher entropy is formally analogous to the Inflationary Epoch followed by gradual expansion. 
+Space is the \textbf{geometric projection} of total entropy: as the underlying information becomes more disordered, the corresponding geometry stretches, producing the observed expansion of the universe.}
+\end{faq}
+
+
 \begin{faq}{Does \IaMe support QBism?}{Does the theory support the QBism view that our observations shape quantum phenomena?}
 \answer{Yes. In \IaMe, the observer is an informational structure and is most likely to find themselves in configurations that preserve their reasoning and decision-making capabilities. Observers with reasoning have a higher probability of persistence than those without. As a result, reasoning statistically biases which configurations an observer experiences next. Quantum mechanics emerges from these informational rules, so it may appear that observation or decisions “change” the quantum state, even though all evolution is fully contained within the underlying substrate.}
 \end{faq}
@@ -37,6 +60,16 @@ Asking why there is something rather than nothing is like asking why “heads”
 
 \begin{faq}{How does Gödel incompleteness affect the theory?}
 \answer{Gödel’s incompleteness theorems constrain formal systems capable of arithmetic, but a ToE aims for ontological closure, not formal deductive completeness. Observer reasoning may encounter Gödel-style limits internally, but these are limitations on embedded observers’ formal reasoning, not on the underlying informational substrate itself.}
+\end{faq}
+
+\begin{faq}{How does Gödel incompleteness affect the theory?}
+\answer{Considering how highly respected authors, such as Stephen Hawking, have noted that a Theory of Everything may be forever constrained by Gödelian limits, we approach this with necessary humility. Gödel’s incompleteness theorems constrain formal systems capable of arithmetic, but our framework suggests a shift in focus: a ToE aims for ontological closure rather than formal deductive completeness. While an \textbf{embedded observer} will inevitably encounter Gödel-style limits in their internal formal reasoning, these might be constraints on the \textit{compression and representation} of the data, not necessarily a limitation on the underlying informational substrate itself.}
+\end{faq}
+
+\begin{faq}{Is a singularity a point of infinite density?}
+  \answer{No. If singularities are taken as points of infinite curvature, their informational correspondence would compress poorly and thus be suppressed in statistical measure. 
+  A geometric point maps to a \textbf{zero-entropy state}, which possesses no degrees of freedom to encode microstructure (such as particles). 
+  Therefore, in neither case does the theory imply that "singularities" are points of infinite curvature, but rather points of informational saturation.}
 \end{faq}
 
 \begin{faq}{Are we living in a simulation?}
@@ -57,20 +90,39 @@ However, the theory places a fundamental constraint on unbounded recursive simul
 
 While it is logically possible to define a simulation of observers, it is informationally expensive to \emph{realize} one. Extracting, encoding, and maintaining the information required to faithfully describe even a single human genome is already nontrivial. Scaling this to billions of humans, each composed of billions of cells, embedded in a universe containing astronomical numbers of particles and interactions, rapidly exhausts available informational resources.
 
-As a result, recursive simulations necessarily degrade. They must either:
-\begin{enumerate}[label=-]
-\item omit detail,
-\item compress aggressively (thereby losing fidelity),
-\item restrict scope, or
-\item terminate.
-\end{enumerate}
+As a result, recursive simulations necessarily degrade. They must either, omit detail, compress aggressively (thereby losing fidelity), restrict scope, or terminate.
 
 While recursive simulation is internally consistent with the theory, its informational cost is high. Consequently, deep, high-fidelity nested simulations are unlikely to persist. The theory favors shallow or short-lived recursions, yet this contradicts our current empirical evidence.}
 \end{faq}
 
 
 \begin{faq}{Why do we die?}
-\answer{The phenomenon of death can be understood in terms of the information content of an observer. As time progresses, an observer accumulates information in the form of memories, knowledge, and physical structure. During early life, this accumulation typically increases the probability of persistence: improved reasoning, learned skills, and adaptive behaviors make it more likely that the observer continues to exist. However, as the information content grows, the number of future configurations compatible with the continued existence of that observer decreases. Eventually, the set of configurations becomes exhausted, and the observer ceases to exist. In this sense, death arises naturally from the finite combinatorial possibilities available to complex informational structures.}
+\answer{
+Death can be understood in terms of the spectral complexity of an observer's wavefunction.
+Let $\psi_O$ denote the linear encoding of all correlations defining observer $O$.
+The observer's probability of continued existence along a future history $\gamma \in \Gamma_O$ is given by the Spectral Selection Principle:
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp\big(-\alpha \,\Sigma[\gamma]\big),
+\]
+where $\Sigma[\gamma]$ is the number of independent frequency--phase components required to encode $\gamma$ at the observer's resolution, and $\alpha$ is a scale parameter determined by observer bandwidth.
+
+As the observer accumulates information—memories, learned skills, and internal structure—the effective spectral complexity $\Sigma[\gamma]$ of future continuations necessarily increases. Each additional independent component in $\psi_O$ reduces the exponential weight of compatible histories. Formally, if the observer requires $N$ additional frequencies to represent future states, the probability of survival along those histories scales as
+\[
+\mathbb{P}_\text{future} \sim \exp(-\alpha N),
+\]
+leading to a rapid, exponential suppression of persistence.
+
+In this framework, death is the inevitable consequence of combinatorial exhaustion: as the observer's informational content grows, the set of future histories that preserve identity becomes vanishingly small. Survival probability approaches zero, corresponding to the cessation of the observer's experiential existence. Hence, death emerges naturally from the finite and exponentially constrained structure of complex informational systems.
+}
+\end{faq}
+
+
+\begin{faq}{Why do we age? Why do we develop wrinkles?}
+\answer{
+Wrinkles and aging are the geometric manifestation of increasing spectral complexity in the observer wavefunction. 
+As \(\psi_O\) accumulates more independent frequencies over time, the number of compatible configurations in \(\Gamma_O\) decreases exponentially. 
+The corresponding geometric view (\(G\)) reflects this scarcity: imperfect skin, structural deterioration, and reduced regenerative capacity are simply the observer’s “finding itself” in suboptimal configurations. 
+Aging is therefore the visible trace of spectral overcomplexification and the inevitable vanishing of survival probability.}
 \end{faq}
 
 \begin{faq}{Does the theory explain why the expansion rate of the universe is so close to the dividing line}

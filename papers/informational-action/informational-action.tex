@@ -3,7 +3,7 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{Classical Geodesics as Minimal-Entropy Trajectories in Informational Space}
+\title{Classical Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space}
 
 \date{2022}
 
@@ -12,19 +12,22 @@
 \maketitle
 
 \begin{abstract}
-  We present a constructive proof-of-concept demonstrating that classical geodesic paths on a curved surface can be recovered by minimizing an informational cost functional defined in bitstring. 
-Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral entropy} computed from local bit-encoded wavefunction segments. 
-We interpret the wavefunction as a \emph{minimal description of nature}, compressing the underlying information such that smoother, simpler waveforms dominate statistical measure. 
+  We present a constructive proof-of-concept showing that classical geodesic paths correspond to the projections of trajectories dominated by the simplest, smoothest wavefunctions, as measured by phase-coherent spectral complexity.
+Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral complexity} computed from local bit-encoded wavefunction segments. 
+We interpret the wavefunction as a \emph{minimal spectral encoding of nature}, compressing the underlying information such that smoother, phase-coherent waveforms dominate statistical measure. 
 Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. 
-This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle.
+This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle based on spectral complexity.
 \end{abstract}
 
-\textbf{Keywords:} Geodesics, Informational Action, Spectral Entropy, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Minimal Description Length, Discrete Path Optimization
+\textbf{Keywords:} Geodesics, Informational Action, Spectral Complexity, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Phase-Coherent Encoding, Discrete Path Optimization
 
 \section{Introduction}
-Here, we explore the notion that the wavefunction itself is a \emph{compression system for the universe}: any set of information can be arranged into many possible wavefunctions, and simple, smooth wavefunctions admit vastly more representations. Thus, smoother, lower-entropy wavefunctions dominate statistical measure, realizing a form of minimal-description principle akin to Kolmogorov complexity but with well-defined size and smoothness constraints.
+Here, we explore the notion that the wavefunction itself is a \emph{spectral compression system for the universe}: any set of information can be arranged into many possible wavefunctions, and smooth, phase-coherent wavefunctions admit vastly more representations. 
+Thus, smoother, lower-spectral-complexity wavefunctions dominate statistical measure, realizing a form of minimal spectral complexity analogous to algorithmic compressibility but defined directly via frequencies and phases rather than algorithmic length.
 
-We investigate whether a purely informational cost functional, defined independently of geometry, can recover classical geodesic behavior. Our approach is algorithmic and discrete: paths are selected step-by-step by minimizing \emph{phase-coherent spectral entropy} over local execution traces. Remarkably, we find strong agreement between the two resulting paths, suggesting that minimal descriptions naturally encode geodesic structure.
+We investigate whether classical geodesic behavior can emerge purely from the statistical dominance of low spectral-complexity, phase-coherent wavefunctions, independent of geometric input. 
+Our approach is algorithmic and discrete: paths are selected step-by-step by identifying trajectories with minimal phase-coherent spectral complexity across local execution traces. 
+Remarkably, we find strong agreement between these trajectories and classical geodesics, suggesting that low spectral complexity alone naturally encodes geodesic structure.
 
 \section{Geometric Setup}
 We consider a two-dimensional spatial domain embedded in a three-dimensional height field, representing a curved metric surface. The surface is constructed as a superposition of Gaussian hills and valleys with added stochastic noise. Let $\phi(x,y)$ denote the surface height. The classical Euclidean action for a path $\gamma$ proceeding in the $x$ direction is approximated locally by
@@ -33,8 +36,8 @@ I_E \approx \sum_x \left( \nabla_x \phi \right)^2,
 \end{equation}
 where the gradient is discretized on a grid. At each step, the next path position is chosen from a local neighborhood to minimize the incremental contribution to $I_E$.
 
-\section{Informational Action as Minimal Description}
-We propose that the classical trajectory emerges from an underlying principle of \emph{Minimal Description}. In this framework, the physical path is not determined by geometric distance, but by the efficiency with which the bit-encoded substrate can represent the state. We define the informational action $S_I$ as the integral of an informational Lagrangian $\mathcal{L}_I$:
+\section{Informational Action as Minimal Spectral Complexity}
+We propose that the classical trajectory emerges from an underlying principle of \emph{minimal spectral complexity}. In this framework, the physical path is not determined by geometric distance, but by the efficiency with which the bit-encoded substrate can represent the state. We define the informational action $S_I$ as the integral of an informational Lagrangian $\mathcal{L}_I$:
 
 \begin{equation}
 S_I = \int_{\gamma} \mathcal{L}_I(\Psi, \dot{\Psi}) \, dt = \int_{\gamma} \left[ \mathcal{H}(\Psi) + \alpha \, \mathcal{D}(\Psi, \dot{\Psi}) \right] dt
@@ -43,7 +46,7 @@ S_I = \int_{\gamma} \mathcal{L}_I(\Psi, \dot{\Psi}) \, dt = \int_{\gamma} \left[
 where the Lagrangian is partitioned into two fundamental terms: the spectral complexity and the phase incoherence.
 
 \subsection{Spectral Entropy ($\mathcal{H}$)}
-The first term, $\mathcal{H}$, quantifies the informational cost to describe the local state. For a discrete bit-segment $\Psi$, we compute the normalized power spectral density (PSD) via a real Fourier transform. The probability $p_k$ of a frequency mode $k$ is given by:
+The first term, $\mathcal{H}$, quantifies the spectral complexity of the local state. For a discrete bit-segment $\Psi$, we compute the normalized power spectral density (PSD) via a real Fourier transform. The probability $p_k$ of a frequency mode $k$ is given by:
 \begin{equation}
 p_k = \frac{|A_k|^2}{\sum_j |A_j|^2}
 \end{equation}
@@ -51,20 +54,20 @@ The spectral entropy is defined as:
 \begin{equation}
 \mathcal{H} = -\sum_{k} p_k \log_2 p_k
 \end{equation}
-Lower entropy corresponds to smoother waveforms, representing a more compressed minimal description.
+Lower $\mathcal{H}$ corresponds to smoother, phase-coherent waveforms, representing a more compressed spectral encoding.
 
 \subsection{Phase Incoherence and Quantum Infidelity ($\mathcal{D}$)}
 To ensure the continuity of the emergent description, we introduce a transport cost $\mathcal{D}$. This term penalizes rapid phase slips between consecutive execution traces. We utilize the complex inner product to measure the overlap between the current state $\Psi_t$ and the candidate state $\Psi_{t+dt}$ in Hilbert space:
 \begin{equation}
 \mathcal{D} = 1 - \frac{|\langle \Psi_t | \Psi_{t+dt} \rangle|}{\|\Psi_t\| \|\Psi_{t+dt}\|}
 \end{equation}
-This formulation is mathematically equivalent to the \emph{Fubini-Study metric}, defining the infinitesimal distance between points in projective Hilbert space. It effectively imparts informational inertia, favoring descriptions that maintain phase-stability over time. The purpose is to find the optimal wavefunction (maximal compression). 
+This formulation is mathematically equivalent to the \emph{Fubini-Study metric}, defining the infinitesimal distance between points in projective Hilbert space. It effectively imparts informational inertia, favoring descriptions that maintain phase stability over time and thus maximize spectral compression.
 
 \section{Path-Finding Algorithm}
 Both methods employ the same local path-finding structure. Starting from a fixed boundary condition, the path advances column by column. At each step, three candidate positions are evaluated, and the one minimizing the respective cost functional is selected. No geometric information is used in the informational method; likewise, no informational quantities appear in the Euclidean action.
 
 \section{Results}
-Across multiple randomly generated surfaces, the paths selected by Euclidean action minimization and minimal description (QBitwave) are nearly identical. Incorporating phase coherence ($\mathcal{D}$) significantly improves alignment, especially in regions with ambiguous local gradients.
+Across multiple randomly generated surfaces, the paths selected by Euclidean action minimization and phase-coherent spectral complexity (QBitwave) are nearly identical. Incorporating phase coherence ($\mathcal{D}$) significantly improves alignment, especially in regions with ambiguous local gradients.
 
 \begin{figure}[h!]
 \centering
@@ -72,16 +75,14 @@ Across multiple randomly generated surfaces, the paths selected by Euclidean act
 \caption{Heatmaps of normalized Euclidean action (left) and informational cost including phase coherence (right).}
 \end{figure}
 
-
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/path-comparison.png}
 \caption{Comparison of paths obtained via Euclidean action (red) and phase-coherent spectral entropy (blue).}
 \end{figure}
 
-
 \subsection*{Systematic Noise Study}
-A parameter sweep shows that at low noise, both measures correlate strongly. As noise increases, Euclidean action rises monotonically, while the informational action exhibits a saturation effect due to finite-resolution encoding. This divergence illustrates that informational cost imposes natural cutoffs, reflecting the dominance of smooth wavefunctions as minimal descriptions.
+A parameter sweep shows that at low noise, both measures correlate strongly. As noise increases, Euclidean action rises monotonically, while the informational action exhibits a saturation effect due to finite-resolution encoding. This divergence illustrates that spectral complexity imposes natural cutoffs, reflecting the dominance of smooth, phase-coherent wavefunctions as minimal spectral encodings.
 
 \begin{figure}[h!]
 \centering
@@ -89,13 +90,11 @@ A parameter sweep shows that at low noise, both measures correlate strongly. As 
 \caption{Systematic noise sweep using \texttt{entropy\_action\_comparison.py}. 
 The Euclidean action (red) increases monotonically with noise. 
 The phase-coherent spectral entropy (blue) initially tracks the action but saturates at higher noise levels due to finite-resolution bit encoding and phase-stability effects. 
-The dashed line represents the compressibility measure of the informational path, highlighting the minimal-program dominance of smooth, low-entropy wavefunctions.}
+The dashed line represents the spectral-complexity measure of the informational path, highlighting the dominance of smooth, low-spectral-complexity wavefunctions.}
 \end{figure}
 
-
-
 \section{Discussion}
-The observed correspondence suggests that classical geodesics may be understood as paths of minimum informational description. The minimal-description perspective implies that simpler wavefunctions dominate measure and naturally align with Euclidean geodesics. 
+The observed correspondence suggests that classical geodesics may be understood as paths of minimal spectral complexity. The spectral-complexity perspective implies that smooth, phase-coherent wavefunctions dominate measure and naturally align with Euclidean geodesics. 
 
 \begin{table}[h!]
 \centering
@@ -104,25 +103,24 @@ The observed correspondence suggests that classical geodesics may be understood 
 \textbf{Geometric Quantity} & \textbf{Informational Equivalent} \\ \hline
 Potential Energy ($V$) & Spectral Entropy ($\mathcal{H}$) \\ \hline
 Kinetic Energy ($T$) & Quantum Infidelity ($\mathcal{D}$) \\ \hline
-Action ($S$) & Total Description Length ($\sum \mathcal{L}_I$) \\ \hline
-Geodesic & Optimal Compression Trace \\ \hline
+Action ($S$) & Total Spectral Complexity ($\sum \mathcal{L}_I$) \\ \hline
+Geodesic & Optimal Spectral Compression Trace \\ \hline
 \end{tabular}
 \caption{Correspondences between Geometric and Informational measures.}
 \end{table}
 
 \section{Conclusion}
-We have demonstrated that minimizing phase-coherent spectral entropy can recover classical geodesic paths.
+We have demonstrated that minimizing phase-coherent spectral complexity can recover classical geodesic paths.
 
-This result, together with the \textbf{Entropy-Singularity Lemma}, represents two sides of the same coin: regions of vanishing entropy contain no microstructure, while entropy-minimizing trajectories naturally avoid high-entropy, singular configurations.
+This result, together with the \textbf{Entropy-Singularity Lemma}, represents two sides of the same coin: regions of vanishing entropy contain no microstructure, while spectral-complexity-minimizing trajectories naturally avoid high-entropy, singular configurations.
 
 Taken together, these principles imply that spacetime singularities and divergences are automatically suppressed by the informational structure of the universe.
-
 
 \section*{Supplementary Materials}
 \begin{itemize}
 \item \href{simulations/geodesic_from_information.py}{geodesic\_from\_information.py: PoC demonstration of informational geodesics on 2D surfaces}
-\item \href{simulations/entropy_action_comparison.py}{entropy\_action\_comparison.py: Systematic study of Euclidean action vs. spectral entropy across noise levels and resolutions}
-\item \href{simulations/phi4\_qbitwave\_mcmc\_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
+\item \href{simulations/entropy_action_comparison.py}{entropy\_action\_comparison.py: Systematic study of Euclidean action vs. spectral complexity across noise levels and resolutions}
+\item \href{simulations/phi4\_qbitwave\_mcmc_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
 \item \href{supplementary-qbitwave.pdf}{QBitwave supplementary paper}
 \end{itemize}
 

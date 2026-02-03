@@ -12,11 +12,13 @@ from a Static Wheeler--DeWitt Universe}
 \maketitle
 
 \begin{abstract}  
-  Building on the ontological equivalence of informational configurations established in Paper I, we derive a model of the universe
-  based on ordering of these configurations. We identify an emergent \emph{ordinal time} within the static Wheeler--DeWitt multiverse.
-  Observer-experienced reality is then dominated by histories that minimize description length providing a unified mechanism for the emergence of time,
-  unitarity, quantum probabilities, and the suppression of divergences. Observers most likely find them from maximally compressed paths,
-  as those are numerously dominant and hence most probable.
+Building on the ontological equivalence of informational configurations established in Paper I,
+we derive a model of the universe based on ordering of these configurations.
+We identify an emergent \emph{ordinal time} within the static Wheeler--DeWitt multiverse.
+Observer-experienced reality is dominated by histories that minimize \emph{spectral complexity},
+defined as the number of independent frequencies and phases required to encode correlations.
+Such spectrally minimal paths are combinatorially dominant, providing a unified mechanism for the
+emergence of time, unitarity, quantum probabilities, and the suppression of divergences.
 \end{abstract}
 
 \ifdefined\ishtml
@@ -24,214 +26,211 @@ from a Static Wheeler--DeWitt Universe}
 \small \href{emergence-of-time.pdf}{Download PDF Version}
 \end{center}
 \fi
+
 \section{Ontological Framework}
 
-We consider the universe as a static informational object \(U\) consisting of \(n\) bits. All physically and observer-relevant structures are encoded within this data. Observers are particular configurations \(O \subset U\) whose internal structure allows them to encode a sense of temporal ordering. 
+We consider the universe as a static informational object \(U\) consisting of \(n\) bits.
+All physically and observer-relevant structures are encoded within this data.
+Observers are particular configurations \(O \subset U\) whose internal structure allows
+them to encode correlations and maintain identity across ordered configurations.
 
-Since \(U\) is atemporal, time cannot be fundamental. We define an observer's experience of time as the \emph{ordering of configurations} that preserves the internal correlations of \(O\). Let
+Since \(U\) is atemporal, time cannot be fundamental.
+We define an observer's experience of time as the \emph{ordering of configurations}
+that preserves the internal correlations of \(O\).
+Let
 \begin{equation}
-\mathcal{C}(O) = \{\pi : \pi \text{ is a permutation of configurations in } U \text{ consistent with } O \}
+\mathcal{C}(O) = \{\pi : \pi \text{ is a permutation of configurations in } U
+\text{ consistent with } O \}
 \end{equation}
-denote the set of orderings compatible with the observer's internal structure. Only permutations in \(\mathcal{C}(O)\) correspond to possible temporal experiences for \(O\).
+denote the set of orderings compatible with the observer's internal structure.
+Only permutations in \(\mathcal{C}(O)\) correspond to possible temporal experiences for \(O\).
 
-In this sense, the universe is a timeless informational structure. Dynamics emerge from the correlations inherent in the static data, as experienced by observers through specific orderings of configurations. Arbitrary orderings that destroy these correlations are structurally incompatible with observer experience.
+In this sense, the universe is a timeless informational structure.
+Dynamics emerge from correlations inherent in static data, as experienced by observers
+through specific orderings of configurations.
+Arbitrary orderings that destroy these correlations are structurally incompatible
+with observer experience.
 
-\section{Emergence of Wave-Like Structure from Compressibility}
+\section{Emergence of Wave-Like Structure from Spectral Sparsity}
 
-Among all observer-consistent orderings \(\mathcal{C}(O)\), those that are highly compressible are combinatorially dominant. Let \(K(\pi)\) denote the Kolmogorov complexity of a permutation \(\pi\). Then
+Among all observer-consistent orderings \(\mathcal{C}(O)\), those with minimal
+\emph{spectral complexity} are combinatorially dominant.
+
+\paragraph{Definition (Spectral Complexity).}
+The spectral complexity \(\Sigma(\pi)\) of an ordering \(\pi\) is defined as the number
+of independent frequency--phase components required to encode the correlations preserved
+by \(\pi\) within finite observer resolution.
+
+Formally, if an ordering induces a representation
+\[
+\psi = \sum_k a_k e^{i(\omega_k t + \phi_k)},
+\]
+then
+\[
+\Sigma(\psi) = \left| \{ (\omega_k,\phi_k) \mid a_k \neq 0 \} \right|.
+\]
+
+We then have
 \begin{equation}
-\#\{\pi \in \mathcal{C}(O) \,|\, K(\pi) \text{ minimal}\} \gg
-\#\{\pi \in \mathcal{C}(O) \,|\, K(\pi) \text{ high}\}.
+\#\{\pi \in \mathcal{C}(O) \mid \Sigma(\pi) \text{ minimal}\}
+\gg
+\#\{\pi \in \mathcal{C}(O) \mid \Sigma(\pi) \text{ large}\}.
 \end{equation}
-This dominance is purely structural: it reflects the number of permutations consistent with observer continuity, not any stochastic selection or prior. Our Python simulations confirm that, across a wide range of ensembles, compressible permutations vastly outnumber incompressible ones.
 
-The wavefunction arises as the minimal linear encoding that preserves correlations across these compressible orderings. Superposition naturally appears because linear combinations of compressible orderings remain compressible and maintain the correlations necessary for observer-consistent experience. Interference phenomena reflect the overlap between different orderings within this linear encoding.
+This dominance is structural rather than probabilistic: low-bandwidth histories
+admit vastly more microstate realizations consistent with observer continuity.
+Our numerical simulations confirm that spectrally sparse orderings dominate across
+a wide range of ensembles.
 
-The effective Born weights emerge from the combinatorial multiplicity of orderings corresponding to particular outcomes. Specifically, the squared amplitude of a component in the linear encoding reflects the relative number of permutations consistent with that outcome. Observers therefore experience quantum probabilities not as fundamental randomness, but as a direct consequence of the structural abundance of compressible, observer-consistent orderings.
+The wavefunction arises as the minimal linear encoding that preserves correlations
+across such spectrally minimal orderings.
+Superposition emerges naturally because linear combinations of spectrally sparse
+components preserve observer-relevant correlations.
+Interference reflects overlap between distinct orderings within this linear encoding.
+
+The effective Born weights arise from the combinatorial multiplicity of orderings
+consistent with particular spectral envelopes.
+Observers therefore experience quantum probabilities not as fundamental randomness,
+but as a consequence of the structural abundance of spectrally minimal histories.
 
 \subsection{Summary}
 
 \begin{itemize}
-    \item The universe is a static informational substrate; time is an emergent property of observers embedded within it.
-    \item Observers experience temporal order through permutations of configurations compatible with their internal structure.
-    \item Maximal compressibility combinatorially dominates among observer-consistent orderings, explaining the smoothness of observed physics.
-    \item Wave-like phenomena and the Born rule arise naturally as linear encodings reflecting the multiplicity of compressible orderings, without invoking fundamental probability or external selection.
+\item The universe is a static informational substrate; time is an emergent property of observers.
+\item Observers experience temporal order through permutations compatible with internal structure.
+\item Spectrally minimal orderings dominate combinatorially among observer-consistent histories.
+\item Wave phenomena and quantum probabilities arise from linear encodings of dominant spectral structure.
 \end{itemize}
 
-
-\section{Wheeler-DeWitt}
+\section{Wheeler--DeWitt}
 
 We adopt the canonical formulation of quantum gravity, in which the universal state
-\( \Psi[h_{ij}(\mathbf{x}),\phi(\mathbf{x})] \) satisfies the Wheeler--DeWitt (WdW) equation
+\(
+\Psi[h_{ij}(\mathbf{x}),\phi(\mathbf{x})]
+\)
+satisfies the Wheeler--DeWitt equation
 \begin{equation}
 \hat{H}\Psi = 0,
 \end{equation}
-and contains no fundamental time parameter \cite{DeWitt1967}. We interpret \( \Psi \) in an
-Everettian sense as a static superposition over all admissible 3-geometries and matter field
-configurations:
+and contains no fundamental time parameter \cite{DeWitt1967}.
+We interpret \( \Psi \) in an Everettian sense as a static superposition over all admissible
+3-geometries and matter field configurations:
 \begin{equation}
 \ket{\Psi} = \sum_i c_i \ket{h_i,\phi_i}.
 \end{equation}
 
-In this view, the universe is a timeless informational structure. Any notion of dynamics must
-arise from correlations internal to \( \Psi \), rather than from external temporal evolution.
+In this view, the universe is a timeless informational object.
+All apparent dynamics arise from correlations internal to \( \Psi \),
+rather than from external temporal evolution.
 
 \section{Spectral Selection Principle}
 
-Among all relational histories consistent with the universal state \( \Psi \), observer-experienced
-permutation is dominated by histories whose total description length is minimal.
+Among all relational histories consistent with the universal state \( \Psi \),
+observer experience is dominated by histories of minimal spectral complexity.
 
-Let \( S \) denote a relational history induced by a particular factorization and ordering of
-configurations. The relative weight of \( S \) is
+Let \( S \) denote a relational history induced by a particular factorization
+and ordering of configurations.
+Let \( \Sigma(S) \) denote the number of independent frequency--phase components
+required to encode its correlations within finite observer resolution.
+The relative weight of \( S \) is
 \begin{equation}
-P(S) \propto 2^{-K(S)},
+P(S) \propto e^{-\alpha \Sigma(S)},
 \end{equation}
-where \( K(S) \) is the Kolmogorov complexity (or minimal description length) of \( S \)
-\cite{Kolmogorov1965}.
+where \( \alpha \) is a scale parameter determined by observer bandwidth.
 
-
+\paragraph{Spectral Selection Principle (SSP).}
+Among all observer-consistent relational histories in a timeless universe,
+those with minimal spectral complexity dominate observer experience.
 
 \section{Emergence of Quantum Structure}
 
 \subsection{Wavefunction as Optimal Encoding}
 
-We assume the wavefunction \( \psi \) emerges as the minimal encoding of reality with an observer.
-
-Highly irregular configurations require longer descriptions and are suppressed, leading to an effective low-frequency, smooth structure.
+The wavefunction \( \psi \) emerges as the optimal linear encoding of observer-relevant correlations.
+Highly irregular configurations require broad spectral support and are exponentially suppressed,
+leading to an effective low-frequency, smooth structure.
 
 \subsection{Unitarity from Informational Stability}
 
-Persistence of observer identity requires that successive encodings preserve total information
-content. In a linear representation space, this restricts admissible transformations to
-norm-preserving maps. Continuous norm preservation uniquely selects unitary evolution, with a
-Hermitian generator \( \hat{H} \), yielding
+Persistence of observer identity requires preservation of total encoded information.
+In a linear representation space, admissible transformations must preserve norm.
+Continuous norm preservation uniquely selects unitary evolution,
+with a Hermitian generator \( \hat{H} \):
 \begin{equation}
 i\hbar \frac{\partial}{\partial t}\psi = \hat{H}\psi.
 \end{equation}
 
 \section{The Born Rule from Spectral Optimality}
 
-We now strengthen the derivation of the Born rule by identifying it as the \emph{unique decoding
-rule} compatible with Spectral Selection Principle and observer persistence.
+We derive the Born rule as the unique decoding rule compatible with
+spectral selection and observer persistence.
 
 \subsection{Problem Statement}
 
-Let \( \psi \in \mathcal{H} \) be the observer's compressed encoding of relational correlations.
+Let \( \psi \in \mathcal{H} \) be the observer's compressed spectral encoding.
 A probability rule assigns to each outcome \( i \) a weight
 \begin{equation}
-P(i) = f(|\psi_i|),
+P(i) = f(|\psi_i|).
 \end{equation}
-where \( f \) is a non-negative function.
-
-We seek the unique \( f \) compatible with the following physically motivated constraints.
 
 \subsection{Constraints}
 
-\paragraph{(C1) Additivity under coarse-graining}
-If outcomes \( i \) and \( j \) are grouped,
-\begin{equation}
+\paragraph{(C1) Additivity}
+\[
 P(i \cup j) = P(i) + P(j).
-\end{equation}
+\]
 
-\paragraph{(C2) Composition consistency}
-For independent subsystems \( A \) and \( B \),
-\begin{equation}
-P(i_A, j_B) = P(i_A) P(j_B).
-\end{equation}
+\paragraph{(C2) Composition}
+\[
+P(i_A,j_B) = P(i_A)P(j_B).
+\]
 
 \paragraph{(C3) Basis invariance}
-Probabilities must be invariant under unitary change of basis.
+Probabilities must be invariant under unitary transformations.
 
 \paragraph{(C4) Reconstruction optimality}
-The decoding rule must minimize mean squared reconstruction error between encoded and decoded
-histories. This is the unique optimal decoder for finite observers using lossy compression.
+The decoding rule must minimize mean squared reconstruction error.
 
-\subsection{Uniqueness of the Squared Norm}
+\subsection{Uniqueness}
 
-Constraints (C1) and (C2) imply that \( f(x) \) must be quadratic in amplitude magnitude:
-\begin{equation}
-f(x) = k x^2.
-\end{equation}
-
-Constraint (C3) excludes dependence on phase or basis-dependent quantities.
-
-Constraint (C4) selects the \( L^2 \) norm uniquely: among all \( L^p \) norms, only \( p = 2 \)
-yields linear projections, orthogonality preservation, and stable error minimization under
-compression.
-
-Normalization fixes \( k = 1 \), yielding
-\begin{equation}
+Constraints (C1) and (C2) imply quadratic scaling:
+\[
+f(x) = kx^2.
+\]
+Constraint (C3) excludes phase dependence.
+Constraint (C4) uniquely selects the \(L^2\) norm.
+Normalization fixes \(k=1\), yielding
+\[
 P(i) = |\psi_i|^2.
-\end{equation}
-
-\paragraph{Conclusion.}
-The Born rule is not an independent axiom, but the unique probability assignment compatible with
-spectral compression, compositional consistency, and observer persistence in Hilbert space.
-
-
+\]
 
 \subsection{Physical Meaning of the Born Weight}
 
-Multiplicity explains why the squared norm ($P = |\psi|^2$) is the correct measure selected by the optimal decoding rule.
+\paragraph{Lemma (Quadratic Scaling).}
+In a linear wave-based encoding, the number of distinguishable microstates
+consistent with a spectral envelope scales with the squared norm.
+By Parseval's theorem,
+\[
+\int |\psi(x)|^2 dx
+\]
+measures the total spectral power, which corresponds to the available
+microstate volume consistent with observer structure.
 
-\subsubsection{Lemma: Quadratic Scaling in Linear Encoding}
-In any linear wave-based encoding scheme, the number of distinguishable microstates $\Omega$ consistent with a macroscopic wave constraint scales with the squared norm of the amplitude. Following Parseval's Theorem, the total energy (or informational "power") of a signal in Hilbert space is:
-\begin{equation}
-E = \int | \psi(x) |^2 dx
-\end{equation}
-In our framework, "Power" is equivalent to the **bandwidth of the execution trace**. A higher amplitude $A$ provides a quadratically larger state-space volume for microstate permutations that remain consistent with the observer's template. Thus, the multiplicity of observer-instances is $M \propto |\psi|^2$.
-
-\subsubsection{The Universal Prior and Self-Locating Uncertainty}
-Applying a universal prior (Solomonoff) over the ensemble $\Omega$, the probability $P$ of an observer finding themselves in state $S$ is defined by its Kolmogorov Complexity $\mathcal{K}(S)$:
-\begin{equation}
-P(S) \propto 2^{-\mathcal{K}(S) + c}
-\end{equation}
-where $c$ is a constant determined by the choice of universal Turing machine. This represents \textit{self-locating uncertainty}: the observer is not "choosing" a path, but is statistically distributed across all consistent bit-string permutations.
-
-\subsubsection{Derivation of the Born Weight}
-By combining the multiplicity of the linear wave-template with the universal prior, the relative measure of observer density across configuration space is:
-\begin{equation}
-P(\text{Alice} \in \psi) = \frac{|\psi|^2}{\int |\psi|^2 dx}
-\end{equation}
-This normalization reflects the relative density of observer-instances, not a stochastic collapse of the wavefunction.
-
-\subsubsection{The Vanishing Measure of Divergences}
-This derivation provides a natural "soft cutoff" for the infinities of Quantum Field Theory. While divergent states exist mathematically, their description length $\mathcal{K}$ explodes. Since:
-\begin{equation}
-\lim_{\mathcal{K} \to \infty} 2^{-\mathcal{K}} = 0
-\end{equation}
-the measure of observers inhabiting divergent branches is zero. Physical laws appear smooth and renormalized because only finite, highly-compressible (low-$\mathcal{K}$) branches possess sufficient multiplicity resulting high probability of existence.
-
-
-
-\section{Singularities and Renormalization}
-
-Configurations corresponding to classical singularities in GR, or ultraviolet divergences in QFT possess
-vanishing or ill-defined informational structure. Such states require maximal description length
-and are exponentially suppressed under SSP. Their observational probability is zero.
-
-Renormalization in quantum field theory arises as a direct consequence: high-frequency modes are
-incompressible and do not contribute to dominant observer-compatible histories.
-Effective field theories are therefore maximal-compressibility approximations to the static
-informational substrate.
+Thus, the multiplicity of observer-instances satisfies
+\[
+M \propto |\psi|^2.
+\]
 
 \section{Discussion}
 
-Spacetime geometry, time, quantum probabilities, and classicality emerge as features of
-typical correlations within a timeless universal state. Singularities and
-divergences mark the boundaries of informational accessibility, not physical breakdowns.
+Time, spacetime geometry, quantum probabilities, and classicality emerge as features
+of typical correlations within a timeless universal state.
+Singularities and divergences mark boundaries of informational accessibility,
+not physical breakdowns.
 
-The Spectral Selection Principle shifts the explanatory burden from fundamental dynamics to
-informational selection, providing a unified resolution of the problem of time, the origin of
-quantum probabilities, and the absence of observable infinities.
-
-
-\section*{Supplementary Materials}
-
-\begin{itemize}
-\item \href{supplementary-perception-memory-mortality.pdf}{Observer perception, memory and mortality}
-\end{itemize}
-
+The Spectral Selection Principle shifts the explanatory burden from fundamental dynamics
+to informational structure, unifying the emergence of time, quantum theory,
+and the absence of observable infinities.
 
 \printbibliography
 
