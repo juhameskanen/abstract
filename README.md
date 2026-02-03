@@ -4,25 +4,14 @@
 ## The Equations
 
 $$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O$$
-$$I-\psi-G$$$
+$$D-\psi-G$$
 
 Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
 
 
-## A Simulation
-
-<p align="center">
-  <img src="gallery/emergent_atom.gif" width="640">
-</p>
-
-<p align="center">
-  <em>Emergent forces and quantum interference.</em>
-</p>
-
-
 ## Objective
 
-Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled, suggesting that no fundamental theory exists in the traditional sense. 
+Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled. 
 Despite this, this project leans into the challenge, and even extends it. The objective is not only to formulate 
 the laws governing how the universe behaves, but to gain full understanding what those laws are fundamentally describing. 
 
@@ -36,7 +25,7 @@ Despite the somewhat cheeky name, $IaM^e$ is a playground for rigorous physics, 
 
 ## The Axiom
 
-Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer (a persistent informational subsystem defining a conditional ensemble of histories, analogous to a boundary condition, reference frame, or coarse-graining constraint) exists.
+Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer exists.
 
 From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
 
@@ -62,7 +51,7 @@ In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physi
 * [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
-* [LICENSE ➡](LICENCE.md) – Licence 
+* [LICENSE ➡](LICENSE.md) – Licence 
 
 
 ## Continuous Integration
