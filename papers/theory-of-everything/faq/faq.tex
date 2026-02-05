@@ -53,14 +53,74 @@ Space is the \textbf{geometric projection} of total entropy: as the underlying i
 \end{faq}
 
 
+\begin{faq}{Why did the universe start with zero entropy?}
+\answer{
+The observer-conditioned measure overwhelmingly favors **histories that minimize total complexity**:
+
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda \, \mathcal{C}_O[\gamma]].
+\]
+
+A zero-entropy initial state is **maximally compressible** and hence most probable. 
+
+\[
+0 \;\rightarrow\; 1 \;\rightarrow\; \dots \;\rightarrow\; \text{current state}.
+\]
+
+Starting from high entropy or decreasing entropy requires extra information to embed the observer, increasing \(\mathcal{C}_O[\gamma]\) and suppressing probability:
+
+\[
+\mathbb{P}(\gamma_{\rm high-entropy} \mid O) \ll \mathbb{P}(\gamma_{\rm zero-entropy} \mid O).
+\]
+
+Thus, the **arrow of time** and increasing total entropy naturally emerge:  
+
+\[
+\text{Zero entropy} \;\Rightarrow\; \text{Maximal compressibility} \;\Rightarrow\; \text{Observer-compatible universe}.
+\]
+}
+\end{faq}
+
+
+
+\begin{faq}{If there is no metaphysical signals or interaction, then how does the observer ``see'' anything?}
+  \answer{The universe we “see” is not transmitted to us—it is already part of the set that define us.
+
+The observer’s wavefunction can be split as:
+
+\[
+\Psi_\gamma = \Psi_{\rm self} \otimes \Psi_{\rm env},
+\]
+
+where \(\Psi_{\rm self}\) is the geometrically persistent part defining the observer, and \(\Psi_{\rm env}\) is the remaining “outside” world.
+
+Temporal extrapolation of \(\Psi_{\rm self}\) has a **limited predictive horizon**:
+
+\[
+\Psi_{\rm self}(t+1) \sim \arg\min_{\gamma_{t+1}} \mathcal{C}*O[\gamma*{0:t+1}],
+\]
+
+so the observer cannot see far into the future. Spatial extrapolation generates the compressible environment:
+
+\[
+\Psi_{\rm env} \sim \text{extensions of } \Psi_{\rm self} \text{ into surrounding bits}.
+\]
+
+The perceived universe emerges because **low-complexity histories dominate the measure**:
+
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda , \mathcal{C}_O[\gamma]].
+\]
+
+In short: the observer does not receive signals from outside; the “world” is a compressible extrapolation of the self-wavefunction, and apparent laws and structures emerge statistically.
+}
+\end{faq}
+
+  
 \begin{faq}{Does \IaMe support QBism?}{Does the theory support the QBism view that our observations shape quantum phenomena?}
 \answer{Yes. In \IaMe, the observer is an informational structure and is most likely to find themselves in configurations that preserve their reasoning and decision-making capabilities. Observers with reasoning have a higher probability of persistence than those without. As a result, reasoning statistically biases which configurations an observer experiences next. Quantum mechanics emerges from these informational rules, so it may appear that observation or decisions “change” the quantum state, even though all evolution is fully contained within the underlying substrate.}
 \end{faq}
 
-
-\begin{faq}{How does Gödel incompleteness affect the theory?}
-\answer{Gödel’s incompleteness theorems constrain formal systems capable of arithmetic, but a ToE aims for ontological closure, not formal deductive completeness. Observer reasoning may encounter Gödel-style limits internally, but these are limitations on embedded observers’ formal reasoning, not on the underlying informational substrate itself.}
-\end{faq}
 
 \begin{faq}{How does Gödel incompleteness affect the theory?}
 \answer{Considering how highly respected authors, such as Stephen Hawking, have noted that a Theory of Everything may be forever constrained by Gödelian limits, we approach this with necessary humility. Gödel’s incompleteness theorems constrain formal systems capable of arithmetic, but our framework suggests a shift in focus: a ToE aims for ontological closure rather than formal deductive completeness. While an \textbf{embedded observer} will inevitably encounter Gödel-style limits in their internal formal reasoning, these might be constraints on the \textit{compression and representation} of the data, not necessarily a limitation on the underlying informational substrate itself.}
@@ -138,7 +198,7 @@ Statistically, it is difficult to justify a "singular" outcome in a system of hi
 
 \begin{faq}{Does the claim that compression implies maximal probability depend on Kolmogorov complexity?}
 \answer{
-No. explicitly reject Kolmogorov complexity as a foundational quantity. Kolmogorov complexity is neither continuous nor computable and therefore cannot serve as a physical observable.
+No. We explicitly reject Kolmogorov complexity as a foundational quantity. Kolmogorov complexity is neither continuous nor computable and therefore cannot serve as a physical observable.
 
 In the $IaM^e$ framework, description length is instead defined through the spectral content of the wavefunction. A physical state is characterized by a well-defined set of frequencies and phases, and its informational cost is given by the minimal spectral length required to represent it under finite resolution. This quantity is continuous, measurable, and can be mapped to a discrete bit representation.
 
