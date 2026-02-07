@@ -8,7 +8,7 @@ bit-substrate emergent wavefunctions.
 import numpy as np
 import argparse
 from typing import List, Tuple, Optional, Any
-from qbitwave import QBitwave  # <--- Clean import
+from qbitwave import QBitwave
 from simulation_engine import GravitySim
 
 # --- The Bridge: Mapping Bits to Space ---

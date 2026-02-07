@@ -1,9 +1,9 @@
 """
-Base class for simulations, providing core functionality for particle resampling,
+Base class for IaMe simulations, providing core functionality for particle resampling,
 PDF computation, and MDL-based trajectory updates. 
 
 This simulation demonstrates how *inertia* can emerge from 
-an informational principle: **Minimum Spectral Length (MSL)**.
+an informational principle: **Minimum Description Length (MDL)**.
 
 Concept:
 --------
@@ -13,10 +13,10 @@ Concept:
 - Particles are not moved via forces. Instead, they are resampled 
   according to the joint probability distribution of all blobs.
 - Blob positions are updated from assigned particles, but their 
-  trajectories are chosen using an MSL criterion:
+  trajectories are chosen using an MDL criterion:
   
     The "best" next position is the one that minimizes the 
-    spectral length of the trajectory, i.e., the deviation 
+    description length of the trajectory, i.e., the deviation 
     from linear extrapolation, resulting best compression.
   
 - This introduces *informational inertia*: blobs resist sudden 

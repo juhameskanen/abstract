@@ -126,12 +126,57 @@ Persistent observer identity requires well-defined internal-external distinction
 
 \section{Simulations}
 
-Demonstrations of emergent physics in this framework include:
+Demonstrations of emergent behavior in the proposed framework are implemented in the reference simulation:
 
 \begin{itemize}
-    \item \texttt{simulations/emergent\_atom.py} -- discrete and spectral emergence of particle-like structures
-    \item \texttt{simulations/emergent\_gravity.py} -- emergent geometric and gravitational features
+    \item \texttt{simulations/iame.py}
 \end{itemize}
+
+The simulation evaluates observer-conditioned compression under the $D$--$\psi$--$G$ decomposition. For numerical reasons, the implementation exposes three scaling parameters corresponding to the spectral, geometric, and causal channels:
+
+\begin{itemize}
+  \item \texttt{--hbar\_const}: numerical weight associated with spectral complexity ($\psi$ channel);
+  \item \texttt{--G\_const}: numerical weight associated with geometric overlap ($G$ channel);
+  \item \texttt{--c\_speed}: maximum informational update radius per timestep, limiting causal propagation.
+\end{itemize}
+
+These parameters do not represent physical constants and are not conceptual inputs to the theory. The sole conceptual input is the formal definition of an observer. The parameters serve only to control numerical resolution and convergence behavior in finite simulations.
+
+\subsection*{Role of the Discrete Component $D$}
+
+The discrete component $D$ represents the raw, uncompressed description length of a history at the level of the underlying symbolic representation.
+In the present work, this representation is fixed by construction: all observer-compatible histories are encoded using the same discrete alphabet, update rules, and path length conventions.
+
+As a result, $\mathcal C_D[\gamma]$ contributes an additive baseline common to all histories in $\Gamma_O$ and therefore cancels out in relative probability comparisons.
+The $D$ term thus sets the reference measure on the space of histories rather than acting as a tunable dynamical parameter.
+
+Only the nontrivial compression channels—spectral ($\psi$) and geometric ($G$)—remain visible in simulations as sources of differential weighting.
+This mirrors the role of the uniform prior in algorithmic probability, where structure-dependent compression determines typicality once the base description language is fixed.
+
+
+\subsection*{Qualitative Regimes}
+
+The following parameter regimes consistently produce distinct qualitative behaviors:
+
+\paragraph{Geometric Dominance (Gravity-like Regime)}
+\begin{verbatim}
+python iame.py --G_const 20.0 --hbar_const 0.1
+\end{verbatim}
+In this regime, geometric compression dominates. Observer trajectories exhibit a systematic reduction in mean separation over time, forming stable clusters consistent with an effective attractive interaction.
+
+\paragraph{Spectral Dominance (Quantum-like Regime)}
+\begin{verbatim}
+python iame.py --G_const 1.0 --hbar_const 15.0
+\end{verbatim}
+Here, spectral complexity dominates. Observer trajectories become delocalized, path entropy increases, and interference-like patterns appear in the informational grid, producing behavior analogous to quantum fuzziness.
+
+
+\subsection*{Emergent Constants}
+
+Once the observer definition is fixed, the framework contains no free physical parameters.
+The effective constants commonly denoted by $\hbar$ and $G$ are identified \emph{a posteriori} from characteristic ratios in the emergent observer trajectories,
+such as spectral dispersion, geometric curvature.
+The speed of light emerge automatically and need not to be defined.
 
 
 \subsubsection{Spectral Complexity via Entropy}
@@ -164,7 +209,8 @@ These constants are not postulated a priori, but are unavoidable parameters link
 
 \section{Conclusion}
 
-We have presented a observer-centric informational ontology in which quantum mechanics and general relativity emerge as complementary compression schemes. Observers induce typicality constraints that select for smooth, compressible, and geometrically bounded worlds. This framework explains the apparent laws of physics as statistical consequences of minimal-description-length selection and provides a coherent basis for simulations of emergent phenomena.
+We have presented a observer-centric informational ontology in which quantum and geometric descriptions emerge as stable, observer-compatible compression attractors.
+Spectral representations efficiently encode smooth, temporally coherent informational paths, while geometric representations minimize boundary and locality costs necessary for observer persistence.
 
 
 
