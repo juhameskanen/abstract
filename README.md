@@ -50,7 +50,8 @@ In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physi
 * [The Visualized Theory](gallery.md) — Gallery of simulations demonstrating gravity, inertia, and atomic structures as emergent phenomena. 
 * [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
-* [QBitwave Project - Wavefunction as compression](https://github.com/juhameskanen/abstract/wiki/QBitWave) - Python implementation of emergent wavefunction 
+* [QBitwave Project - Wavefunction as compression](https://github.com/juhameskanen/abstract/wiki/QBitWave) - Python implementation of emergent wavefunction
+* [Project Wiki](https://github.com/juhameskanen/abstract/wiki) - Implementation and research notes and discussions of ongoing and planned matters
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
 * [LICENSE ➡](LICENSE.md) – Licence 
 
@@ -63,18 +64,9 @@ The project uses GitHub Actions for automated builds:
 * [![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
 
 
-## Wiki
-
-The [project wiki](https://github.com/juhameskanen/abstract/wiki) is under construction. It will contain:
-
-* Implementation notes and algorithms
-* Research notes and derivations
-* Discussion of ongoing and planned chapters
-
-
 ## The Current State
 
-**Under Construction** - material is being collected from other resources and converted from different formats to github ecosystem.
+**Under Construction** - very! Material is being collected from other resources and converted from different formats to github ecosystem.
 
 Many simulations and chapters are in draft stage; behavior may be updated frequently based on the current phase of authorial chaos. 
 
