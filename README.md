@@ -50,7 +50,7 @@ In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physi
 * [The Visualized Theory](gallery.md) — Gallery of simulations demonstrating gravity, inertia, and atomic structures as emergent phenomena. 
 * [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
 * [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
-* [QBitwave Project - Wavefunction as compression](https://github.com/juhameskanen/abstract/wiki/QBitWave)
+* [QBitwave Project - Wavefunction as compression](https://github.com/juhameskanen/abstract/wiki/QBitWave) - Python implementation of emergent wavefunction 
 * [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
 * [LICENSE ➡](LICENSE.md) – Licence 
 
