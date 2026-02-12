@@ -1,49 +1,15 @@
 """
-Base class for IaMe simulations, providing core functionality for particle resampling,
-PDF computation, and MDL-based trajectory updates. 
-
-This simulation demonstrates how *inertia* can emerge from 
-an informational principle: **Minimum Description Length (MDL)**.
+Physics agnostic base class for IaMe simulations, providing core functionality for particle resampling,
+PDF computation. 
 
 Concept:
 --------
-- Gaussian blobs represent *observers*. Each blob defines a 
-  probability distribution (a Gaussian filter) that selects 
-  which particle configurations are "observable".
-- Particles are not moved via forces. Instead, they are resampled 
-  according to the joint probability distribution of all blobs.
-- Blob positions are updated from assigned particles, but their 
-  trajectories are chosen using an MDL criterion:
-  
-    The "best" next position is the one that minimizes the 
-    description length of the trajectory, i.e., the deviation 
-    from linear extrapolation, resulting best compression.
-  
-- This introduces *informational inertia*: blobs resist sudden 
-  changes, leading to smoother, mass-like trajectories.
+- Gaussian blobs represent *observers*.
+- Particles are resampled according to the joint probability distribution of all blobs.
 
-Result:
--------
-- Overlapping observer filters produce attraction (gravity-like effect).
-- MDL trajectory compression produces persistence (inertia-like effect).
-- Distance, velocity, and acceleration of blobs are visualized 
-  alongside the particle field.
 
-Usage:
-------
-Run as a script:
-
-    python mdl_gravity_sim.py --sigma 0.11 --particles 4096 --steps 400
-
-Parameters:
------------
---file        Output filename for the simulation video (MP4 format).
---sigma       Standard deviation of Gaussian blobs (observer filter width).
---particles   Number of particles (bits) in the system.
---steps       Number of resampling iterations.
 """
 
-import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
@@ -95,12 +61,6 @@ class GravitySim:
         self.lines: Dict[str, Line2D] = {}
         self.accumulated_pdf = None
 
-    def assign_particles_to_blob(self, blob_index: int) -> np.ndarray:
-        """Assigns particles to a specific blob based on proximity."""
-        pos: np.ndarray = self.positions[blob_index]
-        distances: np.ndarray = np.linalg.norm(self.particles - pos, axis=1)
-        assigned: np.ndarray = self.particles[distances < 3.0 * self.blob_sigma]
-        return assigned
 
     def generate_candidates_for_blob(
         self,
@@ -140,14 +100,25 @@ class GravitySim:
             )
         return np.vstack(particles)
 
+
     def compute_pdf(self, grid_points: np.ndarray) -> np.ndarray:
-        """Compute the combined PDF of all blobs at given grid points."""
-        pdf_total: np.ndarray = np.zeros(grid_points.shape[0])
+        pdf_total = np.zeros(grid_points.shape[0])
+
         for pos in self.positions:
-            cov: List[List[float]] = [[self.blob_sigma**2, 0], [0, self.blob_sigma**2]]
-            pdf_total += multivariate_normal.pdf(grid_points, mean=pos, cov=cov)
-        pdf_total /= pdf_total.sum()
+            cov = [[self.blob_sigma**2, 0], [0, self.blob_sigma**2]]
+            pdf_total += multivariate_normal.pdf(
+                grid_points, mean=pos, cov=cov
+            )
+
+        pdf_total = np.nan_to_num(pdf_total, nan=0.0)
+        s = pdf_total.sum()
+        if s <= 0:
+            pdf_total[:] = 1.0 / len(pdf_total)
+        else:
+            pdf_total /= s
+
         return pdf_total
+
 
     def resample_particles(self, pdf_total: np.ndarray, grid_points: np.ndarray) -> np.ndarray:
         """Resample particles according to the probability distribution."""

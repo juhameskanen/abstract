@@ -10,7 +10,7 @@
 
 \addbibresource{../references.bib}
 
-\title{Informational Ontology and Observer-Conditioned Typicality}
+\title{Observer-Centric Information-Theoretic Framework (\(D–\psi–G\))}
 \author{Juha Meskanen}
 \date{2025}
 
@@ -19,213 +19,162 @@
 \maketitle
 
 \begin{abstract}
-We present an informational ontology in which physical laws emerge from observer-conditioned typicality. Modeling the universe as an abstract, pre-geometric configuration space, we show that quantum mechanics and general relativity arise as complementary compression channels—spectral and geometric—optimized for the persistence of observers. We formalize this via the D--$\psi$--G decomposition, which partitions the complexity of observer-compatible paths and identifies fundamental constants $\hbar$, $G$ and $c$ as scaling weights for spectral and geometric encoding. Our framework naturally resolves the Boltzmann Brain paradox: low-complexity, observer-rich universes dominate the measure, while isolated high-entropy fluctuations are exponentially suppressed. Simulations demonstrate that smooth spacetime and wave-like dynamics emerge from maximization of description-length-based probability. These results suggest that physical laws are not primitive, but are the statistically dominant regularities of a maximally compressible informational substrate, providing a unified, observer-centric perspective on quantum mechanics, gravity, and cosmology.
+We present an informational ontology in which physical laws emerge from observer-conditioned typicality.
+Quantum mechanics and general relativity arise as a trinity of complementary, orthogonal representations of the same underlying informational substrate.
+These three representations are mutually orthogonal: none is sufficient alone, and the observer’s realized history is determined by the joint optimization of their informational complexity.
+We formalize this via the D--$\psi$--G decomposition and demonstrate that emergent physics is fully determined by observer survival, collapsing all apparent free parameters to zero.
 \end{abstract}
 
 \noindent \textbf{Keywords:} Information Theory, Observer-Conditioned Typicality, Emergent Gravity, Quantum Foundations, D--$\psi$--G Decomposition, Algorithmic Complexity, Spectral Compression, Pre-Geometric Universe.
-
 
 \tableofcontents
 \bigskip
 
 \section{Introduction}
 
-The nature of reality can be formalized as a collection of abstract information without intrinsic geometry, ordering, or dynamics. Observers are structured informational entities, and their existence selects for configurations exhibiting regularity and stability. This paper develops a formal, stand-alone framework in which quantum mechanics and general relativity emerge as complementary compression channels acting on the same informational substrate. We introduce an observer-conditioned probability measure and the D--$\psi$--G decomposition to unify discrete, spectral, and geometric representations. This formalism reproduces the familiar macroscopic laws of physics while remaining fully consistent with a timeless, pre-geometric ontology.
+Reality can be formalized as a collection of abstract information without intrinsic geometry, ordering, or dynamics.
+Observers are structured informational entities, and their existence selects for configurations exhibiting regularity and stability.
+We develop a framework in which quantum mechanics and general relativity emerge as complementary compression channels acting on the same informational substrate.
+An observer-conditioned probability measure, together with the D--$\psi$--G decomposition, ensures that all physical laws arise naturally from joint complexity minimization, without introducing extraneous parameters.
 
 \section{Ontological Premises}
 
 \subsection{Fundamental Information Space}
 
-For definiteness, we adopt a binary representation of configurations. This choice is purely formal and convenient. Nothing in the framework depends on the universe being fundamentally binary; any discrete or symbolic representation would suffice. 
-
-Let $\mathcal{C} = \{0,1\}^n$ denote the complete set of binary configurations of $n$ bits. Each element $s \in \mathcal{C}$ is a static configuration of the universe. At this fundamental level:
+We adopt a finite binary representation for clarity: let $\mathcal{C} = \{0,1\}^n$ denote all $n$-bit configurations. Each $s \in \mathcal{C}$ is a static, timeless configuration. At this level:
 \begin{itemize}
-    \item configurations are unordered,
-    \item all configurations exist equally,
-    \item there is no external time or dynamics.
+    \item Configurations are unordered and all exist equally.
+    \item No external time or dynamics is assumed.
 \end{itemize}
 
-A permutation $\sigma: \mathcal{C} \to \mathcal{C}$ defines a total ordering of all $2^n$ configurations; conceptually, this can be viewed as a ``movie'' containing all possible states. While mathematically valid, most permutations are maximally incoherent, containing no stable structure. Observers interact only with structured \emph{paths}, finite sequences $\gamma = (s_1, s_2, \dots, s_T)$ preserving informational continuity.
+A permutation $\sigma: \mathcal{C} \to \mathcal{C}$ defines an ordering of these configurations, representing a ``movie'' of possible states. Most permutations are incoherent; observers interact only with structured \emph{paths} $\gamma = (s_1, \dots, s_T)$ preserving informational continuity.
 
 \subsection{Observers and Induced Time}
 
-Observers are subpatterns instantiated along paths through $\mathcal{C}$. They require:
+Observers are coherent subpatterns along paths through $\mathcal{C}$, requiring:
 \begin{itemize}
-    \item continuity and memory,
-    \item the ability to model and predict internal states,
-    \item well-defined boundaries to preserve identity.
+    \item Memory and continuity,
+    \item The ability to model internal states and predict outcomes,
+    \item Well-defined boundaries to preserve identity.
 \end{itemize}
 
-Time is not fundamental; it is induced as the ordering along the observer path. Observed dynamics, cosmology, and causality are models of path structure rather than external processes.
+Time is emergent along observer paths; macroscopic causality and dynamics are models of this ordering.
 
 \section{Compression and Spectral Complexity}
 
-\subsection{Spectral Complexity}
+\subsection{Spectral Complexity and the Wavefunction}
 
-We define \emph{spectral complexity} $C_{\rm spec}[\gamma]$ as the minimal representation of a path $\gamma$ in terms of frequencies, phases, and amplitudes necessary to capture observer-relevant information. Low $C_{\rm spec}$ corresponds to smooth, compressible worlds; high $C_{\rm spec}$ corresponds to chaotic, uncompressible worlds. Observer-compatible histories overwhelmingly arise from paths minimizing $C_{\rm spec}$.
+Define the \emph{spectral complexity} of a path $\gamma$ as $\mathcal{C}_\psi[\gamma]$, the minimal representation in terms of frequencies, phases, and amplitudes needed to capture observer-relevant information.
 
-\subsection{Wavefunction as Optimal Compression}
+- Low $\mathcal{C}_\psi$ → smooth, compressible, highly probable worlds.  
+- High $\mathcal{C}_\psi$ → chaotic, uncompressible, low-probability worlds.
 
-The quantum wavefunction encodes an ensemble of observer-compatible paths:
-\begin{itemize}
-    \item interference reflects shared substructure across paths,
-    \item probabilities correspond to relative description weights,
-    \item linearity and complex amplitudes emerge from minimal spectral encoding.
-\end{itemize}
+The wavefunction encodes an ensemble of observer-compatible paths. Interference reflects shared substructure, and probabilities correspond to relative description weights. Linearity and complex amplitudes emerge from optimal spectral encoding, explaining why observers perceive a deterministic, continuous $\psi$.
 
-\section{D--$\psi$--G Decomposition and Unified Probability}
+\subsection{Geometric Complexity and Emergent GR}
 
-\subsection{Observer-Conditioned Probability}
+Intelligent observers require **boundaries** to maintain identity. Geometric space is optimal for representing these boundaries. Minimal geometric complexity, $\mathcal{C}_G[\gamma]$, penalizes both spatial roughness and temporal variation of curvature:
 
-We formalize observer-typicality through a probability measure over histories $\gamma \in \Gamma_O$, the set of all paths sustaining observer $O$:
-\begin{equation}
-\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\Big[-\lambda \mathcal C_O[\gamma]\Big],
-\end{equation}
-where $\mathcal{C}_O[\gamma]$ is a description-length-based complexity functional, $\lambda$ is a fidelity parameter, and $Z_O$ normalizes the measure. Histories minimizing $\mathcal{C}_O[\gamma]$ dominate probability, yielding emergent laws of physics.
+\[
+L_G \sim \int d^4x \left( \lvert \nabla K \rvert^2 + \lvert \partial_t K \rvert^2 \right),
+\]
 
-\subsection{D--$\psi$--G Decomposition}
+where $K$ is a curvature-like field. Low $\mathcal{C}_G$ histories dominate, producing **Einstein-like dynamics** as the unique stable compression attractor.
 
-We decompose $\mathcal C_O[\gamma]$ additively into three orthogonal channels:
-\begin{equation}
-\mathcal C_O[\gamma] = \alpha_D \mathcal C_D[\gamma] + \alpha_\psi \mathcal C_\psi[\gamma] + \alpha_G \mathcal C_G[\gamma],
-\end{equation}
-where:
-\begin{itemize}
-    \item $\mathcal C_D[\gamma]$: discrete description of particle-like states,
-    \item $\mathcal C_\psi[\gamma]$: spectral (wavefunction) representation,
-    \item $\mathcal C_G[\gamma]$: geometric (spacetime) encoding enforcing observer boundaries.
-\end{itemize}
+\subsection{Discrete Complexity}
+
+The discrete instantiation $\mathcal{C}_D[\gamma]$ corresponds to particle-like states, the ``pixels'' of reality, ensuring observer consistency with minimal information dissipation.
+
+\section{D--$\psi$--G Unified Probability}
+
+\subsection{Joint Complexity}
+
+We decompose observer-path complexity additively:
+
+\[
+\mathcal{C}_O[\gamma] = \alpha_D \mathcal{C}_D[\gamma] + \alpha_\psi \mathcal{C}_\psi[\gamma] + \alpha_G \mathcal{C}_G[\gamma].
+\]
+
+\subsection{Observer-Conditioned Measure}
+
+The probability of a history $\gamma \in \Gamma_O$ (all paths sustaining observer $O$) is:
+
+\[
+\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\big[-\lambda \mathcal{C}_O[\gamma]\big].
+\]
+
+- $\lambda$ is the \emph{stiffness constant} weighting low-complexity paths.  
+- Crucially, $\lambda$ is \textbf{emergent}: it is the value that maximizes the probability of the observer existing.  
+- Once this condition is applied, all free parameters vanish.
 
 \subsubsection{Illustration}
 
 \begin{center}
-\begin{tikzcd}[row sep=5em, column sep=5em]
-& \psi(\mathcal{I}_n) \arrow[dl, "Sampling"] & \\
-D(\mathcal{I}_n) \arrow[rr, "Geometric"] & & G(\mathcal{I}_n) \arrow[ul, "Compression"]
-\end{tikzcd}
+\begin{tikzpicture}[scale=2]
+
+% Axes
+\draw[thick,->] (0,0,0) -- (2,0,0) node[anchor=north east] {$D$};
+\draw[thick,->] (0,0,0) -- (0,2,0) node[anchor=south west] {$\psi$};
+\draw[thick,->] (0,0,0) -- (0,0,2) node[anchor=south] {$G$};
+
+% Optional: origin label
+\node at (0,0,0) [anchor=north east] {$\mathcal{I}_n$};
+
+% Optional: dotted projections
+\draw[dashed] (2,0,0) -- (2,2,0) -- (0,2,0);
+\draw[dashed] (2,0,0) -- (2,0,2) -- (0,0,2);
+\draw[dashed] (0,2,0) -- (0,2,2) -- (0,0,2);
+
+\end{tikzpicture}
 \end{center}
 
-This diagram illustrates the mutually reinforcing relationship between discrete instantiation $D$, spectral compression $\psi$, and geometric encoding $G$. Together, they generate observer-compatible, high-probability histories.
 
-\subsection{Emergent Physics}
 
-The additive decomposition implies that quantum behavior dominates at scales where $\mathcal C_\psi$ is significant, while classical spacetime emerges where $\mathcal C_G$ dominates. The chain of emergence is thus:
-\begin{equation}
-\text{Maximal Compression} \;\Rightarrow\; \text{Maximal Probability} \;\Rightarrow\; \text{Maximal Predictability}.
-\end{equation}
+
+## Emergent Physics
+
+- Histories minimizing joint complexity dominate.  
+- QM dominates where $\mathcal{C}_\psi$ is significant; classical geometry dominates where $\mathcal{C}_G$ is significant.  
+- Maximal compression → maximal probability → maximal predictability.
+
+\section{Zero-Parameter Universe}
+
+- Given $n$ bits of the observer wavefunction, there are $2^n$ arrangements and $(2^n)!$ orderings.  
+- Only a tiny fraction of these permit persistent observers.  
+- λ is selected by **maximizing observer probability**, collapsing the framework to **zero free parameters**.  
 
 \section{Interpretation}
 
-\subsection{Smooth Worlds and Typicality}
-
-Although chaotic observer paths exist, the measure overwhelmingly favors smooth, compressible configurations. Observers find themselves in worlds with predictable physical laws not by necessity, but due to combinatorial dominance under compression-weighted probability.
-
-\subsection{Geometry as Boundary Enforcement}
-
-Persistent observer identity requires well-defined internal-external distinctions. Geometry enforces these boundaries, producing the familiar three-dimensional structures observed by intelligent entities.
+- $\psi$ and $G$ projections are complementary and orthogonal.  
+- Observers find themselves in minimal joint-complexity histories.  
+- Deviations (injected intelligence) are probabilistically suppressed but may be necessary for survival.
 
 \section{Simulations}
 
-Demonstrations of emergent behavior in the proposed framework are implemented in the reference simulation:
+Demonstrations of emergent behavior are implemented in the reference simulation:
 
 \begin{itemize}
     \item \texttt{simulations/iame.py}
 \end{itemize}
 
-The simulation evaluates observer-conditioned compression under the $D$--$\psi$--$G$ decomposition. For numerical reasons, the implementation exposes three scaling parameters corresponding to the spectral, geometric, and causal channels:
+\section*{Conclusion}
+
+The D--$\psi$--G framework shows that:
+
+1. Observer-compatible laws emerge naturally from compression-weighted probability.  
+2. Quantum mechanics is the minimal spectral representation of paths.  
+3. Classical geometry is the minimal geometric projection necessary for observer survival.  
+4. There are no fundamental free parameters; λ is fixed by observer-conditioned maximal probability.
+
+This provides a **zero-parameter, observer-centric theory of everything**, unifying QM and GR as complementary projections of the same underlying information.
+
+\section*{Acknowledgments and References}
 
 \begin{itemize}
-  \item \texttt{--hbar\_const}: numerical weight associated with spectral complexity ($\psi$ channel);
-  \item \texttt{--G\_const}: numerical weight associated with geometric overlap ($G$ channel);
-  \item \texttt{--c\_speed}: maximum informational update radius per timestep, limiting causal propagation.
+    \item Kolmogorov Complexity \cite{Kolmogorov1965,LiVitanyi}  
+    \item Solomonoff Induction \cite{Solomonoff1964}  
+    \item Chaitin's Algorithmic Information Theory \cite{Chaitin1975}  
 \end{itemize}
-
-These parameters do not represent physical constants and are not conceptual inputs to the theory. The sole conceptual input is the formal definition of an observer. The parameters serve only to control numerical resolution and convergence behavior in finite simulations.
-
-\subsection*{Role of the Discrete Component $D$}
-
-The discrete component $D$ represents the raw, uncompressed description length of a history at the level of the underlying symbolic representation.
-In the present work, this representation is fixed by construction: all observer-compatible histories are encoded using the same discrete alphabet, update rules, and path length conventions.
-
-As a result, $\mathcal C_D[\gamma]$ contributes an additive baseline common to all histories in $\Gamma_O$ and therefore cancels out in relative probability comparisons.
-The $D$ term thus sets the reference measure on the space of histories rather than acting as a tunable dynamical parameter.
-
-Only the nontrivial compression channels—spectral ($\psi$) and geometric ($G$)—remain visible in simulations as sources of differential weighting.
-This mirrors the role of the uniform prior in algorithmic probability, where structure-dependent compression determines typicality once the base description language is fixed.
-
-
-\subsection*{Qualitative Regimes}
-
-The following parameter regimes consistently produce distinct qualitative behaviors:
-
-\paragraph{Geometric Dominance (Gravity-like Regime)}
-\begin{verbatim}
-python iame.py --G_const 20.0 --hbar_const 0.1
-\end{verbatim}
-In this regime, geometric compression dominates. Observer trajectories exhibit a systematic reduction in mean separation over time, forming stable clusters consistent with an effective attractive interaction.
-
-\paragraph{Spectral Dominance (Quantum-like Regime)}
-\begin{verbatim}
-python iame.py --G_const 1.0 --hbar_const 15.0
-\end{verbatim}
-Here, spectral complexity dominates. Observer trajectories become delocalized, path entropy increases, and interference-like patterns appear in the informational grid, producing behavior analogous to quantum fuzziness.
-
-
-\subsection*{Emergent Constants}
-
-Once the observer definition is fixed, the framework contains no free physical parameters.
-The effective constants commonly denoted by $\hbar$ and $G$ are identified \emph{a posteriori} from characteristic ratios in the emergent observer trajectories,
-such as spectral dispersion, geometric curvature.
-The speed of light emerge automatically and need not to be defined.
-
-
-\subsubsection{Spectral Complexity via Entropy}
-
-The spectral component $\mathcal C_\psi[\gamma]$ can be formalized using the Shannon or Rényi entropy of the path's spectral decomposition. Let $\gamma = (s_1, s_2, \dots, s_T)$ denote the observer path in the discrete configuration space $\mathcal{C}$. Define $\hat \gamma(\omega)$ as the discrete Fourier transform (DFT) of $\gamma$ (alternatively, a discrete cosine transform can be used for real-valued paths):
-
-\[
-\hat \gamma(\omega) = \sum_{t=1}^{T} s_t \, e^{-2\pi i \omega t/T}, \quad \omega = 0,1,\dots,T-1.
-\]
-
-Then the spectral complexity is
-\[
-\mathcal C_\psi[\gamma] \;\sim\; H_\alpha(\hat \gamma(\omega)) = \frac{1}{1-\alpha} \log \sum_\omega |\hat \gamma(\omega)|^{2\alpha},
-\]
-or in the Shannon case ($\alpha \to 1$),
-\[
-\mathcal C_\psi[\gamma] \;\sim\; H(\hat \gamma(\omega)) = - \sum_\omega |\hat \gamma(\omega)|^2 \log |\hat \gamma(\omega)|^2.
-\]
-
-Low-entropy paths require few non-negligible spectral coefficients, minimizing $\mathcal C_\psi$ and thereby dominating the observer-conditioned measure. This formalizes the emergence of wave-like dynamics as a statistical consequence of spectral compression.
-
-
-\subsection{Emergent Fundamental Constants}
-
-Within the D--$\psi$--G framework, the observed fundamental constants $\hbar$, $G$, and $c$ naturally arise as scaling weights associated with distinct informational compression channels. Specifically, $\hbar$ quantifies the cost of spectral encoding in the $\psi$ channel, governing the minimal action per unit of spectral complexity; $G$ quantifies the geometric encoding cost in the $G$ channel, controlling the effective curvature of low-complexity spacetime; and $c$ emerges as the maximal rate at which information can propagate along low-complexity geometric paths, setting the causal speed limit.  
-
-These constants are not postulated a priori, but are unavoidable parameters linking the abstract informational substrate to empirically observed physics. While their qualitative roles are clear, deriving their numerical values from first principles within this framework remains an open problem. We therefore treat $\hbar$, $G$, and $c$ as emergent scaling factors, and leave the precise quantitative derivation as a subject for future work. Simulations indicate that typical low-complexity paths reproduce smooth spacetime and wave-like dynamics consistent with effective $\hbar$, $G$, and $c$, providing empirical support for this interpretation.
-
-
-
-\section{Conclusion}
-
-We have presented a observer-centric informational ontology in which quantum and geometric descriptions emerge as stable, observer-compatible compression attractors.
-Spectral representations efficiently encode smooth, temporally coherent informational paths, while geometric representations minimize boundary and locality costs necessary for observer persistence.
-
-
-
-\section*{Acknowledgments and Foundational References}
-
-The framework presented here draws directly on the formal foundations of algorithmic information theory and inductive inference:
-
-\begin{itemize}
-    \item \textbf{Kolmogorov Complexity} \cite{Kolmogorov1965,LiVitanyi}: formalizes the minimal description length of finite strings, providing the rigorous basis for observer-conditioned path complexity.
-    \item \textbf{Solomonoff Induction} \cite{Solomonoff1964}: defines a universal prior over all computable sequences, motivating the statistical weighting of observer-compatible paths.
-    \item \textbf{Chaitin's Algorithmic Information Theory} \cite{Chaitin1975}: demonstrates the correspondence between program-size complexity and probabilistic occurrence of structures, directly inspiring the $D$--$\psi$--$G$ additive decomposition.
-\end{itemize}
-
-Our derivation of emergent physics is an application of these well-established theoretical principles to observer-centered informational universes.
-
 
 \printbibliography
 

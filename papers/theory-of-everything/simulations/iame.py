@@ -7,7 +7,11 @@ from visualization_engine import GravitySim
 
 class ObserverWavefunction:
     """
-    Represents a single observer as a wavefunction with memory.
+    Represents a single observer as a wavefunction with memory in 2D space.
+
+    The observer's motion emerges from minimizing the spectral complexity of
+    its wavefunction, ensuring smooth trajectories and inertial behavior
+    without hard-coded geometric forces.
 
     Attributes
     ----------
@@ -16,7 +20,7 @@ class ObserverWavefunction:
     sigma : float
         Spatial localization width of the Gaussian envelope.
     trajectory : List[np.ndarray]
-        Historical positions for memory / spectral complexity.
+        Historical positions for memory and spectral complexity computation.
     qbit : QBitwave
         Underlying bitstring representation.
     initial_velocity : np.ndarray
@@ -34,12 +38,25 @@ class ObserverWavefunction:
         self.qbit = QBitwave(bitstring=initial_bits, fixed_basis_size=8)
 
     def record_position(self, pos: np.ndarray):
+        """Append a new position to the trajectory and update center."""
         self.trajectory.append(np.array(pos, dtype=float))
         self.center = np.array(pos, dtype=float)
 
     def evaluate(self, points: np.ndarray, t: float) -> np.ndarray:
         """
-        Compute complex amplitude at given spatial points.
+        Compute complex amplitude of the wavefunction at given spatial points.
+
+        Parameters
+        ----------
+        points : np.ndarray
+            Array of 2D coordinates to evaluate.
+        t : float
+            Current simulation time step.
+
+        Returns
+        -------
+        np.ndarray
+            Complex amplitudes at each point.
         """
         r = np.linalg.norm(points - self.center, axis=1)
         amps = self.qbit.get_amplitudes()
@@ -50,7 +67,9 @@ class ObserverWavefunction:
 
         traj_array = np.array(self.trajectory)
         complex_traj = traj_array[:, 0] + 1j * traj_array[:, 1]
+
         if np.any(self.initial_velocity):
+            # Inject initial velocity into the first position
             complex_traj[0] += self.initial_velocity[0] + 1j * self.initial_velocity[1]
 
         spectral_factor = np.abs(np.fft.fft(complex_traj))
@@ -62,47 +81,63 @@ class ObserverWavefunction:
 # --- Emergent ψ–G Physics Simulation ---
 class PsiEmergentSim(GravitySim):
     """
-    Subclass implementing emergent physics via observer wavefunctions.
+    Emergent observer dynamics driven purely by wavefunction spectral complexity.
+
+    Observers evolve in 2D space without any geometric forces. Inertia emerges
+    naturally: rapid changes require high-frequency components, which increases
+    wavefunction complexity and is thus probabilistically suppressed.
 
     Parameters
     ----------
-    alpha_psi : float
-        Spectral complexity weight (ℏ analog).
-    alpha_g : float
-        Geometric overlap weight (G analog).
-    initial_velocity : np.ndarray
-        Optional initial velocity for all observers.
+    initial_velocity : np.ndarray, optional
+        Initial 2D velocity for all observers to seed motion.
+    span : float
+        Fraction of total steps over which observers are born.
+    n_particles : int
+        Number of particles for visualization.
+    n_steps : int
+        Number of simulation steps.
+    blob_sigma : float
+        Spatial size of each observer blob.
+    n_candidates : int
+        Number of candidate positions evaluated per step.
     """
 
     def __init__(self,
-                alpha_psi: float = 0.01,
-                alpha_g: float = 2.0,
-                initial_velocity: Optional[np.ndarray] = None,
-                span: float = 0,
-                n_particles: int = 4096,
-                n_steps: int = 100,
-                blob_sigma: float = 0.1,
-                n_candidates: int = 5):
+                 initial_velocity: Optional[np.ndarray] = None,
+                 span: float = 0,
+                 n_particles: int = 4096,
+                 n_steps: int = 100,
+                 blob_sigma: float = 0.1,
+                 n_candidates: int = 5):
         super().__init__(n_particles, n_steps, blob_sigma, n_candidates)
         self.t = 0.0
-        self.alpha_psi = alpha_psi
-        self.alpha_g = alpha_g
         self.initial_velocity = initial_velocity if initial_velocity is not None else np.zeros(2)
 
-        # Create wavefunctions, one per blob
+        # Initialize wavefunctions for each observer
         self.wavefunctions: List[ObserverWavefunction] = [
             ObserverWavefunction(pos, self.blob_sigma, initial_velocity=self.initial_velocity)
             for pos in self.positions
         ]
 
-        # Birth schedule and activity flags
+        # Birth schedule for observers
         self.observer_span = span
         self.birth_frame = np.linspace(0, self.n_steps - 1, num=self.n_blobs, dtype=int) if self.observer_span > 0 else np.zeros(self.n_blobs, dtype=int)
         self.active_observers = [False] * self.n_blobs
 
     def compute_pdf(self, grid_points: np.ndarray) -> np.ndarray:
         """
-        Compute the normalized probability density from all observer wavefunctions.
+        Compute normalized probability density from all observer wavefunctions.
+
+        Parameters
+        ----------
+        grid_points : np.ndarray
+            Array of 2D points to evaluate PDF.
+
+        Returns
+        -------
+        np.ndarray
+            Normalized PDF across points.
         """
         psi_total = np.zeros(grid_points.shape[0], dtype=np.complex128)
         for wf in self.wavefunctions:
@@ -112,7 +147,17 @@ class PsiEmergentSim(GravitySim):
 
     def calculate_spectral_complexity(self, pos: np.ndarray) -> float:
         """
-        Estimate spectral entropy at candidate position.
+        Estimate local spectral entropy (complexity) from particle distribution.
+
+        Parameters
+        ----------
+        pos : np.ndarray
+            2D candidate position.
+
+        Returns
+        -------
+        float
+            Spectral complexity (Shannon entropy in bits).
         """
         grid_res = 8
         x = np.linspace(pos[0] - self.blob_sigma, pos[0] + self.blob_sigma, grid_res)
@@ -122,15 +167,16 @@ class PsiEmergentSim(GravitySim):
         p_freq = f_coeffs.flatten() / (np.sum(f_coeffs) + 1e-10)
         return -np.sum(p_freq * np.log2(p_freq + 1e-10))
 
-
     def generate_candidates_emergent(self, blob_idx: int) -> np.ndarray:
         """
-        Generate candidate positions for a blob using fully emergent displacement.
-        
-        Displacement is limited by:
-        1. Local PDF variance (dense regions -> smaller moves)
-        2. Trajectory MDL cost (high deviation -> penalized)
-        
+        Generate candidate positions for an observer based on local PDF spread
+        and trajectory inertia.
+
+        Parameters
+        ----------
+        blob_idx : int
+            Index of the observer.
+
         Returns
         -------
         np.ndarray
@@ -138,8 +184,7 @@ class PsiEmergentSim(GravitySim):
         """
         current_pos = self.positions[blob_idx]
 
-        # --- 1. Local PDF variance ---
-        # Evaluate total PDF on a fine grid around current position
+        # --- Local PDF spread ---
         grid_res = 12
         x = np.linspace(current_pos[0] - self.blob_sigma, current_pos[0] + self.blob_sigma, grid_res)
         y = np.linspace(current_pos[1] - self.blob_sigma, current_pos[1] + self.blob_sigma, grid_res)
@@ -147,98 +192,81 @@ class PsiEmergentSim(GravitySim):
         points = np.column_stack([X.ravel(), Y.ravel()])
         pdf_vals = self.compute_pdf(points)
 
-        # Weighted variance gives local "spread"
         mu = np.average(points, axis=0, weights=pdf_vals)
-        sigma_local = np.sqrt(np.average(np.sum((points - mu)**2, axis=1), weights=pdf_vals))
-        
-        # --- 2. Trajectory-based inertia ---
-        traj = self.wavefunctions[blob_idx].trajectory
-        if len(traj) < 2:
-            inertia_vec = np.zeros(2)
-        else:
-            inertia_vec = traj[-1] - traj[-2]  # MDL prefers continuation of recent motion
+        sigma_local = np.sqrt(np.average(np.sum((points - mu) ** 2, axis=1), weights=pdf_vals))
 
-        # --- 3. Generate candidates ---
+        # --- Trajectory-based inertia ---
+        traj = self.wavefunctions[blob_idx].trajectory
+        inertia_vec = np.zeros(2) if len(traj) < 2 else traj[-1] - traj[-2]
+
+        # --- Generate candidates ---
         n_cand = self.n_candidates * 2
-        r = sigma_local * np.sqrt(np.random.rand(n_cand))           # magnitude proportional to local PDF spread
+        r = sigma_local * np.sqrt(np.random.rand(n_cand))
         theta = np.random.rand(n_cand) * 2 * np.pi
         candidates = np.column_stack([
             current_pos[0] + r * np.cos(theta) + 0.5 * inertia_vec[0],
             current_pos[1] + r * np.sin(theta) + 0.5 * inertia_vec[1]
         ])
-
-        # Keep candidates in [0,1]^2
         candidates = np.clip(candidates, 0, 1)
         return candidates
 
-
-
     def update_positions(self, new_particles: np.ndarray):
         """
-        Move observers by evaluating ψ-G weighted candidate positions.
+        Update observer positions by minimizing wavefunction spectral complexity.
 
-        Key changes:
-        - Geometric cost is derived from total ψ-field at candidate location.
-        - No local particle assignment.
-        - Spectral cost remains as before.
-        - Particles are only resampled from PDF for visualization.
+        Principles
+        ----------
+        1. Small candidate displacements are generated around current positions.
+        2. Wavefunction complexity is evaluated for each candidate.
+        3. Probabilistic selection favors candidates that minimally increase complexity.
+        4. Inertia and smooth motion emerge naturally; no geometric forces applied.
         """
         self.t += 1
         self.particles = new_particles  # visualization only
 
-        # Precompute grid and PDF once for efficiency
-        grid_res = 64
-        x = np.linspace(0, 1, grid_res)
-        y = np.linspace(0, 1, grid_res)
-        X, Y = np.meshgrid(x, y)
-        grid_points = np.column_stack([X.ravel(), Y.ravel()])
-        pdf_total = self.compute_pdf(grid_points)
-
-        for i in range(self.n_blobs):
+        for i, wf in enumerate(self.wavefunctions):
             if self.birth_frame[i] > self.t:
                 continue
             if not self.active_observers[i]:
                 self.active_observers[i] = True
 
+            current_pos = self.positions[i]
             candidates = self.generate_candidates_emergent(i)
-            costs = []
 
+            complexities = []
             for cand in candidates:
-                # --- Geometric cost based on total ψ-field ---
-                idx = np.argmin(np.linalg.norm(grid_points - cand, axis=1))
-                c_g = 1.0 - pdf_total[idx]  # high local PDF → low cost
+                wf_center_backup = wf.center.copy()
+                wf.record_position(cand)
+                complexities.append(wf.qbit.wave_complexity())
+                wf.trajectory.pop()
+                wf.center = wf_center_backup
 
-                # --- Spectral cost based on observer trajectory memory ---
-                c_psi = self.calculate_spectral_complexity(cand)
-
-                costs.append(self.alpha_g * c_g + self.alpha_psi * c_psi)
-
-            costs = np.array(costs)
-            probs = np.exp(-5.0 * (costs - np.min(costs)))
+            complexities = np.array(complexities)
+            delta_c = np.max(complexities) - np.min(complexities) + 1e-12
+            k = 3.0 / delta_c
+            probs = np.exp(-k * (complexities - np.min(complexities)))
             probs /= probs.sum()
 
             chosen_idx = np.random.choice(len(candidates), p=probs)
-            self.positions[i] = candidates[chosen_idx]
-            self.wavefunctions[i].record_position(self.positions[i].copy())
-            self.trajs[i].append(self.positions[i].copy())
+            chosen_pos = candidates[chosen_idx]
+
+            self.positions[i] = chosen_pos
+            wf.record_position(chosen_pos)
+            self.trajs[i].append(chosen_pos.copy())
 
 
-
-
-# --- CLI Interface ---
+# --- IaMe demonstrator ---
 def main():
-    parser = argparse.ArgumentParser(description="Emergent ψ-G Simulation")
-    parser.add_argument("--hbar", type=float, default=10, help="Spectral complexity weight ℏ")
-    parser.add_argument("--G", type=float, default=20.0, help="Geometric overlap weight G")
-    parser.add_argument("--vx", type=float, default=0)
-    parser.add_argument("--vy", type=float, default=0)
-    parser.add_argument("--sigma", type=float, default=0.10)
-    parser.add_argument("--particles", type=int, default=4096)
-    parser.add_argument("--steps", type=int, default=200)
-    parser.add_argument("--span", type=float, default=0.0)
+    parser = argparse.ArgumentParser(description="Emergent ψ Simulation")
+    parser.add_argument("--vx", type=float, default=10, help="Initial velocity x-component")
+    parser.add_argument("--vy", type=float, default=7, help="Initial velocity y-component")
+    parser.add_argument("--sigma", type=float, default=0.10, help="Blob size (σ)")
+    parser.add_argument("--particles", type=int, default=4096, help="Number of particles for visualization")
+    parser.add_argument("--steps", type=int, default=300, help="Number of simulation steps")
+    parser.add_argument("--span", type=float, default=0.0, help="Fraction of total steps over which observers are born")
     parser.add_argument("--file", type=str, default="emergent_sim")
     parser.add_argument("--format", choices=["mp4", "gif"], default="mp4")
-    parser.add_argument("--resolution", type=int, default=640)
+    parser.add_argument("--resolution", type=int, default=640, help="Output video resolution (width in pixels)")
 
     args = parser.parse_args()
     initial_velocity = np.array([args.vx, args.vy])
@@ -247,8 +275,6 @@ def main():
         n_particles=args.particles,
         n_steps=args.steps,
         blob_sigma=args.sigma,
-        alpha_psi=args.hbar,
-        alpha_g=args.G,
         initial_velocity=initial_velocity,
         span=int(args.steps * args.span)
     )

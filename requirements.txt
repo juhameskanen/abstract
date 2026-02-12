@@ -3,4 +3,6 @@ matplotlib
 scikit-image
 zstandard
 scikit-learn
+gbitwave
+qbitwave
 

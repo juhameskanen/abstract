@@ -221,55 +221,42 @@ Thus:
 Particle-like events are what we call reality.  
 The wavefunction is the compression format.
 
-\section{The Rasterization Analogy}
+\section{Conclusions}
 
-Consider a digital rendering engine. 
-The scene may contain continuous color values, 
-but the display device has finite precision.
+What is the system we have described?
 
-To approximate intermediate values, 
-the renderer uses probabilistic dithering. 
+Consider a digital rendering engine. While a scene may contain continuous color values, the display device has only finite precision. To approximate intermediate values, the renderer employs \textbf{probabilistic dithering}.
 Over many pixels, discrete outputs approximate a continuous tone.
 
-Similarly, the wavefunction is continuous and complex-valued.  
-Measurement produces discrete events.
+Similarly, the wavefunction is continuous and complex-valued, yet measurement produces discrete events. The \textbf{Born probabilities} act as a weighted sampling of an underlying amplitude.
+This suggests that classical outcomes are coarse-grained projections of a richer informational structure.
 
-Born probabilities act like weighted sampling of an underlying amplitude.
+In this framework, particles function like specialized data structures:
+\begin{itemize}
+    \item \textbf{Fermions} resemble exclusive memory cells: one state, one occupant.
+    \item \textbf{Bosons} resemble accumulative registers: amplitudes add coherently.
+\end{itemize}
 
-This does not imply limited computational resources in a naive sense.  
-Rather, it suggests that classical outcomes are coarse-grained projections 
-of a richer informational structure.
+A concept that is used in every graphics hardware these days.
 
-Fermions resemble exclusive memory cells: one state, one occupant.  
-Bosons resemble accumulative registers: amplitude adds coherently.
+The quantum formalism organizes information so that exponentially many classical alternatives can be encoded compactly. The wavefunction maps all possible classical configurations into a single linear object in Hilbert space.
 
-The quantum formalism organizes information 
-so that exponentially many classical alternatives 
-can be encoded compactly.
+In this light:
+\begin{itemize}
+    \item \textbf{Superposition} compresses alternatives.
+    \item \textbf{Interference} removes redundancy.
+    \item \textbf{Measurement} extracts discrete events.
+\end{itemize}
 
-\section{Conclusion}
 
-Quantum mechanics does not replace classical reality. 
-It reorganizes it.
+This perspective finds a analogy in digital signal processing, specifically within the \textbf{JPEG} and \textbf{MPEG} codecs. These standards rely on the Discrete Cosine Transform (DCT) to
+decompose an image or video frame into a sum of periodic functions. By prioritizing low-frequency coefficients and discarding less perceptible data,
+the codec compresses vast amounts of visual information into a manageable stream. 
 
-The wavefunction encodes all possible classical configurations 
-into a single linear object in Hilbert space.
+Consider an observer existing entirely within the pixel grid of a highly compressed MPEG movie. To that observer, the behavior of every pixel would appear governed by deterministic,
+periodic $\cos(\theta)$ functions. They might conclude that the ``laws'' of their universe are fundamentally wave-like, when in fact, they are simply observing the most efficient informational
+basis for representing reality. Similarly, the wave-like behavior of quantum particles may simply be the result of nature utilizing a Fourier-based basis to minimize the computational cost of the vacuum.
 
-Superposition compresses alternatives.  
-Interference removes redundancy.  
-Measurement extracts discrete events.
+While we perceive particles as ``reality,'' the wavefunction is the compression scheme that makes that reality computationally and informationally manageable. This is why everything we observe at the micro-scale ``waves.'' 
 
-Particles are what we observe as reality.
-
-The wavefunction is the compression scheme that makes 
-that reality computationally and informationally manageable.
-
-In the next chapter, we will see that General Relativity 
-provides a different compression system: 
-one that encodes mass–energy into curvature.
-
-Quantum mechanics compresses possibilities.  
-General Relativity compresses geometry.
-
-Together, they describe two orthogonal ways 
-of encoding the same underlying informational structure.
+We are observing compressed structure.
