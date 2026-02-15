@@ -1,0 +1,98 @@
+\chapter{Black Holes: From Something to Nothing}
+
+A computer running a simulation and the simulated universe can be viewed as two perspectives of the same information. 
+We can apply this principle to black hole singularities by treating the computer simulation and the simulated black hole 
+as equivalent descriptions of the same informational structure. This may provide insight into the mysterious pathological points of spacetime.
+
+\section{Execution Trace}
+
+Computers are state machines. Each executed CPU instruction drives the system to a new state. 
+In software engineering, an \textbf{execution trace} is the chronological record of all such states. 
+If source code is a map, the execution trace is the complete GPS log of every step taken.
+
+\section{The Simulation}
+
+Consider a massive spherical dust cloud. Each dust particle can be mapped to a sequence of memory bits. 
+Together, the particles form a long continuous bitstring representing a temporal slice of the simulation.
+
+Initially, the bitstring is random:
+
+\begin{verbatim}
+01010100010000010010101111010101010100101010010101010101010100100100111010101001010010101010010101010111001010101010
+\end{verbatim}
+
+Entropy quantifies the randomness of this bitstring—the number of ways the bits can be rearranged to produce the same macroscopic configuration, 
+here the dust cloud and its corresponding spacetime metric as described by General Relativity.
+
+As the simulation evolves, the cloud collapses under its own gravity. Measuring the entropy of the bitstring over time shows a monotonic decrease. 
+Numerical instabilities prevent the simulation from reaching the final singularity, but extrapolation of the execution trace suggests:
+
+\begin{verbatim}
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+\end{verbatim}
+
+The singularity corresponds to a zero-entropy state.
+
+\subsection{Formal Description}
+
+Let $\mathcal{M}$ denote the set of all memory locations in a deterministic computing system. 
+A \emph{machine state} $\mathcal{S} \in \mathcal{M}$ is a complete assignment of values to all memory elements. 
+Let $\mathcal{P} = (I_1, I_2, \dots, I_n)$ be a sequence of deterministic instructions, 
+with $I_k : \mathcal{S} \rightarrow \mathcal{S}$. 
+
+The execution trace $\mathcal{T}$ is the ordered sequence:
+
+\[
+\mathcal{T} = (s_0, s_1, \dots, s_n), \quad s_{k+1} = I_{k+1}(s_k).
+\]
+
+This trace encodes the full informational evolution of the simulated geometry.
+
+\subsection{Mapping Geometry to Bitstrings}
+
+A geometric configuration can be encoded as a bitstring $b \in \{0,1\}^L$, 
+representing discretized particle positions in the collapsing cloud. 
+Define the configuration space:
+
+\[
+C = \{0,1\}^{3k},
+\]
+
+with a decoding map
+
+\[
+f : C \to \mathbb{Z}^3
+\]
+
+that converts fixed-length binary segments into integer coordinates. 
+Quantization ensures that entropy reflects genuine positional distinctions.
+
+\subsection{Shannon Entropy}
+
+The Shannon entropy of the bitstring is
+
+\[
+H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
+\]
+
+where $p_0$ and $p_1$ are empirical bit frequencies. 
+Across the execution trace, $H(b)$ decreases as particles converge.
+
+Even though the classical simulation crashes at the singularity due to divergences, the entropy trajectory can be smoothly extrapolated:
+
+\[
+H(\mathcal{B}_t) \to 0.
+\]
+
+Zero entropy implies $W = 1$: only one distinguishable configuration remains.
+
+\section{Conclusion}
+
+Singularities may be interpreted as points of zero entropy rather than merely infinite curvature. 
+In classical GR, curvature diverges as geodesics converge, but this may reflect the limits of the geometric description rather than a physical pathology—analogous to measuring surface derivatives at the north pole of a sphere.
+
+Remarkably, the zero-entropy conclusion is invariant under coordinate choice, representation, or dimensionality. 
+Mapping information to geometry inevitably yields the same minimal object: a point. 
+
+Thus, singularities are not mysterious infinities but the simplest possible geometric configurations: 
+states of informational exhaustion. They represent the ultimate compression of all degrees of freedom in a region of spacetime.

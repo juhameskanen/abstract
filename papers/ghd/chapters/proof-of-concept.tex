@@ -1,0 +1,140 @@
+\chapter{Proof of Concept}
+
+\section{From Formal Theory to Physical Demonstration}
+
+The preceding chapters derive the theory at the level of axioms, measures, and limiting principles.
+At this stage, the theory must be tested not philosophically, but operationally: we must demonstrate
+that its defining assumptions are sufficient to produce structures resembling observed physics.
+
+To this end, we construct a proof-of-concept simulation.
+The simulation is not intended to reproduce the universe in full detail.
+Rather, its purpose is sharply defined:
+
+\begin{quote}
+Given only an observer-conditioned informational measure and a compression principle,
+do effective quantum behavior, inertia, and gravitational geometry emerge without being explicitly imposed?
+\end{quote}
+
+No forces, equations of motion, or spacetime structures are hard-coded.
+Only information, ordering, and compression are permitted.
+
+\section{The Role of the Observer}
+
+The theory is fundamentally observer-centric.
+Therefore, the simulation must begin with an observer, or more precisely,
+with an observer-compatible informational trace.
+
+At the implementation level, this requires specifying:
+\begin{itemize}
+    \item an informational capacity (a finite number of bits),
+    \item Observer wavefunction - a minimal observer filter defining what constitutes observer continuity.
+\end{itemize}
+
+The simulation then explores informational configurations that contain such an observer trace.
+For each compatible configuration, all admissible observer walks
+(orderings of informational states consistent with observer survival)
+are considered.
+
+Each observer walk is evaluated by compressing it:
+\begin{itemize}
+    \item spectrally (minimal independent frequencies/phases),
+    \item geometrically (minimal coherent spatial embedding).
+\end{itemize}
+
+From these compressions, a joint weight is computed.
+Observer walks admitting minimal joint compression dominate the measure.
+
+\begin{quote}
+The universe an observer most likely finds themselves in
+is the observer walk with maximal compressibility.
+\end{quote}
+
+Importantly, this formulation does not require that the observer or the total number of bits
+be fundamental.
+In the full theory, both are emergent:
+the most probable observer is the one that arises in the most probable informational universe,
+at the most probable scale.
+
+The simulation fixes these quantities only to make computation possible,
+not because the theory requires them as primitives.
+
+\section{The Combinatorial Barrier}
+
+A system with $n$ bits admits $2^n$ informational states.
+The number of possible orderings (observer walks) over these states is $(2^n)!$.
+This growth is super-exponential.
+
+Even for modest $n$, exhaustive enumeration of configurations or observer walks is impossible.
+Any claim to simulate the full space is therefore mathematically false.
+
+This is not a limitation of the present work, but a structural fact.
+Consequently, \emph{every} simulation of a theory of this type must:
+\begin{itemize}
+    \item sample,
+    \item compress,
+    \item constrain, or
+    \item generatively construct
+\end{itemize}
+the state space.
+
+These are not optional optimizations; they are unavoidable.
+The relevant question is not whether a simulation is biased,
+but whether the bias reflects the theory itself or is externally imposed.
+
+\section{Theory-Driven Constraints and Optimizations}
+
+The constraints used in the simulation are not ad hoc.
+They follow directly from empirical facts and from the theory’s own measure.
+
+For example:
+\begin{itemize}
+    \item Observed universes exhibit increasing entropy.
+    Observer walks with global entropy decrease can therefore be excluded.
+    \item Observed physics exhibits inertia and continuity.
+    Sampling is restricted to geometrically coherent configurations,
+    corresponding to minimal geometric description length.
+\end{itemize}
+
+These constraints do not add physics;
+they eliminate observer walks that are already exponentially suppressed
+by the observer-conditioned measure.
+
+In this sense, the optimizations enforce the theory rather than distort it.
+
+\section{Simulation Architecture}
+
+The simulation proceeds as follows:
+\begin{enumerate}
+    \item Generate observer-compatible informational configurations.
+    \item Enumerate or sample admissible observer walks.
+    \item Compute spectral and geometric compressions for each walk.
+    \item Assign joint weights according to the observer-conditioned measure.
+    \item Identify dominant structures and trajectories.
+\end{enumerate}
+
+The full implementation is provided as supplementary material.
+Here we present only high-level pseudocode and representative outputs.
+
+\section{Emergent Phenomena}
+
+Despite the absence of imposed dynamics, the simulation exhibits:
+\begin{itemize}
+    \item interference patterns characteristic of wave mechanics,
+    \item inertial persistence of localized structures,
+    \item effective attraction corresponding to geometric compression gradients.
+\end{itemize}
+
+These behaviors arise solely from the dominance of minimal-description observer walks.
+
+\section{Interpretation}
+
+This proof of concept does not claim numerical accuracy or cosmological completeness.
+Its significance is structural:
+
+\begin{quote}
+Quantum and gravitational phenomena arise as statistical consequences
+of observer-conditioned informational compression.
+\end{quote}
+
+The simulation demonstrates that the theory is not merely interpretive,
+but generative.
