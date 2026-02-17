@@ -1,16 +1,9 @@
 \documentclass[11pt]{article}
-\usepackage{amsmath, amssymb, amsfonts}
-\usepackage{tikz-cd}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{lipsum}
-\usepackage{biblatex}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib} 
 
-\addbibresource{../references.bib}
-
-\title{Observer-Centric Information-Theoretic Framework (\(D–\psi–G\))}
+\title{Observer-Centric Information-Theoretic Framework}
 \author{Juha Meskanen}
 \date{2025}
 
@@ -26,6 +19,7 @@ We formalize this via the D--$\psi$--G decomposition and demonstrate that emerge
 \end{abstract}
 
 \noindent \textbf{Keywords:} Information Theory, Observer-Conditioned Typicality, Emergent Gravity, Quantum Foundations, D--$\psi$--G Decomposition, Algorithmic Complexity, Spectral Compression, Pre-Geometric Universe.
+
 
 \tableofcontents
 \bigskip
@@ -73,19 +67,19 @@ The wavefunction encodes an ensemble of observer-compatible paths. Interference 
 
 \subsection{Geometric Complexity and Emergent GR}
 
-Intelligent observers require **boundaries** to maintain identity. Geometric space is optimal for representing these boundaries. Minimal geometric complexity, $\mathcal{C}_G[\gamma]$, penalizes both spatial roughness and temporal variation of curvature:
+Intelligent observers require boundaries to maintain identity. Geometric space is optimal for representing these boundaries. Minimal geometric complexity, $\mathcal{C}_G[\gamma]$, penalizes both spatial roughness and temporal variation of curvature:
 
 \[
 L_G \sim \int d^4x \left( \lvert \nabla K \rvert^2 + \lvert \partial_t K \rvert^2 \right),
 \]
 
-where $K$ is a curvature-like field. Low $\mathcal{C}_G$ histories dominate, producing **Einstein-like dynamics** as the unique stable compression attractor.
+where $K$ is a curvature-like field. Low $\mathcal{C}_G$ histories dominate, producing Einstein-like dynamics as the unique stable compression attractor.
 
 \subsection{Discrete Complexity}
 
 The discrete instantiation $\mathcal{C}_D[\gamma]$ corresponds to particle-like states, the ``pixels'' of reality, ensuring observer consistency with minimal information dissipation.
 
-\section{D--$\psi$--G Unified Probability}
+\section{Unified Probability}
 
 \subsection{Joint Complexity}
 
@@ -103,9 +97,9 @@ The probability of a history $\gamma \in \Gamma_O$ (all paths sustaining observe
 \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\big[-\lambda \mathcal{C}_O[\gamma]\big].
 \]
 
-- $\lambda$ is the \emph{stiffness constant} weighting low-complexity paths.  
-- Crucially, $\lambda$ is \textbf{emergent}: it is the value that maximizes the probability of the observer existing.  
-- Once this condition is applied, all free parameters vanish.
+$\lambda$ is the \emph{stiffness constant} weighting low-complexity paths.  
+Crucially, $\lambda$ is \textbf{emergent}: it is the value that maximizes the probability of the observer existing.  
+Once this condition is applied, all free parameters vanish.
 
 \subsubsection{Illustration}
 
@@ -130,24 +124,27 @@ The probability of a history $\gamma \in \Gamma_O$ (all paths sustaining observe
 
 
 
+\section{Emergent Physics}
 
-## Emergent Physics
+Histories minimizing joint complexity dominate.  
 
-- Histories minimizing joint complexity dominate.  
-- QM dominates where $\mathcal{C}_\psi$ is significant; classical geometry dominates where $\mathcal{C}_G$ is significant.  
-- Maximal compression → maximal probability → maximal predictability.
+QM dominates where $\mathcal{C}_\psi$ is significant; classical geometry dominates where $\mathcal{C}_G$ is significant.  
+
+Maximal compression → maximal probability → maximal predictability.
 
 \section{Zero-Parameter Universe}
 
-- Given $n$ bits of the observer wavefunction, there are $2^n$ arrangements and $(2^n)!$ orderings.  
-- Only a tiny fraction of these permit persistent observers.  
-- λ is selected by **maximizing observer probability**, collapsing the framework to **zero free parameters**.  
+Given $n$ bits of the observer wavefunction, there are $2^n$ arrangements and $(2^n)!$ orderings.  
+Only a tiny fraction of these permit persistent observers.  
+$\lambda$ is selected by maximizing observer probability, collapsing the framework to zero free parameters.  
 
 \section{Interpretation}
 
-- $\psi$ and $G$ projections are complementary and orthogonal.  
-- Observers find themselves in minimal joint-complexity histories.  
-- Deviations (injected intelligence) are probabilistically suppressed but may be necessary for survival.
+$\psi$ and $G$ projections are mutually orthogonal.  
+
+Observers find themselves in minimal joint-complexity histories.  
+
+Deviations (injected intelligence) are probabilistically suppressed but may be necessary for survival.
 
 \section{Simulations}
 
@@ -157,18 +154,21 @@ Demonstrations of emergent behavior are implemented in the reference simulation:
     \item \texttt{simulations/iame.py}
 \end{itemize}
 
-\section*{Conclusion}
+\section{Conclusion}
 
 The D--$\psi$--G framework shows that:
 
-1. Observer-compatible laws emerge naturally from compression-weighted probability.  
-2. Quantum mechanics is the minimal spectral representation of paths.  
-3. Classical geometry is the minimal geometric projection necessary for observer survival.  
-4. There are no fundamental free parameters; λ is fixed by observer-conditioned maximal probability.
+Observer-compatible laws emerge naturally from compression-weighted probability.  
 
-This provides a **zero-parameter, observer-centric theory of everything**, unifying QM and GR as complementary projections of the same underlying information.
+Quantum mechanics is the minimal spectral representation of paths.  
 
-\section*{Acknowledgments and References}
+Classical geometry is the minimal geometric projection necessary for observer survival.  
+
+There are no fundamental free parameters; $\lambda$ is fixed by observer-conditioned maximal probability.
+
+This provides a zero-parameter, observer-centric theory of everything, unifying QM and GR as complementary projections of the same underlying information.
+
+\section{Acknowledgments and References}
 
 \begin{itemize}
     \item Kolmogorov Complexity \cite{Kolmogorov1965,LiVitanyi}  
