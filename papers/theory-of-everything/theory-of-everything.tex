@@ -67,13 +67,17 @@ The wavefunction encodes an ensemble of observer-compatible paths. Interference 
 
 \subsection{Geometric Complexity and Emergent GR}
 
-Intelligent observers require boundaries to maintain identity. Geometric space is optimal for representing these boundaries. Minimal geometric complexity, $\mathcal{C}_G[\gamma]$, penalizes both spatial roughness and temporal variation of curvature:
+Intelligent observers require boundaries to maintain identity. Geometric space is optimal for representing these boundaries.
+Minimal geometric complexity, $\mathcal{C}_G[\gamma]$, penalizes both spatial roughness and temporal variation of curvature:
 
 \[
 L_G \sim \int d^4x \left( \lvert \nabla K \rvert^2 + \lvert \partial_t K \rvert^2 \right),
 \]
 
 where $K$ is a curvature-like field. Low $\mathcal{C}_G$ histories dominate, producing Einstein-like dynamics as the unique stable compression attractor.
+
+This functional is illustrative rather than fundamental; any measure penalizing geometric roughness leads to the same low-complexity attractor.
+
 
 \subsection{Discrete Complexity}
 
@@ -88,6 +92,10 @@ We decompose observer-path complexity additively:
 \[
 \mathcal{C}_O[\gamma] = \alpha_D \mathcal{C}_D[\gamma] + \alpha_\psi \mathcal{C}_\psi[\gamma] + \alpha_G \mathcal{C}_G[\gamma].
 \]
+
+The coefficients $\alpha_D, \alpha_\psi, \alpha_G$ are not free parameters but
+emergent normalization factors fixed by observer persistence; only their ratios
+matter, and these are uniquely determined by the survival constraint.
 
 \subsection{Observer-Conditioned Measure}
 
@@ -145,6 +153,10 @@ $\psi$ and $G$ projections are mutually orthogonal.
 Observers find themselves in minimal joint-complexity histories.  
 
 Deviations (injected intelligence) are probabilistically suppressed but may be necessary for survival.
+Formally, intelligent action corresponds to locally increasing $\mathcal{C}_\psi$
+or $\mathcal{C}_G$ to avoid global termination of the observer path, thereby
+minimizing $\mathcal{C}_O$ over extended horizons.
+
 
 \section{Simulations}
 
@@ -170,10 +182,16 @@ This provides a zero-parameter, observer-centric theory of everything, unifying 
 
 \section{Acknowledgments and References}
 
+We acknowledge the foundational contributions of algorithmic information theory and statistical mechanics to the formalization of observer-conditioned physics.
+
+
 \begin{itemize}
     \item Kolmogorov Complexity \cite{Kolmogorov1965,LiVitanyi}  
     \item Solomonoff Induction \cite{Solomonoff1964}  
     \item Chaitin's Algorithmic Information Theory \cite{Chaitin1975}  
+    \item Gibbs Measure and Statistical Mechanics \cite{Gibbs1902,Touchette2009}  
+    \item Canonical Typicality and Quantum Equilibrium \cite{Goldstein2006,Durr1992}  
+    \item Information-Theoretic Emergence of Physics \cite{Bennett1988,Lloyd2006}  
 \end{itemize}
 
 \printbibliography
