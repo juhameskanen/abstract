@@ -19,6 +19,28 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{carroll2010}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a21efd7d6f43a778b4bd8bd5cf50c950}{%
+           family={Carroll},
+           familyi={C\bibinitperiod},
+           given={Sean\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a21efd7d6f43a778b4bd8bd5cf50c950}
+      \strng{fullhash}{a21efd7d6f43a778b4bd8bd5cf50c950}
+      \strng{bibnamehash}{a21efd7d6f43a778b4bd8bd5cf50c950}
+      \strng{authorbibnamehash}{a21efd7d6f43a778b4bd8bd5cf50c950}
+      \strng{authornamehash}{a21efd7d6f43a778b4bd8bd5cf50c950}
+      \strng{authorfullhash}{a21efd7d6f43a778b4bd8bd5cf50c950}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Dutton}
+      \field{title}{From Eternity to Here: The Quest for the Ultimate Theory of Time}
+      \field{year}{2010}
+    \endentry
     \entry{chalmers1995facing}{article}{}
       \name{author}{1}{}{%
         {{hash=dd40036cdd95b093c7f871fe3bd7b74a}{%
@@ -113,6 +135,36 @@
       \field{title}{Galileo's Error: Foundations for a New Science of Consciousness}
       \field{year}{2019}
     \endentry
+    \entry{hawking1996nature}{book}{}
+      \name{author}{2}{}{%
+        {{hash=d6208a0d89bbe93d54449bb980342d85}{%
+           family={Hawking},
+           familyi={H\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%
+           family={Penrose},
+           familyi={P\bibinitperiod},
+           given={Roger},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{437ad548b1a6a264ab6dc1b84ef8fcc1}
+      \strng{fullhash}{437ad548b1a6a264ab6dc1b84ef8fcc1}
+      \strng{bibnamehash}{437ad548b1a6a264ab6dc1b84ef8fcc1}
+      \strng{authorbibnamehash}{437ad548b1a6a264ab6dc1b84ef8fcc1}
+      \strng{authornamehash}{437ad548b1a6a264ab6dc1b84ef8fcc1}
+      \strng{authorfullhash}{437ad548b1a6a264ab6dc1b84ef8fcc1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780691168449}
+      \field{title}{The Nature of Space and Time}
+      \field{year}{1996}
+    \endentry
     \entry{lastactionhero1993}{misc}{}
       \list{publisher}{1}{%
         {Columbia Pictures}%
@@ -123,6 +175,31 @@
       \field{note}{Starring Arnold Schwarzenegger}
       \field{title}{Last Action Hero}
       \field{year}{1993}
+    \endentry
+    \entry{penrose2010}{book}{}
+      \name{author}{1}{}{%
+        {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%
+           family={Penrose},
+           familyi={P\bibinitperiod},
+           given={Roger},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Bodley Head}%
+      }
+      \strng{namehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{fullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{bibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{authorbibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{authornamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \strng{authorfullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Cycles of Time: An Extraordinary New View of the Universe}
+      \field{year}{2010}
     \endentry
     \entry{penrose1989emperor}{book}{}
       \name{author}{1}{}{%
@@ -141,12 +218,37 @@
       \strng{authorbibnamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
       \strng{authornamehash}{f51dfd339a12125d0f82a2d93e66d9b7}
       \strng{authorfullhash}{f51dfd339a12125d0f82a2d93e66d9b7}
+      \field{extraname}{2}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{The Emperor's New Mind: Concerning Computers, Minds, and the Laws of Physics}
       \field{year}{1989}
+    \endentry
+    \entry{hawking1988}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9d99e818c324dfd4351697eb81f01220}{%
+           family={S},
+           familyi={S\bibinitperiod},
+           given={Hawking},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Bantam Dell Publishing Group}%
+      }
+      \strng{namehash}{9d99e818c324dfd4351697eb81f01220}
+      \strng{fullhash}{9d99e818c324dfd4351697eb81f01220}
+      \strng{bibnamehash}{9d99e818c324dfd4351697eb81f01220}
+      \strng{authorbibnamehash}{9d99e818c324dfd4351697eb81f01220}
+      \strng{authornamehash}{9d99e818c324dfd4351697eb81f01220}
+      \strng{authorfullhash}{9d99e818c324dfd4351697eb81f01220}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A Brief History of Time}
+      \field{year}{1988}
     \endentry
     \entry{Strawson2006}{article}{}
       \name{author}{1}{}{%
