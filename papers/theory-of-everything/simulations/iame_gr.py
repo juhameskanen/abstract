@@ -266,7 +266,66 @@ class PsiEmergentSim(GravitySim):
             wf.record_position(chosen_pos)
             self.trajs[i].append(chosen_pos.copy())
 
-    def step(self) -> None:
+    def step(self):
+
+        # 1. Compute wave PDF if desired
+        psi_total = np.zeros(self.grid_points.shape[0], dtype=np.complex128)
+        for wf in self.wavefunctions:
+            psi_total += wf.evaluate(self.grid_points, self.t)
+            wf.update_entropy_energy(kB=1.380649e-23, T=300.0)  # room temp
+
+        # 2. Convert wave to real PDF
+        pdf_total = np.abs(psi_total)**2
+        s = pdf_total.sum()
+
+        if not np.isfinite(s) or s <= 1e-16:
+            # fallback to uniform distribution
+            pdf_total = np.ones_like(pdf_total) / len(pdf_total)
+        else:
+            pdf_total /= s
+
+
+        # 3. Resample particles (CRITICAL)
+        self.particles = self.resample_particles(pdf_total, self.grid_points)
+
+        # 4. Update observer positions
+        self.update_positions(self.particles)
+
+        # 5. Compute curvature
+        self.current_curvature = self.compute_curvature()
+
+        # 6. Advance time
+        self.t += 1
+
+        # --- 7. Store previous positions for velocity/acceleration ---
+        pos_array = np.array(self.positions)
+        prev_array = np.array(getattr(self, "prev_positions", pos_array))
+        delta = pos_array - prev_array
+
+        # Distance: sum of all observers' displacement magnitudes
+        total_dist = np.linalg.norm(delta, axis=1).sum()
+        if not hasattr(self, "distance_history"):
+            self.distance_history = []
+            self.velocity_history = []
+            self.acceleration_history = []
+        self.distance_history.append(total_dist)
+
+        # Velocity: mean speed
+        mean_vel = np.mean(np.linalg.norm(delta, axis=1))
+        self.velocity_history.append(mean_vel)
+
+        # Acceleration: change in velocity
+        if len(self.velocity_history) > 1:
+            accel = mean_vel - self.velocity_history[-2]
+        else:
+            accel = 0.0
+        self.acceleration_history.append(accel)
+
+        # Update previous positions
+        self.prev_positions = pos_array.copy()
+
+
+    def step_old(self) -> None:
         """Perform a single simulation step."""
         # --- 1. Compute PDF from wavefunctions ---
         psi_total = np.zeros(self.grid_points.shape[0], dtype=np.complex128)

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo apt install jq pandoc latexmk texlive-pictures texlive-science texlive-latex-extra biber
+
+
