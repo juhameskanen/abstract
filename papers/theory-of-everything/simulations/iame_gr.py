@@ -39,6 +39,9 @@ class ObserverWavefunction:
         self.initial_velocity = np.array(initial_velocity, dtype=float) if initial_velocity is not None else np.zeros_like(self.center)
         initial_bits = [np.random.randint(0, 2) for _ in range(bit_length)]
         self.qbit = QBitwave(bitstring=initial_bits, fixed_basis_size=8)
+         # Track entropy history (bits) and effective energy (Joules)
+        self.entropy_history: List[float] = []
+        self.energy_history: List[float] = []
 
     def record_position(self, pos: np.ndarray):
         """Append a new position to the trajectory and update center."""
@@ -79,6 +82,25 @@ class ObserverWavefunction:
         spectral_factor = spectral_factor[0] / (np.max(spectral_factor) + 1e-12)
 
         return amps[indices] * envelope * np.exp(-1j * t) * spectral_factor
+
+
+    def update_entropy_energy(self, kB: float = 1.380649e-23, T: float = 300.0):
+        """
+        Compute current entropy and effective energy based on bitstring changes.
+        Energy uses Landauer's principle: E = k_B T ΔS ln 2.
+        """
+        # Compute Shannon entropy of current qbit
+        current_entropy = self.qbit.entropy()  # in bits
+        self.entropy_history.append(current_entropy)
+
+        # Compute stepwise energy
+        if len(self.entropy_history) > 1:
+            delta_S = self.entropy_history[-1] - self.entropy_history[-2]
+        else:
+            delta_S = current_entropy  # first step
+
+        energy = kB * T * delta_S * np.log(2)
+        self.energy_history.append(energy)
 
 
 # --- Emergent ψ–G Physics Simulation ---
@@ -250,7 +272,7 @@ class PsiEmergentSim(GravitySim):
         psi_total = np.zeros(self.grid_points.shape[0], dtype=np.complex128)
         for wf in self.wavefunctions:
             psi_total += wf.evaluate(self.grid_points, self.t)
-
+            wf.update_entropy_energy(kB=1.380649e-23, T=300.0)  # room temp
 
 
         # --- 3. Update observer positions using wavefunction MDL ---
@@ -289,16 +311,20 @@ class PsiEmergentSim(GravitySim):
         # Update previous positions
         self.prev_positions = pos_array.copy()
 
+    @property
+    def total_energy(self) -> float:
+        return sum(sum(wf.energy_history) for wf in self.wavefunctions)
 
     def run_with_curvature(self, save_video: str, res: int, fps: int = 15) -> None:
         plt.style.use("dark_background")
         fig = plt.figure(figsize=(10, 6))
-        gs = fig.add_gridspec(3, 2, width_ratios=[2.5, 1.0])
+        gs = fig.add_gridspec(4, 2, width_ratios=[2.5, 1.0])
 
         ax_geom = fig.add_subplot(gs[:, 0])
         ax_dist = fig.add_subplot(gs[0, 1])
         ax_vel  = fig.add_subplot(gs[1, 1])
         ax_acc  = fig.add_subplot(gs[2, 1])
+        ax_energy = fig.add_subplot(gs[3, 1])  # replace or move as needed
 
         def update_frame(step_idx: int):
             self.step()  # wavefunction PDF → particles, update curvature
@@ -308,6 +334,7 @@ class PsiEmergentSim(GravitySim):
             ax_dist.clear()
             ax_vel.clear()
             ax_acc.clear()
+            ax_energy.clear()
 
             # --- Plot curvature ---
             if self.current_curvature is not None:
@@ -348,6 +375,13 @@ class PsiEmergentSim(GravitySim):
             ax_acc.plot(t, self.acceleration_history, color="red")
             ax_acc.axvline(step_idx, color="gray", alpha=0.4)
             ax_acc.set_title("Acceleration")
+
+            # --- Plot total energy ---
+            total_energy_steps = [sum(wf.energy_history[:step_idx+1]) for wf in self.wavefunctions]
+            total_energy_array = np.sum(total_energy_steps, axis=0)
+            ax_energy.plot(total_energy_array, color="yellow")
+            ax_energy.set_title("Cumulative Energy (J)")
+            ax_energy.set_xlim(0, self.n_steps)
 
             for ax in (ax_dist, ax_vel, ax_acc):
                 ax.set_xlim(0, self.n_steps)
