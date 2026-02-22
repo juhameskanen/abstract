@@ -1,0 +1,173 @@
+\section{Informational Complexity Functional and Emergence of Einstein-like Dynamics}
+
+\subsection{Minimum Description Length Functional}
+
+We interpret spacetime geometry as a compression model for worldline data.
+The optimal geometry minimizes total description length:
+
+\begin{equation}
+C_{\mathrm{total}}[g;\mathcal{H}]
+=
+C_G[g]
++
+C_Q[\mathcal{H} \mid g],
+\end{equation}
+
+where:
+
+\begin{align}
+C_G[g]
+&=
+\alpha \int (\partial g)^2 \, d^dx, \\
+C_Q[\mathcal{H} \mid g]
+&=
+\beta \sum_a
+\int
+\left(
+\ddot{x}_a^\mu
++
+\Gamma^\mu_{\nu\rho}(g)\,
+\dot{x}_a^\nu \dot{x}_a^\rho
+\right)^2 dt.
+\end{align}
+
+Here:
+
+\begin{itemize}
+\item $C_G[g]$ represents geometric encoding cost (smoothness penalty),
+\item $C_Q[\mathcal{H} \mid g]$ represents conditional worldline encoding cost,
+\item $\Gamma^\mu_{\nu\rho}(g)$ are Christoffel symbols derived from $g$.
+\end{itemize}
+
+Geodesics satisfy:
+
+\begin{equation}
+\ddot{x}^\mu
++
+\Gamma^\mu_{\nu\rho}
+\dot{x}^\nu \dot{x}^\rho
+= 0,
+\end{equation}
+
+and therefore minimize $C_Q$.
+
+\subsection{Variation with Respect to Worldlines}
+
+Varying $C_Q$ with respect to $x^\mu$ yields:
+
+\begin{equation}
+\delta C_Q = 0
+\quad \Rightarrow \quad
+\ddot{x}^\mu
++
+\Gamma^\mu_{\nu\rho}
+\dot{x}^\nu \dot{x}^\rho
+= 0.
+\end{equation}
+
+Thus geodesics emerge as the minimal conditional encoding trajectories.
+
+\subsection{Variation with Respect to Geometry}
+
+We now vary the total functional with respect to the metric $g_{\mu\nu}$.
+
+The geometric term yields:
+
+\begin{equation}
+\delta C_G
+=
+2\alpha \int
+(\Box g_{\mu\nu})
+\,
+\delta g^{\mu\nu}
+\, d^dx,
+\end{equation}
+
+where $\Box$ denotes the Laplacian operator in the weak-field limit.
+
+For the worldline term:
+
+\begin{equation}
+\delta C_Q
+=
+2\beta \sum_a
+\int
+\left(
+\ddot{x}^\mu
++
+\Gamma^\mu_{\nu\rho}
+\dot{x}^\nu \dot{x}^\rho
+\right)
+\delta \Gamma^\mu_{\nu\rho}
+\dot{x}^\nu \dot{x}^\rho
+\, dt.
+\end{equation}
+
+Since:
+
+\begin{equation}
+\delta \Gamma \sim \partial(\delta g),
+\end{equation}
+
+integration by parts yields:
+
+\begin{equation}
+\delta C_Q
+=
+\int
+T^{\mu\nu}
+\,
+\delta g_{\mu\nu}
+\, d^dx,
+\end{equation}
+
+where:
+
+\begin{equation}
+T^{\mu\nu}(x)
+=
+\sum_a
+\int
+\dot{x}_a^\mu
+\dot{x}_a^\nu
+\,
+\delta^{(d)}(x - x_a(t))
+\, dt.
+\end{equation}
+
+This is precisely the stress-energy tensor for point particles.
+
+\subsection{Field Equation}
+
+Stationarity of the total description length gives:
+
+\begin{equation}
+\delta C_{\mathrm{total}} = 0
+\quad \Rightarrow \quad
+\alpha \Box g_{\mu\nu}
+=
+\beta T_{\mu\nu}.
+\end{equation}
+
+This is the weak-field limit of the Einstein field equations:
+
+\begin{equation}
+R_{\mu\nu}
+=
+\kappa T_{\mu\nu}.
+\end{equation}
+
+\subsection{Conclusion}
+
+Minimizing informational description length yields:
+
+\begin{itemize}
+\item Geodesic motion from conditional encoding minimization,
+\item Einstein-like field equations from geometric encoding minimization.
+\end{itemize}
+
+Thus, in the weak-field continuum limit, the Minimum Description Length
+principle reproduces the variational structure of General Relativity.
+
+Spacetime geometry emerges as the optimal compression model
+for dynamical histories.
