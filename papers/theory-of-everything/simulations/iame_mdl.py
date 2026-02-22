@@ -17,7 +17,9 @@ class ObserverWavefunction:
     center : np.ndarray
         Initial 2D position.
     sigma : float
-        Spatial width parameter.
+        Spatial width parameter (size of the observer).
+    oscillations : float
+        Number of oscillations in the wavepacket.
     initial_velocity : np.ndarray, optional
         Initial velocity vector.
     """
@@ -25,10 +27,12 @@ class ObserverWavefunction:
     def __init__(self,
                  center: np.ndarray,
                  sigma: float,
+                 oscillations: float,
                  initial_velocity: Optional[np.ndarray] = None):
 
         self.center = np.array(center, dtype=float)
         self.sigma = sigma
+        self.oscillations = oscillations
         self.trajectory: List[np.ndarray] = [self.center.copy()]
         self.initial_velocity = (
             np.array(initial_velocity, dtype=float)
@@ -46,11 +50,10 @@ class ObserverWavefunction:
         self.trajectory.append(pos)
         self.center = pos
 
-    # ------------------------------------------------------------
 
     def rebuild_spectral_modes(self, trajectory: Optional[np.ndarray] = None):
         """
-        Rebuild integer spectral representation from trajectory.
+        Rebuild spectral representation from trajectory.
 
         Parameters
         ----------
@@ -63,17 +66,20 @@ class ObserverWavefunction:
         if len(traj) < 2:
             return
 
+        # Interpret 2D trajectory as complex signal
         complex_traj = traj[:, 0] + 1j * traj[:, 1]
+
         fft_vals = np.fft.fft(complex_traj)
 
         for k, coeff in enumerate(fft_vals):
-            amp = int(np.round(np.abs(coeff)))
-            if amp == 0:
+            A = np.abs(coeff)
+            if A < 1e-10:  # numerical threshold instead of integer zero
                 continue
-            phase = int(np.round(np.angle(coeff) * 1000))
-            self.qbit.add_mode(k, amp, phase)
 
-    # ------------------------------------------------------------
+            phi = np.angle(coeff)
+
+            self.qbit.add_mode(k, A, phi)
+
 
     def spectral_complexity(self,
                             trajectory: Optional[np.ndarray] = None) -> float:
@@ -100,30 +106,35 @@ class ObserverWavefunction:
 
         return complexity
 
-    # ------------------------------------------------------------
-
     def evaluate(self, points: np.ndarray, t: float) -> np.ndarray:
         """
-        Evaluate Gaussian wavefunction centered at current position.
-
-        Parameters
-        ----------
-        points : np.ndarray
-            Points at which to evaluate.
-        t : float
-            Simulation time (unused but kept for interface consistency).
-
-        Returns
-        -------
-        np.ndarray
-            Complex wavefunction values.
+        Complex Gaussian wavepacket with momentum phase.
         """
         diff = points - self.center
         r2 = np.sum(diff ** 2, axis=1)
-        return np.exp(-r2 / (2 * self.sigma ** 2))
+
+        # infer local velocity (momentum)
+        if len(self.trajectory) >= 2:
+            v = self.trajectory[-1] - self.trajectory[-2]
+        else:
+            v = np.zeros(2)
+
+        # plane-wave phase term
+        k_micro = 2 * np.pi * self.oscillations / self.sigma
+
+        v = self.trajectory[-1] - self.trajectory[-2] if len(self.trajectory) >= 2 else np.zeros(2)
+
+        norm = np.linalg.norm(v)
+        direction = v / (norm + 1e-12)
+
+        k_micro = 2 * np.pi * self.oscillations / self.sigma
+        phase = points @ direction * k_micro
 
 
-# ======================================================================
+        envelope = np.exp(-r2 / (2 * self.sigma ** 2))
+        return envelope * np.exp(1j * phase)
+
+
 
 
 class PsiEmergentSim(GravitySim):
@@ -141,6 +152,7 @@ class PsiEmergentSim(GravitySim):
                  span: float = 0.0,
                  n_particles: int = 4096,
                  n_steps: int = 100,
+                 oscillations_per_radius: float = 5.0 ,
                  blob_sigma: float = 0.1,
                  n_candidates: int = 5):
         """
@@ -158,19 +170,23 @@ class PsiEmergentSim(GravitySim):
             Number of simulation steps.
         blob_sigma : float
             Gaussian width of each observer.
+        oscillations_per_radius : float
+            Number of oscillations in the observer wavepacket per σ radius.
         n_candidates : int
             Base number of candidate positions (internally doubled).
         """
         super().__init__(n_particles, n_steps, blob_sigma, n_candidates)
 
         self.t = 0.0
+        self.oscillations_per_radius = oscillations_per_radius
         self.initial_velocity = (
             initial_velocity if initial_velocity is not None
             else np.zeros(2)
         )
 
         self.wavefunctions: List[ObserverWavefunction] = [
-            ObserverWavefunction(pos, self.blob_sigma,
+            ObserverWavefunction(pos, self.blob_sigma, 
+                                 oscillations = self.oscillations_per_radius,
                                  initial_velocity=self.initial_velocity)
             for pos in self.positions
         ]
@@ -313,37 +329,31 @@ class PsiEmergentSim(GravitySim):
         float
             Total informational complexity of the universe.
         """
-        # Build joint complex signal
-        signals = []
+        total = 0.0
 
         for wf in self.wavefunctions:
             traj = np.array(wf.trajectory)
             if len(traj) < 2:
                 continue
+
             complex_traj = traj[:, 0] + 1j * traj[:, 1]
-            signals.append(complex_traj)
+            fft_vals = np.fft.fft(complex_traj)
 
-        if not signals:
-            return 0.0
+            N = len(fft_vals)
+            for k, coeff in enumerate(fft_vals):
+                amp = np.abs(coeff)
+                k_eff = min(k, N - k)
+                total += (k_eff ** 2) * (amp ** 2)
 
-        joint_signal = np.concatenate(signals)
-
-        fft_vals = np.fft.fft(joint_signal)
-
-        complexity = 0.0
-        for k, coeff in enumerate(fft_vals):
-            amp = np.abs(coeff)
-            complexity += (k ** 2) * (amp ** 2)
-
-        return complexity            
-
+        return total
 
 # --- IaMe demonstrator ---
 def main():
     parser = argparse.ArgumentParser(description="Emergent ψ Simulation")
     parser.add_argument("--vx", type=float, default=0, help="Initial velocity x-component")
     parser.add_argument("--vy", type=float, default=0, help="Initial velocity y-component")
-    parser.add_argument("--sigma", type=float, default=0.10, help="Blob size (σ)")
+    parser.add_argument("--sigma", type=float, default=0.20, help="Blob size (σ)")
+    parser.add_argument("--osc", type=float, default=5, help="Oscillations per observer radius")
     parser.add_argument("--particles", type=int, default=1024, help="Number of particles for visualization")
     parser.add_argument("--steps", type=int, default=300, help="Number of simulation steps")
     parser.add_argument("--span", type=float, default=0.0, help="Fraction of total steps over which observers are born")

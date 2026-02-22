@@ -100,24 +100,25 @@ class GravitySim:
             )
         return np.vstack(particles)
 
-
     def compute_pdf(self, grid_points: np.ndarray) -> np.ndarray:
-        pdf_total = np.zeros(grid_points.shape[0])
+        """
+        Compute Born probability from total coherent wavefunction.
+        """
+        psi_total = np.zeros(len(grid_points), dtype=complex)
 
-        for pos in self.positions:
-            cov = [[self.blob_sigma**2, 0], [0, self.blob_sigma**2]]
-            pdf_total += multivariate_normal.pdf(
-                grid_points, mean=pos, cov=cov
-            )
+        for wf in self.wavefunctions:
+            psi_total += wf.evaluate(grid_points, self.t)
 
-        pdf_total = np.nan_to_num(pdf_total, nan=0.0)
-        s = pdf_total.sum()
+        prob = np.abs(psi_total) ** 2
+
+        s = prob.sum()
         if s <= 0:
-            pdf_total[:] = 1.0 / len(pdf_total)
+            prob[:] = 1.0 / len(prob)
         else:
-            pdf_total /= s
+            prob /= s
 
-        return pdf_total
+        return prob
+
 
 
     def resample_particles(self, pdf_total: np.ndarray, grid_points: np.ndarray) -> np.ndarray:
