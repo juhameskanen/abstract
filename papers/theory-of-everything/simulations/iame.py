@@ -1,7 +1,7 @@
 import numpy as np
 import argparse
 from typing import List, Optional
-from qbitwave import QBitwave
+from qbitwave import QBitwaveMDL as QBitwave
 from visualization_engine import GravitySim  
 
 

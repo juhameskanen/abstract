@@ -1,4 +1,4 @@
-\chapter{Spectral Occam’s Razor}
+\chapter{Emergence of Quantum Mechanics}
 
 \section{The Problem With ``Something from Nothing''}
 
@@ -102,3 +102,156 @@ If the energy of a wavefunction is proportional to its spectral size, these equa
 
 
 
+\section{Finite Observer and Emergent Spectral Complexity}
+
+\subsection{Foundational Assumption}
+
+We assume that the observer is a finite informational structure. 
+Consequently, any physically meaningful state description must be finitely representable. 
+The universe is taken to consist of a finite number of distinguishable configurations.
+
+Thus, the wavefunction cannot be a fundamentally continuous object; 
+it must be an emergent finite representation.
+
+\subsection{Static Wavefunction as History Encoding}
+
+The wavefunction is not interpreted as an evolving state $\psi(x,t)$.
+Instead, it encodes an entire observer history as a single static object.
+
+Let $\mathcal{H}$ denote a full trajectory through configuration space.
+The wavefunction $\Psi$ is a compressed spectral representation of $\mathcal{H}$.
+
+Time is therefore not fundamental but corresponds to ordering within the encoded structure.
+
+\subsection{Integer Spectral Representation (QBitwave)}
+
+We define a discrete spatial domain of size $N$.
+Allowed frequencies are integers:
+
+\[
+k \in \mathbb{Z}_N.
+\]
+
+The wavefunction is represented by a finite set of integer parameters:
+
+\[
+\{ (k_i, A_i, \phi_i) \}_{i=1}^{m},
+\]
+
+where
+
+\begin{itemize}
+\item $k_i$ = integer frequency index,
+\item $A_i$ = integer amplitude coefficient,
+\item $\phi_i$ = integer phase (mod $M$).
+\end{itemize}
+
+The evaluation algorithm (e.g., $\sin$ or $e^{ikx}$) has constant description cost
+and is not counted toward structural complexity.
+
+All ontological quantities are integers.
+Normalization is performed only when computing probabilities:
+
+\[
+P(x) = \frac{|\psi(x)|^2}{\sum_x |\psi(x)|^2}.
+\]
+
+This yields the Born rule without assuming continuous amplitudes.
+
+\subsection{Spectral Complexity Measure}
+
+The spectral complexity $C_Q$ is defined as the total binary description length
+of the spectral parameters:
+
+\[
+C_Q =
+\sum_{i=1}^{m}
+\left[
+\mathrm{bits}(k_i)
++
+\mathrm{bits}(A_i)
++
+\mathrm{bits}(\phi_i)
+\right],
+\]
+
+where
+
+\[
+\mathrm{bits}(n) = \lfloor \log_2 |n| \rfloor + 1.
+\]
+
+This measure has the following properties:
+
+\begin{itemize}
+\item Higher frequency indices require more bits.
+\item Larger integer amplitudes require more bits.
+\item More modes increase total complexity.
+\item Fine phase tuning increases complexity.
+\item The measure is computable and smooth in large-scale limits.
+\item No uncomputable Kolmogorov complexity is used.
+\end{itemize}
+
+Higher physical wave numbers correspond to larger integer indices $k$.
+Since $\mathrm{bits}(k)$ grows logarithmically with $|k|$,
+shorter physical wavelengths require greater description length.
+
+
+\subsection{Typicality Principle}
+
+We assign statistical weight to histories according to:
+
+\[
+P(\Psi) \propto 2^{-C_Q(\Psi)}.
+\]
+
+Thus, spectrally simple (low-bit) histories dominate.
+
+\subsection{Emergent Smooth Dynamics}
+
+Sharp localization requires:
+
+\begin{itemize}
+\item Many frequency modes,
+\item Large frequency indices,
+\item Precise phase coordination.
+\end{itemize}
+
+Hence, discontinuous or highly irregular trajectories have large $C_Q$ 
+and are statistically suppressed.
+
+Conversely:
+
+\begin{itemize}
+\item Low-frequency modes are cheaper.
+\item Smooth trajectories require fewer modes.
+\item Slowly varying histories dominate the measure.
+\end{itemize}
+
+This produces:
+
+\begin{itemize}
+\item Apparent inertial persistence,
+\item Smooth dynamics,
+\item Interference phenomena via linear superposition.
+\end{itemize}
+
+\subsection{Continuity Requirement}
+
+For observers capable of prediction and logical reasoning,
+the complexity functional must vary smoothly under small parameter changes.
+
+Kolmogorov complexity is unsuitable because it is discontinuous and uncomputable.
+
+Binary description length of integer spectral parameters provides a continuous,
+computable alternative compatible with finite observers.
+
+\subsection{Interpretational Position}
+
+\begin{itemize}
+\item The wavefunction is emergent and finite.
+\item It encodes full histories, not instantaneous states.
+\item Smooth physics arises from compression dominance.
+\item Complex Fourier structure is taken as empirically given,
+      consistent with translation symmetry and linear superposition.
+\end{itemize}
