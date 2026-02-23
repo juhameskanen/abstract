@@ -51,6 +51,7 @@ class ObserverWavefunction:
         self.center = pos
 
 
+
     def rebuild_spectral_modes(self, trajectory: Optional[np.ndarray] = None):
         """
         Rebuild spectral representation from trajectory.
@@ -202,7 +203,74 @@ class PsiEmergentSim(GravitySim):
 
         self.active_observers = [False] * self.n_blobs
 
-    # ------------------------------------------------------------
+
+    def compute_pdf(self, grid_points: np.ndarray) -> np.ndarray:
+        """
+        Compute Born probability from total coherent wavefunction.
+        """
+        psi_total = np.zeros(len(grid_points), dtype=complex)
+        for wf in self.wavefunctions:
+            psi_total += wf.evaluate(grid_points, self.t)
+        prob = np.abs(psi_total) ** 2
+        s = prob.sum()
+        if s <= 0:
+            prob[:] = 1.0 / len(prob)
+        else:
+            prob /= s
+        return prob
+
+
+    def compute_pdf_new(self, grid_points: np.ndarray) -> np.ndarray:
+        """
+        Compute visualization PDF from all active observer wavefunctions.
+        """
+
+        rho = np.zeros(len(grid_points))
+
+        for i, wf in enumerate(self.wavefunctions):
+
+            # skip unborn observers
+            if not self.active_observers[i]:
+                continue
+
+            psi = wf.evaluate(grid_points, self.t)
+            rho += np.abs(psi) ** 2
+
+        total = rho.sum()
+        if total > 0:
+            rho /= total
+        else:
+            rho = np.ones_like(rho) / len(rho)
+
+        return rho
+
+    def get_spectral_data(self):
+        """
+        Uses the same definition as total_spectral_complexity,
+        but returns the per-k weighted spectrum.
+        """
+        complex_signal = []
+
+        for wf in self.wavefunctions:
+            traj = np.array(wf.trajectory)
+            if len(traj) < 2:
+                continue
+            complex_signal.extend(traj[:, 0] + 1j * traj[:, 1])
+
+        if len(complex_signal) < 2:
+            return None, None
+
+        z = np.array(complex_signal)
+        fft_vals = np.fft.fft(z)
+
+        N = len(fft_vals)
+        k = np.arange(N)
+        k_eff = np.minimum(k, N - k)
+
+        power = np.abs(fft_vals) ** 2
+        weighted = (k_eff ** 2) * power
+
+        return k_eff[:N//2], weighted[:N//2]
 
     def generate_candidates_emergent(self, blob_idx: int) -> np.ndarray:
         """
@@ -317,6 +385,36 @@ class PsiEmergentSim(GravitySim):
             wf.record_position(chosen_pos)
             self.trajs[i].append(chosen_pos.copy())
 
+
+    def get_complexity_spectrum(self):
+        """
+        Returns (k_eff, weighted_power, raw_power)
+        for the joint trajectory signal.
+        """
+        complex_signal = []
+
+        for wf in self.wavefunctions:
+            traj = np.array(wf.trajectory)
+            if len(traj) < 2:
+                continue
+            complex_signal.extend(traj[:, 0] + 1j * traj[:, 1])
+
+        if len(complex_signal) < 2:
+            return None, None, None
+
+        z = np.array(complex_signal)
+        fft_vals = np.fft.fft(z)
+
+        N = len(fft_vals)
+        k = np.arange(N)
+        k_eff = np.minimum(k, N - k)
+
+        power = np.abs(fft_vals) ** 2
+        weighted = (k_eff ** 2) * power
+
+        half = N // 2
+        return k_eff[:half], weighted[:half], power[:half]
+
     def total_spectral_complexity(self) -> float:
         """
         Compute spectral complexity of the joint universal wavefunction.
@@ -353,13 +451,13 @@ def main():
     parser.add_argument("--vx", type=float, default=0, help="Initial velocity x-component")
     parser.add_argument("--vy", type=float, default=0, help="Initial velocity y-component")
     parser.add_argument("--sigma", type=float, default=0.20, help="Blob size (σ)")
-    parser.add_argument("--osc", type=float, default=5, help="Oscillations per observer radius")
+    parser.add_argument("--osc", type=float, default=10, help="Oscillations per observer radius")
     parser.add_argument("--particles", type=int, default=1024, help="Number of particles for visualization")
-    parser.add_argument("--steps", type=int, default=300, help="Number of simulation steps")
+    parser.add_argument("--steps", type=int, default=100, help="Number of simulation steps")
     parser.add_argument("--span", type=float, default=0.0, help="Fraction of total steps over which observers are born")
     parser.add_argument("--file", type=str, default="emergent_sim")
     parser.add_argument("--format", choices=["mp4", "gif"], default="mp4")
-    parser.add_argument("--resolution", type=int, default=640, help="Output video resolution (width in pixels)")
+    parser.add_argument("--resolution", type=int, default=128, help="Output video resolution (width in pixels)")
 
     args = parser.parse_args()
     initial_velocity = np.array([args.vx, args.vy])
