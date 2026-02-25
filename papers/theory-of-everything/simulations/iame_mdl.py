@@ -2,6 +2,7 @@ import numpy as np
 import argparse
 from typing import List, Optional
 from qbitwave import QBitwaveMDL as QBitwave
+from gbitwave import GBitwave
 from visualization_engine import GravitySim
 
 
@@ -41,8 +42,6 @@ class ObserverWavefunction:
         )
 
         self.qbit = QBitwave(N=256)
-
-    # ------------------------------------------------------------
 
     def record_position(self, pos: np.ndarray):
         """Append a new position to the trajectory."""
@@ -155,7 +154,8 @@ class PsiEmergentSim(GravitySim):
                  n_steps: int = 100,
                  oscillations_per_radius: float = 5.0 ,
                  blob_sigma: float = 0.1,
-                 n_candidates: int = 5):
+                 n_candidates: int = 5,
+                 learning_rate: float = 0.01):
         """
         Initialize emergent simulation.
 
@@ -179,6 +179,7 @@ class PsiEmergentSim(GravitySim):
         super().__init__(n_particles, n_steps, blob_sigma, n_candidates)
 
         self.t = 0.0
+        self.learning_rate = learning_rate
         self.oscillations_per_radius = oscillations_per_radius
         self.initial_velocity = (
             initial_velocity if initial_velocity is not None
@@ -191,6 +192,9 @@ class PsiEmergentSim(GravitySim):
                                  initial_velocity=self.initial_velocity)
             for pos in self.positions
         ]
+        self.g_space = GBitwave(grid_size=32) 
+        self.alpha = 1.0  # The gravitational coupling constant
+        self.lambda_c = 10.0 # The "stiffness" of physical laws
 
         # Interpret span as fraction of total simulation
         if span > 0:
@@ -220,30 +224,6 @@ class PsiEmergentSim(GravitySim):
         return prob
 
 
-    def compute_pdf_new(self, grid_points: np.ndarray) -> np.ndarray:
-        """
-        Compute visualization PDF from all active observer wavefunctions.
-        """
-
-        rho = np.zeros(len(grid_points))
-
-        for i, wf in enumerate(self.wavefunctions):
-
-            # skip unborn observers
-            if not self.active_observers[i]:
-                continue
-
-            psi = wf.evaluate(grid_points, self.t)
-            rho += np.abs(psi) ** 2
-
-        total = rho.sum()
-        if total > 0:
-            rho /= total
-        else:
-            rho = np.ones_like(rho) / len(rho)
-
-        return rho
-
     def get_spectral_data(self):
         """
         Uses the same definition as total_spectral_complexity,
@@ -265,6 +245,9 @@ class PsiEmergentSim(GravitySim):
 
         N = len(fft_vals)
         k = np.arange(N)
+
+        # subtracting np.min(complexities) is for numerical stability (softmax centering).
+        # this does not change the resulting probabilities but prevents floating-point overflow.        
         k_eff = np.minimum(k, N - k)
 
         power = np.abs(fft_vals) ** 2
@@ -330,61 +313,55 @@ class PsiEmergentSim(GravitySim):
 
         return np.clip(candidates, 0.0, 1.0)
 
-    # ------------------------------------------------------------
-
     def update_positions(self, new_particles: np.ndarray):
         """
-        Update observer positions by minimizing joint universal
-        spectral complexity.
+        Unified Update: Observers move to minimize joint Informational Strain.
         """
         self.t += 1
         self.particles = new_particles
 
-        # Compute baseline complexity
-        base_complexity = self.total_spectral_complexity()
-
         for i, wf in enumerate(self.wavefunctions):
-
-            if self.birth_frame[i] > self.t:
-                continue
-
             if not self.active_observers[i]:
-                self.active_observers[i] = True
+                if self.birth_frame[i] <= self.t:
+                    self.active_observers[i] = True
+                else:
+                    continue
 
             candidates = self.generate_candidates_emergent(i)
-
-            complexities = []
+            strains = []
 
             for cand in candidates:
-                # --- Temporarily modify trajectory ---
-                wf.trajectory.append(cand)
+                # 1. Spectral Cost (C_Q)
+                c_q = wf.spectral_complexity(np.array(wf.trajectory + [cand]))
 
-                # Compute new joint complexity
-                c_total = self.total_spectral_complexity()
-                complexities.append(c_total)
+                # 2. Interaction Cost (C_int)
+                # Map candidate to grid
+                xi = int(np.clip(cand[0] * self.g_space.grid_size, 1, self.g_space.grid_size - 2))
+                yi = int(np.clip(cand[1] * self.g_space.grid_size, 1, self.g_space.grid_size - 2))
 
-                # Restore state
-                wf.trajectory.pop()
+                # Sampling the metric strain from GBitwave
+                gamma = self.g_space._christoffel(xi, yi)
+                local_R = np.abs(np.trace(gamma[0]) + np.trace(gamma[1])) 
+                
+                c_int = self.alpha * local_R 
+                strains.append(c_q + c_int)
 
-            complexities = np.array(complexities)
-
-            delta_c = max(
-                np.max(complexities) - np.min(complexities),
-                1e-6
-            )
-
-            k = 3.0 / delta_c
-            probs = np.exp(-k * (complexities - np.min(complexities)))
-            probs /= probs.sum()
+            strains = np.array(strains)
+            
+            # MDL-based probability distribution (Boltzmann-like)
+            probs = np.exp(-self.lambda_c * (strains - np.min(strains)))
+            probs /= (probs.sum() + 1e-12)
 
             chosen_idx = np.random.choice(len(candidates), p=probs)
             chosen_pos = candidates[chosen_idx]
 
-            # Apply permanently
             self.positions[i] = chosen_pos
             wf.record_position(chosen_pos)
             self.trajs[i].append(chosen_pos.copy())
 
+        # The Back-Reaction: Spacetime warps to follow the observers
+        self.update_metric_field()
+        
 
     def get_complexity_spectrum(self):
         """
@@ -415,6 +392,95 @@ class PsiEmergentSim(GravitySim):
         half = N // 2
         return k_eff[:half], weighted[:half], power[:half]
 
+
+    def total_informational_strain(self, blob_idx: int, candidate_pos: np.ndarray) -> float:
+        """
+        Computes the total MDL cost (S = C_Q + C_G + C_int) for a candidate move.
+        """
+        wf = self.wavefunctions[blob_idx]
+
+        # --- 1. Spectral Cost (C_Q) ---
+        # How much does this move 'jerk' the Fourier representation of the path?
+        c_q = wf.spectral_complexity(np.array(wf.trajectory + [candidate_pos]))
+
+        # --- 2. Geometric Cost (C_G) ---
+        # The cost of the spacetime grid itself (R^2)
+        c_g = self.g_space.geometric_encoding_cost()
+
+        # --- 3. Interaction Cost (C_int) ---
+        # The 'Bridge': Matter (psi) feels the metric (g).
+        # We sample the local curvature at the candidate position.
+        xi = int(np.clip(candidate_pos[0] * self.g_space.grid_size, 1, self.g_space.grid_size - 2))
+        yi = int(np.clip(candidate_pos[1] * self.g_space.grid_size, 1, self.g_space.grid_size - 2))
+
+        # Proxy for local Ricci curvature at candidate spot
+        gamma = self.g_space._christoffel(xi, yi)
+        local_R = np.abs(np.trace(gamma[0]) + np.trace(gamma[1])) # Simplified R proxy
+
+        # C_int = Coupling * Density * Curvature
+        # Since it's a single candidate point, density is effectively 1.0 here
+        c_int = self.alpha * local_R 
+
+        return c_q + c_g + c_int
+
+
+    def update_metric_field(self):
+        """
+        Replaces hard-coded multipliers with a gradient descent on the 
+        Action S = C_G + C_int.
+        """
+        grid_size = self.g_space.grid_size
+        # 1. Map current observer density to the grid using Gaussian footprints
+        rho = np.zeros((grid_size, grid_size))
+        for i, wf in enumerate(self.wavefunctions):
+            if not self.active_observers[i]: 
+                continue
+            
+            # Map center to grid coordinates
+            xi_c = wf.center[0] * grid_size
+            yi_c = wf.center[1] * grid_size
+            
+            # Define a local window based on the observer's sigma
+            # Typically 3 * sigma covers 99% of the density
+            win = int(3 * wf.sigma * grid_size)
+            for dx in range(-win, win + 1):
+                for dy in range(-win, win + 1):
+                    tx = int(xi_c + dx) % grid_size
+                    ty = int(yi_c + dy) % grid_size
+                    
+                    # Distance in grid units
+                    dist_sq = dx**2 + dy**2
+                    # Density contribution follows the wavepacket's spatial profile
+                    rho[tx, ty] += np.exp(-dist_sq / (2 * (wf.sigma * grid_size)**2))
+
+        # 2. Compute Gradient of the Action w.r.t Metric g
+        # We use the approximation that C_int ~ rho * R and C_G ~ R^2
+        
+        for x in range(1, grid_size - 1):
+            for y in range(1, grid_size - 1):
+                # Calculate local curvature proxy R
+                gamma = self.g_space._christoffel(x, y)
+                R = np.abs(np.trace(gamma[0]) + np.trace(gamma[1]))
+                
+                # dS/dg = d(C_G)/dg + d(C_int)/dg
+                # For Quadratic Gravity (R^2), the variation is ~ R
+                # For the interaction, the variation is ~ rho
+                grad_G = 2 * R  
+                grad_int = -self.alpha * rho[x, y]
+                
+                total_grad = grad_G + grad_int
+                
+                # 3. Update the metric components (g_00, g_11)
+                # The metric 'shrinks' (gravity) where rho is high to minimize S
+                self.g_space.metric[x, y, 0, 0] -= self.learning_rate * total_grad
+                self.g_space.metric[x, y, 1, 1] -= self.learning_rate * total_grad
+
+        # 4. Global Normalization (Prevents the universe from collapsing/expanding forever)
+        # This enforces the 'Zero Parameter' constraint by keeping total volume invariant
+        self.g_space.metric /= np.mean(self.g_space.metric)
+
+
+            
     def total_spectral_complexity(self) -> float:
         """
         Compute spectral complexity of the joint universal wavefunction.
@@ -458,6 +524,7 @@ def main():
     parser.add_argument("--file", type=str, default="emergent_sim")
     parser.add_argument("--format", choices=["mp4", "gif"], default="mp4")
     parser.add_argument("--resolution", type=int, default=128, help="Output video resolution (width in pixels)")
+    parser.add_argument("--learning", type=float, default=0.01, help="Learning rate for metric updates")
 
     args = parser.parse_args()
     initial_velocity = np.array([args.vx, args.vy])
@@ -467,7 +534,8 @@ def main():
         n_steps=args.steps,
         blob_sigma=args.sigma,
         initial_velocity=initial_velocity,
-        span=int(args.steps * args.span)
+        span=int(args.steps * args.span),
+        learning_rate=args.learning
     )
 
     sim.run(f"{args.file}.{args.format}", res=args.resolution, fps=15)

@@ -58,9 +58,6 @@ class GravitySim:
         self.ax_spec: Optional[Axes] = None
         self.ax_stats: Optional[Axes] = None
 
-    # ============================================================
-    # CORE
-    # ============================================================
 
     def init_particles(self) -> np.ndarray:
         particles = []
@@ -104,9 +101,6 @@ class GravitySim:
     def get_spectral_data(self):
         return None, None
 
-    # ============================================================
-    # VISUALIZATION
-    # ============================================================
 
     def run(self, save_video: str, res: int, fps: int = 15):
 
@@ -138,9 +132,7 @@ class GravitySim:
         # Right bottom: stats
         self.ax_stats = self.fig.add_subplot(gs[1, 1])
 
-        # ======================
         # SIM PANEL
-        # ======================
 
         self.ax_sim.set_xlim(0, 1)
         self.ax_sim.set_ylim(0, 1)
@@ -164,9 +156,7 @@ class GravitySim:
             edgecolors="none"
         )
 
-        # ======================
         # SPECTRAL PANEL
-        # ======================
 
         self.ax_spec.set_title("Spectral Complexity")
         self.ax_spec.set_xlabel("k")
@@ -176,9 +166,7 @@ class GravitySim:
 
         self.spec_line, = self.ax_spec.plot([], [], lw=1.2)
 
-        # ======================
         # STATS PANEL
-        # ======================
 
         self.ax_stats.set_title("Distance / Velocity / Acceleration")
         self.ax_stats.set_xlabel("Step")
@@ -206,9 +194,7 @@ class GravitySim:
 
         self.ax_stats.legend(loc="upper left")
 
-        # ============================================================
         # FRAME UPDATE
-        # ============================================================
 
         def update_frame(step):
 

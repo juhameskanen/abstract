@@ -3,196 +3,112 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib} 
 
-\title{Observer-Centric Information-Theoretic Framework}
+\title{The Principle of Minimal Informational Strain: \\ A Zero-Parameter Theory of Emergent Physics}
 \author{Juha Meskanen}
-\date{2025}
+\date{2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-We present an informational ontology in which physical laws emerge from observer-conditioned typicality.
-Quantum mechanics and general relativity arise as a trinity of complementary, orthogonal representations of the same underlying informational substrate.
-These three representations are mutually orthogonal: none is sufficient alone, and the observer’s realized history is determined by the joint optimization of their informational complexity.
-We formalize this via the D--$\psi$--G decomposition and demonstrate that emergent physics is fully determined by observer survival, collapsing all apparent free parameters to zero.
+We present an informational ontology where physical laws emerge from observer-conditioned typicality. 
+Reality is formalized as a static $n$-bit substrate, from which quantum mechanics ($\psi$) and general relativity ($G$) arise as dual, optimal compression channels. 
+We demonstrate that the observer's realized history is determined by the joint minimization of spectral and geometric complexity. 
+This "Dual-Compression" framework implies that $\psi$ and $G$ are not fundamental, but are the most efficient coordinate systems for maintaining observer coherence. 
+We solve the measure problem by identifying a self-organized critical parameter $\lambda_c$, effectively collapsing all apparent free parameters to zero.
 \end{abstract}
 
-\noindent \textbf{Keywords:} Information Theory, Observer-Conditioned Typicality, Emergent Gravity, Quantum Foundations, D--$\psi$--G Decomposition, Algorithmic Complexity, Spectral Compression, Pre-Geometric Universe.
-
+\noindent \textbf{Keywords:} Spectral Complexity, Minimal Description Length, Emergent Gravity, Observer-Conditioned Typicality, Quadratic Gravity, $R^2$ Action.
 
 \tableofcontents
 \bigskip
 
-\section{Introduction}
-
-Reality can be formalized as a collection of abstract information without intrinsic geometry, ordering, or dynamics.
-Observers are structured informational entities, and their existence selects for configurations exhibiting regularity and stability.
-We develop a framework in which quantum mechanics and general relativity emerge as complementary compression channels acting on the same informational substrate.
-An observer-conditioned probability measure, together with the D--$\psi$--G decomposition, ensures that all physical laws arise naturally from joint complexity minimization, without introducing extraneous parameters.
-
-\section{Ontological Premises}
+\section{Ontological Premises: The Static Bit-Space}
 
 \subsection{Fundamental Information Space}
-
-We adopt a finite binary representation for clarity: let $\mathcal{C} = \{0,1\}^n$ denote all $n$-bit configurations. Each $s \in \mathcal{C}$ is a static, timeless configuration. At this level:
+Reality is a static informational totality $\mathcal{C} = \{0,1\}^n$. 
 \begin{itemize}
-    \item Configurations are unordered and all exist equally.
-    \item No external time or dynamics is assumed.
+    \item \textbf{Configuration Space:} All $2^n$ configurations exist simultaneously and timelessly.
+    \item \textbf{Ordered Traversals:} A history $\gamma$ is an ordered path through bit-space. All possible paths exist; however, the sampling measure is non-uniform.
+    \item \textbf{The Observer:} An observer is a localized informational substructure that maintains internal coherence and persistent memory across a history $\gamma$.
 \end{itemize}
 
-A permutation $\sigma: \mathcal{C} \to \mathcal{C}$ defines an ordering of these configurations, representing a ``movie'' of possible states. Most permutations are incoherent; observers interact only with structured \emph{paths} $\gamma = (s_1, \dots, s_T)$ preserving informational continuity.
+\subsection{Induced Dynamics and Time}
+Time is not an ontological primitive but a coordinate internal to the compressed representation of a path. 
+Causality emerges because histories with low-complexity transitions are exponentially more probable than chaotic ones.
 
-\subsection{Observers and Induced Time}
+\section{Dual-Compression Channels}
 
-Observers are coherent subpatterns along paths through $\mathcal{C}$, requiring:
+We propose that physics is the result of the observer mapping raw bit-string histories onto two primary, complementary compression channels.
+
+\subsection{Spectral Complexity}
+Microscopic correlations are most efficiently compressed via a spectral representation. 
+We define the complexity $C_Q$ as a Sobolev-type seminorm:
+\begin{equation}
+    C_Q[\gamma] = \sum_{k} k_{\text{eff}}^2 |A_k|^2
+\end{equation}
+where $k_{\text{eff}}$ is the minimal frequency distance. 
+This functional penalizes high-frequency "roughness." 
+The wavefunction $\psi$ is thus the minimal smooth encoding of discrete informational structure. 
+Quantum behavior (interference, superposition) emerges because Fourier-like modes are the optimal basis for microscopic data compression.
+
+\subsection{Geometric Complexity}
+Macroscopic relational structure is compressed via geometry. 
+Unlike the Einstein-Hilbert action, the informational cost must be positive-definite to ensure vacuum stability. 
+We employ a quadratic Ricci functional:
+\begin{equation}
+    C_G[\gamma] = \alpha \int R^2 \sqrt{-g} \, d^4x + \beta \int \|a + \Gamma(v,v)\|^2 ds
+\end{equation}
 \begin{itemize}
-    \item Memory and continuity,
-    \item The ability to model internal states and predict outcomes,
-    \item Well-defined boundaries to preserve identity.
+    \item \textbf{$R^2$ Penalty:} Ensures all curvature costs information, preventing "negative information" instabilities.
+    \item \textbf{Geodesic Enforcement:} Deviations from geodesics increase the description length of a path, forcing observers to perceive "inertial" motion.
 \end{itemize}
 
-Time is emergent along observer paths; macroscopic causality and dynamics are models of this ordering.
+\section{The Universal Informational Measure}
 
-\section{Compression and Spectral Complexity}
+The probability $\mathbb{P}$ of an observer history $\gamma$ is determined by the joint minimization of spectral, geometric, and interaction complexity:
 
-\subsection{Spectral Complexity and the Wavefunction}
+\begin{equation}
+    \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp \Big[ -\lambda_c \big( C_Q(\gamma) + C_G(\gamma) + C_{\text{int}}(\gamma, G) \big) \Big]
+\end{equation}
 
-Define the \emph{spectral complexity} of a path $\gamma$ as $\mathcal{C}_\psi[\gamma]$, the minimal representation in terms of frequencies, phases, and amplitudes needed to capture observer-relevant information.
+\subsection{The Self-Organized Criticality of Lamda}
+The parameter $\lambda$ weights the "stiffness" of the laws of physics. 
+We posit that $\lambda$ is fixed at a critical value $\lambda_c$ representing a phase transition between chaos and crystalline order. 
+Only at $\lambda_c$ can "intelligent" observers exist who are complex enough to record history but simple enough to remain predictable. 
+Thus, $\lambda$ is an emergent property of the observer's existence, not a free constant.
 
-- Low $\mathcal{C}_\psi$ → smooth, compressible, highly probable worlds.  
-- High $\mathcal{C}_\psi$ → chaotic, uncompressible, low-probability worlds.
+\subsection{Emergent Gravity via Coupling}
+Gravity is the necessary coupling between the two compression channels. 
+The interaction term represents the informational cost of mapping a wavefunction $\psi$ onto a manifold $G$:
+\begin{equation}
+    C_{\text{int}} \sim \int |\psi|^2 R \, \sqrt{-g} \, dV
+\end{equation}
+Variation of the total functional with respect to the metric yields field equations where curvature responds to spectral density. 
+Gravity is not a force; it is the geometric "warping" required to minimize the total global compression cost of an informational structure.
 
-The wavefunction encodes an ensemble of observer-compatible paths. Interference reflects shared substructure, and probabilities correspond to relative description weights. Linearity and complex amplitudes emerge from optimal spectral encoding, explaining why observers perceive a deterministic, continuous $\psi$.
+\section{Intelligence and Survival as MDL Optimization}
 
-\subsection{Geometric Complexity and Emergent GR}
-
-Intelligent observers require boundaries to maintain identity. Geometric space is optimal for representing these boundaries.
-Minimal geometric complexity, $\mathcal{C}_G[\gamma]$, penalizes both spatial roughness and temporal variation of curvature:
-
-\[
-L_G \sim \int d^4x \left( \lvert \nabla K \rvert^2 + \lvert \partial_t K \rvert^2 \right),
-\]
-
-where $K$ is a curvature-like field. Low $\mathcal{C}_G$ histories dominate, producing Einstein-like dynamics as the unique stable compression attractor.
-
-This functional is illustrative rather than fundamental; any measure penalizing geometric roughness leads to the same low-complexity attractor.
-
-
-\subsection{Discrete Complexity}
-
-The discrete instantiation $\mathcal{C}_D[\gamma]$ corresponds to particle-like states, the ``pixels'' of reality, ensuring observer consistency with minimal information dissipation.
-
-\section{Unified Probability}
-
-\subsection{Joint Complexity}
-
-We decompose observer-path complexity additively:
-
-\[
-\mathcal{C}_O[\gamma] = \alpha_D \mathcal{C}_D[\gamma] + \alpha_\psi \mathcal{C}_\psi[\gamma] + \alpha_G \mathcal{C}_G[\gamma].
-\]
-
-The coefficients $\alpha_D, \alpha_\psi, \alpha_G$ are not free parameters but
-emergent normalization factors fixed by observer persistence; only their ratios
-matter, and these are uniquely determined by the survival constraint.
-
-\subsection{Observer-Conditioned Measure}
-
-The probability of a history $\gamma \in \Gamma_O$ (all paths sustaining observer $O$) is:
-
-\[
-\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\big[-\lambda \mathcal{C}_O[\gamma]\big].
-\]
-
-$\lambda$ is the \emph{stiffness constant} weighting low-complexity paths.  
-Crucially, $\lambda$ is \textbf{emergent}: it is the value that maximizes the probability of the observer existing.  
-Once this condition is applied, all free parameters vanish.
-
-\subsubsection{Illustration}
-
-\begin{center}
-\begin{tikzpicture}[scale=2]
-
-% Axes
-\draw[thick,->] (0,0,0) -- (2,0,0) node[anchor=north east] {$D$};
-\draw[thick,->] (0,0,0) -- (0,2,0) node[anchor=south west] {$\psi$};
-\draw[thick,->] (0,0,0) -- (0,0,2) node[anchor=south] {$G$};
-
-% Optional: origin label
-\node at (0,0,0) [anchor=north east] {$\mathcal{I}_n$};
-
-% Optional: dotted projections
-\draw[dashed] (2,0,0) -- (2,2,0) -- (0,2,0);
-\draw[dashed] (2,0,0) -- (2,0,2) -- (0,0,2);
-\draw[dashed] (0,2,0) -- (0,2,2) -- (0,0,2);
-
-\end{tikzpicture}
-\end{center}
-
-
-
-\section{Emergent Physics}
-
-Histories minimizing joint complexity dominate.  
-
-QM dominates where $\mathcal{C}_\psi$ is significant; classical geometry dominates where $\mathcal{C}_G$ is significant.  
-
-Maximal compression → maximal probability → maximal predictability.
-
-\section{Zero-Parameter Universe}
-
-Given $n$ bits of the observer wavefunction, there are $2^n$ arrangements and $(2^n)!$ orderings.  
-Only a tiny fraction of these permit persistent observers.  
-$\lambda$ is selected by maximizing observer probability, collapsing the framework to zero free parameters.  
-
-\section{Interpretation}
-
-$\psi$ and $G$ projections are mutually orthogonal.  
-
-Observers find themselves in minimal joint-complexity histories.  
-
-Deviations (injected intelligence) are probabilistically suppressed but may be necessary for survival.
-Formally, intelligent action corresponds to locally increasing $\mathcal{C}_\psi$
-or $\mathcal{C}_G$ to avoid global termination of the observer path, thereby
-minimizing $\mathcal{C}_O$ over extended horizons.
-
-
-\section{Simulations}
-
-Demonstrations of emergent behavior are implemented in the reference simulation:
+A potential tension exists between "minimal complexity" and the "complex action" of intelligent agents. 
+We resolve this by observing that "death" (entropic dissolution) represents a transition to a high-entropy, high-frequency state. 
+In the spectral domain, the dissolution of a coherent observer costs an astronomical amount of informational "bits" ($\sum k^2 |A|^2$ spikes as $\psi$ fragments).
 
 \begin{itemize}
-    \item \texttt{simulations/iame.py}
+    \item \textbf{Intelligence:} The strategic expenditure of local complexity to avoid global informational decoherence.
+    \item \textbf{Active Inference:} An intelligent observer selects paths that minimize the \emph{integrated} complexity over future horizons. 
+    Swimming against a current to avoid a waterfall is the most probable path because the "cost of swimming" is lower than the "cost of fragmentation."
 \end{itemize}
 
 \section{Conclusion}
 
-The D--$\psi$--G framework shows that:
+The universe is the path of least informational resistance. 
+By replacing Kolmogorov complexity with computable spectral and geometric metrics, we show that:
+1. Quantum Mechanics is the optimal micro-compression.
+2. General Relativity is the optimal macro-compression.
+3. Intelligence is the self-maintenance of these compressed boundaries.
 
-Observer-compatible laws emerge naturally from compression-weighted probability.  
-
-Quantum mechanics is the minimal spectral representation of paths.  
-
-Classical geometry is the minimal geometric projection necessary for observer survival.  
-
-There are no fundamental free parameters; $\lambda$ is fixed by observer-conditioned maximal probability.
-
-This provides a zero-parameter, observer-centric theory of everything, unifying QM and GR as complementary projections of the same underlying information.
-
-\section{Acknowledgments and References}
-
-We acknowledge the foundational contributions of algorithmic information theory and statistical mechanics to the formalization of observer-conditioned physics.
-
-
-\begin{itemize}
-    \item Kolmogorov Complexity \cite{Kolmogorov1965,LiVitanyi}  
-    \item Solomonoff Induction \cite{Solomonoff1964}  
-    \item Chaitin's Algorithmic Information Theory \cite{Chaitin1975}  
-    \item Gibbs Measure and Statistical Mechanics \cite{Gibbs1902,Touchette2009}  
-    \item Canonical Typicality and Quantum Equilibrium \cite{Goldstein2006,Durr1992}  
-    \item Information-Theoretic Emergence of Physics \cite{Bennett1988,Lloyd2006}  
-\end{itemize}
+Physics is fully determined by the requirement that a bit-string representation remain smooth, coupled, and persistent.
 
 \printbibliography
 
