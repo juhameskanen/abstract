@@ -3,20 +3,25 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib} 
 
-\title{The Principle of Minimal Informational Strain: \\ A Zero-Parameter Theory of Emergent Physics}
+\title{A Zero-Parameter Theory of Emergent Physics}
 \author{Juha Meskanen}
-\date{2026}
+\date{2025}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-We present an informational ontology where physical laws emerge from observer-conditioned typicality. 
-Reality is formalized as a static $n$-bit substrate, from which quantum mechanics ($\psi$) and general relativity ($G$) arise as dual, optimal compression channels. 
-We demonstrate that the observer's realized history is determined by the joint minimization of spectral and geometric complexity. 
-This "Dual-Compression" framework implies that $\psi$ and $G$ are not fundamental, but are the most efficient coordinate systems for maintaining observer coherence. 
-We solve the measure problem by identifying a self-organized critical parameter $\lambda_c$, effectively collapsing all apparent free parameters to zero.
+We propose an observer centric informational framework in which physical law emerges from compression. 
+Reality is identified with the totality of possible informational configurations, without privileging any specific encoding. 
+Observers are coherent substructures whose histories are weighted by description length. 
+Because predictable, law-like structure compresses most efficiently, observer-conditioned probability concentrates on maximally compressible histories.
+
+Quantum mechanics and general relativity arise as complementary compression mechanisms. 
+Hilbert-space structure provides an optimal spectral encoding of microscopic correlations, while geometry provides an optimal encoding of macroscopic relational structure. 
+Observers therefore most probably find themselves in histories where both spectral and geometric compression are simultaneously near-optimal.
+
+The apparent fine-tuning of physical constants is reinterpreted as a selection effect associated with a critical weighting of description length, yielding an effectively parameter-free description of physics.
 \end{abstract}
 
 \noindent \textbf{Keywords:} Spectral Complexity, Minimal Description Length, Emergent Gravity, Observer-Conditioned Typicality, Quadratic Gravity, $R^2$ Action.
@@ -27,7 +32,7 @@ We solve the measure problem by identifying a self-organized critical parameter 
 \section{Ontological Premises: The Static Bit-Space}
 
 \subsection{Fundamental Information Space}
-Reality is a static informational totality $\mathcal{C} = \{0,1\}^n$. 
+Reality is a finite static informational totality $\mathcal{C} = \{0,1\}^n$. 
 \begin{itemize}
     \item \textbf{Configuration Space:} All $2^n$ configurations exist simultaneously and timelessly.
     \item \textbf{Ordered Traversals:} A history $\gamma$ is an ordered path through bit-space. All possible paths exist; however, the sampling measure is non-uniform.
@@ -56,7 +61,7 @@ Quantum behavior (interference, superposition) emerges because Fourier-like mode
 \subsection{Geometric Complexity}
 Macroscopic relational structure is compressed via geometry. 
 Unlike the Einstein-Hilbert action, the informational cost must be positive-definite to ensure vacuum stability. 
-We employ a quadratic Ricci functional:
+We employ a quadratic Ricci functional. At the continuum level, the effective geometric cost can be written as:
 \begin{equation}
     C_G[\gamma] = \alpha \int R^2 \sqrt{-g} \, d^4x + \beta \int \|a + \Gamma(v,v)\|^2 ds
 \end{equation}
@@ -73,7 +78,7 @@ The probability $\mathbb{P}$ of an observer history $\gamma$ is determined by th
     \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp \Big[ -\lambda_c \big( C_Q(\gamma) + C_G(\gamma) + C_{\text{int}}(\gamma, G) \big) \Big]
 \end{equation}
 
-\subsection{The Self-Organized Criticality of Lamda}
+\subsection{The Self-Organized Criticality of \texorpdfstring{$\lambda$}{lambda}}
 The parameter $\lambda$ weights the "stiffness" of the laws of physics. 
 We posit that $\lambda$ is fixed at a critical value $\lambda_c$ representing a phase transition between chaos and crystalline order. 
 Only at $\lambda_c$ can "intelligent" observers exist who are complex enough to record history but simple enough to remain predictable. 
@@ -100,15 +105,69 @@ In the spectral domain, the dissolution of a coherent observer costs an astronom
     Swimming against a current to avoid a waterfall is the most probable path because the "cost of swimming" is lower than the "cost of fragmentation."
 \end{itemize}
 
+
+\section{Discussion: On Parameter Freedom and Observer-Conditioned Measures}
+
+At first glance, the appearance of the parameter $\lambda$ in the universal informational measure may seem to contradict the claim that the present framework is parameter-free.
+This apparent tension arises from a misclassification of the role played by $\lambda$.
+
+The theory itself introduces no free parameters at the ontological level.
+The informational substrate, the space of all histories, and the complexity functionals $C_Q$, $C_G$, and $C_{\text{int}}$ are fully specified without reference to any tunable constants.
+The parameter $\lambda$ does not characterize the universe; rather, it characterizes the measure induced by conditioning on the existence of a particular observer.
+
+Formally, $\lambda$ functions as a Lagrange multiplier conjugate to description length, analogous to inverse temperature in statistical mechanics.
+Different values of $\lambda$ define different valid measures over the same space of histories.
+All such measures exist simultaneously.
+However, for any specified observer, the probability of sustained coherence is sharply peaked around a characteristic value $\lambda^*(O)$.
+Observers therefore find themselves in universes with an apparently fixed $\lambda$, not because this value is fundamental, but because other values render their continued existence exponentially unlikely.
+
+In this sense, $\lambda$ is not a free parameter to be chosen, but an inferred quantity determined by the observer's informational structure.
+The apparent fine-tuning of physical laws is thus a selection effect rather than an ontological assumption.
+The framework remains genuinely zero-parameter: no constants are specified prior to conditioning on observer existence, and no degrees of freedom remain unconstrained by the theory.
+
+
 \section{Conclusion}
 
 The universe is the path of least informational resistance. 
-By replacing Kolmogorov complexity with computable spectral and geometric metrics, we show that:
-1. Quantum Mechanics is the optimal micro-compression.
-2. General Relativity is the optimal macro-compression.
-3. Intelligence is the self-maintenance of these compressed boundaries.
+By replacing Kolmogorov complexity with computable spectral and geometric metrics, we propose that:
+\begin{itemize}
+\item 1. Quantum Mechanics is the optimal micro-compression. This is what we 
+\item 2. General Relativity is the optimal macro-compression.
+\item 3. Intelligence is the self-maintenance of these compressed boundaries.
+\end{itemize}
 
-Physics is fully determined by the requirement that a bit-string representation remain smooth, coupled, and persistent.
+Observer-conditioned histories are distributed according to description length. Observers therefore experience the most compressible (predictable,
+smooth, structured) histories compatible with their existence.
+
+
+\section{Appendix: Simulation Proof-of-Concept}
+
+\noindent
+The PsiEmergentSim PoC implements the principles of the Dual-Compression framework numerically. 
+Although the continuum geometric cost term
+\(
+\int \|a + \Gamma(v,v)\|^2 ds
+\)
+is not explicitly computed, its effect emerges from the combination of:
+
+\begin{enumerate}
+    \item \textbf{Spectral Complexity Penalty ($C_Q$):} 
+    Large accelerations or sharp deviations in the observer trajectory produce high-frequency Fourier components, which are heavily penalized. This reproduces the information-theoretic cost of non-geodesic motion.
+
+    \item \textbf{Candidate Proposal Bias (Inertia):} 
+    New candidate positions are sampled around smooth extrapolations of the observer's previous trajectory. This preferentially selects paths with minimal local curvature in discrete steps.
+
+    \item \textbf{Curvature Interaction ($C_{\text{int}}$):} 
+    The observer experiences informational penalties when deviating from regions of low curvature as encoded in the discretized GBitwave grid. This approximates the effect of geodesic enforcement.
+\end{enumerate}
+
+\noindent
+Together, these components reproduce the continuum geodesic penalty statistically. 
+The PoC thus demonstrates that both quantum-like smoothness and emergent geodesic motion arise naturally from description length, without any hard-coded laws.
+
+\bigskip
+\noindent
+\textit{Note:} Observers in the simulation effectively select paths that minimize total complexity, providing numerical evidence that $\lambda$ acts as a selection parameter for observer coherence rather than a fundamental constant.
 
 \printbibliography
 
