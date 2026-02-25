@@ -3,7 +3,7 @@ import argparse
 from typing import List, Optional
 from qbitwave import QBitwaveMDL as QBitwave
 from gbitwave import GBitwave
-from visualization_engine import GravitySim
+from simulation_engine import Simulation
 
 
 class ObserverWavefunction:
@@ -23,13 +23,16 @@ class ObserverWavefunction:
         Number of oscillations in the wavepacket.
     initial_velocity : np.ndarray, optional
         Initial velocity vector.
+    max_modes : int
+        Maximum number of spectral modes to encode.
     """
 
     def __init__(self,
                  center: np.ndarray,
                  sigma: float,
                  oscillations: float,
-                 initial_velocity: Optional[np.ndarray] = None):
+                 initial_velocity: Optional[np.ndarray] = None,
+                 max_modes: int = 256):
 
         self.center = np.array(center, dtype=float)
         self.sigma = sigma
@@ -41,7 +44,7 @@ class ObserverWavefunction:
             else np.zeros_like(self.center)
         )
 
-        self.qbit = QBitwave(N=256)
+        self.qbit = QBitwave(N=max_modes)
 
     def record_position(self, pos: np.ndarray):
         """Append a new position to the trajectory."""
@@ -137,7 +140,7 @@ class ObserverWavefunction:
 
 
 
-class PsiEmergentSim(GravitySim):
+class PsiEmergentSim(Simulation):
     """
     Emergent observer dynamics driven by spectral informational complexity.
 
@@ -155,7 +158,10 @@ class PsiEmergentSim(GravitySim):
                  oscillations_per_radius: float = 5.0 ,
                  blob_sigma: float = 0.1,
                  n_candidates: int = 5,
-                 learning_rate: float = 0.01):
+                 learning_rate: float = 0.1,
+                 max_modes : int =512,
+                 n_blobs : int = 5
+                 ) -> None: 
         """
         Initialize emergent simulation.
 
@@ -176,7 +182,7 @@ class PsiEmergentSim(GravitySim):
         n_candidates : int
             Base number of candidate positions (internally doubled).
         """
-        super().__init__(n_particles, n_steps, blob_sigma, n_candidates)
+        super().__init__(n_particles, n_steps, blob_sigma, n_candidates, n_blobs)
 
         self.t = 0.0
         self.learning_rate = learning_rate
@@ -189,7 +195,8 @@ class PsiEmergentSim(GravitySim):
         self.wavefunctions: List[ObserverWavefunction] = [
             ObserverWavefunction(pos, self.blob_sigma, 
                                  oscillations = self.oscillations_per_radius,
-                                 initial_velocity=self.initial_velocity)
+                                 initial_velocity=self.initial_velocity,
+                                 max_modes=max_modes)
             for pos in self.positions
         ]
         self.g_space = GBitwave(grid_size=32) 
@@ -514,17 +521,20 @@ class PsiEmergentSim(GravitySim):
 # --- IaMe demonstrator ---
 def main():
     parser = argparse.ArgumentParser(description="Emergent ψ Simulation")
-    parser.add_argument("--vx", type=float, default=0, help="Initial velocity x-component")
-    parser.add_argument("--vy", type=float, default=0, help="Initial velocity y-component")
-    parser.add_argument("--sigma", type=float, default=0.20, help="Blob size (σ)")
-    parser.add_argument("--osc", type=float, default=10, help="Oscillations per observer radius")
+    parser.add_argument("--vx", type=float, default=4, help="Initial velocity x-component")
+    parser.add_argument("--vy", type=float, default=5, help="Initial velocity y-component")
+    parser.add_argument("--sigma", type=float, default=0.1, help="Blob size (σ)")
+    parser.add_argument("--osc", type=float, default=2, help="Oscillations per observer radius")
     parser.add_argument("--particles", type=int, default=1024, help="Number of particles for visualization")
     parser.add_argument("--steps", type=int, default=100, help="Number of simulation steps")
     parser.add_argument("--span", type=float, default=0.0, help="Fraction of total steps over which observers are born")
     parser.add_argument("--file", type=str, default="emergent_sim")
     parser.add_argument("--format", choices=["mp4", "gif"], default="mp4")
     parser.add_argument("--resolution", type=int, default=128, help="Output video resolution (width in pixels)")
-    parser.add_argument("--learning", type=float, default=0.01, help="Learning rate for metric updates")
+    parser.add_argument("--learning", type=float, default=0.5, help="Learning rate for metric updates")
+    parser.add_argument("--candidates", type=int, default=50, help="Number of candidate positions to evaluate per step")
+    parser.add_argument("--max-modes", type=int, default=1024, help="Maximum number of spectral modes to encode per observer")
+    parser.add_argument("--observers", type=int, default=10, help="Number of observers (blobs) in the simulation")
 
     args = parser.parse_args()
     initial_velocity = np.array([args.vx, args.vy])
@@ -535,7 +545,10 @@ def main():
         blob_sigma=args.sigma,
         initial_velocity=initial_velocity,
         span=int(args.steps * args.span),
-        learning_rate=args.learning
+        n_candidates=args.candidates,
+        learning_rate=args.learning,
+        max_modes=args.max_modes,
+        n_blobs=args.observers
     )
 
     sim.run(f"{args.file}.{args.format}", res=args.resolution, fps=15)
