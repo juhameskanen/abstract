@@ -18,7 +18,7 @@ do effective quantum behavior, inertia, and gravitational geometry emerge withou
 No forces, equations of motion, or spacetime structures are hard-coded.
 Only information, ordering, and compression are permitted.
 
-\section{The Role of the Observer}
+\section{The Definition of the Observer}
 
 The theory is fundamentally observer-centric.
 Therefore, the simulation must begin with an observer, or more precisely,
@@ -50,8 +50,7 @@ is the observer walk with maximal compressibility.
 \end{quote}
 
 Importantly, this formulation does not require that the observer or the total number of bits
-be fundamental.
-In the full theory, both are emergent:
+be fundamental. In the full theory, both are emergent:
 the most probable observer is the one that arises in the most probable informational universe,
 at the most probable scale.
 
@@ -101,6 +100,77 @@ by the observer-conditioned measure.
 
 In this sense, the optimizations enforce the theory rather than distort it.
 
+
+
+
+\section*{Linearized General Relativity}
+
+General Relativity posses another obstacle. In order to implement a practical simulation, we
+linearize the full MDL-based GR functional around a background metric, typically taken as flat Minkowski space:
+
+\begin{equation}
+g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \quad |h_{\mu\nu}| \ll 1,
+\end{equation}
+
+where $h_{\mu\nu}$ represents small perturbations encoding deviations from flat spacetime.  
+
+
+\subsection*{Linearized Geometric Cost}
+
+Expanding the Einstein–Hilbert action to quadratic order in $h_{\mu\nu}$ gives:
+
+\begin{equation}
+C_G[h] \approx \alpha \int (\partial_\lambda h_{\mu\nu}) (\partial^\lambda h^{\mu\nu}) \, d^4x,
+\end{equation}
+
+neglecting higher-order terms $\mathcal{O}(h^3)$.  
+
+- This can be interpreted as smoothness penalty in the simulation.  
+- The Laplacian $\Box h_{\mu\nu}$ arises naturally from the quadratic form.  
+- In this limit, variations of $C_G$ with respect to $h_{\mu\nu}$ yield **linear field equations**:
+
+\begin{equation}
+\Box h_{\mu\nu} = \frac{\beta}{\alpha} T_{\mu\nu},
+\end{equation}
+
+
+
+\subsection*{Linearized Worldline / Matter Term}
+
+Similarly, the matter encoding cost for point particles reduces to:
+
+\begin{equation}
+C_Q[\{x_a\} \mid h] \approx \beta \sum_a \int \left( \ddot{x}_a^\mu + \Gamma^\mu_{\nu\rho} \dot{x}_a^\nu \dot{x}_a^\rho \right)^2 dt,
+\end{equation}
+
+where the Christoffel symbols are approximated linearly:
+
+\begin{equation}
+\Gamma^\mu_{\nu\rho}[h] \approx \frac{1}{2} \eta^{\mu\sigma} (\partial_\nu h_{\sigma\rho} + \partial_\rho h_{\sigma\nu} - \partial_\sigma h_{\nu\rho}).
+\end{equation}
+
+- This can be take as the **worldline cost functional** in the weak-field.
+- Geodesics are approximated by solutions to $\ddot{x}^\mu + \Gamma^\mu_{\nu\rho} \dot{x}^\nu \dot{x}^\rho = 0$, justifying the discrete trajectory updates in the code.
+
+
+\subsection*{Connection to the Simulation}
+
+1. The perturbation $h_{\mu\nu}$ in the simulation corresponds to the **discrete, integer-based metric representation**.  
+2. The **Laplacian term** in $C_G$ drives the smoothing of the metric.  
+3. The **worldline penalty** drives particles to follow approximate geodesics.  
+4. The linearized equations ensure **computational tractability**, while retaining the MDL principle: the simulation still minimizes total description length for geometry and worldlines, albeit in the linearized limit.  
+
+
+\subsection*{Justification for Python Implementation}
+
+- The linearization allows the metric, Christoffel symbols, and worldline accelerations to be computed efficiently on a discrete grid.  
+- Nonlinear terms $\mathcal{O}(h^2)$ and higher are neglected, which is valid as long as perturbations remain small.  
+- This  provides a **rigorous connection between the MDL principle and the simulation**: each update step decreases an approximation to the total description length functional.  
+
+\textbf{Remark:} The full, nonlinear GR functional remains the ultimate target; this linearized supplement serves as a **formal justification for current simulation choices**, allowing the Python code to faithfully represent MDL-driven spacetime evolution in the weak-field limit.
+
+
+
 \section{Simulation Architecture}
 
 The simulation proceeds as follows:
@@ -138,3 +208,16 @@ of observer-conditioned informational compression.
 
 The simulation demonstrates that the theory is not merely interpretive,
 but generative.
+
+
+\section{Simulation Code}
+
+Simulation consists of the following classes:
+
+\begin{itemize}
+  \item qbitwave.py - Wavefunction as Minimal Description Language
+  \item gbitwave.py - Geometry as MDL
+  \item simulation\_engine.py: Physics agnostic base class
+  \item iame.py: - Classes implementing the actual physics
+\end{itemize}
+

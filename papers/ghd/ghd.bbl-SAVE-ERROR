@@ -226,6 +226,40 @@
       \field{title}{The Emperor's New Mind: Concerning Computers, Minds, and the Laws of Physics}
       \field{year}{1989}
     \endentry
+    \entry{hameroff1996conscious}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%
+           family={Penrose},
+           familyi={P\bibinitperiod},
+           given={Roger},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0222fe55cb2dd4fcf944f87d55f759b1}{%
+           family={Hameroff},
+           familyi={H\bibinitperiod},
+           given={Stuart},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{e972d92c310544741cca0b632227732c}
+      \strng{fullhash}{e972d92c310544741cca0b632227732c}
+      \strng{bibnamehash}{e972d92c310544741cca0b632227732c}
+      \strng{authorbibnamehash}{e972d92c310544741cca0b632227732c}
+      \strng{authornamehash}{e972d92c310544741cca0b632227732c}
+      \strng{authorfullhash}{e972d92c310544741cca0b632227732c}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematics and Computers in Simulation}
+      \field{number}{3}
+      \field{title}{Orchestrated objective reduction of quantum coherence in brain microtubules: The ``Orch OR'' model for consciousness}
+      \field{volume}{40}
+      \field{year}{1996}
+      \field{pages}{453\bibrangedash 480}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1016/S0378-4754(96)00042-1
+      \endverb
+    \endentry
     \entry{hawking1988}{article}{}
       \name{author}{1}{}{%
         {{hash=9d99e818c324dfd4351697eb81f01220}{%
