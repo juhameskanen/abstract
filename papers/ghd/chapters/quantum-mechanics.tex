@@ -9,11 +9,10 @@ it resists classical intuition.
 At small scales, matter does not behave like tiny billiard balls. 
 Instead, it behaves according to a complex-valued object called the \emph{wavefunction}.
 
-\subsection{The Wavefunction}
+\subsection*{The Wavefunction}
 
-At the heart of quantum mechanics lies the so-called \emph{wavefunction}.  
-It is a mysterious entity: it has no mass, no electric charge, and it does not emit or absorb light.  
-It cannot be directly measured by any instrument.  
+The \emph{wavefunction} is an abstract entity: it possesses no mass, no electric charge, and it does not emit or absorb light.
+It cannot be directly measured by any instrument. Yet, it exerts fundamental control over the universe at its smallest scales.
 
 Every isolated quantum system is described by a state vector 
 \[
@@ -29,8 +28,11 @@ i\hbar \frac{\partial}{\partial t} |\psi(t)\rangle = \hat{H} |\psi(t)\rangle.
 
 This evolution is linear and unitary. No randomness appears at this level.
 
-However, when we perform a measurement, we do not observe a superposition. 
-We observe a definite outcome.
+
+\subsection*{The Measurement}
+
+When we perform a measurement, we do not observe the complex-valued wavefunction directly. Instead, we observe a definite, real-valued
+outcome, a particle.
 
 The double-slit experiment illustrates this vividly. 
 Photons sent one by one through two slits produce an interference pattern. 
@@ -41,9 +43,12 @@ The particle becomes localized only upon detection.
 Thus, there is a dual structure:
 
 \begin{itemize}
-\item Continuous, distributed wavefunction evolution.
-\item Discrete, localized detection events.
+\item Continuous, linear, complex-valued unitary evolution of wavefunction.
+\item Discrete, localized classical measurement events in spacetime.
 \end{itemize}
+
+The wavefunction lives in Hilbert space, which is linear, continuous, complex-valued, and nonlocal.
+The latter is discrete, real-valued and localized. 
 
 The wavefunction is abstract by nature, yet it governs the probabilities of all physical events.  
 It encodes the potential behaviors of particles, dictating outcomes without being a tangible object itself.
@@ -51,7 +56,7 @@ It encodes the potential behaviors of particles, dictating outcomes without bein
 This is particle–wave duality.
 
 
-\subsection{Superposition as Informational Encoding}
+\subsection*{Superposition as Informational Encoding}
 
 Consider a quantum two-state system \(\psi\rangle = \alpha \):
 
@@ -76,12 +81,12 @@ This structure is crucial. The wavefunction does not store outcomes separately.
 It stores them in compressed, phase-sensitive form.
 
 If one were to list all classical alternatives explicitly, 
-the information content would scale exponentially exponentially with system size.
+the information content would scale exponentially with system size.
 Instead, the Hilbert space vector stores all alternatives 
 in a linear superposition.
 
 
-\subsection{Identity of Quantum Particles}
+\subsection*{Identity of Quantum Particles}
 
 Quantum particles lack classical individuality.  
 Electrons, for example, are indistinguishable not merely in practice, but in principle.  
@@ -119,7 +124,7 @@ Bose–Einstein condensation.
 Identity is therefore encoded algebraically, not geometrically. 
 The symmetry properties of Hilbert space replace classical individuality.
 
-\subsection{Uncertainty and Localization}
+\subsection*{Uncertainty and Localization}
 
 The Born rule states:
 
@@ -160,7 +165,7 @@ The wavefunction distributes information between conjugate variables.
 This trade-off is not experimental limitation. 
 It is structural compression.
 
-\subsection{Entanglement}
+\subsection*{Entanglement}
 
 Consider two particles in the joint state:
 
@@ -230,14 +235,14 @@ Particle-like events are the classical manifestations we observe as reality.
 
 
 
-\section{Universal Studios of Reality}
+\section{Ultimate Reality Show}
 
 What is the system we have described?
 
 Consider a digital rendering engine. While a scene may contain continuous color values, the display device has only finite precision. To approximate intermediate values, the renderer employs \textbf{probabilistic dithering}. If the actual value of the computed pixel is 9.75, but the rendering hardware supports only values 9 and 10, then the probability
 of getting 9 is 25 percent, and the probability of getting the value 10 is 75 percent. Over many pixels, discrete outputs approximate a continuous tone.
 
-Similarly, the wavefunction is continuous and complex-valued, yet measurement produces discrete events. The \textbf{Born probabilities} act as a weighted sampling of an underlying amplitude.
+Similarly, the \textbf{Born probabilities} act as a weighted sampling of an underlying amplitude.
 This suggests that classical outcomes are coarse-grained projections of a richer informational structure.
 
 In this framework, particles function like specialized data structures:
@@ -262,7 +267,7 @@ This perspective finds a analogy in digital signal processing, specifically with
 decompose an image or video frame into a sum of periodic functions. By prioritizing low-frequency coefficients and discarding less perceptible data,
 the codec compresses vast amounts of visual information into a manageable stream. 
 
-Consider an observer existing entirely within the pixel grid of a highly compressed MPEG movie. To that observer, the behavior of every pixel would appear governed by deterministic,
+Consider observers existing entirely within the pixel grid of a highly compressed MPEG movie. To those observers, the behavior of every pixel would appear governed by deterministic,
 periodic $\cos(\theta)$ functions. They might conclude that the ``laws'' of their universe are fundamentally wave-like, when in fact, they are simply observing the most efficient informational
 basis for representing reality. Similarly, the wave-like behavior of quantum particles may simply be the result of nature utilizing a Fourier-based basis to minimize the computational cost of the vacuum.
 

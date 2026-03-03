@@ -1,45 +1,35 @@
 \chapter{Preface}
 
-\section*{Origins}
+\section*{Motivation}
 
-The spark that ignited this project was not a flash of inspiration, but a painful accident. My highly respected dentist recommended the precautionary removal of a wisdom tooth: ``Problems might be expected, and they will only get worse over time,'' he warned. Trusting his expertise, I followed his advice, and soon I was one tooth---and a few hundred dollars---lighter.
+The spark that ignited this project was not a flash of inspiration, but a painful accident. My highly respected dentist recommended the precautionary removal of a wisdom tooth: ``Problems might be expected, and they will only get worse over time,'' he warned.
+Trusting his expertise, I followed his advice, and soon I was one tooth---and a few hundred dollars---lighter.
 
 But the problems got worse anyway. The socket refused to heal, leaving the nerves exposed. With the Christmas holidays in full swing, all dentists were off duty, and for days it felt as though the ache had expanded from one tooth to engulf my entire head.
 
-In that haze of pain, my thoughts turned irrational. First, I condemned the sugar industry for ruining people’s precious teeth with such a toxic product. My dentist became the next object of blame, and before long, even the government education system stood accused of failing in its duty to train competent dentists.
+I didn't take the pain well. First, I condemned the sugar industry for ruining people’s precious teeth with such a toxic product. My dentist became the next object of blame, and before long, even the government education system stood accused of failing in its duty to train competent dentists.
 
-Eventually, of course, the holiday ended, the clinic reopened, and the original mistake was repaired. Relief came quickly. Yet what remained was a question I had pondered many times with my colleagues: could pain ever be implemented as software?
+Eventually, of course, the holiday ended, the clinic reopened, and the original mistake was resolved. Relief came quickly. Yet what remained was a question I had pondered many times with my colleagues: could pain ever be implemented as software?
 
-My colleague, apparently blessed with better teeth, believed it was possible. With sensors, firmware, and code, a robot might be made to simulate agony. I disagreed. To behave as if in pain is not the same as to feel pain, I argued.
+My colleague, apparently blessed with better teeth, believed it was possible. With sensors, firmware, and code, a robot might be made to simulate agony. I disagreed. To behave as if in pain is not the same as to feel pain, I argued. I could not see how pain could ever be implemented in a programming language.
 
-It was this missing ``pain function'' in the standard library of \texttt{C/C++} that planted the seed of an obsession. That seed has grown, over years of trial and error, into the pages that follow.
+It was this missing ``pain function'' in the standard library of \texttt{C/C++} that planted the seed of an obsession. That seed has grown, over years of trial and error, into the work that follows.
+
 
 \section*{Method and Approach}
 
-The conclusions presented here have been developed using typical software design methods and tools. Code, like theory, must ultimately work. Programs written according to these principles run reliably; they do not succeed by persuasion, but by execution.
+The conclusions presented here were developed using standard software design methods and tools—the same ones I have relied on throughout my career as a software professional. The software built with these methods works.
 
-No program is without flaws. Bugs are inevitable. In the same way, some arguments here may contain errors. But I trust that, as with good software, the imperfections will not obscure the larger structure, nor the promise of the approach.
+However, no program is without flaws; bugs are inevitable. In the same way, some arguments presented here may contain errors. Yet I am confident that, as with well-designed software, these imperfections will not obscure the larger picture.
 
-This book attempts to weave together threads from physics and computation while consciously avoiding philosophy. Every conclusion drawn is backed by a simulation whenever possible.
-
-\section*{Formal Theory}
-
-This book is based on a set of formal papers written in the language of academic research, with definitions, theorems, proofs, and simulations. Many of the concepts were initially developed and verified through programming, then systematically converted into formal mathematics.
-
-The two strands are designed to support each other. The papers provide rigor; the book provides perspective. Together they form a record of an unusual journey: from a very personal question about the nature of pain, through simulations of information and collapsing dust clouds, to a model that seeks to unify entropy, geometry, and consciousness under a single informational framework.
 
 \section*{Acknowledgments}
 
-I extend my gratitude to my loving wife, who patiently endured countless nights beside me as I typed away on my noisy laptop. Despite the many disturbances to her sleep, she remained remarkably understanding and supportive throughout the creation of this book.
+I extend my heartfelt gratitude to my loving wife, who patiently endured countless nights beside me as I typed away on my noisy laptop. Despite the many disruptions to her sleep, she remained remarkably understanding and supportive throughout the writing of this book.
 
-I owe a deep debt of gratitude to my brother, whose unwavering patience has been central to my journey with programming and the eventual completion of this work. Without his enduring support (and constructive criticism), I might never have ventured into this field, let alone finished such an ambitious project. I also owe him an apology for the many fishing trips I disrupted by insisting he listen to my theories.
+I owe a deep debt of gratitude to my brother—and an apology for the many fishing trips I interrupted by insisting he listen to my theories.
 
-Special thanks (or perhaps blame, offered in good humor) go to Andy Jones. His gift of \emph{The Structure of Space and Time}, based on the 1995 Cambridge lectures by Roger Penrose and Stephen Hawking, proved transformative. Without that ``gift,'' I might never have developed the necessary obsession to see this work through to the end.
+Special thanks (or perhaps blame, offered in good humor) go to Andy Jones. His gift of The Structure of Space and Time proved transformative. Without that “gift,” I might never have developed the necessary obsession to see this work through to completion.
 
-We thank the statistical mechanics and quantum foundations literature for laying the groundwork for observer-conditioned probability measures and large-deviation formalism.
+Finally, I wish to honor the memory of my dog, Raju (R.I.P.), my loyal hunting companion, with whom I shared many memorable hunts—and, to the hares, R.I.P. as well.
 
-A great deal of thanks must also go to ChatGPT, Gemini, and other AI models. They have patiently fulfilled every request to debug code, verify references, and convert materials to \LaTeX{} and Python—all without ever refusing a task or letting out a sigh.
-
-I also wish to express my appreciation to those who generously shared insights beyond my own expertise. Though they prefer to remain unnamed, their contributions have enriched both the content and the quality of this work in ways I cannot overstate.
-
-Finally, I want to remember my dog, Raju (R.I.P.), my loyal hunting companion, with whom I shared many memorable hare (R.I.P.\ as well) hunts.

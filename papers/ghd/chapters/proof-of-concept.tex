@@ -117,21 +117,15 @@ where $h_{\mu\nu}$ represents small perturbations encoding deviations from flat 
 
 \subsection*{Linearized Geometric Cost}
 
-Expanding the Einstein–Hilbert action to quadratic order in $h_{\mu\nu}$ gives:
+In the simulation, we implement the variation of the $R^2$ functional. Expanding the curvature proxy $R$ linearly in terms of the metric perturbation $h_{\mu\nu}$, the cost gradient simplifies to a form driven by the Laplacian of the field:
 
 \begin{equation}
-C_G[h] \approx \alpha \int (\partial_\lambda h_{\mu\nu}) (\partial^\lambda h^{\mu\nu}) \, d^4x,
+\frac{\delta C_G}{\delta h_{\mu\nu}} \approx 2R \approx \nabla^2 h_{\mu\nu}
 \end{equation}
 
-neglecting higher-order terms $\mathcal{O}(h^3)$.  
+- The **Laplacian term** arises naturally from the quadratic cost.
+- The simulation reaches equilibrium when the geometric "stiffness" ($2R$) balances the informational density of the observer ($\alpha \rho$).
 
-- This can be interpreted as smoothness penalty in the simulation.  
-- The Laplacian $\Box h_{\mu\nu}$ arises naturally from the quadratic form.  
-- In this limit, variations of $C_G$ with respect to $h_{\mu\nu}$ yield **linear field equations**:
-
-\begin{equation}
-\Box h_{\mu\nu} = \frac{\beta}{\alpha} T_{\mu\nu},
-\end{equation}
 
 
 
@@ -149,7 +143,7 @@ where the Christoffel symbols are approximated linearly:
 \Gamma^\mu_{\nu\rho}[h] \approx \frac{1}{2} \eta^{\mu\sigma} (\partial_\nu h_{\sigma\rho} + \partial_\rho h_{\sigma\nu} - \partial_\sigma h_{\nu\rho}).
 \end{equation}
 
-- This can be take as the **worldline cost functional** in the weak-field.
+- This can be taken as the **worldline cost functional** in the weak-field.
 - Geodesics are approximated by solutions to $\ddot{x}^\mu + \Gamma^\mu_{\nu\rho} \dot{x}^\nu \dot{x}^\rho = 0$, justifying the discrete trajectory updates in the code.
 
 
@@ -175,8 +169,9 @@ where the Christoffel symbols are approximated linearly:
 
 The simulation proceeds as follows:
 \begin{enumerate}
-    \item Generate observer-compatible informational configurations.
-    \item Enumerate or sample admissible observer walks.
+    \item Initialize the observer state as a localized wavepacket, representing the minimal prior of an existing informational trace.
+    \item Enumerate or sample admissible observer walks. In practice, the simulation employs a local Metropolis-Hastings-style sampling of the path integral, where candidate trajectories are weighted by the Boltzmann factor of the total informational action.
+      This allows the system to efficiently find the 'classical' path without exhaustive enumeration.
     \item Compute spectral and geometric compressions for each walk.
     \item Assign joint weights according to the observer-conditioned measure.
     \item Identify dominant structures and trajectories.

@@ -1,32 +1,23 @@
 \chapter{Humans as Axiomatic System}
 
-According to Roger Penrose \cite{penrose1989emperor}, the operation of the human brain might not be an axiomatic system.
-Gödel's theorem states that within complex axiomatic systems, there exist true statements that cannot be proven true or false.
-Since computers and Turing Machines are equivalent to axiomatic systems, some answers cannot be obtained algorithmically.
-Penrose speculates that the human brain can reach such answers, indicating that humans are not merely computational machines.
-
-\section{Mathematics and Axiomatic Systems}
-
-An \emph{axiomatic system} consists of a set of \emph{axioms}—statements assumed to be true—and rules of logical inference that generate further statements, called \emph{theorems}.
-Classical mathematics, from Euclid's geometry to modern set theory, operates within such frameworks. One starts from a set of axioms, and mathematics is that follows.
-
-
 \section{Basic Assumptions}
 
 Let's start with the following assumptions:
 
 \begin{enumerate}
-    \item DNA encodes the blueprint for consciousness.
-    \item DNA obeys physical laws.
+    \item DNA encodes the blueprint of life.
+    \item DNA consists of ordinary matter that obeys physical laws.
 \end{enumerate}
 
 It should be noted that these are observable assumptions, and as such, they cannot be definitively proven. However, the observational evidence supporting them is strong.
 
 The first assumption posits that the human genome encodes all the information required to construct a conscious, pain-sensitive human being within this universe and its observed laws of physics.
 
-The second assumption states that DNA is composed solely of ordinary physical matter. It is made of the same matter as everything else and is governed by the same physical laws, with no non-physical or supernatural influences affecting its operation.
+The second assumption states that DNA is composed solely of ordinary physical matter. It is made of the same matter as everything else and is governed by the same physical laws,
+with no non-physical or supernatural influences affecting its operation.
 
-It then follows that humans, unlike what Roger Penrose speculates, must be implementations of axiomatic systems. Consequently, consciousness could be described using the principles of mathematics.
+It then follows that humans, unlike what Roger Penrose speculates, must be implementations of axiomatic systems. Consequently, consciousness can be described using the principles of mathematics.
+
 
 \section{Church-Turing Thesis}
 
@@ -38,9 +29,10 @@ Let us make a third assumption:
 \end{enumerate}
 
 It states that all physical processes can, in principle, be simulated by a device known as a Turing machine. Modern computers are essentially Turing machines.
-The thesis has never been formally proven, but if it were false, we would have good reason to worry about keeping our money in bank accounts.
+The Church--Turing Thesis  has never been formally proven, but if it were false, we would have good reason to worry about keeping our money in bank accounts \aside{what money}?.
 
 From these three assumptions it follows that humans can be simulated by a Turing machine---or, in its modern incarnation, a computer. 
+
 
 \section{DNA Simulation Thought Experiments}
 
@@ -49,13 +41,18 @@ same laws of physics as our own. As the simulation executes, the DNA evolves int
 pain-sensitive observer. The simulated human experiences an expanding universe where time flows from
 past to future, and tooth pain is real.
 
-\subsection{Optimizing Code}
 
-All software programs consist of two kinds of information: code and data. In a DNA simulation, the code would describe the laws of physics, such as quantum mechanics and gravity. The data would include the digitized DNA and a sufficiently large section of the surrounding universe.
+\subsection*{Optimizing Code}
+
+All software programs consist of two kinds of information: code ($c$) and data ($d$). In a DNA simulation, the code would describe the laws of physics, such as quantum mechanics and gravity.
+The data would include the digitized DNA and a sufficiently large section of the surrounding universe. Let us assume the simulation software
+consists of rougly equal amount of code and data.
 
 \[
-| \text{codecodecodecodecodecodecode}|\text{datadatadatadatadatadatadatadata}|
+1.0 = \frac{\operatorname{sizeof}(\text{cccccccccccccccccccccccc})}
+         {\operatorname{sizeof}(\text{dddddddddddddddddddddddd})}
 \]
+
 
 A well-known technique for optimizing slow, CPU-intensive code is to use lookup tables, which replace computation with precomputed data. For example, one can replace all \texttt{sqrt()} computations:
 
@@ -74,26 +71,33 @@ Empirically, software programs yield identical results regardless of how the res
 However, this optimization has the effect of reducing the amount of code and increasing the amount of data in our DNA simulation:
 
 \[
-| \text{codecodecodecodecode}|\text{datadatadatadatadatadatadatadatadatadata}|
+0.9 = \frac{\operatorname{sizeof}(\text{cccccccccccccccccccccccc})}
+         {\operatorname{sizeof}(\text{ddddddddddddddddddddddddddd})}
 \]
 
-Now, imagine we gradually optimize the DNA simulation by replacing algorithmic components (e.g., \texttt{sqrt()}) with lookup tables. As a consequence, the number of CPU cycles required to run the simulation decreases. Suppose we take this optimization to the extreme: all computation is replaced by a static dataset encoding the entire execution trace.
+
+Now, imagine we gradually optimize the DNA simulation by replacing algorithmic components with lookup tables.
+As a consequence, the number of CPU cycles required to run the simulation decreases. Suppose we take this optimization to the extreme:
+all computation is replaced by a static dataset encoding the entire execution trace.
 
 \[
-| \text{datadatadatadatadatadatadatadatadatadatadatadatadatadatadata}|
+0.0 = r = \frac{\operatorname{sizeof}(\text{})}
+         {\operatorname{sizeof}(\text{dddddddddddddddddddddddd}}
 \]
+
 
 As a result, we don't have anything to run in a computer. It is just a massive hard drive containing all procedures precomputed.
 
 Does the simulated human still experience time and pain? 
 
-The answer, within the axiomatic model, is yes. Affirming otherwise would imply the existence of a new physical constant in our books of physics: a minimum code-data ratio required for the Church--Turing thesis to hold, or for consciousness to emerge.
+The answer, within the axiomatic model, is yes. Affirming otherwise would certainly imply the existence of a new physical constant in our books of physics: a minimum code-data ratio required for consciousness to emerge.
 
 Temporal structure and pain, therefore, must emerge from the internal relationships among states, not from the external runtime. From the internal perspective of the simulated observer, time still flows from past to future and pain is real.
 
 As a conclusion, a static dataset can fully specify a universe containing conscious observers with subjective time. Consequently, time and pain must be properties of simulated observers, not fundamental properties of the universe.
 
-\subsection{Multi-threaded Simulation}
+
+\subsection*{Multi-threaded Simulation}
 
 When a single DNA simulation---let's call her Alice---runs on a computer, the execution trace is easy to study. Every CPU instruction drives the computer (and Alice) to a new state. From Alice's perspective, time flows forward, and the effect of each CPU cycle can be mapped to a simulated particle in her world.
 
@@ -115,21 +119,28 @@ Now, let's gradually shorten the number of CPU cycles until each thread is limit
 |\text{A}| \text{B}| \text{OS}| \text{R}| \text{J}| \text{OS}| \text{l}| \text{Ji}| \text{i}| \text{ce}| \text{b}| \text{ob}| \text{n}| \text{l}| \dots|
 \]
 
-Are the simulated observers still conscious?
+Is Alice still conscious?
 
-The answer, again within the axiomatic model, is yes. Empirically, multi-threaded computers function reliably regardless of how few CPU cycles are allocated per thread switch or how narrow the CPU’s internal registers are. From each observer's internal perspective, time still flows from past to future.
+The answer, again within the axiomatic model, is yes. Empirically, multi-threaded computers function reliably regardless of how few CPU cycles are allocated per thread switch or how narrow the CPU’s internal
+registers are. From each observer's internal perspective, time still flows from past to future.
 
-This raises an obvious question: how does each conscious, simulated observer know which sequences belong to them and which do not, in order to remain conscious?
+This raises an obvious question: how does Alice know which sequences belong to her and which do not, in order to remain conscious?
 
-Conclusion: if there is any way to interpret the data of the execution trace as a "conscious observer," then that is exactly what happens: a conscious observer emerges. If the initial assumptions hold, consciousness, pain, and subjective time can emerge from static data that resembles pure static noise.
+Conclusion: if there is any way to interpret static data as a "conscious observer," then that is exactly what happens: a conscious observer emerges.
+If the initial assumptions hold, consciousness, pain, and subjective time can emerge from static data that resembles pure static noise.
+
 
 \section{Causality}
 
-It is often assumed that a virtual universe only comes into existence when a simulation is actively executed—that the computer must be powered on to run the simulation code for the simulated world to exist. If the simulation computer is never started, then no simulated virtual world emerges. No consciousness, definitely no pain.
+It we can create a simulation with a computers, then it might seem obvious that those virtual universes only comes into existence when a simulation is actively executed—that the
+computer must be powered on to run the simulation code for the simulated world to exist.
+So if the simulation computer is never started, then no simulated virtual world emerges. No consciousness, definitely no pain. 
 
 However, pure static data (such as the full execution trace of a simulation) has no notion of time. One cannot measure the time it takes from the ``execution'' to create the virtual world.
-Therefore, one cannot argue that one created the other. What appears as static information, e.g., execution trace of a computer to us external observers, appears as an expanding universe and pain to the simulated human observing the data from inside. This relationship is representational, not causal. 
-The computer and the simulated universe must be two sides of the same coin: distinct arrangements of the same underlying information. 
+One cannot argue that one created the other. What appears as static information, e.g., execution trace of a computer to us external observers, appears as an expanding universe and
+pain to the simulated human observing the data from inside. This relationship is representational, not causal. 
+The computer and the simulated universe are two sides of the same coin: distinct arrangements of the same information. 
+
 
 \section{Parallel Universes}
 
@@ -138,18 +149,15 @@ Apparently, most of them describe chaotic universes with no conscious observers.
 And one describes something we call a computer, which is simulating a computationally heavy procedure---DNA.
 
 
-
 \section{Philosophical Zombies}
 
-Current technology does not yet allow for full-scale DNA simulations. However, were such a capability to exist, and assuming the three initial axioms hold true, we would have undoubtedly digitized our DNA multiple times to create conscious and pain-sensitive virtual twins of ourselves.
+Philosopher David Chalmers \cite{chalmers1995facing} proposed the concept of a philosophical zombie: a hypothetical being that is physically and behaviorally identical to a
+conscious human but lacks any subjective experience. Such a zombie would respond to pain stimuli in the exact same way a conscious person does---it would cry out,
+flinch, and try to avoid the source of pain---but it would not feel anything.
 
-But would those digital twins of us truly be conscious and sense pain?
+According to Chalmers, even with a perfect simulation, we would only be observing the physical processes. We still wouldn't know if there's a "ghost in the machine"---a feeling of what it's
+like to be that simulated being. A computer could be programmed to perfectly mimic the behavior of a person feeling pain without actually having the experience itself. 
 
-Philosopher David Chalmers \cite{chalmers1995facing} proposed the concept of a philosophical zombie: a hypothetical being that is physically and behaviorally identical to a conscious human but lacks any subjective experience. Such a zombie would respond to pain stimuli in the exact same way a conscious person does---it would cry out, flinch, and try to avoid the source of pain---but it would not feel anything.
-
-According to Chalmers, even with a perfect simulation, we would only be observing the physical processes. We still wouldn't know if there's a "ghost in the machine"---a feeling of what it's like to be that simulated being. A computer could be programmed to perfectly mimic the behavior of a person feeling pain without actually having the experience itself. 
-
-This goes back to philosopher the *hard problem of consciousness*. It appears that human conduct is not reducible to the operation of the human brain. 
 
 \section{Pain Hypothesis --- From Philosophy to Physics}
 
@@ -166,18 +174,9 @@ This assumption brings the concept of pain from philosophy to physics. Just like
 \text{Human} \neq \text{Human + Pain}
 \]
 
-The core argument is then as follows:
-
-\begin{itemize}
-    \item Axiom 1: DNA encodes the blueprint for consciousness.
-    \item Axiom 2: DNA obeys physical laws. From this, it follows that humans must be an axiomatic system.
-    \item Axiom 3: Church--Turing thesis holds. From this, it follows that humans can be simulated.
-    \item Axiom 4: Pain has measurable effects. From this, it follows that the simulated copy must experience pain and be conscious. 
-\end{itemize}
-
-If a system's behavior is entirely determined by its physical components and their interactions, a perfect copy should exhibit identical behavior. If a simulation is a perfect copy of those physical components, it must behave identically to the original. If the original's behavior is driven by the experience of pain, the simulation must have that experience too.
-
-If consciousness and pain have measurable, physical effects, we can reason that in an axiomatic system, identical inputs must yield identical outputs. If the simulated human's output (its behavior) is different from the real human's, then the assumption that they are identical axiomatic systems is wrong. If their behavior is identical, then their internal states, including consciousness and pain, must also be identical. $2+2$ holds for both bananas and apples. 
+If a system's behavior is entirely determined by its physical components and their interactions, an axiomatic copy should exhibit identical behavior.
+If their behavior is identical, then their internal states, including consciousness and pain, must also be identical. $2+2$ holds for both bananas and apples. 
+If the original's behavior is driven by the experience of pain, the simulation must have that experience too. Otherwise there would be a contradiction.
 
 Correspondingly, the P-Zombie is an impossibility. If Axioms 1--4 hold, the P-Zombie premise collapses:
 \begin{itemize}
@@ -185,13 +184,23 @@ Correspondingly, the P-Zombie is an impossibility. If Axioms 1--4 hold, the P-Zo
     \item Axiom 4 states that the experience of pain ($P$) has a measurable, physical effect.
 \end{itemize}
 
-As soon as our technology allows for full-scale DNA simulations, we can test whether a simulated human experiences pain, and thus, whether this hypothesis is valid.
+
+\subsection*{Falsification of the Hypothesis}
+
+While full-scale DNA simulations are currently beyond our computational reach, this limitation is secondary to the theoretical framework. Much like our inability to calculate the highest possible prime numbers,
+the current technical ceiling does not invalidate the underlying logic; what matters is that such simulations are possible in principle.
+
+As soon as computational technology allows for high-fidelity biological modeling, we will be able to test whether a simulated human truly experiences subjective states, such as pain.
+This provides a clear path for empirical validation. We can simulate a statistically significant sample of human subjects. By comparing the simulated subjects' responses to those of their
+real-world counterparts, we can measure the difference. If the simulated subjects exhibit the necessary biological reactions but lack the qualitative experience (qualia) of pain,
+the arguments presented here collapse. This would indicate that at least one of the four initial axioms is invalid.
+
 
 \section{Conclusions}
 
 If the four assumptions hold, then consciousness, time, and even pain can emerge from the structure of information alone.
-The universe itself is nothing more---or nothing less---than a vast tapestry of abstract information.
-Observers, particles, and the flow of time are just patterns woven into this tapestry, emerging wherever conditions allow. 
+The universe itself is made of abstract information. Observers, particles, and the flow of time are just patterns woven into
+this tapestry, emerging wherever conditions allow. 
 
 Time appears to be a subjective property of us intelligent and conscious observers, illusion that we created in our minds rather than a fundamental property of the universe.
 The universe is informational and abstract by nature, and our everything in us observers can emerge even from static or noisy informational substrate.

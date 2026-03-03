@@ -176,6 +176,39 @@
       \field{title}{Last Action Hero}
       \field{year}{1993}
     \endentry
+    \entry{prigogine1977self}{book}{}
+      \name{author}{2}{}{%
+        {{hash=fd3011b6e2d4372e08da8054938e76d3}{%
+           family={Nicolis},
+           familyi={N\bibinitperiod},
+           given={Gregoire},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6ff4b41bc981f47b97628e38213b6712}{%
+           family={Prigogine},
+           familyi={P\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{14c7bb6d882eb04d0d447418e062f688}
+      \strng{fullhash}{14c7bb6d882eb04d0d447418e062f688}
+      \strng{bibnamehash}{14c7bb6d882eb04d0d447418e062f688}
+      \strng{authorbibnamehash}{14c7bb6d882eb04d0d447418e062f688}
+      \strng{authornamehash}{14c7bb6d882eb04d0d447418e062f688}
+      \strng{authorfullhash}{14c7bb6d882eb04d0d447418e062f688}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0471024019}
+      \field{title}{Self-Organization in Non-Equilibrium Systems: From Dissipative Structures to Order through Fluctuations}
+      \field{year}{1977}
+    \endentry
     \entry{penrose2010}{book}{}
       \name{author}{1}{}{%
         {{hash=f51dfd339a12125d0f82a2d93e66d9b7}{%
@@ -309,6 +342,35 @@
       \field{year}{2006}
       \field{pages}{3\bibrangedash 31}
       \range{pages}{29}
+    \endentry
+    \entry{verlinde2011origin}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bb173e9b623b7737a79f22558b0becc4}{%
+           family={Verlinde},
+           familyi={V\bibinitperiod},
+           given={Erik},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{bb173e9b623b7737a79f22558b0becc4}
+      \strng{fullhash}{bb173e9b623b7737a79f22558b0becc4}
+      \strng{bibnamehash}{bb173e9b623b7737a79f22558b0becc4}
+      \strng{authorbibnamehash}{bb173e9b623b7737a79f22558b0becc4}
+      \strng{authornamehash}{bb173e9b623b7737a79f22558b0becc4}
+      \strng{authorfullhash}{bb173e9b623b7737a79f22558b0becc4}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of High Energy Physics}
+      \field{number}{4}
+      \field{title}{On the origin of gravity and the laws of Newton}
+      \field{volume}{2011}
+      \field{year}{2011}
+      \field{pages}{29}
+      \range{pages}{1}
     \endentry
     \entry{Whitehead1929}{book}{}
       \name{author}{1}{}{%

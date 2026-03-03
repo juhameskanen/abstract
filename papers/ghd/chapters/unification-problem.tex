@@ -42,15 +42,15 @@ Effects such as the Casimir effect confirm that vacuum fluctuations have measura
 \section{Combinatorial Complexity and Software Analogies}
 
 Both QFT and GR work extremely well on their own; they are solid theories independently.  
-However, the explosion of complexity encountered when attempting to unify these systems mirrors a familiar challenge in software engineering. When two orthogonal descriptions are merged, the result is a \textbf{combinatorial explosion} of states. 
+However, the explosion of complexity encountered when attempting to unify these systems mirrors a familiar challenge in software engineering.
+When two orthogonal descriptions are merged, the result is a \textbf{combinatorial explosion} of states. 
 
 Consider a minimal example: many Graphical User Interface toolkits have their own “QFT” and “GR,” called layouts ($L$) and views ($V$), which are used to compose the actual user interface.  
 Layouts and views can be paired to create the desired interface. The number of required classes to implement them separately is $L + V$.  
 If a programmer tries to unify them for every possible combination, the number of classes explodes to $L \times V$.  
 
-Layouts and views are two orthogonal descriptions of the same substrate: views can be pictured as real particles—they can be detected. Layouts play the role of virtual particles, or perhaps the wavefunction. For some reason, views seem to obey the forces defined by layouts and align nicely on the screen. Keeping the two separate is the best design.
-
-Failing to honor this design eventually produces software that collapses under its own weight.
+Layouts and views are two orthogonal descriptions of the same substrate: views can be pictured as real particles—they can be detected. Layouts play the role of virtual particles, or perhaps the wavefunction. For some reason, views seem to obey the forces defined by layouts and align nicely on the screen. Keeping the two separate is the best design to assert the design eventually produces software that does not
+collapses under its own weight.
 
 In general, attempting to integrate two large systems with differing abstractions typically leads to:
 \begin{itemize}
@@ -63,28 +63,24 @@ String Theory predicts estimated \( 10^{500} \) possible vacua. From a software 
 To satisfy the constraints of both GR and QFT, the theory introduces an
 unfathomable number of possible configurations just to remain mathematically consistent.
 
+However, this combinatorial explosion is not quite what happens in quantum gravity. The problem is fundamenta. 
+QFT assumes a fixed spacetime and external time coordinate. GR says geometry is dynamical and does not need
+external time parameter. 
+
+In General Relativity, geometry itself is dynamical; time is part of the solution.
+In Quantum Mechanics, states evolve in an externally supplied time parameter; time is not dynamical.
+
+GR internalizes time. QM presupposes time.
+
 
 \section{Why Einstein Instead of Hilbert?}
 
-There is even strikier difference between QM and GR.
+There is even more drastic difference between QM and GR.
 We live in a geometrically flat, approximately Euclidean three-dimensional space.
 Everything we perceive through our eyes and other biological senses exists within this geometric framework.
+
 Why is this the case? Why do we not instead experience reality as inhabitants of a high-dimensional,
 complex-valued Hilbert space, perceiving ourselves as wave-like entities?
 
 From a fundamental standpoint, this is a deeply nontrivial question.
 
-
-
-\section{Summary}
-
-The parallels are clear:
-\begin{enumerate}
-    \item Two systems are simple to describe independently.
-    \item Unification forces them to share state, creating new degrees of freedom.
-    \item The resulting system is combinatorially complex, whether in software, celestial mechanics, or fundamental physics.
-\end{enumerate}
-
-
-This suggests that the difficulty of unification may stem not from the physics itself, but from attempting to merge two orthogonal projections of a
-single informational substrate into a single representation.
