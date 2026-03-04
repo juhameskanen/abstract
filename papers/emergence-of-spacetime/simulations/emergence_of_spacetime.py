@@ -167,31 +167,6 @@ class Simulation:
             self.bitstring[index] ^= 1
 
 
-    def run2(self):
-        for step in range(self.steps):
-
-            # measure entropy
-            entropy = entropy_bitstring(self.bitstring)
-            
-            # extract particles
-            particles = self.recursive_pattern_levels(self.bitstring)
-
-            # number of particles
-            ones_count = [np.sum(particle) for particle in particles]
-
-            # build up data array for plotting
-            snapshot = []
-            snapshot.append(float(entropy))
-            for i, (lvl, count) in enumerate(zip(particles, ones_count)):
-                snapshot.append(float(count))
-
-            self.history.append(snapshot)
-            
-            # Flip k random bits per step
-            index = random.randint(0, self.bits - 1)
-            self.bitstring[index] ^= 1
-
-
     def plot(self):
         history = np.array(self.history)
         steps = np.arange(len(history))

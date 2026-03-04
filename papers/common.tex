@@ -10,7 +10,7 @@
 \usepackage{physics}
 \usepackage{booktabs}
 \usepackage{listings}
-\usepackage{listings}
+\usepackage{bookmark}
 \usepackage{amscd}
 \usepackage{tikz-cd}
 \usepackage{mathtools}
@@ -32,6 +32,27 @@
 \geometry{letterpaper, margin=1in}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1em}
+
+\hypersetup{
+    colorlinks=true,    % false: bordered boxes; true: colored text
+    linkcolor=black,    % internal links (change to blue if you want them visible)
+    citecolor=black,    % links to bibliography
+    filecolor=magenta,  
+    urlcolor=blue
+}
+
+
+\usepackage{tocloft}
+
+% 1. Keep the space before Chapters (adjust 1.0em to your liking)
+\setlength{\cftbeforechapskip}{1.0em}
+
+% 2. Remove the empty lines before sections and subsections
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+
+% 3. Optional: If you want dots for chapters too (standard is usually just sections)
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
 % glossary
 \defglsentryfmt{\ifglsused{\glslabel}{\glsgenentryfmt}{\textit{\glsgenentryfmt}}}

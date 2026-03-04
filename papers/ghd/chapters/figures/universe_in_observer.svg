@@ -1,0 +1,47 @@
+<svg width="400" height="420" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Observer (Superset) -->
+  <circle cx="200" cy="200" r="180" fill="#f0f4f8" stroke="#2d3748" stroke-width="2" />
+
+  <defs>
+    <!-- Universe gradient -->
+    <radialGradient id="universeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#4299e1; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2b6cb0; stop-opacity:1" />
+    </radialGradient>
+
+    <!-- Other observers gradient -->
+    <radialGradient id="otherObsGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ed8936; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dd6b20; stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Universe (Encoded Subset) -->
+  <circle cx="220" cy="210" r="95" fill="url(#universeGrad)" stroke="#2c5282" stroke-width="2" />
+
+  <!-- Other Observers inside Universe -->
+  <circle cx="180" cy="190" r="25" fill="url(#otherObsGrad)" stroke="#7b341e" stroke-width="1.5" />
+  <circle cx="250" cy="190" r="25" fill="url(#otherObsGrad)" stroke="#7b341e" stroke-width="1.5" />
+  <circle cx="215" cy="250" r="25" fill="url(#otherObsGrad)" stroke="#7b341e" stroke-width="1.5" />
+
+  <!-- Labels -->
+  <text x="70" y="90" font-family="Arial, sans-serif" font-size="24" fill="#2d3748" font-weight="bold">O</text>
+  <text x="70" y="120" font-family="Arial, sans-serif" font-size="14" fill="#4a5568">
+    Observer (Informational Superset)
+  </text>
+
+  <text x="210" y="215" font-family="Arial, sans-serif" font-size="22" fill="white" font-weight="bold">U</text>
+  <text x="135" y="325" font-family="Arial, sans-serif" font-size="14" fill="#2c5282" font-weight="bold">
+    Universe (Encoded Subset)
+  </text>
+
+  <!-- Labels for other observers -->
+  <text x="170" y="195" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">O′</text>
+  <text x="240" y="195" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">O′</text>
+  <text x="205" y="255" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">O′</text>
+
+  <!-- Set relation -->
+  <text x="145" y="395" font-family="Times New Roman, serif" font-size="26" fill="#2d3748" font-style="italic">
+    O′ ⊂ U ⊂ O
+  </text>
+</svg>
