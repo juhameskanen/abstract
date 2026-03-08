@@ -135,6 +135,30 @@
       \field{title}{Galileo's Error: Foundations for a New Science of Consciousness}
       \field{year}{2019}
     \endentry
+    \entry{hawking1988brief}{book}{}
+      \name{author}{1}{}{%
+        {{hash=d6208a0d89bbe93d54449bb980342d85}{%
+           family={Hawking},
+           familyi={H\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Bantam Books}%
+      }
+      \strng{namehash}{d6208a0d89bbe93d54449bb980342d85}
+      \strng{fullhash}{d6208a0d89bbe93d54449bb980342d85}
+      \strng{bibnamehash}{d6208a0d89bbe93d54449bb980342d85}
+      \strng{authorbibnamehash}{d6208a0d89bbe93d54449bb980342d85}
+      \strng{authornamehash}{d6208a0d89bbe93d54449bb980342d85}
+      \strng{authorfullhash}{d6208a0d89bbe93d54449bb980342d85}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A Brief History of Time}
+      \field{year}{1988}
+    \endentry
     \entry{hawking1996nature}{book}{}
       \name{author}{2}{}{%
         {{hash=d6208a0d89bbe93d54449bb980342d85}{%
@@ -164,6 +188,35 @@
       \field{isbn}{9780691168449}
       \field{title}{The Nature of Space and Time}
       \field{year}{1996}
+    \endentry
+    \entry{hoyle1957blackcloud}{book}{}
+      \name{author}{1}{}{%
+        {{hash=078470d185900f936a0890f9555e75ad}{%
+           family={Hoyle},
+           familyi={H\bibinitperiod},
+           given={Fred},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {London}%
+      }
+      \list{publisher}{1}{%
+        {Heinemann}%
+      }
+      \strng{namehash}{078470d185900f936a0890f9555e75ad}
+      \strng{fullhash}{078470d185900f936a0890f9555e75ad}
+      \strng{bibnamehash}{078470d185900f936a0890f9555e75ad}
+      \strng{authorbibnamehash}{078470d185900f936a0890f9555e75ad}
+      \strng{authornamehash}{078470d185900f936a0890f9555e75ad}
+      \strng{authorfullhash}{078470d185900f936a0890f9555e75ad}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-451-11432-9}
+      \field{note}{Science fiction novel about a sentient interstellar gas cloud}
+      \field{title}{The Black Cloud}
+      \field{year}{1957}
     \endentry
     \entry{lastactionhero1993}{misc}{}
       \list{publisher}{1}{%

@@ -46,7 +46,7 @@ for SLUG in $MAP; do
         pushd "$DIR_PATH" > /dev/null
         
         # Run latexmk
-        latexmk -pdf -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
+        latexmk -pdf -quiet -interaction=nonstopmode -halt-on-error "$(basename "$texfile")"
         
         # Prepare the output filename (flattening slashes to dashes)
         SAFE_SLUG="${SLUG//\//-}"
