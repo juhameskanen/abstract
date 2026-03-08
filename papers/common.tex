@@ -1,20 +1,6 @@
-% common.tex — minimal noise setup
-% ----------------------------
+% -- Common definitions for all papers
 
-% Silence package messages before anything else
-\RequirePackage{silence}
-
-% Completely hide "info" messages from LaTeX packages
-\WarningFilter*{latex}{}
-\WarningFilter*{hyperref}{}
-\WarningFilter*{pgf}{}
-\WarningFilter*{tikz}{}
-
-% Optionally: hide some hyperref PDF string warnings that are common but harmless
-\WarningFilter{hyperref}{Token not allowed in a PDF string}
-
-% ----------------------------
-% Now load the usual packages
+% --- Packages ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
@@ -33,37 +19,77 @@
 \usepackage{glossaries}
 \usepackage{tcolorbox}
 
-% ----------------------------
-% Theorems, macros
 \newtheorem{lemma}{Lemma}
-\newcommand{\IaMe}{\(IaM^e\)\xspace}
+\newcommand{\IaMe}{\(IaM^e\) \xspace}
 \newcommand{\pdflink}[1]{}
 
-% ----------------------------
-% Page layout
-\geometry{letterpaper, margin=1in}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1em}
 
-% Hyperref settings
+\hfuzz=5pt % Don't complain about small margin overlaps
+\vfuzz=5pt % Don't complain about small vertical gaps
+\hbadness=10000 % Silence "Underfull \hbox"
+\vbadness=10000 % Silence "Underfull \vbox"
+
+% --- Page Setup ---
+\geometry{letterpaper, margin=1in}
+
 \hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    citecolor=black,
-    filecolor=magenta,
+    colorlinks=true,    % false: bordered boxes; true: colored text
+    linkcolor=black,    % internal links (change to blue if you want them visible)
+    citecolor=black,    % links to bibliography
+    filecolor=magenta,  
     urlcolor=blue
 }
 
-% TOC formatting
-\usepackage{tocloft}
-\setlength{\cftbeforechapskip}{1.0em}
-\setlength{\cftbeforesecskip}{0pt}
-\setlength{\cftbeforesubsecskip}{0pt}
-\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
-% Glossary
+\usepackage{tocloft}
+
+\makeatletter
+
+% ---------- Spacing before entries ----------
+\@ifundefined{cftbeforechapskip}{
+    % article class
+    \setlength{\cftbeforesecskip}{1.0em}
+}{
+    % book/report class
+    \setlength{\cftbeforechapskip}{1.0em}
+}
+
+% ---------- Leader dots ----------
+\@ifundefined{cftchapleader}{}{
+    \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+}
+
+\@ifundefined{cftsecleader}{}{
+    \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+}
+
+\@ifundefined{cftsubsecleader}{}{
+    \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+}
+
+% ---------- Indentation (safe defaults) ----------
+\@ifundefined{cftchapindent}{}{
+    \setlength{\cftchapindent}{0em}
+}
+
+\@ifundefined{cftsecindent}{}{
+    \setlength{\cftsecindent}{1.5em}
+}
+
+\@ifundefined{cftsubsecindent}{}{
+    \setlength{\cftsubsecindent}{3em}
+}
+
+\makeatother
+% 2. Remove the empty lines before sections and subsections
+%\setlength{\cftbeforesecskip}{0pt}
+%\setlength{\cftbeforesubsecskip}{0pt}
+
+% 3. Optional: If you want dots for chapters too (standard is usually just sections)
+%\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+% glossary
 \defglsentryfmt{\ifglsused{\glslabel}{\glsgenentryfmt}{\textit{\glsgenentryfmt}}}
 
-% Author
+% --- Author ---
 \author{$IaM^e$}
-
