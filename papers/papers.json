@@ -120,6 +120,10 @@
       "title": "The Books",
       "items": [
         {
+          "title": "The Book",
+          "slug": "book"
+        },
+        {
           "title": "Good Heavens, Dogs? Hell No, Gogs!",
           "slug": "ghd"
         }

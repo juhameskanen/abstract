@@ -4,9 +4,9 @@
 
 If entropy collapse corresponds to geometric compression, then increasing entropy should correspond to geometric unfolding.
 Collapse and expansion are simply two directions within the same informational configuration space.
-
 Instead of simulating black hole collapse and observing how the bitstring (execution trace) entropy approaches zero, one starts from
-zero entropy execution trace and mutate it to introduce entropy. The corresponding 3D space should then unfold from singularity into some sort of virtual universe.
+zero entropy execution trace and mutate it to introduce entropy. The corresponding 3D space should then unfold from singularity
+into some sort of virtual universe.
 
 
 \subsection*{Geometric Particle Filter}
@@ -14,27 +14,12 @@ zero entropy execution trace and mutate it to introduce entropy. The correspondi
 In the black hole simulation we considered all dust particles as infinitely small points. However, in this simulation we pay attention 
 not only to global spacetime but also emergent micro structures.
 
-We define an execution trace
-\[
-S_t \in \{0,1\}^L, \quad t = 0, \dots, n,
-\]
-with fixed length $L$. The system is initialized at zero Shannon entropy,
-\[
-S_0 = (0,0,\dots,0),
-\]
-which represents the initial singularity.
-
+We initialize an execution trace with at zero Shannon entropy to represents the initial singularity.
+Then we start mutating the execution trace with random bit-flips, which increases its expected Shannon entropy, flip by flip.
 As the system evolves through random bit-flip mutations, its expected Shannon entropy
-\[
-H(S_t) = - \sum_{b \in \{0,1\}} p_t(b)\log p_t(b)
-\]
-increases monotonically.
 
-To visualize this process, we introduce a decoding map
-\[
-D : \{0,1\}^L \rightarrow \mathbb{R}^3,
-\]
-which assigns subsets of bits to spatial coordinates, producing a discrete spacetime fabric. On this induced geometry, we apply simple structural filters:
+To visualize this process, we introduce a decoding map assigns subsets of bits to spatial coordinates, producing a discrete spacetime fabric.
+On this induced geometry, we apply simple structural filters:
 
 \begin{itemize}
     \item \textbf{Elementary particles:} Pairs of spatial points whose separation is below a threshold $\varepsilon$.
@@ -45,17 +30,17 @@ which assigns subsets of bits to spatial coordinates, producing a discrete space
 
 \subsection*{Recursive Pattern Matching}
 
-An alternative definition of emergent particles is given by recursive bit-pattern detection. Here, the execution trace $S_t$ itself is treated as a one-dimensional candidate space of particles, with no explicit geometric mapping required.
+An alternative definition of emergent particles is given by recursive bit-pattern detection.
+Here, the execution trace itself is treated as a one-dimensional candidate space of particles, with no explicit geometric mapping required.
+Elementary particles are defined as short substrings. Composite particles are formed recursively by concatenating previously defined particles.
+There is a composite particle if it appears in  and if its sub-patterns are recognized particles.
 
-\textbf{Elementary particles:} Defined as short substrings $p \in \{0,1\}^k$ that occur within $S_t$.
+This recursive pattern-matching approach captures the emergence of particles purely from informational redundancy, without reliance on an explicit geometric embedding.
+The hierarchy is constructed bottom-up: from frequent substrings (elementary particles), to composite concatenations (atoms), to repeated higher-order motifs (molecules).
 
-\textbf{Composite particles:} Formed recursively by concatenating previously defined particles. A composite particle $P$ is valid if it appears in $S_t$ and if its sub-patterns are recognized particles.
-
-This recursive pattern-matching approach captures the emergence of particles purely from informational redundancy, without reliance on an explicit geometric embedding. The hierarchy is constructed bottom-up: from frequent substrings (elementary particles), to composite concatenations (atoms), to repeated higher-order motifs (molecules).
-
-
-It should be noted that both these filters are deliberately minimal and arbitrary. Their purpose is not realism, but robustness: to test whether structure emerges generically under entropy growth.
-While arbitrary, the models preserves two key features characteristic of the real universe: (i) the hierarchical structuring of particles, and (ii) the fact that particle sizes do not stretch with the universe, only their mutual distances. This is what we observe in the real universe.
+It should be noted that both above mentioned filters are deliberately minimal and arbitrary. 
+Whowever, the models preserves two key features characteristic of the real universe: (i) the hierarchical structuring of particles, and (ii) the fact that particle
+sizes do not stretch with the universe, only their mutual distances. This is what we observe in the real universe.
 
 
 \section{Results}
@@ -81,7 +66,7 @@ The following key properties are observed:
 \subsection*{The Lognormal Signature}
 
 Remarkably, across multiple mappings, decoding schemes, representations and threshold choices,
-the abundance of emergent structures is not linear but follows a \textbf{lognormal distribution}.
+the abundance of emergent structures is not linear but follows a lognormal distribution.
 
 Lognormal distributions often arise in physics, generically in systems governed by multiplicative stochastic processes, where growth proceeds through successive random amplifications
 rather than additive steps. They are observed in phenomena as particle clustering, galaxy mass distributions, biological growth, and economic and network hierarchies.
@@ -92,15 +77,16 @@ rather than additive steps. They are observed in phenomena as particle clusterin
 \subsection*{Observer Filter}
 
 The result is philosophically appealing because it removes the need for metaphysics. If the universe we observe is simply the most probable outcome---a result driven entirely by the
-laws of statistical mechanics, then it is something we can fully understand. 
+laws of statistical mechanics, then it is something we can fully understand.  Could this trivial informational model provide the unified explanatory framework that has eluded physics for a century?
 
-Could this trivial informational model provide the unified explanatory framework that has eluded physics for a century?
 
 \subsection*{The Fine-Tuning Problem}
 
+One of the biggest mysteries in science is why the current laws of physics appear to be so well-tuned to allow our existence.
+
 If we were one of those sub-strings to be found, where then, should we expect to find ourselves? The answer is near the peak of the log-normal curve,
 where the probability of emergent structures is the highest. From this perspective, the observed regularity, scale hierarchy, and apparent fine balance of the universe would not be surprising.
-They are just the most typical properties of configurations.
+They are just the most typical properties of such configurations.
 
 
 \subsection*{The Low-Entropy Initial State}
@@ -113,19 +99,19 @@ This inflationary phase was devised as an explanation for the uniformity of the 
 However it treates the low-entropy initial state as a fine-tuned boundary condition rather than a derived property, and offers little insight into the nature of these fields or why the initial
 state was so meticulously ordered.
 
-One might ask why the universe was not perfectly ordered---a zero-entropy state. Standard physics often points to the Heisenberg uncertainty principle and quantum fluctuations as the spoiler of perfect order, but this merely shifts the problem to another layer of abstraction.
+One might also ask why the universe was not perfectly ordered---a zero-entropy state. Standard physics often points to the Heisenberg uncertainty principle and quantum fluctuations as the spoiler of
+perfect order, but this merely shifts the problem to another layer of abstraction.
 
-In contrast, a pure information-theoretic perspective treats spacetime geometry as a projection of information evolving toward maximal entropy.
+However, this information-theoretic perspective treats spacetime geometry as a projection of information evolving toward maximal entropy.
 Here, the increasing entropy, when interpreted geometrically, generates a rapid, inflation-like expansion as the system relaxes from a state of maximal constraint.
-This exponential growth emerges as a generic combinatorial consequence of increasing entropy. Furthermore, our simulations consistently demonstrate that an
-initial state of exactly zero entropy can still give rise to rich, hierarchical structures. 
+Our simulations consistently demonstrate that an initial state of exactly zero entropy can still give rise to rich, hierarchical structures. 
 
 An expanding universe and increasing entropy are two sides of the same coin. An expanding universe is the geometric interpretation of a increasing entropy.
 
 \subsection*{Source of Gravity}
 
-In the above simulations, we traced the total number of emergent motifs. However, geometric interpretations of information yield spacetime that is not perfectly uniform. Somewhere bits tend to cluster to represent
-symmetries. These can be interpreted as geometric structures. Entropy creates local gradients and variations, biasing the probability of emergent structures.
+In the above described simulations, we traced the total number of emergent motifs. However, geometric interpretations of information yield spacetime that is not perfectly uniform.
+Somewhere bits tend to cluster to represent symmetries. These can be interpreted as geometric structures. Entropy creates local gradients and variations, biasing the probability of emergent structures.
 
 This could provide an intuitive explanation for the fundamental nature of gravity; structures tend to be found in regions of higher statistical weight because those configurations
 are more numerous. 
@@ -140,18 +126,23 @@ Despite many promising properties, the  model suffers from several obvious flaws
 
 \subsection*{Thermodynamical Arrow and the Banana Paradox}
 
-The model does not inherently explain why entropy increases over time rather than decreases.
+The model does not explain why entropy increases over time rather than decreases. 
 
-We may actually owe our existence as intelligent beings to this entropic increase. In semi-hostile environments where structures naturally decay, intelligence serves as a way to ``fight back'' by creating local order \cite{prigogine1977self}. Could intelligence even function in a system with decreasing entropy, where things naturally drift toward a more ordered state anyway?
+We may owe our existence as intelligent beings to entropic increase. In semi-hostile environments where structures naturally decay, intelligence serves as a way to ``fight back'' by creating local order \cite{prigogine1977self}. Could intelligence even function in a system with decreasing entropy, where things naturally drift toward a more ordered state anyway?
 
 We currently consume low-entropy fuel---such as the highly ordered structure of a banana---and our bodies break that order down into high-entropy metabolic waste. How would we harvest energy in a universe where entropy decreases, where systems tend from noise toward higher order? To maintain a local arrow of time, we would essentially have to consume metabolic waste and, through some miracle of reverse-metabolism, produce a perfectly formed, low-entropy banana.
 
 While mathematically possible in a symmetric system, our current forward-running universe is certainly more aesthetically appealing. We are lucky to live on the side of the curve where breakfast goes in the top and comes out as waste, rather than the other way around.
 
+
+
 \subsection*{Boltzmann Brains}
 
-Computational simulations can be utilized to stress-test this hypothesis, but they reveal a significant challenge: The Boltzmann Brain Problem. While structures do emerge within the model, they fail to transition smoothly along the geodesics of geometric spacetime.
+Computational simulations can be utilized to stress-test this hypothesis, but they reveal a significant challenge: The Boltzmann Brain Problem.
+While structures do emerge within the model, they fail to transition smoothly along the geodesics of geometric spacetime.
 
-Instead of beautiful spiral galaxies or planets tracing elegant elliptical orbits, the simulation produces a chaotic ``explosion'' of spacetime. No General Relativity emerges, and there is no sign of a coherent wavefunction. What we observe instead are stochastic, erratic structures that behave haphazardly, adhering only to a statistical probability gradient rather than the lawful patterns of classical physics.
+Instead of beautiful spiral galaxies or planets tracing elegant elliptical orbits, the simulation produces a chaotic ``explosion'' of spacetime.
+No General Relativity emerges, and there is no sign of a coherent wavefunction. What we observe instead are stochastic, erratic structures that behave haphazardly,
+adhering only to a statistical probability gradient rather than the lawful patterns of classical physics.
 
 This contradicts empirical observation; the universe overwhelmingly favors large, lawful, and persistent structures over isolated, transient fluctuations.

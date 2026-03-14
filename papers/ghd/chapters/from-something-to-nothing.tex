@@ -4,9 +4,11 @@ Let us test the idea of treating the simulated system and the simulator as two s
 
 What would be the most bizarre object in the universe—one we still do not fully understand? Maybe a black hole singularity!
 
-According to General Relativity, all the matter in a black hole collapses to a point of zero size and infinite density. An entire star—millions or even billions of times more massive than the Earth—can, in principle, be compressed into a region of vanishing volume. This description strains physical intuition.
+According to General Relativity, all the matter in a black hole collapses to a point of zero size and infinite density.
+An entire star—millions or even billions of times more massive than the Earth—can, in principle, be compressed into a region of vanishing volume. This description strains physical intuition.
 
-We therefore construct a black hole simulation and treat the simulation and the computer executing it as equivalent descriptions of the same informational structure. By doing so, we hope to gain new insight into the pathological points of spacetime that appear in classical geometry.
+We therefore construct a black hole simulation and treat the simulation and the computer executing it as equivalent descriptions of the same informational structure.
+By doing so, we hope to gain new insight into the pathological points of spacetime that appear in classical geometry.
 
 \section{Execution Trace}
 
@@ -16,22 +18,29 @@ If source code is a map, the execution trace is the complete GPS log of every st
 
 \section{The Simulation}
 
-We begin with a massive, spherical dust cloud and allow it to collapse under its own gravity to form a black hole. In practice, we cannot run such a simulation to its logical conclusion—the formation of a physical singularity. As the collapse nears its final state, the software inevitably crashes.
+We begin with a massive, spherical dust cloud and allow it to collapse under its own gravity to form a black hole.
+In practice, we cannot run such a simulation to its logical conclusion—the formation of a physical singularity.
+As the collapse nears its final state, the software inevitably crashes.
 
-This failure is driven by two factors: the fundamental breakdown of the Einstein field equations and the inherent limitations of our digital tools. Long before the singularity is reached, the system is overwhelmed by division-by-zero exceptions and mathematical infinities that exceed the numerical precision of our floating-point representations. No matter how detailed or physically accurate a simulation we attempt to run, the singularity itself remains obscured by these divergences.
+This failure is driven by two factors: the fundamental breakdown of the Einstein field equations and the inherent limitations of our digital tools.
+Long before the singularity is reached, the system is overwhelmed by division-by-zero exceptions and mathematical infinities that exceed the numerical precision of our floating-point representations.
+No matter how detailed or physically accurate a simulation we attempt to run, the singularity itself remains obscured by these divergences.
 
-General Relativity predicts singularities, but it fails to describe them. However, since General Relativity is fundamentally a theory of geometry—and solutions to the Einstein equations are themselves geometries—the most essential nature of the singularity must be geometric.
+General Relativity predicts singularities, but it fails to describe them.
 
-In our model, each dust particle and every point of the spacetime fabric in the simulation can be mapped to a unique sequence of memory bits. Together, these elements form a long, continuous bitstring representing a temporal slice of the spatial geometry. By analyzing the information-theoretic correspondence of the black hole—its execution trace—we can bypass the numerical "crash" and observe the underlying state of the information itself.
+However, since General Relativity is fundamentally a theory of geometry—and solutions to the Einstein equations are themselves geometries—the most essential nature of the singularity must be geometric.
 
-Initially, we observe that the bitstring is very random:
+Each dust particle and every point of the spacetime fabric in the simulation can be mapped to a unique sequence of memory bits.
+Together, these elements form a long, continuous bitstring representing a temporal slice of the spatial geometry. 
+
+Initially, we observe that the bitstring representing the dustcloud is very random:
 
 \begin{verbatim}
 00100101011110101010101001010100101010101010101001001001110101010010100101010...
 ...
 \end{verbatim}
 
-As the simulation evolves and total entropy increases, the entropy of the bitstring encoding the space shows a monotonic decrease over time. 
+As the simulation evolves and total entropy increases, the entropy of the bitstring encoding the space decreases over time. 
 
 \begin{verbatim}
 ...
@@ -54,63 +63,7 @@ The black hole singularity corresponds to a zero-entropy state.
 
 
 
-\subsection*{Formal Description}
-
-Let $\mathcal{M}$ denote the set of all memory locations in a deterministic computing system. 
-A \emph{machine state} $\mathcal{S} \in \mathcal{M}$ is a complete assignment of values to all memory elements. 
-Let $\mathcal{P} = (I_1, I_2, \dots, I_n)$ be a sequence of deterministic instructions, 
-with $I_k : \mathcal{S} \rightarrow \mathcal{S}$. 
-
-The execution trace $\mathcal{T}$ is the ordered sequence:
-
-\[
-\mathcal{T} = (s_0, s_1, \dots, s_n), \quad s_{k+1} = I_{k+1}(s_k).
-\]
-
-This trace encodes the full informational evolution of the simulated geometry.
-
-\subsection*{Mapping Geometry to Bitstrings}
-
-A geometric configuration can be encoded as a bitstring $b \in \{0,1\}^L$, 
-representing discretized particle positions in the collapsing cloud. 
-Define the configuration space:
-
-\[
-C = \{0,1\}^{3k},
-\]
-
-with a decoding map
-
-\[
-f : C \to \mathbb{Z}^3
-\]
-
-that converts fixed-length binary segments into integer coordinates. 
-Quantization ensures that entropy reflects genuine positional distinctions.
-
-\subsection*{Shannon Entropy}
-
-The Shannon entropy of the bitstring is
-
-\[
-H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
-\]
-
-where $p_0$ and $p_1$ are empirical bit frequencies. 
-Across the execution trace, $H(b)$ decreases as particles converge.
-
-Even though the classical simulation crashes at the singularity due to divergences, the entropy trajectory can be smoothly extrapolated:
-
-\[
-H(\mathcal{B}_t) \to 0.
-\]
-
-Zero entropy implies $W = 1$: only one distinguishable configuration remains.
-
-
 \section{Conclusion}
-
-Geometric space time singularities can be viewed as points of zero entropy rather than merely infinite curvature. 
 
 In classical GR, curvature diverges as geodesics converge, implying infinite curvature. But this may reflect
 the limits of the geometric description rather than a physical
@@ -121,4 +74,5 @@ Mapping zero entropy bitstring to geometry inevitably yields the same minimal ob
 
 Thus, singularities are not mysterious infinities but the simplest possible geometric configurations: 
 states of informational exhaustion. They represent the ultimate compression of all degrees of freedom in a region of spacetime.
+
 
