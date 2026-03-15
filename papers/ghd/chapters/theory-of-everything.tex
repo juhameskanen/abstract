@@ -2,88 +2,65 @@
 
 \section{Intuition: From Singularities to Structured Universes}
 
-Consider a “library” of all possible histories $\Gamma$ of finite bitstrings, ranging from complete randomness to highly coherent, law-like sequences. If we draw a movie at random from $\Gamma_O$, what would we expect to observe?
+If the fundamental observational assumptions hold, the universe is revealed as static and informational. There is no dynamical generation, no ontological time, and no external metaphysics. 
 
-With overwhelming probability, not chaos. 
-
-The same underlying bits can encode the same observer in astronomically many ways. Among these, histories with regularity and smooth temporal structure admit vastly shorter descriptions. Because the number of possible descriptions grows exponentially with description length, histories with minimal description dominate the observer-conditioned measure. Consequently, observers overwhelmingly find themselves embedded in worlds that are predictable, regular, and law-like.
-
-\section{Fundamental Ontology: The Static Bit-Space}
-
-The universe is a static informational totality. There is no dynamical generation, no ontological time, and no external metaphysics. 
-
-\begin{itemize}
-    \item \textbf{Configuration Space:} For $n$ bits, there exist $2^n$ configurations.
-    \item \textbf{Total Existence:} All configurations and all possible ordered traversals (histories) exist as static paths in the bit-space.
-    \item \textbf{The Observer:} Reality is a static informational space of bitstrings. An observer is a localized informational substructure capable of recording state.
-\end{itemize}
+\textbf{Configuration Space:} For $n$ bits, there exist $2^n$ configurations.
+\textbf{Traversals:} Time is the ordinal of the observer's sequence through the configuration space. 
 
 \section{The Measure Problem: Anthropic Sampling}
 
-If all observers exist, the central question is the sampling measure: \textit{From which informational structure is an observer most likely sampled?} We posit that the measure concentrates on the most compressible structures. Unlike Kolmogorov complexity ($K(x)$), which is uncomputable, we employ \textbf{Spectral Complexity} ($C_Q$) and \textbf{Geometric Complexity} ($C_G$).
+In a reality where all computable configurations exist, the central challenge is the sampling measure: \textit{From which informational structure is an observer most likely sampled?} We posit that the measure concentrates on the most compressible structures. To quantify this, we employ \textbf{Spectral Complexity} ($C_Q$) and \textbf{Geometric Complexity} ($C_G$).
 
 \section{Spectral Complexity and Wave Physics}
 
 We define the complexity of the wavefunction $\psi$ as a Sobolev-type seminorm. In the discrete domain $\mathbb{Z}_N$:
-
 \begin{equation}
 C_Q = \sum_{i} k_{\text{eff}}^2 |A_i|^2
 \end{equation}
-
-where $k_{\text{eff}} = \min(|k|, N - |k|)$. This functional penalizes high-frequency components and sharp gradients. Particles appear wave-like because wavefunctions are the optimal compression of microscopic informational correlations.
+where $k_{\text{eff}} = \min(|k|, N - |k|)$. This functional penalizes high-frequency components and sharp gradients. Particles appear wave-like because wavefunctions are the optimal spectral compression of microscopic informational correlations.
 
 \section{Geometric Complexity and Spacetime}
 
-Geometry ($G$) is the optimal compression of macroscopic relational structure. It allows for stable, separable boundaries and localized informational identity.
-
+Observers require well-defined boundaries, which are most efficiently defined in a geometric manifold. Geometry ($G$) is the optimal compression of macroscopic relational structure.
 \begin{equation}
-C_G = \alpha \sum R^2 \sqrt{-g} + \beta \sum |a + \Gamma(v,v)|^2
+C_G = \alpha \int R \sqrt{-g} \, d^4x + \beta \sum |a + \Gamma(v,v)|^2
 \end{equation}
+\textbf{Relational Cost:} The Ricci scalar $R$ represents the first-order cost of geometric curvature.
+\textbf{Geodesic Enforcement:} The term $\|a + \Gamma(v,v)\|^2$ ensures that non-geodesic motion increases description length.
 
-\begin{itemize}
-    \item \textbf{Curvature Penalty:} $R^2$ serves as a compression cost for relational irregularity, ensuring cost is always positive-definite.
-    \item \textbf{Geodesic Enforcement:} The term $\|a + \Gamma(v,v)\|^2$ ensures that non-geodesic motion increases description length.
-\end{itemize}
+\section{The Spectral Resolution of Singularities}
 
-
+In classical General Relativity, $R$ allows for singularities where curvature becomes infinite. However, in an informational universe, a singularity is a \emph{computational impossibility}. Because the probability of a history is weighted by $e^{-C_Q}$, states requiring infinite spectral descriptive power (infinite frequencies) are suppressed to zero probability. The spectral codec acts as a natural low-pass filter, rendering the "infinite curvature" of standard GR unreachable.
 
 \section{The Joint Dominance Principle}
 
-The measure over observers is weighted by the joint minimization of both functionals. The observer-conditioned probability of a history $\gamma$ is:
-
+The measure over observers is weighted by the joint minimization of complexity functionals. The observer-conditioned probability of a history $\gamma$ is:
 \begin{equation}
 \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp \left[ -\lambda \left( C_Q(\gamma) + C_G(\gamma) + C_{\text{int}}(\gamma, G) \right) \right]
 \end{equation}
-
-Physics emerges at the intersection of these simplicity priors. Spectral smoothness (micro-scale) and geometric smoothness (macro-scale) are statistically aligned, producing a coherent physical world.
+Physics emerges at the intersection of these simplicity priors. Spectral and geometric smoothness are statistically aligned, producing a coherent physical world.
 
 \section{Derivation of Emergent Physics}
 
-To find the "laws of physics," we treat the total complexity as a Euclidean Action $S$. The observed dynamics are the stationary points found by setting the variation $\delta S = 0$.
+Treating total complexity as a Euclidean Action $S$, the observed dynamics are stationary points ($\delta S = 0$).
 
 \subsection*{The Emergent Wave Equation}
-Varying $C_Q = \int |\nabla \psi|^2 \, dV$ with respect to $\psi^*$ yields the Laplacian: $\nabla^2 \psi = 0$. In the presence of a sampling frequency, this emerges as the Helmholtz/Schrödinger form.
+Varying $C_Q$ with respect to $\psi^*$ yields the Laplacian $\nabla^2 \psi = 0$. In the presence of a sampling frequency (clock speed), this emerges as the Helmholtz/Schrödinger form.
 
 \subsection*{The Emergent Field Equations}
-Varying $C_G$ leads to the field equations for \textbf{Quadratic Gravity}:
+Varying $C_G$ with respect to the metric $g_{\mu\nu}$ yields the standard Einstein Field Equations:
 \begin{equation}
-2 R R_{\mu\nu} - 2 \nabla_{\mu} \nabla_{\nu} R + 2 g_{\mu\nu} \nabla^2 R - \frac{1}{2} g_{\mu\nu} R^2 = 0
+R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R = 8\pi G T_{\mu\nu}
 \end{equation}
 
-\subsection*{Emergent Motion}
-The "cheapest" history is one where $\ddot{x}^\mu + \Gamma^\mu_{\alpha\beta} \dot{x}^\alpha \dot{x}^\beta = 0$.
+\section{Post-Quantum Stochasticity (PQG)}
 
-\section{The Universal Informational Measure}
+A critical consequence of the many-to-many mapping between $C_Q$ and $C_G$ is the emergence of \textbf{Post-Quantum Gravity (PQG)}. Because a single wavefunction $\psi$ can be embedded into multiple geometric configurations $G$ with nearly identical complexity costs, the observer does not perceive a rigid coupling. 
 
-\subsection*{Emergence of the Physical Constant}
-The parameter $\lambda$ is fixed by \textbf{Computational Phase Coherence}. At the critical value $\lambda_c$, the system exists at the "Edge of Chaos," maximizing the variety of stable informational substructures capable of observation.
+Instead, the interaction manifests as a fundamental ``noise'' floor or ``quantization error.'' The ``Mass Jitter'' predicted by modern PQG models is the irreducible variance that occurs when high-dimensional spectral information is compressed into a lower-dimensional geometric manifold.
 
-\subsection*{The Coupled Complexity (Emergent Gravity)}
-$C_{\text{int}}$ represents the cost of mapping the spectral wavefunction onto the geometric manifold:
-\begin{equation}
-C_{\text{int}} \sim \int |\psi|^2 R \, \sqrt{-g} \, dV
-\end{equation}
-Gravity emerges as the necessary deformation of $G$ required to minimize the spectral cost of $\psi$. As seen in simulation, the metric adapts to "quench" the informational strain of high-density regions.
+\section{Conclusion}
 
-\subsection*{Emergence of Lorentz Symmetry}
-Lorentz symmetry emerges as a spectral invariant. Space and time coordinates mix solely to keep the description length $C_{\text{total}}$ invariant for all observers relative to the bit-resolution limit.
+The probability of an observer finding themselves in a specific configuration is determined by the joint probability of $G$ and $\psi$. Because spacetime can be described by many wavefunctions, and vice-versa, the universe is fundamentally stochastic at the interface of scale. This framework removes the need for dynamical axioms, replacing them with a single principle: \textbf{The universe is the minimal information capable of containing us.}
+
+
