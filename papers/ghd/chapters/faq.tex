@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{lipsum} % for placeholder text
+\input{../../common.tex}
+\input{../../glossary.tex}
+\input{../../faq_setup.tex}
+\addbibresource{../../references.bib} 
+
+\title{Frequently Asked Questions}
+\date{2001 -- 2025}
+
+\begin{document}
+\maketitle
+
+% Automatic PDF TOC at top
+\tableofcontents
+\bigskip
+
+\begin{faq}{Where did all the matter in the universe come from?}
+\answer{
+This question implicitly assumes temporal ordering and an external origin. Both time and causality are emergent, observer-dependent phenomena (as established in Paper~1). In the underlying informational substrate, the universe is abstract and timeless; it exists because no constraints forbid it. Matter is simply a projection of the observer-compatible informational configuration, not a separate ontological substance.
+}
+\end{faq}
+
+\begin{faq}{Why something rather than nothing?}
+\answer{
+This is analogous to asking why “heads” rather than “tails”: both are equally abstract and neither is privileged. Observers necessarily find themselves in configurations that are informationally realizable. There is no external “reason”; existence arises because nothing prevents it.
+}
+\end{faq}
+
+\begin{faq}{Why do particles follow a complex-valued wavefunction?}
+\answer{
+The wavefunction is not a classical object; it encodes the \textbf{optimal compression} of the underlying informational structure of reality. Observed wave-like behavior emerges from this compression.  
+
+Formally:
+\[
+\boxed{\text{Maximal Compression}} \;\rightarrow\; \boxed{\text{Maximal Probability}} \;\rightarrow\; \boxed{\text{Maximal Predictability}}
+\]
+
+Configurations with minimal observer-indexed complexity \( \mathcal{C}_O[\gamma] \) dominate the probability measure:
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda \, \mathcal{C}_O[\gamma]].
+\]
+
+Hence, the “laws” of physics are statistical consequences of overwhelmingly probable, compressible configurations.}
+\end{faq}    
+
+\begin{faq}{Why does the universe expand? Is there a link to entropy?}
+\answer{
+Expansion corresponds to increasing entropy. Space and entropy are dual: as the underlying informational substrate becomes more disordered, the corresponding geometry stretches.  
+
+The trajectory of observer-compatible configurations toward higher entropy mirrors the Inflationary Epoch and subsequent cosmological expansion.  
+Space is the \textbf{geometric projection} of total entropy, so as entropy increases, the universe appears to expand.}
+\end{faq}
+
+\begin{faq}{Why did the universe start with zero entropy?}
+\answer{
+Observers exist only in low-complexity, observer-compatible configurations. Among all \(2^n\) possible arrangements of an \(n\)-bit universe, only a tiny subset can support stable, self-referential structures (observers).  
+
+A zero-entropy “beginning” does not imply temporal origin in an external sense; it is a boundary condition favored by the observer-conditioned measure:
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda \, \mathcal{C}_O[\gamma]].
+\]
+
+Low-entropy configurations are maximally compressible and thus most probable. High-entropy starting states would require additional information to encode the observer, increasing \(\mathcal{C}_O[\gamma]\) and suppressing probability:
+\[
+\mathbb{P}(\gamma_{\rm high-entropy} \mid O) \ll \mathbb{P}(\gamma_{\rm zero-entropy} \mid O).
+\]
+
+Consequently, the arrow of time and increasing entropy emerge naturally:
+\[
+\text{Zero entropy} \;\Rightarrow\; \text{Maximal compressibility} \;\Rightarrow\; \text{Observer-compatible universe}.
+\]
+
+\textit{Speculative remark:} Other observer-compatible configurations may exist with different geometric histories. Whether all must exhibit apparent low-entropy origins is an open question.}
+\end{faq}
+
+\begin{faq}{If there are no metaphysical signals or interaction, then how does the observer “see” anything?}
+\answer{
+Observation does not require signals. The universe perceived by an observer is already encoded within their wavefunction:
+\[
+\Psi_\gamma = \Psi_{\rm self} \otimes \Psi_{\rm env},
+\]
+where \(\Psi_{\rm self}\) defines the persistent observer structure and \(\Psi_{\rm env}\) encodes the surrounding environment.  
+
+\textbf{Temporal and spatial extrapolation:} These are purely indexical—observer-compatible histories are extended by minimal-complexity continuations:
+\[
+\Psi_{\rm self}(t+1) \sim \arg\min_{\gamma_{0:t+1}} \mathcal{C}_O[\gamma_{0:t+1}],
+\quad
+\Psi_{\rm env} \sim \text{compressible extensions of } \Psi_{\rm self}.
+\]
+
+Apparent laws, structures, and predictability emerge statistically:
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda \, \mathcal{C}_O[\gamma]].
+\]
+
+No external signals are required; perception is emergent from correlations within the observer-compatible configuration space.}
+\end{faq}
+
+\begin{faq}{Does \IaMe support QBism?}
+\answer{
+Yes. Observers are informational structures. Reasoning observers are statistically more likely to persist because their compatible histories maximize compressibility and continuity. This can make quantum events appear observer-dependent. All evolution remains fully contained in the abstract informational substrate; “collapse” or decision-based effects are emergent statistical phenomena.}
+\end{faq}
+
+\begin{faq}{How does Gödel incompleteness affect the theory?}
+\answer{
+Gödel’s theorems constrain formal systems capable of arithmetic, but \IaMe targets ontological closure rather than formal deductive completeness. Embedded observers will encounter Gödel-style limits in reasoning, which manifest as constraints on compression and representation, not on the underlying informational substrate itself.}
+\end{faq}
+
+\begin{faq}{Is a singularity a point of infinite density?}
+\answer{
+No. Singularities correspond to zero-entropy states with no degrees of freedom to encode microstructure. Infinite-density interpretations would compress poorly and are suppressed statistically. This aligns with the informational mapping of geometry to entropy, independent of spacetime embedding.
+}
+\end{faq}
+
+\begin{faq}{Are we living in a simulation?}
+\answer{
+In the \IaMe framework, all observer-compatible configurations exist within a single informational substrate. External simulators are unnecessary. Simulated and non-simulated realities are ontologically equivalent. Hence, the question of “living in a simulation” is ill-posed; everything arises from the same abstract information.
+}
+\end{faq}
+
+\begin{faq}{Is the recursive simulation hypothesis supported within the theory?}
+\answer{
+Yes, but only in a restricted sense. Observers can construct simulations of themselves as informational structures. Sub-simulations correspond to configurations within the same underlying informational substrate, without requiring a separate ontological level.  
+
+\textbf{Constraint: entropy.} Fully faithful, unbounded recursive simulations are informationally expensive and degrade quickly. They must compress, restrict scope, or terminate.}
+\end{faq}
+
+\begin{faq}{Why do we age and die?}
+\answer{
+The observer’s future is limited by spectral complexity of their wavefunction, \(\psi_O\). Let \(\Sigma[\gamma]\) denote the number of independent frequency-phase components required to encode future history \(\gamma\). The probability of persistence scales as:
+\[
+\mathbb{P}(\gamma \mid O) \propto \exp(-\alpha \, \Sigma[\gamma]).
+\]
+
+Accumulation of memories, skills, and internal structure increases \(\Sigma[\gamma]\), reducing the measure of compatible continuations. Aging and death are the geometric and statistical manifestations of combinatorial exhaustion: the set of observer-compatible configurations eventually vanishes.}
+\end{faq}
+
+\begin{faq}{Does the theory explain why the expansion rate of the universe is near-critical?}
+\answer{
+Conditional on increasing entropy and typical emergence, observers are most likely to find themselves near the peak of the microstructure count (maximum compressibility). This may correspond to a near-critical expansion regime.  
+
+\textit{Speculative:} This has not yet been formally derived; the statement is based on probabilistic arguments from the observer-conditioned measure.}
+\end{faq}
+
+\begin{faq}{Is this just Solipsism? Am I the only one who exists?}
+\answer{
+The theory takes the observer’s existence as axiomatic. It does not imply solipsism: the number of observers is a probabilistic variable. Multiple observers dominate the measure unless a single observer can be proven statistically favored.
+}
+\end{faq}
+
+\begin{faq}{Does the claim that compression implies maximal probability depend on Kolmogorov complexity?}
+\answer{
+No. Kolmogorov complexity is neither continuous nor computable, and thus not physically observable.  
+\IaMe defines description length via the spectral content of the wavefunction: frequencies, phases, and minimal-resolution representations. Compressed configurations dominate the measure because they are overwhelmingly probable among physically realizable states, not because Kolmogorov complexity is assumed.
+}
+\end{faq}
+
+\printbibliography
+
+\end{document}
