@@ -111,6 +111,31 @@
       \field{pages}{246\bibrangedash 276}
       \range{pages}{31}
     \endentry
+    \entry{friend2014pluralism}{book}{}
+      \name{author}{1}{}{%
+        {{hash=7a0fc2383848a884ff872d74bb56c615}{%
+           family={Friend},
+           familyi={F\bibinitperiod},
+           given={Michèle},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7a0fc2383848a884ff872d74bb56c615}
+      \strng{fullhash}{7a0fc2383848a884ff872d74bb56c615}
+      \strng{bibnamehash}{7a0fc2383848a884ff872d74bb56c615}
+      \strng{authorbibnamehash}{7a0fc2383848a884ff872d74bb56c615}
+      \strng{authornamehash}{7a0fc2383848a884ff872d74bb56c615}
+      \strng{authorfullhash}{7a0fc2383848a884ff872d74bb56c615}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Logic, Epistemology, and the Unity of Science}
+      \field{title}{Pluralism in Mathematics: A New Position in Philosophy of Mathematics}
+      \field{year}{2014}
+    \endentry
     \entry{Goff2019}{book}{}
       \name{author}{1}{}{%
         {{hash=bf9a83e1bbe1e0f2de292c14854dd927}{%
@@ -135,29 +160,34 @@
       \field{title}{Galileo's Error: Foundations for a New Science of Consciousness}
       \field{year}{2019}
     \endentry
-    \entry{hawking1988brief}{book}{}
+    \entry{hamkins2012multiverse}{article}{}
       \name{author}{1}{}{%
-        {{hash=d6208a0d89bbe93d54449bb980342d85}{%
-           family={Hawking},
+        {{hash=d6e139e04e1ed1547b7e0315915d6822}{%
+           family={Hamkins},
            familyi={H\bibinitperiod},
-           given={Stephen},
-           giveni={S\bibinitperiod}}}%
+           given={Joel\bibnamedelima David},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
-        {Bantam Books}%
+        {Cambridge University Press}%
       }
-      \strng{namehash}{d6208a0d89bbe93d54449bb980342d85}
-      \strng{fullhash}{d6208a0d89bbe93d54449bb980342d85}
-      \strng{bibnamehash}{d6208a0d89bbe93d54449bb980342d85}
-      \strng{authorbibnamehash}{d6208a0d89bbe93d54449bb980342d85}
-      \strng{authornamehash}{d6208a0d89bbe93d54449bb980342d85}
-      \strng{authorfullhash}{d6208a0d89bbe93d54449bb980342d85}
+      \strng{namehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{fullhash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{bibnamehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authorbibnamehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authornamehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authorfullhash}{d6e139e04e1ed1547b7e0315915d6822}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{A Brief History of Time}
-      \field{year}{1988}
+      \field{journaltitle}{Review of Symbolic Logic}
+      \field{number}{3}
+      \field{title}{The set-theoretic multiverse}
+      \field{volume}{5}
+      \field{year}{2012}
+      \field{pages}{416\bibrangedash 449}
+      \range{pages}{34}
     \endentry
     \entry{hawking1996nature}{book}{}
       \name{author}{2}{}{%
@@ -345,6 +375,31 @@
       \verb{doi}
       \verb 10.1016/S0378-4754(96)00042-1
       \endverb
+    \endentry
+    \entry{priest2024mathematical}{book}{}
+      \name{author}{1}{}{%
+        {{hash=35495cd70c0dd7531b7ce07b9942c81d}{%
+           family={Priest},
+           familyi={P\bibinitperiod},
+           given={Graham},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{35495cd70c0dd7531b7ce07b9942c81d}
+      \strng{fullhash}{35495cd70c0dd7531b7ce07b9942c81d}
+      \strng{bibnamehash}{35495cd70c0dd7531b7ce07b9942c81d}
+      \strng{authorbibnamehash}{35495cd70c0dd7531b7ce07b9942c81d}
+      \strng{authornamehash}{35495cd70c0dd7531b7ce07b9942c81d}
+      \strng{authorfullhash}{35495cd70c0dd7531b7ce07b9942c81d}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Cambridge Elements in the Philosophy of Mathematics}
+      \field{title}{Mathematical Pluralism}
+      \field{year}{2024}
     \endentry
     \entry{hawking1988}{article}{}
       \name{author}{1}{}{%
