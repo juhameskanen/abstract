@@ -60,19 +60,22 @@ Space is the \textbf{geometric projection} of total entropy: as the underlying i
 \(n\) bits, corresponding to a configuration space of size \(2^n\).  Different arrangements and interpretations of this information correspond
 to distinct possible universes within the same abstract informational substrate.
 
-Only a very small subset of these configurations may admit stable, self-referential informational structures capable of functioning as observers. We necessarily find ourselves in one such configuration, which—when interpreted geometrically—appears to originate from a remarkably ordered, low-entropy state.
+Only a very small subset of these configurations may admit stable, self-referential informational structures capable of functioning as observers.
+We necessarily find ourselves in one such configuration, which—when interpreted geometrically—appears to originate from a remarkably ordered, low-entropy state.
 
-Other informational arrangements compatible with intelligent observers may also exist and need not share identical geometric or entropic histories. Whether all observer-compatible universes must exhibit an apparent low-entropy “origin” remains an open question.
+Other informational arrangements compatible with intelligent observers may also exist and need not share identical geometric or entropic histories.
+Whether all observer-compatible universes must exhibit an apparent low-entropy “origin” remains an open question.
 
-Importantly, a zero-entropy beginning in this framework does not represent a temporal origin in an external time. Instead, it functions as a boundary condition selected by observer-conditioned probability: low-entropy configurations are maximally compressible and therefore dominate the measure over observer-compatible histories.
+Importantly, a zero-entropy beginning in this framework does not represent a temporal origin in an external time.
+Instead, it functions as a boundary condition selected by observer-conditioned probability: low-entropy configurations are maximally compressible and therefore dominate the measure over observer-compatible histories.
 
-The observer-conditioned measure overwhelmingly favors **histories that minimize total complexity**:
+The observer-conditioned measure overwhelmingly favors histories that minimize total complexity:
 
 \[
 \mathbb{P}(\gamma \mid O) \propto \exp[-\lambda \, \mathcal{C}_O[\gamma]].
 \]
 
-A zero-entropy initial state is **maximally compressible** and hence most probable. 
+A zero-entropy initial state is maximally compressible and hence most probable. 
 
 \[
 0 \;\rightarrow\; 1 \;\rightarrow\; \dots \;\rightarrow\; \text{current state}.
@@ -84,7 +87,7 @@ Starting from high entropy or decreasing entropy requires extra information to e
 \mathbb{P}(\gamma_{\rm high-entropy} \mid O) \ll \mathbb{P}(\gamma_{\rm zero-entropy} \mid O).
 \]
 
-Thus, the **arrow of time** and increasing total entropy naturally emerge:  
+Thus, the arrow of time and increasing total entropy naturally emerge:  
 
 \[
 \text{Zero entropy} \;\Rightarrow\; \text{Maximal compressibility} \;\Rightarrow\; \text{Observer-compatible universe}.
@@ -101,15 +104,15 @@ Thus, the **arrow of time** and increasing total entropy naturally emerge:
 The observer’s wavefunction can be split as:
 
 \[
-\Psi_\gamma = \Psi_{\rm self} \otimes \Psi_{\rm env},
+\Psi_\gamma = \Psi_{\rm self} \otimes \Psi_{\rm env}
 \]
 
 where \(\Psi_{\rm self}\) is the geometrically persistent part defining the observer, and \(\Psi_{\rm env}\) is the remaining “outside” world.
 
-Temporal extrapolation of \(\Psi_{\rm self}\) has a **limited predictive horizon**:
+Temporal extrapolation of \(\Psi_{\rm self}\) has a limited predictive horizon:
 
 \[
-\Psi_{\rm self}(t+1) \sim \arg\min_{\gamma_{t+1}} \mathcal{C}*O[\gamma*{0:t+1}],
+\Psi_{\rm self}(t+1) \sim \arg\min_{\gamma_{t+1}} \mathcal{C}*O[\gamma*{0:t+1}]
 \]
 
 so the observer cannot see far into the future. Spatial extrapolation generates the compressible environment:
@@ -118,10 +121,10 @@ so the observer cannot see far into the future. Spatial extrapolation generates 
 \Psi_{\rm env} \sim \text{extensions of } \Psi_{\rm self} \text{ into surrounding bits}.
 \]
 
-The perceived universe emerges because **low-complexity histories dominate the measure**:
+The perceived universe emerges because low-complexity histories dominate the measure:
 
 \[
-\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda , \mathcal{C}_O[\gamma]].
+\mathbb{P}(\gamma \mid O) \propto \exp[-\lambda \mathcal{C}_O[\gamma]].
 \]
 
 In short: the observer does not receive signals from outside; the “world” is a compressible extrapolation of the self-wavefunction, and apparent laws and structures emerge statistically.
@@ -154,11 +157,16 @@ In short: the observer does not receive signals from outside; the “world” is
 \answer{
 Yes, but only in a restricted and precisely defined sense.
 
-Within the theory, observers are informational structures. Any such structure capable of reasoning can, in principle, construct formal systems, Turing machines, and simulations of itself. This has already occurred: humans have defined universal computation and have begun simulating simplified versions of biological, cognitive, and physical processes. Since biological information (including DNA) can be encoded digitally without loss of information, simulated humans can be axiomatic copies of real humans at the informational level.
+Within the theory, observers are informational structures. Any such structure capable of reasoning can, in principle, construct formal systems, Turing machines, and simulations of itself.
+This has already occurred: humans have defined universal computation and have begun simulating simplified versions of biological, cognitive, and physical processes.
+Since biological information (including DNA) can be encoded digitally without loss of information, simulated humans can be axiomatic copies of real humans at the informational level.
 
-These sub-simulations do not require a separate ontological substrate. They correspond simply to different configurations within the same underlying informational space (e.g., subsets of $2^n$). In this limited sense, recursive simulation is supported.
+These sub-simulations do not require a separate ontological substrate. They correspond simply to different configurations within the same underlying informational space (e.g., subsets of $2^n$).
+In this limited sense, recursive simulation is supported.
 
-However, the theory places a fundamental constraint on unbounded recursive simulation: \textbf{entropy}. It is informationally expensive to \emph{realize} one. Extracting, encoding, and maintaining the information required to faithfully describe even a single human genome is already nontrivial. Scaling this to billions of humans, each composed of billions of cells, embedded in a universe containing astronomical numbers of particles and interactions, rapidly exhausts available informational resources.
+However, the theory places a fundamental constraint on unbounded recursive simulation: \textbf{entropy}. It is informationally expensive to \emph{realize} one. Extracting, encoding, and maintaining
+the information required to faithfully describe even a single human genome is already nontrivial. Scaling this to billions of humans, each composed of billions of cells, embedded in a
+universe containing astronomical numbers of particles and interactions, rapidly exhausts available informational resources.
 
 As a result, recursive simulations necessarily degrade. They must either omit detail, compress aggressively (thereby losing fidelity), restrict scope, or terminate.}
 
@@ -175,15 +183,18 @@ The observer's probability of continued existence along a future history $\gamma
 \]
 where $\Sigma[\gamma]$ is the number of independent frequency--phase components required to encode $\gamma$ at the observer's resolution, and $\alpha$ is a scale parameter determined by observer bandwidth.
 
-As the observer accumulates information—memories, learned skills, and internal structure—the effective spectral complexity $\Sigma[\gamma]$ of future continuations necessarily increases. Each additional independent component in $\psi_O$ reduces the exponential weight of compatible histories. Formally, if the observer requires $N$ additional frequencies to represent future states, the probability of survival along those histories scales as
+As the observer accumulates information—noise, memories, learned skills, and internal structure—the effective spectral complexity $\Sigma[\gamma]$ of future continuations necessarily increases.
+Each additional independent component in $\psi_O$ reduces the exponential weight of compatible histories. Formally, if the observer requires $N$ additional frequencies to represent future states, the probability of survival along those histories scales as
 \[
 \mathbb{P}_\text{future} \sim \exp(-\alpha N),
 \]
 leading to a rapid, exponential suppression of persistence.
 
-Wrinkles and aging are the geometric manifestation of increasing spectral complexity in the observer wavefunction.
+Wrinkles and aging are the geometric manifestation of increasing spectral complexity in the observer wavefunction. 
 
-Death is the inevitable consequence of combinatorial exhaustion: as the observer's informational content grows, the set of future histories that preserve identity becomes vanishingly small. Survival probability approaches zero, corresponding to the cessation of the observer's experiential existence. Hence, death emerges naturally from the finite and exponentially constrained structure of complex informational systems.}
+Death is the inevitable consequence of combinatorial exhaustion: as the observer's informational content grows, the set of future histories that preserve identity becomes vanishingly small.
+Survival probability approaches zero, corresponding to the cessation of the observer's experiential existence.
+Hence, death emerges naturally from the finite and exponentially constrained structure of complex informational systems.}
 \end{faq}
 
 \begin{faq}{Does the theory explain why the expansion rate of the universe is so close to the dividing line}
