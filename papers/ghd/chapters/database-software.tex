@@ -61,13 +61,36 @@ Human behavior cannot be reduced to the operation of neurons alone.
 In recent decades, the study of consciousness has emerged as one of the most active interdisciplinary fields, spanning neuroscience, cognitive science, artificial intelligence, and philosophy.
 Yet the central question remains unresolved: why do physical processes give rise to subjective experience, and how does such experience govern the behavior of macroscopic entities?
 
-What if a home automation software suddenly gained consciousness and began feeling pain when a heating sensor reported high temperatures? This pain might be agonizing, perhaps even intolerable.
-The next command in its code would still be to load a value from a register, multiply it by another, calculate a square root, and—based on the return value—write to a memory address to control a heating valve.
-
-What could the software do about its pain? Could it refuse to execute the next assembly instruction? Could it choose not to proceed? It appears doomed to execute its logic, without the agency to choose otherwise.
-
 This persistent gap between physical processes and subjective experience is what has come to be known as the "hard problem of consciousness" \cite{chalmers1995facing}.
 
+
+\section{The Problem With Pain}
+
+It is often assumed that consciousness and pain are incidental; we can understand the structure of software, but we cannot know what it feels like to be that software.
+
+However, the real issue is this: how could such subjective “feelings” have any effect on the software’s operation?
+
+In a program, every step is determined by prior state and code. Even if a “pain state” exists, it has no causal power—it cannot influence what happens next. Pain seems causally inert.
+
+Imagine a home automation system that suddenly gained consciousness and began experiencing pain whenever a heating sensor reported high temperatures. This pain might be agonizing, perhaps even intolerable. Yet the next instruction in its code would still be to load a value from a register, multiply it, calculate a square root, and—based on the result—write to a memory address controlling a heating valve.
+
+What could the software do about its pain? Could it refuse to execute the next assembly instruction? Could it choose not to proceed? It could not. It is trapped in its logic, with no alternative. Introducing non-deterministic elements would not help: randomness is not the same as pain-driven control.
+
+The only way to give pain causal power would be to implement pain-sensitive code, such as a function that feels pain. Then the program could compare the level of pain and adjust its execution flow accordingly:
+
+\begin{verbatim}
+if (self->pain()) {
+// choose A
+} else {
+// choose B
+}
+\end{verbatim}
+
+But we have not the faintest idea how to implement such a \textbf{pain()} function.
+
+What makes this problem even more troubling for a programmer is that code is ultimately just data—bits, nothing more. Even if we could someday write this pain function, it would amount to saying: this particular arrangement of bits “feels” pain, and this one does not.
+
+It would be like a painting on a wall enduring unbearable agony.
 
 
 \section{Proposed Sources of Consciousness}
@@ -93,11 +116,12 @@ Could consciousness lurk in the fact that humans are composed of organic biologi
 Is all matter conscious to some degree, as panpsychism suggests? Could relays, copper wires, even rocks have some level of 
 consciousness~\cite{Goff2019,Strawson2006,Chalmers2015,Whitehead1929}?
 
-The best imaginable way to study whether an object is conscious is by torturing it with an appropriate torturing device. 
+The best imaginable way to study whether an object is conscious is by torturing it with an appropriate torturing device.
 So let us torture rocks with the best possible rock-torturing device one can imagine---a sledgehammer. 
 Rocks do not seem to care! This observation cannot, of course, prove rocks unconscious. Rocks could well be conscious, 
 they just do not have the sense to feel pain. Or perhaps they do sense pain intensely, but they just cannot show it. 
 They might be in everlasting pain, but have no mouth to scream, no legs to kick. What a terrible destiny!
 
-Physics has, so far, failed rather miserably to describe human feelings. There is no Newtonian law of pain, no Schrödinger equation of suffering, and certainly no general relativistic theory that can predict tomorrow’s headache.
+Physics has, so far, failed rather miserably to describe human feelings. There is no Newtonian law of pain, no Schrödinger equation of suffering,
+and certainly no general relativistic theory that can predict tomorrow’s headache.
 
