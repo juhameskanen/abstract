@@ -1,4 +1,4 @@
-\chapter{A Zero-Parameter Theory of Emergent Physics}
+\chapter{A Zero-Parameter Theory of Everything}
 
 \section{Everything is Information}
 
@@ -48,7 +48,73 @@ The probability that an observer finds themselves in a particular configuration 
 \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\Big[-\lambda\, \mathcal{C}_O[\gamma]\Big], \quad \gamma \in \Gamma_O
 \]
 
-with 
+\section{Unifying Quantum Mechanics and Gravity}
+
+At the deepest level, the universe is static and informational. There is no dynamical generation, no external time, and no need for a simulator or metaphysical agent. Everything that exists is a configuration in an enormous information space. For $n$ bits, there are $2^n$ possible configurations. Observers experience a “flow of time” simply by traversing a sequence of these configurations:
+
+\begin{itemize}
+\item \textbf{Configuration Space:} All possible states exist as static information.  
+\item \textbf{Traversal:} Time is the ordinal sequence an observer finds themselves in.  
+\end{itemize}
+
+In such a universe, the central question is: \emph{Which configurations are observers most likely to inhabit?} The answer lies in compression: observers overwhelmingly find themselves in the \textbf{most compressible} structures. This gives rise to both quantum mechanics and general relativity as emergent phenomena.  
+
+We quantify this using two complementary notions of complexity:
+
+\begin{itemize}
+\item \textbf{Spectral Complexity} $C_Q$ — compression of microscopic wave-like correlations.  
+\item \textbf{Geometric Complexity} $C_G$ — compression of macroscopic relational structures in spacetime.
+\end{itemize}
+
+
+
+\section{Spectral Complexity: Why Particles Wave}
+
+The wavefunction is nature’s spectral compression of microscopic correlations. We penalize high-frequency components to favor smooth, predictable states:
+
+\begin{equation}
+C_Q = \sum_i k_{\text{eff}}^2 |A_i|^2,
+\end{equation}
+
+where $k_{\text{eff}} = \min(|k|, N-|k|)$ in a discrete domain $\mathbb{Z}_N$. Sharp gradients and high frequencies are costly, so wave-like behavior emerges naturally as the optimal spectral representation.  
+
+Particles appear wave-like because “waves compress correlations best.”
+
+
+
+\section{Geometric Complexity: Why Spacetime Curves}
+
+Observers also require coherent, well-defined boundaries, which are efficiently encoded in a geometric manifold. The geometric complexity functional is:
+
+\begin{equation}
+C_G = \alpha \int R \sqrt{-g} \, d^4x + \beta \sum |a + \Gamma(v,v)|^2,
+\end{equation}
+
+where:  
+
+\begin{itemize}
+\item $R$ is the Ricci scalar curvature — the “cost” of bending spacetime.  
+\item $\Gamma(v,v)$ represents acceleration along a trajectory; non-geodesic motion increases the description length.  
+\item $\alpha, \beta$ are weighting constants.  
+\end{itemize}
+
+Smooth, geodesic motion compresses histories most efficiently.
+
+
+
+\section{Resolving Singularities with Spectral Compression}
+
+In classical GR, curvature can become infinite at singularities. In an informational universe, such singularities are impossible: they would require infinite spectral description. The probability of a configuration is weighted by $e^{-C_Q}$, so states needing infinite spectral resources are naturally suppressed:
+
+\[
+\text{Singularities } \Rightarrow 0 \text{ probability}.
+\]
+
+The spectral “codec” acts as a low-pass filter, smoothing out infinite curvature.  
+
+Nature’s “compression algorithm” prevents infinities from appearing.
+
+with
 
 \[
 \mathcal{C}_O[\gamma] = C_Q[\gamma] + C_G[\gamma] + C_\text{obs}[\gamma; O].
@@ -80,6 +146,56 @@ Observers don’t “choose” a universe—they simply exist in the highly prob
 \end{tikzpicture}
 \caption{Observer embedded in configuration space. The most probable configurations preserve internal structure.}
 \end{figure}
+
+Observers experience reality according to the \emph{joint minimization} of spectral and geometric complexity. The probability of a particular history $\gamma$ for an observer $O$ is:
+
+\begin{equation}
+\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp \Big[ -\lambda ( C_Q(\gamma) + C_G(\gamma) + C_{\text{int}}(\gamma,G) ) \Big],
+\end{equation}
+
+where $C_{\text{int}}$ accounts for the interaction between spectral and geometric compression. Physics emerges where spectral and geometric simplicity align, producing a coherent and smooth world.
+
+
+\section{Emergent Physical Laws}
+
+Treating total complexity as a generalized action \(S\), the observed dynamics correspond to stationary points \(\delta S = 0\):
+
+\subsection*{Wave Equations}
+
+Varying spectral complexity with respect to the wavefunction yields:
+
+\begin{equation}
+\nabla^2 \psi = 0,
+\end{equation}
+
+which, in the presence of a clock or sampling frequency, recovers the Schrödinger or Helmholtz form.  
+
+\subsection*{Field Equations}
+
+Varying geometric complexity with respect to the metric reproduces Einstein’s field equations:
+
+\begin{equation}
+R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R = 8\pi G T_{\mu\nu}.
+\end{equation}
+
+The laws of physics are \emph{stationary points of minimal information cost}.
+
+
+
+\section{Predictions and Observational Consequences}
+
+Because a single wavefunction can be embedded in multiple geometric configurations with nearly equal complexity, the observer sees apparent stochasticity or “noise” at the interface of scales. This produces:
+
+\begin{itemize}
+\item Fundamental variance or “quantization error” when compressing high-dimensional spectral information into spacetime.  
+\item Potentially measurable effects in extreme events, e.g., black hole mergers or Hawking radiation.  
+\end{itemize}
+
+
+
+\section{Conclusion}
+
+The universe is fundamentally informational. Observers inhabit the most compressible trajectories in configuration space. Quantum mechanics emerges from \textbf{spectral compression} of microscopic correlations. General relativity emerges from \textbf{geometric compression} of macroscopic relational structures.  
 
 
 
@@ -209,4 +325,12 @@ All familiar physics—quantum mechanics, wavefunctions, general relativity—ar
 \begin{quote}
 You are not created by a simulation. You \textbf{are} the configuration in which your informational pattern exists. All else—spacetime, fields, particles—is just the most probable compression compatible with you.
 \end{quote}
+
+\begin{quote}
+\emph{The universe is the minimal information capable of containing observers.}
+\end{quote}
+
+From this single principle, both quantum mechanics and gravity arise naturally, without invoking dynamical axioms, external simulators, or metaphysical agents.  
+
+Physics is the statistical dominance of low-complexity, efficiently encoded histories.
 
