@@ -1,75 +1,54 @@
-\chapter{The Deep Nature of Quantum Mechanics}
+\chapter{Spectral Complexity}
 
-\section{Quantum Mechanics as Compression}
+\section{Introduction}
 
-Imagine the universe as a colossal three-dimensional movie.
+What is the deep nature of Quantum Mechanics and its mysterious abstract wave function?
+
+Why does everything we observe at the subatomic level appear to behave like a wave?
+
+
+\subsection*{Movie Analogy}
+
 In a conventional movie, each frame consists of pixels with simple features, such as red, green, and blue intensities.
-To compress such a movie efficiently, engineers use techniques like the discrete cosine transform (DCT) or Fourier transforms, distributing the information across coefficients.
-When the image is displayed on a finite-resolution screen, subtle probabilistic tricks such as \emph{dithering} are applied: pixel intensities are sampled in a way that, on average, reproduces the underlying image without jagged edges.
+To compress such a movie efficiently, engineers use techniques like the discrete cosine transform (DCT) or Fourier transforms, distributing the information across coefficients (JPG, MPEG).
 
-In the real universe, the “pixels” are elementary particles.
-Unlike RGB pixels, these particles carry rich internal features—spin, charge, flavor, and more.
-If we imagined the universe as a deterministic movie of particle positions, the full information content would be astronomically large.
-Nature, however, encodes this information in the \emph{wavefunction}, a complex-valued, high-dimensional structure evolving deterministically according to the Schrödinger equation:
+If you were an observer in such a movie, made of pixels, what would you observe?
 
-\begin{equation}
-i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \Psi(x,t).
-\end{equation}
-
-Just as a Fourier transform spreads image information across coefficients, the wavefunction distributes amplitude information across all possible configurations, including interference effects that have no classical analogue.
+The underlying structure governing pixels would appear to follow hidden, wave-like patterns, even though what you directly see are just individual pixels.
 
 
+\section{Wavefunction as Compression}
 
-\section{Measurement as Dithering}
+The wavefunction is a more advanced, complex-valued version of the sinusoidal building blocks used in compression algorithms like JPG and MPEG.
 
-Just as RGB components combine to produce all visible colors in a pixel, quarks combine in various ways to produce all the observable hadrons in the universe.
+In a movie, a pixel just has a color. In the wavefunction, a 'pixel' also has a phase (a kind of internal angle that determines how waves combine).
 
-Measurement in quantum mechanics is analogous to observing the movie on a finite-resolution screen. We can only observe discrete outcomes.
+In the real universe, the “pixels” are elementary particles. Unlike RGB pixels, these particles carry rich internal features—spin, charge, flavor, and more.
+
+Just as a Fourier transform spreads image information across coefficients, the wavefunction distributes amplitude information across all possible configurations.
+
+
+
+\section{Born Rule as Dithering}
+
 The Born rule acts like probabilistic \emph{dithering}: instead of reading the amplitude directly, nature samples it probabilistically.
-The probability of observing a particular outcome is
-
-\begin{equation}
-P(x) = \frac{|\Psi(x)|^2}{\sum_x |\Psi(x)|^2}.
-\end{equation}
 
 Over many repeated measurements, these probabilistic outcomes faithfully reproduce the underlying continuous amplitude distribution, smoothing out “jagged edges” and preserving the global structure of possibilities.
 In this sense, the Born rule emerges naturally as the way to extract discrete outcomes from a maximally compressed, deterministic amplitude field.
 
+It allows the reality to be printed with least number of resources (pixels in movie industry, ink in printing industry).
 
 
 \section{Compression Dominates Reality}
 
-Quantum mechanics can therefore be seen as nature’s ultimate compression algorithm:
+Quantum mechanics can therefore be seen as nature’s ultimate compression algorithm.  The deterministic evolution of amplitudes preserves all information (unitarity).  
+Observed outcomes are probabilistic samples that faithfully reproduce the underlying amplitudes. Interference, superposition, and entanglement emerge naturally as
+consequences of encoding complex, high-dimensional information efficiently.
 
-\begin{itemize}
-\item The deterministic evolution of amplitudes preserves all information (unitarity).  
-\item Observed outcomes are probabilistic samples that faithfully reproduce the underlying amplitudes.  
-\item Interference, superposition, and entanglement emerge naturally as consequences of encoding complex, high-dimensional information efficiently.
-\end{itemize}
+Smooth, predictable patterns dominate because they are \emph{spectrally simple}: a low number of active modes suffices to encode them.
 
-Smooth, predictable patterns dominate because they are \emph{spectrally simple}: a low number of active modes suffices to encode them. Formally, we can assign a spectral measure to wavefunctions:
-
-\begin{equation}
-P(\Psi) \propto 2^{-N},
-\end{equation}
-
-where \(N\) counts the number of active frequency components. Simple, low-\(N\) states are exponentially more probable than complex, high-\(N\) states. In other words, the universe “prefers” smooth, predictable histories because they are maximally compressible and therefore dominate the measure.
-
-
-
-\section{Observers as Compressed Trajectories}
-
-Observers are themselves finite informational structures. The histories they experience are the \emph{most probable trajectories}, those that are efficiently represented in the spectral basis of the universe. From this perspective:
-
-\begin{itemize}
-\item No external simulator is needed.  
-\item No divine intervention is required.  
-\item Observers find themselves following trajectories that are maximally compressed because these trajectories overwhelmingly dominate the measure.
-\end{itemize}
-
-Time itself can be understood as the ordering of events within these trajectories. The apparent flow of time, smooth dynamics, and deterministic laws arise naturally from the dominance of low-complexity, spectrally sparse histories.
-
-
+Unlike Kolmogorov complexity, the wavefunction's complexity is both continuous and computable.
+The complexity of the wavefunction is the number of phases and frequencies.
 
 \section{Summary}
 
