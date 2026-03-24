@@ -248,16 +248,74 @@
       \field{title}{The Black Cloud}
       \field{year}{1957}
     \endentry
-    \entry{lastactionhero1993}{misc}{}
-      \list{publisher}{1}{%
-        {Columbia Pictures}%
+    \entry{meskanen2010}{article}{}
+      \name{author}{1}{}{%
+        {{hash=192553fc61cfa4b817982519133b45fc}{%
+           family={Meskanen},
+           familyi={M\bibinitperiod},
+           given={Juha},
+           giveni={J\bibinitperiod}}}%
       }
-      \field{sortinit}{L}
-      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \strng{namehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{fullhash}{192553fc61cfa4b817982519133b45fc}
+      \strng{bibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorbibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authornamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorfullhash}{192553fc61cfa4b817982519133b45fc}
+      \field{extraname}{1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Starring Arnold Schwarzenegger}
-      \field{title}{Last Action Hero}
-      \field{year}{1993}
+      \field{journaltitle}{Unpublished Manuscript}
+      \field{title}{Entropy Collapse and the Nature of Black Hole Singularities}
+      \field{year}{2010}
+    \endentry
+    \entry{meskanen2011}{article}{}
+      \name{author}{1}{}{%
+        {{hash=192553fc61cfa4b817982519133b45fc}{%
+           family={Meskanen},
+           familyi={M\bibinitperiod},
+           given={Juha},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{fullhash}{192553fc61cfa4b817982519133b45fc}
+      \strng{bibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorbibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authornamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorfullhash}{192553fc61cfa4b817982519133b45fc}
+      \field{extraname}{2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Unpublished Manuscript}
+      \field{title}{Expanding Entropy and the Birth of Spacetime}
+      \field{year}{2011}
+    \endentry
+    \entry{meskanen2008}{article}{}
+      \name{author}{1}{}{%
+        {{hash=192553fc61cfa4b817982519133b45fc}{%
+           family={Meskanen},
+           familyi={M\bibinitperiod},
+           given={Juha},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{fullhash}{192553fc61cfa4b817982519133b45fc}
+      \strng{bibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorbibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authornamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorfullhash}{192553fc61cfa4b817982519133b45fc}
+      \field{extraname}{3}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Unpublished Manuscript}
+      \field{title}{Physics as an Emergent Property of the Observer: A Derivation from Four Assumptions}
+      \field{year}{2008}
     \endentry
     \entry{prigogine1977self}{book}{}
       \name{author}{2}{}{%
