@@ -181,7 +181,7 @@ Together, these results establish that simplicity, probability, and compressibil
 
 A fundamental property of Kolmogorov complexity is that it is \emph{uncomputable}. There exists no algorithm that can take an arbitrary string $x$ and determine the exact value of $K(x)$.
 
-This limitation follows from the halting problem: determining whether a program is the shortest possible description of a string would require knowing whether any shorter program eventually halts and produces the same output.
+This limitation follows from the halting problem-a computational analogue of Gödel’s incompleteness result: determining whether a program is the shortest possible description of a string would require knowing whether any shorter program eventually halts and produces the same output.
 
 As a result, Kolmogorov complexity cannot be computed exactly in general. In practice, one can only estimate upper bounds by finding shorter descriptions or compression schemes.
 
@@ -197,7 +197,8 @@ Some programs halt and produce output, while others run forever. The probability
 \Omega = \sum_{p \text{ halts}} 2^{-|p|}.
 \]
 
-Because the programs are required to be prefix-free, this sum converges to a real number between 0 and 1.
+Because the programs are required to be prefix-free, this sum converges to a real number between 0 and 1. But no algorithm can compute the exact value of if. There is difference to numbers like PI (3.14..).
+Even though PI has infinitely many digits, its digits are fully determined by a finite algorithm. Chaitinn's Omaga is infinite as well. However, it is partially unknowable even in principle. It encodes unprovable truths. 
 
 The number $\Omega$ has several remarkable properties. Its binary expansion is algorithmically random: the first $n$ bits of $\Omega$ have Kolmogorov complexity approximately $n$. In other words, there is no significantly shorter program that can compute those bits.
 
@@ -206,6 +207,7 @@ At the same time, $\Omega$ encodes the solution to the halting problem for all p
 As a consequence, the bits of $\Omega$ are mathematically well-defined but fundamentally uncomputable. No finite algorithm can determine more than finitely many of its digits.
 
 Chaitin's Omega illustrates a profound feature of Algorithmic Information Theory: even within pure mathematics, there exist well-defined quantities whose values contain irreducible algorithmic randomness.
+\textit{Maybe Chaitin's Omega is from which pain emerges!}
 
 
 \section{The Bad News}
@@ -216,7 +218,7 @@ AIT cannot be used for predicting planetary motions, evolution of subatomic part
 
 No known simulation exists in which realistic physical laws—not even minimal Newtonian gravity or basic planetary motion—emerge purely from the principle of minimal description length or algorithmic probability.
 
-While we can \emph{describe} our laws using AIT, we have yet to see these laws \emph{emerge} spontaneously from a purely algorithmic distribution. 
+No-one has demonstrated or seen the laws of physics to \emph{emerge} spontaneously from a purely algorithmic distribution. 
 
 For the software professional, this is the ultimate reverse engineering challenge. We have a beautiful, elegant "Source Code" theory (AIT),
 but we cannot yet compile a universe that looks like our own.

@@ -4,8 +4,7 @@
 \section{The Strange Quantum World}
 
 Quantum Mechanics is extraordinarily successful at describing microscopic phenomena. 
-Its predictions have been confirmed to astonishing precision. Yet conceptually, 
-it resists classical intuition. 
+Its predictions have been confirmed to astonishing precision. Yet conceptually, it resists classical intuition. 
 
 At small scales, matter does not behave like tiny billiard balls. 
 Instead, it behaves according to a complex-valued object called the \emph{wavefunction}.
@@ -156,7 +155,8 @@ This is the content of the uncertainty relation:
 
 Localization requires informational expansion in momentum space.
 
-In other words, precise position requires many Fourier components. 
+In other words, precise position requires many Fourier components.
+This is the Heisenberg uncertainty principle. It is not merely a limitation of our measuring devices, but a fundamental property of nature.
 
 
 
@@ -199,6 +199,156 @@ The universe is composed of several such overlapping fields, e.g:
 \end{itemize}
 
 These fields interact where they overlap. For instance, an electron field "wiggling" can kick the photon field. This framework is remarkably precise, provided the stage—space itself—remains a flat Minkowski metric $\eta_{\mu\nu}$.
+
+
+
+\section{The Measurement Problem}
+
+Quantum mechanics introduces a subtle complication to the role of the observer, namely the measurement problem.
+
+According to quantum theory, reality is described as a superposition of possibilities, all of which exist until they are ``observed.'' Upon observation, one of these possibilities is realized as a definite outcome.
+
+The question then arises: what qualifies as an observer?
+
+Several mathematically equivalent interpretations attempt to address this issue.
+In the Copenhagen interpretation, the ``observer'' is often treated as a classical measurement apparatus. However, the boundary between the classical and quantum domains is not precisely defined.
+In the Many-Worlds interpretation, no special role is assigned to observers; instead, they are simply quantum systems that become entangled with their environment.
+In this view, observations give rise to branching universes. Other approaches, such as objective collapse theories and quantum information–based or relational interpretations, attempt to formalize the notion of measurement in different ways.
+
+Despite these differences, the mathematical formalism of quantum mechanics does not uniquely specify what constitutes an observer. Apparently a pain sensitive observer does, fish, a single molecule, electron, quark? 
+
+In modern physics, an “observer” is effectively any system that becomes irreversibly entangled with another system in a way that produces a stable record of information.
+
+But what the heck does this even mean? 
+
+
+\section{Irreversible Recording in Quantum Mechanics}
+
+\subsection*{1. Interaction + entanglement (the starting point)}
+
+When a system \( S \) interacts with an apparatus \( A \), the joint state evolves as:
+
+\[
+|\psi_S\rangle \otimes |A_0\rangle \;\longrightarrow\; \sum_i c_i \, |s_i\rangle \otimes |A_i\rangle
+\]
+
+This is called unitary evolution in quantum mechanics.
+
+At this stage:
+
+\begin{itemize}
+\item No irreversibility yet
+\item No ``record'' in the classical sense yet
+\item The system is just entangled
+\end{itemize}
+
+\subsection*{2. Reduced density matrix (what one actually observe)}
+
+One  ``ignores'' the environment and looks at the system:
+
+\[
+\rho_S = \mathrm{Tr}_A(\rho_{SA})
+\]
+
+This is where information starts to look ``lost.''
+
+\subsection*{3. Decoherence (the key step)}
+
+Due to interaction with the environment \( E \), the off-diagonal terms vanish:
+
+\[
+\rho_S =
+\begin{pmatrix}
+\rho_{11} & \rho_{12} \\
+\rho_{21} & \rho_{22}
+\end{pmatrix}
+\;\longrightarrow\;
+\begin{pmatrix}
+\rho_{11} & 0 \\
+0 & \rho_{22}
+\end{pmatrix}
+\]
+
+This suppression is typically modeled as:
+
+\[
+\rho_{ij}(t) \sim \rho_{ij}(0)\, e^{-\Gamma t}
+\]
+
+where:
+
+\begin{itemize}
+\item \( \Gamma \) = decoherence rate
+\end{itemize}
+
+\subsection*{4. Irreversibility = entropy increase}
+
+Now one can define the key quantity:
+
+\[
+S(\rho) = -\mathrm{Tr}(\rho \log \rho)
+\]
+
+This is the von Neumann entropy.
+
+Irreversibility corresponds to:
+
+\[
+\Delta S > 0
+\]
+
+This is the quantum analogue of the Second Law of Thermodynamics.
+
+\subsection*{5. Information loss = irreversibility condition}
+
+A more precise information-theoretic statement is:
+
+\[
+I(S:A) \downarrow \quad \text{and} \quad I(S:E) \uparrow
+\]
+
+\begin{itemize}
+\item Information about the system becomes encoded in the environment
+\item That information becomes practically unrecoverable
+\end{itemize}
+
+\subsection*{6. The key operational definition}
+
+In physics, ``irreversible recording'' means:
+
+\begin{quote}
+A process in which information about a system becomes redundantly encoded in many environmental degrees of freedom, such that reversing the dynamics would require control over an exponentially large number of variables.
+\end{quote}
+
+\subsection*{7. Why this is effectively irreversible}
+
+The full evolution is still unitary (reversible in principle), but:
+
+\begin{itemize}
+\item The environment is too large
+\item Information is dispersed into inaccessible degrees of freedom
+\end{itemize}
+
+So irreversibility is:
+
+\begin{itemize}
+\item practical irreversibility, not fundamental irreversibility
+\end{itemize}
+
+\subsection*{8. One-line ``equation-level'' summary}
+
+There is no single equation, but the closest compact mathematical statement is:
+
+\[
+\rho \;\xrightarrow{\text{decoherence}}\; \text{diagonalized } \rho, 
+\qquad \Delta S = -\mathrm{Tr}(\rho \log \rho) > 0
+\]
+
+\subsection*{Bottom line}
+
+``Irreversible recording'' in physics is not a fundamental primitive—it is the emergent result of entanglement, decoherence, and entropy increase, where information is transferred into environmental degrees of freedom in a way that cannot be practically reversed.
+
+Finally a clear definition for us-conscious observers: we are systems that performs irreversible recordings.
 
 
 \section{The Origin of the Wavefunction}
