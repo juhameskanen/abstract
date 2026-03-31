@@ -5,7 +5,11 @@ Emergent Spacetime and Particles
 Description:
 -------------
 Simulate an execution trace of increasing entropy and monitor the corresponding expansion of the emergent spacetime and particle populations.
-Minimal and naive example of how complex structures and spacetime-like behavior can emerge from simple information-theoretic rules.
+Minimal Proof of Concept that complexity isn't added to the universe by external laws, but is a statistical inevitability of a expanding search space (entropy).
+
+Demonstrates that any arbitrarily chosen filter produces a Lognormal Trace, de-mystifying the "Fine-Tuning" problem. 
+The universe doesn't look the way it does because the constants are perfect; it looks this way because any filter acting on increasing entropy will 
+yield a log-normal distribution of structures, with a rapid initial growth (inflation) followed by a long tail of decay (heat death).
 
 
 Emergent Spacetime and Particles: A Computational Ontology
@@ -41,6 +45,7 @@ Emergent Properties:
   reflecting the separation between spacetime expansion and particle scale.
 - Particle populations follow log-normal-like distribution as a function of
   mutations.
+- Gravity is statistical bias in the emergence of structures, not a fundamental force.
 
 
 Theoretical Implications: The Informational Singularity
@@ -67,7 +72,6 @@ making indistinguishability a fundamental property of the information field.
 Usage:
 ------
 The simulation can be configured via command-line arguments for:
-    --method         : bitstring mutation method (bitflip, hamming, entropy)
     --bits           : total bitstring size
     --steps          : number of simulation steps
     --bits_per_coord : width of each spacetime fragment
