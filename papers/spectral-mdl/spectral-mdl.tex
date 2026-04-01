@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib} 
+
+\title{Pauli Exclusion as Emergent Antisymmetry via MDL}
+\author{Juha Meskanen}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+TODO
+\end{abstract}
+
+\noindent \textbf{Keywords:} Spinor, Spectral Complexity, Minimal Description Length
+
+\tableofcontents
+\bigskip
+
+\section{Pauli Exclusion as Emergent Antisymmetry via MDL}
+
+\subsection{Motivation}
+
+We began with the goal of constructing a minimal, observer-centric framework in which physical laws are not imposed but \emph{emerge} from information-theoretic principles. The initial attempt relied on hardcoding fermionic behavior, specifically Pauli's exclusion principle, through antisymmetric wavefunctions (e.g., Slater determinants).
+
+While this approach reproduced desired phenomenology, it violated the guiding principle: \emph{all structure should emerge from a compression principle rather than be assumed}.
+
+
+\subsection{Initial Assumptions and Limitations}
+
+The initial model assumed:
+\begin{itemize}
+    \item Point-like particles with positional degrees of freedom.
+    \item Gaussian wavepackets representing localized "blobs."
+    \item Explicit antisymmetry to enforce fermionic behavior.
+\end{itemize}
+
+These assumptions were sufficient to produce stable, inertial-like dynamics, but they imposed:
+\begin{itemize}
+    \item Hard constraints (e.g., exclusion) rather than emergent behavior.
+    \item A fixed particle ontology rather than a representation-based one.
+\end{itemize}
+
+\subsection{Shift in Perspective: Observer-Centric MDL}
+
+We replaced the ontological perspective with an \emph{observer-centric Minimum Description Length (MDL)} framework:
+
+\begin{itemize}
+    \item The fundamental object is not a particle, but a \emph{description of observations}.
+    \item The observer selects representations that minimize encoding cost.
+\end{itemize}
+
+We identified three key principles:
+
+\begin{enumerate}
+    \item \textbf{Observer existence:} Observers correspond to consistent sequences of encoded states.
+    \item \textbf{Compression:} Descriptions are minimized in spectral complexity (low-frequency dominance).
+    \item \textbf{Symmetry:} Equivalent configurations must not be redundantly distinguished.
+\end{enumerate}
+
+\subsection{Key Insight: Compression is a Collective Property}
+
+A critical realization was that:
+
+\begin{quote}
+\emph{Compression is not a property of individual objects, but of the entire configuration.}
+\end{quote}
+
+This implies:
+\begin{itemize}
+    \item Physical statistics (bosonic vs fermionic) cannot be assigned locally.
+    \item Instead, they emerge from global encoding constraints.
+\end{itemize}
+
+\subsection{The Trade-Off: Compression vs. Distinguishability}
+
+We identified two competing encoding strategies:
+
+\begin{enumerate}
+    \item \textbf{Symmetric (bosonic) encoding:}
+    \[
+        A + B
+    \]
+    \begin{itemize}
+        \item Minimizes spectral complexity.
+        \item Merges identities, increasing ambiguity.
+    \end{itemize}
+
+    \item \textbf{Antisymmetric (fermionic) encoding:}
+    \[
+        A - B
+    \]
+    \begin{itemize}
+        \item Preserves distinguishability.
+        \item Introduces structural cost (higher frequencies).
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Ambiguity as a Cost Function}
+
+We introduced a new term into the MDL framework:
+
+\[
+\text{Total Cost} = C_{\text{spectral}} + \lambda \cdot C_{\text{ambiguity}}
+\]
+
+where:
+\begin{itemize}
+    \item $C_{\text{spectral}}$ measures the frequency-weighted energy of the signal.
+    \item $C_{\text{ambiguity}}$ penalizes indistinguishability between configurations.
+\end{itemize}
+
+This ambiguity cost becomes large when two states overlap and cannot be uniquely reconstructed.
+
+\subsection{Emergence of Pauli Exclusion}
+
+With this modified cost function, we observe:
+
+\begin{itemize}
+    \item When particles are well separated:
+    \begin{itemize}
+        \item Symmetric encoding is cheaper.
+        \item Bosonic behavior emerges.
+    \end{itemize}
+
+    \item When particles overlap:
+    \begin{itemize}
+        \item Ambiguity cost diverges.
+        \item Antisymmetric encoding becomes cheaper.
+        \item Effective exclusion emerges.
+    \end{itemize}
+\end{itemize}
+
+Thus:
+
+\begin{quote}
+\emph{Pauli exclusion is not a fundamental rule, but a consequence of minimizing description length under a distinguishability constraint.}
+\end{quote}
+
+\subsection{Role of Gaussian States}
+
+Gaussian wavepackets naturally arise because they minimize joint uncertainty in position and frequency domains. They are therefore:
+
+\begin{itemize}
+    \item The optimal localized representation under spectral compression.
+    \item The natural "atoms" of the observer’s encoding.
+\end{itemize}
+
+\subsection{Spinors as Minimal Representations}
+
+Spinors were reinterpreted not as fundamental physical entities, but as:
+
+\begin{quote}
+\emph{minimal representations that encode rotational and exchange symmetries in a compressed form.}
+\end{quote}
+
+Their defining feature:
+\begin{itemize}
+    \item A $2\pi$ rotation introduces a sign change.
+    \item This sign structure enables antisymmetric encoding.
+\end{itemize}
+
+Thus, spin-$\tfrac{1}{2}$ behavior is not assumed, but emerges as the minimal structure supporting antisymmetric distinguishability.
+
+\subsection{Phase Transition Perspective}
+
+The physical universe is hypothesized to exist at a critical point:
+
+\begin{itemize}
+    \item Pure bosonic regime: maximal compression, but loss of information.
+    \item Pure fermionic regime: maximal distinguishability, but rigid structure.
+\end{itemize}
+
+The observed universe corresponds to a balance between these extremes:
+
+\begin{quote}
+\emph{A phase transition between compression and distinguishability.}
+\end{quote}
+
+
+\subsection{Conclusion}
+
+The key result of this progression is the replacement of hardcoded physical laws with emergent constraints:
+
+\begin{itemize}
+    \item Pauli exclusion emerges from an ambiguity penalty.
+    \item Bosons and fermions correspond to different optimal encoding strategies.
+    \item Spinors arise as minimal representations of symmetry under compression.
+\end{itemize}
+
+This leads to a unified view:
+
+\begin{quote}
+\emph{Physics is the minimal description of observer-consistent data under competing pressures of compression and distinguishability.}
+\end{quote}
+
+
+\end{document}
