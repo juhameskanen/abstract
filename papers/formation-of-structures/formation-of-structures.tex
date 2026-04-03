@@ -1,10 +1,10 @@
 \documentclass[11pt]{article}
-
-\usepackage{amsmath, amssymb, graphicx, geometry}
-\geometry{margin=1in}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib}
 
 \title{Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles}
-\author{Juha Meskanen}
+
 \date{\today}
 
 \begin{document}
@@ -196,6 +196,43 @@ This suggests that structure can arise as a consequence of global description-le
 
 \section*{Supplementary Material}
 
-The implementation and generated video data are provided separately.
+\subsection*{Computational Implementation: Variational Optimization via Autograd}
+
+The optimization of the global spacetime functional $\mathcal{F}[\Psi]$ is performed using the PyTorch deep learning framework. While typically used for neural network training, the framework is utilized here as a high-dimensional variational solver to find the stationary points of the spectral-entropy manifold.
+
+\textbf{Automatic Differentiation and the Gradient}
+
+The wavefunction $\Psi(x, y, t)$ is represented as a complex-valued tensor of rank 3. We define the search for the minimal wavefunction as a gradient descent process. For each iteration, the framework constructs a dynamic computational graph of the functional:
+\[
+\nabla_{\Psi} \mathcal{F} = \frac{\partial}{\partial \Psi} \left( \lambda_C C[\Psi] + \lambda_H \| H[\Psi] - H_{\text{target}} \|^2 \right)
+\]
+The engine utilizes \textit{Reverse-Mode Autodifferentiation} to compute the gradient of the total loss with respect to every spatial and temporal coordinate of the wavefunction simultaneously.
+
+\textbf{The Optimizer as a Physical Regulator}
+
+We employ the \textbf{Adam} (Adaptive Moment Estimation) optimizer to navigate the high-dimensional loss landscape. Adam maintains a per-parameter learning rate and utilizes first and second moments of the gradients:
+\begin{enumerate}
+    \item \textbf{Momentum:} By tracking the moving average of gradients, the optimizer avoids local minima and "stuttering" in the high-entropy regime.
+    \item \textbf{Adaptive Scaling:} It normalizes the updates based on the variance of the gradients, ensuring that low-power Fourier modes (high-frequency "ghosts") and high-power modes (DC components) are optimized with equal stability.
+\end{enumerate}
+
+\textbf{Algorithmic Flow}
+
+The solver treats the universe as a single block of data. The "Arrow of Time" is not a hard-coded loop but emerges through the following cycle:
+\begin{itemize}
+    \item \textbf{3D Fourier Mapping:} The spatial tensor is mapped to its 3D spectral representation $\Psi(k_x, k_y, k_t)$.
+    \item \textbf{Constraint Evaluation:} The spectral tax is calculated based on the squared distance from the frequency origin.
+    \item \textbf{Born Rule Projection:} The tensor is projected back to the spatial domain to evaluate the Shannon entropy of the probability field.
+    \item \textbf{Manifold Update:} The tensor is updated in the direction of the "Least Description Length," effectively sculpting the spacetime block to satisfy the boundary conditions with minimal spectral expenditure.
+\end{itemize}
+
+\subsection*{Simulation Code}
+
+\begin{itemize}
+    \item \href{simulations/block_universe_variational_solver.py}{\texttt{block\_universe\_variational\_solver.py}: Spacetime Variational Wavefunction Solver}
+\end{itemize}
+   
+\printbibliography
+
 
 \end{document}
