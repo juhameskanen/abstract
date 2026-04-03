@@ -1,0 +1,193 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb, graphicx, geometry}
+\geometry{margin=1in}
+
+\title{Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles}
+\author{Juha Meskanen}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We study a variational model over complex-valued wavefunctions defined on a finite spatial lattice and evolving over discrete time. The model minimizes a global functional consisting of a spectral complexity term and an entropy constraint. Despite operating near maximal entropy, the optimized solutions exhibit persistent, spatially localized structures. This demonstrates that nontrivial structure can arise as a consequence of spectral minimality under entropy constraints, without introducing explicit locality, smoothness, or interaction priors.
+\end{abstract}
+
+\section{Introduction}
+
+The relationship between entropy and structure is typically framed such that high entropy corresponds to disorder and lack of structure. In contrast, we investigate whether structured configurations can emerge in high-entropy regimes when constrained by a global description-length functional.
+
+We define a variational problem over a spacetime wavefunction $\Psi(x,y,t)$, where the objective combines:
+\begin{itemize}
+    \item a spectral complexity measure in Fourier space, and
+    \item a constraint enforcing a prescribed entropy trajectory.
+\end{itemize}
+
+The resulting system is solved numerically using gradient-based optimization. We analyze the emergent configurations and demonstrate the presence of persistent localized structures even near maximal entropy.
+
+\section{Model Definition}
+
+\subsection{Wavefunction Representation}
+
+We consider a complex-valued wavefunction:
+\[
+\Psi : \mathbb{Z}_W \times \mathbb{Z}_H \times \{0, \dots, T-1\} \to \mathbb{C}
+\]
+
+For each time slice $t$, we define its Fourier transform:
+\[
+\Psi_k(t) = \mathcal{F}[\Psi(x,y,t)]
+\]
+
+\subsection{Spectral Complexity}
+
+We define spectral complexity as:
+\[
+C(t) = \sum_k k^2 |\Psi_k(t)|^2
+\]
+
+where $k^2 = k_x^2 + k_y^2$ denotes squared frequency magnitude.
+
+\subsection{Probability and Entropy}
+
+The spatial probability distribution is defined via the Born rule:
+\[
+p(x,y,t) = \frac{|\Psi(x,y,t)|^2}{\sum_{x,y} |\Psi(x,y,t)|^2}
+\]
+
+Shannon entropy is:
+\[
+H(t) = -\sum_{x,y} p(x,y,t)\log p(x,y,t)
+\]
+
+\subsection{Target Entropy Schedule}
+
+We impose a target entropy trajectory:
+\[
+H_{\text{target}}(t) = \alpha \cdot \frac{t}{T-1}
+\]
+
+where $\alpha = \log(W \cdot H)$ is the maximum entropy.
+
+\subsection{Global Functional}
+
+The total functional is:
+\[
+\mathcal{F}[\Psi] = \sum_{t=0}^{T-1} \left[
+\lambda_C \, C(t) + \lambda_H \, (H(t) - H_{\text{target}}(t))^2
+\right]
+\]
+
+where $\lambda_C, \lambda_H > 0$ are weighting parameters.
+
+\section{Numerical Optimization}
+
+We parametrize $\Psi_k(t)$ directly as a learnable tensor in Fourier space and optimize:
+
+\begin{itemize}
+    \item Real and imaginary components as independent variables
+    \item Gradient descent via Adam optimizer
+\end{itemize}
+
+At each iteration:
+\begin{enumerate}
+    \item Construct $\Psi_k(t)$
+    \item Compute inverse FFT to obtain $\Psi(x,y,t)$
+    \item Evaluate entropy and complexity
+    \item Backpropagate total loss
+\end{enumerate}
+
+The optimization is performed globally over all time slices simultaneously.
+
+\section{Results}
+
+The optimized spacetime wavefunction exhibits the following properties:
+
+\subsection{High-Entropy Regime}
+
+For large $t$, entropy approaches its maximum:
+\[
+H(t) \approx \log(W \cdot H)
+\]
+
+The spatial distribution resembles noise, but is not fully random.
+
+\subsection{Localized Structures}
+
+Despite near-maximal entropy, the probability field contains:
+
+\begin{itemize}
+    \item spatially localized peaks
+    \item coherent interference patterns
+\end{itemize}
+
+These structures arise from constructive interference of Fourier modes.
+
+\subsection{Temporal Persistence}
+
+Structures persist across adjacent time slices. This occurs because:
+
+\begin{itemize}
+    \item large spectral changes increase $C(t)$
+    \item maintaining continuity minimizes total functional cost
+\end{itemize}
+
+Thus, the optimizer favors gradual deformation over discontinuous reconfiguration.
+
+\section{Interpretation}
+
+The results demonstrate that:
+
+\begin{quote}
+Minimizing spectral complexity under entropy constraints produces structured configurations even in high-entropy regimes.
+\end{quote}
+
+This effect does not rely on:
+
+\begin{itemize}
+    \item explicit locality constraints
+    \item interaction potentials
+    \item predefined object models
+\end{itemize}
+
+Instead, structure emerges from the interplay between:
+\begin{itemize}
+    \item frequency-weighted complexity
+    \item entropy requirements
+\end{itemize}
+
+\section{Limitations}
+
+The model has several limitations:
+
+\begin{itemize}
+    \item No physical interpretation of $\Psi$ beyond a mathematical object
+    \item No notion of conserved quantities
+    \item Finite discretization effects
+    \item No explicit dynamical laws (purely variational)
+\end{itemize}
+
+\section{Future Work}
+
+Potential extensions include:
+
+\begin{itemize}
+    \item Alternative complexity measures
+    \item Continuous-time formulations
+    \item Higher-dimensional domains
+    \item Definition of observer functionals over $\Psi(x,y,t)$
+\end{itemize}
+
+\section{Conclusion}
+
+We have introduced a variational framework in which wavefunctions evolve under a spectral complexity constraint while matching a prescribed entropy trajectory. Numerical optimization reveals that structured, persistent patterns emerge even near maximal entropy.
+
+This suggests that structure can arise as a consequence of global description-length minimization, independent of explicit physical priors.
+
+\section*{Supplementary Material}
+
+The implementation and generated video data are provided separately.
+
+\end{document}

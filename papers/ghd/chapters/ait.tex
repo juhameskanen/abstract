@@ -1,7 +1,5 @@
 \chapter{Algorithmic Information Theory (AIT)}
 
-\chapter{Algorithmic Information Theory (AIT)}
-
 \section{Introduction}
 
 Traditionally, researchers have viewed the laws of physics primarily through the lens of continuous equations and calculus.
@@ -144,38 +142,13 @@ Martin-Löf randomness provides a mathematically precise notion of randomness th
 
 \section{The Levin--Chaitin Theorem}
 
-A fundamental result in AIT connects Kolmogorov complexity and algorithmic probability. The \emph{Algorithmic Coding Theorem} states that
+A fundamental result in AIT connects Kolmogorov complexity ($K$) and algorithmic probability ($P$). The \emph{Algorithmic Coding Theorem} establishes a deep link between information content and the likelihood of existence:
 
 \[
-K(x) \approx -\log P(x).
+K(x) \approx -\log_2 P(x)
 \]
 
-In other words, objects that are more likely to be produced by a random program have shorter algorithmic descriptions.
-This establishes a deep link between information content and probability.
-
-Let $P(x)$ denote the universal algorithmic probability of a string $x$:
-
-\[
-P(x) = \sum_{p:U(p)=x} 2^{-|p|}.
-\]
-
-The Levin--Chaitin theorem states that the Kolmogorov complexity of a string is closely related to the negative logarithm of this probability:
-
-\[
-K(x) = -\log P(x) + O(1).
-\]
-
-This relationship shows that strings which are more likely to be produced by a random program have shorter descriptions. Conversely, strings that require long descriptions are exponentially unlikely to appear as outputs of random programs.
-
-The theorem therefore links three fundamental notions:
-
-\begin{itemize}
-\item \textbf{Description length}: measured by Kolmogorov complexity.
-\item \textbf{Probability}: measured by the universal distribution.
-\item \textbf{Randomness}: characterized by incompressibility.
-\end{itemize}
-
-Together, these results establish that simplicity, probability, and compressibility are mathematically equivalent concepts within Algorithmic Information Theory.
+This relationship implies that strings which are more likely to be produced by a random program have shorter descriptions. Conversely, complex strings are exponentially unlikely to appear as spontaneous outputs. This establishes that \textbf{simplicity, probability, and compressibility} are mathematically equivalent. In the context of our simulated universe, this suggests that the laws of physics we observe are not arbitrary; they are the most probable "short-cuts" in the space of all possible computations.
 
 
 \section{The Uncomputability of Complexity}
@@ -227,5 +200,6 @@ No-one has demonstrated or seen the laws of physics to \emph{emerge} spontaneous
 
 We have a beautiful, elegant "Source Code" theory (AIT), but we cannot yet compile a universe that looks like our own.
 
-
+The problem is that while AIT says a 'simple' universe is more likely, the search space of all possible simple programs is infinite.
+We are looking for a needle in a haystack of infinite size, and we don't yet know what the 'needle' (the specific program for General Relativity) looks like
 
