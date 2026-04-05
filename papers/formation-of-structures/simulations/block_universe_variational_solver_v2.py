@@ -1,8 +1,6 @@
 """
 Spacetime Entropy-Constrained Wavefunction Solver
-=================================================
-
-A global variational optimization over spacetime, consistent with a block-universe perspective.
+================================================
 
 This module implements a variational solver that constructs a 3D spacetime
 wavefunction ψ(t, x, y) whose induced probability distributions follow a
@@ -10,7 +8,7 @@ prescribed entropy trajectory over time.
 
 Core idea
 ---------
-Optimize a complex-valued field ψ such that:
+We optimize a complex-valued field ψ such that:
 
 1. Smoothness constraint:
    The wavefunction is penalized in Fourier space to suppress high-frequency
@@ -29,6 +27,11 @@ Optimize a complex-valued field ψ such that:
 This produces a global spacetime configuration consistent with a prescribed
 entropy evolution.
 
+Interpretation
+--------------
+This is NOT a forward time simulation. Instead, it is a global variational
+optimization over spacetime, consistent with a block-universe perspective.
+
 Key properties
 --------------
 - Numerically stable (log-domain softmax)
@@ -40,42 +43,9 @@ Outputs
 -------
 - Optimized wavefunction ψ(t, x, y)
 - Entropy diagnostics vs. target
-- Spacetime visualization as video
+- Optional visualization as video
 
-
-Solver
-------
-
-Variational Optimization via Autograd. 
-
-The optimization of the global spacetime functional $\mathcal{F}[\Psi]$ is performed using the PyTorch deep learning framework.
-While typically used for neural network training, the framework is utilized here as a high-dimensional variational solver to find the
-stationary points of the spectral-entropy manifold.
-
-The wavefunction $\Psi(x, y, t)$ is represented as a complex-valued tensor of rank 3. The minimal wavefunction is searched as a gradient descent process.
-For each iteration, the framework constructs a dynamic computational graph of the functional:
-
-$$
-\nabla_{\Psi} \mathcal{F} = \frac{\partial}{\partial \Psi} \left( \lambda_C C[\Psi] + \lambda_H \| H[\Psi] - H_{\text{target}} \|^2 \right)
-$$
-
-The engine utilizes \textit{Reverse-Mode Autodifferentiation} to compute the gradient of the total loss with respect to every spatial and temporal coordinate of the wavefunction simultaneously.
-
-The Adam (Adaptive Moment Estimation) optimizer is applied to navigate the high-dimensional loss landscape. Adam maintains a per-parameter learning
-rate and utilizes first and second moments of the gradients:
-
-- Momentum: By tracking the moving average of gradients, the optimizer avoids local minima and "stuttering" in the high-entropy regime.
-- Adaptive Scaling: It normalizes the updates based on the variance of the gradients, ensuring that low-power Fourier modes (high-frequency "ghosts") and high-power modes
-(DC components) are optimized with equal stability.
-
-The solver treats the universe as a single block of data. The "Arrow of Time" is not a hard-coded loop but emerges through the following cycle:
-- 3D Fourier Mapping: The spatial tensor is mapped to its 3D spectral representation $\Psi(k_x, k_y, k_t)$.
-- Constraint Evaluation: The spectral tax is calculated based on the squared distance from the frequency origin.
-- Born Rule Projection: The tensor is projected back to the spatial domain to evaluate the Shannon entropy of the probability field.
-- Manifold Update: The tensor is updated in the direction of the "Least Description Length," effectively sculpting the spacetime block to satisfy the boundary conditions with minimal spectral expenditure.
-
-
-Author:  Juha Meskanen
+Author: (your name)
 """
 
 from typing import Tuple
@@ -284,14 +254,14 @@ def plot_diagnostics(entropies: np.ndarray, targets: np.ndarray) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--width", type=int, default=128)
-    parser.add_argument("--height", type=int, default=128)
-    parser.add_argument("--time_steps", type=int, default=500)
+    parser.add_argument("--width", type=int, default=64)
+    parser.add_argument("--height", type=int, default=64)
+    parser.add_argument("--time_steps", type=int, default=250)
     parser.add_argument("--iterations", type=int, default=500)
     parser.add_argument("--entropy_start_fraction", type=float, default=0.5)
-    parser.add_argument("--entropy_end_fraction", type=float, default=0.97)
+    parser.add_argument("--entropy_end_fraction", type=float, default=0.95)
     parser.add_argument("--entropy_power", type=float, default=2.0)
-    parser.add_argument("--output", type=str, default="output2.mp4")
+    parser.add_argument("--output", type=str, default="output.mp4")
 
     args = parser.parse_args()
 

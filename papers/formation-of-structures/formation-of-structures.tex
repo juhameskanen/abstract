@@ -12,20 +12,24 @@
 \maketitle
 
 \begin{abstract}
-We study a variational model over complex-valued wavefunctions defined on a finite spatial lattice and evolving over discrete time. The model minimizes a global functional consisting of a spectral complexity term and an entropy constraint. Despite operating near maximal entropy, the optimized solutions exhibit persistent, spatially localized structures. This demonstrates that nontrivial structure can arise as a consequence of spectral minimality under entropy constraints, without introducing explicit locality, smoothness, or interaction priors.
+We extend a minimal information-theoretic model of structure formation from discrete bitstring dynamics to continuous complex-valued wavefunctions defined over spacetime. In the original formulation, increasing entropy in a finite binary sequence led to the emergence of hierarchical structures under simple pattern-detection rules. 
+
+Here, we generalize this idea by defining a variational problem over a spacetime wavefunction $\Psi(x,y,t)$, constrained to follow a prescribed entropy trajectory while minimizing spectral complexity. The resulting optimized configurations exhibit persistent, spatially localized structures even in high-entropy regimes.
+
+This demonstrates that structure can arise not from low entropy alone, but from global constraints on representation complexity. The results suggest that increasing entropy expands the space of accessible configurations, within which structured subregions emerge as stable features under minimal-description principles.
 \end{abstract}
+
 
 \section{Introduction}
 
-The relationship between entropy and structure is typically framed such that high entropy corresponds to disorder and lack of structure. In contrast, we investigate whether structured configurations can emerge in high-entropy regimes when constrained by a global description-length functional.
+In earlier work, we introduced a minimal computational model in which a finite bitstring evolves from a zero-entropy state through random mutations. As entropy increases, simple pattern-detection rules applied to the bitstring reveal the emergence of hierarchical structures. This demonstrated that increasing entropy does not preclude structure, but rather enables the formation of statistically stable patterns within a growing configuration space.
 
-We define a variational problem over a spacetime wavefunction $\Psi(x,y,t)$, where the objective combines:
-\begin{itemize}
-    \item a spectral complexity measure in Fourier space, and
-    \item a constraint enforcing a prescribed entropy trajectory.
-\end{itemize}
+However, the bitstring model is inherently discrete and representation-dependent. A natural question is whether this phenomenon persists in more general settings, particularly in continuous or wave-like representations more closely aligned with physical theories.
 
-The resulting system is solved numerically using gradient-based optimization. We analyze the emergent configurations and demonstrate the presence of persistent localized structures even near maximal entropy.
+In this work, we extend the model to complex-valued wavefunctions defined over a discrete spacetime lattice. Instead of simulating stochastic evolution, we construct spacetime configurations via global variational optimization. The system is constrained to follow a prescribed entropy trajectory while minimizing a spectral complexity functional.
+
+This formulation removes explicit particle definitions and replaces them with a general principle: structures correspond to regions that remain stable under global constraints on representation complexity. We investigate whether such structures arise naturally even in high-entropy regimes.
+
 
 \section{Model Definition}
 
@@ -52,35 +56,40 @@ where $k^2 = k_x^2 + k_y^2$ denotes squared frequency magnitude.
 
 \subsection{Probability and Entropy}
 
-The spatial probability distribution is defined via the Born rule:
+To obtain a stable and controllable entropy profile, we define the spatial probability distribution using a temperature-scaled transformation of the amplitude:
+
 \[
-p(x,y,t) = \frac{|\Psi(x,y,t)|^2}{\sum_{x,y} |\Psi(x,y,t)|^2}
+p(x,y,t) = \frac{\exp\left(\beta(t) \log(|\Psi(x,y,t)|^2 + \epsilon)\right)}{\sum_{x,y} \exp\left(\beta(t) \log(|\Psi(x,y,t)|^2 + \epsilon)\right)}
 \]
 
-Shannon entropy is:
+where $\beta(t) > 0$ is a time-dependent inverse temperature parameter, and $\epsilon$ ensures numerical stability.
+
+The Shannon entropy is then:
 \[
 H(t) = -\sum_{x,y} p(x,y,t)\log p(x,y,t)
 \]
 
+This formulation allows direct control over the entropy of each time slice by modulating $\beta(t)$.
+
+
 \subsection{Target Entropy Schedule}
 
-We impose a target entropy trajectory:
+We impose a smooth entropy trajectory of the form:
 \[
-H_{\text{target}}(t) = \alpha \cdot \frac{t}{T-1}
+H_{\text{target}}(t) = H_{\text{start}} + (H_{\text{end}} - H_{\text{start}})\left(1 - e^{-\kappa \frac{t}{T-1}}\right)
 \]
 
-where $\alpha = \log(W \cdot H)$ is the maximum entropy.
-
-\subsection{Global Functional}
-
-The total functional is:
+where:
 \[
-\mathcal{F}[\Psi] = \sum_{t=0}^{T-1} \left[
-\lambda_C \, C(t) + \lambda_H \, (H(t) - H_{\text{target}}(t))^2
-\right]
+H_{\text{start}} = \alpha_{\text{start}} \log(W \cdot H), \quad
+H_{\text{end}} = \alpha_{\text{end}} \log(W \cdot H)
 \]
 
-where $\lambda_C, \lambda_H > 0$ are weighting parameters.
+and $\kappa > 0$ controls the rate of approach to the asymptotic entropy.
+
+This formulation allows the system to evolve from intermediate entropy states toward near-maximal entropy.
+
+
 
 \section{Numerical Optimization}
 
@@ -100,6 +109,8 @@ At each iteration:
 \end{enumerate}
 
 The optimization is performed globally over all time slices simultaneously.
+
+
 
 \section{Results}
 
@@ -143,90 +154,62 @@ Thus, the optimizer favors gradual deformation over discontinuous reconfiguratio
 \caption{Snapshot of the optimized spacetime wavefunction $|\Psi(x,y,t)|^2$ at a time slice. The field exhibits localized high-probability regions (bright spots) embedded in a high-entropy background. These structures emerge from minimizing the spectral complexity functional under an entropy constraint.}
 \end{figure}
 
+\subsection{High-Entropy Regime}
+
+For large $t$, entropy approaches its prescribed upper bound:
+\[
+H(t) \approx H_{\text{end}}
+\]
+
+Despite this, the spatial distribution is not fully uniform. Instead, it exhibits structured deviations from randomness.
+
+\subsection{Localized Structures}
+
+The probability field contains spatially localized peaks and coherent interference patterns. These structures are not imposed explicitly, but arise from the constraint that the wavefunction must simultaneously:
+
+\begin{itemize}
+    \item maintain high entropy, and
+    \item minimize spectral complexity.
+\end{itemize}
+
+This tension leads to configurations in which localized regions concentrate probability mass while the global distribution remains broadly dispersed.
+
+\subsection{Temporal Persistence}
+
+Structures persist across adjacent time slices due to the global nature of the optimization. Large temporal variations would increase spectral complexity, so the optimizer favors configurations that evolve smoothly over time.
+
+This produces coherent trajectories of localized structures, resembling persistent objects in spacetime.
+
+
 
 \section{Interpretation}
 
-The results demonstrate that:
+The results demonstrate that high entropy does not eliminate structure. Instead, increasing entropy expands the space of accessible configurations, within which structured subregions can emerge as stable solutions under global constraints.
 
-\begin{quote}
-Minimizing spectral complexity under entropy constraints produces structured configurations even in high-entropy regimes.
-\end{quote}
+In the earlier bitstring model, structure appeared as recurring patterns within an expanding combinatorial space. In the present formulation, structure appears as localized concentrations of probability within a high-entropy field.
 
-This effect does not rely on:
+In both cases, the underlying mechanism is the same: entropy increase enlarges the configuration space, while constraints on representation (such as spectral minimality) select structured configurations within that space.
 
-\begin{itemize}
-    \item explicit locality constraints
-    \item interaction potentials
-    \item predefined object models
-\end{itemize}
+This suggests that structure is not in opposition to entropy, but rather a consequence of constrained optimization within high-entropy ensembles.locality constraints, interaction potentials nor predefined object models.
 
-Instead, structure emerges from the interplay between:
-\begin{itemize}
-    \item frequency-weighted complexity
-    \item entropy requirements
-\end{itemize}
-
-\section{Limitations}
-
-The model has several limitations:
-
-\begin{itemize}
-    \item No physical interpretation of $\Psi$ beyond a mathematical object
-    \item No notion of conserved quantities
-    \item Finite discretization effects
-    \item No explicit dynamical laws (purely variational)
-\end{itemize}
 
 \section{Future Work}
 
-Potential extensions include:
+Potential extensions include definition of observer functionals over $\Psi(x,y,t)$
 
-\begin{itemize}
-    \item Alternative complexity measures
-    \item Continuous-time formulations
-    \item Higher-dimensional domains
-    \item Definition of observer functionals over $\Psi(x,y,t)$
-\end{itemize}
+
 
 \section{Conclusion}
 
-We have introduced a variational framework in which wavefunctions evolve under a spectral complexity constraint while matching a prescribed entropy trajectory. Numerical optimization reveals that structured, persistent patterns emerge even near maximal entropy.
+We have extended a discrete, entropy-driven model of structure formation to a continuous wavefunction-based framework. By imposing a prescribed entropy trajectory and minimizing spectral complexity, we construct spacetime configurations that exhibit persistent, localized structures even near maximal entropy.
 
-This suggests that structure can arise as a consequence of global description-length minimization, independent of explicit physical priors.
+These results support the view that structure emerges not from low entropy alone, but from the interplay between entropy and global constraints on representation. Increasing entropy expands the space of possible configurations, while minimal-complexity principles select structured solutions within that space.
 
-\section*{Supplementary Material}
+This provides a unified perspective in which spacetime structure and matter-like features arise naturally from information-theoretic principles, without requiring explicit physical interaction laws.
 
-\subsection*{Computational Implementation: Variational Optimization via Autograd}
 
-The optimization of the global spacetime functional $\mathcal{F}[\Psi]$ is performed using the PyTorch deep learning framework. While typically used for neural network training, the framework is utilized here as a high-dimensional variational solver to find the stationary points of the spectral-entropy manifold.
 
-\textbf{Automatic Differentiation and the Gradient}
-
-The wavefunction $\Psi(x, y, t)$ is represented as a complex-valued tensor of rank 3. We define the search for the minimal wavefunction as a gradient descent process. For each iteration, the framework constructs a dynamic computational graph of the functional:
-\[
-\nabla_{\Psi} \mathcal{F} = \frac{\partial}{\partial \Psi} \left( \lambda_C C[\Psi] + \lambda_H \| H[\Psi] - H_{\text{target}} \|^2 \right)
-\]
-The engine utilizes \textit{Reverse-Mode Autodifferentiation} to compute the gradient of the total loss with respect to every spatial and temporal coordinate of the wavefunction simultaneously.
-
-\textbf{The Optimizer as a Physical Regulator}
-
-We employ the \textbf{Adam} (Adaptive Moment Estimation) optimizer to navigate the high-dimensional loss landscape. Adam maintains a per-parameter learning rate and utilizes first and second moments of the gradients:
-\begin{enumerate}
-    \item \textbf{Momentum:} By tracking the moving average of gradients, the optimizer avoids local minima and "stuttering" in the high-entropy regime.
-    \item \textbf{Adaptive Scaling:} It normalizes the updates based on the variance of the gradients, ensuring that low-power Fourier modes (high-frequency "ghosts") and high-power modes (DC components) are optimized with equal stability.
-\end{enumerate}
-
-\textbf{Algorithmic Flow}
-
-The solver treats the universe as a single block of data. The "Arrow of Time" is not a hard-coded loop but emerges through the following cycle:
-\begin{itemize}
-    \item \textbf{3D Fourier Mapping:} The spatial tensor is mapped to its 3D spectral representation $\Psi(k_x, k_y, k_t)$.
-    \item \textbf{Constraint Evaluation:} The spectral tax is calculated based on the squared distance from the frequency origin.
-    \item \textbf{Born Rule Projection:} The tensor is projected back to the spatial domain to evaluate the Shannon entropy of the probability field.
-    \item \textbf{Manifold Update:} The tensor is updated in the direction of the "Least Description Length," effectively sculpting the spacetime block to satisfy the boundary conditions with minimal spectral expenditure.
-\end{itemize}
-
-\subsection*{Simulation Code}
+\section{Simulation Code}
 
 \begin{itemize}
     \item \href{simulations/block_universe_variational_solver.py}{\texttt{block\_universe\_variational\_solver.py}: Spacetime Variational Wavefunction Solver}
