@@ -15,7 +15,10 @@ Core Logic:
 3. The "Observer Filter" identifies specific bit-patterns, creating a
    statistical pressure for structures to crystallize where patterns emerge.
 
-Author: Juha Meskanen & Gemini
+   
+
+   
+Author: Juha Meskanen
 """
 
 import argparse
@@ -64,7 +67,9 @@ def solve_spacetime(
     iterations: int,
     h_start_frac: float,
     h_end_frac: float,
-    pattern: int
+    pattern: int,
+    lmbda: float,
+    kappa: float
 ) -> torch.Tensor:
     """
     Variational solver that sculpts the spacetime block.
@@ -75,6 +80,12 @@ def solve_spacetime(
         iterations: Optimization steps.
         h_start_frac, h_end_frac: Relative entropy targets (0.0 to 1.0).
         pattern: The observer's target bit-pattern.
+        lmbda: Coupling strength of the observer filter.
+        kappa: Simplicity weight (vacuum viscosity).
+
+    Returns:
+        A tensor representing the optimized wavefunction Ψ(t, x, y). 
+
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     k_sq = build_3d_frequency_grid(time_steps, height, width, device)
@@ -116,10 +127,10 @@ def solve_spacetime(
             # Observer pressure: force density toward the pattern-match mask
             observer_loss = torch.mean((prob - (observer_mask * progress))**2)
             
-            total_constraint_loss += (current_h - target_h)**2 + 15.0 * observer_loss
+            total_constraint_loss += (current_h - target_h)**2 + lmbda * observer_loss
 
         # Total Loss: Simplicity vs. Constraints
-        loss = 0.0005 * complexity_loss + total_constraint_loss
+        loss = kappa * complexity_loss + total_constraint_loss
         loss.backward()
         optimizer.step()
 
@@ -164,13 +175,16 @@ def save_visual_output(
 
 def main():
     parser = argparse.ArgumentParser(description="Variational Emergent Spacetime")
+    parser.add_argument("--lmbda", type=float, default=3.0, 
+                    help="Coupling strength of the observer filter (λ)")
+    parser.add_argument("--kappa", type=float, default=0.0005, help="Simplicity Weight (Vacuum Viscosity)")
     parser.add_argument("--width", type=int, default=128)
     parser.add_argument("--height", type=int, default=128)
-    parser.add_argument("--time_steps", type=int, default=500)
-    parser.add_argument("--iterations", type=int, default=120)
+    parser.add_argument("--time_steps", type=int, default=350)
+    parser.add_argument("--iterations", type=int, default=300)
     parser.add_argument("--pattern", type=int, default=0b0010, help="Observer bit-pattern filter")
     parser.add_argument("--h_start", type=float, default=0.1, help="Starting relative entropy (0-1)")
-    parser.add_argument("--h_end", type=float, default=0.85, help="Ending relative entropy (0-1)")
+    parser.add_argument("--h_end", type=float, default=0.97, help="Ending relative entropy (0-1)")
     parser.add_argument("--colormap", type=str, default="magma", choices=["jet", "viridis", "magma", "hot"])
     parser.add_argument("--output", type=str, default="spacetime_evolution.mp4")
 
@@ -179,7 +193,7 @@ def main():
     # 1. Optimize the spacetime block
     wf = solve_spacetime(
         args.width, args.height, args.time_steps, 
-        args.iterations, args.h_start, args.h_end, args.pattern
+        args.iterations, args.h_start, args.h_end, args.pattern, args.lmbda, args.kappa
     )
 
     # 2. Render to video
