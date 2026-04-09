@@ -37,7 +37,8 @@ pdf-files/
 *.html
 *.pdf
 *-SAVE-ERROR
-
+*.glo
+*.ist
 # OS files
 *.DS_Store
 Thumbs.db
