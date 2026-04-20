@@ -294,6 +294,29 @@
       \field{title}{Expanding Entropy and the Birth of Spacetime}
       \field{year}{2011}
     \endentry
+    \entry{meskanen2008}{article}{}
+      \name{author}{1}{}{%
+        {{hash=192553fc61cfa4b817982519133b45fc}{%
+           family={Meskanen},
+           familyi={M\bibinitperiod},
+           given={Juha},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{fullhash}{192553fc61cfa4b817982519133b45fc}
+      \strng{bibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorbibnamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authornamehash}{192553fc61cfa4b817982519133b45fc}
+      \strng{authorfullhash}{192553fc61cfa4b817982519133b45fc}
+      \field{extraname}{3}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Unpublished Manuscript}
+      \field{title}{Physics as an Emergent Property of the Observer: A Derivation from Four Assumptions}
+      \field{year}{2008}
+    \endentry
     \entry{prigogine1977self}{book}{}
       \name{author}{2}{}{%
         {{hash=fd3011b6e2d4372e08da8054938e76d3}{%
