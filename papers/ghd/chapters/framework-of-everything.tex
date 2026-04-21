@@ -42,6 +42,105 @@ Representation length $K_{\mathrm{rep}}$ is then the induced measure rank under 
 
 
 
+\section{Structured Representation Complexity}
+
+We refine the representation length of a description $d$ by introducing an explicit decomposition into structural components.
+
+Each description $d \in \mathcal{D}(c)$ is assumed to admit a factorisation:
+
+\[
+d \equiv (d_{\text{spec}}, d_{\text{rel}}, d_{\text{sym}})
+\]
+
+corresponding to:
+\begin{itemize}
+\item spectral content,
+\item internal constraint structure,
+\item symmetry and indistinguishability structure.
+\end{itemize}
+
+The total representation complexity is defined as:
+
+\[
+K(d) = K_{\text{spec}}(d_{\text{spec}}) + K_{\text{rel}}(d_{\text{rel}}) + K_{\text{sym}}(d_{\text{sym}})
+\]
+
+
+\subsection*{Spectral Complexity}
+
+The spectral component of the complexity is given by:
+
+\[
+K_{\text{spec}} =
+\sum_{i}
+\left[
+\log_2\!\left(\frac{A_i}{\Delta A_i}\right)
++
+\log_2\!\left(\frac{2\pi}{\Delta \phi_i}\right)
++
+\log_2\!\left(\frac{\omega_i}{\Delta \omega_i}\right)
+\right]
+\]
+
+where:
+\begin{itemize}
+\item $i$ indexes spectral modes,
+\item $A_i$ is the amplitude of mode $i$,
+\item $\phi_i \in [0, 2\pi)$ is the phase of mode $i$,
+\item $\omega_i$ is the frequency of mode $i$,
+\item $\Delta A_i$ is the required precision for distinguishing amplitudes,
+\item $\Delta \phi_i$ is the required phase resolution,
+\item $\Delta \omega_i$ is the frequency resolution,
+\item $\log_2(\cdot)$ measures the number of bits required to specify the parameter at the given precision.
+\end{itemize}
+
+The cost of specifying a parameter is determined not by its absolute range, but by the precision required to distinguish it within the representation.
+
+The resolution parameters $(\Delta A_i, \Delta \phi_i, \Delta \omega_i)$ are not fixed a priori, but are determined by the minimal precision required to distinguish configurations within the representation.
+
+This term captures the distributed wave-like structure of the description.
+
+\subsection*{Relational Complexity}
+
+\[
+K_{\text{rel}} = \text{Cost of internal constraint structure among spectral components}
+\]
+
+where:
+\begin{itemize}
+\item this term measures how strongly spectral components are constrained to form coherent structures,
+\item it reflects compatibility, persistence, and stability of composite patterns,
+\item it does not introduce additional primitives, but captures structure implicit in the description itself.
+\end{itemize}
+
+This component is responsible for:
+\begin{itemize}
+\item effective locality,
+\item structural stability,
+\item inertia-like resistance to reconfiguration.
+\end{itemize}
+
+\subsection*{Symmetry and Indistinguishability Complexity}
+
+\[
+K_{\text{sym}} = \text{Cost of encoding indistinguishable or equivalent excitations}
+\]
+
+where:
+\begin{itemize}
+\item this term measures the cost of representing multiple occurrences of structurally equivalent spectral components,
+\item it captures invariance under permutation of equivalent components,
+\item it encodes how occupancy of identical or nearly identical spectral states is represented.
+\end{itemize}
+
+Different scaling behaviors of this term give rise to distinct statistical regimes:
+\begin{itemize}
+\item configurations allowing unrestricted occupancy correspond to bosonic behavior,
+\item configurations in which multiple occupancy is strongly suppressed correspond to fermionic behavior.
+\end{itemize}
+
+This term therefore determines the statistical structure and taxonomy of emergent excitations.
+
 
 \section{Induced Measure}
 
