@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib} 
+
+\title{String Theory as Spectral Compression}
+\author{Juha Meskanen}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The objective is to study whether adding antisymmetric structure actually reduce description length under complexity measure.
+\end{abstract}
+
+
+\tableofcontents
+\bigskip
+
+\section{Hypothesis}
+
+Compression Advantage of Antisymmetry.
+
+For ensembles that support persistent localized structures, encodings with antisymmetric constraints achieve lower total description length than purely symmetric (bosonic) encodings.
+
+
+\section{Define the Competing Models}
+
+Define two strictly comparable representations
+
+\subsection*{Bosonic}
+
+\begin{itemize}
+\item State = multiset of modes
+\item No occupancy restriction
+\item Fully symmetric under exchange
+\end{itemize}
+
+Formally:
+
+\begin{itemize}
+\item coefficients \( c_k \in \mathbb{C} \)
+\item no constraint on reuse of modes
+\end{itemize}
+
+\subsection{Fermionic / Antisymmetric}
+
+\begin{itemize}
+\item State = antisymmetric combination of modes
+\item Enforced uniqueness / exclusion
+\item Order-sensitive with sign flips
+\end{itemize}
+
+Implementation-wise, we don’t need full QFT. We can approximate via bitstrings with no duplicate occupancy, or determinant-like encoding (Slater-style).
+
+This corresponds to the structure behind the Pauli exclusion principle, but we’re testing it purely as an information constraint.
+
+
+\section{Define Description Length Operationally}
+
+Define a computable proxy for:
+\[
+L(\text{state})
+\]
+
+
+\section{Experimental Design (Minimal Viable Spike)}
+
+TODO
+
+\section{Code}
+
+TODO
+
+\printbibliography
+
+\end{document}

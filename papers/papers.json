@@ -54,7 +54,11 @@
         {
           "title": "Paper-4: Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles",
           "slug": "formation-of-structures"
-	}
+	},
+        {
+          "title": "String Theory as Compression",
+          "slug": "string-theory"
+        }
       ]
     },
     {
@@ -128,7 +132,7 @@
       "title": "The Books",
       "items": [
         {
-          "title": "Good Heavens, Dogs? Hell No, Gogs!",
+          "title": "Good Heavens, Gogs? Hell No, Dogs!",
           "slug": "ghd"
         }
       ]
