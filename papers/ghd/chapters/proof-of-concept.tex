@@ -2,187 +2,66 @@
 
 \section{From Formal Theory to Physical Demonstration}
 
-The preceding chapters derive the theory at the level of axioms, measures, and limiting principles.
-At this stage, the theory must be tested operationally: we must demonstrate that its defining assumptions are sufficient to produce structures resembling observed physics.
+This is the moment of truth.
 
-To this end, we construct a proof-of-concept simulation.
-The purpose of this simulation is sharply defined:
-\begin{quote}
-Given only an observer-conditioned informational measure and a compression principle, do effective quantum behavior, inertia, and gravitational geometry emerge without being explicitly imposed?
-\end{quote}
-No forces, equations of motion, or spacetime structures are hard-coded.
+After decades of developing the informational framework, we finally ask the only question that matters: Can anything that looks like physics come out of it — using nothing but the compression measure and observer-conditioned probability?
 
-This is the ultimate test of the theory. We are effectively building a ``Non-Physical Engine''---a system that discovers physics rather than obeying it.
+The answer is... partially. What you are about to see is a real, working simulation. It succeeds in surprising ways and fails in instructive ones.
 
-\section{The Definition of the Observer}
-
-The theory is fundamentally observer-centric; we assume the existence of a configuration $c$ such that $\mu_O(c) > 0$.
-Modeling a biological observer is computationally prohibitive.
-We therefore utilize a simplified proxy: let the observer be a \textbf{Gaussian wavepacket} with memory---a localized, two-dimensional geometric disk-shaped object. 
-
-At the implementation level, this requires specifying:
-\begin{itemize}
-    \item \textbf{Informational Capacity:} A finite number of bits $n$.
-    \item \textbf{Observer Wavefunction ($\psi_O$):} A minimal observer filter defining what constitutes observer continuity across configurations.
-\end{itemize}
-
-The simulation explores the history space $\Gamma_O$ containing such an observer.
-For each compatible configuration, all admissible observer walks (orderings of informational states matching the observer filter) are evaluated by the fundamental measure:
-\begin{equation}
-\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right)
-\end{equation}
-where $\mathcal{C}_O[\gamma]$ is the joint spectral and geometric description length.
-The configuration sequence admitting the \textbf{Minimum Description Length (MDL)} dominates the measure.
-
-
-\section{Spectral Complexity and the Wavefunction Class}
-
-To remain fully faithful to the informational ontology, we eschew standard lossy compression libraries (such as DCT-based JPEG or MPEG). While these algorithms are highly optimized for human perception, they utilize heuristic quantization tables and block-based encodings that do not correspond to the universal informational substrate. 
-
-Instead, we implement a dedicated \textbf{Wavefunction Class} where the complexity $\mathcal{C}_Q(\psi)$ is computed directly from the spectral decomposition. In our simulation, the complexity of a state is defined as the total bit-count required to specify its active modes:
-
-\begin{equation}
-\mathcal{C}_Q(\psi) = \sum_{k \in \mathcal{K}} \left[ \log_2(\omega_k) + \text{bits}(\phi_k) + \text{bits}(A_k) \right]
-\end{equation}
-
-where $\omega_k$ is the frequency, $\phi_k$ the phase, and $A_k$ the amplitude of the $k$-th mode. This formulation ensures that high-frequency modes (high $\omega_k$) inherently carry a higher informational cost, providing the mathematical basis for both \textbf{inertia} and the \textbf{low-pass filtering} of singularities.
-
-\subsection*{Spectral Complexity Measure}
-
-It would be tempting to use an existing standard MPEG/JPG Discrete Cosine Transforms (DCT) implementation to measure the spectral complexity.
-However, DCT present two significant issues for a foundational physics simulation:
-
-\begin{enumerate}
-\item \textbf{Discontinuity:} The DCT is defined over discrete blocks. Transitioning between blocks introduces high-frequency "edge artifacts". This would create artificial "shaking" in the observer's perceived geometry.
-    \item \textbf{Non-Analytic Complexity:} In standard compression, complexity is often measured by the final size of a Huffman-encoded bitstream. This is a discontinuous function; a tiny change in a pixel can cause a "spike" in the compressed size. 
-\end{enumerate}
-
-So we implement real complex-valued wavefunction class with proper spectral complexity method, to ensure that the cost function is a smooth, differentiable functional based
-on the real informational cost required to encode phases/frequencies in the wavefunction.
-
-This allows the Metropolis-Hastings sampler to navigate the configuration space effectively, as the "gradient of simplicity" points clearly toward smooth, law-like trajectories rather than being lost in the algorithmic noise of a standard compression codec.
-
-
-\section*{Basis Optimization and the Minimum Basis Principle}
-
-A fundamental challenge arises from the non-uniqueness of spectral representations: any complex-valued wavefunction can be decomposed into an infinite variety of basis sets.
-In standard quantum mechanics, the choice of basis (e.g., position vs. momentum) is arbitrary. However, in an informational ontology, the choice of basis is \textbf{ontologically decisive}.
-
-To remain faithful to the MDL principle, the simulation must not assume a fixed basis. Instead, it must satisfy the \textbf{Minimum Basis Principle}:
+We built a first proof-of-concept simulation with a sharply defined goal:
 
 \begin{quote}
-The perceived reality is defined by the specific spectral basis that minimizes the joint description length of the observer and their environment.
+Given only an observer-conditioned informational measure and a compression principle, does anything resembling quantum behavior, inertia, or gravitational attraction emerge — without being explicitly programmed?
 \end{quote}
 
+No forces, equations of motion, or spacetime structures are hard-coded. We are building a “Non-Physical Engine” — a system that attempts to discover physics rather than obey it.
 
-\subsection*{The Basis Search as Compression}
+\section{The Observer Proxy}
 
-If Alice can be described as a sum of 10 modes in Basis A, but requires $10^6$ modes in Basis B, the measure $\mathbb{P}(\gamma \mid O)$ exponentially favors Basis A.
-This explains why we perceive a world of discrete "particles" and "objects" rather than a smeared-out soup of frequencies: \textbf{Objectivity is a compression artifact.}
-We perceive "things" because "things" are the most efficient basis for describing the correlations in the bitstring.
+The theory is fundamentally observer-centric, but modeling a full biological observer is computationally impossible. So we use a simple proxy: a localized Gaussian wavepacket with memory — basically a small, disk-shaped “blob”.
 
+The simulation explores possible “observer walks” (sequences of configurations picked up by this observer filter) and weights them according to the fundamental measure. Paths with the minimum joint description length dominate.
 
-\subsection*{Implementation in the Simulation}
+\section{Important Clarification}
 
-In the \texttt{qbitwave.py} class, the \texttt{complexity()} method does not simply sum a fixed set of Fourier coefficients.
-Instead, it searches for the transform that yields the highest sparsity (minimal active modes). 
+It should be noted that we are not deriving quantum mechanics or general relativity from the informational measure.
+Both are taken as observational facts: the microscopic world behaves like waves, and gravity manifests geometrically.
+We simply use wavefunction descriptions and geometric descriptions as practical tools to calculate informational cost — the two most efficient languages reality has shown us.
 
-This is computationally expensive but necessary to demonstrate the emergence of physical constants.
-The "Best Basis" typically aligns with the geometric symmetries of the observer, effectively deriving \textbf{Noether's Theorem} from informational efficiency:
-symmetries in the bits lead to sparse bases, which lead to conserved quantities in the observer's experience.
+The simulation then asks one question: which observer histories minimize the joint spectral + geometric description length?
+Whatever behavior emerges does so because it is the cheapest way to exist and be describable.
 
+\section{What the Simulation Actually Does}
 
-\section{The Combinatorial Barrier and Heuristics}
+Instead of relying on standard image compression algorithms, we implemented a true complex-valued wavefunction class that directly computes spectral complexity from frequencies, phases, and amplitudes.
+On the geometric side, we use a heavily simplified, linearized approximation of curvature to measure geometric description cost.
 
-A system with $n$ bits admits $2^n$ informational states, and the number of possible observer walks is $(2^n)!$.
-To navigate this super-exponential growth, we apply a ``Search Heuristic'' to the Solomonoff Prior.
-We are not ``coding'' physics; we are pruning configurations that have zero measure. 
-
-The optimizations follow directly from the theory:
-\begin{itemize}
-    \item \textbf{Entropy Gradient:} Observer walks with global entropy decrease are excluded, as they represent informationally expensive ``reversals'' that are exponentially suppressed.
-    \item \textbf{Local Smoothness:} Sampling is restricted to geometrically coherent configurations.
-      This corresponds to the \textbf{Large-Deviation Principle}, where we concentrate our search on the peak of the probability distribution.
-\end{itemize}
-
-\section{Linearized General Relativity}
-
-To implement a practical simulation of geometry, we linearize the MDL-based GR functional around a flat Minkowski background:
-\begin{equation}
-g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \quad |h_{\mu\nu}| \ll 1
-\end{equation}
-where $h_{\mu\nu}$ represents small perturbations encoding deviations from flat spacetime. 
-
-\subsection*{Linearized Geometric Cost}
-We implement the variation of the $R^2$ functional.
-Expanding the curvature proxy $R$ linearly, the geometric cost gradient $C_G$ simplifies to a form driven by the Laplacian of the field:
-\begin{equation}
-\frac{\delta C_G}{\delta h_{\mu\nu}} \approx \nabla^2 h_{\mu\nu}
-\end{equation}
-The simulation reaches equilibrium when the geometric ``stiffness'' balances the informational density of the observer.
-
-\subsection*{Linearized Worldline / Matter Term}
-The matter encoding cost for point particles reduces to the \textbf{worldline cost functional} in the weak-field:
-\begin{equation}
-C_Q[\{x_a\} \mid h] \approx \beta \sum_a \int \left( \ddot{x}_a^\mu + \Gamma^\mu_{\nu\rho} \dot{x}_a^\nu \dot{x}_a^\rho \right)^2 dt
-\end{equation}
-where the Christoffel symbols are approximated linearly:
-\begin{equation}
-\Gamma^\mu_{\nu\rho}[h] \approx \frac{1}{2} \eta^{\mu\sigma} (\partial_\nu h_{\sigma\rho} + \partial_\rho h_{\sigma\nu} - \partial_\sigma h_{\nu\rho})
-\end{equation}
-This ensures that the ``cheapest'' paths in the simulation are approximate geodesics, justifying the discrete trajectory updates in the code.
-
-\section{Simplified Particle Spectrum}
-
-In terms of the Standard Model, the best candidate for our simulated ``pixel'' is a \textbf{Sterile Neutrino}.
-It is the informationally cheapest massive particle, possessing enough mass to demonstrate inertia without triggering a computational crash from massive geometric warping ($G_{\mu\nu}$).
-It is charge-neutral, allowing us to avoid the overhead of $U(1)$ gauge symmetry.
-We enforce \textbf{Pauli Exclusion} (one particle per coordinate) to generate the geometric boundaries required for a stable observer functional $\mu_O$.
-
-\section{Simulation Architecture}
-
-The simulation engine (\texttt{simulation\_engine.py}) proceeds as follows:
-\begin{enumerate}
-    \item Initialize the observer state as a localized wavepacket ($\psi_O$).
-    \item Sample admissible observer walks using a \textbf{Metropolis-Hastings} path-integral approach, weighting trajectories by their informational action.
-    \item Compute spectral ($C_Q$) and geometric ($C_G$) compressions.
-    \item Identify the dominant structure: the path where $\mathcal{C}_O[\gamma]$ is minimized.
-\end{enumerate}
+The simulation uses a Metropolis-Hastings sampler to explore the enormous space of possible observer walks, guided by the principle of minimum total description length.
 
 \section{Emergent Phenomena}
 
-Despite the absence of hard-coded dynamics, the simulation exhibits:
-\begin{itemize}
-    \item \textbf{Inertia:} Localized structures persist in their state of motion because straight-line paths have the lowest spectral description length.
-    \item \textbf{Quantum Interference:} Wave-like behaviors emerge as the most efficient way to resolve multiple possible configuration overlaps.
-    \item \textbf{Gravity:} An effective attraction emerges from geometric compression gradients; it is informationally ``cheaper'' for particles to cluster than to remain scattered.
-\end{itemize}
+Despite the absence of any programmed forces or laws, the simulation shows several encouraging behaviors:
 
+\begin{itemize}
+\item {textbf(Inertia:} Localized blobs tend to keep moving in roughly straight lines because smooth, predictable paths have lower spectral description length.
+\item{Quantum Interference:} Wave-like interference patterns appear naturally as compression artifacts of complex-valued wavefunction.
+\item{Weak Attraction:} The blobs show a statistical tendency to move toward one another. Configurations in which they are closer together often turn out to have lower joint description length than when they are far apart.
+\end{itemize}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/emergent_inertia_gravity.png}
-\caption{Simulation demonstrating emergent inertia and gravity}
+\caption{Three Gaussian observers showing emergent inertia and weak mutual attraction}
 \end{figure}
 
+These results are genuinely exciting. After twenty years of work, watching law-like behavior arise purely from informational compression feels like a real milestone.
 
-The simulation demonstrates that the theory is not merely interpretive, but generative. 
+\section{The Limitation}
 
-\section{Code Structure}
-\begin{itemize}
-  \item \texttt{qbitwave.py} - Wavefunction with complexity measure.
-  \item \texttt{gbitwave.py} - Geometry with complexity measure
-  \item \texttt{simulation\_engine.py} - Physics-agnostic base engine
-  \item \texttt{iame.py} - The ``Information As Matter/Energy'' implementation.
-\end{itemize}
+However, there is a major catch.
 
+The three Gaussian blobs (our proxy observers, or “Alices”) eventually lose their individual identities and fuse into a single undifferentiated entity. There are no stable collisions or rebounds. The distinct informational structures simply blend together and become irretrievably mixed.
+For any real world Alice this would have catastropic consequences.
 
-\section{Conclusions}
-
-The emergent law-like dynamics based on pure spectral compression is huge win and definitely causes celebration.
-
-Given $n$ bits, those bits can be arranged in $2^n$ ways, each corresponding to Evereretian style
-worlds without branching, but forming Wheeler-DeWitt like static timeless universe that just is.
-Observer's emerge as intelligent conscious 'walks' through the configurations. Those with minimal
-spectral description dominate the measure.
+In short: we see bosonic-like wave behavior and some effective attraction, but we see no sign of fermionic statistics or anything resembling the Pauli exclusion principle. Without a natural mechanism that keeps localized structures distinct, complex material reality remains out of reach.
 
