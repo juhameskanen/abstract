@@ -8,7 +8,7 @@ Its predictions have been confirmed to astonishing accuracy across a vast range 
 At its core, quantum mechanics does not fundamentally describe particles, but rather the evolution of a mathematical object called the \emph{wavefunction}. What we perceive as particles emerge as localized outcomes of interactions and measurements.
 
 There is a fundamental duality: phenomena that appear particle-like in one context reveal wave-like behavior in another.
-This is not a contradiction, but a reflection of a deeper underlying structure.
+
 
 \section{Particles}
 
@@ -27,11 +27,7 @@ Despite their diversity, elementary particles are characterized by only a few pr
 
 Interestingly, not all of these properties are ``quantized'' in the same sense.
 
-Spin and electric charge take on discrete values. For example, all observed charges are integer multiples of a basic unit, and spin appears only in integer or half-integer multiples of $\hbar$. This discreteness is deeply tied to symmetry principles.
-
-Mass, however, is different. While each elementary particle has a well-defined mass, there is no known fundamental unit from which all masses are built. The values of particle masses arise from their interaction with the Higgs field, and their origin remains one of the open questions in fundamental physics.
-
-This highlights an important point: quantization is not a single universal mechanism, but can arise in different ways from the underlying structure of the theory.
+Spin and electric charge take on discrete values. For example, all observed charges are integer multiples of a basic unit, and spin appears only in integer or half-integer multiples of $\hbar$. This discreteness is deeply tied to symmetry principles. Mass, however, is different. While each elementary particle has a well-defined mass, there is no known fundamental unit from which all masses are built. The values of particle masses arise from their interaction with the Higgs field, and their origin remains one of the open questions in fundamental physics. So quantization is not a single universal mechanism, but can arise in different ways from the underlying structure of the theory.
 
 The spin of Fermions have an interesting property. It describes how a particle’s state transforms under rotations. A striking consequence is that fermions
 (spin $1/2$) require a full $720^\circ$ rotation to return to their original quantum state, while bosons (integer spin) return after $360^\circ$.
@@ -72,6 +68,8 @@ We do not observe the wavefunction directly. Instead, we observe specific result
 P(x,t) = |\psi(x,t)|^2.
 \]
 
+The terms in the wavefunction are complex-valued, and complex numbers cannot be interpreted as probabilities in any meaningful way. The Born Rule acts as a translator that turns them into probabilities by taking the absolute square \( |\psi|^2 \). The result is a positive, real number that specifies the probability of finding the particle at a specific point in space and time.
+
 The double-slit experiment illustrates this. Even when particles are sent one at a time, an interference pattern emerges. The wavefunction propagates through both slits, while detection produces localized impacts.
 
 This leads to a dual structure:
@@ -99,11 +97,9 @@ P = |\alpha + \beta|^2.
 
 This phase-sensitive structure enables interference.
 
-Instead of listing all classical alternatives explicitly, the wavefunction encodes them in a compact, structured form. In this sense, it acts as a highly efficient representation of potential outcomes.
 
-\subsection*{Identity of Quantum Particles}
 
-Quantum particles lack classical individuality. 
+\subsection*{Pauli Exclusion Principle}
 
 In Hilbert space, exchanging two identical particles corresponds to a transformation of the state:
 
@@ -126,14 +122,15 @@ This is the Pauli exclusion principle: no two identical fermions can occupy the 
 
 For bosons, symmetric states allow multiple occupation, enabling phenomena such as coherent states and Bose–Einstein condensation.
 
+
 \subsection*{Missing Identity}
 
 Particles do not possess classical individuality. 
 
 Consider a parabolic mirror. A photon emitted from the focal point is later detected on a screen after reflecting from the mirror. Classically, one would imagine the photon taking a specific path: leaving the source, reflecting at a definite point, and arriving at the detector.
 
-However, the photon is not assigned a single trajectory. Instead, it can be shown that it takes all the possible paths. Contributions from all
-possible paths determine where the particle most likely hits the screen.
+However, the photon is not assigned a single trajectory. Instead, it can be shown that it takes all the possible paths. Contributions from the entire
+surface of the mirror determine where the particle most likely hits the screen.
 
 
 \subsection*{Quantum Tunneling}
@@ -147,7 +144,7 @@ In this sense, it is not meaningful to ask how the particle “passed through”
 This reinforces the idea that quantum particles are not persistent entities following well-defined paths, but manifestations of an underlying informational structure.
 
 
-\subsection*{Uncertainty and Localization}
+\subsection*{Heisenberg Uncertainty}
 
 A plane wave:
 \[
@@ -165,7 +162,16 @@ The more localized the position, the broader the momentum distribution. This is 
 \Delta x \Delta p \ge \frac{\hbar}{2}.
 \]
 
-This is not a limitation of measurement, but a fundamental property of quantum systems.
+Heisenberg imagined trying to pinpoint the exact location of an electron by illuminating it with a photon.
+To see the electron more clearly, one needs a photon with a very short wavelength (high energy), like a gamma ray. However, a high-energy photon acts like a billiard ball; the moment it hits the electron to reveal its position, it delivers a massive kick of momentum, sending the electron flying off in an unpredictable direction. If one uses a lower-energy photon to avoid disturbing the electron, the long wavelength becomes too blurry to resolve the position. Heisenberg realized that the act of measurement itself imposes a fundamental limit: the more you sharpen your vision of where a particle is, the more you blur its path.
+
+It would be easy to think that the uncertainty is just the problem of observation and that particles would actually have both well defined position and momentum, simultaneously. However, this is not the case.
+
+If you have a single particle in a vast space and its wavefunction is a pure sine wave. Its energy is \(E=hf\) where $f$ is frequency. Its probability is perfectly flat. Because space is so huge, the chance of finding the particle at any one specific point is practically zero. In this state, the particle’s position is totally smeared out—it simply doesn't have a specific 'here' or 'there'. The only way to localize the particle is to stack additional waves into the wavefunction. These waves interfere with each other, canceling out in most places and peaking in one small spot. But then you are mixing multiple energies together. The more you pin down the position, the more the energy 'smears.' The fuzziness isn't a measurement error; it's just how waves work.
+
+It’s like a musical note: you can have a pure, steady pitch that lasts forever (perfect energy, no timing), or you can have a short, sharp 'staccato' pop (perfect timing, no pitch).
+You physically cannot have both at once.
+
 
 \subsection*{Entanglement}
 
