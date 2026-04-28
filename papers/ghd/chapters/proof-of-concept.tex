@@ -20,7 +20,7 @@ No forces, equations of motion, or spacetime structures are hard-coded. We are b
 
 The theory is fundamentally observer-centric, but modeling a full biological observer is computationally impossible. So we use a simple proxy: a localized Gaussian wavepacket with memory — basically a small, disk-shaped “blob”.
 
-The simulation explores possible “observer walks” (sequences of configurations picked up by this observer filter) and weights them according to the fundamental measure. Paths with the minimum joint description length dominate.
+The simulation explores possible “observer walks” (sequences of configurations picked up by this observer filter) and weights them according to the fundamental measure. Then one is chosen randomly.
 
 \section{Important Clarification}
 
@@ -43,9 +43,9 @@ The simulation uses a Metropolis-Hastings sampler to explore the enormous space 
 Despite the absence of any programmed forces or laws, the simulation shows several encouraging behaviors:
 
 \begin{itemize}
-\item {textbf(Inertia:} Localized blobs tend to keep moving in roughly straight lines because smooth, predictable paths have lower spectral description length.
-\item{Quantum Interference:} Wave-like interference patterns appear naturally as compression artifacts of complex-valued wavefunction.
-\item{Weak Attraction:} The blobs show a statistical tendency to move toward one another. Configurations in which they are closer together often turn out to have lower joint description length than when they are far apart.
+\item \textbf{Inertia:} Localized blobs tend to keep moving in roughly straight lines because smooth, predictable paths have lower spectral description length.
+\item \textbf{Quantum Interference:} Wave-like interference patterns appear naturally as compression artifacts of complex-valued wavefunction.
+\item \textbf{Weak Attraction:} The blobs show a statistical tendency to move toward one another. Configurations in which they are closer together often turn out to have lower joint description length than when they are far apart.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -54,7 +54,7 @@ Despite the absence of any programmed forces or laws, the simulation shows sever
 \caption{Three Gaussian observers showing emergent inertia and weak mutual attraction}
 \end{figure}
 
-These results are genuinely exciting. After twenty years of work, watching law-like behavior arise purely from informational compression feels like a real milestone.
+These results are genuinely exciting. Watching law-like behavior arise purely from informational compression feels like a real milestone.
 
 \section{The Limitation}
 

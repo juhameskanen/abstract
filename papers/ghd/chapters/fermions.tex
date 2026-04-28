@@ -19,24 +19,28 @@ In standard quantum mechanics, exchanging two identical particles produces a sim
 \item Fermions: \(\psi(x_1, x_2) = -\psi(x_2, x_1)\)
 \end{itemize}
 
-The minus sign forces \(\psi(x,x) = 0\), creating the exclusion principle.
+The minus sign forces \(\psi(x,x) = 0\), creating the exclusion principle. The probability that two fermions
+could occupy the same state is zero. 
 
 Our informational measure, based purely on counting bits needed to describe spectral modes, naturally favors symmetric stacking (bosonic behavior) because it is cheaper to describe multiple identical excitations with shared modes.
-Achieving a sharp antisymmetric cancellation that drives probability exactly to zero at overlap points appears to require either infinite high-frequency modes (which our theory exponentially suppresses) or an extra rule we cannot yet derive from bit-counting alone.
+Achieving a sharp antisymmetric cancellation that drives probability exactly to zero at overlap points appears to require either massive number of high-frequency modes (which our theory exponentially suppresses) or an extra rule we cannot yet derive from bit-counting alone.
+
+
+\subsection*{Where To Go From Here?}
 
 Hard-coding antisymmetry would be philosophically unacceptable. It would violate the very spirit of the project: everything must emerge from the informational cost measure.
 
 We want everything (including the existence of fermions and the Pauli exclusion principle) to emerge purely from the information-content-driven measure, via something Solomonoff-like: configurations (or descriptions) that require fewer total bits to specify are exponentially favored in the induced probability \(P(c)\).
-No extra primitives, no hand-added spinors on vertices/edges, no ad-hoc sign rules. Only counting bits.
+No extra primitives, no hand-added spinors on vertices/edges, no ad-hoc sign rules.
 
-This is a high bar, but it's the right one for a truly first principle framework.
+Only counting bits.
+
+
+\subsection*{Where To Go From Here?}
 
 Bosons emerge naturally because stacking identical spectral modes (same \(\omega, A, \phi\)) often reduces \(K_{\rm sym}\): one description can cover multiple indistinguishable excitations with almost no extra bits (symmetric wavefunction, unrestricted occupancy). The total \(K(d)\) stays low, so those configurations get high weight \(W(c)\).
 
 Fermions require the opposite: multiple occupancy must become extremely expensive (or effectively forbidden) for identical states, and exchanging two such excitations should introduce a minus sign in the amplitude (antisymmetry). We need a mechanism where certain multi-excitation configurations suddenly have much higher joint description length, so they are exponentially suppressed in the observer-conditioned probability \(P(c \mid O)\).
-
-
-\subsection*{Where To Go From Here?}
 
 The only acceptable path is to find a mechanism in which antisymmetric configurations are dramatically cheaper in total joint description length (spectral + geometric + relational) than symmetric ones, when a coherent observer is present.
 
@@ -52,6 +56,9 @@ Several directions deserve serious exploration:
 \item \textbf{Geometric singularity analogy:} As we saw in earlier chapters, zero-entropy configurations map to minimal geometric points, explaining
   GR singularities as geometric problems only, while informational picture remains fully descriptive. Could similar mechanics work here too? 
 
+\item \textbf{Observer Filter:}  Maybe observer filter is that selects fermion way over bosons, because observers simply don't
+  exist based on purely bosonic principle.
+  
 \end{itemize}
 
 None of these ideas are fully developed yet. But they all stay within the rules we set: no new primitives, only differences in how many bits are required to produce a stable, compressible description that supports an observer.

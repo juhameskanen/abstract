@@ -111,6 +111,34 @@
       \field{pages}{246\bibrangedash 276}
       \range{pages}{31}
     \endentry
+    \entry{deutsch1997fabric}{book}{}
+      \name{author}{1}{}{%
+        {{hash=f6c8e450bcdca89973765cf5d2daf6f1}{%
+           family={Deutsch},
+           familyi={D\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {London}%
+      }
+      \list{publisher}{1}{%
+        {Penguin Books}%
+      }
+      \strng{namehash}{f6c8e450bcdca89973765cf5d2daf6f1}
+      \strng{fullhash}{f6c8e450bcdca89973765cf5d2daf6f1}
+      \strng{bibnamehash}{f6c8e450bcdca89973765cf5d2daf6f1}
+      \strng{authorbibnamehash}{f6c8e450bcdca89973765cf5d2daf6f1}
+      \strng{authornamehash}{f6c8e450bcdca89973765cf5d2daf6f1}
+      \strng{authorfullhash}{f6c8e450bcdca89973765cf5d2daf6f1}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0140275414}
+      \field{title}{The Fabric of Reality: The Science of Parallel Universes---and Its Implications}
+      \field{year}{1997}
+    \endentry
     \entry{friend2014pluralism}{book}{}
       \name{author}{1}{}{%
         {{hash=7a0fc2383848a884ff872d74bb56c615}{%
