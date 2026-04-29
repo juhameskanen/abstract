@@ -4,29 +4,77 @@ Traditional physics describes Quantum Field Theory (QFT) through the lens of Lag
 
 \section{The Particle Class}
 
-If we were to define the Standard Model in code, the class would be structured to minimize redundancy while maximizing the complexity of the emergent reality.
+If we were to define minimal version of Particle of the Standard Model in code:
 
-\begin{lstlisting}[language=C++, caption=The Standard Model Particle Class (Ideal)]
+\begin{lstlisting}[language=C++, caption=The Standard Model Particle Class (Minimal)]
 class Particle {
-public:
     double mass;           // The energy-cost of the excitation
     double charge;         // Coupling constant for the U(1) field
     double spin;           // Geometric symmetry (0, 0.5, 1.0)
-    int baryonNumber;      // For hadronic matter
-    int statisticalSign;   // -1 for Fermions (Pauli Exclusion), 1 for Bosons
-    std::vector<Mode> modes; // Wavefunction (The Fourier components)
+    Wavefunction wavefunction; // Essentially list<Mode> 
 
-    Vector4 getExpectedPosition() { 
-        return resolveInterference(modes); // Center-of-mass of the pattern
+    Vector4 getPosition() {
+      // resolve interference and return
+      // center-of-mass of the pattern
     }
 };
 \end{lstlisting}
 
+
+
+\subsection*{The Mode Class}
+
+The Wavefunction - \texttt{list<Mode>} attribute - is the heart of quantum mechanics.
+One of its essential features is \texttt{sin()} function, which basically needs 
+two attributes: frequency and phase. To have a particle one also needs \texttt{momentum} attribute.
+
+The most essential equation in QM is about the energy of a particle:
+
+\[
+E=hf
+\]
+
+Frequency yields the Energy ($E=hf$), while the Phase Gradient is the Momentum. The term $h$ is Planck's constant (some very small number).
+In other words, the higher the frequency, the higher the energy. 
+
+We have two sensible approaches when designing its structure, depending on how want to deal with \texttt{momentum}.
+
+Either we have phase and momentum attributes, from which we compute frequency:
+
+\begin{lstlisting}[language=C++, caption=The Wavefunction Modes 1]
+class Mode {
+    Vector3 k;            // Wavenumber (Momentum p = h-bar * k)
+    double amplitude;     // "Weight" of this specific frequency
+    double phase;         // Initial offset (the "starting point" of the wave)
+
+    // Frequency (omega) is derived from k and mass!
+    // omega = sqrt(|k|^2 + m^2)
+    double frequency() {
+      return sqrt(abs(k^2 + m^2));
+    }
+};
+
+\end{lstlisting}
+
+Or we compute momentum from the phase and the frequency, which feels better
+to a programmer with object-oriented mind, because this way we have proper self
+contained wave class. We could use it with any waves.
+
+\begin{lstlisting}[language=C++, caption=The Wavefunction Modes 2]
+struct Mode {
+    double frequency; // Energy
+    double phase;     // The "offset" at a specific point in space-time
+    double amplitude; // The "strength" of the excitation
+    Vector3 momentum () {
+      // compute momentum 
+    }
+};
+\end{lstlisting}
+
+
 \section{Modes as the Compression Scheme}
 
-The \texttt{list<Mode>} attribute is the heart of quantum mechanics. A \texttt{Mode} consists of a frequency, a phase, and a momentum vector. By summing these modes, the universe creates a ``Wave Packet.''
-
-This gives us all the cool features. For example, a single mode is a simple sine wave extending to infinity---it requires almost no data to describe but has no localization. To create a ``local'' particle (a definite position), one needs more modes. 
+This gives us many of the cool features of QM. For example, a single mode is a simple sine wave extending to infinity---it requires almost no data to describe but has no localization. To create a ``local'' particle (a definite position), one needs more modes. 
 
 \section{The Illusion of Geometry}
 
@@ -44,7 +92,7 @@ However, a few minor details bug the average programmer. The \texttt{Particle} c
 
 \section{Doing QFT}
 
-So there is no position attribute. How come we see particles in our 3D space? What gives them their coordinates? This is the million-dollar question. The Field is everywhere, but the Particle (the result) appears somewhere specific.
+According to QFT the Field is everywhere, but the Particle (the result) appears somewhere specific.
 
 To get definite coordinates from a system that doesn't have position as a fundamental attribute, one needs to implement two distinct steps: \textbf{wave packet construction} and the \textbf{measurement projection}.
 
@@ -59,9 +107,9 @@ $$ \langle x \rangle = \int \Psi^*(x) x \Psi(x) dx $$
 
 \subsection*{The Spacetime ``Address'' (Four-Vectors)}
 
-The Standard Model uses Minkowski Space. Technically, this is a vacuum solution to the Einstein field equations of General Relativity where the energy-momentum tensor is zero. It describes a flat, four-dimensional manifold where time and space are woven into a single fabric with a metric signature of $(-+++)$. 
+The Standard Model uses Minkowski Space. Technically, this is a vacuum solution to the Einstein field equations of General Relativity where the energy-momentum tensor is zero. It describes a flat, four-dimensional manifold where time and space are woven into a single fabric with Lorentzian metric signature of $(-+++)$ rather than the Euclidean $(++++)$ metric.
 
-It is a trivial, zero-matter baseline—hardly worth mentioning, really. We'll get back to the actual curvature and gravity mess once we get the basic physics engine running without crashing. For now, just assume the ``position'' is a point on this manifold described by a Four-Vector:
+It is a trivial, hardly worth mentioning, really. We'll get back to the actual curvature and gravity mess once we get the basic physics engine running without crashing. For now, just assume the ``position'' is a point on this manifold described by a Four-Vector:
 \[
 x^\mu = (ct, x, y, z)
 \]
@@ -103,15 +151,55 @@ class Particle {
 
 The position is an emergent property. We see definite coordinates only because the number of modes is huge and interactions are extremely localized. Because forces act through point-like vertices, it creates the illusion of solid little balls hitting each other.
 
+
+\section{The Field Refactor: From Objects to States}
+
+In reality, if we want to support $N$ particles, we must move from the above Object-Oriented Particles to \texttt{Excitation Mapping} (if I say excitation one more time I will burn this book myself).
+
+In this final architecture, the "Field" is the only thing that exists. It is an array of Harmonic Oscillators—one for every possible frequency. When one creates a particle, we aren't instantiating a class; instead we are just incrementing the `n` (excitation level) of a specific oscillator in the field's frequency buffer.
+
+\begin{lstlisting}[language=C++, caption=The Field as a Frequency Buffer]
+class QuantumField {
+    // The "Mass" is now a global constant for this specific buffer
+    const double m; 
+
+    // Every possible momentum 'k' is a key in our map.
+    // The value is an oscillator that tracks how many 'particles' 
+    // are currently vibrating at that frequency.
+    std::map<Vector3, QuantumOscillator> modes; 
+
+    void addParticle(Vector3 k) {
+        modes[k].n++; // "Creating" a particle is just an increment!
+    }
+    void deleteParticle(Vector3 k) {
+        modes[k].n--;
+    }
+};
+\end{lstlisting}
+
+And then we'd need bunch of these fields, to describe all the different types of
+particles in the universe.
+
+\begin{lstlisting}[language=C++, caption=The fundamental 17 Fields]
+QuantumField ElectronField(0.511);  // Mass in MeV
+QuantumField UpQuarkField(2.2);
+QuantumField DownQuarkField(4.7);
+QuantumField PhotonField(0.0);      // Massless!
+// ... and so on for all 17 fundamental fields
+\end{lstlisting}
+
+
 \section{Final Conclusions}
 
-So easy, right? Seriously, what a mess. 
+So easy, right? Seriously, what a mess. And we were trying to implement only QFT here. Semi-classical
+gravity (Quantum Field Theory on curved spacetime) is beyond the scope of this book for sure. 
+
 As Stephen Hawking famously commented: ``The Standard Model is a set of equations that we can write on a T-shirt, but it is not very beautiful.'' Is this really the best the universe has to offer?
 
 The Hawking quote fits so well. It highlights the "Spaghetti Code" nature of the Standard Model.
 It works perfectly, but it feels like it was written by a developer who was in a hurry and kept adding global variables (weakIsospin, hypercharge, colorCharge) to fix bugs.
 
-The original architect left without writing any documentation, and now the junior angels are just patching things as they go.
+No wonder Heaven and Hell exists! The original architect left without writing any documentation, and now the junior angels are just patching things as they go.
 
 \textit{``Boss, the particles aren't staying together!''}
 

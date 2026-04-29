@@ -2,6 +2,15 @@
   "title": "The Abstract Universe Project (AUP)",
   "sections": [
     {
+      "title": "The Books",
+      "items": [
+        {
+          "title": "Good Heavens, Gods? Hell No, Dogs!",
+          "slug": "ghd"
+        }
+      ]
+    },
+    {
       "title": "The Theory",
       "items": [
         {
@@ -125,15 +134,6 @@
         {
           "title": "A Study in Significant Whitespace in YAML and Mental Collapse",
           "slug": "yaml-paradox"
-        }
-      ]
-    },
-    {
-      "title": "The Books",
-      "items": [
-        {
-          "title": "Good Heavens, Gogs? Hell No, Dogs!",
-          "slug": "ghd"
         }
       ]
     }
