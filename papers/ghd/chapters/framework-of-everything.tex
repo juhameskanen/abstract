@@ -1,10 +1,13 @@
 
-\chapter{The Framework of Bosons}
-
+\chapter{The Theory}
 
 \section{Primitive Ontology}
 
-We assume the existence of a configuration space $\mathcal{C}$ consisting of finite bitstrings:
+We assume the universe is not fundamentally made of information, nor it is finite. The concepts of
+information and mathematics are not fundamental properties of reality. What we call information is the structured way we - conscious observers -
+experience reality through our own cognitive apparatus.
+
+We assume existence of finite observer configuration space $\mathcal{C}$ consisting of finite bitstrings:
 \[
 \mathcal{C} = \{0,1\}^n
 \]
@@ -14,7 +17,6 @@ No spacetime, dynamics, or physical law is assumed.
 A configuration is a complete static object.
 
 It should be noted that the bitstring plays no fundamental role; binary system is chosen simply for the sake of convenience.
-
 
 
 \section{Descriptions}
@@ -28,42 +30,6 @@ A description $d \in \mathcal{D}(c)$ is any encoding that reproduces $c$ under i
 
 We assume representation non-uniqueness:
 different $d$ may encode the same $c$.
-
-
-\section{Representation Length}
-
-We define a structural ordering over representations.
-
-Let $[d]$ denote the equivalence class of all representations describing the same configuration.
-
-We define a partial order $[d_1] \prec [d_2]$ if $[d_1]$ admits a strictly more coherent internal constraint structure than $[d_2]$, meaning its internal correlations can be generated from a smaller set of consistent relational rules.
-
-Representation length $K_{\mathrm{rep}}$ is then the induced measure rank under this ordering.
-
-
-
-\section{Structured Representation Complexity}
-
-We refine the representation length of a description $d$ by introducing an explicit decomposition into structural components.
-
-Each description $d \in \mathcal{D}(c)$ is assumed to admit a factorisation:
-
-\[
-d \equiv (d_{\text{spec}}, d_{\text{rel}}, d_{\text{sym}})
-\]
-
-corresponding to:
-\begin{itemize}
-\item spectral content,
-\item internal constraint structure,
-\item symmetry and indistinguishability structure.
-\end{itemize}
-
-The total representation complexity is defined as:
-
-\[
-K(d) = K_{\text{spec}}(d_{\text{spec}}) + K_{\text{rel}}(d_{\text{rel}}) + K_{\text{sym}}(d_{\text{sym}})
-\]
 
 
 \subsection*{Spectral Complexity}
@@ -100,45 +66,7 @@ The resolution parameters $(\Delta A_i, \Delta \phi_i, \Delta \omega_i)$ are not
 
 This term captures the distributed wave-like structure of the description.
 
-\subsection*{Relational Complexity}
 
-\[
-K_{\text{rel}} = \text{Cost of internal constraint structure among spectral components}
-\]
-
-where:
-\begin{itemize}
-\item this term measures how strongly spectral components are constrained to form coherent structures,
-\item it reflects compatibility, persistence, and stability of composite patterns,
-\item it does not introduce additional primitives, but captures structure implicit in the description itself.
-\end{itemize}
-
-This component is responsible for:
-\begin{itemize}
-\item effective locality,
-\item structural stability,
-\item inertia-like resistance to reconfiguration.
-\end{itemize}
-
-\subsection*{Symmetry and Indistinguishability Complexity}
-
-\[
-K_{\text{sym}} = \text{Cost of encoding indistinguishable or equivalent excitations}
-\]
-
-where:
-\begin{itemize}
-\item this term measures the cost of representing multiple occurrences of structurally equivalent spectral components,
-\item it captures invariance under permutation of equivalent components,
-\item it encodes how occupancy of identical or nearly identical spectral states is represented.
-\end{itemize}
-
-Different scaling behaviors of this term give rise to distinct statistical regimes.
-
-Configurations allowing unrestricted occupancy of identical spectral modes naturally produce bosonic-like excitations.
-Achieving genuine fermionic statistics (strong suppression of multiple occupancy and effective antisymmetry under exchange) appears to require additional structure in the relational or symmetry sector — a point we return to when examining concrete simulations.
-
-This term therefore determines the statistical structure and taxonomy of emergent excitations.
 
 \section{Induced Measure}
 
@@ -164,16 +92,9 @@ An observer is not a configuration but a functional:
 \mu_O : \mathcal{C} \rightarrow [0,1]
 \]
 
-$\mu_O(c)$ measures the degree to which configuration $c$ instantiates a coherent observer structure.
+$\mu_O(c)$ measures the degree to which configuration $c$ describes an observer structure.
 
-This includes:
-\begin{itemize}
-\item structural stability
-\item internal consistency
-\item persistence of encoded memory
-\end{itemize}
-
-The observer is therefore a graded property of configurations, not a binary predicate.
+The observer is a graded property of configurations, not a binary predicate.
 
 \section{Observer Conditioning}
 
@@ -186,6 +107,7 @@ P(c \mid O) =
 
 This defines the effective reality accessible to an observer.
 
+
 \section{Dual Representation Principle}
 
 Each configuration admits two complementary descriptions:
@@ -197,7 +119,6 @@ Each configuration admits two complementary descriptions:
 
 Neither representation is fundamental; both are interpretations of the same underlying configuration.
 
-Observer structure requires compatibility between both representations.
 
 \section{Observer Compatibility}
 
@@ -208,28 +129,21 @@ A configuration contributes significantly to observer experience only if:
 \item it supports stable geometric structure corresponding to an observer functional
 \end{itemize}
 
-Formally:
-high contribution to $P(c \mid O)$ requires both low $K(d)$ and high $\mu_O(c)$.
+Formally, high contribution to $P(c \mid O)$ requires both low $K(d)$ and high $\mu_O(c)$.
+
 
 \section{Emergence Principle}
 
-The observer-conditioned measure is dominated by configurations that maximize:
+The observer-conditioned measure is dominated by configurations that maximize representational compressibility.
 
-\begin{itemize}
-\item representational compressibility
-\item structural coherence
-\end{itemize}
+As a result, observer-accessible reality appears smooth and law-like.
 
-As a result, observer-accessible reality appears:
-\begin{itemize}
-\item smooth
-\item stable
-\item law-like
-\end{itemize}
+High predictability implies high compressibility implies high probability in measure. 
 
-These properties are not fundamental, but induced by the structure of the measure.
 
-\section{Internal Ordering}
+
+
+\section{Principle of Internal Describability}
 
 Time is not a fundamental dimension.
 
@@ -243,22 +157,16 @@ if configuration $c_2$ contains a more developed or stable instantiation of $\mu
 
 Time is therefore an emergent ordering induced by observer structure, not a physical evolution parameter.
 
-\section{Principle of Internal Describability}
+The experienced structure of reality is determined by the distribution of configurations weighted by the joint effect of
+representational compressibility.
 
-Reality is not governed by external laws or dynamics.
-
-Instead, the experienced structure of reality is determined by:
-
-\begin{quote}
-the distribution of configurations weighted by the joint effect of representational compressibility and observer coherence.
-\end{quote}
-
-Observers exist as stable high-weight structures within this distribution.
+Observers find themselves in most compressible paths through configurations.
 
 
 \section{The Path Measure and Physical Laws}
 
-By combining the induced measure of configurations with the observer functional, we arrive at the fundamental equation of the theory. If we define a history $\gamma$ as a sequence of observer-compatible configurations, the probability of inhabiting a specific history is:
+By combining the induced measure of configurations with the observer functional, we arrive at the fundamental equation of the theory.
+If we define a history $\gamma$ as a sequence of observer-compatible configurations, the probability of inhabiting a specific history is:
 
 \begin{equation}
 \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O
@@ -271,4 +179,5 @@ where:
     \item $\mathcal{C}_O[\gamma]$ is the joint spectral and geometric complexity.
 \end{itemize}
 
-Under this measure, \textbf{observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$}. The universe does not follow laws because they are imposed from the outside; it appears law-like because configurations that deviate from minimal complexity are exponentially suppressed in the measure.
+Under this measure, \textbf{observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$}.
+The universe does not follow laws because they are imposed from the outside; it appears law-like because configurations that deviate from minimal complexity are exponentially suppressed in the measure.
