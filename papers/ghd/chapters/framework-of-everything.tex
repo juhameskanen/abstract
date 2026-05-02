@@ -1,183 +1,94 @@
-
 \chapter{The Theory}
 
 \section{Primitive Ontology}
 
-We assume the universe is not fundamentally made of information, nor it is finite. The concepts of
-information and mathematics are not fundamental properties of reality. What we call information is the structured way we - conscious observers -
-experience reality through our own cognitive apparatus.
+We assume nothing about the fundamental nature of reality.
+In particular, we do not assume that the universe is made of information, that it is finite, or that any specific laws of physics exist a priori.
+The concepts of ``information'', ``bits'', ``mathematics'', and ``finite configuration space'' are treated as descriptive tools available to conscious observers, not as ontological primitives.
 
-We assume existence of finite observer configuration space $\mathcal{C}$ consisting of finite bitstrings:
+Our single starting point is observational: there exists at least one conscious observer (``Alice'') who experiences pain, geometry, and a structured world.
+From this and four minimal axioms, the theory is developed.
+
+\section{Configuration Space}
+
+For descriptive convenience we introduce a finite configuration space
 \[
-\mathcal{C} = \{0,1\}^n
+\mathcal{C} = \{0,1\}^n,
 \]
+where each $c \in \mathcal{C}$ is a complete static configuration.
+The binary representation is chosen purely for convenience; the theory does not depend on it.
 
-No spacetime, dynamics, or physical law is assumed.
+No spacetime, dynamics, or external laws are assumed.
 
-A configuration is a complete static object.
+\section{Descriptions and Complexity}
 
-It should be noted that the bitstring plays no fundamental role; binary system is chosen simply for the sake of convenience.
+Each configuration $c$ admits many possible descriptions $\mathcal{D}(c)$.
+A description $d \in \mathcal{D}(c)$ is any encoding that reproduces $c$ under suitable interpretation.
 
-
-\section{Descriptions}
-
-Each configuration $c \in \mathcal{C}$ admits a set of representations:
+We define the complexity of a description primarily through its spectral content (wave-like representation):
 \[
-\mathcal{D}(c)
+K_{\rm spec}(d) = \sum_i \left[ 
+\log_2\left(\frac{A_i}{\Delta A_i}\right) + 
+\log_2\left(\frac{2\pi}{\Delta \phi_i}\right) + 
+\log_2\left(\frac{\omega_i}{\Delta \omega_i}\right)
+\right],
 \]
+where $A_i$, $\phi_i$, $\omega_i$ are the amplitude, phase and frequency of spectral mode $i$, and the $\Delta$ terms reflect the precision required to distinguish configurations.
 
-A description $d \in \mathcal{D}(c)$ is any encoding that reproduces $c$ under interpretation.
+Higher frequencies and sharper features require more bits and are therefore heavily suppressed.
+Smooth, low-frequency, predictable structures compress far better and dominate the measure.
 
-We assume representation non-uniqueness:
-different $d$ may encode the same $c$.
-
-
-\subsection*{Spectral Complexity}
-
-The spectral component of the complexity is given by:
-
+A geometric complexity $K_{\rm geo}(d)$ is similarly defined to capture localized structure and boundaries. The total complexity is
 \[
-K_{\text{spec}} =
-\sum_{i}
-\left[
-\log_2\!\left(\frac{A_i}{\Delta A_i}\right)
-+
-\log_2\!\left(\frac{2\pi}{\Delta \phi_i}\right)
-+
-\log_2\!\left(\frac{\omega_i}{\Delta \omega_i}\right)
-\right]
+K(d) = K_{\rm spec}(d) + K_{\rm geo}(d).
 \]
-
-where:
-\begin{itemize}
-\item $i$ indexes spectral modes,
-\item $A_i$ is the amplitude of mode $i$,
-\item $\phi_i \in [0, 2\pi)$ is the phase of mode $i$,
-\item $\omega_i$ is the frequency of mode $i$,
-\item $\Delta A_i$ is the required precision for distinguishing amplitudes,
-\item $\Delta \phi_i$ is the required phase resolution,
-\item $\Delta \omega_i$ is the frequency resolution,
-\item $\log_2(\cdot)$ measures the number of bits required to specify the parameter at the given precision.
-\end{itemize}
-
-The cost of specifying a parameter is determined not by its absolute range, but by the precision required to distinguish it within the representation.
-
-The resolution parameters $(\Delta A_i, \Delta \phi_i, \Delta \omega_i)$ are not fixed a priori, but are determined by the minimal precision required to distinguish configurations within the representation.
-
-This term captures the distributed wave-like structure of the description.
-
-
 
 \section{Induced Measure}
 
-Configurations acquire weight through the multiplicity of their descriptions:
-
+The weight of a configuration is given by the multiplicity of its low-complexity descriptions:
 \[
-W(c) = \sum_{d \in \mathcal{D}(c)} e^{-K(d)}
+W(c) = \sum_{d \in \mathcal{D}(c)} e^{-K(d)}.
 \]
-
-This defines an induced measure over configuration space:
-
+This induces the measure
 \[
-P(c) = \frac{W(c)}{\sum_{c' \in \mathcal{C}} W(c')}
+P(c) = \frac{W(c)}{\sum_{c' \in \mathcal{C}} W(c')}.
 \]
-
-No external probability distribution is assumed.
-
 
 \section{Observer Functional}
 
-An observer is not a configuration but a functional:
+An observer is characterized by a functional
 \[
-\mu_O : \mathcal{C} \rightarrow [0,1]
+\mu_O : \mathcal{C} \to [0,1]
+\]
+that grades how well a configuration realizes an observer structure (for example, a spatially localized Gaussian blob with stable internal dynamics).
+
+Observer-conditioned probability is then
+\[
+P(c \mid O) = \frac{\mu_O(c) \, W(c)}{\sum_{c'} \mu_O(c') \, W(c')}.
 \]
 
-$\mu_O(c)$ measures the degree to which configuration $c$ describes an observer structure.
+\section{Emergence of Laws and Geometry}
 
-The observer is a graded property of configurations, not a binary predicate.
+Configurations supporting stable Gaussian-blob observers naturally produce emergent inertia and smooth elliptical orbits.
+Sharp turns or chaotic motion require high-frequency spectral components, which dramatically increase description length and are exponentially suppressed in the measure.
 
-\section{Observer Conditioning}
+Thus, observer-compatible reality is overwhelmingly dominated by smooth, predictable, law-like configurations.
+Physical laws are not imposed from outside; they are large-deviation minimizers of the joint spectral-geometric complexity under the observer measure.
 
-The experienced distribution over configurations is:
+\section{The Internal Clock}
 
+Time is not fundamental. For an observer $O$, it emerges as an internal ordering $\prec_O$ on configurations:
 \[
-P(c \mid O) =
-\frac{\mu_O(c)\, W(c)}{\sum_{c' \in \mathcal{C}} \mu_O(c')\, W(c')}
+c_1 \prec_O c_2 \quad \text{if $c_2$ contains a more stable and developed realization of $\mu_O$ than $c_1$.}
 \]
 
-This defines the effective reality accessible to an observer.
+The experienced flow of time is the observer's traversal along the most compressible available paths.
+As informational content accumulates over a ``lifetime'', maintaining high compression becomes harder.
+Eventually the supporting measure drops below a critical threshold and consciousness fades.
 
+\section{Conclusion}
 
-\section{Dual Representation Principle}
+If the four observational axioms hold (DNA encodes conscious beings, matter is ordinary, processes are computable, and subjective experience has causal power), then the only universe any observer can ever know is the one that arises as the most compressible, observer-compatible structure within consciousness itself.
 
-Each configuration admits two complementary descriptions:
+The apparent external world is a highly compressed internal construction. In the deepest sense, the universe we experience lives in us.
 
-\begin{itemize}
-\item Spectral representations: capturing global structure via distributed modes
-\item Geometric representations: capturing localized coherence and boundaries
-\end{itemize}
-
-Neither representation is fundamental; both are interpretations of the same underlying configuration.
-
-
-\section{Observer Compatibility}
-
-A configuration contributes significantly to observer experience only if:
-
-\begin{itemize}
-\item it admits compressible spectral representations
-\item it supports stable geometric structure corresponding to an observer functional
-\end{itemize}
-
-Formally, high contribution to $P(c \mid O)$ requires both low $K(d)$ and high $\mu_O(c)$.
-
-
-\section{Emergence Principle}
-
-The observer-conditioned measure is dominated by configurations that maximize representational compressibility.
-
-As a result, observer-accessible reality appears smooth and law-like.
-
-High predictability implies high compressibility implies high probability in measure. 
-
-
-
-
-\section{Principle of Internal Describability}
-
-Time is not a fundamental dimension.
-
-For a given observer $O$, define an internal ordering relation:
-
-\[
-c_1 \prec_O c_2
-\]
-
-if configuration $c_2$ contains a more developed or stable instantiation of $\mu_O$ than $c_1$.
-
-Time is therefore an emergent ordering induced by observer structure, not a physical evolution parameter.
-
-The experienced structure of reality is determined by the distribution of configurations weighted by the joint effect of
-representational compressibility.
-
-Observers find themselves in most compressible paths through configurations.
-
-
-\section{The Path Measure and Physical Laws}
-
-By combining the induced measure of configurations with the observer functional, we arrive at the fundamental equation of the theory.
-If we define a history $\gamma$ as a sequence of observer-compatible configurations, the probability of inhabiting a specific history is:
-
-\begin{equation}
-\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $Z_O$ is the partition function (the sum over all observer-compatible histories).
-    \item $\lambda$ is the global selection pressure (compression factor).
-    \item $\mathcal{C}_O[\gamma]$ is the joint spectral and geometric complexity.
-\end{itemize}
-
-Under this measure, \textbf{observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$}.
-The universe does not follow laws because they are imposed from the outside; it appears law-like because configurations that deviate from minimal complexity are exponentially suppressed in the measure.

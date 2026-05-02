@@ -221,10 +221,38 @@ If the simulated subjects exhibit the necessary biological reactions but lack th
 Should this be the case, the arguments presented here collapse. This would indicate that at least one of the four initial axioms is invalid.
 
 
+
+\section{Pre-computing the Data}
+
+A common objection is that replacing code with precomputed data does not truly eliminate computation.
+One might argue that the computation simply occurred earlier, when the lookup tables were created, and therefore the optimization argument collapses: static data alone would not be sufficient for subjective experience.
+
+This objection fails for the following reason.
+
+Software is fundamentally order-critical. The sequence in which elementary operations are executed is essential.
+Swapping the order of even relatively simple operations often destroys the correctness of the program entirely.
+In a system as complex as a full-scale DNA simulation, changing the execution order would almost certainly crash the simulation or produce complete nonsense instead of a coherent Alice.
+
+However, when we precompute lookup tables, the order in which we calculate those values is largely irrelevant to the final result.
+What matters is only that the precomputed values correctly correspond to the inputs they will receive during execution. 
+
+In other words: the temporal order in which the programmer (or the optimizer) computes the lookup tables does not need to match the order in which those values are later accessed.
+The final static data structure encodes the correct mappings regardless of the history of its creation.
+
+Thus, the optimization process remains valid. We can gradually transform a fully running, causally ordered simulation into pure static data while preserving the exact output.
+If subjective experience depended on the real-time execution of those precomputations, we would require some form of metaphysical or non-computable process to explain why the experience survives the optimization.
+This would directly contradict Axiom 3 (that all relevant processes are computable).
+
+The optimization argument therefore stands: subjective experience can persist in purely static information.
+
+
+
 \section{Conclusions}
 
-If the four assumptions hold, then consciousness, time, and even pain can emerge from the structure of static information alone.
+If the four assumptions hold, then consciousness, time, and even pain can emerge from the structure of static noisy information alone.
 
 Observers, particles, and the flow of time are just patterns woven into this tapestry, emerging from pure white noise wherever conditions allow. 
 
-From the four basic assumptions about DNA, the Church--Turing thesis, and the causal efficiency of pain, we have landed on statistical mechanics, chaos theory, the one of the first-principle candidates suffering from the Boltzmann Brain problem.
+From the four basic assumptions about DNA, the Church--Turing thesis, and the causal efficiency of pain, we have landed on statistical mechanics,
+chaos theory, the one of the first-principle candidates suffering from the Boltzmann Brain problem.
+

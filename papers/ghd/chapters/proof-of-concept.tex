@@ -1,74 +1,65 @@
 \chapter{Proof of Concept}
 
-\section{From Formal Theory to Physical Demonstration}
+\section{From Theory to Simulation}
 
-This is the moment of truth.
+The ultimate test of any theory is whether it can produce something that resembles the world we observe, using only its own principles.
 
-After decades of developing the informational framework, we finally ask the only question that matters: Can anything that looks like physics come out of it — using nothing but the compression measure and observer-conditioned probability?
-
-The answer is... partially. What you are about to see is a real, working simulation. It succeeds in surprising ways and fails in instructive ones.
-
-We built a first proof-of-concept simulation with a sharply defined goal:
+We built a minimal proof-of-concept simulation with a clear question:
 
 \begin{quote}
-Given only an observer-conditioned informational measure and a compression principle, does anything resembling quantum behavior, inertia, or gravitational attraction emerge — without being explicitly programmed?
+Given \emph{only} an observer-conditioned compression measure, can anything resembling inertia, quantum interference, or mutual attraction emerge — without being explicitly programmed?
 \end{quote}
 
-No forces, equations of motion, or spacetime structures are hard-coded. We are building a “Non-Physical Engine” — a system that attempts to discover physics rather than obey it.
+No forces, equations of motion, spacetime metric, or physical laws were hard-coded. The system is a pure ``Non-Physical Engine'' that selects configurations solely according to the joint spectral-geometric complexity measure.
 
 \section{The Observer Proxy}
 
-The theory is fundamentally observer-centric, but modeling a full biological observer is computationally impossible. So we use a simple proxy: a localized Gaussian wavepacket with memory — basically a small, disk-shaped “blob”.
+Full biological observers are computationally intractable, so we use a simple proxy: a localized Gaussian wave packet with limited internal memory — essentially a small, coherent ``blob''. The blob size and memory capacity are adjustable parameters.
 
-The simulation explores possible “observer walks” (sequences of configurations picked up by this observer filter) and weights them according to the fundamental measure. Then one is chosen randomly.
+The simulation explores possible ``observer walks'' (sequences of configurations compatible with the blob) and selects them according to the induced observer-conditioned measure $P(c \mid O)$.
 
-\section{Important Clarification}
+\section{Implementation}
 
-It should be noted that we are not deriving quantum mechanics or general relativity from the informational measure.
-Both are taken as observational facts: the microscopic world behaves like waves, and gravity manifests geometrically.
-We simply use wavefunction descriptions and geometric descriptions as practical tools to calculate informational cost — the two most efficient languages reality has shown us.
+We implemented a complex-valued wavefunction class that computes spectral complexity directly from frequencies, phases, and amplitudes. Geometric complexity is approximated via a linearized measure of curvature and boundary sharpness.
 
-The simulation then asks one question: which observer histories minimize the joint spectral + geometric description length?
-Whatever behavior emerges does so because it is the cheapest way to exist and be describable.
-
-\section{What the Simulation Actually Does}
-
-Instead of relying on standard image compression algorithms, we implemented a true complex-valued wavefunction class that directly computes spectral complexity from frequencies, phases, and amplitudes.
-On the geometric side, we use a heavily simplified, linearized approximation of curvature to measure geometric description cost.
-
-The simulation uses a Metropolis-Hastings sampler to explore the enormous space of possible observer walks, guided by the principle of minimum total description length.
+A Metropolis-Hastings sampler explores the space, guided exclusively by minimization of total description length.
 
 \section{Emergent Phenomena}
 
-Despite the absence of any programmed forces or laws, the simulation shows several encouraging behaviors:
+Even with this minimal setup, several non-trivial behaviors emerge:
 
 \begin{itemize}
-\item \textbf{Inertia:} Localized blobs tend to keep moving in roughly straight lines because smooth, predictable paths have lower spectral description length.
-\item \textbf{Quantum Interference:} Wave-like interference patterns appear naturally as compression artifacts of complex-valued wavefunction.
-\item \textbf{Weak Attraction:} The blobs show a statistical tendency to move toward one another. Configurations in which they are closer together often turn out to have lower joint description length than when they are far apart.
+    \item \textbf{Inertia and Smooth Motion:} Blobs naturally follow smooth, curved trajectories. Sharp changes in direction require high-frequency spectral components, which carry high description cost and are heavily suppressed.
+    \item \textbf{Weak Mutual Attraction:} Configurations in which blobs are closer together often have lower joint spectral-geometric complexity, leading to a statistical tendency to cluster.
+    \item \textbf{Wave-like Interference:} Interference patterns appear naturally from the complex-valued wavefunction representation.
 \end{itemize}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/emergent_inertia_gravity.png}
-\caption{Three large Gaussian blobs showing emergent inertia and weak mutual attraction}
+\caption{Three Gaussian blobs exhibiting emergent inertia and weak mutual attraction.}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/emergent_interference.png}
-\caption{Three microscopic Gaussian blobs demonstrating emergent interference}
+\caption{Emergent interference patterns in microscopic Gaussian blobs.}
 \end{figure}
 
+These results are encouraging. Law-like behavior, including something resembling Newtonian inertia and weak gravity, arises purely from informational compression.
 
-These results are genuinely exciting. Watching law-like behavior arise purely from informational compression feels like a real milestone.
+\section{The Fermion Problem}
 
-\section{The Limitation}
+Despite these successes, a major limitation appears: the Gaussian blobs eventually lose their individual identities and merge into a single undifferentiated structure. There is no stable repulsion or exclusion at close range.
 
-However, there is a major catch.
+In standard quantum mechanics, fermions obey the Pauli exclusion principle due to antisymmetry of the wavefunction. In our purely compression-based measure, symmetric (bosonic) configurations are strongly favored because they allow shared spectral modes and lower total description length. Antisymmetric configurations appear to require significantly higher complexity, and thus are exponentially suppressed.
 
-The three Gaussian blobs (our proxy observers, or “Alices”) eventually lose their individual identities and fuse into a single undifferentiated entity. There are no stable collisions or rebounds. The distinct informational structures simply blend together and become irretrievably mixed.
-For any real world Alice this would have catastropic consequences.
+Hard-coding antisymmetry would violate the spirit of the project. The central open challenge is therefore to find a natural mechanism within the compression measure that makes multiple occupancy of identical states dramatically more expensive when coherent observers are present.
 
-In short: we see bosonic-like wave behavior and some effective attraction, but we see no sign of fermionic statistics or anything resembling the Pauli exclusion principle. Without a natural mechanism that keeps localized structures distinct, complex material reality remains out of reach.
+This is currently the most important open problem of the theory.
 
+\section{Conclusion}
+
+The simulation demonstrates that key features of classical and quantum behavior (inertia, interference, weak attraction) can emerge from pure informational compression and observer conditioning. However, stable distinguishable matter requires something resembling fermionic statistics.
+
+The hunt for emergent exclusion within a pure description-length measure is now the primary frontier.
