@@ -33,7 +33,7 @@ class Mode {
     double amplitude; // Complex coefficient magnitude & phase can be combined
     double phase;     // Initial phase offset
     double frequency() {
-      // Natural units: ħ = c = 1
+      // Natural units: h = c = 1
       return k.squaredNorm() / 2m; // $\omega = \frac{k^2}{2m}$
     }
 };
