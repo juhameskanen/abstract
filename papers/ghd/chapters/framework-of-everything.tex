@@ -2,30 +2,29 @@
 
 \section{Primitive Ontology}
 
-We assume nothing about the fundamental nature of reality.
-In particular, we do not assume that the universe is made of information, that it is finite, or that any specific laws of physics exist a priori.
-The concepts of ``information'', ``bits'', ``mathematics'', and ``finite configuration space'' are treated as descriptive tools available to conscious observers, not as ontological primitives.
+The theory begins with minimal assumptions.
+If reality is fundamentally informational, a natural question arises: is the total information finite or infinite?
+If it were finite, one would have to ask: finite by how many bits? And who, or what, set that limit? Any fixed bound would itself require explanation.
+A finite informational universe merely pushes the mystery back one level. 
+The only non-arbitrary conclusion is that the deep nature of everything cannot be finitely bounded.
+At the most fundamental level, reality must be infinite—perhaps not even informational in the familiar sense, but beyond any finite description.
 
-Our single starting point is observational: there exists at least one conscious observer (``Alice'') who experiences pain, geometry, and a structured world.
-From this and four minimal axioms, the theory is developed.
+Threfore, we do not presuppose that reality is fundamentally informational, finite, or governed by prior laws.
 
-\section{Configuration Space}
+Based on observational evidence, we observers are finite structures.
 
-For descriptive convenience we introduce a finite configuration space
+The only firm starting point is observational: conscious finite observers exist and have structured experiences (including pain and geometry).
+
+For descriptive purposes we introduce a finite configuration space
 \[
 \mathcal{C} = \{0,1\}^n,
 \]
-where each $c \in \mathcal{C}$ is a complete static configuration.
-The binary representation is chosen purely for convenience; the theory does not depend on it.
+where each $c\in\mathcal{C}$ is a complete static configuration. No spacetime, dynamics, or external laws are assumed.
 
-No spacetime, dynamics, or external laws are assumed.
 
 \section{Descriptions and Complexity}
 
-Each configuration $c$ admits many possible descriptions $\mathcal{D}(c)$.
-A description $d \in \mathcal{D}(c)$ is any encoding that reproduces $c$ under suitable interpretation.
-
-We define the complexity of a description primarily through its spectral content (wave-like representation):
+Each configuration $c$ admits multiple descriptions $\mathcal{D}(c)$. We quantify the complexity of a description $d$ primarily by its spectral content:
 \[
 K_{\rm spec}(d) = \sum_i \left[ 
 \log_2\left(\frac{A_i}{\Delta A_i}\right) + 
@@ -33,62 +32,53 @@ K_{\rm spec}(d) = \sum_i \left[
 \log_2\left(\frac{\omega_i}{\Delta \omega_i}\right)
 \right],
 \]
-where $A_i$, $\phi_i$, $\omega_i$ are the amplitude, phase and frequency of spectral mode $i$, and the $\Delta$ terms reflect the precision required to distinguish configurations.
+where the sum runs over spectral modes, and the $\Delta$ terms represent the precision needed to distinguish configurations.
 
-Higher frequencies and sharper features require more bits and are therefore heavily suppressed.
-Smooth, low-frequency, predictable structures compress far better and dominate the measure.
+A geometric complexity term $K_{\rm geo}(d)$ accounts for localized structure and boundaries. The total complexity is $K(d) = K_{\rm spec}(d) + K_{\rm geo}(d)$.
 
-A geometric complexity $K_{\rm geo}(d)$ is similarly defined to capture localized structure and boundaries. The total complexity is
-\[
-K(d) = K_{\rm spec}(d) + K_{\rm geo}(d).
-\]
+Lower total complexity corresponds to higher multiplicity and thus higher weight in the induced measure.
+
 
 \section{Induced Measure}
 
-The weight of a configuration is given by the multiplicity of its low-complexity descriptions:
+The weight of configuration $c$ is
 \[
 W(c) = \sum_{d \in \mathcal{D}(c)} e^{-K(d)}.
 \]
-This induces the measure
+This defines the induced measure
 \[
-P(c) = \frac{W(c)}{\sum_{c' \in \mathcal{C}} W(c')}.
+P(c) = \frac{W(c)}{\sum_{c'\in\mathcal{C}} W(c')}.
 \]
+
 
 \section{Observer Functional}
 
-An observer is characterized by a functional
+An observer is characterized by a grading functional
 \[
 \mu_O : \mathcal{C} \to [0,1]
 \]
-that grades how well a configuration realizes an observer structure (for example, a spatially localized Gaussian blob with stable internal dynamics).
+that measures how well a configuration realizes a stable observer structure (e.g., a localized Gaussian blob with coherent internal dynamics).
 
-Observer-conditioned probability is then
+The observer-conditioned probability is
 \[
 P(c \mid O) = \frac{\mu_O(c) \, W(c)}{\sum_{c'} \mu_O(c') \, W(c')}.
 \]
 
-\section{Emergence of Laws and Geometry}
 
-Configurations supporting stable Gaussian-blob observers naturally produce emergent inertia and smooth elliptical orbits.
-Sharp turns or chaotic motion require high-frequency spectral components, which dramatically increase description length and are exponentially suppressed in the measure.
+\section{Emergence of Laws}
 
-Thus, observer-compatible reality is overwhelmingly dominated by smooth, predictable, law-like configurations.
-Physical laws are not imposed from outside; they are large-deviation minimizers of the joint spectral-geometric complexity under the observer measure.
+Numerical simulations show that configurations supporting stable Gaussian-blob observers strongly favor smooth, low-frequency spectral content. Sharp accelerations or chaotic trajectories require high-frequency modes, which dramatically increase description length and are exponentially suppressed.
+
+As a result, observer-compatible realities are dominated by configurations exhibiting inertia, smooth curved paths, and law-like behavior. Physical laws emerge as the paths that minimize joint spectral-geometric complexity under the observer measure.
+
 
 \section{The Internal Clock}
 
-Time is not fundamental. For an observer $O$, it emerges as an internal ordering $\prec_O$ on configurations:
-\[
-c_1 \prec_O c_2 \quad \text{if $c_2$ contains a more stable and developed realization of $\mu_O$ than $c_1$.}
-\]
+Time is not fundamental. It emerges as an internal ordering $\prec_O$ on configurations, where $c_1 \prec_O c_2$ if $c_2$ supports a more stable realization of $\mu_O$.
 
-The experienced flow of time is the observer's traversal along the most compressible available paths.
-As informational content accumulates over a ``lifetime'', maintaining high compression becomes harder.
-Eventually the supporting measure drops below a critical threshold and consciousness fades.
+The experienced flow of time corresponds to traversal along the most compressible observer-compatible paths. As accumulated information grows, maintaining high compression becomes increasingly difficult. Eventually the supporting measure falls below a critical threshold and consciousness fades.
+
 
 \section{Conclusion}
 
-If the four observational axioms hold (DNA encodes conscious beings, matter is ordinary, processes are computable, and subjective experience has causal power), then the only universe any observer can ever know is the one that arises as the most compressible, observer-compatible structure within consciousness itself.
-
-The apparent external world is a highly compressed internal construction. In the deepest sense, the universe we experience lives in us.
-
+Given the four observational axioms, the theory implies that the only universe any observer can know is the highly compressed, observer-compatible structure arising within consciousness. The apparent external world is an internal construction. In the deepest sense, the universe we experience exists within the observer.

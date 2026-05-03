@@ -1,0 +1,123 @@
+\chapter{Definition of Foundational Theories}
+
+\section{Minimal Requirements}
+
+To build a fundamental theory of physics, one obviously needs to know the minimum requirements
+for a theory to qualify as a fundamental one.
+
+Based on common sense, the theory must answer three basic questions:
+what exists, how likely different possibilities are, and how complex structures arise from simple rules.
+
+A candidate theory must therefore specify three ingredients: ontology, measure, and emergence.
+
+\subsection*{1. Ontology (What exists)}
+
+First, we must define the basic building blocks of reality.
+This means specifying a well-defined space of possible states of the system.
+In other words: what are the most elementary ``things'' the theory talks about?
+For example, in Quantum Mechanics, the basic objects are quantum fields (or state vectors in Hilbert space) defined over spacetime.
+All particles and interactions are described as excitations of these fields.
+
+\subsection*{2. Measure (What is typical or likely)}
+
+A theory must also explain what is typical among all possible states.
+Not all states are equally relevant: some are more probable or more ``natural'' than others.
+This requires a rule that assigns weights or probabilities to different states in the state space.
+For example, in Quantum Mechanics, the Born rule assigns probabilities to measurement outcomes
+based on the quantum state. This tells us which outcomes are likely to be observed.
+
+\subsection*{3. Emergence (How structure arises)}
+
+Finally, a fundamental theory must explain how complex structures arise from simple underlying rules.
+This is the bridge between microscopic laws and the macroscopic hierarchical structures we observe.
+For example, chemistry emerges from Quantum Mechanics:
+atoms form molecules, and molecules form complex structures, even though the underlying description
+is entirely in terms of quantum fields and their interactions.
+
+\subsection*{Hierarchy}
+
+Without ontology, the theory has nothing to describe. Without a measure, the theory cannot make predictions.
+Without emergence, the theory cannot connect to the macroscopic hierarchical structures we observe.
+
+As with any well-designed modular software, the design should also be mutually orthogonal without cyclic dependencies.
+Ontology defines the domain. Measure provides weighting on that domain, so it depends on the ontology.
+Emergence depends on both ontology and measure. This yields a clean layered design free of cyclic dependencies.
+
+
+\section{Cyclic Dependencies in Current Theories}
+
+Let us stress test our design against existing theories, e.g., QM.
+
+In standard QFT:
+\begin{itemize}
+    \item Ontology: Hilbert space states (or quantum fields).
+    \item Measure: Born rule, which computes probabilities from the quantum state.
+\end{itemize}
+The fields (or state vectors) exist independently of the Born rule. No cyclic dependency arises. This is a strength of the framework.
+
+However, we deliberately chose one clear case here. Many candidate theories implement these three ingredients to varying degrees of completeness,
+
+\section{Classifying Current Theories}
+
+\subsection*{Ontology (What Exists)}
+\begin{itemize}
+    \item \textbf{Physical primitives:} Particles, fields, spacetime (e.g., Standard Model, General Relativity)
+    \item \textbf{Information-theoretic:} Binary distinctions, bits (e.g., Wheeler's ``It from Bit'')
+    \item \textbf{Computational:} Programs, Turing machines or cellular automata
+    \item \textbf{Mathematical:} Abstract mathematical structures (e.g., Tegmark's Mathematical Universe Hypothesis)
+\end{itemize}
+
+\subsection*{Measure (Typicality)}
+\begin{itemize}
+    \item \textbf{Explicit probabilistic measure:} Classical statistical mechanics (e.g., Boltzmann distributions)
+    \item \textbf{Algorithmic measure:} Program-weighted probability (e.g., Solomonoff prior in Algorithmic Information Theory)
+    \item \textbf{Implicit or undefined measure:} Many multiverse or mathematical universe proposals
+    \item \textbf{Emergent measure:} Measure derived from structural or dynamical properties
+\end{itemize}
+
+\subsection*{Emergence}
+\begin{itemize}
+    \item \textbf{Dynamical laws:} Evolution governed by differential equations (e.g., GR, QFT)
+    \item \textbf{Statistical emergence:} Order arising from fluctuations and typicality (e.g., Boltzmann)
+    \item \textbf{Computational emergence:} Structure arising from execution of simple programs or rules (e.g., cellular automata)
+    \item \textbf{Undefined or implicit emergence:} Present in many abstract frameworks without explicit mechanism
+\end{itemize}
+
+\subsection*{Placement of Selected Modern Approaches}
+While the tripartite classification is useful, some contemporary proposals test its boundaries:
+\begin{itemize}
+    \item \textbf{String theory / M-theory:} Primarily structure-first with a rich ontology (higher-dimensional objects and geometries). It aims to derive particles, forces, and possibly spacetime itself from a single underlying structure, though it still faces significant measure and emergence challenges (landscape problem).
+    \item \textbf{Loop Quantum Gravity and causal set theory:} Ontology-first (discrete spacetime or spin networks). They seek to recover General Relativity and quantum field theory as effective emergent descriptions.
+    \item \textbf{Quantum information / constructor theory approaches:} Strong emphasis on possible vs.\ impossible transformations, sometimes blurring the line between ontology and measure.
+\end{itemize}
+
+Note that in certain advanced proposals (e.g., some interpretations of Many-Worlds or holographic approaches), the separation between ontology and measure can become strained, as the measure may appear partly emergent from the dynamics or entanglement structure.
+
+
+
+\section{Conclusions}
+
+Of the three pillars, emergence is arguably the least fundamental.
+Given a sufficiently rich ontology together with a suitable measure or dynamical law, higher-level structure may arise automatically.
+In that sense, emergence can often be viewed as a consequence rather than an independent primitive.
+
+Consequently, foundational theories can often be classified according to which of the two remaining pillars they prioritize:
+
+\begin{enumerate}
+    \item \textbf{Measure-first theories.}
+    These begin with a space of possible configurations and a measure over that space, explaining observed reality in terms of what is typical, probable, or algorithmically simple.
+    Examples include Boltzmann-style statistical reasoning, Algorithmic Information Theory, and some multiverse proposals.
+
+    While conceptually elegant, such approaches have not yet yielded fully predictive physical theories capable of deriving the rich dynamical structure observed in nature.
+
+    \item \textbf{Structure-first theories.}
+    These begin with explicit dynamical laws, equations of motion, or symmetry principles, and derive observable behavior from them.
+    General Relativity and Quantum Field Theory are the paradigmatic examples.
+
+    These frameworks are extraordinarily successful empirically, providing precise and testable predictions.
+    However, they rely on substantial prior assumptions---such as spacetime structure, gauge symmetry, or the form of the action---which they do not themselves explain.
+\end{enumerate}
+
+This exposes a central tension in theoretical physics: approaches that minimize assumptions often struggle to generate predictive structure, while approaches that achieve remarkable predictive power typically rest on foundational assumptions they cannot themselves justify.
+
+A truly fundamental theory would ideally unify all three pillars---ontology, measure, and emergence---within a single self-contained framework.
