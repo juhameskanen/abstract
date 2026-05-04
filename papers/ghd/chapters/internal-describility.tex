@@ -58,18 +58,20 @@ For an 8-bit word:
 
 The physical state is identical; only interpretation differs.
 
+
 \subsection*{Reading Order and Indexing}
 
 Even ordering conventions are not intrinsic to the data.
 
-A bitstring such as $001$ may correspond to different values depending on endianness or indexing conventions. For example:
+A bitstring such as $001$ may correspond to different values depending indexing conventions (endianess). For example:
 
 \begin{itemize}
 \item interpreted left-to-right: $1$
 \item interpreted right-to-left: $4$
 \end{itemize}
 
-Thus, numerical meaning depends on a chosen mapping from structure to semantics.
+and these are just two of the possible $2^n$ interpretations. 
+
 
 \section{Code as Data}
 
@@ -101,20 +103,32 @@ A single finite configuration admits a vast number of syntactically valid decomp
 \item execution histories
 \end{itemize}
 
-Most such interpretations are meaningless under any stable rule, but they nevertheless exist as valid mappings of the same underlying structure.
+While the state space is $2^n$, the number of possible transition functions (the "laws of physics" or "code" for that system) is the set of all
+mappings from the state space to itself, which is $(2^n)^{(2^n)}$.
+
+Even with just a few bits the space is enormous. For $n=3$ bits it is $(2^3)! = 8! = 40,320$. For $n=10$ bits it is $(1024)!$, which is a number with over 2,500 digits.
+
+This reinforces why a "Universe" or a "Computer" cannot be fundamental—the space of possible "rules" for that system is far larger than the system itself.
+
 
 \section{Conclusion}
 
-A computer is a self-contained physical system. At the most fundamental level, it is a finite informational structure. The distinction between code and data, meaning and noise, execution and representation, arises only through internal or external interpretive mappings.
+A computer is a self-contained physical system.
 
-When humans interpret the output of a machine, this too relies on shared conventions regarding encoding, display, and measurement. A monitor does not intrinsically display a circle; it produces a two-dimensional array of values which is interpreted as a circle under agreed geometric conventions.
+At the most fundamental level, it is a finite informational structure.
+The distinction between code and data, meaning and noise, execution and representation, arises only through interpretive mappings.
+
+When humans interpret the output of a machine, this too relies on shared conventions regarding encoding, display, and measurement.
+Not even a monitor would display a circle unless mutually agreed interpretations.
+It assumes a two-dimensional array of values which is interpreted as a circle under agreed geometric conventions.
 
 If those conventions are altered, the same underlying data may appear entirely different.
 
-Thus, the effectiveness of mathematics in describing physical systems does not imply that mathematical symbols carry intrinsic meaning. Rather, it reflects the existence of structural correspondences between different levels of interpretation.
+Thus, the effectiveness of mathematics in describing physical systems does not imply that mathematical symbols carry intrinsic meaning.
+Rather, it reflects the existence of structural correspondences between different levels of interpretation.
 
 \begin{tcolorbox}[title=Self-Interpretive Information Principle]
-Information contain within itself the full space of possible interpretations.
+Information contains within itself the full space of possible interpretations.
 \end{tcolorbox}
 
-
+The "Self-Interpretive Information Principle" implies that the universe is a Self-Reading Book.
