@@ -63,14 +63,14 @@ The physical state is identical; only interpretation differs.
 
 Even ordering conventions are not intrinsic to the data.
 
-A bitstring such as $001$ may correspond to different values depending indexing conventions (endianess). For example:
+A bitstring such as $001$ may correspond to different values depending on the bit ordering conventions. For example:
 
 \begin{itemize}
 \item interpreted left-to-right: $1$
 \item interpreted right-to-left: $4$
 \end{itemize}
 
-and these are just two of the possible $2^n$ interpretations. 
+and these are just two of the $n!$ possible permutations of the bit significance.
 
 
 \section{Code as Data}
@@ -130,4 +130,5 @@ Rather, it reflects the existence of structural correspondences between differen
 \begin{tcolorbox}[title=Self-Interpretive Information Principle]
 Information contains within itself the full space of possible interpretations.
 \end{tcolorbox}
+
 
