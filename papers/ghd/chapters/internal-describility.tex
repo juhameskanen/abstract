@@ -103,22 +103,24 @@ A single finite configuration admits a vast number of syntactically valid decomp
 \item execution histories
 \end{itemize}
 
-While the state space is $2^n$, the number of possible transition functions (the "laws of physics" or "code" for that system) is the set of all
-mappings from the state space to itself, which is $(2^n)^{(2^n)}$.
+While the state space itself contains only $2^n$ configurations, the number of possible transition functions (i.e., possible “laws” or “programs” that could govern the system) is $(2^n)^(2^n)$. Even for small systems this number is immense. For n=3 bits it is already $8^8$ = 16,777,216.
+For n=10 bits the number has thousands of digits.
+This vast explosion of possible interpretive rules is why neither a “Universe” nor a “Computer” can be regarded as fundamental — the space of possible rules dwarfs the system they act upon.
 
-Even with just a few bits the space is enormous. For $n=3$ bits it is $(2^3)! = 8! = 40,320$. For $n=10$ bits it is $(1024)!$, which is a number with over 2,500 digits.
-
-This reinforces why a "Universe" or a "Computer" cannot be fundamental—the space of possible "rules" for that system is far larger than the system itself.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/interpretation-space}
+    \caption{A single byte (11111111) can be 255, or -1, or a machine instruction that moves data in memory.
+      The information itself is silent.
+      The enormous space of possible interpretations is where mathematics becomes realizable,
+      where computation runs, and where conscious observers like Alice can emerge as different readings of the exact same underlying structure.}
+    \label{fig:interpretation-space}
+\end{figure}
 
 
 \section{Conclusion}
 
-A computer is a self-contained physical system.
-
-At the most fundamental level, it is a finite informational structure.
-The distinction between code and data, meaning and noise, execution and representation, arises only through interpretive mappings.
-
-When humans interpret the output of a machine, this too relies on shared conventions regarding encoding, display, and measurement.
+When humans interpret the output of a machine, it relies on shared conventions regarding encoding, display, and measurement.
 Not even a monitor would display a circle unless mutually agreed interpretations.
 It assumes a two-dimensional array of values which is interpreted as a circle under agreed geometric conventions.
 
