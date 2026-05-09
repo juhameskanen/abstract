@@ -2,36 +2,40 @@
 
 \section{From Theory to Simulation}
 
-The ultimate test of any theory is whether it can produce something that resembles the world we observe, using only its own principles.
+The ultimate test of the framework developed so far is whether it can generate something that resembles observed reality using only its own principles.
 
-We built a minimal proof-of-concept simulation with a clear question:
+We constructed a minimal proof-of-concept simulation with one central question:
 
 \begin{quote}
-Given \emph{only} an observer-conditioned compression measure, can anything resembling inertia, quantum interference, or mutual attraction emerge — without being explicitly programmed?
+Given \emph{only} an observer-conditioned spectral compression measure, can anything resembling inertia, interference, or mutual attraction emerge — without being explicitly programmed?
 \end{quote}
 
-No forces, equations of motion, spacetime metric, or physical laws were hard-coded. The system is a pure ``Non-Physical Engine'' that selects configurations solely according to the joint spectral-geometric complexity measure.
+No forces, equations of motion, spacetime metric, or physical laws were hard-coded.
+The system is a pure informational engine that selects configurations solely according to a joint spectral-geometric complexity measure.
 
 \section{The Observer Proxy}
 
-Full biological observers are computationally intractable, so we use a simple proxy: a localized Gaussian wave packet with limited internal memory — essentially a small, coherent ``blob''. The blob size and memory capacity are adjustable parameters.
+Since full biological observers are computationally intractable, we use a simplified proxy: a localized Gaussian wave packet with limited internal memory — essentially a small, coherent ``blob''.
+The size and memory capacity of this blob are adjustable parameters.
 
-The simulation explores possible ``observer walks'' (sequences of configurations compatible with the blob) and selects them according to the induced observer-conditioned measure $P(c \mid O)$.
+The simulation explores possible ``observer walks'' (sequences of configurations consistent with the persistence of this blob) and selects them according to the induced observer-conditioned measure $P(c \mid O)$.
 
 \section{Implementation}
 
-We implemented a complex-valued wavefunction class that computes spectral complexity directly from frequencies, phases, and amplitudes. Geometric complexity is approximated via a linearized measure of curvature and boundary sharpness.
+We implemented a complex-valued wavefunction class that directly computes spectral complexity from frequencies, amplitudes, and phases.
+Geometric complexity is approximated through a linearized measure of curvature and boundary sharpness.
 
-A Metropolis-Hastings sampler explores the space, guided exclusively by minimization of total description length.
+A Metropolis-Hastings sampler explores the configuration space, guided exclusively by the minimization of total spectral-geometric description length.
 
 \section{Emergent Phenomena}
 
-Even with this minimal setup, several non-trivial behaviors emerge:
+Even in this highly minimal setup, several non-trivial behaviors emerge naturally:
 
 \begin{itemize}
-    \item \textbf{Inertia and Smooth Motion:} Blobs naturally follow smooth, curved trajectories. Sharp changes in direction require high-frequency spectral components, which carry high description cost and are heavily suppressed.
-    \item \textbf{Weak Mutual Attraction:} Configurations in which blobs are closer together often have lower joint spectral-geometric complexity, leading to a statistical tendency to cluster.
-    \item \textbf{Wave-like Interference:} Interference patterns appear naturally from the complex-valued wavefunction representation.
+\item \textbf{Inertia and Smooth Motion:} The blobs follow smooth, curved trajectories.
+  Sharp changes in direction introduce high-frequency components, which carry high spectral cost and are heavily suppressed.
+    \item \textbf{Weak Mutual Attraction:} Configurations in which multiple blobs are closer together often exhibit lower joint spectral-geometric complexity, producing a statistical tendency toward clustering.
+    \item \textbf{Wave-like Interference:} Interference patterns arise spontaneously from the complex-valued wavefunction representation.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -43,43 +47,41 @@ Even with this minimal setup, several non-trivial behaviors emerge:
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/emergent_interference.png}
-\caption{Emergent interference patterns in microscopic Gaussian blobs.}
+\caption{Emergent interference patterns between microscopic Gaussian blobs.}
 \end{figure}
 
-These results are encouraging. Law-like behavior, including something resembling Newtonian inertia and weak gravity, arises purely from informational compression.
+These results suggest that key aspects of classical and quantum behavior can arise purely from informational compression.
 
 \section{The Fermion Problem}
 
-Despite these successes, a major limitation appears: the Gaussian blobs eventually lose their individual identities and merge into a single undifferentiated structure. There is no stable repulsion or exclusion at close range.
+Despite these encouraging results, a significant limitation appears.
+The Gaussian blobs eventually lose their individual identities and merge into a single undifferentiated structure.
+There is no stable repulsion or exclusion principle at short distances.
 
-In standard quantum mechanics, fermions obey the Pauli exclusion principle due to antisymmetry of the wavefunction. In our purely compression-based measure, symmetric (bosonic) configurations are strongly favored because they allow shared spectral modes and lower total description length. Antisymmetric configurations appear to require significantly higher complexity, and thus are exponentially suppressed.
+In standard quantum mechanics, fermions obey the Pauli exclusion principle due to antisymmetry of the wavefunction.
+In our pure compression-based approach, symmetric (bosonic) configurations are strongly preferred because they allow shared spectral modes and lower total description length.
+Antisymmetric configurations appear significantly more expensive and are therefore suppressed.
 
-Hard-coding antisymmetry would violate the spirit of the project. The central open challenge is therefore to find a natural mechanism within the compression measure that makes multiple occupancy of identical states dramatically more expensive when coherent observers are present.
+Hard-coding antisymmetry would violate the spirit of the project.
+Finding a natural mechanism \emph{within} the compression measure that makes multiple occupancy of the same state dramatically more costly for coherent observers remains the most important open challenge of the theory.
 
-This is currently the most important open problem of the theory.
 
 \section{Conclusion}
 
-The simulation demonstrates that key features of classical and quantum behavior (inertia, interference, weak attraction) can emerge from pure informational compression and observer conditioning. However, stable distinguishable matter requires something resembling fermionic statistics.
+This proof-of-concept simulation demonstrates that important features of physical law — inertia, wave interference, and weak attraction — can emerge from pure spectral compression and observer conditioning, without being explicitly programmed.
 
-The hunt for emergent exclusion within a pure description-length measure is now the primary frontier.
+It supports the broader thesis that law-like behavior is not imposed from outside but arises internally as a consequence of how self-interpretive information is most efficiently organized.
+However, the emergence of stable, distinguishable particles (fermionic statistics) is not yet achieved and constitutes the current frontier.
 
 
-\section{Videos}
+\section{Accompanying Videos}
 
-The following two videos shifts focus from the evolution of the system to the trajectory of the observer. By applying an 'observer filter' (Gaussian blob)
-across all possible configurations, we map every valid observational sequence. When compressed using complex-valued Fourier (the wavefunction),
-we find that 'smooth' trajectories—those that are predictable and symmetric—possess the highest compressibility.
-Consequently, these ordered observer-walks are exponentially more probable than their chaotic counterparts.
+By applying an observer filter (the Gaussian blob) across all possible configurations and evaluating them under complex-valued Fourier compression (the wavefunction), smooth and symmetric trajectories consistently show the highest compressibility.
 
 \begin{itemize}
-    \item \href{https://youtu.be/G6p1Nrd1zBQ}{Macroscopic scale}
+    \item \href{https://youtu.be/G6p1Nrd1zBQ}{Macroscopic scale observer}
     \item \href{https://youtu.be/Tx-LDoXpfWM}{Subatomic scale blobs}
 \end{itemize}
 
-
-
-In the first simulation, where the observer is large relative to the wavelength, the fine-grained interference patterns are smoothed over.
-The observers appear to collapse, converging into a single, unified point—a 'bosonic' merger of entities.
-
-In the second simulation, we bring the observer scale down to the size of the wavelength.
+In the macroscopic case, fine interference is averaged over, and observers tend to converge.
+In the microscopic case, wave-like behavior becomes dominant.

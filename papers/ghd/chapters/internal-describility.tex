@@ -5,132 +5,156 @@
 Let us stress-test the claim of the ``unreasonable effectiveness of mathematics in the natural sciences.''
 
 Two intelligent agents, located at different points in space and time, independently develop the same arithmetic.
-Without exchanging information, both agree on basic structure:
+Without exchanging any information, both agree on the following relation.
 
-Let Alice use a decimal system, motivated by biological convenience (ten fingers, ten toes):
-
+Alice uses a decimal system, motivated by biological convenience (ten fingers):
 \[
 2 + 3 = 5.
 \]
 
-Let Bob, working in a computational environment, adopt binary representation:
-
+Bob, working in a computational environment, adopts binary representation:
 \begin{itemize}
 \item $2 \rightarrow 10_2$
 \item $3 \rightarrow 11_2$
 \item $5 \rightarrow 101_2$
 \end{itemize}
 
-In binary arithmetic, the same relation becomes:
-
+In binary arithmetic the same relation becomes:
 \[
 10_2 + 11_2 = 101_2.
 \]
 
-If Alice were to encounter Bob's notation without context, she would likely misinterpret the symbols.
-In particular, $10_2$ does not refer to ten in decimal, but to two in base-10 interpretation.
-
-Even if the full expression is given, interpretation still depends on the assumed encoding scheme.
-
-Thus, meaning is not intrinsic to symbol structure alone, but depends on an interpretive convention.
+If Alice encountered Bob's notation without context, she would misinterpret the symbols.
+In particular, $10_2$ does not refer to ten.
+Even the full expression requires an assumed encoding scheme.
+Thus, meaning is not intrinsic to the symbol structure alone, but depends on an interpretive convention.
 
 \subsection*{Symbolic Relativity}
 
-The arbitrariness of representation becomes clearer when we replace digits entirely.
-For example, the binary alphabet $\{0,1\}$ may be replaced with the faces of a coin $\{H,T\}$:
-
+The arbitrariness of representation becomes clearer when we replace the digits entirely.
+The binary alphabet $\{0,1\}$ may be replaced with coin faces $\{H,T\}$:
 \[
 HT + HH = HTH.
 \]
 
-Similarly, operational symbols such as $+$ and $-$ are not inherently tied to addition or subtraction. They are part of a chosen syntactic convention.
+Operational symbols such as $+$ and $-$ are likewise part of a chosen syntactic convention, not intrinsic to the underlying relation.
 
 \subsection*{Two's Complement}
 
 In finite digital systems, identical bit patterns admit multiple semantic interpretations.
-
 For an 8-bit word:
-
 \begin{itemize}
-\item $11111111$ may represent $255$ in unsigned interpretation
-\item or $-1$ in two's complement representation
+\item $11111111$ may represent $255$ in unsigned interpretation,
+\item or $-1$ in two's complement representation.
 \end{itemize}
 
-The physical state is identical; only interpretation differs.
-
+The physical state is identical; only the interpretation differs.
 
 \subsection*{Reading Order and Indexing}
 
-Even ordering conventions are not intrinsic to the data.
-
-A bitstring such as $001$ may correspond to different values depending on the bit ordering conventions. For example:
-
+Even ordering conventions are not intrinsic.
+A bitstring such as $001$ may correspond to different values depending on bit significance:
 \begin{itemize}
-\item interpreted left-to-right: $1$
-\item interpreted right-to-left: $4$
+\item left-to-right (MSB first): $1$,
+\item right-to-left (LSB first): $4$.
 \end{itemize}
 
-and these are just two of the $n!$ possible permutations of the bit significance.
-
+These are merely two of the $n!$ possible permutations of bit significance.
 
 \section{Code as Data}
 
-Consider a computer in full physical detail. A memory dump yields a finite sequence of bits. Likewise, the CPU, instruction set architecture, and storage devices are themselves physically instantiated information structures.
+Consider a computer in full physical detail.
+A memory dump yields only a finite sequence of bits.
+The CPU, instruction set, and storage devices are themselves physically instantiated information structures.
+At the level of raw physical state there is no intrinsic separation between ``code'' and ``data''.
+This distinction arises solely through an interpretive layer.
 
-There is no intrinsic separation between ``code'' and ``data'' at the level of raw physical state. This distinction arises only through an interpretive layer imposed by an executing system.
-
-Even when the architecture is known, the global state of a machine remains a configuration within a finite state space of size:
-
-\[
-2^n,
-\]
-
-where $n$ is the number of bits describing the system state.
-
-Each configuration may participate in multiple possible interpretations depending on how state transitions are mapped to computational semantics.
-
-From this perspective, computation is not a property of isolated states, but of relations between states under an interpretation rule.
+The global state of an $n$-bit system occupies a configuration space of size $2^n$.
+Computation, or any other semantics, arises only from relations between states under a chosen interpretive rule.
 
 \section{Interpretational Explosion}
 
 As the number of bits increases, the space of possible interpretations grows combinatorially.
-A single finite configuration admits a vast number of syntactically valid decompositions into:
+A single finite configuration admits a vast number of syntactically valid decompositions into code/data partitions, memory layouts, instruction interpretations, and execution histories.
 
-\begin{itemize}
-\item code vs data partitions
-\item memory layouts
-\item instruction interpretations
-\item execution histories
-\end{itemize}
+While the state space itself contains only $2^n$ configurations, the number of possible transition functions is $(2^n)^{2^n}$.
+For $n=3$ bits this is already $8^8 = 16\,777\,216$.
+For $n=10$ the number has thousands of digits.
 
-While the state space itself contains only $2^n$ configurations, the number of possible transition functions (i.e., possible “laws” or “programs” that could govern the system) is $(2^n)^(2^n)$. Even for small systems this number is immense. For n=3 bits it is already $8^8$ = 16,777,216.
-For n=10 bits the number has thousands of digits.
-This vast explosion of possible interpretive rules is why neither a “Universe” nor a “Computer” can be regarded as fundamental — the space of possible rules dwarfs the system they act upon.
+This vast explosion of possible interpretive rules implies that neither a ``Universe'' nor a ``Computer'' can be regarded as fundamental in isolation — the space of possible rules dwarfs the configurations they act upon.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/interpretation-space.png}
-    \caption{A single byte (11111111) can be 255, or -1, or a machine instruction that moves data in memory.
+    \caption{A single byte (11111111) can be interpreted as 255, or $-1$, or a machine instruction, or part of a larger structure.
       The information itself is silent.
-      The enormous space of possible interpretations is where mathematics becomes realizable,
-      where computation runs, and where conscious observers like Alice can emerge as different readings of the exact same underlying structure.}
+      The enormous space of possible interpretations is where mathematics becomes possible, where computation can be described, and where conscious observers can emerge as different readings of the exact same underlying structure.}
     \label{fig:interpretation-space}
 \end{figure}
+
+A raw bitstring does not intrinsically contain logic, syntax, semantics, truth conditions, or consistency relations.
+These arise only after selecting an interpretive scheme.
+
+\subsection{Equivalence Classes}
+
+Even after an interpretation is assigned, it is not unique.
+Different interpretive schemes may preserve the same underlying relational structure.
+
+Consider a sufficiently large bitstring.
+Under one interpretation it may appear as random noise.
+Under another it may be interpreted as implementing the relation $2 + 3 = 5$, as encoding a mathematical structure, or even as the informational substrate of an observer.
+Instruction layouts, memory partitions, addressing schemes, and representational conventions may all vary, yet certain structural relations can remain invariant across these transformations.
+
+We therefore define:
+
+\begin{tcolorbox}[title=Interpretive Equivalence Class]
+Two interpretations belong to the same interpretive equivalence class if they preserve the same observable relational structure under admissible transformations.
+\end{tcolorbox}
+
+What ultimately matters is not the precise arrangement of symbols, but the invariant relational structure that survives reinterpretation:
+\[
+\text{bitstring} \ \longrightarrow \ \text{interpretation} \ \longrightarrow \ \text{relational structure (invariant)}
+\]
+
+This relational structure is more primitive than computation, mathematics, or any particular semantics.
+All of these are merely possible interpretations.
 
 
 \section{Conclusion}
 
-When humans interpret the output of a machine, it relies on shared conventions regarding encoding, display, and measurement.
-Not even a monitor would display a circle unless mutually agreed interpretations.
-It assumes a two-dimensional array of values which is interpreted as a circle under agreed geometric conventions.
-
-If those conventions are altered, the same underlying data may appear entirely different.
-
-Thus, the effectiveness of mathematics in describing physical systems does not imply that mathematical symbols carry intrinsic meaning.
-Rather, it reflects the existence of structural correspondences between different levels of interpretation.
-
 \begin{tcolorbox}[title=Self-Interpretive Information Principle]
-Information contains within itself the full space of possible interpretations.
+Information contains within itself the full space of possible interpretations and their equivalence classes.
 \end{tcolorbox}
 
+When humans interpret the output of a computer monitor, they rely on an astronomical stack of shared conventions (encoding standards, pixel geometry, scan order, handedness, row length, etc.). Changing these conventions can render the identical underlying data unrecognizable or meaningless.
 
+
+
+\subsection{On the Unreasonable Effectiveness of Mathematics}
+
+The preceding analysis allows us to revisit and resolve Eugene Wigner's famous puzzle concerning the ``unreasonable effectiveness of mathematics in the natural sciences.''
+
+Mathematics is effective not because the physical world possesses intrinsic mathematical properties, nor because abstract mathematical objects inhabit a Platonic realm with causal influence on matter.
+Instead, its effectiveness arises from the highly selective action of conscious interpreters.
+
+A raw information structure --- whether a bitstring, a physical state, or the configuration of the universe itself --- admits an astronomically large space of possible interpretations.
+Within this space, only a vanishingly small subset consists of stable, coherent, predictive, and intersubjectively shareable relational structures.
+Mathematics is precisely this privileged slice.
+
+Intelligent observers do not passively discover pre-existing mathematical truths.
+They actively function as interpretive filters that select, stabilize, and commit to specific equivalence classes within the vast interpretive landscape.
+What we call ``physical law'' emerges when these selected mathematical structures align tightly with the relational invariants of observed phenomena.
+
+This perspective dissolves the apparent mystery.
+The effectiveness of mathematics is reasonable once we recognize that:
+\begin{itemize}
+\item The underlying information is semantically silent and interpretationally prolific.
+\item Observers themselves are self-interpreting structures that have evolved or emerged to privilege those interpretations yielding survival-relevant predictability and consistency.
+\item Different observers (or the same observer under different conventions) can extract entirely different mathematics from the same raw information, yet certain deep structural correspondences remain robust across wide classes of interpretations.
+\end{itemize}
+
+Thus, mathematics works so well because we are exceptionally good at finding and fixing those rare interpretive schemes that map the invariant relational skeleton of reality onto compact, powerful, and communicable symbolic systems.
+The universe does not need to be mathematical.
+It only needs to be sufficiently rich in information to admit the interpretive filters that conscious observers naturally apply.
+
+In this light, the ``unreasonable effectiveness'' is revealed as an anthropic-like selection effect operating within the enormous space of possible interpretations of self-interpretive information.

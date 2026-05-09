@@ -2,16 +2,16 @@
 
 \section{Introduction}
 
-Now that we are, at least in spirit, fully trained practitioners of quantum mechanics, let us ask: what is the deep nature of the theory and its mysterious wavefunction? 
+What is the deep nature of the theory and its mysterious wavefunction? 
 
-Why does everything at the subatomic level appear to behave like a wave?
+The microscopic building blocks are simple—a small set of fields with just a few parameters producing enormous emergent richness.
 
-If we view the system from a distance, we observe two things:
-First, the microscopic building blocks are simple—a small set of fields with just a few parameters producing enormous emergent richness.
-Second, the complex-valued amplitudes in the wavefunction do all the heavy lifting.
+The complex-valued amplitudes in the wavefunction do all the heavy lifting.
 Interference, entanglement, tunneling and superpositions are simply consequences of existing within a complex-valued Hilbert space. 
 
 If we don’t pay attention to the above-mentioned little details, what remains?
+
+Why does everything at the subatomic level appear to behave like a wave?
 
 
 \subsection*{The Movie Analogy}
@@ -24,6 +24,9 @@ From this perspective, the Quantum Mechanical wavefunction is simply an advanced
 
 Just as a Fourier transform spreads image information across coefficients, the wavefunction distributes amplitude across
 basis states in Hilbert space.
+
+Waves (and complex-valued amplitudes in particular) are exceptionally efficient at encoding relational information densely. They naturally produce the kind of smoothness and continuity that intelligent observers require.
+
 
 
 \section{The Dithering Analogy}
@@ -51,17 +54,26 @@ the fidelity of the universe with a minimal expenditure of underlying informatio
 \section{Spectral Complexity}
 
 Kolmogorov complexity, as utilized in Algorithmic Information Theory (AIT), provides a theoretical foundation for minimal description length.
-However, it is neither computable nor continuous, which limits its utility as a functional physical principle. 
+However, it is neither computable nor continuous, which limits its utility as a functional physical principle.
 
-Observational evidence suggests that physical systems already possess a natural, inherent mode of representation: their decomposition into \textbf{spectral modes}. This motivates the replacement of abstract algorithmic complexity with a physically grounded alternative:
+It is difficult to see how such a ``jumpy'' measure could easily support stable prediction, reasoning, or decision-making by intelligent observers.
 
-\textbf{Spectral Complexity ($C_s$):} The total information required to specify the amplitudes, frequencies, and phases of the modes composing a physical state.
+Observational evidence suggests that physical systems already possess a natural, inherent mode of representation: their decomposition into \textbf{spectral modes}.
+This motivates the replacement of abstract algorithmic complexity with a physically grounded alternative:
+
+\textbf{Spectral Complexity:} The total information required to specify the amplitudes, frequencies, and phases of the modes composing a physical state.
 
 
 \subsection*{The Cost Function}
 
 If we implement a wavefunction as a computational class, the complexity is determined by the bits required to instantiate its constituent modes.
-We can model the total spectral complexity $C_s$ of a state $\Psi$ as the sum of its algorithmic overhead and the parameters of its $N$ modes:
+
+Different precise definitions are possible (depending on exactly how one encodes the compressed wavefunction), but they all share the critical property:
+they assign a smooth gradient of cost across neighboring states. This smoothness is not incidental — it is essential.
+
+In order to write proof-of-concept simulation, we need to implement the wavefunction class with a method that computes the complexity.
+
+We model the total spectral complexity $C_s$ of a state $\Psi$ as the sum of its algorithmic overhead and the parameters of its $N$ modes:
 
 \[
 C_s(\Psi) = \text{Cost}(\text{base}) + \sum_{i=1}^{N} \left[ \text{Cost}(\phi_i) + \text{Cost}(A_i) + \log_2\left(\frac{\omega_i}{\Delta\omega}\right) \right]
@@ -70,15 +82,17 @@ C_s(\Psi) = \text{Cost}(\text{base}) + \sum_{i=1}^{N} \left[ \text{Cost}(\phi_i)
 Where:
 \begin{itemize}
 \item \textbf{$\text{Cost}(\text{base})$}: Represents the constant $O(1)$ cost of the `sin()` method. In a universe-scale description, this is vanishingly small and treated as a constant.
-\item \textbf{$\text{Cost}(\phi_i)$}: The bit-cost of the phase. Since phase is bounded within $[0, 2\pi]$, this is a small, fixed-width cost per mode.
+\item \textbf{$\text{Cost}(\phi_i)$}: The bit-cost of the phase. Since phase is bounded within $[0, 2\pi]$, we can assume this is a small, fixed-width cost per mode.
 \item \textbf{$\text{Cost}(A_i)$}: The information required to encode the amplitude.
 \item \textbf{$\log_2(\omega_i / \Delta\omega)$}: The dominant term. It represents the number of bits required to specify the frequency $\omega$ relative to the system's minimum resolution $\Delta\omega$.
 \end{itemize}
 
+
+
+
 \subsection*{Solomonoff Suppression}
 
-One might argue that a continuous universe implies an infinite number of modes, leading to infinite complexity.
-However, within the framework of AIT, these infinities are naturally suppressed. According to the \textbf{Solomonoff Prior},
+According to the \textbf{Solomonoff Prior},
 the probability $P$ of a state is exponentially inversely proportional to its description length $L$:
 
 \[
@@ -86,23 +100,31 @@ P(s) \approx 2^{-L(s)}
 \]
 
 
-High-frequency "noise" and infinite-mode configurations are so spectrally expensive that their probability of manifestation vanishes. We do not find ourselves in a chaotic, infinitely complex universe for the same reason we do not find ourselves inside an uncompressed, raw-pixel movie: the simplest, most compressed descriptions are the ones that dominate reality. 
+High-frequency "noise" and infinite-mode configurations are so spectrally expensive that their probability of manifestation vanishes.
+We do not find ourselves in a chaotic, infinitely complex universe for the same reason we do not find ourselves inside an uncompressed, raw-pixel movie: the simplest, most compressed descriptions are the ones that dominate reality. 
+
+It should be noted that the above presented Spectral Complexity definition is somwhat arbitrary. For example, the number of
+bits required to represent phase might be equally significant to cost of the frequency component, due to precision requirements.
+
+However, what matters is that measure is continuous  and smooth. The intuition behind this is that in order to provide
+intelligent observers with best predictive tools for features like reasonign and decision making, discrete non-continuos
+functions, like Kolmogorov, are ruled out. 
+
 
 
 \section{Emergent Order through Spectral Compression}
 
 To test the validity of the Compression Hypothesis, let us consider a bitstring starting out
-from zero entropy state and evolving towards equillibrium. 
-
-In this iteration, the evolution from zero entropy to higher entropy states was compressed
-through a complex-valued wavefunction representation.
+from zero entropy state and evolving towards equillibrium, as compressed 
+a complex-valued wavefunction representation.
 
 According to the modified principles of Solomonoff induction, the "measure" of any given universe is determined by its compressibility.
 Therefore, the most compressible configurations—those defined by law-like regularity and symmetry—dominate the probability space.
 
 \subsection*{Results}
 
-Upon performing random samples from this spectral distribution, the results shifted dramatically:
+Compared to our first Something out of Nothing simulations demonstrating emergence of chaotic Bolzzman like universes, the results shifted dramatically:
+
 
 \begin{itemize}
     \item \textbf{Emergence of Smoothness:} The chaotic, high-entropy noise of the baseline was replaced by smoothly evolving structures.
@@ -122,16 +144,15 @@ These findings support the idea that the wave-like nature of the micro-cosmos is
 optimized compression scheme. 
 
 
+
 \section{Conclusions}
 
-We have landed on a many-worlds-style view of quantum mechanics — all possible configurations exist simultaneously in a vast static superposition — but without any dynamic branching in an external time.
+We have landed on a model that resembles closely many-worlds-style view of quantum mechanics — all possible configurations exist simultaneously in a vast static superposition — but without any dynamic branching in an external time.
 Each configuration corresponds to what an Everettian observer would experience as a separate world.
 Together they form the timeless universe described by the Wheeler-DeWitt equation, emerging purely from information.
 
-Quantum mechanics may be viewed fundamentally as a theory of representation.
-The wavefunction encodes physical reality in a continuous, spectral form that naturally supports superposition, interference, and entanglement.
-
-By replacing the uncomputable Kolmogorov notion of complexity with spectral complexity, we establish a bridge between physical structure and informational description. The remaining components of Algorithmic Information Theory (AIT) still apply. Specifically, Solomonoff induction explains why we find ourselves within a law-like, smooth universe governed by symmetries, rather than manifesting as chaotic Boltzmann brains.
+By replacing the uncomputable Kolmogorov notion of complexity with spectral complexity, we establish a bridge between physical structure and informational description.
+Specifically, Solomonoff-kind induction explains why we find ourselves within a law-like, smooth universe governed by symmetries, rather than manifesting as chaotic Boltzmann brains.
 
 In this view, the wave-like nature of the microscopic world is not a mystery, but a reflection of how information is most effectively organized.
 
@@ -140,7 +161,7 @@ The cosmos waves because we are observing compressed structure.
 The wavefunction is the compression scheme of the universe.
 
 
-\section{Videos}
+\section{Proof-of-Concept Videos}
 
 From zero entropy to thermal equilibrium, there are nearly infinite paths—most of which represent just chaotic noise.
 We use AI to isolate the paths that are most 'compressible'—those with hidden symmetries and structural patterns.
@@ -153,3 +174,4 @@ but a statistically dominant feature of the compressed universe.
     \item \href{https://youtube.com/shorts/5XYXhmOgiW8}{Video 2}
     \item \href{https://youtube.com/shorts/XAMWDg5zX6I}{Video 3}
 \end{itemize}
+
