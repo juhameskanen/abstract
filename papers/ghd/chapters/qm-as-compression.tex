@@ -28,8 +28,9 @@ basis states in Hilbert space.
 Waves (and complex-valued amplitudes in particular) are exceptionally efficient at encoding relational information densely. They naturally produce the kind of smoothness and continuity that intelligent observers require.
 
 
-
 \section{The Dithering Analogy}
+
+The wavefunction itself is deterministic. Randomness emerges only when one attempts to interpret it in terms of discrete particles.
 
 Consider a graphics engine rendering a perfectly smooth, analytically defined sphere with an intended intensity of 0.85.
 If the display hardware is limited to discrete intensities of 0.8 and 0.9, it cannot render the true value.
@@ -58,7 +59,7 @@ However, it is neither computable nor continuous, which limits its utility as a 
 
 It is difficult to see how such a ``jumpy'' measure could easily support stable prediction, reasoning, or decision-making by intelligent observers.
 
-Observational evidence suggests that physical systems already possess a natural, inherent mode of representation: their decomposition into \textbf{spectral modes}.
+More importantly, observational evidence suggests that physical systems already possess a natural, inherent mode of representation: their decomposition into \textbf{spectral modes}.
 This motivates the replacement of abstract algorithmic complexity with a physically grounded alternative:
 
 \textbf{Spectral Complexity:} The total information required to specify the amplitudes, frequencies, and phases of the modes composing a physical state.
@@ -68,7 +69,8 @@ This motivates the replacement of abstract algorithmic complexity with a physica
 
 If we implement a wavefunction as a computational class, the complexity is determined by the bits required to instantiate its constituent modes.
 
-Different precise definitions are possible (depending on exactly how one encodes the compressed wavefunction), but they all share the critical property:
+It should be noted that this is our first toy candidate. Different precise definitions are possible (depending on exactly how one encodes the
+compressed wavefunction), but they all share the critical property:
 they assign a smooth gradient of cost across neighboring states. This smoothness is not incidental — it is essential.
 
 In order to write proof-of-concept simulation, we need to implement the wavefunction class with a method that computes the complexity.
@@ -101,14 +103,10 @@ P(s) \approx 2^{-L(s)}
 
 
 High-frequency "noise" and infinite-mode configurations are so spectrally expensive that their probability of manifestation vanishes.
-We do not find ourselves in a chaotic, infinitely complex universe for the same reason we do not find ourselves inside an uncompressed, raw-pixel movie: the simplest, most compressed descriptions are the ones that dominate reality. 
 
-It should be noted that the above presented Spectral Complexity definition is somwhat arbitrary. For example, the number of
-bits required to represent phase might be equally significant to cost of the frequency component, due to precision requirements.
-
-However, what matters is that measure is continuous  and smooth. The intuition behind this is that in order to provide
-intelligent observers with best predictive tools for features like reasonign and decision making, discrete non-continuos
-functions, like Kolmogorov, are ruled out. 
+In other words, we do not find ourselves in a chaotic, infinitely complex universe because the information required to describe us can be
+arranged in numerous ways as a compressed wavefunction. The simplest, most highly compressed descriptions of our state are far more numerous and,
+consequently, are the ones in which we most likely find ourselves.
 
 
 
