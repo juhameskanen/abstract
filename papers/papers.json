@@ -11,72 +11,28 @@
       ]
     },
     {
-      "title": "The Theory",
+      "title": "Papers",
       "items": [
         {
-          "title": "D-Psi-G",
-          "slug": "theory-of-everything",
-	  "children": [
-            {
-              "title": "Philosophy",
-              "slug": "philosophy"
-            },
-            {
-              "title": "Formal Derivation",
-              "slug": "formal-derivation"
-            },
-            {
-              "title": "Ladders of Emergence",
-              "slug": "ladders"
-            },
-            {
-              "title": "Geometric Dimensions",
-              "slug": "dimensions"
-            },
-            {
-              "title": "Observer Probability",
-              "slug": "observer-probability"
-            },
-            {
-              "title": "Frequently Asked Questions",
-              "slug": "faq"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Core Papers",
-      "items": [
-        {
-          "title": "Paper-1: Informational Derivation of Reality",
+          "title": "Informational Derivation of Reality",
           "slug": "informational-derivation-of-reality"
         },
         {
-          "title": "Paper-2: Singularities as Zero-Entropy States",
+          "title": "Singularities as Zero-Entropy States",
           "slug": "black-hole-singularities"
         },
         {
-          "title": "Paper-3: Emergence of Spacetime",
+          "title": "Emergence of Spacetime",
           "slug": "emergence-of-spacetime"
 	},
         {
-          "title": "Paper-4: Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles",
+          "title": "Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles",
           "slug": "formation-of-structures"
 	},
         {
-          "title": "Paper-5: String Theory as Compression",
-          "slug": "string-theory"
-        },
-        {
-          "title": "Paper-6: The Hard Problem of Consciousness",
+          "title": "The Hard Problem of Consciousness",
           "slug": "hard-problem"
-        }
-      ]
-    },
-    {
-      "title": "Emergent Gravity Program",
-      "items": [
+        },
         {
           "title": "Quantum Cosmology: Spectral Complexity and the Measure of Observers in a Static Universe",
           "slug": "quantum-cosmology"
@@ -100,15 +56,14 @@
         {
           "title": "Spectral MDL",
           "slug": "spectral-mdl"
-        }
-      ]
-    },
-    {
-      "title": "Foundations",
-      "items": [
+        },
         {
           "title": "Wavefunction as Compression",
           "slug": "wavefunction-as-compression"
+        },
+        {
+          "title": "String Theory as Compression",
+          "slug": "string-theory"
         },
         {
           "title": "QFT Divergences",
@@ -123,16 +78,6 @@
         {
           "title": "Emergence of Time",
           "slug": "emergence-of-time"
-        },
-        {
-          "title": "Emergence of GR",
-          "slug": "emergence-of-gr",
-          "children": [
-            {
-              "title": "Plank Scale and Specral Gravity",
-              "slug": "supplementary"
-            }
-          ]
         }
       ]
     },
