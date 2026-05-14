@@ -1,12 +1,20 @@
 # Informational, Abstract Model of Everything ($IaM^e$)
 
-
 ## The Equations
 
 $$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O$$
-$$D-\psi-G$$
 
 Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
+
+The notation:
+
+$$D-\psi-G$$
+
+captures "Joint Compressibility" logic:
+
+* $D$ (Data/Description): The raw naked discrete information.
+* $\psi$ (Spectral/Quantum): The "Codec" that compresses data into wavefunctions (minimizing $C_s$).
+* $G$ (Geometry/Gravity): The geometric manifold (minimizing $C_g$).
 
 
 ## Objective
