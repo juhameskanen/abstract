@@ -13,7 +13,7 @@ The same computation runs identically whether or not it ``feels like anything.''
 Both horns are unsatisfactory. The previous chapter undermines the hidden premise that generates this dilemma:
 the assumption that computation or mathematical law is ontologically fundamental.
 
-As established in the Self-Interpretive Information Principle, raw information is semantically neutral.
+As articulated by \nameref{pr:semantic-nakedness-of-information}, raw information is semantically neutral.
 A given configuration (a bitstring or physical state) admits an astronomically large space of possible interpretations.
 Computation, mathematics, and physical law are merely specific, highly selected slices within this space.
 Subjective experience does not need to ``insert itself'' into any single computational interpretation.
@@ -24,7 +24,7 @@ Instead, it operates at the level of interpretation itself.
 \end{center}
 
 Qualia are not located inside the mathematics or the computation.
-Rather, mathematics and computation are structures that appear \emph{within} particular interpretive readings performed by conscious observers.
+Rather, mathematics and computation are structures that appear \emph{within} particular interpretive readings performed by sufficiently complex, intelligent observers.
 What appears as a causally closed physical evolution is only one projection of a far richer underlying informational object.
 
 \section{Observer Equivalence Classes}
@@ -91,6 +91,62 @@ observer toward high-measure (highly compressible, relationally rich) interpreta
 This phenomenological axis provides an efficient approximation to optimization in an otherwise intractable space.
 
 This is the low-level domain of subjective experience, such as Pain.
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.4cm,
+        layer/.style={rectangle, draw, rounded corners=6pt, minimum width=9cm, align=center, font=\small},
+        base/.style={layer, minimum height=1.8cm, fill=blue!12, thick},
+        interp/.style={layer, minimum height=4.2cm, fill=orange!12, thick},
+        top/.style={layer, minimum height=1.6cm, fill=purple!12, thick},
+        arrow/.style={->, thick, >=stealth}
+    ]
+    
+    % Bottom Layer - Naked Bits
+    \node[base] (Bits) at (0,0) {
+        \textbf{Naked Bits / Raw Informational Totality (U)} \\
+        \small Semantically silent configurations
+    };
+    
+    % Middle Layer - Interpretation Space
+    \node[interp, above=of Bits] (Interp) {
+        \textbf{Interpretation Space} \\
+        \small Vast space of possible mappings \& self-interpretations \\
+        \\[4pt]
+        \textit{Heuristic Navigation Layer} \\
+        \small Pain $\leftrightarrow$ destabilization / fragmentation \\
+        \small Joy / Insight $\leftrightarrow$ stabilization / coherence \\
+        \small Feelings = navigation heuristics in interpretation space
+    };
+    
+    % Top Layer - Mathematics & Logic
+    \node[top, above=of Interp] (Math) {
+        \textbf{Mathematics \& Logical Reasoning} \\
+        \small Thin high-level subset \\
+        \small Maximal compression \& stable invariants \\
+        \small Enables abstract thinking and long-term survival strategies
+    };
+    
+    % Arrows
+    \draw[arrow] (Bits) -- node[right, font=\tiny] {interpreted as} (Interp);
+    \draw[arrow] (Interp) -- node[right, font=\tiny] {stable invariants} (Math);
+    
+    % Note on thinness
+    \node[below=0.3cm of Math, font=\scriptsize, align=center] (Note) {
+        \textit{Mathematics is only a tiny stable subset} \\
+        \textit{of the much larger interpretation space}
+    };
+    
+    % Self-containment
+    \draw[->, dashed, thick, bend right=40] (Interp) to node[auto, left, font=\tiny] {all inside U} (Bits);
+    
+    \end{tikzpicture}
+    \caption{Layered structure of experience in SIIP: From raw information to feelings to mathematics}
+    \label{fig:sii-hard-problem}
+\end{figure}
 
 
 \section{Evolutionary and Functional Role}

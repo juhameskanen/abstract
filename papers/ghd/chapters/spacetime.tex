@@ -5,9 +5,6 @@ In truth, downplaying GR as 'no big deal' wasn't entirely fair.
 
 Anyone familiar with GR most likely laughed while reading that—or perhaps cried, or more likely both.
 
-General Relativity is perhaps the hardest topic an average programmer can come across.
-While QFT deals with the "values" stored in the memory cells, GR defines the "memory addresses" themselves, the distance between those addresses, and the routing rules for traversing the pointer space.
-
 To get any sense out of GR, let's implement it.
 
 
@@ -75,7 +72,7 @@ It is a theory that doesn't just work; it performs with a level of mathematical 
 However, there is a catch. 
 
 In our simple \texttt{SpacetimeCell} above, we assumed the metric $g$ was a read-only, static background.
-But the true, mind-bending complexity of GR is that \textbf{the database writes back to itself}. 
+But the true, mind-bending complexity of GR is that the database writes back to itself. 
 
 The matter-energy values of QFT (the \textbf{Stress-Energy Tensor}, $T_{\mu\nu}$) act as write-commands to the Metric ($g_{\mu\nu}$).
 As matter moves, it mutates the metric.

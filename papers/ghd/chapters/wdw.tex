@@ -1,89 +1,130 @@
-\chapter{Towards Emergent Fermions}
+\chapter{The Static Universe: Quantum Cosmology}
+\label{chap:wdw}
 
-\section{Refining Spectral Complexity}
+\section{Everett without Branching}
 
-The preceding chapter identified the emergence of fermions as the central open challenge of the framework.
+The "Problem of Time" in physics is easily understood through the lens of state management. In a running program, time is the sequence of state mutations.
+But we have landed in static fully self contained universe which just is. Every possible state of every possible system is already "compiled" into a single, massive, static lookup table.
 
-The current, first-order version of Spectral Complexity — which adds the bit-cost of individual frequencies, amplitudes, and phases — naturally favors bosonic behavior by allowing heavy mode sharing.
+This is the Wheeler-DeWitt (WdW) universe. Standard physics often interprets this via the many-worlds (Everettian) view, but with a branching mechanism.
+In our informational framework, we refuse to rely on metaphysical branching. There is only a static configuration space $\mathcal{C}$ of $2^n$ bits. Every "Everettian world" is simply a different
+configuration in this massive set of information.
 
-We need a deeper, more sophisticated measure.
+The question then is: if everything exists at once, why do we experience a sequential "now"?
+As demonstrated earlier, the answer is that we find ourselves along the observer-compatible histories occupying the largest low-complexity equivalence classes.
 
-The solution lies in moving from a flat, additive complexity to a \textbf{hierarchical and implementation-relative} description length.
 
-The true informational cost of a wavefunction must include not only the direct parameters of its modes, but also the cost of the \emph{encoding scheme} chosen to represent those modes.
+\section{Quantum Cosmology: Spectral Complexity and the Measure of Observers}
 
-The Self-Interpretive Information Principle (SIIP) must be applied recursively to the spectral compression itself.
+To formalize this, we apply our theory to the scale of the entire cosmos.
+In standard quantum cosmology, physicists use a "Wick rotation" to imaginary time to make their math work. 
+Rather than relying on Euclidean continuation, we introduce an alternative informational weighting principle based on spectral complexity.
 
-Since the universe is fundamentally timeless (Wheeler--DeWitt-like), observers and time emerge internally as compressible \emph{worldlines} — ordinal sequences of configurations that an observer can ``walk'' while maintaining low total description length.
-The probability weight of any such worldline is governed by its overall compressibility.
 
-We therefore propose the following refinement:
-\[
-C_{\text{total}}(\Psi) = \min_{E} \Big[ \, C(\Psi \mid E) + \lambda \cdot C(E) + \mu \cdot C_{\text{obs}}(\Psi, O) \, \Big]
-\]
+\subsection*{Introduction}
 
-where:
+The canonical quantization of general relativity leads to the Wheeler-DeWitt equation \cite{DeWitt1967}:
+\begin{equation}
+\hat{\mathcal{H}} \Psi[g_{ij}, \phi] = 0,
+\end{equation}
+where $\Psi$ is the wavefunction of the universe. This equation is timeless. The ``Problem of Time'' arises because all physical predictions must be extracted from a single, static superposition.
 
+In this work, we propose \textit{Spectral Quantum Cosmology} (SQC).
+We remain strictly within the static WdW framework and introduce an information-theoretic selection principle based on \textit{Spectral Complexity}.
+Rather than weighting geometries via Euclidean action, we weight possible \textit{observer wavefunctions} directly.
+Observers with simpler internal descriptions dominate the measure.
+
+\section{Relational Observers in a Timeless Universe}
+
+Following Page and Wootters \cite{page1983clock}, time emerges relationally.
+The universal wavefunction $\Psi$ is static and contains entangled subsystems: a clock degree of freedom and the rest of the universe.
+
+An observer corresponds to a wavefunction $\psi_o$ that is entangled with a suitable clock variable $\lambda$ (like the scale factor of the universe).
+The experienced flow of time arises from correlations between observer states and relational clock degrees of freedom within the static universal wavefunction.
+
+\subsection*{Intuitive Analogy}
+
+One can think of the universe as divided into two entangled parts:
 \begin{itemize}
-\item \(C(\Psi \mid E)\) is the cost of describing the global timeless wavefunction under encoding scheme \(E\),
-\item \(C(E)\) is the cost of specifying the encoding scheme itself (including transformations, symmetries, or algebraic constraints),
-\item \(C_{\text{obs}}(\Psi, O)\) is the total description-length cost associated with extracting and sustaining compressible observer worldlines from \(\Psi\), penalizing loss of distinguishable identity, boundary integrity, and internal order.
+\item A "clock" subsystem: something that can "tick" (e.g., the position of a particle, the reading on a real clock, the scale factor of the expanding universe, or even a photon's polarization in experiments).
+
+\item The rest of the system: everything else one is interested in (particles, fields, you as an observer, etc.).
 \end{itemize}
 
-This hierarchical formulation naturally introduces non-linear, context-dependent, and threshold behavior.
+The total quantum state of the universe is a special entangled superposition. It is completely stationary from the outside — nothing "moves" globally.
 
-\section{Cheap Transformations and Antisymmetry}
+However, when one "look at" the state of the clock, the rest of the system appears to change depending on what the clock reads. For example, when the clock reads "10:00," the rest of the universe is in configuration A.
+When the clock reads "10:01," the rest of the universe is in configuration B. And so on. 
 
-Among the cheapest possible encoding transformations are simple symmetry operations — particularly sign flips under exchange of subsystems.
-Specifying a rule of the form ``multiply by $-1$ upon exchange'' has extremely low description cost (essentially a single bit or a short program fragment).
+These correlations can be built into the single static wavefunction.
+There is no external time making things evolve.
+The appearance of evolution comes purely from asking relational questions: ``Given that my clock shows time t, what is the state of the rest?''
 
-Consider two coherent observer-proxies (blobs) approaching each other.
-Their approach is smooth and inertial because any sudden jump would inject high-frequency modes, dramatically increasing spectral cost.
-The global structure of \(\Psi\) favors configurations with higher central amplitude, causing the blobs to draw closer.
+It's like a movie stored on a DVD. The entire film exists all at once on the disc (static). But when you play it and look at the time counter (the clock), scene 5 appears when the counter says 00:05:00, and scene 6 follows at 00:05:01. The story flows *relationally* through the correlation between the counter and the image.
 
-When the blobs begin to overlap significantly, a sharp competition arises between encodings:
+Physicists have actually done tabletop experiments with entangled photons. One photon acts as the "clock," the other as the "system."
+An external observer who looks at both photons together sees a static, timeless entangled state.
+But an "internal observer" who correlates with the clock photon sees the other photon evolving exactly as quantum mechanics predicts.
+Time "emerges" for the insider.
 
-\begin{itemize}
-\item \textbf{Symmetric encoding (bosonic):} Allows heavy mode sharing and constructive interference, keeping direct spectral cost \(C(\Psi \mid E)\) relatively low.
-  However, the ``video streams'' of the two observers begin to corrupt one another.
-  Internal boundaries dissolve, self-models become ambiguous, and worldline continuation rules turn highly incompressible (analogous to injecting frames from one MPEG video into another).
-  The total description length of any attempted distinct observer worldline explodes, driving \(C_{\text{obs}}\) to very high values.
+This tames the Problem of Time in a static universed. We don't need an external time parameter. Time is relational.
+It fits perfectly with a static configuration space or "block universe" view, and pairs naturally with our low-complexity observers:
+the observers who experience smooth, law-like evolution are those strongly correlated with good clock variables in low-complexity ways.
 
-\item \textbf{Antisymmetric encoding (fermionic):} Introduces the cheap antisymmetrizer rule (minus sign on exchange) at negligible cost to \(C(E)\). This creates a node in the exact identical-overlap sector and preserves distinguishable phase structure.
-  Each observer can maintain clean geometric boundaries and a simple, highly compressible continuation rule: the worldlines deflect smoothly (elastic-like rebound) while preserving internal order and identity.
-  Consequently, \(C_{\text{obs}}\) drops dramatically.
-\end{itemize}
+The universe as a whole is timeless and unchanging. But inside it, different parts can be entangled so that *one part acts as a clock for the other*.
+What we call "the flow of time" is just reading those built-in correlations — like different frames of a movie that all exist simultaneously, but appear sequential when we watch them with the timecode.
 
-Because the induced measure favors worldlines with minimal total description length, antisymmetric configurations dominate whenever multiple observer-capable structures interact closely.
-The minus sign is not imposed by hand — it emerges as the shortest program that protects the compressibility of distinct, persistent observer worldlines.
 
-This mechanism is inherently observer-conditioned and aligns with the Internal Emergence Principle and the timeless nature of the framework.
+\section{Spectral Complexity as the Measure}
 
-\section{Expected Simulation Outcomes}
+We define the \textit{Spectral Complexity} of an observer wavefunction $\psi_o(\lambda)$ as the minimal information cost of representing it in the frequency domain.
+\begin{equation}
+\psi_o(\lambda) = \sum_{k=1}^{M} c_k e^{i\omega_k\lambda}
+\end{equation}
 
-If this hierarchical refinement is successful, simulations should exhibit the following emergent behaviors:
-\begin{itemize}
-\item Stable individual identities even at close range,
-\item Short-range repulsion leading to elastic-like collisions and ``bouncing'' between blobs (while preserving inertia and smooth trajectories),
-\item Persistent multi-body systems in which separate entities orbit one another without merging,
-\item The informational origin of material rigidity — the foundation for atoms, molecules, and macroscopic objects.
-\end{itemize}
+According to the natural prior weight for any observer:
+\begin{equation}
+P(\psi_o) \propto 2^{-C_{\text{spec}}(\psi_o)}
+\end{equation}
 
-In essence, we expect to recover the emergence of ``solid matter'' from pure informational compression once the encoding hierarchy is properly taken into account.
+Observers requiring highly oscillatory or spectrally incoherent descriptions are exponentially suppressed.
+Conversely, observers who experience smooth, law-like evolution dominate the measure.
+This replaces the "imaginary time" trick of standard physics with a native algorithmic measure.
 
-\section{Broader Implications}
 
-This refinement does more than solve the fermion problem.
-It demonstrates that Spectral Complexity must be understood as a \emph{recursive, self-referential} measure — one that can choose how to compress itself.
-Different implementations and symmetry operations compete on total description length under the constraint of supporting compressible observer worldlines.
 
-The wavefunction is no longer a passive object whose modes are merely counted.
-It becomes an actively compressed structure whose very encoding scheme is chosen to minimize global informational cost, subject to the existence of low-description-length observer sequences.
 
-This move brings us closer to a fully self-consistent theory in which bosons, fermions, wave behavior, inertia, elastic collisions, and material rigidity all emerge from the same underlying principle: the minimization of hierarchical description length within a timeless, self-interpretive informational universe.
+\section{Testing the Idea in a Simple Simulation}
 
-The development of a precise mathematical formulation and its systematic testing in simulations remains ongoing work.
-However, the direction is clear: by allowing the measure to reflect the cost of \emph{how} information is represented — and how well it supports clean observer worldlines — the emergence of both bosonic cooperation and fermionic exclusion becomes not only possible, but natural.
+We implemented a minimal simulation (2 spatial and 1 time dimension) to see if our "Minimal Complexity" path matched the "Least Action" path of traditional physics.
 
-The hunt for emergent fermions is no longer just a problem.
-It is the next necessary step toward understanding how a static informational universe gives rise to the rich, structured, and solid reality we inhabit.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/wdwfields.png}
+\caption{Side-by-side comparison: The classical field (Euclidean Action) vs.
+  The Informational field (Induced Measure). Preliminary numerical results indicate rough agreement between minimal spectral complexity trajectories and classical least-action solutions.}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/wdwpaths.png}
+\caption{Side-by-side comparison: The classical path (Euclidean Action) vs.
+  The Informational path (Induced Measure). Preliminary numerical results indicate strong qualitative agreement between minimal spectral complexity trajectories and classical least-action solutions.}
+\end{figure}
+
+
+The results were promising. 
+The path that is "simplest to describe" spectrally matches approximately the path that Einstein’s equations predict.
+The apparent fuzziness of microscopic physics may reflect limitations inherent in finite observer-side spectral representation.
+
+\section{Conclusion}
+
+When applied to cosmology, the framework naturally converges toward an effective Wheeler--DeWitt description:
+a timeless, self-contained universe in which dynamics emerge relationally through observer-conditioned correlations.
+
+
+\section{Future Work}
+
+The simulations were 2D toy-models with predefined metric without backreaction.
+Implement a true closed FLRW minisuperspace simulation.

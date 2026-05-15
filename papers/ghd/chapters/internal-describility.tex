@@ -113,21 +113,66 @@ Two interpretations belong to the same interpretive equivalence class if they pr
 
 What ultimately matters is not the precise arrangement of symbols, but the invariant relational structure that survives reinterpretation:
 \[
-\text{bitstring} \ \longrightarrow \ \text{interpretation} \ \longrightarrow \ \text{relational structure (invariant)}
+\text{information} \ \longrightarrow \ \text{interpretation} \ \longrightarrow \ \text{relational structure (invariant)}
 \]
 
 This relational structure is more primitive than computation, mathematics, or any particular semantics.
 All of these are merely possible interpretations.
 
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.2cm and 1.8cm,
+        box/.style={rectangle, draw, rounded corners=4pt, minimum width=4.8cm, minimum height=1.1cm, align=center, font=\small},
+        base/.style={box, fill=blue!10, thick},
+        observer/.style={box, fill=green!10, thick},
+        emergent/.style={box, fill=violet!10, thick},
+        arrow/.style={->, thick, >=stealth}
+    ]
+    
+    % Level 0 - Raw U
+    \node[base] (U) {Static Informational Totality \\ \textbf{U} \\ \small (Naked Bits / Raw Configurations)};
+    
+    % Level 1 - Interpretation
+    \node[observer, below=of U] (Interp) {Interpretations / Mappings};
+    \node[observer, right=of Interp] (Obs) {Observers / Interpreters \\ \small (Compressed relational wavefunctions $\psi_o(\lambda)$)};
+    
+    % Level 2 - Stable Structures
+    \node[emergent, below=of Obs] (Stable) {Stable Observer Classes \\ \small (Equivalence Classes + Minimal Description Length)};
+    
+    \node[emergent, below left=0.8cm and 0.3cm of Stable] (Math) {Mathematics \\ \small (Invariant relational patterns)};
+    \node[emergent, below=of Stable] (Physics) {Physics \& Laws};
+    \node[emergent, below right=0.8cm and 0.3cm of Stable] (Time) {Relational Time \\ \small (Page-Wootters style $\lambda$)};
+    \node[emergent, below=of Physics] (Exp) {Subjective Experience \\ \small (Internal discovery \& stabilization)};
+    
+    % Arrows
+    \draw[arrow] (U) -- (Interp);
+    \draw[arrow] (U) -- (Obs);
+    \draw[arrow] (Interp) -- (Obs);
+    \draw[arrow] (Obs) -- (Stable);
+    \draw[arrow] (Stable) -- (Math);
+    \draw[arrow] (Stable) -- (Physics);
+    \draw[arrow] (Stable) -- (Time);
+    \draw[arrow] (Stable) -- (Exp);
+    
+    % Self-containment loop
+    \draw[->, thick, dashed, bend right=30] (Obs) to node[auto, left, font=\tiny] {self-contained in U} (U);
+    
+    \end{tikzpicture}
+    \caption{Structure of emergence in the Self-Interpretive Information Principle (SIIP)}
+    \label{fig:sii-emergence}
+\end{figure}
+
+
 \section{Conclusion}
 
-\begin{tcolorbox}[title=Self-Interpretive Information Principle (SIIP)]
+\begin{principle}{Self-Interpretive Information Principle (SIIP)}
+{siip}
 Information contains within itself the full space of possible interpretations and their equivalence classes.
-\end{tcolorbox}
+\end{principle}
 
 When humans interpret the output of a computer monitor, they rely on an astronomical stack of shared conventions (encoding standards, pixel geometry, scan order, handedness, row length, etc.). Changing these conventions can render the identical underlying data unrecognizable or meaningless.
-
 
 
 \subsection{On the Unreasonable Effectiveness of Mathematics}
@@ -158,3 +203,19 @@ The universe does not need to be mathematical.
 It only needs to be sufficiently rich in information to admit the interpretive filters that conscious observers naturally apply.
 
 In this light, the ``unreasonable effectiveness'' is revealed as an anthropic-like selection effect operating within the enormous space of possible interpretations of self-interpretive information.
+
+
+
+\section{Conclusion}
+
+\begin{principle}{Semantic Nakedness of Information}
+{semantic-nakedness-of-information}
+A raw informational configuration carries no intrinsic meaning, syntax, semantics, mathematics, computation, or purpose.
+\end{principle}
+
+Any such structure exists only relative to an interpretation performed by another informational structure acting as an interpreter.
+
+Thus, neither mathematics nor computation are fundamental properties of information itself, but emergent relational structures arising between informational configurations.
+
+
+

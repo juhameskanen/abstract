@@ -2,7 +2,7 @@
 
 \section{Introduction}
 
-What is the deep nature of the theory and its mysterious wavefunction? 
+What is the deep nature of Quantum Mechanics and its mysterious wavefunction? 
 
 The microscopic building blocks are simple—a small set of fields with just a few parameters producing enormous emergent richness.
 
@@ -67,13 +67,12 @@ This motivates the replacement of abstract algorithmic complexity with a physica
 
 \subsection*{The Cost Function}
 
-If we implement a wavefunction as a computational class, the complexity is determined by the bits required to instantiate its constituent modes.
+Let us plug in one additional method - spectral\_complexity()o the Wavefunction class we implemented earlier.
+The complexity is determined by the bits required to instantiate its constituent modes.
 
 It should be noted that this is our first toy candidate. Different precise definitions are possible (depending on exactly how one encodes the
-compressed wavefunction), but they all share the critical property:
-they assign a smooth gradient of cost across neighboring states. This smoothness is not incidental — it is essential.
-
-In order to write proof-of-concept simulation, we need to implement the wavefunction class with a method that computes the complexity.
+compressed wavefunction), but they all must share the critical property:
+they assign a smooth gradient of cost across neighboring states. 
 
 We model the total spectral complexity $C_s$ of a state $\Psi$ as the sum of its algorithmic overhead and the parameters of its $N$ modes:
 
@@ -149,7 +148,7 @@ We have landed on a model that resembles closely many-worlds-style view of quant
 Each configuration corresponds to what an Everettian observer would experience as a separate world.
 Together they form the timeless universe described by the Wheeler-DeWitt equation, emerging purely from information.
 
-By replacing the uncomputable Kolmogorov notion of complexity with spectral complexity, we establish a bridge between physical structure and informational description.
+By replacing the uncomputable and discrete Kolmogorov notion of complexity with continuous and computable spectral complexity, we establish a bridge between physical structure and informational description.
 Specifically, Solomonoff-kind induction explains why we find ourselves within a law-like, smooth universe governed by symmetries, rather than manifesting as chaotic Boltzmann brains.
 
 In this view, the wave-like nature of the microscopic world is not a mystery, but a reflection of how information is most effectively organized.
@@ -157,6 +156,13 @@ In this view, the wave-like nature of the microscopic world is not a mystery, bu
 The cosmos waves because we are observing compressed structure.
 
 The wavefunction is the compression scheme of the universe.
+
+\begin{principle}{Wavefunction Compression Principle (WCP)}
+{wavefunction-compression-principle}
+
+The quantum wavefunction is the universe's compression scheme.
+
+\end{principle}
 
 
 \section{Proof-of-Concept Videos}

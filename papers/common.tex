@@ -18,6 +18,7 @@
 \usepackage[backend=biber, style=numeric]{biblatex}
 \usepackage{glossaries}
 \usepackage{tcolorbox}
+\tcbuselibrary{theorems}
 \usepackage{tocloft}
 \usepackage{parskip}
 \usepackage{tikz}
@@ -26,7 +27,8 @@
 \newtheorem{lemma}{Lemma}
 \newcommand{\IaMe}{\(IaM^e\) \xspace}
 \newcommand{\pdflink}[1]{}
-
+\newtcbtheorem[number within=section]{principle}{Principle}%
+{colback=blue!5,colframe=blue!50!black,fonttitle=\bfseries}{pr}
 
 
 \hfuzz=5pt % Don't complain about small margin overlaps
