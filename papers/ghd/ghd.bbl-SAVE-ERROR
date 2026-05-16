@@ -139,6 +139,35 @@
       \field{title}{The Fabric of Reality: The Science of Parallel Universes---and Its Implications}
       \field{year}{1997}
     \endentry
+    \entry{DeWitt1967}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3379c3ada004ba7f753c6f1cf0645937}{%
+           family={DeWitt},
+           familyi={D\bibinitperiod},
+           given={Bryce\bibnamedelima S.},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {APS}%
+      }
+      \strng{namehash}{3379c3ada004ba7f753c6f1cf0645937}
+      \strng{fullhash}{3379c3ada004ba7f753c6f1cf0645937}
+      \strng{bibnamehash}{3379c3ada004ba7f753c6f1cf0645937}
+      \strng{authorbibnamehash}{3379c3ada004ba7f753c6f1cf0645937}
+      \strng{authornamehash}{3379c3ada004ba7f753c6f1cf0645937}
+      \strng{authorfullhash}{3379c3ada004ba7f753c6f1cf0645937}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review}
+      \field{number}{5}
+      \field{title}{Quantum Theory of Gravity. I. The Canonical Theory}
+      \field{volume}{160}
+      \field{year}{1967}
+      \field{pages}{1113\bibrangedash 1148}
+      \range{pages}{36}
+    \endentry
     \entry{friend2014pluralism}{book}{}
       \name{author}{1}{}{%
         {{hash=7a0fc2383848a884ff872d74bb56c615}{%
@@ -377,6 +406,40 @@
       \field{isbn}{978-0471024019}
       \field{title}{Self-Organization in Non-Equilibrium Systems: From Dissipative Structures to Order through Fluctuations}
       \field{year}{1977}
+    \endentry
+    \entry{page1983clock}{article}{}
+      \name{author}{2}{}{%
+        {{hash=912dcbe6f59255a341991eeddac4df48}{%
+           family={Page},
+           familyi={P\bibinitperiod},
+           given={Don\bibnamedelima N.},
+           giveni={D\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=db3a2ac4bb7edc871a862059726651fe}{%
+           family={Wootters},
+           familyi={W\bibinitperiod},
+           given={William\bibnamedelima K.},
+           giveni={W\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{0f6e20451e43ea16c8fdd3de4892ad83}
+      \strng{fullhash}{0f6e20451e43ea16c8fdd3de4892ad83}
+      \strng{bibnamehash}{0f6e20451e43ea16c8fdd3de4892ad83}
+      \strng{authorbibnamehash}{0f6e20451e43ea16c8fdd3de4892ad83}
+      \strng{authornamehash}{0f6e20451e43ea16c8fdd3de4892ad83}
+      \strng{authorfullhash}{0f6e20451e43ea16c8fdd3de4892ad83}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review D}
+      \field{number}{12}
+      \field{title}{Evolution without Evolution: Dynamics Described by Stationary Observables}
+      \field{volume}{27}
+      \field{year}{1983}
+      \field{pages}{2885\bibrangedash 2892}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1103/PhysRevD.27.2885
+      \endverb
     \endentry
     \entry{penrose2010}{book}{}
       \name{author}{1}{}{%

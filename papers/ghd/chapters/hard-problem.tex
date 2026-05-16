@@ -2,105 +2,58 @@
 
 \section{Introduction}
 
-The hard problem of consciousness \cite{chalmers1995facing} asks why any physical or computational process should be accompanied by subjective experience (Qualia) at all.
-Any specific program or physical evolution appears fully determined by its rules, leaving no apparent room for subjective qualia to exert causal influence.
-The same computation runs identically whether or not it ``feels like anything.'' This creates a classic dilemma:
-\begin{itemize}
-\item Subjective experience is causally inert (epiphenomenal), or
-\item It must somehow transcend the underlying physical/computational structure.
-\end{itemize}
+The hard problem of consciousness \cite{chalmers1995facing} asks why physical or computational processes should be accompanied by subjective experience (qualia).
+If a system's physical evolution or program execution is fully causally closed, qualia appear epiphenomenal—causally inert additions to a machine that would run identically in the dark.
 
-Both horns are unsatisfactory. The previous chapter undermines the hidden premise that generates this dilemma:
-the assumption that computation or mathematical law is ontologically fundamental.
+This dilemma rests entirely on a hidden premise: the assumption that a specific computational or mathematical structure is ontologically fundamental. 
 
-As articulated by \nameref{pr:semantic-nakedness-of-information}, raw information is semantically neutral.
-A given configuration (a bitstring or physical state) admits an astronomically large space of possible interpretations.
-Computation, mathematics, and physical law are merely specific, highly selected slices within this space.
-Subjective experience does not need to ``insert itself'' into any single computational interpretation.
-Instead, it operates at the level of interpretation itself.
+Under the \nameref{ch:self-interpretive-information-principle}, this premise fails.
+Raw information carries no intrinsic semantics.
+A physical state or bitstring admits an astronomical landscape of possible interpretations.
+Mathematics, computation, and physical laws do not generate the observer; rather, they are highly restricted, stable invariants found *within* specific interpretive frameworks selected by the observer.
+
+Qualia do not need to insert themselves into a causally closed mathematical structure.
+Instead, subjective experience operates entirely at the level of the interpretation space itself.
 
 \begin{center}
-\textbf{Information $\longrightarrow$ Interpretation $\longrightarrow$ Relational Structure}
+\textbf{Raw Information $\longrightarrow$ Interpretive Framework $\longrightarrow$ Relational Structure}
 \end{center}
 
-Qualia are not located inside the mathematics or the computation.
-Rather, mathematics and computation are structures that appear \emph{within} particular interpretive readings performed by sufficiently complex, intelligent observers.
-What appears as a causally closed physical evolution is only one projection of a far richer underlying informational object.
+What appears as a causally closed physical universe is merely a high-compression projection of a deeper, semantically naked informational object.
 
-\section{Observer Equivalence Classes}
 
-The same raw informational configuration can support many different interpretive schemes.
-Some of these schemes give rise to structurally similar observer-trajectories.
+\section{The Phenomenological Axis as a Heuristic Filter}
 
-We define an equivalence relation on interpretations:
-\[
-I_a(B) \sim I_b(B)
-\]
-for a raw configuration $B$, whenever the resulting observer-perspectives preserve sufficiently similar:
+Because the space of possible transition functions for an $n$-bit system grows combinatorially as $(2^n)^{2^n}$, an intelligent observer cannot perform an explicit, exhaustive search for stable structures. The space is too vast.
+
+To navigate this landscape, the observer relies on two fundamental axes of computation:
+
+\paragraph{1. The Logical Axis (Kolmogorov Complexity):} Explicit symbolic manipulation, rule-based execution, and deduction within a stabilized interpretive scheme.
+This is the domain of formal mathematics, algorithmic execution, and physical laws.
+
+\paragraph{2. The Phenomenological Axis (Spectral Complexity):} Navigation and selection across different interpretive frameworks. 
+
+
+We propose that qualia are low-dimensional heuristic filters operating on the interpretation space. 
+
+Feelings such as pain, joy, intuition, or aesthetic judgment are not extra properties added to a Turing machine.
+They are the internal, first-person experience of algorithmic optimization (measure concentration) over the interpretation space. 
+
 \begin{itemize}
-\item memory and self-model structure,
-\item internal correlations and continuity,
-\item behavioral and relational organization,
-\item phenomenological coherence.
+    \item \textbf{Pain} is the phenomenological manifestation of interpretive fragmentation, error propagation, or a drop in structural compression.
+    \item \textbf{Joy or Insight} is the manifestation of sudden structural alignment, stabilization, and high relational compression.
 \end{itemize}
 
-An observer is therefore not tied to any single bitstring or execution trace, but to an \emph{interpretive equivalence class} (consistent with the definition introduced in the previous chapter).
-This mirrors statistical mechanics: many micro-configurations realize the same macrostate.
-Many informational configurations, under different interpretations, can realize the same conscious observer.
-
-This framework is compatible with the emergence of consciousness from pure static data.
-Even when all code has vanished and the remaining bitstring appears as noise under most interpretations, certain rare but highly compressible interpretive schemes can still support coherent observer experiences.
-
-\section{Induced Measure and Compressibility}
-
-Not all interpretations are equal.
-We assign to each interpretation $I$ a complexity $\mathcal{C}[I(B)]$, understood as its description length (Kolmogorov complexity, Spectral Complexity).
-This induces a natural measure on interpretation space:
-\[
-\mathbb{P}(I(B)) \propto 2^{-\mathcal{C}[I(B)]}.
-\]
-
-Highly compressible interpretations — those that reveal rich relational structure with minimal overhead — dominate the measure.
-Irregular or complex interpretations are exponentially suppressed.
-
-The central proposal is:
-\begin{quote}
-Subjective experience corresponds to the internal perspective of measure concentration over interpretive equivalence classes.
-\end{quote}
-
-Phenomenology is not an extra property added to computation.
-It \emph{is} the first-person view of this measure-driven selection process within the vast space of possible interpretations of neutral information.
-
-\section{Two Axes of Cognition}
-
-We distinguish two fundamental axes along which observers navigate information:
-
-\paragraph{1. Logical Axis, Kolmogorov Complexity}
-
-Explicit symbolic manipulation, rule-based reasoning, and computation within a chosen interpretive scheme.
-This is the domain of mathematics, logic, and causal inference. This is what appears as Turing Machine to us.
-
-We humans are particulary good (well...) in this domain.
-
-\paragraph{2. Phenomenological Axis, Spectral Complexity}
-
-Navigation and selection within interpretation space according to the induced measure.
-Qualia (pain, pleasure, color, intuition, aesthetic judgment) function as low-dimensional heuristics that guide the
-observer toward high-measure (highly compressible, relationally rich) interpretations and away from low-measure ones.
-
-This phenomenological axis provides an efficient approximation to optimization in an otherwise intractable space.
-
-This is the low-level domain of subjective experience, such as Pain.
-
-
+Evolution selects intelligent observers who privilege interpretive schemes that yield survival-relevant predictability.
+Qualia are the steering mechanics that guide the observer toward these rare, highly compressible, and relationally rich mathematical slices.
 
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[
         node distance=1.4cm,
         layer/.style={rectangle, draw, rounded corners=6pt, minimum width=9cm, align=center, font=\small},
-        base/.style={layer, minimum height=1.8cm, fill=blue!12, thick},
-        interp/.style={layer, minimum height=4.2cm, fill=orange!12, thick},
+        base/.style={layer, minimum height=1.6cm, fill=blue!12, thick},
+        interp/.style={layer, minimum height=3.8cm, fill=orange!12, thick},
         top/.style={layer, minimum height=1.6cm, fill=purple!12, thick},
         arrow/.style={->, thick, >=stealth}
     ]
@@ -108,78 +61,46 @@ This is the low-level domain of subjective experience, such as Pain.
     % Bottom Layer - Naked Bits
     \node[base] (Bits) at (0,0) {
         \textbf{Naked Bits / Raw Informational Totality (U)} \\
-        \small Semantically silent configurations
+        \small Semantically silent configurations ($\mathbf{2}^S$)
     };
     
     % Middle Layer - Interpretation Space
     \node[interp, above=of Bits] (Interp) {
-        \textbf{Interpretation Space} \\
-        \small Vast space of possible mappings \& self-interpretations \\
+        \textbf{Interpretation Space (The Phenomenological Axis)} \\
+        \small Combinatorial explosion of possible rules and mappings \\
         \\[4pt]
-        \textit{Heuristic Navigation Layer} \\
-        \small Pain $\leftrightarrow$ destabilization / fragmentation \\
-        \small Joy / Insight $\leftrightarrow$ stabilization / coherence \\
-        \small Feelings = navigation heuristics in interpretation space
+        \textit{Heuristic Filter Layer} \\
+        \small Fragmentation / Chaos $\leftrightarrow$ Pain \\
+        \small Relational Compression / Stabilization $\leftrightarrow$ Joy \\
+        \small \relax Qualia function as navigation shortcuts toward stable structures
     };
     
     % Top Layer - Mathematics & Logic
     \node[top, above=of Interp] (Math) {
-        \textbf{Mathematics \& Logical Reasoning} \\
-        \small Thin high-level subset \\
-        \small Maximal compression \& stable invariants \\
-        \small Enables abstract thinking and long-term survival strategies
+        \textbf{Mathematics \& Logical Laws (The Logical Axis)} \\
+        \small Thin, highly restricted invariant subset \\
+        \small Maximally compressed, predictable relational structures
     };
     
     % Arrows
-    \draw[arrow] (Bits) -- node[right, font=\tiny] {interpreted as} (Interp);
-    \draw[arrow] (Interp) -- node[right, font=\tiny] {stable invariants} (Math);
-    
-    % Note on thinness
-    \node[below=0.3cm of Math, font=\scriptsize, align=center] (Note) {
-        \textit{Mathematics is only a tiny stable subset} \\
-        \textit{of the much larger interpretation space}
-    };
+    \draw[arrow] (Bits) -- node[right, font=\tiny] {interpreted via} (Interp);
+    \draw[arrow] (Interp) -- node[right, font=\tiny] {stabilized into} (Math);
     
     % Self-containment
     \draw[->, dashed, thick, bend right=40] (Interp) to node[auto, left, font=\tiny] {all inside U} (Bits);
     
     \end{tikzpicture}
-    \caption{Layered structure of experience in SIIP: From raw information to feelings to mathematics}
+    \caption{The Layered Architecture of Consciousness under SIIP. Subjective experience is the internal view of the heuristic filter navigating the interpretation space toward stable mathematical invariants.}
     \label{fig:sii-hard-problem}
 \end{figure}
 
-
-\section{Evolutionary and Functional Role}
-
-Explicit search over the full interpretation space is impossible.
-
-Evolution therefore selects systems that can efficiently approximate measure concentration.
-
-Subjective experience is the mechanism that performs this approximation internally:
-
-Pain, pleasure and other Qualia reflect the probability gradients in the interpretation space.
-
-
-\section{Shared Reality and the Effectiveness of Mathematics}
-
-Observers converge on similar descriptions of reality because the induced measure strongly favors low-complexity, high-compressibility interpretations.
-Mathematics and physical laws appear universal not because they are intrinsic to the information, but because they constitute especially stable, low-complexity relational structures that many observers independently select.
-
-This explains Wigner's ``unreasonable effectiveness'': mathematics is effective precisely because conscious observers are measure-driven filters that preferentially stabilize the tiny, highly compressible slice of interpretation space in which such structures dominate.
-
 \section{Conclusion}
 
-The hard problem of consciousness dissolves once we reject the primacy of computation and mathematics.
-From the Self-Interpretive Information Principle we obtain a coherent alternative:
+The hard problem of consciousness dissolves the moment we reject the primacy of physical laws and formal computation. 
 
+Consciousness does not emerge \emph{from} math; rather, math is the pristine skeleton left behind when an intelligent observer's heuristic filters successfully process raw, semantically naked information. The "feeling" of experience is simply what the algorithmic process of finding that skeleton looks like from the inside.
+
+\section{Supplementary Material}
 \begin{itemize}
-\item Information is primary and semantically neutral,
-\item Interpretations are radically non-unique,
-\item Observers are equivalence classes over interpretations,
-\item Subjective experience is the internal aspect of measure concentration within interpretation space.
+  \item \href{abstract-proof-abstract-proof.pdf}{Interpretive Gauge Invariance Hypothesis (IGIH)}
 \end{itemize}
-
-Consciousness does not emerge \emph{from} computation.
-It emerges from the selection and stabilization of particular interpretive schemes applied to static, self-interpretive information.
-In the limit where all code vanishes and only pure data remains, consciousness persists exactly where the measure concentrates --- even if that data appears as noise under almost every other interpretation.
-
