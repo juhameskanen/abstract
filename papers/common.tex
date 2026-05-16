@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 \usepackage{geometry}
+\usepackage{amsthm}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{physics}
@@ -29,6 +30,22 @@
 \newcommand{\pdflink}[1]{}
 \newtcbtheorem[number within=section]{principle}{Principle}%
 {colback=blue!5,colframe=blue!50!black,fonttitle=\bfseries}{pr}
+
+
+\newtheorem{axiom}{Axiom}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+
+% --- THE CORRECT PHYSICS CONFLICT RESET ---
+\makeatletter
+\let\remark\@undefined
+\let\endremark\@undefined
+\makeatother
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 
 
 \hfuzz=5pt % Don't complain about small margin overlaps

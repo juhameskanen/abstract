@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib}
+
+\title{Why Something Rather Than Nothing}
+  
+\date{2008}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Raw informational structures possess no intrinsic semantics.
+Any assignment of meaning, ontology, mathematics, or physical
+interpretation arises only relative to an interpretive framework.
+
+Consequently, ontological claims that depend purely on representational
+choice are gauge-dependent and cannot possess observer-independent
+metaphysical significance.
+
+The following formal framework develops the consequences of this principle
+for the classical question ``Why something rather than nothing?''
+\end{abstract}
+
+
+\section{Introduction}
+
+The question of why anything exists at all has long been considered a fundamental mystery of metaphysics. By treating existence and non-existence through the lens of informational structures and gauge invariance, we can analyze the structural properties of this problem mathematically. 
+
+In this paper, we formalize this approach by treating representational choices as symmetries. Section~\ref{sec:igit} outlines the core axioms of this Interpretive Gauge Invariance Thesis and demonstrates how the classical question ultimately dissolves under observer self-location.
+
+\section{Interpretive Gauge Invariance Thesis}
+\label{sec:igit}
+
+\begin{definition}
+A \emph{binary distinction} is a pair of mutually exclusive and jointly exhaustive states, canonically represented by the set $\mathbf{2} = \{0, 1\}$.
+\end{definition}
+
+\begin{axiom}[Binary Representability of Existence]
+The distinction between existence and non-existence (``to be or not to be'') can be represented as a binary distinction: one state corresponding to the empty set $\varnothing$ (``nothing'') and the other to a non-empty structure (``something'').
+\end{axiom}
+
+\begin{axiom}[Semantic Non-Intrinsicality]
+No raw informational structure possesses an intrinsic interpretation.
+Any semantics assigned to a representation arises only relative
+to an interpretation.
+\end{axiom}
+
+\begin{axiom}[Closure under Set-Theoretic Construction]
+Arbitrary set-theoretic objects (power sets, function spaces $\mathbf{2}^S$, relations, etc.) may be constructed from binary distinctions. All such constructions remain subject to Axioms 1 and 2.
+\end{axiom}
+
+\begin{axiom}[Plenitude]
+Every internally consistent mathematical structure possesses equal ontological standing. There is no external ``existence predicate'' that selects one consistent structure as actual over any other.
+\end{axiom}
+
+\begin{theorem}[Representational Symmetry]
+Under Axioms 1--2, the binary encoding of ``something'' versus ``nothing'' does not confer ontological priority on either side. The choice of which label designates the empty configuration is arbitrary.
+\end{theorem}
+
+\begin{theorem}[No Privileged Configuration via Labeling]
+Let $S$ be any index set and let $\mathbf{2}^S$ be the space of all possible configurations (functions $f: S \to \{0,1\}$).  
+
+No configuration $f \in \mathbf{2}^S$ --- including the all-zero configuration (the empty universe) and any information-rich configuration containing observers --- is distinguished from the others \emph{merely by representational labeling conventions}. 
+\end{theorem}
+
+\begin{proof}
+Consider the boolean inversion operator $\neg: \mathbf{2} \to \mathbf{2}$. This induces a bijection $\Phi: \mathbf{2}^S \to \mathbf{2}^S$ by composition, $\Phi(f) = \neg \circ f$. By Axiom 2, $\Phi$ preserves all purely ontological standing. Since the all-zero configuration maps to the all-one configuration under $\Phi$, any predicate assigning ``actuality'' based solely on the label assignment is gauge-dependent and physically non-invariant.
+\end{proof}
+
+\begin{theorem}[Observer Self-Location]
+Any self-aware observer can only exist within those configurations in $\mathbf{2}^S$ that contain the necessary informational structure to support consciousness and consistent memories. Observers therefore necessarily self-locate within observer-compatible configurations. there is no requirement to explain a causal or temporal transition from an empty configuration to a non-empty one.
+\end{theorem}
+
+\begin{corollary}[Dissolution of the Classical Question]
+The question ``Why something rather than nothing?'' presupposes that the empty configuration possesses a special metaphysical status that requires explanation for why it was not realized.  
+
+Under Axioms 1--4, this presupposition fails:  
+\begin{itemize}
+    \item The distinction is representable as a binary choice whose labels are arbitrary (Axioms 1--2);
+    \item All consistent configurations have equal ontological standing (Axiom 4);
+    \item Observers can only appear in structured configurations (Theorem 3).
+\end{itemize}
+The classical question is therefore ill-posed. It is replaced by the milder issue of observer self-location within the ensemble of consistent mathematical structures.
+\end{corollary}
+
+\begin{remark}
+This framework distinguishes three notions:
+\begin{enumerate}
+    \item \emph{Representational symmetry} (Axiom 2): labels are arbitrary;
+    \item \emph{Structural properties}: different configurations generally have different internal structure (the empty configuration is not isomorphic to a rich one);
+    \item \emph{Ontological standing} (Axiom 4): all internally consistent structures are on equal footing.
+\end{enumerate}
+The argument relies on the move from (1) and (3) to the dissolution, while fully acknowledging (2).
+\end{remark}
+
+This formalization shows that once one accepts the neutrality of representational labels and the equal ontological status of consistent structures, the traditional asymmetry between ``something'' and ``nothing'' disappears.
+
+\end{document}

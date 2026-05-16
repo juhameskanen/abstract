@@ -1,4 +1,4 @@
-\chapter{Self-Interpretive Information Principle}
+\chapter{Self-Interpretive Information Principle (SIIP)}
 
 \section{The Interpretation Problem}
 
@@ -83,22 +83,52 @@ For $n=10$ the number has thousands of digits.
 
 This vast explosion of possible interpretive rules implies that neither a ``Universe'' nor a ``Computer'' can be regarded as fundamental in isolation — the space of possible rules dwarfs the configurations they act upon.
 
-\begin{figure}[h]
+
+
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/interpretation-space.png}
-    \caption{A single byte (11111111) can be interpreted as 255, or $-1$, or a machine instruction, or part of a larger structure.
-      The information itself is silent.
-      The enormous space of possible interpretations is where mathematics becomes possible, where computation can be described, and where conscious observers can emerge as different readings of the exact same underlying structure.}
-    \label{fig:interpretation-space}
+    \begin{tikzpicture}[scale=1.1]
+        
+        % 1. The Static Totality U
+        \draw[thick, fill=blue!5, draw=blue!40] (0,0) circle (4.2cm);
+        \node[align=center, font=\small\bfseries, color=blue!80!black] at (0, 3.7) 
+            {Static Informational Totality ($\mathbf{U}$) \\ \small All Raw Configurations $\mathbf{2}^S$ (Infinite \& Semantically Silent)};
+
+        % 2. The Interpretational Explosion
+        \draw[thick, fill=orange!10, draw=orange!50, dashed] (0,-0.4) circle (3.1cm);
+        \node[align=center, font=\small\bfseries, color=orange!80!black] at (0, 2.1) 
+            {The Interpretative Landscape \\ \small Combinatorial Explosion of Mappings / Rules};
+
+        % 3. The Mathematical Slice
+        \draw[thick, fill=teal!15, draw=teal!60] (0,-0.8) circle (1.8cm);
+        \node[align=center, font=\small\bfseries, color=teal!80!black] at (0, 0.4) 
+            {The Mathematical Slice \\ \small Stable Gauge Orbits \\ \small \& Invariant Relations};
+
+        % 4. The Observer Core
+        \draw[lightgray, fill=violet!20, draw=violet!70, thick] (0,-1.3) circle (0.7cm);
+        \node[align=center, font=\footnotesize\bfseries, color=violet!90!black] at (0, -1.3) 
+            {Observer\\Self-Location\\ \scriptsize (Consciousness)};
+
+        % Explanatory Filter Arrows (Left side)
+        \draw[-{Stealth[scale=1.2]}, thick, gray, dashed] (-3.8, 0) to [bend right=15] node[midway, left, font=\tiny, align=right] {Interpretive\\Filter} (-2.3, -0.4);
+        \draw[-{Stealth[scale=1.2]}, thick, gray, dashed] (-2.0, -0.6) to [bend right=15] node[midway, left, font=\tiny, align=right] {Consistency\\Filter} (-1.1, -0.9);
+        \draw[-{Stealth[scale=1.2]}, thick, gray, dashed] (-0.9, -1.1) to [bend right=15] node[midway, left, font=\tiny, align=right] {Anthropic\\Filter} (-0.4, -1.3);
+
+    \end{tikzpicture}
+    \caption{The cosmic architecture of the Interpretive Gauge Invariance Thesis (IGIT). Within the infinite, silent totality of raw information ($\mathbf{U}$), an explosion of interpretive frameworks is possible. Observers act as highly selective filters, self-locating inside the exceptionally rare mathematical slices that preserve stable, predictive, and structurally invariant relational realities.}
+    \label{fig:interpretation-hierarchy}
 \end{figure}
+
 
 A raw bitstring does not intrinsically contain logic, syntax, semantics, truth conditions, or consistency relations.
 These arise only after selecting an interpretive scheme.
 
-\subsection{Equivalence Classes}
+\subsection{Equivalence Classes - Interpretive Gauge Invariance}
 
 Even after an interpretation is assigned, it is not unique.
 Different interpretive schemes may preserve the same underlying relational structure.
+
+In mathematical physics, when a physical state remains unchanged under a change of local descriptive frameworks, we call that symmetry a gauge invariance.
 
 Consider a sufficiently large bitstring.
 Under one interpretation it may appear as random noise.
@@ -123,21 +153,21 @@ All of these are merely possible interpretations.
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[
-        node distance=1.2cm and 1.8cm,
+        node distance=1.0cm and 1.6cm,
         box/.style={rectangle, draw, rounded corners=4pt, minimum width=4.8cm, minimum height=1.1cm, align=center, font=\small},
         base/.style={box, fill=blue!10, thick},
         observer/.style={box, fill=green!10, thick},
         emergent/.style={box, fill=violet!10, thick},
         arrow/.style={->, thick, >=stealth}
     ]
-    
+
     % Level 0 - Raw U
-    \node[base] (U) {Static Informational Totality \\ \textbf{U} \\ \small (Naked Bits / Raw Configurations)};
-    
+    \node[base] (U) {Static Informational Totality \\ \textbf{U} \\ \small (Raw Configurations / Set $\mathbf{2}^S$)};
+
     % Level 1 - Interpretation
-    \node[observer, below=of U] (Interp) {Interpretations / Mappings};
-    \node[observer, right=of Interp] (Obs) {Observers / Interpreters \\ \small (Compressed relational wavefunctions $\psi_o(\lambda)$)};
-    
+    \node[observer, below=of U] (Interp) {Interpretive Frameworks \\ \small (Representational Labels)};
+    \node[observer, right=of Interp] (Obs) {Conscious Observers \\ \small (Self-Locating Informational Structures)};
+      
     % Level 2 - Stable Structures
     \node[emergent, below=of Obs] (Stable) {Stable Observer Classes \\ \small (Equivalence Classes + Minimal Description Length)};
     
@@ -165,12 +195,27 @@ All of these are merely possible interpretations.
 \end{figure}
 
 
-\section{Conclusion}
+
+
+\section{The Core Thesis}
+
+By synthesizing the semantic nakedness of raw data with the mathematical necessity of gauge invariance, we arrive at the foundational thesis of this framework:
+
+\begin{theorem}[Interpretive Gauge Invariance Thesis - IGIT]
+  Ontological and physical significance cannot reside in representational labelings.
+  Because raw informational structures possess no intrinsic semantics (Axiom of Semantic Non-Intrinsicality), all physical laws and properties must be invariant under a change of interpretive framework.
+\end{theorem}
+
+This leads directly to the overarching system property of our universe:
 
 \begin{principle}{Self-Interpretive Information Principle (SIIP)}
 {siip}
-Information contains within itself the full space of possible interpretations and their equivalence classes.
+The raw informational substrate is semantically silent, it inherently contains the entire mathematical landscape of possible interpretive frameworks, gauge orbits, and self-locating conscious observers.
 \end{principle}
+
+
+
+\section{Conclusion}
 
 When humans interpret the output of a computer monitor, they rely on an astronomical stack of shared conventions (encoding standards, pixel geometry, scan order, handedness, row length, etc.). Changing these conventions can render the identical underlying data unrecognizable or meaningless.
 
@@ -219,3 +264,8 @@ Thus, neither mathematics nor computation are fundamental properties of informat
 
 
 
+\section{Supplementary Material}
+
+\begin{itemize}
+  \item \href{abstract-proof-abstract-proof.pdf}{Interpretive Gauge Invariance Hypothesis}
+\end{itemize}
