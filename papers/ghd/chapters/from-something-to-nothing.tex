@@ -1,85 +1,91 @@
 \chapter{Black Holes: From Something to Nothing}
 
-Let us test the idea of treating the simulated system and the simulator as two sides of the same coin:
-a computer running a simulation and the simulated universe viewed as two perspectives of the same underlying information \cite{meskanen2010}.
+Let us test the consequences of treating a simulated system and its simulator as two perspectives of the same underlying information.
+Under this framework, a computer running a simulation and the simulated universe itself are simply dual descriptions of a single informational structure.
 
-What would be the most bizarre object in the universe—one we still do not fully understand? Maybe a black hole singularity!
+If this equivalence holds, what insight does it offer into the most bizarre and pathological object in our universe—one that classical physics still fails to fully comprehend? 
 
-According to General Relativity, all the matter in a black hole collapses to a point of zero size and infinite density.
-An entire star—millions or even billions of times more massive than the Earth—can, in principle, be compressed into a region of vanishing volume. This description strains physical intuition.
+The black hole singularity.
 
-We therefore construct a black hole simulation and treat the simulation and the computer executing it as equivalent descriptions of the same informational structure.
-By doing so, we hope to gain new insight into the pathological points of spacetime that appear in classical geometry.
+According to General Relativity, all matter crossing the event horizon eventually collapses into a point of zero spatial volume and infinite density.
+An entire star—millions or even billions of times more massive than the Earth—is compressed into a region of vanishing volume.
+This description profoundly strains physical intuition.
 
-\section{Execution Trace}
+By constructing a black hole simulation and treating the program execution and the emergent spacetime geometry as equivalent informational states, we can gain an entirely new perspective on these pathological points in classical geometry.
 
-Computers are state machines. Each executed CPU instruction drives the system to a new state. 
-In software engineering, an \textbf{execution trace} is the chronological record of all such states. 
-If source code is a map, the execution trace is the complete GPS log of every step taken.
+\section{The Execution Trace as Spacetime}
 
-\section{The Simulation}
+Computers are deterministic state machines.
+Each executed CPU instruction drives the system from one discrete state to the next.
+In software engineering, an \textbf{execution trace} is the chronological record of this state trajectory.
+If the source code represents the laws of physics, the execution trace is the complete spacetime history of the universe it generates.
 
-We begin with a massive, spherical dust cloud and allow it to collapse under its own gravity to form a black hole.
-In practice, we cannot run such a simulation to its logical conclusion—the formation of a physical singularity.
-As the collapse nears its final state, the software inevitably crashes.
+\section{The Simulation of Gravitational Collapse}
 
-This failure is driven by two factors: the fundamental breakdown of the Einstein field equations and the inherent limitations of our digital tools.
-Long before the singularity is reached, the system is overwhelmed by division-by-zero exceptions and mathematical infinities that exceed the numerical precision of our floating-point representations.
-No matter how detailed or physically accurate a simulation we attempt to run, the singularity itself remains obscured by these divergences.
+Consider a simulation tracking a massive, spherical dust cloud as it collapses under its own gravity to form a black hole.
+In computational practice, we cannot run such a simulation to its absolute mathematical conclusion.
+As the collapse approaches its final state, the software inevitably crashes.
 
-General Relativity predicts singularities, but it fails to describe them.
+This failure is driven by two factors: the fundamental breakdown of the classical Einstein field equations and the inherent limitations of our digital floating-point tools.
+Long before the physical singularity is reached, the execution trace is overwhelmed by division-by-zero exceptions and numerical infinities that instantly exceed the bit-width precision of the system's hardware. 
 
-However, since General Relativity is fundamentally a theory of geometry—and solutions to the Einstein equations are themselves geometries—the most essential nature of the singularity must be geometric.
+General Relativity predicts singularities, but its smooth, continuous geometry lacks the toolkit to describe them.
+However, because General Relativity is fundamentally a theory of geometry, the ultimate nature of this computational breakdown must be geometric.
 
-Each dust particle and every point of the spacetime fabric in the simulation can be mapped to a unique sequence of memory bits.
-Together, these elements form a long, continuous bitstring representing a temporal slice of the spatial geometry. 
+In our simulation, each dust particle and every discrete coordinate of the spacetime fabric maps to a unique sequence of memory bits.
+Together, these elements form a continuous bitstring representing successive temporal slices of the spatial configuration. 
 
-Initially, we observe that the bitstring representing the dustcloud is very random:
+Initially, the bitstring encoding the highly disordered dust cloud possesses maximum entropy and high descriptive complexity:
 
 \begin{verbatim}
 00100101011110101010101001010100101010101010101001001001110101010010100101010...
 ...
 \end{verbatim}
 
-As the simulation evolves and total entropy increases, the entropy of the bitstring encoding the space decreases over time. 
+As the simulation evolves toward a black hole, an extraordinary inversion occurs.
+While the global thermodynamic entropy of the system satisfies cosmological bounds, the \emph{informational entropy} (the Kolmogorov complexity) of the bitstring encoding the spatial geometry radically decreases.
+The geometric configurations become increasingly uniform, uniformized, and redundant:
 
 \begin{verbatim}
 ...
 0001000010000010010001000000001000100000000000001000010000000010000000100010000...
 0001001000000000010000000000000010000010000000001000000000000000000100000000001...
 0000001000000000000000000000001000000000000000000000100001000000000000000000100...
-[crash]
+...
+[hardware exception: division by zero / arithmetic overflow]
 \end{verbatim}
 
-Even if numerical instabilities prevent the simulation from reaching the final singularity, the result remains clear; we can draw the necessary conclusion by extrapolating the execution trace.
+Even though numerical instabilities prevent the machine from registering the final state, the trajectory is mathematically clear.
+By extrapolating the trend of the execution trace, we arrive at a definitive conclusion:
 
-The black hole singularity corresponds to a zero-entropy state.
-
+\begin{principle}{The Singularity Inversion}
+The classical black hole singularity corresponds to a state of absolute zero informational entropy.
+\end{principle}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/schwarzschild.png}
 \caption{Execution-trace entropy of particles falling into a Schwarzschild black hole.}
+\label{fig:schwarzschild-entropy}
 \end{figure}
 
 
+\section{Conclusion: The Exhaustion of Information}
 
-\section{Conclusion}
+In classical physics, gravitational curvature diverges to infinity because physical geodesics converge to a point.
+However, our informational framework suggests that this infinity is merely a artifact of an exhausted descriptive framework—analogous to the mathematical divergence of surface derivatives when evaluating coordinates at the exact North Pole of a smooth sphere.
 
-In classical GR, curvature diverges as geodesics converge, implying infinite curvature. But this may reflect
-the limits of the geometric description rather than a physical
-pathology—analogous to measuring surface derivatives at the north pole of a sphere.
+Remarkably, this zero-entropy conclusion is entirely invariant under coordinate choice, representational mapping, or dimensionality.
+If you map a zero-entropy bitstring (such as a string consisting entirely of zeros) back to a geometric interpretation, it can only yield one possible object:
+a single, featureless point.
 
-Remarkably, this zero-entropy conclusion is invariant under coordinate choice, representation, or dimensionality. 
-Mapping zero entropy bitstring to geometry inevitably yields the same minimal object: a point. 
+Thus, singularities are not terrifying regions of infinite physical massiveness, but the exact opposite: states of complete informational exhaustion.
+They are the simplest, most trivial geometric configurations possible.
 
-Thus, singularities might not mysterious infinities but the simplest possible geometric configurations: 
-states of informational exhaustion.
+Because a zero-entropy bitstring is fundamentally incapable of encoding or describing internal microstructures—such as the discrete states of incoming particles—it offers a beautiful, elegant solution to the paradox of the singularity:
 
-As a bitstring of zero entropy (the geometric singularity) is totally incapable to describe
-any geometric micro structures, such as particles, this suggests that instead of being pathological break down of
-physics black hole centers are the exact opposite - they are the most well defined and trivial objects of zero information.
+\begin{quote}
+The probability of any falling particle actually existing \emph{inside} the singularity is zero. The singularity is simply too structurally trivial an object to hold them.
+\end{quote}
 
-The probability that any of the falling particles would find themselves in the singularity is zero. Singularity
-is simply too trivial object to describe them.
-
+By shifting our perspective from continuous geometry to discrete, self-interpretive information, one of the greatest mysteries of modern astrophysics is revealed to be the ultimate expression of simplicity—an elegant baseline of zero data that any software engineer can inherently understand.

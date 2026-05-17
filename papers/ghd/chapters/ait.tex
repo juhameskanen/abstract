@@ -1,202 +1,80 @@
 \chapter{Algorithmic Information Theory (AIT)}
-\label{chap:ait}
+\label{ait}
 
-\section{Introduction}
+\section{Introduction: Physics as Computation}
 
-Traditionally, researchers have viewed the laws of physics primarily through the lens of continuous equations and calculus.
-However, the previous chapter introduced a toy model of the universe in which the universe is not composed of ``stuff'' like particles, but of information—bits.
+Traditionally, physics has viewed the universe through the lens of continuous equations and calculus.
+However, our previous thought experiments suggest a radical alternative: the universe is not composed of physical ``stuff'' like particles, but of discrete information—bits. 
 
-All the computers and computations we use today are based on bits—the binary system. So it is not difficult to arrive at the conclusion that perhaps the laws of physics emerge from bits as computations.
+If the laws of physics emerge from bits via decompression, then we landed in the world of computation and computers.
+Our most powerful analytical tool is no longer a telescope, but a computer.
+Under the \textbf{Church-Turing Thesis}, there is a fundamental equivalence between mathematics and computation.
+Whether we use the abstract tape of a Turing machine or the silicon circuits of a modern PC, the underlying logic remains identical.
 
-There is a theory called \emph{Algorithmic Information Theory} (AIT) that explores exactly this idea. It shifts the focus from what a system \emph{is} to how much computational work is required to \emph{describe} it.
-AIT was developed in the 1960s by three researchers working independently:
-
-\begin{itemize}
-\item \textbf{Ray Solomonoff:} The father of algorithmic probability.
-\item \textbf{Andrey Kolmogorov:} The giant of complexity (hence ``Kolmogorov Complexity'').
-\item \textbf{Gregory Chaitin:} Who linked AIT to the deepest limits of mathematics (uncomputability).
-\end{itemize}
-
-Another figure central to this discourse is Max Tegmark, proponent of the \emph{Mathematical Universe Hypothesis}.
-Tegmark argues that our physical world does not merely possess mathematical properties; it \emph{is} mathematics. In his view, every mathematical structure exists physically—a profoundly Platonic perspective.
-
-If either of these theories is correct, then the most powerful tool for understanding reality is not a telescope, but a computer.
-
-According to the \textbf{Church-Turing Thesis}, there is a fundamental link between mathematics and computation.
-Whether we use the abstract tape of a Turing machine or the silicon circuits of a modern PC, the underlying logic remains the same.
-
-For the software professional, this realization is transformative. Expertise in managing complexity, abstraction, and algorithms is not merely a corporate skill—it is a foundational literacy for understanding reality itself. This is welcome news for the programmer: in the quest to understand the universe, we may already speak the native language of nature.
-
+There is a theory called \emph{Algorithmic Information Theory} (AIT), pioneered in the 1960s by Ray Solomonoff, Andrey Kolmogorov, and Gregory Chaitin.
+AIT shifts the focus from what a system \emph{is} to the absolute computational work required to \emph{describe} it. 
 
 \section{Beyond Statistical Information}
 
-Traditionally, physics uses \emph{Shannon entropy} to quantify uncertainty in probabilistic systems.
-Shannon's information is a statistical measure: it quantifies the expected amount of information produced by a random source relative to a probability distribution.
-It does not describe the intrinsic information content of an individual object.
+Traditionally, physics uses \emph{Shannon entropy} to quantify uncertainty.
+However, Shannon's entropy is strictly a statistical measure: it tells you how surprising a message is relative to a pre-existing probability distribution of an entire ensemble.
+It cannot tell anything about the intrinsic information content of a single, isolated object.
 
-Algorithmic Information Theory (AIT) shifts the focus from ensembles to individual objects. Instead of asking how surprising a message is relative to a distribution, AIT asks:
-what is the shortest description of a particular object?
+AIT fixes this.
+Instead of analyzing infinite ensembles, it asks a beautifully simple question about individual objects: what is the shortest computer program that can generate this specific data string?
 
-In this framework, every physical configuration can be encoded as a finite binary string. The question then becomes: how much information is required to describe that string?
+This is exactly what we need: the best compression implies the maximum probability of existence!
+
 
 \section{Kolmogorov Complexity}
 
-The central concept of AIT is \emph{Kolmogorov complexity}. The Kolmogorov complexity $K(x)$ of a binary string $x$ is defined as the length of the shortest program $p$ that,
-when run on a Universal Turing Machine (UTM) $U$, outputs $x$ and halts:
+The foundational metric of AIT is \emph{Kolmogorov complexity}.
+The Kolmogorov complexity $K(x)$ of a binary string $x$ is defined as the length of the shortest program $p$ that, when executed on a Universal Turing Machine (UTM) $U$, outputs $x$ and halts:
 
 \[
 K(x) = \min \{ |p| : U(p) = x \}.
 \]
 
-Intuitively, $K(x)$ measures the \emph{absolute compressibility} of an object.
+Intuitively, $K(x)$ measures the \emph{absolute compressibility} of an object:
+A highly ordered structure—like a crystal lattice—has incredibly low Kolmogorov complexity because a very short program can generate it (e.g., ``repeat this unit cell $N$ times'').
+A completely random string cannot be compressed; it contains no patterns, meaning its shortest description is the string itself. 
 
-\begin{itemize}
-    \item A crystal lattice is simple because a short program can generate it (for example, ``repeat the unit cell $N$ times'').
-    \item A typical random string cannot be compressed and therefore has complexity close to its full length.
-\end{itemize}
 
-In general, highly ordered structures have low Kolmogorov complexity, while random-looking configurations have high complexity.
+\section{The Algorithmic Coding Theorem}
 
-An important feature of Kolmogorov complexity is that it is defined only up to an additive constant. Different choices of Universal Turing Machine correspond to different programming languages,
-but the \emph{Invariance Theorem} guarantees that the difference between descriptions is bounded by a constant independent of the string being described.
-
-\section{Prefix Complexity}
-
-In many applications of AIT, programs must be \emph{self-delimiting}: no valid program is allowed to be a prefix of another.
-This leads to the concept of \emph{prefix Kolmogorov complexity}, usually denoted $K(x)$ in modern treatments.
-
-Self-delimiting programs allow one to define probability distributions over programs in a consistent way.
-This property is essential for connecting complexity with probability in the theory of algorithmic induction.
-
-\section{Algorithmic Probability}
-
-If we imagine generating programs by flipping fair coins and running them on a universal machine, some programs will halt and produce outputs.
-The probability that a random program outputs a particular string $x$ is known as the \emph{algorithmic probability}:
+The ultimate bridge between information theory and physical existence is established by the \emph{Levin--Chaitin Algorithmic Coding Theorem}.
+If we imagine generating programs by flipping fair coins (random inputs) and running them on a universal machine, the probability $P(x)$ of a specific output $x$ emerging is mathematically locked to its complexity:
 
 \[
-P(x) = \sum_{p:U(p)=x} 2^{-|p|}.
+K(x) \approx -\log_2 P(x) \quad \text{or} \quad P(x) \sim 2^{-K(x)}
 \]
 
-Shorter programs contribute exponentially more weight than longer ones. As a result, objects with simple descriptions tend to have higher probability.
+This relationship proves that simplicity, probability, and compressibility are mathematically equivalent.
+Shorter programs contribute exponentially more statistical weight than longer ones. 
 
-This provides a formal expression of \emph{Occam's Razor}: among all explanations consistent with the data, simpler ones are favored.
+This provides an airtight, formal mathematical proof for our coin and pixel thought experiments: objects with short, elegant, recursive descriptions are exponentially more likely to spontaneously manifest than chaotic, uncompressible noise. 
 
+\section{The Failure of Kolmogorov Complexity in Physics}
 
-\section{Solomonoff Induction}
+To test the compression idea, let us apply ZIP compression (the closes thing to ideal Kolmogorov) to our big-bang simulations. We run
+the simulations many times, compress the information in them and then pick those that compress the best. What do we see? 
 
-Ray Solomonoff combined algorithmic probability with Bayesian reasoning to create a framework for universal prediction.
+Chaos. No beautiful spiral galaxies. All simulations still consistently yield chaotic noise. 
 
-Suppose we observe a sequence of symbols $x = x_1 x_2 \dots x_n$. To predict the next symbol, Solomonoff induction considers every program that could generate a sequence beginning with $x$.
-Each program contributes a weight proportional to $2^{-|p|}$.
+If AIT mathematically guarantees that simple, compressed universes are exponentially more probable than random ones, why does our Big Bang simulations still end in a chaotic explosion of Boltzmann noise?
+Why don't realistic physical laws—such as General Relativity or basic planetary motion—spontaneously crystallize out of minimal description length?
 
-The probability that the next symbol is $a$ is
+The standard Kolmogorov complexity suffers from two fatal, foundational flaws that prevent it from being the compression system of the universe:
 
-\[
-P(a|x) = \frac{P(xa)}{P(x)},
-\]
+First, it is discrete. ZIP compression is discrete. Even small changes in its input may yield big jumps in the compressed file size.
+Can any physics based on such a shaky, non-continuous behavior?
 
-where $xa$ denotes the sequence extended by the symbol $a$.
+How could reasoning, predicting and decision making work in the universe in which probabilities jump chaotically based on how individual bits happen to be arranged? This is in strike
+contradiction with our earlier conclusions (Alice as Equivalence class).
 
-This approach effectively averages over all computable hypotheses, weighting simpler explanations more heavily. Solomonoff induction is often viewed as the theoretical limit of
-inductive inference: if the true data-generating process is computable, predictions based on this method will eventually converge to the correct distribution.
-
-However, Solomonoff induction is not computable in practice, since evaluating the universal distribution requires solving the halting problem.
-
-
-\section{Logical Depth}
-
-Kolmogorov complexity measures the length of the shortest description of an object, but it does not measure how difficult that object is to produce.
-
-To capture this distinction, Charles Bennett introduced the concept of \emph{logical depth}. The logical depth of a string is the amount of computational time required for a near-optimal program to generate it.
-
-This measure distinguishes between different kinds of complexity:
-
-\begin{itemize}
-    \item Random strings have high Kolmogorov complexity but low logical depth because they can be generated quickly by printing them directly.
-    \item Highly regular strings have both low complexity and low depth.
-    \item Structured objects such as biological organisms or physical systems may have relatively short descriptions but require long computations to generate, making them logically deep.
-\end{itemize}
-
-Logical depth is often interpreted as a measure of the amount of meaningful structure or computational history contained in an object.
+Another problem is that Kolmogorov complexity is not even computable. Due to its reliance on the halting problem, $K(x)$ is fundamentally uncomputable.
+There is no algorithm that can take an arbitrary string and calculate its exact minimal program length.
+It can only ever estimate upper bounds - the best possible theoretical compression one can ever hope to achieve with computers. 
 
 
-\section{Algorithmic Randomness}
-
-One of the central goals of Algorithmic Information Theory is to give a rigorous definition of randomness for individual objects.
-
-Intuitively, a string is random if it cannot be compressed. In the language of Kolmogorov complexity, a string $x$ of length $n$ is considered algorithmically random if
-
-\[
-K(x) \geq n - c,
-\]
-
-where $c$ is a constant independent of $x$. In other words, no program significantly shorter than the string itself can generate it.
-
-However, this condition alone is not sufficient to capture all aspects of randomness. A stronger and more robust definition was introduced by Per Martin-Löf through the concept of \emph{effective statistical tests}.
-
-A sequence is said to be \emph{Martin-Löf random} if it passes every computable statistical test for randomness. More precisely, a Martin-Löf test is a computable sequence of sets whose measures shrink rapidly; a sequence is random if it does not belong to the intersection of all such tests.
-
-An important result in Algorithmic Information Theory is that these two perspectives are closely related: an infinite binary sequence is Martin-Löf random if and only if the Kolmogorov complexity of its finite prefixes grows approximately linearly with their length.
-
-Martin-Löf randomness provides a mathematically precise notion of randomness that applies to individual sequences rather than probability distributions. It plays a central role in modern studies of algorithmic randomness and computability theory.
-
-
-\section{The Levin--Chaitin Theorem}
-
-A fundamental result in AIT connects Kolmogorov complexity ($K$) and algorithmic probability ($P$). The \emph{Algorithmic Coding Theorem} establishes a deep link between information content and the likelihood of existence:
-
-\[
-K(x) \approx -\log_2 P(x)
-\]
-
-This relationship implies that strings which are more likely to be produced by a random program have shorter descriptions. Conversely, complex strings are exponentially unlikely to appear as spontaneous outputs. This establishes that \textbf{simplicity, probability, and compressibility} are mathematically equivalent. In the context of our simulated universe, this suggests that the laws of physics we observe are not arbitrary; they are the most probable "short-cuts" in the space of all possible computations.
-
-
-\section{The Uncomputability of Complexity}
-
-A fundamental property of Kolmogorov complexity is that it is \emph{uncomputable}. There exists no algorithm that can take an arbitrary string $x$ and determine the exact value of $K(x)$.
-
-This limitation follows from the halting problem-a computational analogue of Gödel’s incompleteness result: determining whether a program is the shortest possible description of a string would require knowing whether any shorter program eventually halts and produces the same output.
-
-As a result, Kolmogorov complexity cannot be computed exactly in general. In practice, one can only estimate upper bounds by finding shorter descriptions or compression schemes.
-
-
-\section{Chaitin's Omega}
-
-One of the most striking results of Algorithmic Information Theory is the existence of a number known as \emph{Chaitin's Omega}. This number represents the probability that a randomly generated program halts.
-
-Consider generating a binary program by flipping a fair coin for each bit and running the resulting program on a universal prefix-free Turing machine $U$.
-Some programs halt and produce output, while others run forever. The probability that such a random program eventually halts is defined as
-
-\[
-\Omega = \sum_{p \text{ halts}} 2^{-|p|}.
-\]
-
-Because the programs are required to be prefix-free, this sum converges to a real number between 0 and 1. But no algorithm can compute the exact value of if. There is difference to numbers like PI (3.14..).
-Even though PI has infinitely many digits, its digits are fully determined by a finite algorithm. Chaitinn's Omaga is infinite as well. However, it is partially unknowable even in principle. It encodes unprovable truths. 
-
-The number $\Omega$ has several remarkable properties. Its binary expansion is algorithmically random: the first $n$ bits of $\Omega$ have Kolmogorov complexity approximately $n$. In other words, there is no significantly shorter program that can compute those bits.
-
-At the same time, $\Omega$ encodes the solution to the halting problem for all programs. Knowing the first $n$ bits of $\Omega$ would allow one to determine whether every program of length up to $n$ halts.
-
-As a consequence, the bits of $\Omega$ are mathematically well-defined but fundamentally uncomputable. No finite algorithm can determine more than finitely many of its digits.
-
-Chaitin's Omega illustrates a profound feature of Algorithmic Information Theory: even within pure mathematics, there exist well-defined quantities whose values contain irreducible algorithmic randomness.
-\textit{Maybe Chaitin's Omega is from which pain emerges!}
-
-
-\section{The Bad News}
-
-Could AIT, combined with the expanding entropy and unfolding universe idea, explain why we see expanding universe filled with beautiful spiral galaxies instead of chaotically exploding Bolzzman brains?
-
-Could Salomonoff induction and Kolmogorov complexity explain why persistent symmetries exist? 
-
-While Algorithmic Information Theory predicts that universes with simpler descriptions are exponentially more probable than highly random ones, a significant gap remains.
-
-AIT hasn't evolved to a level where it could be used for predicting evolution of subatomic particles, let alone tell us the nature of singularity inside a black hole. 
-
-No known simulation exists in which realistic physical laws—not even minimal Newtonian gravity or basic planetary motion—emerge purely from the principle of minimal description length or algorithmic probability.
-
-The problem is that while AIT says a 'simple' universe is more likely, the search space of all possible simple programs is infinite.
-We are looking for a needle in a haystack of infinite size, and we don't yet know what the 'needle' (the specific program for General Relativity) looks like
-
+Anyway, AIT tells us that a 'simple' universe is more likely, but the search space of all possible short programs is infinite.
