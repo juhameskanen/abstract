@@ -13,30 +13,79 @@ Given \emph{only} an observer-conditioned spectral compression measure, can anyt
 No forces, equations of motion, spacetime metric, or physical laws were hard-coded.
 The system is a pure informational engine that selects configurations solely according to a joint spectral-geometric complexity measure.
 
-\section{The Observer Proxy}
 
-Since full biological observers are computationally intractable, we use a simplified proxy: a localized Gaussian wave packet with limited internal memory — essentially a small, coherent ``blob''.
+\subsection{Challenges in Proof-of-Concept Implementation}
+
+While the framework presented in this book offers a unified informational picture of reality, demonstrating it through direct computational proof-of-concept faces severe practical obstacles.
+
+The core difficulty is combinatorial explosion. Consider a modest system containing only \(n\) bits of information. The total number of possible raw configurations is already \(2^n\). For \(n = 100\)—a tiny system by physical standards—this yields approximately \(10^{30}\) possible states.
+Even listing them all would be impossible on any conceivable computer.
+
+The problem grows dramatically worse when we consider dynamics.
+The number of possible ways to order or traverse these configurations is \((2^n)!\), a number so enormous that it dwarfs even the most extreme quantities in cosmology.
+For comparison, the number of atoms in the observable universe is roughly \(10^{80}\); \((2^{100})!\) is inconceivably larger.
+This is super-exponential growth, rendering brute-force enumeration or simulation fundamentally intractable even for laughably small systems.
+
+Yet these figures only describe the raw configuration space.
+
+The true complexity lies in the interpretation space—the vast set of possible semantic mappings that can be applied to the same binary data.
+Pure bits carry no inherent meaning, ontology, or physical interpretation.
+A given string of 0s and 1s can, in principle, be decoded as a wavefunction, a spacetime geometry, a conscious observer, or sheer noise, depending on the chosen descriptive language.
+The number of reasonable (and unreasonable) interpretive schemes is itself effectively unbounded.
+Each interpretation then carries its own spectral complexity \(C_s\) and geometric complexity \(C_g\), which must be evaluated under the joint compressibility measure.
+
+This creates a double-layered explosion: an astronomical space of raw configurations, multiplied by an even larger space of valid descriptions and observer functionals.
+
+Direct simulation of the full framework is therefore not merely difficult—it is computationally impossible with any realistic resources, now or in the foreseeable future.
+
+Fortunately, brute-force enumeration is not the only path forward.
+Just as we do not need to simulate every possible fluid molecule to understand aerodynamics, we can seek clever approximations, analytical limits, observer-centric selection principles, and targeted numerical experiments on small but representative subsystems.
+
+
+\section{Implementation}
+
+\subsection*{The Observer Filter}
+
+For the above mentioned reasons, and since any full biological observers are computationally intractable, we use a simplified proxy: a localized Gaussian wave packet with limited internal memory — essentially a small, coherent ``Gaussian blob''.
 The size and memory capacity of this blob are adjustable parameters.
 
 The simulation explores possible ``observer walks'' (sequences of configurations consistent with the persistence of this blob) and selects them according to the induced observer-conditioned measure $P(c \mid O)$.
 
-\section{Implementation}
-
-We implemented a complex-valued wavefunction class that directly computes spectral complexity from frequencies, amplitudes, and phases.
+A complex-valued wavefunction class is implemented, with method to compute spectral complexity from frequencies, amplitudes, and phases.
 Geometric complexity is approximated through a linearized measure of curvature and boundary sharpness.
 
 A Metropolis-Hastings sampler explores the configuration space, guided exclusively by the minimization of total spectral-geometric description length.
 
-\section{Emergent Phenomena}
+\subsection*{Simulation Design}
 
-Even in this highly minimal setup, several non-trivial behaviors emerge naturally:
+To test whether the joint compressibility framework can produce realistic physics, we started with a minimal 2+1D simulation.
+The goal was simple: start with pure randomness and see whether anything resembling inertia, wave interference, or mutual attraction would emerge when configurations are selected solely based on how easily they can be compressed.
 
-\begin{itemize}
-\item \textbf{Inertia and Smooth Motion:} The blobs follow smooth, curved trajectories.
-  Sharp changes in direction introduce high-frequency components, which carry high spectral cost and are heavily suppressed.
-    \item \textbf{Weak Mutual Attraction:} Configurations in which multiple blobs are closer together often exhibit lower joint spectral-geometric complexity, producing a statistical tendency toward clustering.
-    \item \textbf{Wave-like Interference:} Interference patterns arise spontaneously from the complex-valued wavefunction representation.
-\end{itemize}
+The simulation works as follows:
+
+At its foundation is a random noise substrate — a sea of particles whose positions are continually redrawn from a probability distribution.
+This distribution is generated by the interference patterns of complex-valued wavefunctions, similar to how quantum mechanics describes reality.
+
+Within this noisy environment, observers are modeled as localized Gaussian wave packets — essentially smooth, coherent “blobs” of information.
+Each blob represents a simplified observer with limited memory and internal structure.
+These observers do not follow pre-programmed laws of motion.
+Instead, at every step, the system evaluates many possible small changes to their trajectories and selects those that minimize the total spectral and geometric complexity (\(C_s + C_g\)).
+
+This implements the core principle of the framework: the more compressible an observer’s experience is, the more statistically likely it becomes.
+Smooth, predictable motion compresses far better than erratic, high-frequency jitter.
+As a result, the observer-blobs naturally develop inertia — they prefer to continue moving in gentle curves rather than making sudden turns, because sharp changes create expensive high-frequency components in the wavefunction.
+
+Quantum-like behavior emerges directly from the complex-valued wavefunction representation.
+Interference patterns appear naturally, without being programmed.
+
+Emergent mutual attraction (a primitive form of gravity) arises because overlapping wavefunctions between nearby observers create regions of higher probability density in the space between them.
+The observers are statistically “pulled” toward areas where more microscopic configurations support their persistence.
+
+No forces, no equations of motion, and no spacetime metric were ever coded into the simulation.
+The only rule was: keep the observer’s description as short and compressible as possible.
+
+The simulation is deliberately minimal. It uses a few thousand particles on a 2D grid and runs for a few hundred time steps.
+Even with these severe limitations, clear structured behavior consistently appears.
 
 \begin{figure}[h!]
 \centering
