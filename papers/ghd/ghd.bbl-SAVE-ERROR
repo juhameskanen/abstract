@@ -553,35 +553,6 @@
       \field{pages}{3\bibrangedash 31}
       \range{pages}{29}
     \endentry
-    \entry{verlinde2011origin}{article}{}
-      \name{author}{1}{}{%
-        {{hash=bb173e9b623b7737a79f22558b0becc4}{%
-           family={Verlinde},
-           familyi={V\bibinitperiod},
-           given={Erik},
-           giveni={E\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{bb173e9b623b7737a79f22558b0becc4}
-      \strng{fullhash}{bb173e9b623b7737a79f22558b0becc4}
-      \strng{bibnamehash}{bb173e9b623b7737a79f22558b0becc4}
-      \strng{authorbibnamehash}{bb173e9b623b7737a79f22558b0becc4}
-      \strng{authornamehash}{bb173e9b623b7737a79f22558b0becc4}
-      \strng{authorfullhash}{bb173e9b623b7737a79f22558b0becc4}
-      \field{sortinit}{V}
-      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of High Energy Physics}
-      \field{number}{4}
-      \field{title}{On the origin of gravity and the laws of Newton}
-      \field{volume}{2011}
-      \field{year}{2011}
-      \field{pages}{29}
-      \range{pages}{1}
-    \endentry
     \entry{Whitehead1929}{book}{}
       \name{author}{1}{}{%
         {{hash=9131dcc0b7c52c07d7d95e489ba0a0f6}{%
