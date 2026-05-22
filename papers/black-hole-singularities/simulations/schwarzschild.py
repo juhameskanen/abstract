@@ -10,7 +10,7 @@ singularities disrupting integration.
 
 Purpose
 -------
-This code provides the simplest *standard GR baseline* for black hole
+This code provides the simplest standard GR baseline for black hole
 collapse. It models geodesics in the Schwarzschild spacetime and serves
 as a reference for both the Kerr EF simulation (rotating case) and the
 Abstract Universe (AU) formulation. Together, these models allow direct
@@ -57,7 +57,8 @@ Instantiate a `SchwarzschildEFGeodesicCloud` and evolve:
 The returned trajectory array can be used for visualization,
 entropy analysis, and comparison against Kerr and AU simulations.
 
-Copyright 2019 - The Abstract Universe Project
+Copyright 2001 ... 2026 - Juha Meskanen
+The Abstract Universe Project
 """
 
 
