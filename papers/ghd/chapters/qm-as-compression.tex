@@ -47,7 +47,7 @@ Quantum mechanics may simply be the most efficient rendering engine mathematical
 
 \section{From Kolmogorov to Spectral Complexity}
 
-As we established in Chapter~\ref{ait}, standard Kolmogorov complexity provides a theoretical foundation for minimal description lengths.
+As we established in Chapter~\nameref{chap:ait}, standard Kolmogorov complexity provides a theoretical foundation for minimal description lengths.
 However, because it relies on the binary halting state of a Turing machine, it is fundamentally discrete, discontinuous, and uncomputable.
 It is difficult to see how such a jagged, "jumpy" informational measure could smoothly support stable prediction, continuous spacetime geometry, or the gradual evolutionary reasoning of an intelligent observer.
 
@@ -81,26 +81,24 @@ Therefore, the most compressible configurations—those defined by law-like regu
 
 \subsection*{The Cost Function}
 
-To implement this, we introduce a `spectral\_complexity()` method to our underlying Wavefunction simulation class.
-The complexity is determined by counting the total bits required to instantiate the state's constituent modes. The total spectral complexity $C_s$ of a state $\Psi$ is calculated as the sum of its algorithmic software overhead and the explicit parameters of its $N$ active modes:
+To implement this, we introduce a \texttt{spectral\_complexity()} method to our underlying Wavefunction simulation class. The complexity is determined by measuring the linear resource allocation required to instantiate and track the state's constituent modes over a simulation interval. The total spectral complexity $C_s$ of a state $\Psi$ is calculated as the sum of its algorithmic software overhead and the explicit parameters of its $N$ active modes:
 
 \[
-C_s(\Psi) = \text{Cost}(\text{base}) + \sum_{i=1}^{N} \left[ \text{Cost}(\phi_i) + \text{Cost}(A_i) + \log_2\left(\frac{\omega_i}{\Delta\omega}\right) \right]
+C_s(\Psi) = \text{Cost(base)} + \sum_{i=1}^{N} \left[ \text{Cost}(\phi_i) + \text{Cost}(A_i) + \left(\frac{\omega_i}{\Delta\omega}\right) \right]
 \]
 
 Where:
 \begin{itemize}
-\item \textbf{$\text{Cost}(\text{base})$}: The constant $O(1)$ computational cost of the underlying trigonometric and mathematical subroutines (e.g., the `sin()` method).
-  On a universal cosmological scale, this overhead is fixed and treated as a constant.
-\item \textbf{$\text{Cost}(\phi_i)$}: The explicit bit-cost of encoding the wave phase.
-  Because phase is strictly bounded within the periodic interval $[0, 2\pi]$, this is modeled as a small, fixed-width bit cost per active mode.
+    \item \textbf{$\text{Cost(base)}$}: The constant $\mathcal{O}(1)$ computational cost of the underlying trigonometric and mathematical subroutines (e.g., the \texttt{sin()} method). On a system-wide simulation scale, this baseline overhead is fixed, vanishingly small, and treated as a constant.
+    \item \textbf{$\text{Cost}(\phi_i)$}: The explicit bit-cost of encoding the wave phase. Because phase is strictly bounded within the periodic interval $[0, 2\pi]$, this is modeled as a small, fixed-width bit cost per active mode.
     \item \textbf{$\text{Cost}(A_i)$}: The informational bit-depth required to encode the continuous amplitude.
-    \item \textbf{$\log_2(\omega_i / \Delta\omega)$}: The dominant term of the cost function.
-      This represents the exact number of bits required to specify the mode frequency $\omega$ relative to the system's minimum resolution threshold $\Delta\omega$.
+    \item \textbf{$\omega_i / \Delta\omega$}: The dominant term of the cost function. This represents the linear resource cost required to track the mode frequency $\omega_i$ relative to the system's minimum resolution threshold $\Delta\omega$.
 \end{itemize}
 
-It should be noted that this formulation represents our initial toy candidate for a spectral metric.
-While different precise digital encoding schemes are possible depending on how one compresses the wavefunction, they all fundamentally share a critical mathematical property: they assign a smooth, continuous cost gradient across neighboring physical states.
+Approximately, the informational cost scales linearly with the number of active modes multiplied by their frequency. Crucially, by mapping complexity linearly to frequency, this formulation mirrors physical thermodynamic systems where energy scales linearly with frequency ($E = \hbar\omega$). Under a Solomonoff induction framework ($P \propto 2^{-C_s}$), this linear cost ensures that increasingly complex, high-frequency states suffer exponential probability suppression, directly analogous to the physical Boltzmann distribution ($P \propto e^{-\beta E}$).
+
+It should be noted that this formulation represents our initial candidate for a spectral metric. While different precise digital encoding schemes are possible depending on how one compresses the wavefunction, they all fundamentally share a critical mathematical property: they assign a smooth, continuous cost gradient across neighboring physical states.
+
 
 \subsection*{Simulation Results}
 

@@ -51,9 +51,9 @@ To answer this, Solomonoff formulated the \textbf{Universal Prior} $M(x)$, which
 M(x) = \sum_{p: U(p) = x*} 2^{-|p|}
 \]
 
-where $x*$ represents any arbitrary output sequence that begins with the prefix $x$, and $|p|$ is the length of the program $p$ in bits. Because the terms scale exponentially as $2^{-|p|}$, the sum is aggressively dominated by the absolute shortest programs capable of producing the observed data. 
+where $x$ represents any arbitrary output sequence that begins with the prefix $x$, and $|p|$ is the length of the program $p$ in bits. Because the terms scale exponentially as $2^{-|p|}$, the sum is aggressively dominated by the absolute shortest programs capable of producing the observed data. 
 
-This formulation mathematically mirrors our earlier thought experiment from Chapter~\ref{chap:the-filter}.
+This formulation mathematically mirrors our earlier thought experiment from Chapter~\nameref{chap:the-filter}.
 In the coin-tossed universe, we derived that the probability of an observer's existence scales strictly with their minimal description length:
 
 \[
@@ -62,7 +62,7 @@ P(\text{Alice}) = 2^{-m}
 
 where $m$ is the length of the macro-structural blueprint. 
 
-It seems what our miniature coin universe demonstrated through intuitive combinatorics is functionally identical to the foundational premise of the Solomonoff Universal Prior and the Levin--Chaitin Algorithmic Coding Theorem.
+So it seems what our miniature coin universe demonstrated through intuitive combinatorics is functionally identical to the foundational premise of the Solomonoff Universal Prior and the Levin--Chaitin Algorithmic Coding Theorem.
 By generating microstates uniformly at random, the emergence of any macroscopic structure is governed not by raw chance, but by the absolute brevity of its compressed description length.
 
 
@@ -74,23 +74,32 @@ This provides an airtight, formal mathematical proof for our coin and pixel thou
 
 \section{The Failure of Kolmogorov Complexity in Physics}
 
-To test the compression idea, let us apply ZIP compression (the closest thing to ideal Kolmogorov) to our big-bang simulations. We run
-the simulations many times, compress them and then pick those that compress the best. What do we see? 
+To test the compression idea, let us apply ZIP compression (the closest thing to ideal Kolmogorov) to our \nameref{chap:from-nothing-to-something} big-bang simulations. We run
+the simulations many times, compress them and then pick those that compress the best.
 
-Chaos. No beautiful spiral galaxies. All simulations still consistently yield chaotic noise. 
+What do we see? 
 
-If AIT mathematically guarantees that simple, compressed universes are exponentially more probable than random ones, why does our Big Bang simulations still end in a chaotic explosion of Boltzmann noise?
+Still chaos.
+
+No beautiful spiral galaxies. All simulations still consistently yield chaotic noise. 
+
+AIT mathematically guarantees that simple, compressed universes are exponentially more probable than random ones.
+
+Predictable smooth data compresses best.
+
+So why does our Big Bang simulations still end in a chaotic explosion of Boltzmann noise?
+
 Why don't realistic physical laws—such as General Relativity or basic planetary motion—spontaneously crystallize out of minimal description length?
+
 
 It seems the standard Kolmogorov complexity suffers from two fatal, foundational flaws that prevent it from being the compression system of the universe:
 
-First, it is discrete. Even small changes in its input may yield big jumps in the compressed file size. Can any physics based on such a shaky, non-continuous behavior?
+First, it is discrete. Even small changes in its input may yield big jumps in the compressed file size. It is difficult to see how any smooth predictable physics emerge based on such a shaky,
+non-continuous behavior. How could reasoning, predicting and decision making work in the universe in which probabilities jump chaotically based on how individual bits happen to be arranged?
+This is in strike contradiction with our earlier conclusions (Alice as Equivalence class).
 
-How could reasoning, predicting and decision making work in the universe in which probabilities jump chaotically based on how individual bits happen to be arranged? This is in strike
-contradiction with our earlier conclusions (Alice as Equivalence class).
-
-Another problem is that Kolmogorov complexity is not even computable. Due to its reliance on the halting problem, $K(x)$ is fundamentally uncomputable.
+Another problem is that Kolmogorov complexity is not even computable.
+Due to its reliance on the halting problem, $K(x)$ is fundamentally uncomputable.
 There is no algorithm that can take an arbitrary string and calculate its exact minimal program length.
 It can only ever estimate upper bounds - the best possible theoretical compression one can ever hope to achieve with computers. 
 
-AIT tells us that a 'simple' universe is more likely, but the search space of all possible short programs is infinite.
