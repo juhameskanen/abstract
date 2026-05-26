@@ -5,52 +5,48 @@ If the four assumptions hold, then subjective experience can emerge internally f
 
 Let us go through two thought experiments to demonstrate the consequences.
 
+\section{Alice as an Execution Trace}
 
-\section{Alice as a Video}
-
-Consider a full, faithful particle simulation of Alice's universe.
-We render it frame by frame into an MPEG video.
+Consider a full, faithful particle simulation of Alice's universe. 
+We record it frame by frame into an uncompressed, lossless digital archive. 
 This is the straightforward, non-optimized implementation.
 
-What distinguishes this video from ordinary ones is that the ``pixels'' are not flat 2D rasters, but 3D counterparts---``voxels''---where particles play the role of pixels. 
-It is a complete, particle-level recording of the entire simulated universe, including Alice's body, her brain states, and every interaction.
-This video is a virtual copy of real-world Alice---functionally identical at every relevant level.
+What distinguishes this archive from ordinary media is that the coordinates are not flat 2D rasters,
+but 3D counterparts---``voxels''---where fundamental particles play the role of pixels. 
+It is a complete, particle-level recording of the entire simulated universe, including Alice's body, her brain states, and every interaction. 
+This record is a virtual copy of real-world Alice---functionally identical at every relevant level.
 
-Now we begin optimizing the code.
-First, we replace every \texttt{log10()} call with a precomputed lookup table.
-We render the simulation again. The resulting video is \emph{identical} to the original.
+Now we begin optimizing the simulation code. 
+First, we replace every \texttt{log10()} call with a precomputed lookup table. 
+We run the simulation again. The resulting state-space archive is \emph{identical} to the original.
 
-Next, we replace all \texttt{sqrt()} computations with precomputed values.
-Again, the videos are indistinguishable.
+Next, we replace all \texttt{sqrt()} computations with precomputed values. 
+Again, the outputs are indistinguishable.
 
-We continue this process, gradually replacing more and more active computation with static lookup tables.
-At every step, the output video remains exactly the same.
-The only difference is the time required to generate it: the more we optimize, the faster the rendering completes.
+We continue this process, gradually replacing more and more active computation with static lookup tables. 
+At every run, the output data remains exactly the same. The only difference is the physical time required
+for the host hardware to generate it: the more we optimize, the faster the execution completes.
 
-In the end, we optimize the simulation completely.
-All computation has been replaced by precomputed data. What remains are two sets of files of pure static information: the execution traces of the gradually optimized simulations and their rendered video file counterparts.
+In the end, we optimize the simulation completely. 
+All active computation has been replaced by precomputed data. What remains are two sets of files of pure, static information: the execution traces of the gradually optimized simulations and their completed state-space counterparts.
 
-All the generated videos are indistinguishable from one another; only the code-to-data ratio of the process that created them differs.
-
+All the generated records are indistinguishable from one another; only the code-to-data ratio of the process that created them differs. 
 The execution traces themselves differ because the underlying implementation of each run was different.
 
 We can draw two major conclusions from this thought experiment:
 
-First, it would be absurd to argue that, within a set of identical videos, some would be more ``special'' than others (with some hosting active consciousness and pain, while others remain inert). 
-
-If the output is the same, then the ``experience'' must either exist in all versions or none of them.
+First, it would be absurd to argue that, within a set of identical data structures, some would be more ``special'' than others (with some hosting active consciousness and pain, while others remain inert). 
+If the output data is identical, then the ``experience'' must either exist in all versions or none of them.
 
 Second, many different execution traces (or their computational equivalents) can produce the exact same Alice. 
-
 The observer is not bound to a single, specific bitstring!
 
-This is a manifestation of statistical mechanics and entropy.
+This is a manifestation of statistical mechanics and entropy. 
 Just as the sand grains in an hourglass can pile up in astronomically many distinct microscopic arrangements while still producing essentially the same macroscopic shape---a cone---the underlying informational execution traces can be arranged in many different ways to produce the exact same emergent Alice.
 
 Alice is an \textbf{Equivalence Class}.
 
 The immense number of distinct execution traces (microstates) that yield the identical macroscopic observer (the macrostate) is the informational analog of \textbf{Boltzmann Entropy}.
-
 
 
 \section{The Self-Mutating Computer}
@@ -82,31 +78,37 @@ What remains is a static set, where ``running'' is merely a specific internal st
 This self-mutating computer provides the bridge to understanding how entire universes---complete with conscious beings experiencing the flow of time and the reality of pain and joy---arise purely from static information without the need for outside intervention or a pre-existing flow of time.
 
 
+\section{Physics Supporting an Informationally Static, Timeless Universe}
+
+\textbf{The Wheeler-DeWitt Equation \& The Problem of Time:} In quantum cosmology, applying the Schrödinger equation to the universe as a whole yields $\hat{H}|\Psi\rangle = 0$. The global wave function of the universe is completely static; fundamental time does not exist.
+
+\textbf{The Block Universe of General Relativity:} Einstein’s relativity eliminates a universal "now." Past, present, and future are merely geometric coordinates within a static four-dimensional spacetime block, rather than events being created or destroyed.
+
+\textbf{Quantum Unitarity and Information Conservation:} Quantum evolution is strictly unitary ($U^\dagger U = 1$), meaning the total information of a closed system is preserved perfectly. The modern resolution to the Black Hole Information Paradox (via the Holographic Principle/AdS-CFT) reaffirms that information can never be destroyed or truly created.
+
+\textbf{Time-Symmetry of Fundamental Laws:} The core microscopic equations of physics (Newtonian, Maxwellian, Einsteinian, and Quantum) are time-reversal invariant ($T$-symmetric). The direction of time is a macroscopic, thermodynamic illusion, not a fundamental property of matter.
+
+\textbf{Emergent Time via Entanglement (Page-Wootters Mechanism):} Modern quantum mechanics demonstrates that a globally static universe can give rise to the perception of time locally. ``Time'' emerges purely as a statistical correlation between an entangled observer (Alice) and her environment.
+
+\textbf{The Feynman Path Integral Formulation:} Quantum mechanics relies on summing over all possible histories simultaneously. In an information-first framework, this implies that all observer-compatible continuations ($\Gamma_O$) exist statically, with probabilities determined by their constraints rather than a chronological unfolding.
+
+
 \section{Conclusion: Time as a Representational Gauge}
 
 Together, these thought experiments illustrate a profound structural truth: any external feature—including a clock, a CPU, or time itself—can be entirely internalized by embedding it within a joint system.
 
-This internalization completely reframes the physics of time.
-In modern quantum cosmology, this is known as the Page-Wootters \cite{page1983clock} mechanism, which demonstrates that the global universe can be completely static, while time emerges purely as a relational correlation between an internalized clock subsystem and the rest of the system's states. 
+This internalization completely reframes the physics of time. 
+In modern quantum cosmology, this is modeled by the Page-Wootters \cite{page1983clock} mechanism,
+which demonstrates that the global universe can be completely static, while time emerges purely as a relational correlation between an internalized clock subsystem and the rest of the system's states. 
 
 We can push this realization to its logical conclusion:
 
 \begin{enumerate}
-
-\item \textbf{The Totality is Timeless:} The Static Informational Totality ($\mathbf{U}$) does not execute, run, or tick.
-  It is a timeless, static ensemble of raw, uninterpreted configurations ($\mathbf{2}^S$). 
-
-\item \textbf{Time is an Interpretive Slice:} The "flow of time" is not a fundamental property of the bits.
-  It is part of the interpretive framework selected by the observer to achieve maximal relational compression.
-
-\item \textbf{Temporal Order is Gauge-Dependent:} Just as an 8-bit word can be read as LSB or MSB, a static execution trace can be permuted or read in any direction.
-  The choice of which variable serves as the "clock parameter" $\lambda$ is a representational choice.
-  Time is therefore a gauge choice, and the apparent dynamics of the universe are gauge-dependent.
+    \item \textbf{The Totality is Timeless:} The Static Informational Totality ($\mathbf{U}$) does not execute, run, or tick. It is a timeless, static ensemble of raw, uninterpreted configurations ($\mathbf{2}^S$). 
+    \item \textbf{Time is an Interpretive Slice:} The ``flow of time'' is not a fundamental property of the bits. It is part of the interpretive framework selected by the observer to achieve maximal relational compression.
+    \item \textbf{Temporal Order is Gauge-Dependent:} Just as an 8-bit word can be read as LSB or MSB, a static execution trace can be permuted or read in any direction. The choice of which internal variable serves as the ``clock parameter'' $\lambda$ is a representational choice. Time is therefore a gauge choice, and the apparent dynamics of the universe are gauge-dependent.
 \end{enumerate}
 
-The illusion of a running computer or a dynamically expanding universe is dissolved.
+What we call ``the passage of time'' is the structure discovered by an intelligent observer within a static block of information.
 
-What we call "the passage of time" is nothing more than the structure discovered by an intelligent observer within a static block of information.
-
-The clock does not drive the universe; the clock and the universe are simply entangled readings of the exact same silent totality.
-
+The clock does not drive the universe; the clock and the universe are entangled readings of the same information.
