@@ -23,6 +23,7 @@
 \usepackage{tocloft}
 \usepackage{parskip}
 \usepackage{tikz}
+\usepackage{etoolbox}
 \usetikzlibrary{arrows.meta, shapes, positioning, calc, cd}
 \usepackage[en-US]{datetime2}
 \newtheorem{lemma}{Lemma}
@@ -44,6 +45,30 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{definition}{Definition}
+
+
+% --- Profilation --
+
+% Default build mode
+\newtoggle{physics}
+\newtoggle{theology}
+
+% Full version by default
+\toggletrue{physics}
+\toggletrue{theology}
+
+
+% Allow command-line overrides
+\providecommand{\buildphysics}{true}
+\providecommand{\buildtheology}{true}
+
+\ifdefstring{\buildphysics}{true}
+  {\toggletrue{physics}}
+  {\togglefalse{physics}}
+
+\ifdefstring{\buildtheology}{true}
+  {\toggletrue{theology}}
+  {\togglefalse{theology}}
 
 
 % --- THE CORRECT PHYSICS CONFLICT RESET ---
