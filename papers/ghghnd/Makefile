@@ -18,11 +18,12 @@ pdf-theology:
 	$(FILENAME).tex
 
 clean:
-	latexmk -C
+	rm $(FILENAME).glo $(FILENAME).ist $(FILENAME).bcf \
+	$(FILENAME).blg $(FILENAME).aux $(FILENAME).bbl $(FILENAME).fls \
+	$(FILENAME).toc $(FILENAME)_physics.* $(FILENAME).fdb_latexmk \
+	$(FILENAME).run.xml
 
 html-full:
 	make4ht -c $(FILENAME).cfg -d html-output $(FILENAME).tex "xhtml,2,sections+,next"
 	make4ht -m clean $(FILENAME).tex
 
-clean:
-	make4ht -m clean $(FILENAME).tex
