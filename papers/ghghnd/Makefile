@@ -1,29 +1,42 @@
-FILENAME=ghghnd
+DOCS = ghghnd iame
 
-pdf-full:
-	latexmk -pdf -quiet \
-	-interaction=nonstopmode \
-	$(FILENAME).tex
+PDFS      = $(DOCS:=.pdf)
+HTML_DIR  = $(addprefix html-output-, $(DOCS))
+REMOTE_DIR = /meskanen/abstract
 
-pdf-physics:
-	latexmk -pdf -quiet \
-	-jobname=$(FILENAME)_physics \
-	-pdflatex='pdflatex %O "\def\buildtheology{false}\input{%S}"' \
-	$(FILENAME).tex
 
-pdf-theology:
-	latexmk -pdf -quiet \
-	-jobname=$(FILENAME)_theology \
-	-pdflatex='pdflatex %O "\def\buildphysics{false}\input{%S}"' \
-	$(FILENAME).tex
+ghghnd.pdf : PROF_MACRO = \def\buildtheology{true}
+iame.pdf   : PROF_MACRO = \def\buildtheology{false}
+
+
+html-output-ghghnd : PROF_MACRO = \def\buildtheology{true}
+html-output-iame   : PROF_MACRO = \def\buildtheology{false}
+
+
+all: $(PDFS) $(HTML_DIR)
+	@echo "All documents successfully compiled!"
+
+$(DOCS): %: %.pdf html-output-%
+
+
+%.pdf: %.tex
+	@echo "Building $@ with profile flags..."
+	latexmk -pdf -quiet -interaction=nonstopmode \
+		-pdflatex="pdflatex %O '$(PROF_MACRO)\input{%S}'" \
+		$<
+
+html-output-%: %.tex
+	@echo "Building HTML profile $*..."
+
 
 clean:
-	rm $(FILENAME).glo $(FILENAME).ist $(FILENAME).bcf \
-	$(FILENAME).blg $(FILENAME).aux $(FILENAME).bbl $(FILENAME).fls \
-	$(FILENAME).toc $(FILENAME)_physics.* $(FILENAME).fdb_latexmk \
-	$(FILENAME).run.xml
+	@for doc in $(DOCS); do \
+		latexmk -C -jobname=$$doc $$doc.tex 2>/dev/null; \
+		rm -rf html-output-$$doc; \
+	done
 
-html-full:
-	make4ht -c $(FILENAME).cfg -d html-output $(FILENAME).tex "xhtml,2,sections+,next"
-	make4ht -m clean $(FILENAME).tex
+.PHONY: all clean $(DOCS) upload
+
+# separate file for security 
+include upload.mak
 

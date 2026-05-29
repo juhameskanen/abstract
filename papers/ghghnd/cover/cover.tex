@@ -9,13 +9,26 @@
 \end{tikzpicture}
 
 \centering
+\iftoggle{theology}{
 {\Huge\bfseries Good Heavens, Gods?\par}
 {\Huge\bfseries Hell No, Dogs!\par}
+}{
+{\Huge\bfseries The Abstract Universe Project\par}
+{\Huge\bfseries \iame\par}
+}
 \vspace{1cm}
 {\Large Juha Meskanen\par}
 \vspace{0.5cm}
-{\small\scshape Universal Edition\par}
+\iftoggle{theology}{
+  {\small\scshape Universal Edition\par}
+}{
+  {\small\scshape Physics Edition\par}
+}
 \vspace{0.2cm}
-{\footnotesize\ttfamily [ Code: GHGHND ]\par} % Added here
-       
+\iftoggle{theology}{
+  {\footnotesize\ttfamily [ Code: GHGHND ]\par}
+}{
+  {\footnotesize\ttfamily [ Code: IAMe ]\par}
+}
+
 \end{titlepage}
