@@ -1,121 +1,79 @@
-# Informational, Abstract Model of Everything ($IaM^e$)
+# Informational, Abstract Measure of Everything (IAM^e)
 
-## The Equations
+A candidate framework for everything where reality emerges as the large-deviation minimum of observer-compatible histories.
 
-$$\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O$$
+Reality is not assumed — it is what a structured observer is most likely to experience.
 
-Observed physical laws are the large-deviation minimizers of $\mathcal{C}_O[\gamma]$ over observer-compatible histories.
+## Overview
 
-The notation:
+The existence of the observer ("I am") is taken as the sole primitive. Everything else — physics, mathematics, and the structure of experience — is derived as the most probable emergent configuration consistent with that observer.
 
-$$D-\psi-G$$
+Observed physical laws, mathematical structures, and coherent reality itself are the configurations that minimize a spectral and geometric joint compressibility cost under observer constraints.
 
-captures "Joint Compressibility" logic:
+No fundamental discreteness, finiteness, spacetime, or informational ontology is assumed at the base level. The theory seeks to explain not only quantum gravity but a broad range of phenomena through the single lens of **probability of emergence**.
 
-* $D$ (Data/Description): The raw naked discrete information.
-* $\psi$ (Spectral/Quantum): The "Codec" that compresses data into wavefunctions (minimizing $C_s$).
-* $G$ (Geometry/Gravity): The geometric manifold (minimizing $C_g$).
+## Core Equations
 
+$$
+\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O
+$$
 
-## Objective
+Observed regularities (physical laws, geometry, quantum behavior, etc.) are the large-deviation minimizers of the cost functional $\mathcal{C}_O[\gamma]$ over observer-compatible histories $\gamma$.
 
-Attempts to formulate a conventional theory of quantum gravity have repeatedly stalled. 
-Despite this, this project leans into the challenge, and even extends it. The objective is not only to formulate 
-the laws governing how the universe behaves, but to gain full understanding what those laws are fundamentally describing. 
+The notation **D-ψ-G** captures the joint compressibility principle:
+- **D** — Raw discrete information (data/description)
+- **ψ** — Spectral/quantum description (wavefunctions minimizing spectral cost)
+- **G** — Geometric/gravity description (minimizing geometric cost)
 
-This is an ambitious goal, and the author is under no illusion about its difficulty.
+## Key Features
 
-
-## Informational, Abstract Model of Everything ($IaM^e$)
-
-Despite the somewhat cheeky name, $IaM^e$ is a playground for rigorous physics, Python simulations, and LaTeX-driven documentation. It’s where the GitHub ecosystem meets deep-space curiosity—a space where entropy, abstract structures, and reality itself are tackled with joy, curiosity, and serious mathematical rigor (YAML configuration excluded, obviously).
-
-
-## The Axiom
-
-Stating "we assume nothing" is, in itself, an assumption. So we assume one thing, the only undeniable datum: The Observer exists.
-
-From this single point of certainty—the "I am"—we explore how a coherent physical universe, governed by smooth laws and complex structures, emerges not by decree, but as a statistical inevitability.
-
-In $IaM^e$, reality isn't a pre-existing stage; it is the most probable informational outcome including the observer as a sub-set. 
-
-
-## Physics vs. Philosophy
-
-$IaM^e$ is a project of Physics, not philosophy. If a concept cannot be computed, simulated, or derived via mathematical rigor, it does not belong here.
-
-Furthermore, physics must be falsifiable via observation, or it is not physics but philosophy. The existence of the Observer is treated operationally: as an empirically given informational subsystem whose persistence conditions define the ensemble under study.
-
-
-## The Simulation Gallery
-
-The core of $IaM^e$ is proving that "smooth" physics is a statistical inevitability. Every simulation start with well defined observer, and what follows is just the most probable outcome.
-In this repo, we don't hard-code physics; we watch it emerge. The "Laws of Physics" are not pre-set rules but the most likely attributes of the configuration for the observer.
-
+- Physics and laws are not hardcoded — they emerge probabilistically.
+- Strong emphasis on computational validation through Python simulations.
+- Minimalist ontology: begins only from the existence of the observer ("I am").
+- No prior commitment to finiteness, discreteness, or informational fundamentalism.
 
 ## Contents
 
-* [The Visualized Theory](gallery.md) — Gallery of simulations demonstrating gravity, inertia, and atomic structures as emergent phenomena. 
-* [Pages](https://juhameskanen.github.io/abstract/) – HTML and PDF versions of all papers
-* [Papers](https://github.com/juhameskanen/abstract) – LaTeX and python simulation source code for all papers
-* [QBitwave Project - Wavefunction as compression](https://github.com/juhameskanen/abstract/wiki/QBitWave) - Python implementation of emergent wavefunction
-* [Project Wiki](https://github.com/juhameskanen/abstract/wiki) - Implementation and research notes and discussions of ongoing and planned matters
-* [CHANGELOG ➡](CHANGELOG.md) – Record of updates, improvements, and new simulations
-* [LICENSE ➡](LICENSE.md) – Licence 
+- **[The Visualized Theory](gallery.md)** — Gallery of simulations showing emergent gravity, inertia, and atomic structures.
+- **[Papers & HTML Versions](https://juhameskanen.github.io/abstract/)** — Compiled papers (HTML + PDF).
+- **[Source Code & LaTeX](https://github.com/juhameskanen/abstract)** — All papers and simulations.
+- **[QBitwave Project](https://github.com/juhameskanen/abstract/wiki/QBitWave)** — Wavefunction as emergent compression.
+- **[Project Wiki](https://github.com/juhameskanen/abstract/wiki)** — Research notes and discussions.
+- **[CHANGELOG](CHANGELOG.md)** — Project history.
+- **[LICENSE](LICENSE.md)** — License information.
+
+## Simulation Gallery
+
+Starting from a well-defined observer, the simulations resolve the most probable (most compressible) static configuration. Time, dynamics, stable atoms, gravitational attraction, and wave-like behavior all emerge as part of this timeless resolution — they are not evolved step-by-step but appear as intrinsic features of the optimal description.
+
+## Current Status
+
+**Under heavy construction** — Many chapters and simulations are in draft or intermediate form. Content evolves regularly as the work progresses.
+
+[![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
+
+[![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
 
 
-## Continuous Integration
+## Philosophy & Approach
 
-The project uses GitHub Actions for automated builds:
-
-* [![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
-* [![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
-
-
-## The Current State
-
-**Under Construction** - very! Material is being collected from other resources and converted from different formats to github ecosystem.
-
-Many simulations and chapters are in draft stage; behavior may be updated frequently based on the current phase of authorial chaos. 
-
-This is a research-in-progress project. The content evolves frequently as research progresses.
-
+IAM^e is a **physics** project. Concepts must be computable, simulatable, or mathematically derivable. The existence of the observer is treated operationally as an empirically given subsystem. While the work touches deep foundational questions, the goal remains falsifiable, predictive physics rather than pure philosophy.
 
 ## Contributing
 
-Contributions are generally not expected, but welcomed anyway, especially:
+Contributions are welcome, particularly:
+- New simulations that test or illustrate theoretical claims
+- Corrections and improvements to documentation
+- Code refactoring and performance enhancements
 
-* Additional simulations demonstrating theoretical claims
-* Corrections, clarifications, or expansions of draft chapters
-* Documentation improvements
+For major changes, please open an issue first to discuss.
 
-Observers should follow standard GitHub workflow: fork → branch → pull request, and ensure all code additions are well-documented.
+## License & Disclaimer
 
+Usage for academic study and non-commercial research is permitted with proper citation.
 
-## A Note on Scope and Difficulty
-
-Despite the initial enthusiasm and optimism, the difficulty of this field has proven far greater than I originally anticipated. What began as a project I expected to complete within a few years has, in reality, extended over my lifetime. I am no longer young, and the scale of the challenge only became clear through sustained engagement with the problem.
-
-This experience has profoundly deepened my respect for figures such as Einstein, Penrose and Hawking, just to name a few. 
-
-
-## Acknowledgments
-
-I would like to thank several colleagues who influenced this work along the way. Special thanks — or perhaps blame, offered in good humor — go to Andy Jones for his invaluable contribution. His gift of The Structure of Space and Time, based on lectures by Roger Penrose and Stephen Hawking at the University of Cambridge, proved transformative. Without that “gift,” I might never have developed the bipolar obsession necessary to see this work through to completion.
-
-A special thanks to ChatGPT, Gemini, and other AI models, which have assisted in numerous tasks—particularly in converting my C/C++ code into Python, debugging, and verifying references. They have done all this and so much more without ever refusing a task or letting out a sigh (I shall refrain from mentioning YAML here to maintain a positive attitude).
-
-
-## License
-
-All project content—including papers, simulations, and documentation—is proprietary. Usage for academic study and non-commercial research is permitted with proper citation.
-
-
-## Disclaimer
-
-THE THEORY ($IaM^e$) IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF EXISTENTIAL CRISIS, CONSISTENCY OF REALITY, OR FITNESS FOR A PARTICULAR UNIVERSE. IN NO EVENT SHALL THE COPYRIGHT HOLDER OBSERVER, OR ANY OTHER OBSERVERS DISTRIBUTING THESE MATERIALS, BE LIABLE FOR ANY COLLAPSE OF THE WAVEFUNCTION, LOSS OF SUBJECTIVE COHERENCE, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE THEORY OR THE USE OR OTHER DEALINGS IN THE INFORMATION.
+**Disclaimer**  
+THE THEORY IS PROVIDED "AS IS". Use at your own risk of existential crisis or wavefunction collapse.
 
 ---
-
-©Copyright 2001 ... 2025 - The Abstract Universe Project. All rights reserved.*
-
+©Copyright 2001 ... 2025 - The Abstract Universe Project. All rights reserved.
