@@ -69,6 +69,18 @@ Informationally complex Gaussian distributions exhibit effective gravitational a
 Smooth, predictable observer paths admit maximal compression and therefore dominate the measure of realizable histories from which Gaussian structures are statistically expected to arise.     
     </td>
   </tr>
+    </tr>
+    <tr>
+    <td>
+      <img src="gallery/emergent_structures.jpg" width="400">
+      <br><i>Emergence of structure</i>
+    </td><td valign="top">
+      Most compressed path through configurations of increasing entropy. 
+       <a href="https://youtube.com/shorts/5XYXhmOgiW8">
+    Watch on YouTube
+  </a>
+    </td>
+  </tr>
 </table>
 
 
