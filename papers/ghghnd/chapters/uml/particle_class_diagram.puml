@@ -1,0 +1,111 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+title Standard Model – Particle Ontology (particles first)
+
+' =========================
+' Base ontology
+' =========================
+
+abstract class Particle {
+  +mass : double
+  +charge : double
+  +spin : double
+  +wavefunction()
+}
+
+abstract class Fermion
+abstract class Boson
+abstract class Group {
+  +children : List<Particle>
+}
+
+Particle <|-- Fermion
+Particle <|-- Boson
+Particle <|-- Group
+
+
+' =========================
+' Leptons
+' =========================
+
+abstract class Lepton
+
+Fermion <|-- Lepton
+
+class Electron
+class Muon
+class Tau
+
+class ElectronNeutrino
+class MuonNeutrino
+class TauNeutrino
+
+Lepton <|-- Electron
+Lepton <|-- Muon
+Lepton <|-- Tau
+
+Lepton <|-- ElectronNeutrino
+Lepton <|-- MuonNeutrino
+Lepton <|-- TauNeutrino
+
+
+' =========================
+' Quarks
+' =========================
+
+abstract class Quark
+
+Fermion <|-- Quark
+
+class UpQuark
+class DownQuark
+class CharmQuark
+class StrangeQuark
+class TopQuark
+class BottomQuark
+
+Quark <|-- UpQuark
+Quark <|-- DownQuark
+Quark <|-- CharmQuark
+Quark <|-- StrangeQuark
+Quark <|-- TopQuark
+Quark <|-- BottomQuark
+
+
+' =========================
+' Bosons
+' =========================
+
+class Photon
+class Gluon
+class WPlus
+class WMinus
+class ZBoson
+class HiggsBoson
+
+Boson <|-- Photon
+Boson <|-- Gluon
+Boson <|-- WPlus
+Boson <|-- WMinus
+Boson <|-- ZBoson
+Boson <|-- HiggsBoson
+
+
+' =========================
+' Group particles
+' =========================
+
+class Proton
+class Neutron
+
+Group <|-- Proton
+Group <|-- Neutron
+
+Proton o-- UpQuark
+Proton o-- DownQuark
+
+Neutron o-- UpQuark
+Neutron o-- DownQuark
+
+@enduml

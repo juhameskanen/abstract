@@ -9,62 +9,131 @@ Anyone familiar with GR most likely laughed while reading that—or perhaps crie
 To get any sense out of GR, let's implement it.
 
 
-\section{The Spacetime Class}
+\section{The Spacetime Implementation}
 
-In a rigorous simulation of General Relativity, we do not store forces or gravitational fields.
-We store the \textbf{Metric Tensor} ($g_{\mu\nu}$), which acts as our spatial lookup table.
+In a rigorous object-oriented implementation of General Relativity, one does not store forces or arbitrary gravitational fields. 
+The universe is modeled as a structural interplay between an abstract base \textbf{Tensor} data container and its specialized geometric and energy variants.
 
-\begin{lstlisting}[language=C++, caption=The Spacetime Class]
+Crucially, because we inhabit a static Block Universe, the components of these tensors are not stored as static, dead scalar primitives like floating-point arrays. 
+Instead, every component is a continuous \textbf{ScalarField}---a functional object that takes an explicit four-dimensional coordinate position $(t, x, y, z)$ and evaluates the local mathematical value on the fly.
+
+\begin{lstlisting}[language=C++, caption=The Core Tensor Architecture]
+
+#include <functional>
+#include <array>
+#include <cmath>
+
 /**
- * @brief Represents a local patch of the 4D Manifold.
+ * Represents a single event or point in the 4D spacetime manifold.
  */
-class SpacetimeCell {
-public:
-    // The Metric Tensor: 10 independent components (symmetric 4x4)
-    // This is the ONLY fundamental state variable of geometry.
-    double g[4][4]; 
-
-    // The Christoffel Symbols (Gamma) and Riemann Curvature are NOT state variables.
-    // They are computed on-the-fly (or cached) from the first and second 
-    // derivatives of the metric 'g'. 
-    // They represent the "bending" of the memory buffer.
-    GammaTensor calculateChristoffel() const;
-    RiemannTensor calculateRiemann() const;
-
-    /**
-     * @brief The Geodesic Equation (The Equation of Motion)
-     * There is no 'force' or 'acceleration' variable in the universe's physics engine. 
-     * The next state is determined purely by local pointer arithmetic (the Christoffel symbols).
-     */
-    Vector4 computeGeodesicStep(Vector4 velocity, double d_tau) {
-        Vector4 acceleration = {0, 0, 0, 0};
-        auto Gamma = this->calculateChristoffel();
-        
-        // Classic Einstein summation wrapped in a nested loop.
-        // It computes how the grid coordinates "bend" the velocity vector.
-        for (int mu = 0; mu < 4; mu++) {
-            for (int nu = 0; nu < 4; nu++) {
-                for (int rho = 0; rho < 4; rho++) {
-                    acceleration[mu] -= Gamma[mu][nu][rho] * velocity[nu] * velocity[rho];
-                }
-            }
-        }
-        
-        // Update velocity and position using Euler integration over proper time step d_tau
-        return velocity + (acceleration * d_tau); 
-    }
+struct Position4 {
+  double t, x, y, z;
 };
+
+using ScalarField = function<double(const Position4& pos)>;
+
+/**
+ * Abstract base class representing a Rank-2 Spacetime Tensor.
+ */
+class Tensor {
+  array<array<ScalarField, 4>, 4> components;
+  virtual ~Tensor() = default;
+  
+  ScalarField getComponent(int mu, int nu) const { 
+    return components[mu][nu]; 
+  }
+};
+
+/**
+ * The Metric Tensor (g_mu_nu).
+ */
+class MetricTensor : public Tensor {
+  Tensor getInverse() const; // Contravariant metric (g^mu_nu) 
+  Tensor getEinsteinTensor() const;
+  
+  array<array<array<ScalarField, 4>, 4>, 4> getChristoffel() const;
+
+  /**
+   * Evaluates a geodesic worldline step at a specific coordinate location.
+   * The trajectory is determined by evaluation of the Christoffel fields.
+   */
+  array<double, 4> computeGeodesicAcceleration(const Position4& pos, 
+                                                array<double, 4> velocity) const {
+    array<double, 4> acceleration = {0.0, 0.0, 0.0, 0.0};
+    auto Gamma = this->getChristoffel();
+    
+    for (int mu = 0; mu < 4; mu++) {
+      for (int nu = 0; nu < 4; nu++) {
+        for (int rho = 0; rho < 4; rho++) {
+          // Evaluate the field at this specific event
+          double gamma_val = Gamma[mu][nu][rho](pos);
+          acceleration[mu] -= gamma_val * velocity[nu] * velocity[rho];
+        }
+      }
+    }
+    return acceleration; 
+  }
+};
+
+class StressEnergyTensor : public Tensor {};
+
+/**
+ * The universe, cosisting of energy and spacetime geometry
+ */
+class Universe {
+  const double G = 6.6743e-11;
+  const double c = 299792458.0;
+
+  MetricTensor g_mu_nu;
+  StressEnergyTensor T_mu_nu;
+
+  /**
+   * Assert the field equations locally at a specific spacetime event.
+   * G_mu_nu == (8 * pi * G / c^4) * T_mu_nu
+   */
+  bool EFE(const Position4& pos) const {
+    auto G_tensor = g_mu_nu.getEinsteinTensor();
+    double constant = (8.0 * M_PI * G) / pow(c, 4);
+
+    for (int mu = 0; mu < 4; mu++) {
+      for (int nu = 0; nu < 4; nu++) {
+        double geometry_val = G_tensor.getComponent(mu, nu)(pos);
+        double energy_val = T_mu_nu.getComponent(mu, nu)(pos);
+        
+        if (abs(geometry_val - (constant * energy_val)) > 1e-9) {
+          return false; 
+        }
+      }
+    }
+    return true;
+  }
+};
+
 \end{lstlisting}
 
+The complexity of GR emerges from the fact that the system writes back to itself. 
 
-The complexity of GR emerges from the factk that that the system writes back to itself. 
-
-The matter-energy values of QFT (the \textbf{Stress-Energy Tensor}, $T_{\mu\nu}$) modify the Metric ($g_{\mu\nu}$).
-As matter moves, it mutates the metric.
-As the metric mutates, it changes the geodesic paths, which forces the matter to move differently.
-This creates a highly non-linear, self-referential loop.
+The matter-energy values of QFT (the \textbf{Stress-Energy Tensor}, $T_{\mu\nu}$) specify the functional constraints of the Metric ($g_{\mu\nu}$).
+Because the geometry of the metric changes how fields evaluate across coordinates, it alters the path of the stress-energy distribution. 
+This creates a highly non-linear, self-referential loop. 
 In software terms, it is a recursive function where the stack frame itself is constantly warping while the function executes.
 
+
+\subsection*{The Class Diagram}
+
+To sum it up, spacetime is the interplay of exactly two components: 
+
+\textit{Energy} ($T_{\mu\nu}$): The physical content—mass, radiation, pressure, and momentum.
+
+\textit{Geometry} ($g_{\mu\nu}$): The measurement framework—distances, time intervals, curvature, and causal pathways.
+
+Einstein’s field equation is the equal sign between them. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/gr_class_diagram.png}
+\caption{\emph{General Relativity UML Diagram}}
+\end{figure}
 
 
 \section{Minor Implementation Notes}
@@ -107,12 +176,3 @@ messy exclusion rules, and infinite loops that require "renormalization" hacks j
 
 The architect responsible for this module surely deserves a raise.
 
-What General Relativity tells us is that the reality of an event depends entirely on the metric of the observer.
-
-There is no single metric, or objective time in which the fall happens; there is only the geometric relationship between the worldlines.
-The beauty of GR lies in this consistency.
-
-GR suggests that we live in a static universe. The falling observer and the frozen observer are both real;
-they are simply viewing the same static, 4D geometric structure from different perspectives.
-
-The past, the present, and the future all exist as the geometry of four-dimensional spacetime.

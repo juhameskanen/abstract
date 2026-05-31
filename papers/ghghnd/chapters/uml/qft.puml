@@ -1,0 +1,146 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+title Standard Model – Quantum Fields
+
+
+' =========================
+' Spacetime
+' =========================
+
+class Event {
+  +t : double
+  +x : double
+  +y : double
+  +z : double
+}
+
+class Spacetime {
+  +dimension : int = 4
+  +metricSignature : string = "(-+++)"
+  +distance(a : Event, b : Event)
+}
+
+Spacetime o-- Event
+
+
+' =========================
+' Base quantum field
+' =========================
+
+abstract class QuantumField {
+  +mass : double
+  +spin : double
+  +vacuumExpectationValue : double
+  +domain : Spacetime
+  +createParticle(k)
+  +annihilateParticle(k)
+  +valueAt(event : Event)
+}
+
+
+' =========================
+' Fermion fields
+' =========================
+
+abstract class FermionField {
+  +generation : int
+}
+
+QuantumField <|-- FermionField
+
+class ElectronField
+class MuonField
+class TauField
+
+class ElectronNeutrinoField
+class MuonNeutrinoField
+class TauNeutrinoField
+
+class UpQuarkField
+class DownQuarkField
+class CharmQuarkField
+class StrangeQuarkField
+class TopQuarkField
+class BottomQuarkField
+
+FermionField <|-- ElectronField
+FermionField <|-- MuonField
+FermionField <|-- TauField
+
+FermionField <|-- ElectronNeutrinoField
+FermionField <|-- MuonNeutrinoField
+FermionField <|-- TauNeutrinoField
+
+FermionField <|-- UpQuarkField
+FermionField <|-- DownQuarkField
+FermionField <|-- CharmQuarkField
+FermionField <|-- StrangeQuarkField
+FermionField <|-- TopQuarkField
+FermionField <|-- BottomQuarkField
+
+
+' =========================
+' Gauge fields
+' =========================
+
+abstract class GaugeField {
+  +gaugeGroup : string
+}
+
+QuantumField <|-- GaugeField
+
+class PhotonField
+class WeakField
+class GluonField
+
+GaugeField <|-- PhotonField
+GaugeField <|-- WeakField
+GaugeField <|-- GluonField
+
+
+' =========================
+' Higgs
+' =========================
+
+class HiggsField {
+  +vacuumExpectationValue : double
+  +couple(field : QuantumField)
+}
+
+QuantumField <|-- HiggsField
+
+
+' =========================
+' Universe container
+' =========================
+
+class Universe {
+  +children : List<QuantumField>
+}
+
+Universe o-- Spacetime
+
+Universe o-- HiggsField
+
+Universe o-- ElectronField
+Universe o-- MuonField
+Universe o-- TauField
+
+Universe o-- ElectronNeutrinoField
+Universe o-- MuonNeutrinoField
+Universe o-- TauNeutrinoField
+
+Universe o-- UpQuarkField
+Universe o-- DownQuarkField
+Universe o-- CharmQuarkField
+Universe o-- StrangeQuarkField
+Universe o-- TopQuarkField
+Universe o-- BottomQuarkField
+
+Universe o-- PhotonField
+Universe o-- WeakField
+Universe o-- GluonField
+
+
+@enduml

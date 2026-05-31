@@ -8,7 +8,35 @@ The universe exists with or without intelligent, conscious observers or their in
 As far as general relativity is concerned, observers are no different from rocks.
 A psychosocially complex, traumatized, and poorly maintained human falling into a black hole is treated no differently from a rock of the exact same mass.
 
-Yet, like quantum mechanics, this theory demands a profound departure from classical intuition.
+
+\subsection*{The Einstein Field Equations}
+
+The universe is geometric by nature. 
+
+The dynamics of the geometry are governed by the famous Einstein field equations:
+\begin{equation}
+G_{\mu\nu} = 8\pi G \, T_{\mu\nu},
+\end{equation}
+where $G_{\mu\nu}$ is the Einstein tensor:
+\begin{equation}
+G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R,
+\end{equation}
+and $T_{\mu\nu}$ is the stress–energy tensor, which encodes energy density, momentum density, pressure, and shear stress.
+
+These equations equate geometry with matter.
+As the physicist John Wheeler famously summarized: \emph{Spacetime tells matter how to move. Matter tells spacetime how to curve.}
+
+A profound mathematical feature of these equations is the contracted Bianchi identity.
+It states that the covariant divergence of the Einstein tensor vanishes identically:
+\begin{equation}
+\nabla^\mu G_{\mu\nu} = 0.
+\end{equation}
+Because the field equations equate $G_{\mu\nu}$ with the stress–energy tensor $T_{\mu\nu}$, this identity mathematically \textbf{forces} the local conservation of energy and momentum:
+\begin{equation}
+\nabla^\mu T_{\mu\nu} = 0.
+\end{equation}
+Conservation of energy isn't an extra rule programmed into the universe; it is a logical consequence of the geometry itself.
+
 
 
 \section{The Geometric Nature of Gravity}
@@ -42,48 +70,26 @@ where $\Gamma^\mu_{\nu\rho}$ represents the Christoffel symbols constructed from
 This equation is the ultimate lazy-evaluation algorithm: it describes pure, unforced inertial motion.
 Gravity disappears locally. What we perceive as gravitational attraction is just nearby geodesics naturally converging in curved space.
 
+
 \subsection*{Curvature}
 
+Just like a transformation matrix can be decomposed into four
+basic transformations, such as rotation and scale matrices, also
+Riemann curvature tensor can be decomposed to various other tensors. 
 
 The curvature of spacetime is encoded in the \textbf{Riemann} curvature tensor:
 \begin{equation}
 R^\mu_{\;\nu\rho\sigma}.
 \end{equation}
-It measures the failure of vectors to return unchanged after parallel transport around infinitesimal loops.
+It measures the failure of parallel transported vectors to return unchanged after transport around infinitesimal loops.
 Contractions of the Riemann tensor yield the \textbf{Ricci} tensor $R_{\mu\nu}$ and the Ricci scalar $R$, which summarize the curvature relevant to volume distortion and geodesic convergence.
 
-While the Ricci tensor describes how matter locally curves spacetime, it does not tell the whole story.
+While the \textbf{Ricci} tensor describes how matter locally curves spacetime, it does not tell the whole story.
 The Riemann tensor can be decomposed into the \textbf{Ricci} curvature, which vanishes in a vacuum, and the \textbf{Weyl} curvature, which does not.
 The Weyl tensor is responsible for tidal forces and allows gravitational influence to propagate through the vacuum of space as gravitational waves (not again, nature waves!)
 
-The most intuitive way to understand the Ricci scalar (also known as the scalar curvature, denoted as $R$ without tensor subscripts) is to think of it as a measures how much the volume of a region in curved space deviates from a flat, Euclidean space.
+The most intuitive way to understand the Ricci scalar (also known as the scalar curvature, denoted as $R$ without tensor subscripts) is to think of it as a measure how much the volume of a region in curved space deviates from a flat, Euclidean space.
 
-
-\subsection*{The Einstein Field Equations}
-
-The dynamics of this geometry are governed by the famous Einstein field equations:
-\begin{equation}
-G_{\mu\nu} = 8\pi G \, T_{\mu\nu},
-\end{equation}
-where $G_{\mu\nu}$ is the Einstein tensor:
-\begin{equation}
-G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R,
-\end{equation}
-and $T_{\mu\nu}$ is the stress–energy tensor, which encodes energy density, momentum density, pressure, and shear stress.
-
-These equations equate geometry with matter.
-As the physicist John Wheeler famously summarized: \emph{Spacetime tells matter how to move. Matter tells spacetime how to curve.}
-
-A profound mathematical feature of these equations is the contracted Bianchi identity.
-It states that the covariant divergence of the Einstein tensor vanishes identically:
-\begin{equation}
-\nabla^\mu G_{\mu\nu} = 0.
-\end{equation}
-Because the field equations equate $G_{\mu\nu}$ with the stress–energy tensor $T_{\mu\nu}$, this identity mathematically \textbf{forces} the local conservation of energy and momentum:
-\begin{equation}
-\nabla^\mu T_{\mu\nu} = 0.
-\end{equation}
-Conservation of energy isn't an extra rule programmed into the universe; it is a logical consequence of the geometry itself.
 
 \section{Time as a Personal Issue}
 
@@ -104,7 +110,7 @@ The closer the falling wife gets to the event horizon, the slower she appears to
 To him, she will never actually seem to cross it.
 A distant husband would have to wait an infinite amount of time to watch his wife pass the point of no return.
 
-Things look very different from the wife's point of view (my wife's response: ``As usual!'').
+Things look very different from the wife's point of view (as usual!).
 For her, there is no dramatic physical boundary at the event horizon.
 Her watch keeps ticking normally.
 As she falls, she can look back and see the light from the outside universe perfectly well.
@@ -113,18 +119,20 @@ Yet, because she is falling so quickly, she has only a limited proper time---sec
 She crosses the horizon smoothly, seeing only a finite slice of the universe's future, and meets her doom inside.
 
 Black holes eventually evaporate via Hawking radiation.
-Since the husband sees his wife take ``infinite time'' to cross the horizon, and the black hole will eventually evaporate in a finite (albeit unimaginably long) time, does the black hole disappear before she even crosses it? 
+Since the husband sees his wife take almost ``infinite time'' to cross the horizon,
+and the black hole will eventually evaporate in a finite (albeit unimaginably long) time,
+there is a small chance that the black hole disappears just before she even hits the singularity.
+The horizon can shrink faster than she can cross it, or the singularity vanishes before her proper time can run out.
 
-While classical relativity says she crosses the horizon in mere seconds of her own time without seeing the end of the universe, quantum mechanics introduces a massive paradox.
-Because a distant observer sees the black hole evaporate over trillions of years, all the information about the falling observer must eventually be radiated back out. 
+Not all information that passes through the event horizon is necessarily lost. You can't even trust black holes!
 
-To resolve this clash of perspectives, some physicists argue that the horizon isn't a peaceful gateway at all, but a raging ``firewall'' of quantum energy that would vaporize the wife the moment she touched it.
-Who is right? Einstein or the quantum physicists? Currently, we don't know---and that is the exciting frontier.
+Of course, surviving such a trip is strictly the domain of science fiction anyway.
 
-
-Of course, surviving such a trip is strictly the domain of science fiction.
 Fierce tidal forces would ``spaghettify'' and tear any observer apart.
-The programmer's wife would also get burned quite badly - receive a lethal, highly boosted cosmic sunburn as a parting gift.
+To resolve the clash of two different perspectives, some physicists argue that the horizon isn't a peaceful gateway at all,
+but a raging ``firewall'' of quantum energy that would vaporize the wife the moment she touched it.
+So the programmer's wife would also get burned quite badly - receive a highly boosted cosmic sunburn as a parting gift.
+
 On the bright side, she would find her husband aging rapidly relative to her---if that is any consolation!
 
 \section{General Relativity as Constraint: The Block Universe}
@@ -149,12 +157,12 @@ Change is an illusion of the observer; reality is simply the geometry of the who
 General Relativity says that gravity isn't a force, but the shape of the container.
 However, it describes the behavior of the container without explaining the fabric of the container itself. 
 
-Then the theory predicts points of infinite density. Singularity at the center of black hole is not a mere coordinate glitch, but a point of ultimate physical breakdown:
+Then the theory predicts points of infinite density. The singularity at the center of a black hole is not a mere coordinate glitch, but a point of ultimate physical breakdown:
 a place where all of the matter from a collapsed star (say, ten times the mass of our Sun) is crushed down into a region of literally zero radius ($r = 0$).
 This forces the density and the curvature of spacetime to become infinite ($\rho \rightarrow \infty$, $R \rightarrow \infty$).
 
 Furthermore, GR treats spacetime as a perfectly smooth manifold.
-It works flawlessly until one zooms in to the so called Planck scale---the threshold where the smooth geometry of General Relativity collides with the discrete,
+It works flawlessly until one zooms in to the so-called Planck scale---the threshold where the smooth geometry of General Relativity collides with the discrete,
 pixelated fluctuations of Quantum Mechanics. 
 
 This fundamental clash is the main reason why many argue Einstein's theory of gravity, brilliant as it is, cannot be the final word.

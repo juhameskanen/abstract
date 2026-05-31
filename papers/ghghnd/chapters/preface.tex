@@ -3,7 +3,8 @@
 
 \section*{Motivation}
 
-The spark that ignited this project was not a sudden flash of inspiration, but a painful personal accident.
+The spark that ignited this project was a painful personal accident.
+\iftoggle{theology} {
 My highly respected dentist recommended the precautionary removal of a wisdom tooth. ``Problems might appear later,'' he warned, ``and they will only get worse with time.''
 
 Trusting his expertise, I followed his advice.
@@ -26,19 +27,44 @@ I strongly disagreed.
 To behave \emph{as if} in pain, I argued, is not the same as \emph{feeling} pain.
 I could not see how genuine pain could ever be implemented in a programming language.
 
-It was this missing ``pain function'' in the standard library of C that planted the seed of an obsession---an obsession that has grown, over years of thought and trial and error, into the work you are now reading.
+It was this missing ``pain function'' in the standard library of ``C'' that planted the seed of an obsession---an obsession that has grown, over years of thought and trial and error, into the work you are now reading.
+} {
+I had one of my wisdom teeth removed as a precautionary action. However, the socket refused to heal, leaving the nerves exposed.
+With Christmas holidays in full swing, all dentists were off duty.
+For several days, the pain expanded from one tooth until it felt as though my entire head was aching.
+This incident led me to the question I had discussed many times with my colleagues: Can pain ever be implemented as software?
+}
 
 \section*{Method and Approach}
 
 The conclusions presented in this book were developed using the same software design methods and tools I have relied on throughout my career as a software professional.
-The software I have built with these methods works reliably. Accordingly, I believe the conclusions developed with them should hold as well.
+
+I began by treating observed systems as if they were software: abstract structures defined by behavior, constraints, and interaction.
+For each system, I explored every meaningful architecture I could formulate and modeled them as rigorously as possible.
+I then unified these models into a minimal class hierarchy, reducing the total number of entities and attributes while preserving explanatory power.
+From that foundation, I asked what such systems could, in principle, do, and derived the full range of meaningful possibilities implied by their structure.
+These possibilities were then compared, consolidated, and reduced.
+Over the course of three decades, many candidate explanations failed, contradicted observation, or proved redundant.
+What remained after that process of elimination forms the basis of this book.
+
+The software I have built with these methods works. Accordingly, I believe the conclusions developed with them hold.
 
 However, no program is without bugs, and no complex argument is without potential flaws. Some parts of the reasoning presented here may contain errors. Still, I am confident that, as with well-designed software, these imperfections will not obscure the larger picture.
+
+\subsection*{On Human Consciousness and the Limits of Physics}
+
+Many of the most speculative branches in this work emerged from a single question:
+whether conscious experience—qualia itself—can be fully reduced to physics, or whether it points to something beyond our present physical descriptions.
+Following that thread led to both productive and difficult conclusions.
+Some paths reinforced the view that consciousness may arise naturally from information and physical law.
+Others extended into increasingly unconventional territory, raising questions that could not be resolved within established physics alone.
+A number of these branches were ultimately set aside, while others remain open.
+They are included not as final claims, but as a record of where the investigation led when followed without restriction.
 
 \section*{Acknowledgments}
 
 I owe my deepest gratitude to my wife.
-She is quite a remarkable piece of work---far more complex than anything found in the standard library of C.
+She is quite a remarkable piece of work---far more complex than anything found in the standard library of ``C''.
 She patiently endured countless late nights listening to the clicking of my noisy laptop.
 Despite the many disruptions to her sleep, she remained remarkably understanding and supportive throughout the writing of this book.
 
@@ -48,4 +74,7 @@ Special thanks---or perhaps playful blame---go to Andy Jones.
 His gift of the book \emph{The Structure of Space and Time} proved truly transformative.
 Without that ``gift,'' I might never have developed the necessary obsession to bring this work to completion.
 
+\iftoggle{theology} {
 Finally, I wish to honor the memory of my dog, Raju (R.I.P.), my loyal hunting companion, with whom I shared so many memorable hunts---and to the hares, R.I.P. as well.
+}{}
+

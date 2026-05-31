@@ -1,9 +1,6 @@
 \chapter{Implementing Quantum Mechanics}
 \label{chap:implementing-qm}
 
-Quantum Mechanics is often regarded as the most accurate theory we have.
-Once we know the amplitude and phase of a particle's wavefunction, we can predict its future evolution with astonishing precision.
-
 To make any sense out of this, let's implement it as a software.
 
 \section{The Particle Class (Non-Relativistic QM Starting Point)}
@@ -34,11 +31,11 @@ The first approach (momentum primary) aligns well with physics textbooks:
 \begin{lstlisting}[language=C++, caption=Mode with Momentum (Recommended for QM)]
 class Mode {
     Vector3 k;        // Wavenumber, p = \hbar k
-    double amplitude; // Complex coefficient magnitude & phase can be combined
+    complex<double> amplitude; // Complex magnitude & phase
     double phase;     // Initial phase offset
     double frequency() {
       // Natural units: h = c = 1
-      return k.squaredNorm() / 2m; // $\omega = \frac{k^2}{2m}$
+      return k.squaredNorm() / (2.0 * m); // $\omega = \frac{k^2}{2m}$
     }
 };
 \end{lstlisting}
@@ -58,16 +55,25 @@ Position is not a fundamental attribute of the \texttt{Particle}. It emerges as 
 \langle \mathbf{x} \rangle = \int \Psi^*(\mathbf{x}) \mathbf{x} \Psi(\mathbf{x}) \, d^3x
 \]
 
+So we have a pretty intuitive design here: a base Particle class with just a couple of attributes, which different kinds of particles inherit from. And as we know from particle physics, some particles are actually made of others. To handle this, we can implement a Group class with a list attribute, letting us group elementary particles together to form composite ones like protons and neutrons.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/particle_class_diagram.png}
+\caption{\emph{Particle UML Diagram}}
+\end{figure}
+
 Unfortunately, this intuitive single-particle description already fails for high energies (pair production,
 variable particle number) and does not incorporate special relativity properly. But we insisted to
 design the particle class to serve as a pedagogical starting point only.
+
 
 
 \section{From Particles to Fields (Entering QFT)}
 
 In order to switch to QFT we must abandon the single-particle picture.
 According to quantum field theory, the fundamental entities are \textbf{fields} that exist everywhere.
-Particles are localized excitations (quanta) of these fields.
+Particles are quanta of the fields; localized particles arise as wave packets of those excitations.
 Unlike a classical field, a quantum field is operator-valued and capable of creating or annihilating particle excitations.
 To simulate the Standard Model we need multiple fields, one for each fundamental degree of freedom (with appropriate spin and gauge representation).
 
@@ -260,6 +266,14 @@ class Universe {
 };
 \end{lstlisting}
 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/field_class_diagram.png}
+\caption{\emph{Field UML Diagram}}
+\end{figure}
+
+
 Each field carries its own quantum numbers (representations under the gauge group $U(1)_Y \times SU(2)_L \times SU(3)_c$).
 Interactions arise from coupling terms in the Lagrangian (Yukawa, gauge covariant derivatives, etc.), not from manually checking wave overlap.
 
@@ -324,8 +338,12 @@ The quote fits so well. It highlights the "Spaghetti Code" nature of the Standar
 It works perfectly, but it feels like it was written by a developer who was in a hurry and kept adding global variables (weakIsospin, hypercharge, colorCharge) to fix bugs.
 Maybe the original architect left without writing any documentation, and now the junior developers are just patching things as they go.
 
-Boss, the particles aren't staying together!
+Boss, the particles aren’t staying together.
 
-Just throw in a StrongForce patch and a few colorCharge flags!
+Add color charge.
 
-Anyway, after 13.7 billion years of hard testing, it finally works.
+Still exploding?
+
+Fine—give them a Higgs background too.
+
+Anyway, after 13.7 billion years of hard testing, the Standard Model finally works—provided spacetime stays flat, which it stubbornly refuses to do.

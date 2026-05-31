@@ -1,0 +1,54 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+class Universe {
+    - G: double = 6.674e-11
+    - c: double = 299792458
+    + g_μν: MetricTensor
+    + T_μν: StressEnergyTensor
+    
+    + EFE_is_Valid(): boolean
+}
+
+abstract class Tensor {
+    # components: ScalarField[4][4]
+}
+
+class MetricTensor {
+    + getInverse(): Tensor
+    + getR_μν(): Tensor
+    + getG_μν(): Tensor
+    + getR(): ScalarField
+    + getChristoffel(): ScalarField[4][4][4]
+    + getRiemann(): ScalarField[4][4][4][4]
+}
+
+class StressEnergyTensor {
+    
+}
+
+interface ScalarField {
+    + evaluate(t: double, x: double, y: double, z: double): double
+}
+
+Tensor <|-- MetricTensor
+Tensor <|-- StressEnergyTensor
+
+Universe "1" *-- "1" MetricTensor : geometry
+Universe "1" *-- "1" StressEnergyTensor : matter-energy
+
+Tensor ..> ScalarField : holds >
+
+note right of Universe::EFE_is_Valid
+  The field equation:
+  G_μν == (8πG / c⁴) * T_μν
+end note
+
+note right of MetricTensor::getG_μν
+  The Einstein Tensor:
+  G_μν = R_μν - 0.5 * g_μν * R
+end note
+
+@enduml
