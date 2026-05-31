@@ -44,7 +44,22 @@ In the time-reversed scenario, we observe the unfolding of spacetime driven by i
 A minimal demonstration of how smoothness and predictability emerge as the most probable configurations of information compatible with an inability to see microstates. By applying a Gibbs complexity prior to raw bit-histories, we see 'Physics' emerge: the chaotic micro-history (top) is filtered into a predictable, persistent macro-trajectory (bottom). The observer is the filtering algorithm (Hamming distance).
     </td>
   </tr>
-      <tr>
+  </tr>
+    </tr>
+    <tr>
+    <td>
+      <img src="gallery/emergent_structures.jpg" width="400">
+      <br><i>Emergence of structure</i>
+    </td><td valign="top">
+      Within the space of all finite frame sequences, weighting by minimal description length strongly favors regular and temporally smooth histories over arbitrary noise. The simulations illustrate how coherent structure emerges naturally from compression-efficient descriptions.
+      <p></p>Maximal Compression⇒Maximal Probability⇒Maximal Predictability (physics).</p>      
+      <ul>
+        <li><a href="https://youtube.com/shorts/XAMWDg5zX6I">Increasing entropy, no observers</a></li>
+        <li><a href="https://youtube.com/shorts/LnX3duPWedI">Increasing entropy, observer filter.</a></li> 
+      </ul>
+    </td>
+  </tr>
+  <tr>
     <td>
       <img src="gallery/observer_born_2d.gif" width="400">
       <br><i>2D observer simulation using Born-rule</i>
@@ -68,7 +83,6 @@ By modeling observers as Gaussian blobs, quantum interference and an emergent 'p
 Informationally complex Gaussian distributions exhibit effective gravitational attraction and inertial persistence as emergent properties of compression-optimal observer trajectories.
 Smooth, predictable observer paths admit maximal compression and therefore dominate the measure of realizable histories from which Gaussian structures are statistically expected to arise.     
     </td>
-  </tr>
 </table>
 
 
