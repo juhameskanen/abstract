@@ -10,7 +10,7 @@ Core Logic:
 -----------
 1. The solver finds a 3D wavefunction Ψ(t, x, y) that satisfies a resolution-
    invariant entropy trajectory (normalized from 0.0 to 1.0).
-2. A simplicity bias (Fourier spectral penalty) acts as "Inertia," forcing
+2. A simplicity bias (Fourier spectral description length) acts as "Inertia," forcing
    the emergent structures to move and evolve smoothly.
 3. The "Observer Filter" identifies specific bit-patterns, creating a
    statistical pressure for structures to crystallize where patterns emerge.

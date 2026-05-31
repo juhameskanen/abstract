@@ -76,13 +76,19 @@ process_entry() {
         # We write the footer to a temporary file to ensure UTF-8 compliance
         TEMP_FOOTER=$(mktemp)
         echo "$FOOTER_HTML" > "$TEMP_FOOTER"
-
         pushd "$SRC_DIR" > /dev/null
-        pandoc "$(basename "$TEX_INPUT")" -s --citeproc --bibliography="$BIB_PATH" \
-            --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
-            -c "${TO_ROOT}/style.css" -A "$TEMP_FOOTER" \
-            -o "$TARGET_DIR/index.html" --metadata title="$title"
-        popd > /dev/null
+	pandoc "$(basename "$TEX_INPUT")" \
+	       -f latex+raw_tex \
+	       -s \
+	       --template="$PROJECT_ROOT/scripts/pandoc-template.html" \
+	       --citeproc \
+	       --bibliography="$BIB_PATH" \
+	       --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" \
+	       -c "${TO_ROOT}/style.css" \
+	       -A "$TEMP_FOOTER" \
+	       -o "$TARGET_DIR/index.html" \
+	       --metadata title="$title"
+	popd > /dev/null
         rm "$TEMP_FOOTER"
     fi
 

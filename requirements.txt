@@ -1,3 +1,4 @@
+torch
 opencv-python
 numpy
 matplotlib
@@ -6,4 +7,3 @@ zstandard
 scikit-learn
 gbitwave
 qbitwave
-

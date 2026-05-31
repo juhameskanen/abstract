@@ -1,11 +1,8 @@
 % -- Common definitions for all papers
 
 % --- Packages ---
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 \usepackage{geometry}
-\usepackage{amsthm}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{physics}
@@ -31,10 +28,9 @@
 \newcommand{\entropy}{S}
 \newcommand{\opponent}{opponent}
 \newcommand{\aside}[1]{[\emph{\opponent}: ``#1'']}
-\newcommand{\paper}[1]{[\emph{}: ``#1'']}
+\newcommand{\paper}[1]{[\emph{#1}: ``#1'']}
 \newcommand{\iame}{Iam\textsuperscript{e}}
 \newcommand{\iameverything}{Iam\textsuperscript{everything}}
-%\newcommand{\IaMe}{\(IaM^e\) \xspace}
 
 
 \newcommand{\pdflink}[1]{}
@@ -49,23 +45,9 @@
 
 % --- Profilation --
 
-% Default build mode
-\newtoggle{physics}
 \newtoggle{theology}
-
-% Full version by default
-\toggletrue{physics}
-\toggletrue{theology}
-
-
-% Allow command-line overrides
-\providecommand{\buildphysics}{true}
+\toggletrue{theology}   % default
 \providecommand{\buildtheology}{true}
-
-\ifdefstring{\buildphysics}{true}
-  {\toggletrue{physics}}
-  {\togglefalse{physics}}
-
 \ifdefstring{\buildtheology}{true}
   {\toggletrue{theology}}
   {\togglefalse{theology}}
@@ -148,4 +130,4 @@
 \defglsentryfmt{\ifglsused{\glslabel}{\glsgenentryfmt}{\textit{\glsgenentryfmt}}}
 
 % --- Author ---
-\author{$IaM^e$}
+\author{\iame}
