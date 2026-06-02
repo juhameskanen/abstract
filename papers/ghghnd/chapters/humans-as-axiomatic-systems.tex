@@ -203,7 +203,7 @@ Software is fundamentally order-critical. The sequence in which elementary opera
 Swapping the order of even relatively simple operations often destroys the correctness of the program entirely.
 In a system as complex as a full-scale DNA simulation, changing the execution order would almost certainly crash the simulation or produce complete nonsense instead of a coherent Alice.
 
-However, when we precompute lookup tables, the order in which we calculate those values is largely irrelevant to the final result.
+However, when we precompute lookup tables, the order in which we calculate those values is entirely irrelevant to the final result.
 What matters is only that the precomputed values correctly correspond to the inputs they will receive during execution. 
 
 In other words: the temporal order in which the programmer (or the optimizer) computes the lookup tables does not need to match the order in which those values are later accessed.
