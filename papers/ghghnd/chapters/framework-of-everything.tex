@@ -1,9 +1,7 @@
 \chapter{The Framework of Nearly Everything}
 \label{chap:framework-of-everything}
 
-We are now in possession of all the pieces of our cosmological puzzle. As we reasoned
-in the Chapter~\nameref{chap:definition-of-foundational-theories} a fundamenta theory
-needs three pillars: what fundamentally exists (ontology), what is typical (measure) and
+We are now in possession of all the pieces of our cosmological puzzle: what fundamentally exists (ontology), what is typical (measure) and
 what then inevitably emerges (the structure).
 
 \section{The Ontology: What Fundamentally Exists}
@@ -98,27 +96,24 @@ We quantify the total complexity $C_{\text{total}}(d)$ of a description by split
 C_{\text{total}}(d) = C_s(d) + C_g(d)
 \]
 
-The spectral complexity $C_s(d)$ measures the algorithmic bit-cost required to instantiate and track the wave-like modes:
+The spectral complexity $C_s(d)$ measures the algorithmic bit-cost required to track the wave-like modes:
 \[
 C_s(d) = \sum_i \left[ \text{Cost}(A_i) + \text{Cost}(\phi_i) + \left(\frac{\omega_i}{\Delta \omega}\right) \right]
 \]
 where the sum runs over active spectral modes, $\text{Cost}(A_i)$ represents the bit-depth of the amplitude envelope, $\text{Cost}(\phi_i)$ is the fixed-width register encoding the periodic phase interval $[0, 2\pi]$, and $\omega_i / \Delta \omega$ represents the linear resource allocation required to track the mode frequency relative to the minimum resolution threshold $\Delta\omega$.
 
-The geometric complexity term $C_g(d)$ accounts for the algorithmic overhead of localized spatial structures, boundaries, and metric fields.
-Consistent with our physical foundations, the spectral cost scales linearly with the number of active modes multiplied by their frequency, ensuring an exact algorithmic analogue to thermodynamic energy.
+The geometric complexity term $C_g(d)$ accounts for localized spatial structures, boundaries, and metric fields.
 
 
 
 \subsection*{The Equation of Joint Compressibility}
 
-We have established that the quantum mechanical wavefunction compresses the possibility space of our universe through a spectral language ($C_s$), while General Relativity compresses its realization space through a geometric language ($C_g$). 
-
-Because the relationship between these two frameworks is a many-to-many mapping, any given observer wavefunction can be interpreted through nearly infinitely many different geometric spacetime metrics, and conversely, any spacetime manifold can be decomposed into nearly infinitely many different wavefunctions.
+Because the relationship between these two is a many-to-many mapping, any given observer wavefunction can be interpreted through nearly infinitely many different geometric spacetime metrics, and conversely, any spacetime manifold can be decomposed into nearly infinitely many different wavefunctions.
 This creates an unimaginably massive configuration space. 
 
-How does nature choose our specific reality from this vast haystack?
+In information theory, when a system must be simultaneously validated across two dual representations,
+its joint probability is the product of its individual probabilities.
 
-In information theory, when a system must be simultaneously validated across two dual representations, its joint probability is the product of its individual probabilities.
 Therefore, the absolute measure of any emergent physical state ($s$) within the totality is given by the \textbf{Joint Compressibility Equation}:
 
 \begin{equation}
@@ -135,7 +130,8 @@ The cosmos is governed by a singular, overarching informational Lagrangian:
 \end{equation}
 
 Neither geometry nor waves are primary; they are equal, co-dependent projections of a single underlying informational matrix.
-Our observed reality is the exact mathematical sweet spot of this joint optimization.
+Our observed reality is the sweet spot of this joint optimization.
+
 Spacetime is smooth and the quantum world is lawful because this specific configuration represents the absolute shortest combined code nature can write.
 
 
@@ -157,8 +153,9 @@ An observer is modeled as a grading semantic functional:
 \[
 \mu_O : \mathcal{C} \to [0,1]
 \]
-which measures how strongly a given bit configuration realizes a stable, observer-relative structure.
-This functional induces an observer-relative equivalence relation $c_1 \sim_O c_2$ whenever $c_1$ and $c_2$ realize the same relational observer structure to within the tolerances encoded by $\mu_O$. 
+which measures how strongly a given bit configuration describes observer-relative structure.
+This functional induces an observer-relative equivalence relation $c_1 \sim_O c_2$ whenever $c_1$ and $c_2$ describe
+the same relational observer structure to within the tolerances encoded by $\mu_O$. 
 
 The observer-conditioned probability then becomes:
 \[
@@ -171,7 +168,8 @@ P(c \mid O) = \frac{\mu_O(c)W(c)}{\sum_{c'} \mu_O(c')W(c')}
 To transition from the probability of a single static configuration $P(c \mid O)$ to the probability of an entire experienced history,
 we must track how an observer traverses the configuration space.
 Let a path $\gamma \in \Gamma_O$ represent a sequence of configurations ordered by our internal temporal relation $\prec_O$.
-Because the configurations along the path are independent slices of the static totality, the total probability of the path is the product of its individual constituent measures, meaning their algorithmic costs sum additively.
+Because the configurations along the path are independent slices of the static totality,
+the total probability of the path is the product of its individual constituent measures, meaning their algorithmic costs sum additively.
 
 By changing our informational units from bits to natural units (where $2^{-C} = e^{-C \ln 2}$), we can express the global probability of an entire observed history $\gamma$:
 \[
@@ -189,11 +187,10 @@ This states that observed physical laws are simply the large-deviation minimizer
 Our core hypothesis is that configurations capable of supporting observers strongly favor smooth, low-frequency spectral content.
 Sharp, chaotic particle trajectories require massive high-frequency modes, which exponentially spike the linear description length $C_s(d)$ and are instantly suppressed by the joint measure. 
 
-As a result, observer-compatible realities are overwhelmingly dominated by configurations exhibiting inertia, smooth curved paths, and law-like behavior.
-Spacetime geometry emerges precisely because it makes macroscopic informational boundaries computationally cheap to describe ($C_g$). 
+As a result, observer-compatible configurations are overwhelmingly dominated by those exhibiting inertia, smooth curved paths, and law-like behavior.
+Spacetime geometry emerges because it makes macroscopic informational boundaries computationally cheap to describe ($C_g$). 
 
-Time in this static block-universe is not a fundamental background dimension.
-It emerges entirely as an internal ordering relation $\prec_O$ on configurations, where $c_1 \prec_O c_2$ if $c_2$ supports a more advanced, stable realization of the observer functional $\mu_O$.
+It emerges entirely as an internal ordering relation $\prec_O$ on configurations, where $c_1 \prec_O c_2$ if $c_2$ supports the observer functional $\mu_O$.
 The experienced flow of time corresponds to traversal along the most compressible, optimized paths through this timeless superposition.
 
 
@@ -223,43 +220,6 @@ The discrete data ($D$) is the emergent \emph{output} of this joint minimization
 Spacetime is smooth ($G$), fields are continuous ($\psi$), yet our observations are invariably quantized into discrete particless ($D$).
 
 
-
-\section{Name (Observer-dependent nomenclature)}
-
-The fourth requirement for any foundational theory is a distinctive name that
-captures the deepest essence of the framework.
-
-We have developed a theory featuring:
-
-\begin{itemize}
-\item emergence
-\item information
-\item abstraction (substrate independence)
-\item observer primacy (the fundamental assumption)
-\item static universe (time as an internal emergent property of the observer)
-\item induced measure / exponential weighting
-\item explanatory totality
-\end{itemize}
-
-This may be summarized as an observer-first ontology embedded within a static,
-abstract informational totality.
-
-This gives us:
-
-\[
-\mathbf{\iameverything}
-\]
-
-or simply
-
-\[
-\mathbf{\iame}
-\]
-
-for
-
-\textbf{I}nformational \textbf{A}bstract \textbf{M}easure —
-exponentiated over \textbf{e}verything.
 
 
 \section{The Equations}
