@@ -25,15 +25,19 @@ $(DOCS): %: %.pdf html-output-%
 		-pdflatex="pdflatex %O '$(PROF_MACRO)\input{%S}'" \
 		$<
 
-html-output-%: %.tex
+$(HTML_DIR): html-output-%: %.tex
 	@echo "Building HTML profile $*..."
+	@echo "Building $*.html"
+	make4ht -c $*.cfg -d html-output-$* $*.tex "xhtml,2,sections+,next"
 
 
 clean:
+	@echo "Cleaning up build artifacts..."
 	@for doc in $(DOCS); do \
-		latexmk -C -jobname=$$doc $$doc.tex 2>/dev/null; \
-		rm -rf html-output-$$doc; \
+		latexmk -C $$doc.tex 2>/dev/null; \
 	done
+	rm -rf $(addprefix html-, $(DOCS))
+	rm -f *.4ct *.4tc *.css *.idv *.lg *.tmp *.xref *.dvi
 
 .PHONY: all clean $(DOCS) upload
 
