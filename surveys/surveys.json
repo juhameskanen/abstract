@@ -1,0 +1,372 @@
+{
+  "surveys": [
+    {
+      "id": "iep-axioms",
+      "title": "The Internal Emergence Principle",
+      "subtitle": "A step-by-step derivation. At each node, you decide whether you accept the premise. Rejecting any node reveals exactly what you must accept instead.",
+      "tag": "Logical Survey · Theory of Everything",
+      "prerequisite": null,
+      "type": "axioms",
+      "nodes": [
+        {
+          "id": "A1",
+          "title": "I am.",
+          "statement": "Something is experiencing. I cannot coherently deny this, because the denial itself is an experience.",
+          "reasoning": "This is the only strictly foundational claim available. Any attempt to contest it is performed by the very entity it contests. No inference required — this is a direct datum.",
+          "rejection": {
+            "title": "The survey cannot continue.",
+            "text": "Denying 'I am' is the one move that cannot be made coherently. The denial is itself performed by the entity whose existence is being denied. The survey, and the denier, both require the very thing being rejected.",
+            "commitment": "Nothing. But also: you cannot be reading this."
+          }
+        },
+        {
+          "id": "A2",
+          "title": "I am finite.",
+          "statement": "My memory, attention, and lifespan are all bounded. I can verify this directly, without inference.",
+          "reasoning": "This follows from direct observation of the observer by the observer. It does not require any claim about the universe — only about the one thing we have inside access to.",
+          "rejection": {
+            "title": "You claim infinite experience.",
+            "text": "Rejecting the finitude of the observer is a coherent position, but it requires specifying what evidence supports infinite memory, attention, or lifespan. The derivation proceeds only for finite observers — as all observed observers appear to be.",
+            "commitment": "To identify a mechanism by which experience is unbounded, or to accept that the IEP applies to the finite portion of your experience."
+          }
+        },
+        {
+          "id": "A3",
+          "title": "DNA is the blueprint of life.",
+          "statement": "DNA, operating within the observed laws of physics, is the only mechanism we have ever observed that reliably produces conscious, pain-sensitive observers.",
+          "reasoning": "This is an empirical claim, not a logical one. It is supported by all available biological evidence. Rejecting it requires proposing an alternative mechanism.",
+          "rejection": {
+            "title": "You reject DNA as the blueprint.",
+            "text": "This is a coherent empirical disagreement. It requires proposing an alternative mechanism that reliably produces conscious observers — one that is also consistent with all available biological evidence.",
+            "commitment": "To name the alternative mechanism. The derivation can be reconstructed with that mechanism substituted for DNA, if it is computable and physical."
+          }
+        },
+        {
+          "id": "A4",
+          "title": "DNA is ordinary matter. No magic.",
+          "statement": "DNA is composed entirely of ordinary physical matter obeying ordinary physical laws. No non-physical process plays any role in its operation.",
+          "reasoning": "No experiment has ever required invoking anything beyond standard physics and chemistry to explain DNA's operation. Rejecting this requires naming the non-physical ingredient.",
+          "rejection": {
+            "title": "You accept a non-physical ingredient.",
+            "text": "Rejecting physical closure requires naming the non-physical process involved in DNA's operation — and explaining why no experiment has ever detected it. This is the position sometimes called vitalism.",
+            "commitment": "To identify the non-physical ingredient and specify how it interacts with ordinary matter without leaving a detectable trace."
+          }
+        },
+        {
+          "id": "A5",
+          "title": "DNA processes are computable.",
+          "statement": "The physical processes underlying DNA fall within the computable. A sufficiently powerful computer could, in principle, simulate them.",
+          "reasoning": "We do not require the full Church–Turing thesis — only that the specific class of processes DNA relies on is computable. This is a weaker and more defensible claim.",
+          "rejection": {
+            "title": "You claim DNA processes are non-computable.",
+            "text": "This is a coherent but demanding position. It requires identifying which specific physical process in DNA falls outside the computable — and why. This is the core of Penrose's argument, which remains unproven and contested.",
+            "commitment": "To identify the non-computable process, and to explain why it has not been experimentally isolated despite decades of molecular biology."
+          }
+        },
+        {
+          "id": "A6",
+          "title": "Pain has measurable causal effects.",
+          "statement": "Pain is not epiphenomenal. A system experiencing pain and the same system without pain are physically distinguishable in principle.",
+          "reasoning": "Formally: Human ≠ Human + Pain. If pain had no measurable effects, there would be no way to detect it, study it, or treat it. Rejecting this commits you to accepting philosophical zombies.",
+          "rejection": {
+            "title": "You accept philosophical zombies.",
+            "text": "Rejecting the causal efficacy of pain commits you to accepting that a being physically identical to you in every way might have no inner experience. Pain would then be entirely epiphenomenal — causally inert, producing no measurable effects.",
+            "commitment": "To explain how pain influences behaviour in biological systems if it has no physical causal power — and why medicine can treat it."
+          }
+        },
+        {
+          "id": "A7",
+          "title": "A perfect simulation is conscious.",
+          "statement": "A simulation physically indistinguishable from a conscious being must itself be conscious. If it were not, the experiential difference would produce a measurable behavioural difference — contradicting the assumption of indistinguishability.",
+          "reasoning": "This follows directly from axioms A3–A6. It eliminates the philosophical zombie. Rejecting it requires identifying where the logical chain breaks.",
+          "rejection": {
+            "title": "You reject that simulations can be conscious.",
+            "text": "Rejecting this requires identifying where the logical chain from axioms A3–A6 breaks. A physically indistinguishable system that is nonetheless not conscious would require pain to have measurable effects in biological systems but not computational ones — which is itself a new physical claim requiring justification.",
+            "commitment": "To identify the physical difference between biological and computational substrates that accounts for the presence or absence of experience."
+          }
+        },
+        {
+          "id": "A8",
+          "title": "Active execution is not required.",
+          "statement": "A fully static bitstring — the precomputed execution trace of a simulation — contains the same conscious experience as the running simulation. No active computation is needed.",
+          "reasoning": "If experience vanished when the last line of code was replaced by precomputed data, there would exist a code-to-data threshold below which consciousness ceases. Such a threshold has no basis in any of the four axioms. It would require a non-physical explanatory principle — magic.",
+          "rejection": {
+            "title": "You claim active execution is required.",
+            "text": "This requires identifying a physical threshold — a minimum code-to-data ratio — below which experience ceases. Such a threshold would be a new physical constant with no basis in the four axioms. Its introduction requires a non-physical explanatory principle.",
+            "commitment": "To specify the threshold, explain its physical basis, and identify how it could in principle be measured."
+          }
+        },
+        {
+          "id": "A9",
+          "title": "Any sufficiently large bitstring space contains consciousness.",
+          "statement": "A conscious observer is a finite bitstring of length k. By combinatorics, every bitstring of length k appears within any sufficiently large set of bitstrings. Therefore consciousness exists within that set — with no simulation, no process, and no external reader required.",
+          "reasoning": "This is a direct consequence of combinatorics applied to the previous conclusion. The question 'but who is running it?' has no more purchase than asking 'who is running the number seven?'",
+          "rejection": {
+            "title": "You reject the combinatorial argument.",
+            "text": "Rejecting this requires identifying a flaw in the combinatorial reasoning: that every finite bitstring of length k appears within any sufficiently large bitstring space. This is a mathematical claim, not a physical one — its rejection requires a mathematical counterargument.",
+            "commitment": "To provide a mathematical argument showing why conscious bitstrings do not appear in large configuration spaces, or to accept that the IEP follows."
+          }
+        }
+      ],
+      "conclusion": {
+        "title": "The Internal Emergence Principle follows.",
+        "statement": "Consciousness is a property of certain finite information structures, not of processes acting upon them. Any configuration space large enough to contain such structures contains consciousness."
+      }
+    },
+    {
+      "id": "iep-conclusions",
+      "title": "Conclusions of the Internal Emergence Principle",
+      "subtitle": "These are not new assumptions. Each statement below is a derived conclusion. Rejecting any of them requires identifying which step of the IEP derivation it contradicts.",
+      "tag": "Requires acceptance of IEP",
+      "prerequisite": {
+        "label": "Starting point",
+        "text": "Consciousness is a property of certain finite information structures, not of processes acting upon them. Any configuration space large enough to contain such structures contains consciousness."
+      },
+      "type": "conclusions",
+      "nodes": [
+        {
+          "id": "C1",
+          "title": "The universe is fundamentally static. Time is an internal property of the observer.",
+          "statement": "The IEP establishes that a conscious observer exists within a static bitstring — no external process required. Time, as experienced, is therefore not a property of the universe. It is an ordinal index: configuration A precedes configuration B if and only if B contains a memory of A. The flow of time is internal structure, not external fact.",
+          "derivation": [
+            "IEP: Consciousness exists in static bitstrings — no active execution needed",
+            "→ No external clock is required for experience to occur",
+            "→ Time within experience must be defined by internal structure alone",
+            "→ The only available internal ordering: B follows A iff B contains memory of A",
+            "∴ Time is an ordinal index over observer configurations. The universe is static."
+          ],
+          "rejection": {
+            "title": "Rejecting C1 requires rejecting the IEP.",
+            "text": "The IEP establishes that consciousness exists within static bitstrings without active execution. If the universe were not static — if time were fundamental and external — then active execution would be required for experience. But the IEP rules this out. You cannot accept the IEP and reject C1 simultaneously.",
+            "contradiction": "IEP: 'consciousness exists in static structures, no process required.'\n¬C1: 'time is fundamental and external to the observer.'\nThese cannot both be true. If time is external and fundamental, the static bitstring has no time — and therefore no internal temporal experience — contradicting the IEP."
+          }
+        },
+        {
+          "id": "C2",
+          "title": "The relationship between a physical system and the observer it encodes is representational, not causal.",
+          "statement": "A computer running a DNA simulation of Alice, and Alice experiencing pain and wondering about the expanding universe, are two perspectives on the same information. Neither causes the other. Causality requires time ordering. A static structure has no intrinsic time ordering. Therefore the relationship is representational.",
+          "derivation": [
+            "C1: The universe is fundamentally static",
+            "→ Causality — which requires A to precede and produce B — has no purchase in a static structure",
+            "→ The computer and Alice are two descriptions of the same static information",
+            "∴ The relationship is representational. Neither perspective is more fundamental."
+          ],
+          "rejection": {
+            "title": "Rejecting C2 requires rejecting that the universe is static.",
+            "text": "If the relationship between computer and Alice is causal rather than representational, then there must be a time ordering in which the computer precedes Alice. But C1 establishes the universe is fundamentally static, with no intrinsic time ordering. You cannot have causality without time, and you cannot have external time without contradicting the IEP.",
+            "contradiction": "C1: 'the universe is static — no intrinsic time ordering.'\n¬C2: 'the computer causes Alice — A precedes and produces B.'\nCausality requires temporal precedence. Temporal precedence requires external time. External time contradicts C1."
+          }
+        },
+        {
+          "id": "C3",
+          "title": "There exist 2ⁿ − 2 other configurations of the same information, most describing nothing conscious.",
+          "statement": "A bitstring of length n admits exactly 2ⁿ possible configurations. One describes Alice's universe as she experiences it. One describes the physical computer. The remaining 2ⁿ − 2 are other valid configurations of the same information — most producing no coherent observer, some producing other observers entirely.",
+          "derivation": [
+            "IEP: Consciousness is a property of certain finite information structures",
+            "→ A bitstring of length n has exactly 2ⁿ configurations — pure combinatorics",
+            "→ No configuration is privileged over another by the axioms",
+            "∴ All 2ⁿ configurations exist on equal footing. Most are incoherent. Some contain observers."
+          ],
+          "rejection": {
+            "title": "Rejecting C3 requires a mathematical counterargument.",
+            "text": "C3 is a direct consequence of combinatorics applied to a finite bitstring. A string of length n has exactly 2ⁿ configurations — this is not a physical claim, it is arithmetic. Rejecting it requires identifying a mathematical error in the counting argument, or a reason why certain configurations are physically forbidden by the axioms.",
+            "contradiction": "Combinatorics: a bitstring of length n has 2ⁿ configurations.\n¬C3: fewer than 2ⁿ configurations exist.\nThis requires either a mathematical error or a new axiom that forbids certain configurations — which would itself require justification."
+          }
+        },
+        {
+          "id": "C4",
+          "title": "Everything Alice observes must already be part of her structure. No information reaches her from outside.",
+          "statement": "In a static, self-contained universe with no metaphysical signals, no bits can flip inside Alice because bits flipped outside Alice. There is no photon travelling through space and time carrying information from a distant star through her eye into her memory. Every structure Alice experiences — every star, every sensation — must already be encoded within the bitstring that constitutes her.",
+          "derivation": [
+            "Axiom A4: No magic — no non-physical process plays any role",
+            "C1: The universe is static — no external process runs",
+            "→ No mechanism exists by which external bits could alter internal bits",
+            "→ All of Alice's observations must be pre-encoded in her structure",
+            "∴ Alice does not receive information. She discovers structure already present within her."
+          ],
+          "rejection": {
+            "title": "Rejecting C4 requires either magic or external time.",
+            "text": "For information to reach Alice from outside, something must carry it — a photon, a signal, a causal chain. But in a static universe (C1), no process runs to carry anything. And Axiom A4 rules out non-physical signals. Rejecting C4 requires either reintroducing external time (contradicting C1) or admitting a non-physical information carrier (contradicting Axiom A4).",
+            "contradiction": "Axiom A4: no non-physical processes.\nC1: the universe is static — no process runs externally.\n¬C4: information reaches Alice from outside her structure.\nThe carrier must be either physical-and-dynamic (contradicts C1) or non-physical (contradicts A4)."
+          }
+        },
+        {
+          "id": "C5",
+          "title": "The universe is not outside Alice. Alice contains the universe.",
+          "statement": "Alice believes she is a vanishingly small observer inside a vast universe. But from C4, every structure she experiences — every star, every other person, the entire observable universe — is already encoded within her. The universe Alice experiences is not her container. It is her interior. Alice does not live inside the universe. The universe lives inside Alice.",
+          "derivation": [
+            "C4: Everything Alice observes is pre-encoded in her structure",
+            "→ The 'external' universe is not external — it is part of Alice's bitstring",
+            "→ Alice's naive self-model (small observer, vast universe outside) inverts the true relationship",
+            "∴ The universe Alice experiences is her interior. She contains it, not the other way around."
+          ],
+          "rejection": {
+            "title": "Rejecting C5 requires that Alice can experience something not in her structure.",
+            "text": "C4 established that everything Alice experiences is already encoded within her. If the universe were truly outside Alice, Alice would need to receive information from that container. But C4 rules this out. The universe Alice experiences has no location 'outside' her.",
+            "contradiction": "C4: all of Alice's observations are pre-encoded in her structure.\n¬C5: the universe exists outside Alice and Alice is a small part of it.\nIf the universe is outside Alice, Alice must receive information from it. C4 rules out any such reception. The 'outside' universe would be unobservable by definition — contradicting the premise that Alice experiences it."
+          }
+        },
+	{
+	  "id": "C6",
+	  "title": "Every observer is identical to their own universe. O = U_O.",
+	  "statement": "From Alice's perspective, A = U_Alice. From Bob's perspective, B = U_Bob. These are different objects. There is no single shared universe — only observer-relative universes that partially overlap. Alice appears in U_Bob as a sub-structure. Bob appears in U_Alice as a sub-structure. Neither is the 'real' universe. There is no view from nowhere.",
+	  "derivation": [
+	      "Naive observation: Alice ⊂ U_Alice (Alice is part of her universe)",
+	      "C5: U_Alice ⊂ Alice (Alice's universe is encoded within her)",
+	      "Set theory: A ⊂ B and B ⊂ A implies A = B",
+	      "∴ Alice = U_Alice. But U_Alice ≠ U_Bob — each observer defines their own universe.",
+	      "→ U_Alice ∩ U_Bob is the shared structure: what Alice and Bob can verify together",
+	      "∴ For every observer O: O = U_O. Part of Bob is always outside Alice, and vice versa."
+	  ],
+	  "rejection": {
+	      "title": "Rejecting O = U_O requires a single shared universe accessible to all observers.",
+	      "text": "Rejecting this requires that there exists a single global U that all observers inhabit equally — a view from nowhere. But C5 establishes that each observer's universe is encoded within them. Two observers with different bitstrings therefore have different universes. A single shared U would require all observers to have identical bitstrings — contradicting the existence of distinct observers.",
+	  "contradiction": "C5: U_O ⊂ O for every observer O.\n¬(O = U_O): requires a single global U independent of any observer.\nBut a global U independent of observers cannot be accessed, experienced, or verified by any observer — it would be permanently outside every U_O.\nSuch a U is indistinguishable from non-existence. It contradicts Axiom A4 (no magic) and the foundational principle 'I am'."
+	  }
+	}
+      ],
+      "conclusion": {
+        "title": "The full picture.",
+        "items": [
+          "The universe is fundamentally static. Time is an ordinal index internal to the observer — not a property of the universe.",
+          "A computer running Alice's simulation and Alice experiencing pain are two representations of the same information. The relationship is not causal.",
+          "The same information admits 2ⁿ configurations. Most describe nothing coherent. Some describe other observers.",
+          "Alice does not receive information from outside. She discovers structure already encoded within her as she moves through her configurations.",
+          "Alice is not a small observer inside a vast universe. The vast universe she experiences is her interior. She contains it.",
+            "The observer and the universe are identical. For each O, O = U_O. Any structure permanently unreachable by any observer does not exist in any meaningful sense."
+        ]
+      }
+    },
+      {
+      "id": "full-theory-axioms",
+      "title": "The Full Informational Framework",
+      "subtitle": "A synthesis of the Internal Emergence Principle with Compression, Interpretation, and Qualia. At each node, accept or reject the premise.",
+      "tag": "Logical Survey · Theory of Everything · Hard Problem",
+      "prerequisite": "iep-axioms (full acceptance)",
+      "type": "axioms",
+      "nodes": [
+        {
+          "id": "FT1",
+          "title": "Raw information is semantically silent (SIIP).",
+          "statement": "A finite bitstring or configuration in the static totality U has no intrinsic meaning, semantics, computation, or preferred interpretation. All meaning arises internally via interpretive mappings chosen by sub-structures.",
+          "reasoning": "Direct consequence of representational equivalence, code-as-data, and interpretive explosion. Consistent with IEP static ontology and A4 (no magic).",
+          "rejection": {
+            "title": "You posit intrinsic semantics.",
+            "text": "This requires explaining how raw configurations possess built-in meaning without an external interpreter, contradicting semantic nakedness and SIIP.",
+            "commitment": "To identify the source of intrinsic semantics consistent with a static, self-contained totality."
+          }
+        },
+        {
+          "id": "FT2",
+          "title": "Observers are compressible equivalence classes minimizing total description length.",
+          "statement": "An observer (Alice) is a finite structural pattern (equivalence class under interpretive transformations) that maximizes existence probability by minimizing combined spectral + geometric complexity C_total = C_s + C_g.",
+          "reasoning": "From Observer Filter, joint compressibility equation P_joint = 2^-(C_s + C_g), and Solomonoff-like suppression. Shorter, invariant descriptions dominate measure.",
+          "rejection": {
+            "title": "You reject measure concentration on compressibility.",
+            "text": "This requires arguing why high-description-length or chaotic structures would not be exponentially suppressed for observers.",
+            "commitment": "To provide a counting argument showing Boltzmann-like or uncompressed observers dominate."
+          }
+        },
+        {
+          "id": "FT3",
+          "title": "Dual compression (spectral + geometric) emerges naturally.",
+          "statement": "Quantum wavefunctions (spectral) and spacetime geometry (geometric) are complementary compression schemes selected because they jointly minimize total description length for structures hosting persistent observers.",
+          "reasoning": "Spectral for relational smoothness and micro-prediction; geometric for locality, boundaries, and identity. Explains D-ψ-G trinity and simulation results.",
+          "rejection": {
+            "title": "You reject dual compression.",
+            "text": "This requires showing either a single compression scheme suffices for finite observers or that waves/geometry do not minimize description length.",
+            "commitment": "To propose an alternative architecture that better supports stable observers."
+          }
+        },
+        {
+          "id": "FT4",
+          "title": "Qualia operate at the interpretive/heuristic layer.",
+          "statement": "The full spectrum of qualia (pain, joy, intuition, etc.) is the first-person, phenomenological signature of the heuristic filter navigating the interpretive landscape toward highly compressible, stable structures. Logical reasoning is the complementary symbolic axis.",
+          "reasoning": "Qualia are what it feels like to be a highly probable, compressible Alice. They provide steering (aversion/attraction) in the vast interpretive space, enabling finite observers to find high-measure paths without exhaustive search. Consistent with A6 (causal effects) at the interpretive level.",
+          "rejection": {
+            "title": "You treat qualia as epiphenomenal or extra-metaphysical.",
+            "text": "This reintroduces the hard problem inside the mathematical slice or violates internal containment. Qualia must have functional role in measure selection.",
+            "commitment": "To explain how observers find compressible structures without heuristic/phenomenological guidance."
+          }
+        },
+        {
+          "id": "FT5",
+          "title": "The ontology is minimally agnostic (Undefined U → finite observers).",
+          "statement": "The ultimate substrate is an unrestricted totality U about which we remain agnostic (neither strictly finite, digital, nor informational a priori). Finite observers induce discreteness, information, and structure via boundary conditions and compression.",
+          "reasoning": "Guitar-string analogy + observer constraint. Avoids arbitrary finite bounds while anchoring in direct experience (A1, A2).",
+          "rejection": {
+            "title": "You demand a fully specified ontology.",
+            "text": "This risks introducing untestable commitments (e.g., strict digitalism) that go beyond what finite observers can verify.",
+            "commitment": "To justify a stronger ontological claim consistent with all prior axioms."
+          }
+        }
+      ],
+      "conclusion": {
+        "title": "The Full Framework Follows.",
+        "statement": "Consciousness emerges as compressible, self-interpreting structures within a static, semantically silent totality. Measure concentrates on minimal joint spectral-geometric description length. Qualia are the internal steering mechanism guiding observers toward these high-probability configurations. Smooth physics, laws, time, and mathematics are expected outcomes of this optimization."
+      }
+    },
+    {
+      "id": "full-theory-conclusions",
+      "title": "Conclusions of the Full Informational Framework",
+      "subtitle": "Derived consequences. Rejecting any requires identifying the broken step in the prior axioms.",
+      "tag": "Requires acceptance of Full Framework",
+      "prerequisite": "full-theory-axioms",
+      "type": "conclusions",
+      "nodes": [
+	  {
+	      "id": "FTC1",
+	      "title": "Boltzmann brains and chaotic fluctuations are exponentially suppressed.",
+	      "statement": "Raw high-entropy noise and transient fluctuations have high total description length and are disfavored by the joint compressibility measure. Typical observers inhabit low-initial-entropy, entropy-gradient trajectories with stable D-ψ-G structure.",
+	      "derivation": ["FT2 + FT3 + spectral/geometric filters"],
+	      "rejection": {
+		  "title": "You claim Boltzmann brains dominate.",
+		  "text": "This contradicts measure concentration on compressible structures and simulation results with the observer filter applied."
+	      }
+	  },
+	  {
+	      "id": "FTC2",
+	      "title": "Physical laws and mathematics are discovered invariants.",
+	      "statement": "Laws and mathematics emerge as stable relational invariants within the high-measure compressible slices that observers self-locate into. Wigner's unreasonable effectiveness follows because observers are built from the same unified building blocks.",
+	      "derivation": ["FT2 + FT3 + SIIP"],
+	      "rejection": {
+		  "title": "You reject emergent laws.",
+		  "text": "This requires explaining strong cross-observer consistency and predictive power without shared compressible invariants."
+	      }
+	  },
+	  {
+	      "id": "FTC3",
+	      "title": "Qualia have functional, non-epiphenomenal roles.",
+	      "statement": "Qualia serve as the heuristic navigation system in interpretive space, steering finite observers toward compressible configurations. They are what it feels like to be a highly probable Alice.",
+	      "derivation": ["FT4 + observer functionals μ_O"],
+	      "rejection": {
+		  "title": "You claim qualia are purely epiphenomenal.",
+		  "text": "This leaves unexplained how finite observers efficiently find high-measure structures in an exponentially large interpretive space."
+	      }
+	  },
+	  {
+	      "id": "FTC4",
+	      "title": "The experienced universe is observer-relative and self-contained.",
+	      "statement": "Each observer O = U_O (per IEP C6), with overlaps enforcing shared compressible physics. No external signals or view-from-nowhere exists.",
+	      "derivation": ["IEP conclusions + FT1–FT5"],
+	      "rejection": {
+		  "title": "You posit a single shared external universe.",
+		  "text": "This contradicts internal containment and semantic silence."
+	      }
+	  }
+      ],
+	"conclusion": {
+	    "title": "The Complete Picture",
+	    "items": [
+		"Reality is an unrestricted static totality U containing all configurations.",
+		"Finite observers self-locate in highly compressible structures via dual spectral-geometric compression.",
+		"Qualia are the felt heuristic guidance toward these structures.",
+		"Smooth physics, laws, time, and mathematics are high-measure, expected outcomes — not fine-tuned miracles.",
+		"The framework resolves the measure problem, Boltzmann brains, simulation chaos, and gives qualia a natural functional role without magic."
+	    ]
+	}
+    }
+      
+  ]
+}
+
