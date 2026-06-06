@@ -1,4 +1,4 @@
-# Informational, Abstract Measure of Everything (IAM^e)
+#  ¬(D-ψ-G)
 
 A candidate framework for everything where reality emerges as the large-deviation minimum of observer-compatible histories.
 
@@ -48,7 +48,7 @@ Starting from a well-defined observer, the simulations resolve the most probable
 
 ## Current Status
 
-**Under heavy construction** — Many chapters and simulations are in draft or intermediate form. Content evolves regularly as the work progresses.
+**Under construction** — Many chapters and simulations are in draft or intermediate form. Content evolves regularly as the work progresses.
 
 [![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
 
@@ -57,23 +57,21 @@ Starting from a well-defined observer, the simulations resolve the most probable
 
 ## Philosophy & Approach
 
-IAM^e is a **physics** project. Concepts must be computable, simulatable, or mathematically derivable. The existence of the observer is treated operationally as an empirically given subsystem. While the work touches deep foundational questions, the goal remains falsifiable, predictive physics rather than pure philosophy.
+¬(D-ψ-G) is a **physics** project. Concepts must be computable, simulatable, or mathematically derivable. The existence of the observer is treated operationally as an empirically given subsystem. While the work touches deep foundational questions, the goal remains falsifiable, predictive physics rather than pure philosophy.
 
 ## Contributing
 
 Contributions are welcome, particularly:
-- New simulations that test or illustrate theoretical claims
-- Corrections and improvements to documentation
-- Code refactoring and performance enhancements
 
-For major changes, please open an issue first to discuss.
+Open problem: Fermionic exclusion — stable particle distinguishability under collision — is not yet reproduced by the compression measure and constitutes the current theoretical frontier.
+
 
 ## License & Disclaimer
 
 Usage for academic study and non-commercial research is permitted with proper citation.
 
 **Disclaimer**  
-THE THEORY IS PROVIDED "AS IS". Use at your own risk of existential crisis or wavefunction collapse.
+THE THEORY IS PROVIDED "AS IS". Use at your own risk of ontological crisis or wavefunction collapse.
 
 ---
 ©Copyright 2001 ... 2025 - The Abstract Universe Project. All rights reserved.
