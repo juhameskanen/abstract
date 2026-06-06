@@ -104,16 +104,19 @@ These results suggest that key aspects of classical and quantum behavior can ari
 
 \section{The Fermion Problem}
 
-Despite these encouraging results, a significant limitation appears.
 The Gaussian blobs eventually lose their individual identities and merge into a single undifferentiated structure.
 There is no stable repulsion or exclusion principle at short distances.
 
 In standard quantum mechanics, fermions obey the Pauli exclusion principle due to antisymmetry of the wavefunction.
 In our pure compression-based approach, symmetric (bosonic) configurations are strongly preferred because they allow shared spectral modes and lower total description length.
-Antisymmetric configurations appear significantly more expensive and are therefore suppressed.
 
-Hard-coding antisymmetry would violate the spirit of the project.
-Finding a natural mechanism \emph{within} the compression measure that makes multiple occupancy of the same state dramatically more costly for coherent observers remains the most important open challenge of the theory.
+However, this is a problem with the current PoC. One can describe this via MPEG video analogy: when two
+observers overlap even slightly, it would correspond to a case where frames from Bobs video get
+injected into Alice's video. The description length (MPEG file size) would explode dramatically.
+
+The exclusion principle then follows directly: merger is not forbidden by an external rule.
+It is simply the least probable configuration in the measure, because it maximises description length.
+The observers repel for the same reason inertia exists — the compressibility measure overwhelmingly favours continuity and distinctness.
 
 
 \section{Conclusion}
