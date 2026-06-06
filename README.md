@@ -1,4 +1,4 @@
-#  ¬(D-ψ-G)
+#  IAM¬(D-ψ-G)
 
 A candidate framework for everything where reality emerges as the large-deviation minimum of observer-compatible histories.
 
