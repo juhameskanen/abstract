@@ -2,5 +2,5 @@ DOCS       := theory-of-everything
 
 include ../abstract.mak
 
--include upload.mak
+include ../upload.mak
 
