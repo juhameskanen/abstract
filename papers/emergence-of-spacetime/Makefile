@@ -1,6 +1,5 @@
-DOCS       := theory-of-everything
+DOCS       := emergence-of-spacetime
 
 include ../abstract.mak
 
 -include upload.mak
-

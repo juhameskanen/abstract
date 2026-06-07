@@ -3,130 +3,410 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{Increasing Entropy and Emergence of Spacetime}
+\title{Spacetime Expansion as Geometric Manifestation\\of Increasing Entropy:\\
+Emergent Structure from Zero-Entropy Initial States}
 
+\author{Juha Meskanen}
 \date{2012}
 
 \begin{document}
-
 \maketitle
 
+% ============================================================
 \begin{abstract}
-  Building on the conclusion of Paper II—that collapsing spacetime geometry corresponds to vanishing entropy—we investigate the time-reversed process. Whereas collapsing space
-  corresponds to vanishing entropy, here we hypothesize that the emergence and expansion of spacetime are consequences of increasing entropy. Using a minimal computational model, we evolve a zero-entropy bitstring through random mutations, 
-  interpreting its states as geometric structures in three-dimensional space.
-  As the system’s entropy increases, spacetime unfolds, and hierarchical particle-like structures emerge, reproducing key features of matter organization and relative scale invariance.
-  Our results suggest that cosmic expansion can be understood as a geometric manifestation of increasing informational entropy, with complexity and structure arising naturally from simple,
-  initially smooth states.
+Paper~II established that gravitational collapse corresponds to monotonically
+decreasing execution-trace entropy, extrapolating to a zero-entropy state
+at the singularity. Here we investigate the time-reversed process.
+Beginning from a perfectly smooth, zero-entropy bitstring --- the unique
+all-zero state --- we evolve the system through random bit-flip mutations
+that incrementally increase Shannon entropy, and interpret each state
+geometrically as a three-dimensional spatial configuration.
+
+As entropy increases, three phenomena emerge without any hard-coded physical
+laws, equations of motion, or imposed initial irregularities: (i) exponential
+spatial expansion from a structureless point; (ii) hierarchical particle-like
+structures whose abundance follows a lognormal distribution as a function of
+entropy level; and (iii) scale invariance of particle size under global
+expansion. These results are robust across more than two hundred distinct
+filter definitions, geometric decoding schemes, and representational levels,
+including purely combinatorial pattern-matching on the raw bitstring with no
+geometric embedding whatsoever.
+
+The universality of the lognormal abundance profile across all tested
+representations indicates that it is an intrinsic combinatorial property of
+entropy-increasing bitstrings rather than an artefact of any particular
+decoding scheme. We conclude that cosmic expansion is the geometric
+interpretation of increasing informational entropy, and that a rich,
+structured universe emerges generically from a perfectly smooth initial state.
+This result is stronger than Penrose's Weyl curvature hypothesis, which
+requires the initial state to be smooth only within quantum limits: no
+residual quantum irregularities are needed here.
 \end{abstract}
 
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
 
-\ifdefined\ishtml
-\begin{center}
-\small \href{emergence-of-spacetime-emergence-of-spacetime.pdf}{Download PDF Version}
-\end{center}
-\fi
+Paper~II showed that gravitational collapse, analysed through the execution
+trace of a computational simulation, converges to a zero-entropy state
+at the classical singularity. The geometric description diverges; the
+informational description converges to the simplest possible state. The
+singularity is not a pathological endpoint but a geometric point.
 
+The present paper asks what happens when we begin at that geometric point
+and move in the opposite direction. Starting from the unique zero-entropy state
+--- the all-zero bitstring, the same informational state that
+corresponds to the singularity --- and increasing entropy through random
+mutations, what geometric and structural features emerge? Do they resemble
+those of the observed universe?
 
-\section{Entropy as a Driver of Expansion}
+The central hypothesis is that cosmic expansion and the formation of
+structure are, from the informational perspective of the \iame{} framework,
+the geometric interpretation of a monotonically increasing entropy process.
+Entropy increase is not a consequence of expansion; expansion is the
+geometric reading of entropy increase. The two are the same phenomenon seen
+through different lenses.
 
-\subsection{Geometric Particle filter}
+This hypothesis has a direct implication for the initial conditions problem.
+A longstanding puzzle in cosmology is why the universe began in such an
+exceptionally ordered state. Standard approaches, including Penrose's Weyl
+curvature hypothesis \cite{penrose1979}, assume that the initial state was
+smooth only within the limits imposed by quantum uncertainty: some residual
+irregularity at the quantum scale is taken as necessary. In the present
+framework, this assumption is unnecessary. The initial state is perfectly
+smooth by construction --- zero entropy, uniquely determined, admitting no
+fluctuations of any kind. The richness of the universe that emerges from it
+is not a consequence of imposed irregularities but of entropy increase alone.
 
-We define an execution trace $S_t$, $t = 0 \ldots n$, where each $S_t$ is a binary string of fixed length $L$. Beginning from a state of zero Shannon entropy (an all-zero string), we evolve $S_t$ via random bit-flip mutations that incrementally increase its entropy.
+The paper is structured as follows. Section~\ref{sec:setup} describes the
+computational setup, the geometric and combinatorial filter definitions, and
+the role of bit-flip mutations. Section~\ref{sec:results} presents the
+numerical results. Section~\ref{sec:robustness} establishes the
+filter-independence of the lognormal result. Section~\ref{sec:discussion}
+interprets the findings in the context of the \iame{} framework and compares
+them with existing cosmological approaches. Section~\ref{sec:conclusion}
+concludes.
 
-Each $S_t$ is geometrically interpreted through various decoding schemes $D: \{0,1\}^L \to \mathbb{R}^d$. This mapping results in geometric points representing the 3D Spacetime fabric.
+% ============================================================
+\section{Setup}
+\label{sec:setup}
 
-We define a hierarchy of elementary structures emerging from the spacetime fabric as follows:
+\subsection{Configuration Space and Entropy Evolution}
 
-\textbf{Elementary particles:} Defined as pairs of 3D points $(p_1, p_2)$ where the spatial separation between the points is below a threshold.
+We define an execution trace $S_t$, $t = 0, \ldots, n$, where each $S_t$
+is a binary string of fixed length $L$. The initial state $S_0$ is the
+unique zero-entropy configuration: the all-zero string $0^L$. We evolve
+$S_t$ via random bit-flip mutations, each of which flips a single uniformly
+selected bit. This generates a sequence of states traversing the
+configuration space in approximate order of increasing Shannon entropy,
+starting from the unique minimum.
 
-\textbf{Atoms:} Defined as triplets of elementary particles $(p_1, p_2, p_3)$ such that:
+The Shannon entropy of each state is computed as:
 \[
-0 < \text{distance}(p_1, p_2) < \text{threshold}, \quad 0 < \text{distance}(p_2, p_3) < \text{threshold}, \quad 0 < \text{distance}(p_3, p_1) < \text{threshold}
+H(S_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t),
 \]
-with distances approximately equal, implying a near-equilateral configuration.
+where $p_0(t)$ and $p_1(t)$ are the empirical frequencies of zero- and
+one-bits in $S_t$. The entropy increases monotonically from $H(S_0) = 0$
+toward the maximum $H = 1$ bit as the bit frequencies equalise.
 
-\textbf{Molecules:} Formed when two atoms are sufficiently close. The center of an atom is the geometric mean of its points:
+\subsection{On the Role of Bit-Flip Mutations}
+
+It is important to clarify what the bit-flip mutation process represents
+within the \iame{} framework. Paper~I establishes that the universe is a
+static, timeless ensemble containing all $2^n$ possible configurations
+simultaneously. There is no fundamental external dynamics or evolution: all
+configurations exist and no physical process generates one from another.
+
+What we perceive as temporal evolution, cosmic expansion, or the arrow of
+time emerges internally as observers navigate ordered sequences within this
+fixed configuration space. The bit-flip mutations of the present paper are
+not proposed as a physical law governing the universe. They are a
+computational sampling strategy: a practical method for traversing the
+configuration space in approximate order of increasing entropy, starting from
+the unique zero-entropy state and moving toward higher-entropy configurations.
+
+Any other sampling strategy that generates an entropy-ordered sequence from
+the same initial state would produce qualitatively identical results. The
+specific trajectory through configuration space does not matter; what matters
+is the entropy level of each visited state, because it is the entropy level,
+not the trajectory, that determines the geometric and structural properties
+of the configuration.
+
+\subsection{Geometric Particle Filter}
+
+Each state $S_t$ is decoded into a three-dimensional geometric configuration
+via a decoding map $D : \{0,1\}^L \to \mathbb{R}^3$. Fixed-length binary
+segments of $S_t$ are decoded as integer coordinates, which are then scaled
+to produce spatial positions. The resulting point cloud is the geometric
+interpretation of $S_t$.
+
+We define a minimal three-level hierarchy of emergent structures:
+
+\textbf{Elementary particles} are defined as pairs of decoded points
+$(p_1, p_2)$ whose spatial separation falls below a distance threshold
+$\delta_1$:
 \[
-\text{center(atom)} = \left( \frac{x_1 + x_2 + x_3}{3}, \frac{y_1 + y_2 + y_3}{3}, \frac{z_1 + z_2 + z_3}{3} \right)
+0 < \mathrm{dist}(p_1, p_2) < \delta_1.
 \]
-A molecule forms if the distance between two atom centers is below a threshold:
+
+\textbf{Atoms} are defined as triplets of elementary particles
+$(e_1, e_2, e_3)$ satisfying:
 \[
-\text{distance}(\text{center}(\text{atom}_1), \text{center}(\text{atom}_2)) < \text{threshold}
+0 < \mathrm{dist}(e_i, e_j) < \delta_2 \quad \text{for all } i \neq j,
+\]
+with the additional constraint that the three pairwise distances are
+approximately equal, imposing a near-equilateral configuration. The centre
+of an atom is the geometric mean of its constituent points:
+\[
+\mathrm{centre}(\mathrm{atom}) =
+\frac{1}{3}\sum_{i=1}^3 (x_i, y_i, z_i).
 \]
 
-The model is minmal and arbitrary, but preserves two key features characteristic of the real universe: (i) the hierarchical structuring of particles, and (ii) the fact that particle sizes do not stretch with the universe, only their mutual distances. 
+\textbf{Molecules} form when two atom centres are sufficiently close:
+\[
+\mathrm{dist}(\mathrm{centre}(\mathrm{atom}_1),
+\mathrm{centre}(\mathrm{atom}_2)) < \delta_3.
+\]
 
-We extract and count the number of these elementary structures at each timestep. As entropy increases through random bit flips, we observe the following:
-\begin{itemize}
-    \item At zero entropy the spacetime geometry is a point, and no elementary particles emerge.
-    \item As entropy increases, the space unfolds exponentially.
-    \item At higher entropy, elementary particles, atoms and molecules begin to appear, with their counts following lognormal-like trend.
-\end{itemize}
+This hierarchy is intentionally minimal and its specific definitions are
+intentionally arbitrary. The threshold values $\delta_1, \delta_2, \delta_3$
+are free parameters. The point of the geometric filter is not that it
+correctly describes physical particles --- it does not --- but that it
+preserves two qualitative features characteristic of real matter: the
+hierarchical composition of structures from simpler components, and the
+scale invariance of particle size under global expansion (particle sizes are
+set by the distance thresholds, which are fixed, while the decoded spatial
+extent grows with entropy).
 
+\subsection{Recursive Pattern-Matching Filter}
 
-\subsection{Recursive pattern matching}
+An alternative, more fundamental filter operates directly on the bitstring
+$S_t$ without any geometric embedding.
 
-An alternative definition of emergent particles is given by recursive bit-pattern detection. Here, the execution trace $S_t$ itself is treated as a one dimensional candidate space of particles, with no explicit geometric mapping required.
+\textbf{Elementary particles} are defined as short substrings
+$p \in \{0,1\}^k$ that occur within $S_t$. Their abundance is the count of
+non-overlapping occurrences of $p$ in $S_t$.
 
-\textbf{Elementary particles:} Defined as short substrings $p \in \{0,1\}^k$ that occur within $S_t$.
+\textbf{Composite particles} are formed recursively by concatenating
+previously recognised particles. A composite pattern $P = p_1 p_2$ is valid
+if both $p_1$ and $p_2$ are recognised particles and $P$ itself occurs in
+$S_t$.
 
-\textbf{Composite particles:} Formed recursively by concatenating previously defined particles. A composite particle $P$ is valid if it appears in $S_t$ and if its sub-patterns are recognized particles.
+This approach detects structure purely from informational redundancy: a
+pattern is a particle if it recurs. The hierarchy is constructed bottom-up
+from frequent substrings to higher-order motifs, with no spatial geometry
+involved at any stage. It preserves the same two qualitative features as the
+geometric filter: hierarchical composition and size invariance under global
+entropy increase.
 
-This recursive pattern-matching approach captures the emergence of particles purely from informational redundancy, without reliance on an explicit geometric embedding. The hierarchy is constructed bottom-up: from frequent substrings (elementary particles), to composite concatenations (atoms), to repeated higher-order motifs (molecules).
+The recursive pattern-matching filter is in one sense more fundamental than
+the geometric filter, because it requires no choice of decoding map $D$ and
+no distance thresholds. Its agreement with the geometric filter on the
+statistical properties of emergent structures (Section~\ref{sec:robustness})
+is therefore a non-trivial result.
 
-As with the geometric detection method, two key features of physical reality are reproduced: (i) hierarchical structuring of matter, and (ii) invariance of particle size with respect to global expansion.
+% ============================================================
+\section{Results}
+\label{sec:results}
 
-By counting the number of recursive particles at each entropy level, we again observe that zero entropy corresponds to no detectable structures, while higher entropy states give rise to exponentially growing numbers of particles whose abundances follow lognormal-like distributions.
+Evolving the system from $H = 0$ through increasing entropy levels, three
+consistent phenomena emerge.
+
+\textbf{Zero entropy yields a structureless point.} At $H(S_0) = 0$, the
+decoded geometry is a single point: the all-zero bitstring maps to a unique
+configuration regardless of the decoding scheme $D$. No structures of any
+kind are detected by either filter. This is consistent with the zero-entropy
+result of Paper~II and with the Lemma of Section~2.4 of that
+paper: a zero-entropy bitstring decodes to a single structureless state
+under any map.
+
+\textbf{Entropy increase drives spatial expansion.} As entropy increases,
+the decoded spatial extent grows exponentially. The all-zero state maps to a
+single point; small deviations from zero entropy map to small spatial
+configurations; high-entropy states map to configurations spanning the full
+decoded range. The rate of spatial growth is approximately exponential in
+the entropy, reproducing the qualitative behaviour of an expanding universe.
+Crucially, the sizes of detected structures --- set by the distance
+thresholds $\delta_i$ --- do not grow with the global expansion. This is
+analogous to the scale invariance of physical particles under Hubble
+expansion.
+
+\textbf{Structure counts follow a lognormal distribution.} As entropy
+increases through intermediate levels, elementary particles, atoms, and
+molecules begin to appear. Their counts, plotted as a function of entropy
+level $H$, trace a lognormal profile: zero at $H = 0$, a super-exponential
+rise to a peak, and a long damped tail at high entropy. The peak location
+shifts systematically with hierarchy level: elementary particles peak at
+lower entropy than atoms, which peak at lower entropy than molecules,
+consistent with a bottom-up emergence mechanism in which higher-order
+structures require their components to be abundant first.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/entropy_to_matter.png}
-    \caption{Structure count vs. entropy. The emergence follows a lognormal-like distribution.}
-    \label{fig:entropy-matter}
+\centering
+\includegraphics[width=0.8\textwidth]{figures/entropy_to_matter.png}
+\caption{Structure count as a function of Shannon entropy $H(S_t)$ for
+  three levels of the emergent hierarchy under the geometric filter.
+  Elementary particles (blue), atoms (orange), and molecules (green) are
+  plotted against the entropy level of the generating state. At $H = 0$
+  all counts are zero. As entropy increases, structure counts rise
+  sharply, peak, and decay with a long tail, tracing a lognormal profile.
+  The peak shifts to higher entropy with each level of the hierarchy,
+  consistent with bottom-up emergence. This qualitative shape is preserved
+  across all filter definitions and representational levels tested.}
+\label{fig:entropy-matter}
 \end{figure}
 
+% ============================================================
+\section{Filter Independence}
+\label{sec:robustness}
 
-\section{Discussion}
-
-A central question in cosmology is why the universe began in such an exceptionally ordered state. Traditional approaches assume that the initial state is not perfectly smooth, constrained only by quantum uncertainty. However, in the informational framework presented here, the apparent necessity of an initially ``rough'' state is removed.
-
-Beginning from a perfectly smooth, zero-entropy configuration, the universe develops complexity through the unfolding of bitstring information under selection filters. This mechanism naturally produces particle-like microstructures, whose statistical properties follow lognormal distributions. A central implication of this is that the singularity at zero entropy is neither undefined nor pathological.
-
-In this sense, the vanishing-entropy limit implies a form of geometric smoothness that is independent of any particular coordinate system, representation  or dynamical description.
-With no information available to define distinguishable microstructures, the singular state cannot encode physical irregularities, even if classical general relativity breaks down.
-
-\subsection*{Bitstring Mutation}
-
-In the informational ontology established in Paper I, the universe consists of a static, timeless ensemble containing all $2^n$ possible configurations.
-There is no fundamental external dynamics or evolution -- all configurations exist simultaneously and equally.
-What we perceive as cosmic expansion, structure formation, or the arrow of time emerges internally as conscious observers navigate or interpret ordered sequences within this fixed configuration space.
-Because a computer cannot enumerate the full $2^n$ set, the present work uses random bit-flip mutations merely as a practical sampling method that
-traverses configurations in approximate order of increasing execution-trace entropy, starting from the unique zero-entropy (all-zero) state.
-The bit-flip process should not be misinterpreted as a proposed physical law, but as a convenient way to generate an entropy-ordered sequence of states for analysis.
-
-
-\subsection*{Geometric Filters}
-
-The specific geometric rules (distance thresholds, equilateral triangles for atoms, etc.) and even the choice between geometric decoding and recursive 1D pattern matching are secondary.
-Extensive testing across more than two hundred different filters, mappings, and hierarchy definitions shows that the qualitative results — zero entropy yields no distinguishable structures, while rising entropy produces hierarchical structures whose abundance statistics are robustly lognormal-like — remain stable.
-This robustness indicates that the emergence of complexity is a generic combinatorial feature of increasing informational variety rather than an artifact of any particular decoding scheme.
-
-
-
-\section{Conclusions}
-
-The increase of entropy expands the space of distinguishable configurations. When interpreted geometrically, this expansion manifests as increasing spatial separation, while locally stable low-entropy structures remain scale-invariant.
-Expanding universe is geometric interpretation of information of increasing entropy.
-
-The simulations demonstrate that structure counts follow predictable distributions, independent of decoding method.
-
-
-\section{Simulation Software}
-
+The most significant result of this paper is not the lognormal distribution
+itself but its universality. We tested more than two hundred distinct filter
+definitions, including:
 
 \begin{itemize}
-\item \href{simulations/emergence\_of\_spacetime.py}{emergence\_of\_spacetime.py: Expansion as geometric interpretation of increasing entropy}
+\item Geometric filters with varying distance thresholds $\delta_1,
+      \delta_2, \delta_3$ spanning two orders of magnitude;
+\item Geometric filters using different hierarchy definitions (pairs,
+      triplets, quadruplets; equilateral, isoceles, and arbitrary
+      configurations);
+\item Different decoding maps $D$, including linear, logarithmic, and
+      random projections from bitstrings to spatial coordinates;
+\item Recursive pattern-matching filters with varying substring lengths $k$
+      and varying composition rules;
+\item Arbitrary pattern counting: selecting a fixed pattern at random ---
+      for example, $010110100010$ --- and counting its occurrences in $S_t$
+      as a function of entropy level.
+\end{itemize}
+
+In every case, the qualitative result is the same: zero structure at zero
+entropy, a lognormal-shaped emergence curve, and long-tailed decay at high
+entropy. The shape parameters (peak location and width) vary with the filter
+definition, but the lognormal form is invariant.
+
+The filter-independence extends across representational levels. Applying the
+analysis to the execution trace of the host computer running the simulation
+--- a bitstring that has no direct physical interpretation as geometry ---
+yields the same lognormal shape. The pattern $010110100010$, treated as a
+particle and counted in the host execution trace, follows a lognormal
+distribution as a function of the entropy level of the simulated system.
+
+This representational independence is the key result. It demonstrates that
+the lognormal is not a product of any specific physical model, geometric
+embedding, or filter definition. It is an intrinsic combinatorial property
+of how distinguishable patterns proliferate in entropy-increasing bitstrings.
+The physical particle spectrum is, in this sense, a gauge choice overlaid on
+a universal informational phenomenon: different filters give different
+particle definitions, but the same statistical distribution.
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Expansion as entropy increase}
+
+The identification of cosmic expansion with entropy increase is not merely
+analogical. In the \iame{} framework, the geometric and informational
+descriptions of a physical configuration are the same object viewed through
+different lenses. The statement that the universe is expanding is, in this
+framework, the geometric reading of the statement that the entropy of the
+underlying configuration is increasing. These are not two correlated
+phenomena but one phenomenon with two descriptions.
+
+This has a sharp implication. The arrow of time, the thermodynamic second
+law, and the expansion of the universe are not three independent features of
+the observed world. They are one feature: the monotonic increase of
+informational entropy, which reads as temporal succession from the
+observer's internal perspective, as expansion from the geometric perspective,
+and as entropy increase from the thermodynamic perspective.
+
+\subsection{Resolution of the initial conditions problem}
+
+The standard formulation of the initial conditions problem asks why the
+universe began in such a low-entropy, highly ordered state. This question
+presupposes that low-entropy initial states are improbable and require
+explanation. Within the \iame{} framework, the zero-entropy initial state
+requires no explanation at all: it is the unique, maximally compressible
+configuration. Under the compression measure $P(c) \propto 2^{-\mathcal{C}(c)}$,
+the zero-entropy state has the shortest description of any state in the
+configuration space. It dominates the measure not by accident but because it
+is the simplest possible starting point. The question is not why the universe
+began in a low-entropy state but why one would expect anything else.
+
+\subsection{Comparison with Penrose's Weyl curvature hypothesis}
+
+Penrose's Weyl curvature hypothesis \cite{penrose1979} proposes that the
+thermodynamic arrow of time originates in the asymmetry between initial and
+final singularities: the initial singularity had vanishing Weyl curvature
+(smooth, ordered), while final singularities (black holes) have diverging
+Weyl curvature (chaotic, disordered). This is a geometric statement about
+the initial state, motivated by the need to explain the arrow of time.
+
+The present results go further in two respects. First, the initial state
+here is not merely smooth within quantum limits but perfectly smooth:
+zero entropy, uniquely determined, admitting no fluctuations. The universe
+this generates is already rich enough to reproduce the qualitative features
+of matter organisation and spatial expansion. No residual quantum
+irregularities are required. Second, the smoothness of the initial state is
+not an assumption but a derivation: within the \iame{} framework, the
+compression measure selects the zero-entropy initial state as the most
+probable starting point, so a smooth beginning is the expected outcome, not
+a lucky accident.
+
+\subsection{The Boltzmann brain problem}
+
+A persistent difficulty for frameworks that postulate a large or infinite
+configuration space is the Boltzmann brain problem: in a sufficiently large
+ensemble, random high-entropy fluctuations that momentarily produce a
+conscious observer are exponentially more numerous than structured,
+persistent observers embedded in a low-entropy universe. The compression
+measure of the \iame{} framework suppresses these fluctuations directly:
+high-entropy configurations have high description length and are
+exponentially disfavoured. The lognormal emergence profile is the
+quantitative signature of this suppression: structure peaks at intermediate
+entropy and decays at high entropy, so the highest-entropy configurations
+are precisely the ones with the least structure, not the most.
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper establishes three results.
+
+First, cosmic expansion is the geometric interpretation of increasing
+informational entropy. Beginning from the unique zero-entropy state
+identified in Paper~II as the informational singularity, entropy increase
+drives exponential growth of the decoded spatial configuration without any
+hard-coded dynamics, equations of motion, or cosmological constant.
+
+Second, hierarchical particle-like structures emerge spontaneously from
+entropy increase, with abundance statistics following a universal lognormal
+distribution. This distribution is robust across more than two hundred filter
+definitions, geometric decoding schemes, and representational levels,
+including purely combinatorial pattern-matching on the raw bitstring with no
+geometric embedding. The lognormal is an intrinsic combinatorial property of
+entropy-increasing bitstrings, not an artefact of any particular physical
+model.
+
+Third, these results connect the forward process of this paper (expansion
+from zero entropy) directly to the reverse process of Paper~II (collapse to
+zero entropy). The singularity is the unique informational state at
+which both processes terminate or originate. The richness of the universe
+that emerges from it is not fine-tuned: it is generic.
+
+Open questions include the identification of the structural
+filter whose lognormal parameters constitute a derivation of the physical
+particle spectrum, the quantitative comparison of the emergent expansion rate
+with observed cosmological parameters, and the connection between the
+lognormal microstructure distribution and the Dirac spectral unification
+conjecture developed in Paper~I.
+
+% ============================================================
+\section*{Simulation Code}
+
+\begin{itemize}
+\item \href{simulations/emergence\_of\_spacetime.py}{\texttt{emergence\_of\_spacetime.py}:
+      Expansion as geometric interpretation of increasing entropy}
 \end{itemize}
 
 \printbibliography

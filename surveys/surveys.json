@@ -206,24 +206,24 @@
             "contradiction": "C4: all of Alice's observations are pre-encoded in her structure.\n¬C5: the universe exists outside Alice and Alice is a small part of it.\nIf the universe is outside Alice, Alice must receive information from it. C4 rules out any such reception. The 'outside' universe would be unobservable by definition — contradicting the premise that Alice experiences it."
           }
         },
-	{
-	  "id": "C6",
-	  "title": "Every observer is identical to their own universe. O = U_O.",
-	  "statement": "From Alice's perspective, A = U_Alice. From Bob's perspective, B = U_Bob. These are different objects. There is no single shared universe — only observer-relative universes that partially overlap. Alice appears in U_Bob as a sub-structure. Bob appears in U_Alice as a sub-structure. Neither is the 'real' universe. There is no view from nowhere.",
-	  "derivation": [
-	      "Naive observation: Alice ⊂ U_Alice (Alice is part of her universe)",
-	      "C5: U_Alice ⊂ Alice (Alice's universe is encoded within her)",
-	      "Set theory: A ⊂ B and B ⊂ A implies A = B",
-	      "∴ Alice = U_Alice. But U_Alice ≠ U_Bob — each observer defines their own universe.",
-	      "→ U_Alice ∩ U_Bob is the shared structure: what Alice and Bob can verify together",
-	      "∴ For every observer O: O = U_O. Part of Bob is always outside Alice, and vice versa."
-	  ],
-	  "rejection": {
-	      "title": "Rejecting O = U_O requires a single shared universe accessible to all observers.",
-	      "text": "Rejecting this requires that there exists a single global U that all observers inhabit equally — a view from nowhere. But C5 establishes that each observer's universe is encoded within them. Two observers with different bitstrings therefore have different universes. A single shared U would require all observers to have identical bitstrings — contradicting the existence of distinct observers.",
-	  "contradiction": "C5: U_O ⊂ O for every observer O.\n¬(O = U_O): requires a single global U independent of any observer.\nBut a global U independent of observers cannot be accessed, experienced, or verified by any observer — it would be permanently outside every U_O.\nSuch a U is indistinguishable from non-existence. It contradicts Axiom A4 (no magic) and the foundational principle 'I am'."
-	  }
-	}
+        {
+          "id": "C6",
+          "title": "Every observer is identical to their own universe. O = U_O.",
+          "statement": "From Alice's perspective, A = U_Alice. From Bob's perspective, B = U_Bob. These are different objects. There is no single shared universe — only observer-relative universes that partially overlap. Alice appears in U_Bob as a sub-structure. Bob appears in U_Alice as a sub-structure. Neither is the 'real' universe. There is no view from nowhere.",
+          "derivation": [
+            "Naive observation: Alice ⊂ U_Alice (Alice is part of her universe)",
+            "C5: U_Alice ⊂ Alice (Alice's universe is encoded within her)",
+            "Set theory: A ⊂ B and B ⊂ A implies A = B",
+            "∴ Alice = U_Alice. But U_Alice ≠ U_Bob — each observer defines their own universe.",
+            "→ U_Alice ∩ U_Bob is the shared structure: what Alice and Bob can verify together",
+            "∴ For every observer O: O = U_O. Part of Bob is always outside Alice, and vice versa."
+          ],
+          "rejection": {
+            "title": "Rejecting O = U_O requires a single shared universe accessible to all observers.",
+            "text": "Rejecting this requires that there exists a single global U that all observers inhabit equally — a view from nowhere. But C5 establishes that each observer's universe is encoded within them. Two observers with different bitstrings therefore have different universes. A single shared U would require all observers to have identical bitstrings — contradicting the existence of distinct observers.",
+            "contradiction": "C5: U_O ⊂ O for every observer O.\n¬(O = U_O): requires a single global U independent of any observer.\nBut a global U independent of observers cannot be accessed, experienced, or verified by any observer — it would be permanently outside every U_O.\nSuch a U is indistinguishable from non-existence. It contradicts Axiom A4 (no magic) and the foundational principle 'I am'."
+          }
+        }
       ],
       "conclusion": {
         "title": "The full picture.",
@@ -233,11 +233,11 @@
           "The same information admits 2ⁿ configurations. Most describe nothing coherent. Some describe other observers.",
           "Alice does not receive information from outside. She discovers structure already encoded within her as she moves through her configurations.",
           "Alice is not a small observer inside a vast universe. The vast universe she experiences is her interior. She contains it.",
-            "The observer and the universe are identical. For each O, O = U_O. Any structure permanently unreachable by any observer does not exist in any meaningful sense."
+          "The observer and the universe are identical. For each O, O = U_O. Any structure permanently unreachable by any observer does not exist in any meaningful sense."
         ]
       }
     },
-      {
+    {
       "id": "full-theory-axioms",
       "title": "The Full Informational Framework",
       "subtitle": "A synthesis of the Internal Emergence Principle with Compression, Interpretation, and Qualia. At each node, accept or reject the premise.",
@@ -247,20 +247,20 @@
       "nodes": [
         {
           "id": "FT1",
-          "title": "Raw information is semantically silent (SIIP).",
+          "title": "Raw information is semantically silent.",
           "statement": "A finite bitstring or configuration in the static totality U has no intrinsic meaning, semantics, computation, or preferred interpretation. All meaning arises internally via interpretive mappings chosen by sub-structures.",
           "reasoning": "Direct consequence of representational equivalence, code-as-data, and interpretive explosion. Consistent with IEP static ontology and A4 (no magic).",
           "rejection": {
             "title": "You posit intrinsic semantics.",
-            "text": "This requires explaining how raw configurations possess built-in meaning without an external interpreter, contradicting semantic nakedness and SIIP.",
+            "text": "This requires explaining how raw configurations possess built-in meaning without an external interpreter, contradicting semantic nakedness.",
             "commitment": "To identify the source of intrinsic semantics consistent with a static, self-contained totality."
           }
         },
         {
           "id": "FT2",
           "title": "Observers are compressible equivalence classes minimizing total description length.",
-          "statement": "An observer (Alice) is a finite structural pattern (equivalence class under interpretive transformations) that maximizes existence probability by minimizing combined spectral + geometric complexity C_total = C_s + C_g.",
-          "reasoning": "From Observer Filter, joint compressibility equation P_joint = 2^-(C_s + C_g), and Solomonoff-like suppression. Shorter, invariant descriptions dominate measure.",
+          "statement": "An observer is a finite structural pattern that maximizes existence probability by minimizing combined spectral and geometric complexity: C_total = C_s + C_g. Shorter, invariant descriptions dominate the measure.",
+          "reasoning": "From the joint compressibility equation P_joint = 2^-(C_s + C_g) and Solomonoff-like suppression. Configurations with shorter descriptions have exponentially more representations in configuration space and therefore dominate the count.",
           "rejection": {
             "title": "You reject measure concentration on compressibility.",
             "text": "This requires arguing why high-description-length or chaotic structures would not be exponentially suppressed for observers.",
@@ -269,41 +269,41 @@
         },
         {
           "id": "FT3",
-          "title": "Dual compression (spectral + geometric) emerges naturally.",
-          "statement": "Quantum wavefunctions (spectral) and spacetime geometry (geometric) are complementary compression schemes selected because they jointly minimize total description length for structures hosting persistent observers.",
-          "reasoning": "Spectral for relational smoothness and micro-prediction; geometric for locality, boundaries, and identity. Explains D-ψ-G trinity and simulation results.",
+          "title": "Dual compression — spectral and geometric — emerges naturally, and is conjectured to unify into a single spectral action.",
+          "statement": "Quantum wavefunctions (spectral) and spacetime geometry (geometric) are complementary compression schemes jointly minimizing total description length. They are conjectured to be the high-frequency and low-frequency limits of a single spectral functional built from the Dirac operator D: L_info = Tr(f(D/Λ)). The Dirac operator wins the measure because it is the unique minimum-description-length encoding of spin geometry — not because it is chosen, but because its description is the shortest.",
+          "reasoning": "Spectral compression handles relational smoothness and wave-like behaviour (QM). Geometric compression handles locality, boundaries, and identity (GR). The Lichnerowicz formula D² = Δ + R/4 shows curvature is already encoded in the Dirac spectrum. Expanding Tr(f(D/Λ)) in powers of the cutoff recovers the Einstein-Hilbert action at low modes and wave behaviour at high modes. The conjecture is that the two-term split C_s + C_g is a scale decomposition of this single object.",
           "rejection": {
-            "title": "You reject dual compression.",
-            "text": "This requires showing either a single compression scheme suffices for finite observers or that waves/geometry do not minimize description length.",
-            "commitment": "To propose an alternative architecture that better supports stable observers."
+            "title": "You reject dual compression or the Dirac unification.",
+            "text": "Rejecting dual compression requires showing a single scheme suffices for finite observers, or that waves and geometry do not minimize description length. Rejecting the Dirac conjecture specifically requires identifying a shorter description of spin geometry under the induced measure, or showing the spectral action does not decompose into C_s + C_g at the appropriate scales.",
+            "commitment": "To propose an alternative architecture that better supports stable observers, or to provide a mathematical counterexample to the Dirac minimality claim."
           }
         },
         {
           "id": "FT4",
-          "title": "Qualia operate at the interpretive/heuristic layer.",
-          "statement": "The full spectrum of qualia (pain, joy, intuition, etc.) is the first-person, phenomenological signature of the heuristic filter navigating the interpretive landscape toward highly compressible, stable structures. Logical reasoning is the complementary symbolic axis.",
-          "reasoning": "Qualia are what it feels like to be a highly probable, compressible Alice. They provide steering (aversion/attraction) in the vast interpretive space, enabling finite observers to find high-measure paths without exhaustive search. Consistent with A6 (causal effects) at the interpretive level.",
+          "title": "Qualia operate at the interpretive and heuristic layer.",
+          "statement": "The full spectrum of qualia — pain, joy, intuition — is the first-person phenomenological signature of the observer functional navigating the interpretive landscape toward highly compressible, stable structures. They are what it feels like to be a highly probable, compressible observer.",
+          "reasoning": "Qualia provide steering in the vast interpretive space, enabling finite observers to find high-measure paths without exhaustive search. Consistent with A6 (causal effects) at the interpretive level.",
           "rejection": {
             "title": "You treat qualia as epiphenomenal or extra-metaphysical.",
-            "text": "This reintroduces the hard problem inside the mathematical slice or violates internal containment. Qualia must have functional role in measure selection.",
-            "commitment": "To explain how observers find compressible structures without heuristic/phenomenological guidance."
+            "text": "This reintroduces the hard problem or violates internal containment. Qualia must have a functional role in measure selection.",
+            "commitment": "To explain how observers find compressible structures without heuristic or phenomenological guidance."
           }
         },
         {
           "id": "FT5",
-          "title": "The ontology is minimally agnostic (Undefined U → finite observers).",
-          "statement": "The ultimate substrate is an unrestricted totality U about which we remain agnostic (neither strictly finite, digital, nor informational a priori). Finite observers induce discreteness, information, and structure via boundary conditions and compression.",
-          "reasoning": "Guitar-string analogy + observer constraint. Avoids arbitrary finite bounds while anchoring in direct experience (A1, A2).",
+          "title": "The ontology is minimally agnostic.",
+          "statement": "The ultimate substrate is an unrestricted totality U about which we remain agnostic — neither strictly finite, digital, nor informational a priori. Finite observers induce discreteness, information, and structure via boundary conditions and compression.",
+          "reasoning": "Like a guitar string: discreteness emerges from boundary conditions imposed on a continuous medium, not because discreteness is ontologically primitive. Avoids arbitrary finite bounds while anchoring in direct experience (A1, A2).",
           "rejection": {
             "title": "You demand a fully specified ontology.",
-            "text": "This risks introducing untestable commitments (e.g., strict digitalism) that go beyond what finite observers can verify.",
+            "text": "This risks introducing untestable commitments — strict digitalism, for example — that go beyond what finite observers can verify.",
             "commitment": "To justify a stronger ontological claim consistent with all prior axioms."
           }
         }
       ],
       "conclusion": {
         "title": "The Full Framework Follows.",
-        "statement": "Consciousness emerges as compressible, self-interpreting structures within a static, semantically silent totality. Measure concentrates on minimal joint spectral-geometric description length. Qualia are the internal steering mechanism guiding observers toward these high-probability configurations. Smooth physics, laws, time, and mathematics are expected outcomes of this optimization."
+        "statement": "Consciousness emerges as compressible, self-interpreting structures within a static, semantically silent totality. Measure concentrates on minimal joint spectral-geometric description length, conjectured to reduce to a single Dirac spectral action. Qualia are the internal steering mechanism. Smooth physics, laws, time, and mathematics are expected outcomes of this optimisation."
       }
     },
     {
@@ -314,59 +314,393 @@
       "prerequisite": "full-theory-axioms",
       "type": "conclusions",
       "nodes": [
-	  {
-	      "id": "FTC1",
-	      "title": "Boltzmann brains and chaotic fluctuations are exponentially suppressed.",
-	      "statement": "Raw high-entropy noise and transient fluctuations have high total description length and are disfavored by the joint compressibility measure. Typical observers inhabit low-initial-entropy, entropy-gradient trajectories with stable D-ψ-G structure.",
-	      "derivation": ["FT2 + FT3 + spectral/geometric filters"],
-	      "rejection": {
-		  "title": "You claim Boltzmann brains dominate.",
-		  "text": "This contradicts measure concentration on compressible structures and simulation results with the observer filter applied."
-	      }
-	  },
-	  {
-	      "id": "FTC2",
-	      "title": "Physical laws and mathematics are discovered invariants.",
-	      "statement": "Laws and mathematics emerge as stable relational invariants within the high-measure compressible slices that observers self-locate into. Wigner's unreasonable effectiveness follows because observers are built from the same unified building blocks.",
-	      "derivation": ["FT2 + FT3 + SIIP"],
-	      "rejection": {
-		  "title": "You reject emergent laws.",
-		  "text": "This requires explaining strong cross-observer consistency and predictive power without shared compressible invariants."
-	      }
-	  },
-	  {
-	      "id": "FTC3",
-	      "title": "Qualia have functional, non-epiphenomenal roles.",
-	      "statement": "Qualia serve as the heuristic navigation system in interpretive space, steering finite observers toward compressible configurations. They are what it feels like to be a highly probable Alice.",
-	      "derivation": ["FT4 + observer functionals μ_O"],
-	      "rejection": {
-		  "title": "You claim qualia are purely epiphenomenal.",
-		  "text": "This leaves unexplained how finite observers efficiently find high-measure structures in an exponentially large interpretive space."
-	      }
-	  },
-	  {
-	      "id": "FTC4",
-	      "title": "The experienced universe is observer-relative and self-contained.",
-	      "statement": "Each observer O = U_O (per IEP C6), with overlaps enforcing shared compressible physics. No external signals or view-from-nowhere exists.",
-	      "derivation": ["IEP conclusions + FT1–FT5"],
-	      "rejection": {
-		  "title": "You posit a single shared external universe.",
-		  "text": "This contradicts internal containment and semantic silence."
-	      }
-	  }
+        {
+          "id": "FTC1",
+          "title": "Boltzmann brains and chaotic fluctuations are exponentially suppressed.",
+          "statement": "Raw high-entropy noise and transient fluctuations have high total description length and are disfavoured by the joint compressibility measure. Typical observers inhabit low-initial-entropy trajectories with stable spectral-geometric structure. The zero-entropy initial state is not improbable — it is the unique, maximally compressible starting point, and the richness of the universe that emerges from it is generic, not fine-tuned.",
+          "derivation": [
+            "FT2 + FT3: measure concentrates on compressible structures",
+            "→ High-entropy fluctuations are exponentially suppressed",
+            "→ The zero-entropy state has the shortest possible description — it dominates the measure as a starting point",
+            "→ Simulation confirms: beginning from zero entropy and increasing entropy generates rich structure without fine-tuning",
+            "∴ Boltzmann brains are suppressed. A smooth beginning is expected, not accidental."
+          ],
+          "rejection": {
+            "title": "You claim Boltzmann brains dominate.",
+            "text": "This contradicts measure concentration on compressible structures. It also conflicts with the simulation result that a perfectly smooth zero-entropy initial state generically produces hierarchical structure — making the smooth beginning the natural expectation, not a fine-tuned accident.",
+            "contradiction": "FT2: measure ∝ 2^(-C_total), exponentially favouring short descriptions.\nBoltzmann brains require high-entropy fluctuations with long descriptions.\nThese cannot both dominate."
+          }
+        },
+        {
+          "id": "FTC2",
+          "title": "Physical laws and mathematics are discovered invariants.",
+          "statement": "Laws and mathematics emerge as stable relational invariants within the high-measure compressible slices that observers self-locate into. Wigner's unreasonable effectiveness of mathematics follows because observers and the mathematics they discover are carved from the same compressible structure.",
+          "derivation": [
+            "FT2 + FT3: observers inhabit compressible structures",
+            "→ Stable invariants of those structures are what observers call physical laws",
+            "→ Mathematics is the study of compressible relational structure — the same structure observers are made of",
+            "∴ The effectiveness of mathematics is not unreasonable. It is expected."
+          ],
+          "rejection": {
+            "title": "You reject emergent laws.",
+            "text": "This requires explaining the strong cross-observer consistency and predictive power of physical laws without shared compressible invariants.",
+            "contradiction": "FT2: observers self-locate in compressible structures.\n¬FTC2: laws are not invariants of those structures.\nBut if laws are not invariants of the structures observers inhabit, different observers would find different laws — contradicting observed universality."
+          }
+        },
+        {
+          "id": "FTC3",
+          "title": "Qualia have functional, non-epiphenomenal roles.",
+          "statement": "Qualia serve as the heuristic navigation system in interpretive space, steering finite observers toward compressible configurations. They are what it feels like to be a highly probable observer.",
+          "derivation": [
+            "FT4: qualia are the phenomenological signature of the observer functional",
+            "→ They guide navigation toward high-measure paths without exhaustive search",
+            "∴ Qualia are causally efficacious in measure selection — not epiphenomenal."
+          ],
+          "rejection": {
+            "title": "You claim qualia are purely epiphenomenal.",
+            "text": "This leaves unexplained how finite observers efficiently find high-measure structures in an exponentially large interpretive space — and contradicts Axiom A6.",
+            "contradiction": "A6: pain has measurable causal effects.\n¬FTC3: qualia are epiphenomenal.\nThese are directly contradictory."
+          }
+        },
+        {
+          "id": "FTC4",
+          "title": "The experienced universe is observer-relative and self-contained.",
+          "statement": "Each observer O = U_O, with overlaps between observers enforcing shared compressible physics. No external signals or view-from-nowhere exists.",
+          "derivation": [
+            "IEP conclusions C5 and C6: O = U_O",
+            "FT1: raw information is semantically silent — no external authority assigns meaning",
+            "→ Shared physics is the intersection of observer universes, not an external ground truth",
+            "∴ The experienced universe is observer-relative and self-contained."
+          ],
+          "rejection": {
+            "title": "You posit a single shared external universe.",
+            "text": "This contradicts internal containment (C5) and semantic silence (FT1). A universe external to all observers cannot be experienced by any observer and is indistinguishable from non-existence.",
+            "contradiction": "C5: U_O ⊂ O for every observer.\n¬FTC4: a single global U exists outside all observers.\nNothing outside all U_O can be observed, verified, or distinguished from non-existence."
+          }
+        }
       ],
-	"conclusion": {
-	    "title": "The Complete Picture",
-	    "items": [
-		"Reality is an unrestricted static totality U containing all configurations.",
-		"Finite observers self-locate in highly compressible structures via dual spectral-geometric compression.",
-		"Qualia are the felt heuristic guidance toward these structures.",
-		"Smooth physics, laws, time, and mathematics are high-measure, expected outcomes — not fine-tuned miracles.",
-		"The framework resolves the measure problem, Boltzmann brains, simulation chaos, and gives qualia a natural functional role without magic."
-	    ]
-	}
+      "conclusion": {
+        "title": "The Complete Picture",
+        "items": [
+          "Reality is an unrestricted static totality U containing all configurations.",
+          "Finite observers self-locate in highly compressible structures via dual spectral-geometric compression.",
+          "Qualia are the felt heuristic guidance toward these structures.",
+          "Smooth physics, laws, time, and mathematics are high-measure expected outcomes — not fine-tuned miracles.",
+          "The framework resolves the measure problem, Boltzmann brains, and the hard problem of consciousness, and gives qualia a natural functional role without magic."
+        ]
+      }
+    },
+    {
+      "id": "singularities",
+      "title": "Black Hole Singularities as Zero-Entropy States",
+      "subtitle": "What happens to information when spacetime collapses? The geometric description fails — but the execution trace does not.",
+      "tag": "Derived Result · Paper II",
+      "prerequisite": {
+        "label": "Starting point",
+        "text": "A computer running a simulation and the simulation itself are two arrangements of the same information (C2). Therefore any property of a physical system must be reflected in the execution trace of its simulation — including properties that are geometrically inaccessible."
+      },
+      "type": "conclusions",
+      "nodes": [
+        {
+          "id": "S1",
+          "title": "The execution trace is a faithful proxy for the geometry.",
+          "statement": "By the representational equivalence of Paper 0 (C2), the geometric description of a physical process and the execution trace of its simulation are two representations of the same information. When the geometric description fails — as it does at a gravitational singularity — the execution trace remains well-defined and continues to encode information about the process.",
+          "derivation": [
+            "C2: computer and simulation are two arrangements of the same information",
+            "→ Every property of the physical system is reflected in the execution trace",
+            "→ Properties geometrically inaccessible (singularity, manifold breakdown) are accessible informationally",
+            "∴ The execution trace is a valid proxy even where GR fails."
+          ],
+          "rejection": {
+            "title": "You reject representational equivalence.",
+            "text": "This requires rejecting C2 — that the computer and simulation are two arrangements of the same information. See the IEP conclusions survey for the full argument.",
+            "commitment": "To identify what makes the geometric description privileged over the computational one, given that both encode the same physical process."
+          }
+        },
+        {
+          "id": "S2",
+          "title": "The Shannon entropy of the execution trace decreases monotonically during gravitational collapse.",
+          "statement": "Numerical simulation of both Schwarzschild and Kerr black holes shows that the Shannon entropy of the bitstring sub-trace — the part encoding spatial geometry — decreases monotonically as particles fall toward the singularity. This is an empirical result, verified across both geometries and independent of the simulation architecture.",
+          "derivation": [
+            "Simulate gravitational collapse (Schwarzschild and Kerr)",
+            "Encode spatial geometry as bitstring at each timestep",
+            "Compute Shannon entropy H(b_t) = -p_0 log p_0 - p_1 log p_1",
+            "→ H decreases monotonically throughout collapse in both geometries",
+            "∴ The approach to singularity is an approach to lower informational variety."
+          ],
+          "rejection": {
+            "title": "You dispute the empirical result.",
+            "text": "This is an empirical claim subject to verification. The simulation code is available in the supplementary material. The result has been confirmed for both non-rotating (Schwarzschild) and rotating (Kerr) geometries, and is independent of the discretisation scheme used.",
+            "commitment": "To run the simulation and identify a regime in which entropy increases during collapse, or to identify a flaw in the encoding procedure."
+          }
+        },
+        {
+          "id": "S3",
+          "title": "The singularity corresponds to a zero-entropy state.",
+          "statement": "Extrapolating the monotonically decreasing entropy trajectory to the classical singularity yields zero entropy at the endpoint. The extrapolation is stable over the final decade of the simulated entropy range and consistent across both geometries.",
+          "derivation": [
+            "S2: entropy decreases monotonically during collapse",
+            "→ Extrapolation to singularity yields H → 0",
+            "→ Result is geometry-independent (same for Schwarzschild and Kerr)",
+            "∴ The singularity is an informational state of zero internal variety."
+          ],
+          "rejection": {
+            "title": "You dispute the extrapolation.",
+            "text": "The extrapolation step is the one place where empirical uncertainty exists — the simulation crashes before the singularity forms. The entropy trend must be extrapolated. The claim is that this trend is sufficiently stable and consistent across geometries to support the zero-entropy conclusion. Rejecting it requires identifying an inflection or plateau in the entropy curve that would change the extrapolated endpoint.",
+            "commitment": "To identify a functional form for the entropy trajectory that is consistent with the simulated data but extrapolates to a non-zero endpoint."
+          }
+        },
+        {
+          "id": "S4",
+          "title": "A zero-entropy state cannot support microstructure, matter, or distinguishable geometry.",
+          "statement": "A zero-entropy bitstring has no internal variety — it is a constant string. Take any mapping to interpret it geometrically, and the result is always the same: a single point of zero size. There is no way to interpret a zero-entropy bitstring as anything other than a singular point. It cannot encode particles, microstructures, or stress-energy.",
+          "derivation": [
+            "S3: the singularity corresponds to zero entropy",
+            "→ A zero-entropy bitstring is a constant string — only one possible state",
+            "→ No mapping can extract variety that is not present in the source",
+            "→ Any geometric decoding of a zero-entropy source yields a structureless point",
+            "∴ No microstructure, no matter, no stress-energy exists at the singularity."
+          ],
+          "rejection": {
+            "title": "You claim a zero-entropy bitstring can encode structure.",
+            "text": "This requires identifying a mapping that extracts variety from a source with none. The argument is not about the map — it is about the source. A zero-entropy bitstring carries exactly one state regardless of how it is decoded. No mapping adds information that was not in the input.",
+            "commitment": "To identify a decoding procedure that produces distinguishable geometric configurations from a constant bitstring — which would require the map itself to supply the missing information, contradicting the definition of a lossless geometric interpretation."
+          }
+        },
+        {
+          "id": "S5",
+          "title": "The singularity is not where physics breaks down. It is where physics becomes trivially simple.",
+          "statement": "Standard GR treats the singularity as a catastrophic breakdown of the manifold description. In the informational view, the singularity is the simplest possible state: zero entropy, one configuration, no microstructure, no particles, no stress-energy. Physics does not break down there — it becomes trivial. The probability of physical trajectories reaching the singularity is zero: there is nothing there to arrive at.",
+          "derivation": [
+            "S4: the singularity has no microstructure or matter",
+            "→ No stress-energy source is present at the singularity",
+            "→ The compression measure assigns zero weight to paths terminating in a structureless state",
+            "→ The geometric 'breakdown' reflects the absence of information to describe, not a physical catastrophe",
+            "∴ The singularity is an informational fixed point of zero complexity — physically trivial, not pathological."
+          ],
+          "rejection": {
+            "title": "You maintain that the singularity is a genuine physical catastrophe.",
+            "text": "This requires identifying what physical quantity diverges at the singularity in a way that is not an artefact of the coordinate or manifold description. The informational view predicts that any such divergence is a description failure, not a physical one — and that the execution trace, which remains well-behaved, is the more faithful representation.",
+            "commitment": "To identify a physically measurable quantity (not a coordinate artefact) that diverges at the singularity, and to explain why the execution trace does not reflect this divergence."
+          }
+        },
+        {
+          "id": "S6",
+          "title": "Microstructure emergence near the singularity follows a universal lognormal distribution.",
+          "statement": "When structural filters are applied to the execution trace as a function of radial distance from the singularity, the probability of microstructure emergence consistently takes a lognormal shape: zero at the singularity, a peak at an intermediate radius, and a long tail at large distances. This profile is independent of the filter definition, the geometry (Schwarzschild or Kerr), and the representational level of the analysis — including filters applied to the execution trace of the host computer itself.",
+          "derivation": [
+            "Apply hierarchical structural filters to execution trace at each radial depth",
+            "→ Structure probability is zero at singularity (consistent with S4)",
+            "→ Structure probability peaks at intermediate radius",
+            "→ Structure probability decays with long tail at large radii",
+            "→ Shape is lognormal, independent of filter and geometry",
+            "∴ The lognormal is an intrinsic property of entropy-varying bitstrings, not of any particular physical model."
+          ],
+          "rejection": {
+            "title": "You dispute the universality of the lognormal.",
+            "text": "The universality claim rests on testing across many filters and both geometries. Rejecting it requires identifying a filter or geometry for which the distribution takes a qualitatively different form. The key claim is not that every filter gives the same parameters — it is that every filter gives a lognormal shape.",
+            "commitment": "To identify a structural filter applied to the execution trace that yields a non-lognormal distribution of structure emergence as a function of radial depth."
+          }
+        }
+      ],
+      "conclusion": {
+        "title": "The singularity is an informational fixed point.",
+        "statement": "Gravitational collapse converges to a zero-entropy state incapable of supporting microstructure. The apparent breakdown of GR reflects the absence of information to describe, not a physical catastrophe. The lognormal microstructure distribution connecting the singularity to ordinary distributed matter is a universal property of entropy-varying bitstrings."
+      }
+    },
+    {
+      "id": "expansion",
+      "title": "Spacetime Expansion as Geometric Manifestation of Increasing Entropy",
+      "subtitle": "What does a universe look like when you begin from a perfectly smooth state and increase entropy? The answer is: our universe.",
+      "tag": "Derived Result · Paper III",
+      "prerequisite": {
+        "label": "Starting point",
+        "text": "The singularity corresponds to a zero-entropy state (Paper II). The representational equivalence of Paper 0 licenses the use of entropy-increasing bitstring evolution as a proxy for the forward direction of cosmological time."
+      },
+      "type": "conclusions",
+      "nodes": [
+        {
+          "id": "E1",
+          "title": "The zero-entropy state is the natural starting point.",
+          "statement": "The zero-entropy state — the unique all-zero bitstring — has the shortest possible description of any state in the configuration space. Under the compression measure P(c) ∝ 2^(-C(c)), it is the most probable starting point. A smooth beginning is not a fine-tuned accident. It is the expected outcome.",
+          "derivation": [
+            "FT2: measure concentrates on compressible structures",
+            "→ The zero-entropy state has the shortest description of any configuration",
+            "→ It dominates the measure as an initial state",
+            "∴ A smooth beginning is expected. No fine-tuning required."
+          ],
+          "rejection": {
+            "title": "You claim the initial state requires fine-tuning or imposed irregularities.",
+            "text": "This is the standard cosmological assumption — including Penrose's Weyl curvature hypothesis, which requires the initial state to be smooth only within quantum limits, not perfectly smooth. The present framework is stronger: a perfectly smooth zero-entropy initial state is the natural expectation under the compression measure, not a lucky accident.",
+            "commitment": "To explain why the compression measure would not select the zero-entropy state as the most probable starting point, given that it has the shortest description of any configuration."
+          }
+        },
+        {
+          "id": "E2",
+          "title": "Entropy increase drives spatial expansion.",
+          "statement": "Beginning from the zero-entropy all-zero bitstring and increasing entropy through bit-flip mutations, the decoded spatial extent grows exponentially. The zero-entropy state decodes to a single point; increasing entropy produces increasingly extended spatial configurations. Cosmic expansion is the geometric interpretation of entropy increase — two descriptions of the same monotone process.",
+          "derivation": [
+            "Begin from zero-entropy state (single point)",
+            "Increase entropy via bit-flip mutations",
+            "Decode each state geometrically",
+            "→ Decoded spatial extent grows exponentially with entropy",
+            "∴ Expansion is not a dynamical process imposed on space. It is what entropy increase looks like when read geometrically."
+          ],
+          "rejection": {
+            "title": "You claim expansion and entropy increase are independent phenomena.",
+            "text": "The simulation demonstrates that they are the same phenomenon seen through different descriptions. Rejecting this requires identifying a regime in which entropy increases without spatial expansion, or spatial expansion occurs without entropy increase, under the same geometric decoding.",
+            "commitment": "To identify an entropy trajectory that does not produce spatial expansion under geometric decoding, or to propose a decoding scheme under which the two are genuinely independent."
+          }
+        },
+        {
+          "id": "E3",
+          "title": "The arrow of time, entropy increase, and cosmic expansion are one phenomenon.",
+          "statement": "These are not three correlated features of the observed world. They are one feature: the monotonic increase of informational entropy, which reads as temporal succession from the observer's internal perspective, as expansion from the geometric perspective, and as entropy increase from the thermodynamic perspective.",
+          "derivation": [
+            "C1: time is an internal ordinal index over observer configurations",
+            "E2: spatial expansion is the geometric reading of entropy increase",
+            "→ The direction of time (the arrow) corresponds to the direction of entropy increase",
+            "→ Expansion is the geometric face of the same monotone process",
+            "∴ Three apparent phenomena, one underlying fact."
+          ],
+          "rejection": {
+            "title": "You claim the arrow of time is independent of entropy increase or expansion.",
+            "text": "This requires identifying a physical scenario in which the arrow of time points in the direction of decreasing entropy, or in which expansion proceeds independently of the internal time ordering of observer configurations.",
+            "commitment": "To provide a counterexample or a theoretical framework in which the three phenomena are genuinely independent."
+          }
+        },
+        {
+          "id": "E4",
+          "title": "Hierarchical particle-like structures emerge spontaneously from entropy increase.",
+          "statement": "As entropy increases from zero, hierarchical structures emerge: elementary particles first, then composite structures, then higher-order objects. Their abundance at each entropy level follows a lognormal distribution. No physical laws, equations of motion, or particle definitions are hard-coded. The structures emerge from the combinatorial properties of entropy-increasing bitstrings alone.",
+          "derivation": [
+            "Begin from zero-entropy state",
+            "Increase entropy",
+            "Apply structural filters (geometric or purely combinatorial)",
+            "→ Structures emerge at intermediate entropy levels",
+            "→ Abundance follows lognormal distribution",
+            "→ Higher-order structures peak at higher entropy than lower-order ones",
+            "∴ Particle hierarchy is a generic combinatorial phenomenon, not a fine-tuned physical fact."
+          ],
+          "rejection": {
+            "title": "You claim particle emergence requires hard-coded physical laws.",
+            "text": "The simulation demonstrates emergence without hard-coded laws. Rejecting this requires identifying which aspect of the emergent behaviour depends on an implicit physical assumption in the simulation setup — not in the filter definitions, which are deliberately arbitrary.",
+            "commitment": "To identify the hidden physical assumption in the simulation that produces hierarchical emergence, and to show that removing it eliminates the result."
+          }
+        },
+        {
+          "id": "E5",
+          "title": "The lognormal emergence profile is universal — independent of filter, geometry, and representational level.",
+          "statement": "The lognormal shape of the structure abundance curve is preserved across more than two hundred filter definitions, geometric decoding schemes, and representational levels — including purely combinatorial pattern-matching on the raw bitstring with no geometric embedding, and including filters applied to the execution trace of the host computer running the simulation. The lognormal is an intrinsic property of entropy-increasing bitstrings.",
+          "derivation": [
+            "Test geometric filters with varying thresholds and hierarchy definitions",
+            "Test recursive combinatorial pattern-matching with no geometric embedding",
+            "Test arbitrary pattern counting (e.g. count occurrences of '010110100010')",
+            "Test filters applied to host computer execution trace",
+            "→ All yield lognormal abundance curves",
+            "∴ The lognormal is not a property of any particular physical model. It is a combinatorial universal."
+          ],
+          "rejection": {
+            "title": "You dispute the universality across filters.",
+            "text": "This is an empirical claim. Rejecting it requires identifying a structural filter that yields a qualitatively different distribution — not a different lognormal shape, but a distribution of a different functional form entirely.",
+            "commitment": "To construct and test a structural filter on an entropy-increasing bitstring that yields a non-lognormal abundance distribution."
+          }
+        },
+        {
+          "id": "E6",
+          "title": "A rich, structured universe can emerge from a perfectly smooth initial state.",
+          "statement": "Penrose's Weyl curvature hypothesis requires the initial state to be smooth only within quantum limits — some residual irregularity is assumed necessary. The present result is stronger: starting from a perfectly zero-entropy state, with no imposed irregularities of any kind, the entropy-increasing process generically produces spatial expansion, hierarchical structure, and lognormal abundance distributions. No fine-tuning is required at any stage.",
+          "derivation": [
+            "E1: zero-entropy initial state is natural under compression measure",
+            "E2: entropy increase drives expansion",
+            "E4: hierarchical structures emerge from entropy increase alone",
+            "E5: the lognormal is universal",
+            "∴ A perfectly smooth beginning generically produces a rich universe. Residual quantum irregularities are not required."
+          ],
+          "rejection": {
+            "title": "You claim some initial irregularity is necessary.",
+            "text": "This is the standard cosmological position. The present result directly challenges it. Rejecting it requires identifying a feature of the observed universe that cannot emerge from a zero-entropy initial state — a structure or property that requires pre-existing irregularity to form.",
+            "commitment": "To identify a specific observable feature of the universe that the zero-entropy emergence model cannot reproduce."
+          }
+        }
+      ],
+      "conclusion": {
+        "title": "Expansion and structure are entropy, geometrically read.",
+        "statement": "Cosmic expansion, the arrow of time, and the emergence of hierarchical matter are not three independent features of the universe. They are one phenomenon — increasing informational entropy — seen through three different lenses. A perfectly smooth initial state generically produces a rich universe. No fine-tuning, no imposed irregularities, no hard-coded laws."
+      }
+    },
+    {
+      "id": "dirac-conjecture",
+      "title": "The Dirac Spectral Unification Conjecture",
+      "subtitle": "Can the two compression measures — spectral and geometric — be unified into a single object? The conjecture says yes: they are two frequency regimes of one spectral action.",
+      "tag": "Open Conjecture · Mathematical Physics",
+      "prerequisite": {
+        "label": "Starting point",
+        "text": "The informational Lagrangian L_info = C_s + C_g selects observer-compatible configurations. The question is whether this two-term sum is primitive, or the scale decomposition of a single deeper object."
+      },
+      "type": "axioms",
+      "nodes": [
+        {
+          "id": "D1",
+          "title": "Geometry is spectral.",
+          "statement": "The spectrum of the Laplace-Beltrami operator on a compact Riemannian manifold encodes its geometry: volume, curvature invariants, and topological features are all recoverable from the eigenvalue spectrum. In this sense, geometry is already a spectral object — the two descriptions are faces of the same structure.",
+          "reasoning": "Standard result in spectral geometry (Weyl's law, heat kernel expansion). The question 'Can you hear the shape of a drum?' (Kac, 1966) establishes that spectral and geometric descriptions are deeply connected.",
+          "rejection": {
+            "title": "You claim geometry and spectra are independent.",
+            "text": "This contradicts the established results of spectral geometry. The heat kernel expansion of the Laplacian on a Riemannian manifold has coefficients that are precisely the geometric invariants of the manifold. Rejecting this requires a mathematical counterexample.",
+            "commitment": "To identify a geometric property of a compact Riemannian manifold that is not encoded in the spectrum of its Laplacian."
+          }
+        },
+        {
+          "id": "D2",
+          "title": "The Dirac operator is the minimal sufficient encoder of spin geometry.",
+          "statement": "The Dirac operator D is the unique first-order, self-adjoint differential operator that encodes the full spin geometry of a Riemannian manifold. Its square recovers the Laplacian plus a curvature correction: D² = Δ + R/4 (Lichnerowicz formula). It is the minimal sufficient statistic for the full geometry including orientation — no simpler operator captures all the same information.",
+          "reasoning": "The Lichnerowicz formula shows curvature is encoded directly in the Dirac spectrum. Any operator that encodes less information requires additional structure to recover the full geometry, increasing description length. Any operator that is equivalent to D up to gauge transformation produces the same spectral action.",
+          "rejection": {
+            "title": "You claim another operator encodes spin geometry with equal or shorter description.",
+            "text": "This requires identifying an operator that encodes the full Riemannian spin geometry — metric, orientation, curvature — with a shorter description than D. The Lichnerowicz formula establishes that D² already contains R directly. Any competitor must match this without additional structure.",
+            "commitment": "To identify a first-order operator that encodes the full spin geometry of a Riemannian manifold with strictly shorter description length than D."
+          }
+        },
+        {
+          "id": "D3",
+          "title": "The Dirac spectral action expands into Einstein-Hilbert at low modes.",
+          "statement": "Connes' spectral action Tr(f(D/Λ)) — the trace of a cutoff function of the Dirac operator — when expanded in powers of Λ⁻¹ using heat kernel methods, recovers the Einstein-Hilbert action of general relativity at leading order. Higher-order terms reproduce gauge and matter field actions. This is an established mathematical result, not a conjecture.",
+          "reasoning": "Proved by Chamseddine and Connes (1997). The low-mode (infrared) content of the Dirac spectrum encodes the large-scale geometry, and the spectral action functional extracts this as the gravitational action.",
+          "rejection": {
+            "title": "You dispute the Chamseddine-Connes result.",
+            "text": "This is an established mathematical theorem. Rejecting it requires identifying a mathematical error in the heat kernel expansion of Tr(f(D/Λ)). The result has been verified independently multiple times.",
+            "commitment": "To identify a step in the heat kernel expansion of the spectral action where the Einstein-Hilbert term fails to appear."
+          }
+        },
+        {
+          "id": "D4",
+          "title": "The two-term split C_s + C_g is the scale decomposition of Tr(f(D/Λ)).",
+          "statement": "The conjecture is that the geometric complexity C_g corresponds to the low-frequency (infrared) content of the Dirac spectral action, and the spectral complexity C_s corresponds to the high-frequency (ultraviolet) residual. The informational Lagrangian L_info = C_s + C_g is therefore not a primitive two-term sum but the scale decomposition of a single spectral functional: L_info = Tr(f(D/Λ)).",
+          "reasoning": "D3 establishes the low-mode connection to GR. The high-mode content of the Dirac spectrum encodes wave-like, quantum behaviour — the rapidly oscillating modes that generate interference and superposition. The scale decomposition of a single functional into infrared (geometric) and ultraviolet (spectral) parts is a standard operation in quantum field theory.",
+          "rejection": {
+            "title": "You reject the scale decomposition identification.",
+            "text": "This is the conjectural step — it has not been proved. Rejecting it requires either showing that C_g does not match the low-mode expansion of Tr(f(D/Λ)), or that C_s does not match the high-mode residual. This is the primary open mathematical problem of the framework.",
+            "commitment": "To identify a property of C_g or C_s as defined in the IAME framework that is inconsistent with the corresponding frequency regime of the Dirac spectral action."
+          }
+        },
+        {
+          "id": "D5",
+          "title": "The Dirac operator wins the compression measure — not by assumption, but by count.",
+          "statement": "Within the IAME framework, no operator is chosen by hand. Every operator exists within the unrestricted totality. The induced measure P(c) ∝ 2^(-C_total) selects the most compressible description. The Dirac operator wins because it is the shortest description of spin geometry. Configurations described by the Dirac spectral action therefore have the most representations in configuration space — and we find ourselves in one.",
+          "reasoning": "This is the same argument that selects smooth spacetime over chaotic spacetime, orbiting planets over free particles, and periodic wave behaviour over random jitter. In each case, the compressible structure dominates the measure because it has exponentially more representations. The Dirac operator is not postulated — it is counted.",
+          "rejection": {
+            "title": "You claim another operator dominates the count.",
+            "text": "This requires identifying an operator with a shorter description of spin geometry than D, or arguing that D is not the unique minimum under the IAME measure. Combined with D2, which establishes D is the minimal sufficient statistic, this is a demanding position.",
+            "commitment": "To identify either (a) a shorter description of spin geometry than D, or (b) a reason why the minimum-description-length operator would not dominate the configuration count under the IAME measure."
+          }
+        }
+      ],
+      "conclusion": {
+        "title": "The conjecture, stated precisely.",
+        "statement": "The informational Lagrangian L_info = C_s + C_g is conjectured to be the scale decomposition of Tr(f(D/Λ)), where D is the Dirac operator selected by the induced measure as the unique minimum-description-length encoding of spin geometry. If confirmed, quantum mechanics and general relativity are not two theories requiring unification — they are the high-frequency and low-frequency limits of one spectral functional. Verification requires expertise in spectral geometry and noncommutative geometry, and is the primary open mathematical problem of the IAME framework."
+      }
     }
-      
   ]
 }
 

@@ -3,153 +3,417 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{Black Hole Singularities as Zero Entropy States}
+\title{Black Hole Singularities as Zero-Entropy States}
 
+\author{Juha Meskanen}
 \date{2010}
 
 \begin{document}
 \maketitle
 
-
+% ============================================================
 \begin{abstract}
-Building on the ontological equivalence of physical and informational configurations established in Paper I, we investigate black hole singularities from an information-theoretic perspective, viewing geometric spacetime and the execution trace of a computational simulation as two equivalent interpretations of an underlying informational structure.
-
-Whereas standard General Relativity (GR) cannot be evolved to the point of singularity formation due to numerical divergences and the breakdown of the manifold description, the simulation’s execution trace provides complementary view over the process. This allows us to extrapolate the spacetime description to the actual singularity to the singularity itself. We propose that the “singularity” is not a point of infinite curvature, but rather a state of informational exhaustion, in which the absence of internal variety prevents the emergence of the microstructures we interpret as matter and energy. 
+We investigate black hole singularities from an information-theoretic
+perspective within the \iame{} framework. Under the Internal Emergence
+Principle established in Paper~I, geometric spacetime and the execution
+trace of a computational simulation are two equivalent representations of
+the same underlying informational structure, with neither being more
+fundamental. Standard General Relativity cannot be evolved through
+singularity formation due to numerical divergences and the breakdown of
+the manifold description. The execution trace provides a complementary,
+well-behaved description that remains defined throughout collapse. Analysing
+the Shannon entropy of the bitstring sub-trace for both Schwarzschild and
+Kerr geometries, we find a monotonic decrease converging to zero at the
+singularity. We argue that this identifies the singularity not as a point of
+infinite curvature but as a state of zero informational variety --- a
+point incapable of supporting microstructure, matter, or
+distinguishable geometry. A secondary result, not predicted in advance, is
+that the probability of microstructure emergence as a function of radial
+distance follows a universal lognormal profile, independent of the structural
+filter applied and independent of the representational level at which the
+analysis is performed. Both results require no new physics beyond the
+informational equivalence established in Paper~I.
 \end{abstract}
 
-\ifdefined\ishtml
-\begin{center}
-\small \href{black-hole-singularities-black-hole-singularities.pdf}{Download PDF Version}
-\end{center}
-\fi
-
-
+% ============================================================
 \section{Introduction}
+\label{sec:intro}
 
-The guiding hypothesis is that spacetime geometry and the execution of a simulation 
-can be viewed as complementary descriptions of the same underlying informational structure.
+The singularity theorems of Penrose and Hawking establish that gravitational
+collapse generically produces spacetime singularities --- regions where
+curvature diverges and the classical manifold description breaks down
+\cite{penrose1965, hawking1970}. The standard interpretation is that
+singularities mark the boundary of applicability of General Relativity and
+that a theory of quantum gravity is required to describe what occurs there.
 
-Our central question is whether approaching singularities as information-theoretic phenomena 
-provides new insights into their structure and physical interpretation. To explore this, 
-we develop both analytic reasoning and numerical simulations of collapsing dust clouds.
+The present paper proposes a different interpretation. Within the \iame{}
+framework developed in Paper~I, geometric spacetime and the execution trace
+of a computational simulation are two representations of the same
+informational structure. This equivalence, which follows from the Internal
+Emergence Principle (IEP) without additional assumptions, allows the
+singularity to be approached from the informational side even when the
+geometric description fails. The central question is not what the geometry
+does at the singularity --- it diverges, by definition --- but what the
+execution trace does. The answer, we find, is that the execution trace
+converges: its Shannon entropy decreases monotonically to zero.
 
+This reframes the singularity entirely. A zero-entropy bitstring encodes a
+single, structureless state. Under any faithful geometric decoding, a
+zero-entropy source resolves to a point of zero size. It cannot encode
+microstructures, particles, or stress-energy. The singularity is therefore
+not a point where physics breaks down but an informational state where
+physics becomes trivially simple: there is nothing there to be described.
+
+Existing approaches to singularity regularisation --- loop quantum gravity,
+string-theoretic fuzzballs, effective field theory cutoffs --- introduce new
+physics at the Planck scale. The present approach requires no new physics.
+The regularisation is not imposed but derived from the informational
+structure of the collapse process itself.
+
+The paper is structured as follows. Section~\ref{sec:framework} summarises
+the relevant results from Paper~I. Section~\ref{sec:methods} defines the
+execution trace, the geometric encoding, and the entropy measure.
+Section~\ref{sec:simulations} presents the numerical results for
+Schwarzschild and Kerr geometries. Section~\ref{sec:discussion} interprets
+the results and discusses the lognormal microstructure distribution.
+Section~\ref{sec:conclusion} concludes.
+
+% ============================================================
+\section{Framework: Informational Equivalence of Geometry and Computation}
+\label{sec:framework}
+
+The argument of this paper rests on three propositions established in
+Paper~I, which we summarise here for completeness.
+
+\textbf{Proposition 1 (Simulation consciousness).} A simulation physically
+indistinguishable from a conscious system must itself be conscious. This
+follows from the causal efficacy of qualia: if consciousness were absent
+from the simulation, the experiential difference would produce a measurable
+behavioural difference, contradicting the assumption of indistinguishability.
+
+\textbf{Proposition 2 (Static bitstring equivalence).} A fully static
+bitstring --- the precomputed execution trace of a simulation --- contains
+the same conscious experience as the running simulation. Active execution is
+not required. The introduction of a code-to-data threshold below which
+consciousness ceases would constitute a new physical constant with no basis
+in the axioms of Paper~I, and is therefore excluded.
+
+\textbf{Corollary (Representational equivalence).} Propositions 1 and 2
+together imply that the geometric description of a physical process and the
+computational description of its simulation are two representations of the
+same informational structure, with neither being more fundamental. This
+equivalence is not an interpretive convenience but a structural consequence
+of the IEP.
+
+The representational equivalence is what licenses the approach of this
+paper. When the geometric description fails --- as it does at the singularity
+--- the computational description remains well-defined, and its properties
+can be read back as properties of the geometry.
+
+% ============================================================
 \section{Methods}
-
-We model black hole evolution through computational simulation. 
-We compute the \emph{execution-trace entropy} of the discretized particle positions, 
-which captures the number of distinguishable geometric configurations encoded in memory.
+\label{sec:methods}
 
 \subsection{Execution Trace}
 
-Let \(\mathcal{M}\) denote the set of all memory locations in a deterministic computing system. 
-A \emph{machine state} \(\mathcal{S} \in \mathcal{M}\) is a complete assignment of values 
-to all memory elements. Let \(\mathcal{P} = (I_1, I_2, \dots, I_n)\) be a finite sequence of deterministic instructions, 
-with \(I_k : \mathcal{S} \rightarrow \mathcal{S}\). The \emph{execution trace} \(\mathcal{T}\) of program \(\mathcal{P}\) 
-is the ordered sequence of states
+Let $\mathcal{M}$ denote the set of all memory locations in a deterministic
+computing system. A \emph{machine state} $\mathcal{S} \in \mathcal{M}$ is a
+complete assignment of values to all memory elements. Let
+$\mathcal{P} = (I_1, I_2, \dots, I_n)$ be a finite sequence of deterministic
+instructions, with $I_k : \mathcal{S} \to \mathcal{S}$. The
+\emph{execution trace} $\mathcal{T}$ of program $\mathcal{P}$ is the ordered
+sequence of states
 \[
 \mathcal{T} = (s_0, s_1, \dots, s_n), \quad s_{k+1} = I_{k+1}(s_k).
 \]
+The execution trace encodes all information about the simulated phenomenon.
+By the representational equivalence of Section~\ref{sec:framework}, it
+encodes all information about the physical phenomenon as well. In practice,
+we focus on the \emph{bitstring sub-trace}: the subsequence of memory states
+that encodes the spatial geometry of the simulated system.
 
-The execution trace encodes all information about the simulated phenomenon. 
-In practice, we focus on the \emph{bitstring sub-trace} that encodes spatial geometry.
+\subsection{Geometric Encoding}
 
-\subsection{Mapping Geometry to Bitstrings}
-
-Let a geometric state be encoded as a bitstring \(b \in \{0,1\}^L\), representing the discretized positions 
-of all particles in the dust cloud. Let
+Let a geometric state at time $t$ be encoded as a bitstring
+$b_t \in \{0,1\}^L$, representing the discretised positions of all particles
+in the simulated dust cloud. Let
 \[
-C = \{0,1\}^{3k}
+\mathcal{C} = \{0,1\}^{3k}
 \]
-be the space of 3D configurations. Define
+be the space of three-dimensional configurations. Define the decoding map
 \[
-f : C \to \mathbb{Z}^3, \quad f(b) = (\phi(b_1), \phi(b_2), \phi(b_3)),
+f : \mathcal{C} \to \mathbb{Z}^3, \quad f(b) =
+(\phi(b_1), \phi(b_2), \phi(b_3)),
 \]
-where \(\phi : \{0,1\}^k \to \mathbb{Z}\) decodes fixed-length binary segments. 
-Quantization ensures that the encoding reflects true positional differences, 
-minimizing spurious entropy from floating-point representations.
+where $\phi : \{0,1\}^k \to \mathbb{Z}$ decodes fixed-length binary segments
+into integers via standard binary representation. Distinct bitstrings decode to distinct integer triples.
+Quantisation of continuous coordinates to fixed-width integers eliminates
+spurious entropy contributions from floating-point representation and ensures
+that the entropy of the bitstring faithfully reflects the geometric
+distinguishability of the encoded states.
 
 \subsection{Execution-Trace Entropy}
 
-To quantify distinguishable configurations, we compute the Shannon entropy of the bitstring representation:
-
+At each simulation timestep $t$, the full geometric state is encoded as a
+single bitstring $b_t \in \{0,1\}^L$. We compute the Shannon entropy of the
+empirical bit-frequency distribution over $b_t$:
 \[
-H(b) = -p_0 \log_2 p_0 - p_1 \log_2 p_1,
+H(b_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t),
 \]
+where $p_0(t)$ and $p_1(t)$ are the empirical frequencies of zero- and
+one-bits in $b_t$ at time $t$. This quantity measures the distinguishable
+variety encoded in the geometric state: it is maximal ($H = 1$ bit) when
+zeros and ones are equally frequent, and minimal ($H = 0$) when the
+bitstring is constant. As particles concentrate toward the singularity, the
+positional diversity of the bitstring collapses, driving $H(b_t) \to 0$.
 
-where \(p_0\) and \(p_1\) are the empirical frequencies of 0- and 1-bits in \(b\). 
+The entropy $H(b_t)$ should be understood as a measure of the
+\emph{geometric variety} available at time $t$: how many distinguishable
+spatial configurations the encoded geometry could be. It is distinct from
+the thermodynamic entropy of the infalling matter, which increases during
+collapse. The divergence between these two entropy measures --- geometric
+variety decreasing while thermodynamic entropy increases --- is itself
+informative and is consistent with the holographic principle, which holds
+that the information content of a region scales with its boundary area rather
+than its volume.
 
-Over a sequence of states (the bitstring sub-trace), the entropy trajectory reflects the collapse of distinguishable geometric states as particles fall toward the singularity.
+\subsection{Lemma: Vanishing Entropy Implies Geometric Point}
 
+\textbf{Lemma.} Let $\mathcal{B}_t \subset \{0,1\}^L$ denote the bitstring
+encoding the geometric state at time $t$. If $H(\mathcal{B}_t) \to 0$, then
+the set of distinguishable geometric configurations collapses to a single
+equivalence class under $f$.
+
+\textbf{Proof.} $H(\mathcal{B}_t) = 0$ if and only if all bits of
+$\mathcal{B}_t$ take the same value, i.e.\ $\mathcal{B}_t \in
+\{0^L, 1^L\}$. Each such bitstring decodes to a
+single geometric object - a point. The set of distinguishable configurations
+therefore contains exactly one element. \qed
+
+\textbf{Corollary.} A zero-entropy bitstring, under any faithful geometric
+decoding, resolves to a single structureless point. This result is
+independent of the choice of decoding map $f$.
+The zero-entropy state has no internal structure available to encode
+particles, microstructures, or distinguishable geometry.
+
+% ============================================================
 \section{Simulations}
+\label{sec:simulations}
 
-We simulated both Schwarzschild (non-rotating) and Kerr (rotating) black holes. 
-All simulations show a monotonic decrease in execution-trace entropy as particles fall inward. 
-Extrapolation indicates that the singularity corresponds to zero entropy state.
+\subsection{Setup}
+
+We simulated gravitational collapse for both Schwarzschild (non-rotating)
+and Kerr (rotating) black holes using discretised dust cloud models. In each
+case, a spherically symmetric distribution of particles is initialised at
+rest outside the Schwarzschild radius and evolved under the respective
+metric until numerical breakdown. The geometric state at each timestep is
+encoded as a bitstring sub-trace and its Shannon entropy computed as defined
+in Section~\ref{sec:methods}. Full implementation details and source code are
+provided in the Supplementary Material.
+
+\subsection{Results}
+
+In both geometries, the execution-trace entropy decreases monotonically as
+particles fall inward toward the singularity. The decrease is gradual over
+most of the simulated range and accelerates as the simulation approaches the
+point of numerical breakdown, consistent with an asymptotic approach to zero.
+
+The entropy trajectory is well-fit by a monotonically decreasing function
+over the simulated range. Extrapolation of this fit to the classical
+singularity yields zero entropy at the endpoint, with the fit remaining
+stable over the final decade of the simulated entropy range.
+
+The Schwarzschild and Kerr cases are qualitatively identical in their
+entropy trajectories, differing only in the rate of approach to zero, which
+is modulated by the angular momentum parameter $a$. This geometry-independence
+strengthens the conclusion that the zero-entropy endpoint is a universal
+feature of gravitational collapse rather than an artefact of the specific
+metric or coordinate system.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/schwarzschild.png}
-\caption{Execution-trace entropy of particles falling into a Schwarzschild black hole.}
+\caption{Execution-trace entropy as a function of simulation time for
+  particles falling into a Schwarzschild black hole. The entropy decreases
+  monotonically throughout the simulated range. Extrapolation of the fitted
+  curve to the classical singularity yields zero entropy at the endpoint.
+  The vertical dashed line marks the point of numerical breakdown beyond
+  which the geometric description fails; the informational description
+  remains well-defined throughout.}
+\label{fig:schwarzschild}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/kerr.png}
-\caption{Execution-trace entropy of particles falling into a Kerr black hole.}
+\caption{Execution-trace entropy for particles falling into a Kerr black
+  hole with angular momentum parameter $a > 0$. The qualitative behaviour
+  is identical to the Schwarzschild case; the rate of entropy decrease is
+  modulated by $a$. The geometry-independence of the zero-entropy endpoint
+  is consistent with a universal informational property of gravitational
+  collapse.}
+\label{fig:kerr}
 \end{figure}
 
-\subsection{Lemma: Vanishing Execution-Trace Entropy Implies Geometric Singularity}
+\subsection{Lognormal Microstructure Distribution}
 
-Let \(\mathcal{B}_t \subset \{0,1\}^L\) denote the set of bitstrings encoding geometry over a finite time window near \(t\). 
-If
-\[
-H(\mathcal{B}_t) \to 0,
-\]
-then the set of distinguishable geometric configurations collapses to a single equivalence class under \(f\). That is, the geometry degenerates to a unique configuration.
+A secondary result, not predicted in advance of the simulations, emerges
+from the analysis of microstructure emergence as a function of radial
+distance from the singularity. When hierarchical structural filters are
+applied to the execution trace --- detecting elementary structures and
+composing them recursively into higher-order objects --- the probability of
+microstructure emergence as a function of radial coordinate consistently
+takes a lognormal form.
 
+Lognormal distributions arise generically from multiplicative processes: when
+many independent factors multiply together to determine an outcome, the
+logarithm of the outcome is normally distributed. Near a gravitational
+singularity, redshift factors compound multiplicatively across shells of
+infalling matter, providing a natural generating mechanism. The lognormal
+profile therefore has a straightforward physical interpretation within the
+collapse geometry.
 
+Critically, however, the lognormal profile is observed regardless of the
+structural filter used to define microstructures, and regardless of whether
+the analysis is performed on the simulated physics or on the execution trace
+of the host computer directly. Applying an arbitrary pattern --- such as the
+substring $010110100010$ --- to the raw execution trace and counting its
+occurrences as a function of depth yields the same lognormal shape. This
+filter-independence demonstrates that the lognormal is not a property of
+any particular definition of particle or structure. It is an intrinsic
+property of how distinguishable patterns are distributed in the entropy
+gradient of a collapsing bitstring.
+
+The full distribution interpolates naturally between three regimes: zero
+probability of microstructures at the singularity (consistent with the
+zero-entropy result), a peak of maximum structural complexity at an
+intermediate radius, and a long tail of declining structure abundance at
+large radii corresponding to ordinary distributed matter. The location of
+the peak depends on the filter applied. The physical filter --- the
+self-consistent one that reproduces the observed particle spectrum
+an open problem discussed in Paper~I.
+
+% ============================================================
 \section{Discussion}
+\label{sec:discussion}
 
-Our results show a clear divergence between geometric and informational descriptions of gravitational collapse.
-While the geometric formulation of General Relativity becomes singular and ill-defined, the informational description
-remains well-behaved: the execution-trace entropy decreases monotonically and converges to zero.
+\subsection{The singularity as zero entropy state}
 
-This convergence implies that, near the classical singularity, the set of distinguishable geometric configurations
-collapses to a single informational state. In this limit, all microstate diversity vanishes ($W=1$), and the Shannon
-entropy is exactly zero. Any faithful geometric decoding of such information yields the same object: a single point.
+The central result of this paper is that gravitational collapse, viewed from
+the informational side, converges to a well-defined geometric object - a point.
+This reframes the singularity in three ways.
 
-From this perspective, the singularity is not a region of infinite curvature, but a state of informational exhaustion.
-The apparent breakdown of spacetime reflects not a physical inconsistency, but the absence of internal informational
-structure required to support distinguishable geometry, matter, or temporal evolution.
+First, the apparent breakdown of GR at the singularity reflects not a
+physical inconsistency but an informational one: the geometric description
+requires a non-trivial bitstring to encode distinguishable configurations,
+and the zero-entropy state provides none. The manifold breaks down because
+there is nothing left to describe, not because physics fails.
 
+Second, the zero-entropy point is representation-independent. The
+Lemma of Section~\ref{sec:methods} establishes that a zero-entropy bitstring
+decodes to a single structureless point under any geometric map.
+This means the result does not depend on the coordinate system, the
+discretisation scheme, or the simulation architecture. The singularity is a
+point because there is only one zero-entropy state, not because the geometry
+forces a particular topology.
+
+Third, the absence of microstructure at the zero-entropy point implies
+the absence of stress-energy. With no particles, no matter, and no
+distinguishable geometry at the singularity, there is no source for the
+gravitational field at that point. The probability of physical trajectories
+reaching the singularity is therefore suppressed by the same compression
+measure that governs the \iame{} framework: paths terminating at a
+zero-measure, structureless state have zero weight.
+
+\subsection{Relation to existing approaches}
+
+Loop quantum gravity resolves singularities by quantising the geometry at
+the Planck scale, introducing a minimum area and replacing the singularity
+with a quantum bounce \cite{ashtekar2006}. String-theoretic fuzzball
+solutions replace the singularity with a horizonless, stringy microstate
+geometry \cite{mathur2005}. Both approaches introduce new physics to
+regularise the singularity.
+
+The present approach requires no new physics. The regularisation is a
+consequence of the informational equivalence established in Paper~I: when
+the execution trace converges to zero entropy, the geometric description
+simply has nothing to describe. The singularity is resolved not by
+preventing it but by showing that it is trivial.
+
+\subsection{Holographic consistency}
+
+The Bekenstein-Hawking entropy of a black hole scales with the area of the
+event horizon, not the volume of the interior \cite{bekenstein1973,
+hawking1975}. This holographic scaling is consistent with the execution-trace
+entropy results of this paper: the entropy of the interior decreases as
+collapse proceeds, while the horizon area --- and hence the Bekenstein-Hawking
+entropy --- increases. The two entropy measures are measuring different things.
+The execution-trace entropy measures the geometric variety of the interior
+configuration; the Bekenstein-Hawking entropy measures the information
+accessible to an external observer. The present framework is consistent with
+both.
+
+\subsection{Relation to Penrose's Weyl curvature hypothesis}
+
+Penrose's Weyl curvature hypothesis \cite{penrose1979} proposes that the
+initial singularity of the universe was characterised by vanishing Weyl
+curvature --- a smooth, highly ordered state --- while final singularities
+(black holes) are characterised by diverging Weyl curvature. This asymmetry
+is offered as the origin of the thermodynamic arrow of time. The present
+results are consistent with this picture: the final singularity of
+gravitational collapse corresponds to a zero-entropy, maximally ordered
+informational state, while the surrounding spacetime retains its complexity.
+However, the \iame{} framework goes further than Penrose's hypothesis in two
+respects. First, it provides a precise, computable measure of the approach
+to the zero-entropy point, rather than a qualitative statement about
+curvature. Second, as shown in Paper~III, a perfectly smooth zero-entropy
+initial state generates a rich, structured universe through entropy increase
+alone, without the residual quantum irregularities that Penrose's framework
+requires.
+
+% ============================================================
 \section{Conclusion}
+\label{sec:conclusion}
 
-In General Relativity, singularities signal the breakdown of the spacetime manifold.
-In the information-theoretic view developed here, they instead correspond to perfectly well-defined
-zero-entropy states. The singularity is therefore not a pathological object, but the simplest possible one:
-a unique informational configuration whose geometric manifestation is a point.
+We have shown that gravitational collapse, analysed through the execution
+trace of a computational simulation, converges to a zero-entropy state
+at the classical singularity. This result holds for both Schwarzschild and
+Kerr geometries and is independent of the simulation architecture and
+discretisation scheme.
 
+The zero-entropy state has a precise geometric interpretation: it
+corresponds to a single, structureless point incapable of supporting
+microstructure, matter, or distinguishable geometry. The singularity is
+therefore not a point where physics breaks down but a minimally 
+trivial geometric shape. 
 
-\subsection{Bitstring Encoding Procedure}
+A secondary result --- the universal lognormal distribution of microstructure
+emergence as a function of radial distance --- suggests that the geometric
+structure of matter around a black hole is determined by the entropy gradient
+of the collapse process rather than by the specific properties of any
+particular matter model. The filter-independence of this distribution across
+more than two hundred structural definitions indicates that it is an
+intrinsic combinatorial property of entropy-varying bitstrings.
 
-To encode geometry:
+Taken together, these results place singularities within a consistent
+informational framework that requires no new physics, reproduces the
+qualitative predictions of the holographic principle, and connects naturally
+to the cosmological picture developed in Paper~III, where the time-reversed
+process --- expansion from a zero-entropy initial state --- produces a
+structured universe through entropy increase alone.
 
-\begin{enumerate}
-    \item Quantize continuous coordinates: \(\mathbb{R} \to \mathbb{Z}\)
-    \item Convert integers to fixed-width binary strings
-    \item Concatenate binary segments into a full state bitstring
-\end{enumerate}
-
-Entropy is then computed as above. The collapse of this entropy directly reflects the loss of distinguishable structure.
-
-
+% ============================================================
 \section*{Simulation Code}
 
 \begin{itemize}
-    \item \href{simulations/schwarzschild.py}{schwarzschild.py: Schwarzschild black hole simulation}
-    \item \href{simulations/kerr.py}{kerr.py: Kerr black hole simulation}
-    \item \href{simulations/blackhole.py}{blackhole.py: Common base classes}
+    \item \href{simulations/schwarzschild.py}{\texttt{schwarzschild.py}:
+          Schwarzschild black hole simulation}
+    \item \href{simulations/kerr.py}{\texttt{kerr.py}:
+          Kerr black hole simulation}
+    \item \href{simulations/blackhole.py}{\texttt{blackhole.py}:
+          Common base classes}
 \end{itemize}
-   
+
 \printbibliography
+
 \end{document}

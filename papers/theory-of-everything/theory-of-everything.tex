@@ -5,81 +5,70 @@
 % ============================================================
  
 \documentclass[12pt,a4paper]{article}
- 
+
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{geometry}
-\usepackage{hyperref}
-\usepackage{graphicx}
 \usepackage{tcolorbox}
 \usepackage{enumitem}
-\usepackage{authblk}
-\usepackage{abstract}
-\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
 \usepackage[backend=biber, style=numeric]{biblatex}
- 
-\geometry{margin=2.5cm}
- 
-\hypersetup{
-  colorlinks=true,
-  linkcolor=blue,
-  citecolor=blue,
-  urlcolor=blue
-}
- 
-% Custom commands
-\newcommand{\iame}{$\text{IAM}\lnot(D\text{-}\psi\text{-}G)$}
-\newcommand{\Ctotal}{C_{\mathrm{total}}}
-\newcommand{\Cs}{C_s}
-\newcommand{\Cg}{C_g}
-\newcommand{\Pjoint}{P_{\mathrm{joint}}}
+
+
+% ── Custom commands ──────────────────────────────────────────────────────────
+\newcommand{\iame}{\textsc{IAME}}
 \newcommand{\Linfo}{\mathcal{L}_{\mathrm{info}}}
+\newcommand{\Cs}{\mathcal{C}_s}
+\newcommand{\Cg}{\mathcal{C}_g}
+\newcommand{\Ctotal}{\mathcal{C}_{\mathrm{total}}}
+\newcommand{\Pjoint}{P_{\mathrm{joint}}}
 \newcommand{\muO}{\mu_O}
- 
-\theoremstyle{definition}
+
+% ── Theorem environments ─────────────────────────────────────────────────────
 \newtheorem{axiom}{Axiom}
 \newtheorem{proposition}{Proposition}
-\newtheorem{corollary}{Corollary}
+\newtheorem{conjecture}{Conjecture}
 
 \addbibresource{../references.bib}
 
-
 % ============================================================
-\title{\textbf{\textbf{\iame}}\\[0.5em]
+\title{\textbf{\iame}\\[0.5em]
 \large A Candidate Framework for Everything Where Reality Emerges\\
 as the Large-Deviation Minimum of Observer-Compatible Histories}
- 
+
 \author{Juha Meskanen}
 \date{\today}
- 
+
 % ============================================================
 \begin{document}
- 
+
 \maketitle
- 
 
 % ============================================================
 \begin{abstract}
-We present \iame{}, a
-candidate unified framework in which physical laws, spacetime geometry, quantum
-behaviour, and mathematics are not fundamental postulates but emergent
-consequences of a single informational variational principle. The sole primitive
-is the existence of a finite, structured observer. From this, and without
-assuming discreteness, finiteness, spacetime, or any informational ontology at
-the base level, we derive: (i) that the universe is fundamentally static and
-time is an internal ordinal relation; (ii) that the observer and the universe it
-experiences are identical structures ($O = U_O$); (iii) that observed physical
-laws are the large-deviation minimisers of a joint spectral-geometric
-description-length cost functional $\Linfo = \Cs + \Cg$; and (iv) that quantum
-mechanics and general relativity arise as complementary compression schemes
-selected by this functional. The framework provides a natural suppression of
-Boltzmann-brain fluctuations, resolves the Wigner effectiveness of mathematics,
-and assigns qualia a functional non-epiphenomenal role as heuristic navigators
-in configuration space. Proof-of-concept simulations demonstrate that inertia,
-wave interference, and gravitational attraction emerge from pure compression
-optimisation without hard-coded physical laws. The outstanding open problem ---
-the natural emergence of fermionic exclusion from the compression measure ---
-is identified and its resolution sketched. Full simulation details are provided
-in the Supplementary Material.
+We present \iame{}, a candidate unified framework in which physical laws,
+spacetime geometry, quantum behaviour, and mathematics are not fundamental
+postulates but emergent consequences of a single informational variational
+principle. The sole primitive is the existence of a finite, structured
+observer. From this, and without assuming discreteness, finiteness, spacetime,
+or any informational ontology at the base level, we derive: (i) that the
+universe is fundamentally static and time is an internal ordinal relation;
+(ii) that the observer and the universe it experiences are identical structures
+($O = U_O$); (iii) that observed physical laws are the large-deviation
+minimisers of a joint spectral-geometric description-length cost functional
+$\Linfo = \Cs + \Cg$; and (iv) that quantum mechanics and general relativity
+arise as complementary compression schemes selected by this functional.
+We further conjecture that this two-term decomposition is the scale
+decomposition of a single spectral action $\mathrm{Tr}(f(D/\Lambda))$ built
+from the Dirac operator $D$, providing a route to full spectral unification.
+The framework provides a natural suppression of Boltzmann-brain fluctuations,
+resolves the Wigner effectiveness of mathematics, and assigns qualia a
+functional non-epiphenomenal role as heuristic navigators in configuration
+space. Proof-of-concept simulations demonstrate that inertia, wave
+interference, and gravitational attraction emerge from pure compression
+optimisation without hard-coded physical laws. Two open problems are
+identified: the natural emergence of fermionic exclusion from the compression
+measure, and the rigorous derivation of the Dirac spectral action as the
+unique minimum-description-length encoding of spin geometry.
 \end{abstract}
 
 \tableofcontents
@@ -96,30 +85,38 @@ structure. The Standard Model assumes a specific gauge group and particle
 content. Each framework imports considerable structure at the outset and then
 derives consequences.
 
-The framework takes a different route. We begin with the
-minimum possible primitive: the bare existence of a conscious, finite observer.
-We then ask what physics must look like, given only that starting point and
-the requirement that observer-compatible configurations be statistically
-typical.
+The \iame{} framework takes a different route. We begin with the minimum
+possible primitive: the bare existence of a conscious, finite observer. We
+then ask what physics must look like, given only that starting point and the
+requirement that observer-compatible configurations be statistically typical.
 
 The answer, we argue, is our observed universe.
 
 Physical laws, quantum mechanics, spacetime geometry, the arrow of time, the
 effectiveness of mathematics, and the suppression of Boltzmann-brain
-fluctuations all follow as derived consequences --- not fine-tuned accidents ---
-of a single informational variational principle. The framework is not an
+fluctuations all follow as derived consequences --- not fine-tuned accidents
+--- of a single informational variational principle. The framework is not an
 interpretation of existing physics; it is a derivation of physics from
 something more fundamental than physics.
 
+A central structural conjecture, developed in Section~\ref{sec:dirac}, is
+that the two-term decomposition $\Linfo = \Cs + \Cg$ is not primitive but is
+itself the scale decomposition of a single spectral functional built from the
+Dirac operator. If confirmed, this would reduce the entire framework to one
+operator and one complexity measure, with quantum mechanics and general
+relativity emerging as its infrared and ultraviolet regimes respectively.
+
 The paper is structured as follows. Section~\ref{sec:axioms} presents the
-axiomatic chain from which the framework is derived. Section~\ref{sec:iep}
-states the Internal Emergence Principle and its immediate consequences.
+axiomatic chain. Section~\ref{sec:iep} states the Internal Emergence Principle.
 Section~\ref{sec:ontology} develops the ontological position.
-Section~\ref{sec:measure} presents the measure theory and the joint
-compressibility equation. Section~\ref{sec:emergence} derives the emergent
-structure of physics. Section~\ref{sec:predictions} states the framework's
-falsifiable predictions. Section~\ref{sec:open} discusses the open problem of
-fermionic exclusion. Section~\ref{sec:conclusion} concludes.
+Section~\ref{sec:measure} presents the measure theory and joint compressibility
+equation. Section~\ref{sec:emergence} derives the emergent structure of physics.
+Section~\ref{sec:dirac} presents the Dirac spectral unification conjecture.
+Section~\ref{sec:predictions} states falsifiable predictions.
+Section~\ref{sec:poc} describes proof-of-concept simulations.
+Section~\ref{sec:open} discusses open problems.
+Section~\ref{sec:future} identifies future work.
+Section~\ref{sec:conclusion} concludes.
 
 % ============================================================
 \section{The Axiomatic Chain}
@@ -394,7 +391,8 @@ $\omega_i/\Delta\omega$ is the linear resource allocation required to track the
 mode frequency relative to minimum resolution $\Delta\omega$.
 
 The geometric complexity $\Cg(d)$ accounts for localised spatial structures,
-boundaries, and metric fields.
+boundaries, and metric fields. It measures the bit-cost of encoding the
+boundary description length of spatial configurations.
 
 \subsection{The joint compressibility equation}
 
@@ -521,6 +519,50 @@ c_1 \prec_O c_2 \iff c_2 \text{ supports the observer functional } \muO
 The experienced flow of time corresponds to traversal along the most
 compressible, optimised paths through the timeless configuration space.
 
+\subsection{Entropy, expansion, and the arrow of time}
+
+A striking consequence of the framework concerns cosmological expansion. When
+one mutates a zero-entropy bitstring toward maximal entropy, the geometric
+interpretation of the resulting configurations undergoes exponential expansion
+followed by gradual deceleration toward a vanishing Hubble constant. Cosmic
+expansion and the second law of thermodynamics are therefore not independent
+phenomena: they are the geometric and informational descriptions of the same
+monotone process.
+
+The arrow of time, the expansion of the universe, and entropy increase are not
+three things. They are one thing, seen through three different lenses. This
+derivation requires no cosmological constant, no inflaton field, and no
+fine-tuning. It falls out of pure entropy mutation of the underlying bitstring.
+
+\subsection{Singularities and the entropy of collapse}
+
+Numerical study of gravitational collapse --- both Schwarzschild and Kerr
+geometries --- reveals a counterintuitive result: the Shannon entropy of the
+execution trace corresponding to collapsing spacetime \emph{decreases}
+monotonically as the singularity is approached. Extrapolating this trend to
+completion yields zero entropy at the singularity itself.
+
+A zero-entropy bitstring admits only one state: a structureless constant
+string. Under any mapping to geometric spacetime, a zero-entropy source
+resolves to a point of zero size. As zero-entropy information cannot encode
+microstructure, no particles can exist at the singularity, and therefore no
+stress-energy source is present. The geometric singularity is thus not a point
+where physics breaks down but an informational fixed point where physics
+becomes trivially simple.
+
+Furthermore, numerical study of the probability of microstructure emergence
+as a function of radial distance from the singularity consistently yields a
+lognormal profile, independent of the structural filter applied and independent
+of whether the analysis is performed on the simulated physics or on the
+execution trace of the computer running the simulation. This universality
+--- across geometries, across filters, across representational levels ---
+indicates that the lognormal shape is an intrinsic property of
+pattern emergence in entropy-varying bitstrings, not an artifact of any
+particular description. The filter-independence further suggests that the
+physical particle spectrum is a fixed point of a hierarchical structural
+recursion rather than a contingent choice, and that the lognormal parameters
+at this fixed point constitute a prediction of the theory.
+
 \subsection{Quantum mechanics and general relativity as dual compression schemes}
 
 The central structural claim of the framework is that quantum mechanics
@@ -573,125 +615,251 @@ inhabit low-initial-entropy trajectories with stable D-$\psi$-G structure.
 Boltzmann-brain fluctuations are suppressed not by fine-tuning but by the
 same compression measure that selects all other physical structure.
 
+% ============================================================
+\section{Spectral Unification: The Dirac Conjecture}
+\label{sec:dirac}
+
+\subsection{The unification problem}
+
+The informational Lagrangian $\Linfo = \Cs + \Cg$ is structurally sound and
+empirically productive, but it contains two complexity measures joined by a
+plus sign. This two-term structure raises an immediate question: are $\Cs$
+and $\Cg$ genuinely independent quantities, or are they scale decompositions
+of a single underlying object? If the latter, the framework admits a deeper
+unification in which one operator and one complexity measure generate both
+quantum mechanics and general relativity as complementary frequency regimes.
+
+We now argue that such a unification exists, and that its natural vehicle is
+the Dirac operator.
+
+\subsection{Geometry is spectral}
+
+A foundational result of spectral geometry is that the spectrum of the
+Laplace-Beltrami operator $\Delta$ on a compact Riemannian manifold encodes
+its geometry. Volume, curvature invariants, and topological features are all
+recoverable from the eigenvalue spectrum. In this sense, geometry \emph{is}
+spectral: the geometric object and its spectral object are two faces of the
+same structure.
+
+This suggests that the two-term split $\Cs + \Cg$ might be an artefact of
+working at two different frequency scales of the same spectral object, rather
+than a reflection of two genuinely independent degrees of freedom.
+
+\subsection{The Dirac operator as the minimal geometric encoder}
+
+The Laplacian $\Delta$ encodes geometry but not spin structure. The Dirac
+operator $D$ --- the unique first-order, self-adjoint differential operator
+that squares to the Laplacian up to a curvature correction --- encodes the
+full spin geometry of a Riemannian manifold. The Lichnerowicz formula makes
+this precise:
+
+\begin{equation}
+D^2 = \Delta + \frac{R}{4}
+\end{equation}
+
+where $R$ is the Ricci scalar curvature. The spectrum of $D$ therefore carries
+not only the metric information encoded in $\Delta$ but also the curvature
+structure of the manifold directly. Crucially, $D$ is the \emph{minimal
+sufficient statistic} for the full spin geometry: no simpler operator captures
+all the same information.
+
+\subsection{The spectral action}
+
+Connes' spectral action principle \cite{connes1996} defines a natural
+complexity functional on geometries encoded by the Dirac operator:
+
+\begin{equation}
+S_{\mathrm{spectral}} = \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)
+\end{equation}
+
+where $f$ is a positive, even, rapidly decaying cutoff function and $\Lambda$
+is an energy scale. When expanded in powers of $\Lambda^{-1}$ using heat
+kernel methods, this action yields:
+
+\begin{equation}
+S_{\mathrm{spectral}} \approx \Lambda^4 a_0 + \Lambda^2 a_2 \int R\,\sqrt{g}\,d^4x
++ a_4 \int \left(\alpha R^2 + \beta R_{\mu\nu}R^{\mu\nu}
++ \gamma C_{\mu\nu\rho\sigma}C^{\mu\nu\rho\sigma}\right)\sqrt{g}\,d^4x + \cdots
+\end{equation}
+
+The term proportional to $\Lambda^2$ is precisely the Einstein-Hilbert action
+of general relativity. Higher-order terms reproduce gauge and matter field
+actions when the algebra is extended appropriately. The spectral action
+therefore generates GR and the structure of the Standard Model from a single
+spectral input.
+
+\subsection{Scale decomposition of the informational Lagrangian}
+
+We propose the following identification. The spectral action evaluated at low
+frequencies --- where only the slowly varying, large-scale modes of $D$
+contribute --- recovers $\Cg$: the geometric complexity encoding locality,
+boundaries, and curvature. The spectral action evaluated at high frequencies
+--- where the rapidly oscillating, fine-grained modes dominate --- recovers
+$\Cs$: the wave complexity encoding quantum interference and relational
+superposition.
+
+\begin{equation}
+\boxed{
+\Linfo = \Cs + \Cg
+= \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)\!\bigg|_{\mathrm{high}}
++ \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)\!\bigg|_{\mathrm{low}}
+= \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)
+}
+\end{equation}
+
+If this identification holds, the two-term sum is not a primitive decomposition
+but a scale decomposition of a single spectral functional. The informational
+Lagrangian reduces to:
+
+\begin{equation}
+\label{eq:unified}
+\Linfo = \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)
+\;\longrightarrow\; \text{minimum}
+\end{equation}
+
+with quantum mechanics and general relativity arising as the high-frequency and
+low-frequency limits of minimising this single expression.
+
+\subsection{Why the Dirac operator wins the measure}
+
+Within the \iame{} framework, no geometric encoding is \emph{chosen} by hand.
+Every candidate operator exists within the unrestricted totality $\mathbf{U}$.
+The induced measure $P(c) \propto 2^{-\Ctotal(c)}$ selects the most compressible
+description. The question is therefore: which operator produces the shortest
+description of spin geometry?
+
+The argument is as follows. The Dirac operator is the unique minimal sufficient
+statistic for Riemannian spin geometry. Any other first-order operator either
+fails to capture the full geometry (and therefore requires additional structure,
+increasing description length) or is equivalent to $D$ up to gauge
+transformation (and therefore produces the same spectral action up to terms
+that vanish in the minimum). The Dirac operator wins not because it is
+postulated but because its description is the shortest.
+
+This is the same argument that selects smooth spacetime over chaotic spacetime,
+orbiting planets over free particles, and periodic wave-like behaviour over
+random jitter: in each case, the compressible structure has exponentially more
+representations in configuration space and therefore dominates the measure.
+
+\begin{conjecture}[Dirac spectral unification]
+\label{conj:dirac}
+The informational Lagrangian $\Linfo = \Cs + \Cg$ is the scale decomposition
+of the spectral action $\mathrm{Tr}(f(D/\Lambda))$, where $D$ is the Dirac
+operator on the observer's configuration space. The Dirac operator is the
+unique minimiser of description length among all operators encoding spin
+geometry under the induced measure $P(c) \propto 2^{-\Ctotal(c)}$, and
+therefore dominates the configuration count in any sufficiently large
+unrestricted totality. Quantum mechanics and general relativity are
+respectively the high-frequency and low-frequency limits of minimising this
+single spectral functional.
+\end{conjecture}
+
+Verifying Conjecture~\ref{conj:dirac} requires establishing two things: (1)
+that the spectral action decomposes cleanly into $\Cs$ and $\Cg$ at the
+appropriate frequency scales, and (2) that $D$ is provably the unique
+minimum-description-length encoding of spin geometry under the \iame{}
+measure. Both are well-posed mathematical problems. Their resolution is
+identified as the primary mathematical open problem of the framework and is
+discussed further in Section~\ref{sec:future}.
 
 % ============================================================
-
 \section{Proof of Concept Simulations}
 \label{sec:poc}
 
-To test whether the joint compressibility principle can generate realistic physics without hard-coded laws, a minimal 2+1 dimensional proof-of-concept simulation was implemented.
-Observers were approximated as localised Gaussian wave packets (simplified proxies for structured observers).
-No forces, equations of motion, spacetime metric, or physical laws were programmed.
-Configurations were sampled using a Metropolis-Hastings algorithm guided exclusively by minimisation of the total description length
-\[
-\Ctotal = \Cs + \Cg.
-\]
+To test whether the joint compressibility principle can generate realistic
+physics without hard-coded laws, a minimal 2+1 dimensional proof-of-concept
+simulation was implemented. Observers were approximated as localised Gaussian
+wave packets (simplified proxies for structured observers). No forces,
+equations of motion, spacetime metric, or physical laws were programmed.
+Configurations were sampled using a Metropolis-Hastings algorithm guided
+exclusively by minimisation of the total description length
+$\Ctotal = \Cs + \Cg$.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/emergent_inertia_gravity.png}
 \caption{Emergent inertia and weak mutual attraction.
-  Three Gaussian observer proxies evolve under pure minimisation of the joint spectral-geometric complexity $\Ctotal = \Cs + \Cg$.
+  Three Gaussian observer proxies evolve under pure minimisation of the joint
+  spectral-geometric complexity $\Ctotal = \Cs + \Cg$.
   No equations of motion or forces were programmed.
-  The blobs naturally develop persistent trajectories (inertia) and exhibit weak attraction toward one another, as overlapping configurations increase local probability density in the shared region.
-  This provides visual support for the emergence of both inertial motion and a primitive gravitational-like interaction from the informational Lagrangian alone.}
+  The blobs naturally develop persistent trajectories (inertia) and exhibit
+  weak attraction toward one another, as overlapping configurations increase
+  local probability density in the shared region.}
 \label{fig:emergent-inertia}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/emergent_interference.png}
-\caption{Emergent interference patterns. At smaller scales, complex-valued wavefunction representations naturally produce interference effects between nearby Gaussian observer proxies.
-  These patterns arise solely from the spectral compression term $\Cs$ without any explicit wave equation being imposed.
-  The simulation demonstrates that wave-like behaviour is a generic outcome of minimising description length in the spectral domain.}
+\caption{Emergent interference patterns. At smaller scales, complex-valued
+  wavefunction representations naturally produce interference effects between
+  nearby Gaussian observer proxies. These patterns arise solely from the
+  spectral compression term $\Cs$ without any explicit wave equation being
+  imposed.}
 \label{fig:emergent-interference}
 \end{figure}
 
-The simulations show that several key features of observed physics emerge naturally:
+The simulations demonstrate:
+
 \begin{itemize}
-    \item Persistent, approximately inertial trajectories (smooth motion compresses better than erratic jitter);
-    \item Wave-like interference patterns at small scales;
-    \item Weak mutual attraction between observer proxies, arising because shared spatial regions increase the number of supporting micro-configurations.
+  \item Persistent, approximately inertial trajectories (smooth motion
+        compresses better than erratic jitter);
+  \item Wave-like interference patterns at small scales;
+  \item Weak mutual attraction between observer proxies, arising because shared
+        spatial regions increase the number of supporting micro-configurations.
 \end{itemize}
 
-Full implementation details, source code, parameter settings, convergence diagnostics, and high-resolution video outputs are provided in the Supplementary Material.
-
-These preliminary results support the central claim that important aspects of both classical and quantum behaviour can arise as large-deviation minima of the joint compressibility functional rather than as fundamental postulates.
-
+Full implementation details, source code, parameter settings, convergence
+diagnostics, and high-resolution video outputs are provided in the
+Supplementary Material.
 
 % ============================================================
 \section{Falsifiable Predictions}
 \label{sec:predictions}
 
-The framework makes a number of specific predictions distinguishable from
-those of existing theories.
-
 \textbf{Prediction 1: Dual structure is necessary.}
 Any stable observer-hosting physics must exhibit both wave-like ($\psi$) and
-geometric ($G$) structure. A universe with only one of the two --- pure waves
-without geometry, or pure geometry without quantum fields --- is forbidden by
-the joint compressibility requirement. This constrains the solution space of
-any candidate unified theory.
+geometric ($G$) structure. A universe with only one of the two is forbidden by
+the joint compressibility requirement.
 
 \textbf{Prediction 2: Discreteness is never primitive.}
 The framework predicts that any deeper physical theory will not be
-fundamentally discrete. Discreteness emerges at the observer boundary. This
-distinguishes the framework from strict digital physics (e.g.\ cellular
-automaton or hypergraph approaches) and constitutes a falsifiable fork: if a
+fundamentally discrete. Discreteness emerges at the observer boundary. If a
 future theory demonstrates that fundamental discreteness is unavoidable, the
 framework is refuted.
 
-\textbf{Prediction 3: Quantum gravity as informational minimisation.}
+\textbf{Prediction 3: Quantum gravity as spectral minimisation.}
 The correct theory of quantum gravity will take the form of a joint
-spectral-geometric minimisation principle rather than a quantisation of
-spacetime. Loop quantum gravity and string theory both treat spacetime as in
-some sense fundamental. The \iame{} predicts both are approximations to a deeper
-informational structure.
+spectral-geometric minimisation principle --- specifically, minimisation of a
+Dirac spectral action --- rather than a quantisation of a background metric.
+Loop quantum gravity and string theory are both approximations to a deeper
+informational structure. If Conjecture~\ref{conj:dirac} is confirmed, this
+prediction sharpens: quantum gravity is the full spectral action without the
+infrared truncation that yields classical GR.
 
 \textbf{Prediction 4: Low-entropy past without fine-tuning.}
-The framework predicts a low-entropy past as the \emph{expected} outcome of
-the compression measure, not a lucky accident requiring anthropic selection.
-This is a stronger claim than standard cosmology makes and is in principle
-distinguishable by its derivation of the arrow of time without additional
-assumptions.
+The framework predicts a low-entropy past as the expected outcome of the
+compression measure, not a lucky accident. This is a stronger claim than
+standard cosmology makes.
 
 \textbf{Prediction 5: Fermionic exclusion from compression.}
 The Pauli exclusion principle must emerge naturally from the observer
 functional $\muO$ as a consequence of description-length explosion upon
-observer merger (see Section~\ref{sec:open}). If no such mechanism can be
-identified within the compression measure, the framework is incomplete. This
-is a precise, binary, testable claim.
+observer merger. If no such mechanism can be identified, the framework is
+incomplete.
 
 \textbf{Prediction 6: Macro-micro scaling of interference.}
 At macroscopic scales, fine interference structure averages out and observers
 tend toward smooth classical trajectories. At microscopic scales, wave-like
-behaviour dominates. This scaling behaviour --- already observed in
-proof-of-concept simulations --- should reproduce the quantum-to-classical
-transition quantitatively, not merely qualitatively.
+behaviour dominates. This scaling behaviour should reproduce the
+quantum-to-classical transition quantitatively, not merely qualitatively.
 
-% ============================================================
-\section{Proof-of-Concept Simulations}
-\label{sec:simulations}
-
-A minimal 2+1D proof-of-concept simulation was constructed to test whether
-inertia, wave interference, and gravitational attraction can emerge from pure
-compression optimisation without hard-coded physical laws.
-
-Observers are modelled as localised Gaussian wave packets --- simplified
-proxies for biological observers, chosen because full biological observers are
-computationally intractable (the configuration space of even 100 bits is
-$2^{100} \approx 10^{30}$ states). A Metropolis-Hastings sampler explores
-configuration space guided exclusively by minimisation of $\Ctotal = \Cs + \Cg$.
-
-\textbf{Results:} Emergent inertia, wave interference patterns, and weak
-mutual attraction (a primitive form of gravity) all appear consistently without
-being programmed. The macroscopic and microscopic scaling behaviours are
-qualitatively consistent with Prediction~6. Full simulation details, figures,
-and video supplementary materials are provided in the Supplementary Material.
-
-These results support the thesis that law-like behaviour is not imposed from
-outside but arises internally as the consequence of how self-interpretive
-information is most efficiently organised.
+\textbf{Prediction 7: Lognormal microstructure distribution.}
+The probability of microstructure emergence as a function of distance from a
+gravitational singularity follows a universal lognormal profile, independent
+of the structural filter and independent of the representational level at which
+the analysis is performed. The shape parameters at the fixed-point filter
+correspond to physically observable quantities.
 
 % ============================================================
 \section{The Open Problem: Fermionic Exclusion}
@@ -719,8 +887,7 @@ destructively.
 Formally, the observer functional $\muO$ must assign near-zero measure to
 configurations in which a previously distinct observer ceases to be
 distinguishable. An observer that loses its distinctness ceases to satisfy the
-observer boundary condition --- it is no longer a finite, structured,
-persistent observer in the sense of Axioms~\ref{ax:exist}--\ref{ax:finite}.
+observer boundary condition.
 
 The exclusion principle then follows not from an external antisymmetry rule but
 from the stability-of-identity condition on $\muO$: merger is the least
@@ -730,10 +897,78 @@ self-consistency requirement.
 The predicted signature is an effective short-range repulsion that is sharper
 and more localised than the emergent long-range attraction, because attraction
 arises from gradual wavefunction overlap (smooth, cheap) while repulsion arises
-from structural incompatibility (sharp, expensive). This asymmetry ---
-long-range attraction, short-range repulsion --- is precisely what stable
-matter requires. Demonstrating this computationally in a collision-and-rebound
-simulation is the current experimental frontier of the framework.
+from structural incompatibility (sharp, expensive). Demonstrating this
+computationally in a collision-and-rebound simulation is the current
+experimental frontier of the framework.
+
+% ============================================================
+\section{Future Work}
+\label{sec:future}
+
+Three directions constitute the immediate research frontier of the framework.
+
+\subsection{Rigorous derivation of the Dirac spectral unification}
+
+Conjecture~\ref{conj:dirac} is the primary mathematical open problem. Its
+verification requires two steps.
+
+The first is to establish that the spectral action
+$\mathrm{Tr}(f(D/\Lambda))$ decomposes cleanly into $\Cs$ and $\Cg$ at the
+appropriate frequency scales. Specifically, one must show that the low-mode
+truncation of the Dirac spectral action recovers the geometric complexity
+measure $\Cg$ as defined in Section~\ref{sec:measure}, and that the high-mode
+residual recovers $\Cs$. This is a problem in spectral geometry, and the heat
+kernel expansion of the spectral action provides the natural technical tool.
+
+The second is to establish that the Dirac operator is the unique
+minimum-description-length encoding of spin geometry under the \iame{} induced
+measure. The argument sketched in Section~\ref{sec:dirac} --- that $D$ is the
+minimal sufficient statistic for Riemannian spin geometry and that any
+alternative either loses information or is gauge-equivalent --- needs to be
+made rigorous. This requires a precise formulation of what it means for one
+operator to have shorter description length than another within the \iame{}
+configuration space, and a proof that $D$ achieves the minimum.
+
+This is a problem at the intersection of spectral geometry, algorithmic
+information theory, and noncommutative geometry. Expertise in Connes'
+noncommutative geometry programme \cite{connes1996} is directly relevant, as
+the spectral triple formalism provides much of the required technical machinery.
+
+\subsection{Robust and representation-independent proof-of-concept simulations}
+
+The current proof-of-concept simulations use Gaussian wave packets as observer
+proxies and a Metropolis-Hastings sampler to explore configuration space. While
+the results are encouraging, three limitations must be addressed.
+
+First, the interpretation space of even small bitstrings is super-exponentially
+large. The current implementation explores only a tiny fraction of the
+available configurations. More efficient sampling strategies --- possibly
+inspired by tensor network methods or variational inference --- are needed to
+obtain results that are robust against sampling bias.
+
+Second, the current simulations demonstrate qualitative emergence of inertia,
+interference, and attraction. The next target is quantitative agreement: the
+emergent dynamics should reproduce specific numerical predictions of quantum
+mechanics and general relativity, not merely their qualitative character.
+
+Third, the lognormal microstructure result (Section~\ref{sec:emergence},
+Prediction~7) should be tested across a wider range of geometries and filter
+types, and the fixed-point filter should be identified computationally. The
+fixed-point filter is the one whose shape parameters under the hierarchical
+recursion satisfy a self-consistency condition, and its identification would
+constitute a derivation of the particle spectrum from the compression principle.
+
+\subsection{Fermionic exclusion from collision-and-rebound simulations}
+
+As described in Section~\ref{sec:open}, the emergence of fermionic exclusion
+from the description-length explosion upon observer merger is sketched but not
+demonstrated. The immediate experimental target is a simulation of two
+observer-proxy blobs on a collision course, in which the expected outcome is
+not merger (bosonic) but rebound with preserved identity (fermionic). If the
+sharp short-range repulsion predicted by the description-length argument
+emerges naturally from the compression measure, without any antisymmetry being
+hard-coded, Prediction~5 is confirmed and the framework's particle physics
+programme becomes tractable.
 
 % ============================================================
 \section{Discussion and Relation to Existing Frameworks}
@@ -741,23 +976,36 @@ simulation is the current experimental frontier of the framework.
 
 \textbf{Relation to relational quantum mechanics.}
 Rovelli's relational quantum mechanics \cite{rovelli1996} similarly holds that
-physical quantities are observer-relative. The \iame{} goes further: the observer
-and its universe are identical ($O = U_O$), and the relational structure is
-derived from a compression measure rather than postulated.
+physical quantities are observer-relative. The \iame{} goes further: the
+observer and its universe are identical ($O = U_O$), and the relational
+structure is derived from a compression measure rather than postulated.
 
 \textbf{Relation to the holographic principle.}
 The holographic principle \cite{thooft1993, susskind1995} holds that the
 information content of a region is encoded on its boundary. This is consistent
 with the \iame{}'s geometric compression scheme $\Cg$, which minimises boundary
-description length. The \iame{} provides a possible information-theoretic
-derivation of why holography holds.
+description length. The entropy decrease of collapsing spacetime --- reaching
+zero at the singularity --- is consistent with the holographic trend and
+provides a possible information-theoretic derivation of why holography holds.
 
 \textbf{Relation to Barbour's timeless physics.}
 Barbour \cite{barbour1999} argues from general relativity that time is not
 fundamental and the universe is a static ``Platonia'' of configurations. The
 \iame{} reaches the same conclusion from the opposite direction --- from the
 observer inward --- and provides a measure over configurations that Barbour's
-framework lacks.
+framework lacks. Penrose's Weyl curvature hypothesis similarly assumes an
+initially smooth state, but requires quantum mechanics and spacetime as
+primitives. The \iame{} generates smooth initial states from a perfectly
+zero-entropy bitstring without these assumptions.
+
+\textbf{Relation to Connes' noncommutative geometry.}
+Connes' spectral action programme \cite{connes1996} derives the Einstein-Hilbert
+action and the Standard Model action from a single spectral triple. The \iame{}
+provides a motivation that Connes' approach lacks: the spectral action is
+selected not by mathematical elegance but by the compression measure. The
+Dirac operator wins because it is the shortest description of spin geometry.
+Connes derives the same functional from different starting axioms; the \iame{}
+explains why those axioms hold.
 
 \textbf{Relation to Solomonoff induction and algorithmic information theory.}
 The measure $P(c) \propto 2^{-\Ctotal}$ is a variant of the universal prior
@@ -767,53 +1015,66 @@ extends it with a dual spectral-geometric decomposition motivated by the
 structure of observed physics.
 
 \textbf{What is genuinely new.}
-The \iame{}'s distinctive contributions are: (1) the derivation of $O = U_O$ from
-the IEP without additional assumptions; (2) the joint spectral-geometric
+The \iame{}'s distinctive contributions are: (1) the derivation of $O = U_O$
+from the IEP without additional assumptions; (2) the joint spectral-geometric
 compressibility equation as a single informational Lagrangian from which both
-QM and GR emerge as complementary schemes; (3) the natural suppression of
-Boltzmann brains by the same measure that selects physical structure; and (4)
-the assignment of qualia a functional, non-epiphenomenal role as heuristic
-navigators in configuration space.
+QM and GR emerge as complementary schemes; (3) the conjecture that this
+two-term functional is the scale decomposition of a single Dirac spectral
+action, providing a route to full spectral unification; (4) the natural
+suppression of Boltzmann brains by the same measure that selects physical
+structure; (5) the assignment of qualia a functional, non-epiphenomenal role;
+and (6) the derivation of an arrow-of-time and singularity-regularisation from
+pure informational principles.
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have presented the framework \iame{}, in which the
-sole primitive is the existence of a finite, structured observer, and from
-which physical laws, spacetime geometry, quantum behaviour, the arrow of time,
-the effectiveness of mathematics, and the suppression of disordered
-fluctuations all emerge as derived consequences of a single informational
-variational principle:
+We have presented \iame{}, in which the sole primitive is the existence of a
+finite, structured observer, and from which physical laws, spacetime geometry,
+quantum behaviour, the arrow of time, the effectiveness of mathematics, and the
+suppression of disordered fluctuations all emerge as derived consequences of a
+single informational variational principle:
 
 \begin{equation*}
 \Linfo = \Cs + \Cg \;\longrightarrow\; \text{minimum}
 \end{equation*}
 
-The framework is not an interpretation of existing physics. It is a derivation
-of physics from something more fundamental: the requirement that observer-
-compatible configurations be statistically typical within an unrestricted,
-pre-interpretive totality.
+We further conjecture that this principle reduces to:
 
-The outstanding open problem --- the natural emergence of fermionic exclusion
-from the compression measure --- is identified, its resolution sketched in
-terms of description-length explosion upon observer merger, and its
-computational demonstration identified as the immediate experimental target.
+\begin{equation*}
+\Linfo = \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)
+\;\longrightarrow\; \text{minimum}
+\end{equation*}
 
-The complete picture is:
-
+where $D$ is the Dirac operator, selected by the induced measure as the
+unique minimum-description-length encoding of spin geometry. In this unified
+picture, quantum mechanics is the high-frequency limit and general relativity
+is the low-frequency limit of minimising one spectral functional. No two
+theories need to be unified because they were never separate: they are the
+two ends of one spectrum.
 
 \begin{tcolorbox}[title=Summary: \iame{}]
 \begin{itemize}[leftmargin=*]
-\item Reality is an unrestricted static totality $\mathbf{U}$ containing all configurations.
-\item Finite observers self-locate in highly compressible structures via dual spectral-geometric compression.
+\item Reality is an unrestricted static totality $\mathbf{U}$ containing all
+      configurations.
+\item Finite observers self-locate in highly compressible structures via
+      dual spectral-geometric compression.
 \item Qualia are the felt heuristic guidance toward these structures.
-\item Smooth physics, laws, time, and mathematics are high-measure expected outcomes, not fine-tuned miracles.
+\item Smooth physics, laws, time, and mathematics are high-measure expected
+      outcomes, not fine-tuned miracles.
 \item The observer and the universe are identical: $O = U_O$.
-\item Everything physics observes is internal. The observer is not inside the universe. The universe is inside the observer.
+\item Cosmic expansion, entropy increase, and the arrow of time are one
+      phenomenon seen through three lenses.
+\item Gravitational singularities are informational fixed points of zero
+      entropy, not physical catastrophes.
+\item Everything physics observes is internal. The observer is not inside the
+      universe. The universe is inside the observer.
+\item The Dirac operator is conjectured to unify the two complexity measures
+      into one spectral action, reducing all of physics to a single operator
+      and a single minimisation principle.
 \end{itemize}
 \end{tcolorbox}
-
 
 % ============================================================
 \section*{Acknowledgements}

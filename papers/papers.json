@@ -5,31 +5,26 @@
       "title": "The Theory",
       "items": [
         {
-          "title": "¬(D-ψ-G):: Reality as the Large-Deviation Minimum of Observer-Compatible Histories",
+          "title": "Paper I: Reality as the Large-Deviation Minimum of Observer-Compatible Histories",
           "slug": "theory-of-everything"
         },
-	{
-          "title": "Good Heavens, Gods? Hell No, Dogs!",
-          "slug": "ghghnd"
-        }
-
+        {
+          "title": "Paper II: Singularities as Zero-Entropy States",
+          "slug": "black-hole-singularities"
+        },
+        {
+          "title": "Paper III: Emergence of Spacetime",
+          "slug": "emergence-of-spacetime"
+	}
       ]
     },
     {
-      "title": "Projects",
+      "title": "Less Serious Projects",
       "items": [
         {
           "title": "Informational Derivation of Reality",
           "slug": "informational-derivation-of-reality"
         },
-        {
-          "title": "Singularities as Zero-Entropy States",
-          "slug": "black-hole-singularities"
-        },
-        {
-          "title": "Emergence of Spacetime",
-          "slug": "emergence-of-spacetime"
-	},
         {
           "title": "Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles",
           "slug": "formation-of-structures"
@@ -79,12 +74,17 @@
       ]
     },
     {
-      "title": "Less Scientific Papers",
+      "title": "Miscellaneous Materials",
       "items": [
         {
           "title": "A Study in Significant Whitespace in YAML and Mental Collapse",
           "slug": "yaml-paradox"
+        },
+	{
+          "title": "Good Heavens, Gods? Hell No, Dogs!",
+          "slug": "ghghnd"
         }
+
       ]
     }
   ]

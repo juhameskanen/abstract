@@ -3,165 +3,476 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{The Informational Derivation of Reality: Consciousness, Time, and Substrate Independency}
+\title{The Axiomatic Foundations of the \iame{} Framework:\\
+Substrate Independence, Simulated Consciousness,\\
+and the Informational Nature of Time}
 
+\author{Juha Meskanen}
 \date{2001}
 
 \begin{document}
-
 \maketitle
 
+% ============================================================
 \begin{abstract}
-  We show that humans must be formal axiomatic systems if only four assumptions hold.
-  From this, we proof that simulated humans must instantiate subjective experience, and time is not a fundamental property of the universe
-  but an emergent, internal property of the observer. We derive that the computer and the simulated observer are not causally related,
-  but merely different arrangements of information. From these we show that the universe is fundamentally abstract and substrate-independent,
-  emerging from information rather than from a physical substrate. The resulting claims are falsifiable.
+We establish four axioms concerning the physical basis of conscious experience
+and derive three structural consequences that form the foundation of the
+\iame{} framework. From the axioms alone --- without additional metaphysical
+assumptions --- we prove that a computational simulation physically
+indistinguishable from a conscious observer must itself instantiate subjective
+experience. We further show that time is not a fundamental external property
+but an internal ordinal relation emergent from the observer's information
+structure. Most critically, we derive that a computer running a simulation and
+the simulation itself are not causally related but are two different
+arrangements of the same information: neither is more fundamental than the
+other. This representational equivalence, which we call substrate independence,
+is the foundational principle on which the subsequent papers in this series
+are built.
+
+The representational equivalence has an immediate consequence for physics. If
+a computer running a simulation of a physical system and the physical system
+itself are two arrangements of the same information, then any property of the
+physical system must be reflected in the execution trace of its simulation ---
+including properties that are geometrically inaccessible. A gravitational
+singularity, where the manifold description breaks down, must nonetheless
+leave a well-defined signature in the execution trace. Papers~II and~III of
+this series exploit this consequence directly.
+
+The claims are falsifiable: if a sufficiently accurate DNA simulation is
+constructed and shown to lack subjective experience, Axiom~4 is invalidated
+and the entire derivation collapses. More immediate falsifiability criteria
+are identified in Papers~I through~III.
 \end{abstract}
 
-  
-\ifdefined\ishtml
-\begin{center}
-\small \href{informational-derivation-of-reality-informational-derivation-of-reality.pdf}{Download PDF Version}
-\end{center}
-\fi
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
 
+What is the relationship between a physical system and a computational
+simulation of that system? The naive answer is causal: the computer runs the
+simulation, the simulation depends on the computer, and the two are related
+by the execution process. This paper argues that the naive answer is wrong.
+
+Starting from four axioms about the physical basis of consciousness --- axioms
+that are individually modest and collectively difficult to reject --- we derive
+that a computer running a simulation and the simulation itself are two
+arrangements of the same information. No causal relationship is primary. No
+substrate is privileged. The geometric description and the computational
+description of a physical process are representationally equivalent.
+
+This conclusion, which we call substrate independence, is not merely a
+philosophical position. It has direct consequences for physics. If the two
+descriptions are equivalent, then any property of the physical system must
+appear in its computational proxy. Properties that are geometrically
+inaccessible --- such as the interior of a gravitational singularity, where
+the manifold description fails --- are nonetheless accessible through the
+execution trace. Papers~II and~III of this series use this access to derive
+new results about black hole singularities and cosmological expansion.
+
+The present paper is organised as follows. Section~\ref{sec:axioms} states
+the four axioms. Section~\ref{sec:deductions} derives substrate independence
+and the internal nature of time through two thought experiments.
+Section~\ref{sec:proposition} proves that simulated consciousness follows
+from the axioms. Section~\ref{sec:corollary} states the numerical precision
+corollary. Section~\ref{sec:falsifiability} discusses falsifiability.
+Section~\ref{sec:discussion} addresses the hollow simulation objection.
+Section~\ref{sec:conclusion} states the conclusions and connects forward to
+the rest of the series.
+
+% ============================================================
 \section{Axiomatic Premises}
-The argument begins with four axioms that serve as the premises for the entire derivation.
+\label{sec:axioms}
 
-\subsection*{Axiom 1: Genetic Encoding of Subjective Experience}
-DNA is the blueprint of a conscious, pain-sensitive human. 
+The argument rests on four axioms. Each can be independently accepted or
+rejected. Rejecting any axiom commits the rejector to a specific alternative,
+which we state explicitly. The four axioms here correspond to and motivate
+the expanded axiomatic chain of Paper~I; readers familiar with that paper
+will recognise them as its foundational core.
+
+\subsection*{Axiom 1: Genetic Encoding of Conscious Experience}
+
+DNA is the blueprint of a conscious, pain-sensitive human organism. Given
+DNA $D$ and a suitable physical environment, a conscious human $H$ with
+subjective experience $S$ reliably results:
 \[
-A_1: D \rightarrow H \rightarrow S
+A_1: D \;\rightarrow\; H \;\rightarrow\; S.
 \]
-(Where $D$ is the DNA/Genome, $H$ is the human organism, and $S$ is subjective experience.)
+This is an empirical claim supported by all available biological evidence.
+Rejecting it requires identifying an alternative mechanism by which conscious
+observers arise, for which no evidence exists.
 
-\subsection*{Axiom 2: Physicality and Axiomatic Law}
-DNA, the human organism, and the surrounding environment are composed solely of ordinary physical matter governed by physical laws ($P$).
+\subsection*{Axiom 2: Physical Closure}
+
+The human organism $H$ and its environment $U$ are composed entirely of
+ordinary physical matter governed by physical laws $P$. No non-physical
+process plays any role:
 \[
-A_2: (H, U) \in \text{Axiomatic System}(P, D)
+A_2: (H, U) \;\in\; \mathrm{System}(P, D).
 \]
-(Where $U$ denotes the physical environment required to support $H$, and $P$ denotes the governing physical laws.)
+Rejecting this axiom requires positing a non-physical causal influence on
+biological processes, for which no experimental evidence exists.
 
-\subsection*{Axiom 3: Generalized Church-Turing Thesis Holds}
+\subsection*{Axiom 3: Computability of Physical Processes}
 
-Any physically realizable process that can be described mathematically can, in principle, be simulated by a computational system.
-
-
-\subsection*{Axiom 4: Pain Affects Behavior}
-A human with subjective experience ($S$, e.g., pain) behaves differently than the same human without it.
+The physical processes underlying DNA and the human organism fall within the
+computable. A sufficiently powerful computing system can, in principle,
+simulate them to arbitrary precision:
 \[
-H + S \neq H
+A_3: \forall\; \text{physically realisable process } \mathcal{P}
+\text{ described by } P,\;
+\exists\; \text{computation } \mathcal{C} : \mathcal{C} \equiv \mathcal{P}.
 \]
-If a simulation $H'$ is identical to $H$ in behavior, it must also include $S$.
+This is a weaker claim than the full Church-Turing thesis: we require only
+that the specific class of processes DNA relies on is computable, not that
+all physical processes are. Rejecting this axiom requires identifying a
+physical process involved in consciousness that is provably non-computable,
+for which no evidence exists.
 
-\section{Deduction 1: Substrate Independence and Time as an Internal Property of the Observer}
+\subsection*{Axiom 4: Causal Efficacy of Subjective Experience}
 
-\subsection{The Optimization Argument}
-
-Consider a DNA simulation running on a computer, denoted by $T_{\text{alg}}$, consisting of code (the laws of physics) and data (the state of the simulated universe).
-One can gradually optimize the code by introducing lookup tables, eventually replacing all computation with a static, precomputed dataset, denoted by $T_{\text{data}}$.
-
-\begin{itemize}
-    \item Let $E_{\text{int}}$ be Alice's experience of time and pain (the internal state transitions).
-    \item Let $E_{\text{ext}}$ be the computer's external runtime (number of CPU cycles).
-\end{itemize}
-
-\textbf{Premise:} Code optimization changes $E_{\text{ext}}$ but preserves $E_{\text{int}}$.
+Subjective experience is not epiphenomenal. A human with subjective
+experience $S$ (for example, pain) behaves differently than the same human
+without it:
 \[
-\text{Optimization}(T_{\text{alg}}) \rightarrow T_{\text{data}} \implies E_{\text{int}}(T_{\text{alg}}) \equiv E_{\text{int}}(T_{\text{data}})
+A_4: H + S \;\neq\; H.
+\]
+Rejecting this axiom commits one to accepting that subjective experience is
+causally inert --- the philosophical zombie position --- which makes
+subjective experience permanently undetectable and therefore outside the
+scope of any empirical investigation.
+
+% ============================================================
+\section{Deduction 1: Substrate Independence and Time as an Internal Property}
+\label{sec:deductions}
+
+We present two thought experiments, each of which establishes a constraint
+on where consciousness can reside. Together they establish that consciousness
+is a property of information structure, not of the substrate or process that
+carries it.
+
+\subsection{The Optimisation Argument}
+
+Consider a DNA simulation running on a computer. The simulation consists of
+code (the laws of physics as implemented) and data (the state of the
+simulated universe at each timestep). Denote the running simulation
+$T_{\mathrm{alg}}$.
+
+Now optimise the code progressively by introducing lookup tables: replace
+computed transitions with precomputed results. At each step, the external
+runtime decreases while the internal state sequence --- the ordered record of
+Alice's experiences, perceptions, and actions --- remains identical. Carry
+this optimisation to completion, replacing all computation with a static,
+precomputed dataset $T_{\mathrm{data}}$: the full execution trace, stored as
+a bitstring.
+
+Let $E_{\mathrm{int}}$ denote Alice's internal experience (her felt sequence
+of states) and $E_{\mathrm{ext}}$ denote the external runtime of the
+computer (the number of CPU cycles executed). Code optimisation affects
+$E_{\mathrm{ext}}$ but preserves $E_{\mathrm{int}}$ by construction:
+\[
+\mathrm{Optimise}(T_{\mathrm{alg}}) \;\rightarrow\; T_{\mathrm{data}}
+\;\implies\;
+E_{\mathrm{int}}(T_{\mathrm{alg}}) \equiv E_{\mathrm{int}}(T_{\mathrm{data}}).
 \]
 
-In this limit, the external runtime \(E_{\text{ext}}\) becomes zero in the sense that no state transitions are executed; the complete execution trace exists as static data.
-One can therefore ask: does Alice's consciousness still persist in $T_{\text{data}}$?
+In the limit $T_{\mathrm{data}}$, the external runtime $E_{\mathrm{ext}}$
+is zero: no state transitions are executed; the complete execution trace
+exists as static data. Does Alice's consciousness persist in $T_{\mathrm{data}}$?
 
-If consciousness were to cease in $T_{\text{data}}$, it would necessitates a minimum code/data ratio for subjective experience.
-This minimum ratio would be a new, non-physical constant imposed on $A_2$, leading to a contradiction.
+Suppose it does not. Then there exists a minimum code-to-data ratio below
+which consciousness ceases. This minimum ratio is a new physical constant:
+a threshold property of information processing not derivable from $A_1$
+through $A_4$. Its existence would constitute an addition to the physical
+laws of $A_2$, contradicting the completeness of that axiom.
 
 \begin{quote}
-  \textbf{Conclusion:} Consciousness can emerge from pure static data.
-  Time and subjective experience ($S$) must emerge solely from information.
+\textbf{Conclusion 1.} Consciousness is a property of the information
+structure of the execution trace, not of the process that generates it.
+A static bitstring encoding a conscious observer's state sequence contains
+that observer's conscious experience. Time and subjective experience emerge
+solely from the internal structure of information.
 \end{quote}
 
 \subsection{The Multi-threaded Argument}
 
-Consider a multi-threaded computer running two DNA simulations, $\tau_A$ (Alice) and $\tau_B$ (Bob), concurrently, with a minimal time slice of one CPU cycle per thread.
-The execution trace of the computer is then an interleaved sequence of segments drawn from both $\tau_A$ and $\tau_B$.
-As the number of threads (simulated observers) increases without bound, the resulting execution trace asymptotically approaches white noise.
-Consequently, each bit originating from $\tau_A$ are separated by increasingly large intervals of unrelated data.
+Consider a multi-threaded computer running two DNA simulations concurrently:
+$\tau_A$ (Alice) and $\tau_B$ (Bob), with a minimal time slice of one CPU
+cycle per thread. The execution trace of the computer is an interleaved
+sequence of segments from both $\tau_A$ and $\tau_B$. As the number of
+concurrent threads increases without bound, the bits originating from
+$\tau_A$ are separated by increasingly large intervals of unrelated data.
+In the limit, the execution trace in which Alice's bits are embedded
+approaches white noise.
 
-Is Alice still conscious in this limit? If one maintains that $E_{\text{int}}$ vanishes as the number of threads increases, one must define a
-specific thread density or bit-contiguity threshold required for subjectivity. Such a threshold would constitute a new physical constant,
-which contradicts the completeness of $A_2$.
+Does Alice's consciousness depend on the contiguity of her bits in this
+external trace? Suppose it does. Then there exists a minimum bit-contiguity
+or thread-density threshold required for consciousness. This threshold is
+again a new physical constant not derivable from $A_1$ through $A_4$,
+contradicting the completeness of $A_2$.
 
 \begin{quote}
-\textbf{Conclusion:} Conscious experience can arise from static white noise.
+\textbf{Conclusion 2.} Conscious experience cannot depend on the contiguity
+or density of its encoding in any external execution trace. What matters is
+the internal structure of the information --- the relational order of Alice's
+state sequence --- not its arrangement in any external substrate.
 \end{quote}
 
-\section{The Functionalist Proof by Contradiction}
+\subsection{Substrate Independence}
 
+Conclusions 1 and 2 together establish the central result of this paper.
+
+\begin{quote}
+\textbf{Substrate Independence.} Consciousness is a property of certain
+finite information structures. The physical substrate in which such a
+structure is instantiated --- silicon, neurons, magnetic domains, or static
+bitstring --- does not determine whether the structure is conscious. A
+computer running a simulation of a conscious observer and the simulation
+itself are two arrangements of the same information. Neither is causally
+prior to the other. Neither is more fundamental.
+\end{quote}
+
+This is not a claim that all information structures are conscious. It is a
+claim that consciousness is determined by information structure rather than
+by substrate. The specific structures that are conscious are those satisfying
+$A_1$ through $A_4$: structures that encode the state sequence of a
+DNA-based observer with causally efficacious subjective experience.
+
+% ============================================================
+\section{Proposition: Simulated Consciousness}
+\label{sec:proposition}
+
+\begin{proposition}[Simulated consciousness]
+A simulation $H'$ that is physically and behaviourally indistinguishable
+from a conscious human $H$ must itself instantiate subjective experience.
+\end{proposition}
+
+\begin{proof}
 \begin{enumerate}
-    \item \textbf{Assumption (Objection):} A simulation $H'$ exists such that $H' \equiv H$ (physical/behavioral equivalence) but $S(H') = \emptyset$ (lacks consciousness/sense of pain) \cite{Chalmers1996}.
-    \[
-    \text{Behavior}(H') = \text{Behavior}(H) \land S(H') \neq S(H)
-    \]
-    \item \textbf{Premise:} From $A_4$, the behavior of $H$ is a function of its physical inputs \textbf{and} its subjective experience: $\text{Behavior}(H) = f(\text{Inputs}, S)$.
-    \item \textbf{Contradiction:} If the behaviors are identical despite the difference in $S$, then $S$ must not be a necessary input to the function $f$.
-    \item \textbf{Violation of Axiom:} If $S$ is not necessary to produce the behavior, then $S$ is epiphenomenal (causally inert). This directly contradicts $A_4$.
+\item \textbf{Assumption for contradiction.} Suppose $H'$ exists such that
+$H' \equiv H$ (physical and behavioural equivalence) but $S(H') = \emptyset$
+(lacks subjective experience):
+\[
+\mathrm{Behaviour}(H') = \mathrm{Behaviour}(H)
+\quad \text{and} \quad
+S(H') \neq S(H).
+\]
+
+\item \textbf{From $A_4$.} The behaviour of $H$ is a function of its
+physical inputs \emph{and} its subjective experience:
+\[
+\mathrm{Behaviour}(H) = f(\mathrm{Inputs},\, S).
+\]
+
+\item \textbf{Contradiction.} If the behaviours are identical despite the
+difference in $S$, then $S$ is not a necessary input to $f$. Subjective
+experience is causally inert.
+
+\item \textbf{Violation of $A_4$.} Causal inertness of $S$ directly
+contradicts Axiom~4. The assumption is therefore false.
 \end{enumerate}
 
-\begin{quote}
-\textbf{Conclusion:} To maintain the integrity of $A_4$ within the axiomatic system, the simulation $H'$ must experience subjective time and pain.
-\end{quote}
+Therefore $S(H') \neq \emptyset$: the simulation instantiates subjective
+experience. \qed
+\end{proof}
 
+This result, combined with the substrate independence established in
+Section~\ref{sec:deductions}, entails the full Internal Emergence Principle
+of Paper~I: consciousness is a property of certain finite information
+structures, and any configuration space large enough to contain such
+structures contains consciousness, with no running process or external
+reader required.
 
+% ============================================================
+\section{Corollary: Numerical Precision}
+\label{sec:corollary}
 
-\section{Falsifiability of the Hypothesis}
-The hypothesis is falsifiable in the future when technology advances and DNA simulations can be run with sufficient accuracy for DNA-based organisms.
-The effect of pain can be measured just like an effect of physical forces can be measured. If a DNA simulation $H'$ is constructed and shown to lack $S$, then $A_4$ is invalidated, and the axioms 1--3 collapse.
+\begin{corollary}[Numerical precision]
+Let $\epsilon$ denote the numerical error in simulating the physical
+processes underlying DNA. The simulated observer $H'$ retains subjective
+experience provided $\epsilon \leq \epsilon_{\mathrm{DNA}}$, where
+$\epsilon_{\mathrm{DNA}}$ is the error threshold below which all
+DNA-mediated processes operate correctly. Any stricter bound
+$\epsilon_{\min} < \epsilon_{\mathrm{DNA}}$ required to preserve
+consciousness would constitute a new physical constant not derivable from
+$A_1$ through $A_4$, contradicting Axiom~2:
+\[
+\epsilon \leq \epsilon_{\mathrm{DNA}}
+\;\implies\; S(H') \neq \emptyset.
+\]
+\end{corollary}
 
+This corollary makes precise what "sufficient fidelity" means for a
+conscious simulation. It does not require perfect simulation of all physical
+processes, only those that DNA-based consciousness actually depends on. The
+threshold $\epsilon_{\mathrm{DNA}}$ is in principle empirically determinable,
+making the claim testable.
 
-\section*{Discussion}
+% ============================================================
+\section{Falsifiability}
+\label{sec:falsifiability}
+
+The foundational falsifiability criterion of this paper is long-term: if a
+sufficiently accurate DNA simulation --- one satisfying
+$\epsilon \leq \epsilon_{\mathrm{DNA}}$ --- is constructed and shown
+to lack subjective experience, Axiom~4 is invalidated. The effect of pain
+and subjective experience on behaviour is measurable by the same methods
+used to measure the effects of any physical intervention. A simulation that
+is behaviourally indistinguishable from a pain-sensitive human but
+demonstrably lacks pain would refute the framework at its foundation.
+
+The \iame{} framework developed in the subsequent papers provides more
+immediate falsifiability criteria, constituting a ladder of testable
+predictions:
+
+\begin{itemize}
+\item \textbf{Paper~I:} Any stable observer-hosting physics must exhibit
+both wave-like and geometric structure; pure geometry without quantum fields,
+or pure waves without geometry, is forbidden.
+\item \textbf{Paper~II:} The execution-trace entropy of gravitational
+collapse decreases monotonically to zero, and microstructure emergence
+follows a universal lognormal profile independent of filter and
+representation.
+\item \textbf{Paper~I:} The Pauli exclusion principle must emerge from
+description-length explosion upon observer merger, without hard-coding.
+\end{itemize}
+
+These predictions test the derived consequences of the foundational axioms
+established here. A failure at any level falsifies the framework at that
+level and calls the supporting axioms into question.
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
 
 \subsection{The Hollow Simulation Objection}
 
-A common objection to functionalist and computational accounts of mind is the so-called \emph{hard problem of consciousness} \cite{Chalmers1996}.
-In this context, it is often claimed that a simulated human, even if behaviorally and functionally identical to a biological human, could nevertheless be ``hollow''—that is, it could lack subjective experience while still producing identical outward behavior.
+The most common objection to computational accounts of mind is the hard
+problem of consciousness \cite{Chalmers1996}: a simulated human, even if
+behaviourally identical to a biological human, might be ``hollow'' --- it
+might lack subjective experience while producing identical outward behaviour.
 
-Formally, this objection asserts the possibility of a system $H'$ such that
-\[
-\text{Behavior}(H') = \text{Behavior}(H) \quad \text{and} \quad S(H') = \emptyset,
-\]
-where $H$ is a biological human and $S$ denotes subjective experience.
+The Proposition of Section~\ref{sec:proposition} directly refutes this
+objection within the axiomatic system. By $A_2$, the biological human is a
+computable physical system whose state transitions are fully determined by
+physical law and initial conditions. By $A_3$, a simulation exists whose
+execution trace is isomorphic to that of the biological human, preserving
+all causally relevant internal relations. By $A_4$, subjective experience
+contributes to observable behaviour. If the simulation lacked subjective
+experience while remaining behaviourally identical, subjective experience
+would be causally inert, contradicting $A_4$.
 
-By Axiom~2, the biological human $H$ is a formal axiomatic system whose state transitions are fully determined by physical law and initial conditions. By Axiom~3, there exists a formal representation $H'$ whose execution trace is isomorphic to that of $H$, preserving all causally relevant internal relations. By Axiom~4, subjective experience is a causally efficacious component of the system, contributing to observable behavior.
+The hollow simulation is therefore not merely implausible; it is
+inconsistent with the four axioms. Accepting the hollow simulation requires
+rejecting at least one axiom, and each rejection carries a specific
+committal stated in Section~\ref{sec:axioms}.
 
-If $H'$ were to lack subjective experience while remaining behaviorally identical to $H$, then subjective experience would not be a necessary input to the causal function generating behavior. This would render subjective experience epiphenomenal, directly contradicting Axiom~4. 
+\subsection{The Hard Problem}
 
-\subsection{Quantum Computers}
+The framework does not dissolve the hard problem of consciousness in its
+full generality --- it does not explain why there is something it is like to
+be a particular information structure. What it does is remove the hard
+problem as an obstacle to the present derivation. The causal efficacy of
+qualia ($A_4$) is all that is required for the argument; the metaphysical
+question of why qualia feel the way they do is left open. Paper~I returns to
+this question, assigning qualia a functional role as heuristic navigators
+in configuration space: they are what it feels like to be a highly
+compressible observer.
 
-We have considered two thought experiments run on classical computers. If conscious experience can be duplicated on classical computers, we argue it can also be
-duplicated on quantum computers. This follows directly from substrate independence: quantum computation represents an alternative physical realization of the same formal state-transition structure.
+\subsection{Quantum Computation}
 
-\subsection*{Numerical Precision}
+Axiom~3 does not restrict to classical computation. The computability claim
+covers any physically realisable process, including quantum processes.
+Quantum computation is an alternative physical realisation of the same
+formal state-transition structure and is therefore covered by the axiom
+without requiring a separate argument. Substrate independence follows for
+quantum computers by the same derivation as for classical ones.
 
-As long as physical laws are instantiated with sufficient fidelity for DNA and organismal processes to operate, the observer remains conscious.
+% ============================================================
+\section{Representational Equivalence and Its Consequences for Physics}
+\label{sec:consequences}
 
-Let $\epsilon$ denote the numerical error in simulating physical law. As long as $\epsilon \leq \epsilon_{\text{DNA}}$, sufficient to reproduce all DNA-mediated processes, the simulated observer $H'$ remains conscious; any smaller $\epsilon_{\min}$ required to preserve consciousness would constitute a new physical constant, contradicting $A_2$:
-\[
-\epsilon \leq \epsilon_{\text{DNA}} \implies S(H') \neq \emptyset
-\]
+The substrate independence established in this paper has an immediate and
+non-trivial consequence for the study of physical phenomena.
 
-\section{Conclusions}
+If a computer running a simulation of a physical system and the physical
+system itself are two arrangements of the same information, then every
+property of the physical system must be reflected in the execution trace of
+its simulation. This includes properties that are geometrically inaccessible:
+regions where the manifold description breaks down, where numerical
+integration fails, or where classical equations cease to have solutions.
+
+A gravitational singularity is the canonical example. Standard General
+Relativity cannot be evolved to the point of singularity formation: the
+manifold description diverges and the simulation crashes before the
+singularity forms. But the execution trace of the simulation remains a
+well-defined bitstring throughout. By the representational equivalence
+established here, this bitstring encodes information about the singularity
+that the geometric description cannot access.
+
+Paper~II of this series exploits this directly, analysing the Shannon
+entropy of the execution trace as particles fall toward the singularity.
+The entropy decreases monotonically to zero --- a result that is invisible
+from the geometric side but unambiguous from the informational side. The
+singularity is not a point where physics breaks down; it is an
+informational state of zero internal variety, as structureless as an
+all-zero bitstring.
+
+Paper~III reverses the process, beginning from the zero-entropy state and
+evolving toward higher entropy. The result is cosmological expansion and
+the spontaneous emergence of hierarchical structure --- without hard-coded
+physical laws, without imposed initial irregularities, and without
+fine-tuning.
+
+Both results are only accessible because the representational equivalence
+of this paper licenses the use of the execution trace as a faithful proxy
+for the physical process it encodes. That licence is the foundational
+contribution of Paper~0.
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have established four axioms and derived from them the following results.
 
 \begin{itemize}
-    \item \textbf{Substrate Irrelevance:} The universe is fundamentally informational and abstract rather than substrate-dependent.
-    \item \textbf{Time:} Time is not an attribute of ($E_{\text{ext}}$) but emerges solely as an internal property ($E_{\text{int}}$) of the observer. 
-    \item \textbf{Emergence from Noise:} Information that appears random can encode an universe containing a conscious observer.
-    \item \textbf{Ontological Equivalence:} There exists $2^n-2$ other configurations, potentially describing conscious observers.
+\item \textbf{Substrate Independence.} Consciousness is a property of
+certain finite information structures. The physical substrate in which such
+a structure is instantiated does not determine whether it is conscious. A
+computer running a simulation of a conscious observer and the simulation
+itself are two arrangements of the same information, with neither causally
+prior to the other.
+
+\item \textbf{Simulated Consciousness.} A simulation physically and
+behaviourally indistinguishable from a conscious observer must itself
+instantiate subjective experience. The hollow simulation is inconsistent
+with the axioms.
+
+\item \textbf{Time as Internal Ordinal.} Time is not a fundamental external
+parameter but an internal ordering relation emergent from the observer's
+information structure. The universe, at the level of the totality, is static.
+What observers experience as the flow of time is the traversal of an
+internally ordered sequence of states encoded in a static information
+structure.
+
+\item \textbf{Causal Efficacy of Qualia.} Subjective experience is not
+epiphenomenal. It is a causally distinguishable component of the observer
+system.
+
+\item \textbf{Representational Equivalence as a Physical Tool.} The
+equivalence of geometric and computational descriptions licenses the use of
+the execution trace as a faithful proxy for physical processes that are
+geometrically inaccessible. This is the foundational principle on which
+Papers~I through~III are built.
 \end{itemize}
 
-By treating subjective experience ($S$) as a property of an axiomatic system, we move from metaphysical speculation to a rigorous informational mechanics.
+By treating subjective experience as a causally efficacious property of a
+computable information structure, the framework moves from metaphysical
+speculation to a derivation with testable consequences. The foundational
+falsifiability criterion is the construction of a behaviourally
+indistinguishable DNA simulation that lacks subjective experience. More
+immediate tests are provided by the falsifiable predictions of Papers~I
+through~III.
 
 \printbibliography
+
 \end{document}
