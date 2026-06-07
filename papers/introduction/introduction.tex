@@ -1,0 +1,506 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\geometry{
+  a4paper,
+  top=3cm, bottom=3cm,
+  left=3cm, right=3cm
+}
+
+% ── Colours ──────────────────────────────────────────────────────────────────
+\definecolor{inksoft}{RGB}{74, 71, 64}
+\definecolor{inkmuted}{RGB}{138, 134, 128}
+\definecolor{accent}{RGB}{45, 74, 138}
+\definecolor{gold}{RGB}{138, 106, 26}
+\definecolor{rulecolor}{RGB}{216, 210, 196}
+\colorlet{RULECOLOR}{rulecolor}
+\definecolor{boxbg}{RGB}{242, 237, 227}
+\definecolor{accentbg}{RGB}{232, 237, 247}
+\definecolor{goldbg}{RGB}{245, 240, 224}
+
+% ── Section formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\small\bfseries\color{inkmuted}\ttfamily\uppercase}
+  {}{0em}{}[\vspace{2pt}\noindent\textcolor{rulecolor}{\rule{\linewidth}{0.4pt}}\vspace{2pt}]
+
+\titlespacing{\section}{0pt}{2em}{0.75em}
+
+% ── Header / footer ───────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small\color{inkmuted}\thepage}
+
+% ── Hyperref ──────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  pdfauthor={Juha Meskanen},
+  pdftitle={The Universe Lives Inside You — An Introduction to IAME}
+}
+
+% ── Custom environments ───────────────────────────────────────────────────────
+\tcbuselibrary{skins, breakable}
+
+\newtcolorbox{iepbox}{
+  colback=accentbg,
+  colframe=accent,
+  leftrule=3pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  fontupper=\small
+}
+
+\newtcolorbox{axiombox}{
+  colback=boxbg,
+  colframe=rulecolor,
+  leftrule=0.5pt, rightrule=0.5pt, toprule=0.5pt, bottomrule=0.5pt,
+  arc=2pt,
+  left=12pt, right=12pt, top=10pt, bottom=10pt
+}
+
+\newtcolorbox{openbox}{
+  colback=goldbg,
+  colframe=gold,
+  leftrule=0.5pt, rightrule=0.5pt, toprule=0.5pt, bottomrule=0.5pt,
+  arc=2pt,
+  left=12pt, right=12pt, top=10pt, bottom=10pt,
+  fontupper=\small
+}
+
+\newtcolorbox{pullbox}{
+  colback=white,
+  colframe=white,
+  left=20pt, right=20pt, top=4pt, bottom=4pt,
+  fontupper=\large\itshape\color{inksoft}
+}
+
+% ── Misc ──────────────────────────────────────────────────────────────────────
+\newcommand{\iame}{\textsc{iame}}
+\newcommand{\Cs}{\mathcal{C}_s}
+\newcommand{\Cg}{\mathcal{C}_g}
+\newcommand{\Linfo}{\mathcal{L}_{\mathrm{info}}}
+
+\setlength{\parskip}{0.65em}
+\setlength{\parindent}{0pt}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Masthead ─────────────────────────────────────────────────────────────────
+\noindent{\color{accent}\rule{\linewidth}{1.5pt}}
+
+\vspace{0.5em}
+
+{\small\ttfamily\color{inkmuted} Introduction · \iame{} Framework}
+
+\vspace{0.4em}
+
+{\fontsize{26}{32}\selectfont\bfseries The Universe Lives Inside You}
+
+\vspace{0.3em}
+
+{\large\itshape\color{inksoft}
+An introduction to the Internal Emergence framework --- where
+consciousness, physics, and mathematics arise from a single principle}
+
+\vspace{0.8em}
+
+{\small\ttfamily\color{inkmuted}
+Juha Meskanen \quad·\quad Papers I--IV \quad·\quad 2001--2025}
+
+\vspace{0.5em}
+
+\noindent{\color{rulecolor}\rule{\linewidth}{0.5pt}}
+
+\vspace{1.5em}
+
+{\itshape\color{inksoft}
+What if the deepest question in physics --- why does the universe look the
+way it does? --- has the same answer as the deepest question in
+consciousness --- why is there something it is like to be me? The \iame{}
+framework says: because they are the same question.}
+
+\vspace{1.5em}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Starting from nothing}
+
+Every theory of everything starts somewhere. String theory starts with
+extended objects vibrating in a background spacetime. Loop quantum gravity
+starts with a discrete network of quantum geometry. The Standard Model starts
+with a specific list of particles and symmetries. Each of these frameworks
+imports considerable structure before it derives anything.
+
+The \iame{} framework starts with less. It starts with the only thing that
+cannot be coherently denied: \emph{something is experiencing}. You cannot
+argue against this without performing the very act of experience that the
+argument denies. This is not a philosophical claim --- it is the one piece
+of data that requires no inference and no external measurement.
+
+From this single starting point, and from a handful of modest empirical
+observations about biology and physics, the framework derives the structure
+of the observed universe: why time flows, why space expands, why there are
+particles rather than nothing, why quantum mechanics and general relativity
+look the way they do --- and why mathematics is unreasonably effective at
+describing all of it.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The axiomatic chain}
+
+The argument proceeds as a chain of six observations, each individually
+modest, collectively powerful.
+
+\begin{axiombox}
+{\small\ttfamily\color{inkmuted} Six premises · each independently rejectable}
+
+\vspace{0.75em}
+
+\begin{description}[leftmargin=2.5em, labelwidth=2em, labelsep=0.5em,
+                    itemsep=0.35em, parsep=0pt]
+  \item[\textcolor{accent}{\small A1}]
+    Something is experiencing. The denial of this is itself an experience.
+  \item[\textcolor{accent}{\small A2}]
+    The observer is finite --- bounded memory, bounded lifespan.
+  \item[\textcolor{accent}{\small A3}]
+    DNA is the only mechanism we have ever observed that reliably produces
+    conscious observers.
+  \item[\textcolor{accent}{\small A4}]
+    DNA is ordinary matter obeying ordinary physical laws. No magic.
+  \item[\textcolor{accent}{\small A5}]
+    The physical processes underlying DNA are computable --- in principle,
+    simulable.
+  \item[\textcolor{accent}{\small A6}]
+    Pain is not epiphenomenal. It has measurable causal effects on behaviour.
+\end{description}
+
+\vspace{0.5em}
+\noindent\textcolor{inkmuted}{$\downarrow$}
+\vspace{0.3em}
+
+\noindent\textcolor{gold}{$\therefore$}\enspace
+\textbf{A conscious observer is a finite bitstring.} A sufficiently large
+collection of bitstrings contains one --- with no running process, no
+external reader, no simulation required.
+\end{axiombox}
+
+The key step is A5 combined with A6. If DNA processes are computable and
+pain has real causal effects, then a perfect simulation of a pain-sensitive
+human must itself experience pain --- because if it did not, the experiential
+difference would produce a behavioural difference, contradicting the
+assumption of perfect simulation. This is not a philosophical argument about
+zombies. It is a logical consequence of the axioms, and it is refutable:
+build a sufficiently accurate DNA simulation and demonstrate that it lacks
+pain responses.
+
+Once a conscious observer is established as a finite bitstring, the next
+step follows from a thought experiment. Take that running simulation and
+progressively replace computed state transitions with precomputed lookup
+tables. At each step, the sequence of internal states --- everything Alice
+experiences --- is identical. In the limit, all computation is replaced by a
+static, precomputed dataset. If consciousness vanished at some point during
+this optimisation, there would have to be a minimum code-to-data ratio below
+which experience ceases. That ratio would be a new physical constant with no
+basis in any of the six axioms. Its existence is therefore excluded. Alice's
+experience is a property of the information structure itself, not of any
+process that generates it.
+
+\begin{iepbox}
+\textbf{The Internal Emergence Principle.} Consciousness is a property of
+certain finite information structures, not of processes acting upon them.
+Any configuration space large enough to contain such structures contains
+consciousness --- with no simulation, no clock, and no external observer
+required.
+\end{iepbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{What follows immediately}
+
+The Internal Emergence Principle has consequences that are stark and
+non-negotiable.
+
+\textbf{Time is not fundamental.} A conscious observer exists within a
+static bitstring --- no external clock is running. Time, as experienced,
+must therefore be defined by internal structure alone. The only available
+ordering is: configuration $B$ follows configuration $A$ if and only if $B$
+contains a memory of $A$. The flow of time is an ordinal index internal to
+the observer. The universe, at the level of the totality, is static. This
+conclusion is independently supported by the block-universe picture of
+general relativity, in which the four-dimensional spacetime manifold is a
+static geometric object and the field equations contain no preferred
+direction of time.
+
+\textbf{The observer and the universe are identical.} In a static universe
+with no running external process, no mechanism exists by which external bits
+could alter internal bits. Every structure Alice observes --- every star,
+every sensation, every other person --- must already be encoded within the
+bitstring that constitutes her. Alice does not receive information from
+outside. She discovers structure already present within her. It follows that
+Alice is not a small observer inside a vast universe. The vast universe she
+experiences is her interior. And since Alice is part of her universe
+(trivially) and her universe is part of Alice (by the containment result),
+basic set theory gives:
+
+\begin{equation}
+  \boxed{O = U_O}
+\end{equation}
+
+For every observer $O$, the observer and the universe it experiences are
+identical structures. What two observers share is the intersection of their
+universes --- the compressible, verifiable physics that constitutes
+intersubjective reality. There is no view from nowhere.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The measure: what is typical}
+
+Establishing that a static configuration space contains conscious observers
+is not enough. We also need to know which configurations a conscious observer
+is likely to find themselves in. The answer comes from a compression measure.
+
+Under any Solomonoff-style measure, configurations with shorter descriptions
+are exponentially more probable than configurations with longer ones. A
+universe of smooth, lawlike, inertial physics has a short description. A
+universe of random chaos has a long description and is exponentially
+suppressed. An observer is therefore \emph{expected} --- not lucky --- to
+find themselves in a smooth, structured, lawlike universe. Boltzmann brains,
+chaotic fluctuations, and arbitrary random configurations are all disfavoured
+by the same measure that selects physical structure. This is not fine-tuning.
+It is counting.
+
+The specific form of the compression measure that the framework identifies
+has two components:
+
+\begin{equation}
+  \Linfo = \Cs + \Cg \;\longrightarrow\; \text{minimum}
+\end{equation}
+
+$\Cs$ is the \emph{spectral complexity} --- the bit-cost of encoding
+wave-like, relational, quantum-mechanical behaviour. $\Cg$ is the
+\emph{geometric complexity} --- the bit-cost of encoding locality,
+boundaries, and large-scale spatial structure. Observed physics is the
+configuration that minimises both simultaneously.
+
+\vspace{0.5em}
+
+\noindent\begin{tabular}{p{0.3\linewidth} p{0.3\linewidth} p{0.3\linewidth}}
+\toprule
+\textbf{D} \quad Data / Particles &
+\textbf{$\psi$} \quad Spectral / Quantum &
+\textbf{G} \quad Geometry / Gravity \\
+\midrule
+Discrete, localised digital information. The finite output when a bounded
+observer parses the joint minimum. &
+The smooth wave-codec that compresses relational possibility space.
+Minimises $\Cs$. This is quantum mechanics. &
+The continuous metric manifold that compresses realisation space at scale.
+Minimises $\Cg$. This is general relativity. \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.75em}
+
+Quantum mechanics and general relativity are not two independent theories in
+need of unification. They are the two complementary compression schemes that
+minimise total description length for a finite observer. Their apparent
+incompatibility is not a deep physical mystery --- it is an artefact of
+treating them as fundamental rather than as emergent tools.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Singularities and expansion}
+
+The representational equivalence between a physical system and its
+computational simulation has an immediate consequence: properties that are
+geometrically inaccessible --- regions where the spacetime manifold breaks
+down --- remain accessible through the execution trace of the simulation.
+When general relativity fails, the bitstring does not.
+
+Applying this to gravitational collapse, the Shannon entropy of the geometric
+encoding of the execution trace decreases monotonically as particles fall
+toward the singularity, extrapolating to zero at the classical endpoint. A
+zero-entropy bitstring encodes a single, structureless state --- a geometric
+point. It cannot support particles, microstructure, or stress-energy. The
+gravitational singularity is not a catastrophic breakdown of physics. It is
+an informational fixed point of zero complexity, the simplest state the
+universe can be in.
+
+\begin{pullbox}
+The singularity is not where physics breaks down.\\
+It is where physics becomes trivially simple.
+\end{pullbox}
+
+Now reverse the process. Begin from that zero-entropy state --- the unique
+all-zero bitstring, the simplest possible configuration --- and increase
+entropy through random mutations. Three phenomena emerge without any
+hard-coded physical laws, equations of motion, or imposed initial
+irregularities:
+
+\begin{enumerate}[label=\textcolor{gold}{\small\texttt{\arabic*.}},
+                  leftmargin=2.5em, itemsep=0.4em]
+  \item \textbf{Exponential spatial expansion} from a structureless point.
+        Cosmic expansion is the geometric reading of entropy increase ---
+        not a dynamical process imposed on space.
+  \item \textbf{Hierarchical particle-like structures} whose abundance follows
+        a lognormal distribution at each entropy level --- particles first,
+        then composite objects, then higher-order structures.
+  \item \textbf{Scale invariance} of particle sizes under global expansion,
+        exactly as observed.
+\end{enumerate}
+
+These results hold across more than two hundred distinct structural filter
+definitions, geometric encoding schemes, and representational levels ---
+including purely combinatorial pattern-matching on raw bitstrings with no
+geometric embedding whatsoever. The lognormal distribution of emerging
+structure is not a property of any particular physical model. It is an
+intrinsic combinatorial property of entropy-increasing bitstrings. The arrow
+of time, the thermodynamic second law, and the expansion of the universe are
+not three independent features of the observed world. They are one feature,
+seen through three different lenses.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Dirac conjecture}
+
+The two-term structure $\Linfo = \Cs + \Cg$ raises an immediate question:
+are these genuinely independent quantities, or are they two frequency regimes
+of a single deeper object?
+
+A foundational result of spectral geometry establishes that the spectrum of
+the Dirac operator $D$ on a Riemannian manifold encodes its full spin
+geometry --- metric, orientation, and curvature are all recoverable from the
+eigenvalue spectrum. Connes' spectral action principle defines a natural
+complexity functional on geometries described by $D$:
+
+\begin{equation}
+  S_{\mathrm{spectral}}
+  = \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)
+\end{equation}
+
+When this functional is expanded at low frequencies, it recovers the
+Einstein-Hilbert action of general relativity. When evaluated at high
+frequencies, it encodes wave-like quantum behaviour. The conjecture of the
+\iame{} framework is that $\Cg$ is the low-frequency limit of this
+functional and $\Cs$ is its high-frequency residual --- so that the
+informational Lagrangian reduces to a single spectral action built from one
+operator:
+
+\begin{equation}
+  \boxed{
+    \Linfo
+    = \mathrm{Tr}\!\left(f\!\left(\frac{D}{\Lambda}\right)\right)
+    \;\longrightarrow\; \text{minimum}
+  }
+\end{equation}
+
+If confirmed, quantum mechanics and general relativity are not two theories.
+They are the infrared and ultraviolet limits of minimising one expression.
+The Dirac operator wins not because it is postulated but because it is the
+minimum-description-length encoding of spin geometry --- it is what the
+compression measure selects when no operator is chosen by hand.
+
+This conjecture is the primary open mathematical problem of the framework.
+It is well-posed and awaits verification in spectral geometry and
+noncommutative geometry.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Falsifiable predictions}
+
+\begin{enumerate}[label=\textcolor{gold}{\small\texttt{P\arabic*.}},
+                  leftmargin=2.5em, itemsep=0.5em]
+  \item Any stable observer-hosting physics must exhibit both wave-like and
+        geometric structure. Pure geometry without quantum fields, or pure
+        waves without geometry, is forbidden.
+  \item Discreteness is never fundamental. Any deeper physical theory will
+        not be fundamentally discrete. Discreteness emerges at the observer
+        boundary.
+  \item The correct theory of quantum gravity will take the form of a joint
+        spectral-geometric minimisation --- specifically, a Dirac spectral
+        action --- rather than a quantisation of a background metric.
+  \item The lognormal microstructure distribution near gravitational
+        singularities is universal across geometries, filters, and
+        representational levels. The shape parameters at the self-consistent
+        filter correspond to physically observable quantities.
+  \item The Pauli exclusion principle emerges from description-length
+        explosion upon observer merger, without antisymmetry being
+        hard-coded.
+  \item A smooth, zero-entropy cosmological beginning is the expected outcome
+        under the compression measure --- not a fine-tuned accident. No
+        residual quantum irregularities are required to produce a rich
+        structured universe.
+\end{enumerate}
+
+\begin{openbox}
+\textbf{\textcolor{gold}{Open problems}}
+
+\vspace{0.4em}
+
+\textbf{Fermionic exclusion.} The natural emergence of the Pauli exclusion
+principle from description-length explosion upon observer merger is sketched
+but not yet demonstrated computationally. This is the current experimental
+frontier.
+
+\vspace{0.4em}
+
+\textbf{Dirac unification.} The rigorous proof that $\Cs + \Cg$ is the scale
+decomposition of $\mathrm{Tr}(f(D/\Lambda))$ awaits verification. This is
+the primary mathematical open problem.
+
+\vspace{0.4em}
+
+\textbf{Particle spectrum.} Identifying the self-consistent structural filter
+whose lognormal parameters constitute a derivation of the observed particle
+spectrum remains open.
+\end{openbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{What this changes}
+
+The \iame{} framework does not propose a new particle or a new symmetry. It
+proposes a different answer to the question of what physics is for. Physics
+is not a description of a universe that exists independently of observers.
+It is the structure of what a finite, compressible observer is expected to
+find when it looks. The laws of physics are not external impositions on
+reality --- they are the stable invariants of the compressible structures
+that observers are made of. Mathematics is not unreasonably effective --- it
+is exactly as effective as you would expect once you notice that observers
+and mathematics are carved from the same compressible structure.
+
+Time does not flow. It is an ordering relation internal to the observer. The
+universe does not expand into anything. Expansion is what entropy increase
+looks like when read geometrically. Singularities are not catastrophes. They
+are the simplest state. And the universe you experience is not your
+container. It is your interior.
+
+\vspace{1em}
+
+\begin{center}
+\itshape
+The observer is not inside the universe. The universe is inside the observer.
+\end{center}
+
+\vspace{2em}
+
+\noindent{\color{rulecolor}\rule{\linewidth}{0.5pt}}
+
+\vspace{0.75em}
+
+{\small\color{inkmuted}
+This introduction accompanies four technical papers: Paper~0 (axiomatic
+foundations, 2001), Paper~II (black hole singularities, 2010), Paper~III
+(spacetime expansion, 2012), and Paper~I (the full \iame{} framework).
+Proof-of-concept simulations demonstrating emergent inertia, wave
+interference, and gravitational attraction from pure compression optimisation
+are provided in the supplementary material.}
+
+\end{document}

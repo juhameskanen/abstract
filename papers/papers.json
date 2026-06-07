@@ -2,20 +2,28 @@
   "title": "The Abstract Universe Project (AUP)",
   "sections": [
     {
-      "title": "The Theory",
+      "title": "IAME - The Theory",
       "items": [
         {
-          "title": "Paper I: Reality as the Large-Deviation Minimum of Observer-Compatible Histories",
-          "slug": "theory-of-everything"
+          "title": "Introduction to IAME:",
+          "slug": "introduction"
         },
         {
-          "title": "Paper II: Singularities as Zero-Entropy States",
+          "title": "Paper~0: The Axiomatic Foundations of the IAME Framework",
+          "slug": "informational-derivation-of-reality"
+        },
+        {
+          "title": "Paper~II: Singularities as Zero-Entropy States",
           "slug": "black-hole-singularities"
         },
         {
-          "title": "Paper III: Emergence of Spacetime",
+          "title": "Paper~III: Emergence of Spacetime",
           "slug": "emergence-of-spacetime"
-	}
+	},
+        {
+          "title": "Paper~I: Reality as the Large-Deviation Minimum of Observer-Compatible Histories",
+          "slug": "theory-of-everything"
+        }
       ]
     },
     {
