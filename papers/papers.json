@@ -2,14 +2,23 @@
   "title": "The Abstract Universe Project (AUP)",
   "sections": [
     {
-      "title": "IAME - The Theory",
+      "title": "The Theory",
       "items": [
         {
-          "title": "Introduction to IAME:",
+          "title": "Introduction",
           "slug": "introduction"
         },
         {
-          "title": "Paper~0: The Axiomatic Foundations of the IAME Framework",
+          "title": "Paper~I: Theory of Everything",
+          "slug": "theory-of-everything"
+        }
+      ]
+    },
+    {
+      "title": "Supplementary Papers",
+      "items": [
+        {
+          "title": "Paper~0: The Axiomatic Foundations",
           "slug": "informational-derivation-of-reality"
         },
         {
@@ -19,11 +28,7 @@
         {
           "title": "Paper~III: Emergence of Spacetime",
           "slug": "emergence-of-spacetime"
-	},
-        {
-          "title": "Paper~I: Reality as the Large-Deviation Minimum of Observer-Compatible Histories",
-          "slug": "theory-of-everything"
-        }
+	}
       ]
     },
     {
