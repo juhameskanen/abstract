@@ -6,7 +6,7 @@
 \title{Black Hole Singularities as Zero-Entropy States}
 
 \author{Juha Meskanen}
-\date{2010}
+\date{2010 \dots 2026}
 
 \begin{document}
 \maketitle
@@ -22,17 +22,17 @@ fundamental. Standard General Relativity cannot be evolved through
 singularity formation due to numerical divergences and the breakdown of
 the manifold description. The execution trace provides a complementary,
 well-behaved description that remains defined throughout collapse. Analysing
-the Shannon entropy of the bitstring sub-trace for both Schwarzschild and
-Kerr geometries, we find a monotonic decrease converging to zero at the
-singularity. We argue that this identifies the singularity not as a point of
-infinite curvature but as a state of zero informational variety --- a
-point incapable of supporting microstructure, matter, or
-distinguishable geometry. A secondary result, not predicted in advance, is
-that the probability of microstructure emergence as a function of radial
-distance follows a universal lognormal profile, independent of the structural
-filter applied and independent of the representational level at which the
-analysis is performed. Both results require no new physics beyond the
-informational equivalence established in Paper~I.
+the spatial informational evolution using a multi-metric diagnostic suite---comprising 
+single-bit Shannon entropy, $n$-bit pattern block entropy, and a dynamic 
+inter-particle spectral complexity measure---we map structural phase transitions 
+across Schwarzschild, Eddington-Finkelstein, and high-spin Kerr geometries. 
+We find that while bit and block entropies decrease monotonically toward zero, the 
+spectral complexity tracks higher-order spatial rearrangements. Schwarzschild 
+collapses exhibit non-monotonic tidal peaks before vanishing, whereas Kerr spacetimes 
+reveal an abrupt transition to chaotic complexity spikes upon breaching the 
+ergosphere due to differential frame-dragging. We argue that these metrics identify the 
+singularity not as a point of infinite curvature but as a state of zero informational variety 
+--- a point incapable of supporting microstructure, matter, or distinguishable geometry.
 \end{abstract}
 
 % ============================================================
@@ -54,13 +54,16 @@ Emergence Principle (IEP) without additional assumptions, allows the
 singularity to be approached from the informational side even when the
 geometric description fails. The central question is not what the geometry
 does at the singularity --- it diverges, by definition --- but what the
-execution trace does. The answer, we find, is that the execution trace
-converges: its Shannon entropy decreases monotonically to zero.
+execution trace does. The answer, we find, is that the informational variety 
+of the execution trace collapses into a trivial state.
 
-This reframes the singularity entirely. A zero-entropy bitstring encodes a
-single, structureless state. Under any faithful geometric decoding, a
-zero-entropy source resolves to a point of zero size. It cannot encode
-microstructures, particles, or stress-energy. The singularity is therefore
+To rigorously isolate this collapse, we evaluate the spatial state under three 
+distinct information-theoretic lenses: microscopic bitwise diversity, localized pattern 
+redundancy via block structures, and structural resource costs via continuous 
+spatial frequency spectra. This multi-metric spectrum reframes the singularity entirely. 
+A zero-entropy, zero-complexity bitstring encodes a single, structureless state. Under 
+any faithful geometric decoding, a zero-entropy source resolves to a point of zero size. 
+It cannot encode microstructures, particles, or stress-energy. The singularity is therefore
 not a point where physics breaks down but an informational state where
 physics becomes trivially simple: there is nothing there to be described.
 
@@ -72,37 +75,23 @@ structure of the collapse process itself.
 
 The paper is structured as follows. Section~\ref{sec:framework} summarises
 the relevant results from Paper~I. Section~\ref{sec:methods} defines the
-execution trace, the geometric encoding, and the entropy measure.
+execution trace, the geometric encoding, and the multi-metric complexity suite.
 Section~\ref{sec:simulations} presents the numerical results for
-Schwarzschild and Kerr geometries. Section~\ref{sec:discussion} interprets
-the results and discusses the lognormal microstructure distribution.
+Schwarzschild, Advanced Unistructural (AU), Eddington-Finkelstein (EF), and Kerr geometries. 
+Section~\ref{sec:discussion} interprets the results and discusses their physical implications. 
 Section~\ref{sec:conclusion} concludes.
 
 % ============================================================
 \section{Framework: Informational Equivalence of Geometry and Computation}
 \label{sec:framework}
 
-The argument of this paper rests on three propositions established in
+The argument of this paper rests on the proposition established in
 Paper~I, which we summarise here for completeness.
 
-\textbf{Proposition 1 (Simulation consciousness).} A simulation physically
-indistinguishable from a conscious system must itself be conscious. This
-follows from the causal efficacy of qualia: if consciousness were absent
-from the simulation, the experiential difference would produce a measurable
-behavioural difference, contradicting the assumption of indistinguishability.
-
-\textbf{Proposition 2 (Static bitstring equivalence).} A fully static
-bitstring --- the precomputed execution trace of a simulation --- contains
-the same conscious experience as the running simulation. Active execution is
-not required. The introduction of a code-to-data threshold below which
-consciousness ceases would constitute a new physical constant with no basis
-in the axioms of Paper~I, and is therefore excluded.
-
-\textbf{Corollary (Representational equivalence).} Propositions 1 and 2
-together imply that the geometric description of a physical process and the
-computational description of its simulation are two representations of the
-same informational structure, with neither being more fundamental. This
-equivalence is not an interpretive convenience but a structural consequence
+\textbf{Corollary (Representational equivalence).} The geometric description of a
+physical process and the computational description of its simulation are two
+representations of the same informational structure, with neither being more fundamental.
+This equivalence is not an interpretive convenience but a structural consequence
 of the IEP.
 
 The representational equivalence is what licenses the approach of this
@@ -152,30 +141,64 @@ spurious entropy contributions from floating-point representation and ensures
 that the entropy of the bitstring faithfully reflects the geometric
 distinguishability of the encoded states.
 
-\subsection{Execution-Trace Entropy}
+\subsection{The Informational Diagnostic Suite}
 
-At each simulation timestep $t$, the full geometric state is encoded as a
-single bitstring $b_t \in \{0,1\}^L$. We compute the Shannon entropy of the
-empirical bit-frequency distribution over $b_t$:
+To extract both macroscale pattern formation and microscale structural disorder 
+during gravitational collapse, we evaluate the particle coordinate distribution 
+using three complementary informational metrics.
+
+\subsubsection{Single-Bit Shannon Entropy}
+At each simulation timestep $t$, the full geometric state is mapped onto a 
+vector of continuous positions, which are evaluated as a 1D spatial array of 
+radii $r_n$ or coordinate positions. To evaluate low-level bitwise diversity, 
+this spatial state is scaled by an integer mapping constant $\alpha = 1000.0$ and 
+parsed at the raw bit level. We compute the Shannon entropy of the empirical 
+bit-frequency distribution:
 \[
 H(b_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t),
 \]
-where $p_0(t)$ and $p_1(t)$ are the empirical frequencies of zero- and
-one-bits in $b_t$ at time $t$. This quantity measures the distinguishable
-variety encoded in the geometric state: it is maximal ($H = 1$ bit) when
-zeros and ones are equally frequent, and minimal ($H = 0$) when the
-bitstring is constant. As particles concentrate toward the singularity, the
-positional diversity of the bitstring collapses, driving $H(b_t) \to 0$.
+where $p_0(t)$ and $p_1(t)$ are the global frequencies of zero- and
+one-bits across all parsed words at time $t$. This measures the fundamental
+distinguishable variety encoded in the machine representation.
 
-The entropy $H(b_t)$ should be understood as a measure of the
-\emph{geometric variety} available at time $t$: how many distinguishable
-spatial configurations the encoded geometry could be. It is distinct from
-the thermodynamic entropy of the infalling matter, which increases during
-collapse. The divergence between these two entropy measures --- geometric
-variety decreasing while thermodynamic entropy increases --- is itself
-informative and is consistent with the holographic principle, which holds
-that the information content of a region scales with its boundary area rather
-than its volume.
+\subsubsection{Pattern Block Entropy}
+Because single-bit Shannon entropy treats bits as independent identically 
+distributed variables, it can obscure localized correlations. We implement a spatial 
+pattern variety metric by grouping the bitstream into consecutive sequences of fixed 
+word size $n = 4$. The normalized block entropy is defined as:
+\[
+H_n(b_t) = -\frac{1}{n} \sum_{i=1}^{2^n} P(\omega_i) \log_2 P(\omega_i),
+\]
+where $P(\omega_i)$ is the empirical probability of occurrence of the $i$-th 
+binary pattern word $\omega_i \in \{0,1\}^n$. Due to the fixed scaling properties 
+inherent in binary integer transitions, $H_n(b_t)$ tracks tightly with $H(b_t)$, 
+confirming a high degree of correlation between individual bit state changes 
+and pattern distributions during spatial collapse.
+
+\subsubsection{Dynamic IAME Spectral Complexity}
+To isolate multi-scale spatial organization from bulk coordinate scaling, we implement 
+the continuous IAME spatial rendering resource cost. Let $\bar{x}(t)$ denote the mean 
+value of the $N$-particle spatial distribution $x_n(t)$ at time $t$. We isolate the structural 
+AC variance from the bulk background translation by computing a discrete Fourier 
+transform on the centralized deviations $v_n = x_n - \bar{x}$. For each frequency component $k$, 
+the amplitude is evaluated as:
+\[
+A_k = \sqrt{\mathcal{R}_k^2 + \mathcal{I}_k^2}
+\]
+\[
+\mathcal{R}_k = \sum_{n=0}^{size-1} v_n \cos\left(\frac{2\pi k n}{size}\right), \quad 
+\mathcal{I}_k = -\sum_{n=0}^{size-1} v_n \sin\left(\frac{2\pi k n}{size}\right).
+\]
+To prevent static cutoff masking, we determine a dynamic noise floor threshold 
+$\epsilon = A_{max} \times 10^{-4}$ based on the peak structural mode $A_{max} = \max(A_k)$. 
+The total spectral complexity $\mathcal{C}_s$ is computed as:
+\[
+\mathcal{C}_s = \sum_{k=1}^{size/2} \left[ c_\phi + \frac{\omega_k}{\Delta\omega} \right] \cdot \frac{A_k}{A_{max} + 1e-12} \quad \forall A_k > \epsilon,
+\]
+where $c_\phi = 1.0$ is the baseline rendering node cost, $\omega_k = k$ represents the 
+mode index, and $\Delta\omega = 0.05$ is the frequency normalization step. This metric tracks 
+the relative geometric configuration cost, increasing as structural uniformity breaks down 
+and collapsing to zero when spatial variance disappears.
 
 \subsection{Lemma: Vanishing Entropy Implies Geometric Point}
 
@@ -202,96 +225,68 @@ particles, microstructures, or distinguishable geometry.
 
 \subsection{Setup}
 
-We simulated gravitational collapse for both Schwarzschild (non-rotating)
-and Kerr (rotating) black holes using discretised dust cloud models. In each
-case, a spherically symmetric distribution of particles is initialised at
-rest outside the Schwarzschild radius and evolved under the respective
-metric until numerical breakdown. The geometric state at each timestep is
-encoded as a bitstring sub-trace and its Shannon entropy computed as defined
-in Section~\ref{sec:methods}. Full implementation details and source code are
-provided in the Supplementary Material.
+We simulated gravitational collapse for Schwarzschild (implemented in both 
+Advanced Unistructural and Eddington-Finkelstein coordinate presentations) 
+and Kerr ($a = 0.9$) geometries using discretised dust cloud models. 
+In each case, a spherically symmetric distribution of $N=100$ particles is 
+initialised outside the horizon and evolved using a fourth-order Runge-Kutta (RK4) 
+integrator with a time step $dt = 10^{-3}$ until numerical breakdown or coordinate 
+horizon termination. The geometric states are processed through the complete 
+informational suite at each timestep. 
 
 \subsection{Results}
 
-In both geometries, the execution-trace entropy decreases monotonically as
-particles fall inward toward the singularity. The decrease is gradual over
-most of the simulated range and accelerates as the simulation approaches the
-point of numerical breakdown, consistent with an asymptotic approach to zero.
+The informational metrics yield contrasting signatures across different spacetime geometries, 
+uncovering physical characteristics of the collapse that are invisible to standard curvature calculations.
 
-The entropy trajectory is well-fit by a monotonically decreasing function
-over the simulated range. Extrapolation of this fit to the classical
-singularity yields zero entropy at the endpoint, with the fit remaining
-stable over the final decade of the simulated entropy range.
+In all configurations, the single-bit Shannon entropy $H(b_t)$ and pattern block entropy 
+$H_n(b_t)$ decrease monotonically as particles fall inward toward the singularity. Their 
+curves track each other identically, demonstrating that macroscopic structure and microscale binary data 
+variety decay in tandem as the configuration space collapses.
 
-The Schwarzschild and Kerr cases are qualitatively identical in their
-entropy trajectories, differing only in the rate of approach to zero, which
-is modulated by the angular momentum parameter $a$. This geometry-independence
-strengthens the conclusion that the zero-entropy endpoint is a universal
-feature of gravitational collapse rather than an artefact of the specific
-metric or coordinate system.
+However, the dynamic spectral complexity $\mathcal{C}_s$ reveals distinct structural phases 
+depending on the presence of spacetime rotation:
+
+\begin{enumerate}
+    \item \textbf{Non-Rotating Systems (Schwarzschild AU and EF):} The spectral complexity curves 
+    are beautifully smooth and non-monotonic. They begin flat during the initial homogeneous 
+    infall phase. As the cloud approaches the event horizon, $\mathcal{C}_s$ curves upward. This marks 
+    the onset of extreme physical tidal stretching: because the gravitational acceleration scales 
+    as $1/r^2$, inner particles accelerate rapidly away from outer ones, increasing the structural 
+    disorder and spatial frequency variance of the cloud. After this peak, as the particles cross the 
+    horizon and head toward the central singularity, the relative distances collapse uniformly, 
+    driving $\mathcal{C}_s$ smoothly down to a flat zero.
+    
+    \item \textbf{Rotating Systems (Kerr $a=0.9$):} The high-spin equatorial trajectory displays a 
+    chaotic phase transition. For the first half of the execution path, $\mathcal{C}_s$ remains flat at 
+    zero, indicating that the dust cloud maintains a highly uniform, co-rotating orbital structure. 
+    However, upon breaching the ergosphere boundary, the curve transforms into chaotic, high-amplitude 
+    random spikes. This structural explosion is a direct consequence of frame-dragging (the Lense-Thirring effect), 
+    which shears the cloud into an intricate spiral and induces extreme relative coordinate velocity 
+    fluctuations before horizon crossing.
+\end{enumerate}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1.0\textwidth]{figures/schwarzschild.png}
-\caption{Execution-trace entropy as a function of simulation time for
-  particles falling into a Schwarzschild black hole. The entropy decreases
-  monotonically throughout the simulated range. Extrapolation of the fitted
-  curve to the classical singularity yields zero entropy at the endpoint.
-  The vertical dashed line marks the point of numerical breakdown beyond
-  which the geometric description fails; the informational description
-  remains well-defined throughout.}
-\label{fig:schwarzschild}
+\includegraphics[width=0.9\textwidth]{figures/schwarzschild_au_metrics.png}
+\caption{Multi-metric informational evolution for a Schwarzschild Advanced Unistructural collapse. 
+  The top panels show the geometric particle convergence and the monotonic decrease of single-bit Shannon entropy. 
+  The bottom panels present the structural pattern block entropy and the non-monotonic profile of the 
+  dynamic spectral complexity $\mathcal{C}_s$. The spectral curve smoothly peaks due to tidal elongation 
+  before dropping to zero as the relative coordinate variance vanishes at the singularity.}
+\label{fig:schwarzschild_au}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1.0\textwidth]{figures/kerr.png}
-\caption{Execution-trace entropy for particles falling into a Kerr black
-  hole with angular momentum parameter $a > 0$. The qualitative behaviour
-  is identical to the Schwarzschild case; the rate of entropy decrease is
-  modulated by $a$. The geometry-independence of the zero-entropy endpoint
-  is consistent with a universal informational property of gravitational
-  collapse.}
-\label{fig:kerr}
+\includegraphics[width=0.9\textwidth]{figures/kerr_metrics.png}
+\caption{Multi-metric informational spectrum for a high-spin Kerr ($a=0.9$) dust collapse. 
+  While bit and block entropies decay monotonically, the dynamic spectral complexity $\mathcal{C}_s$ (bottom-right) 
+  exhibits a sharp phase transition. It remains flat at zero during the uniform orbital phase, then erupts 
+  into chaotic spikes upon entering the ergosphere, mapping the physical shearing induced by differential 
+  frame-dragging before coordinate breakdown.}
+\label{fig:kerr_metrics}
 \end{figure}
-
-\subsection{Lognormal Microstructure Distribution}
-
-A secondary result, not predicted in advance of the simulations, emerges
-from the analysis of microstructure emergence as a function of radial
-distance from the singularity. When hierarchical structural filters are
-applied to the execution trace --- detecting elementary structures and
-composing them recursively into higher-order objects --- the probability of
-microstructure emergence as a function of radial coordinate consistently
-takes a lognormal form.
-
-Lognormal distributions arise generically from multiplicative processes: when
-many independent factors multiply together to determine an outcome, the
-logarithm of the outcome is normally distributed. Near a gravitational
-singularity, redshift factors compound multiplicatively across shells of
-infalling matter, providing a natural generating mechanism. The lognormal
-profile therefore has a straightforward physical interpretation within the
-collapse geometry.
-
-Critically, however, the lognormal profile is observed regardless of the
-structural filter used to define microstructures, and regardless of whether
-the analysis is performed on the simulated physics or on the execution trace
-of the host computer directly. Applying an arbitrary pattern --- such as the
-substring $010110100010$ --- to the raw execution trace and counting its
-occurrences as a function of depth yields the same lognormal shape. This
-filter-independence demonstrates that the lognormal is not a property of
-any particular definition of particle or structure. It is an intrinsic
-property of how distinguishable patterns are distributed in the entropy
-gradient of a collapsing bitstring.
-
-The full distribution interpolates naturally between three regimes: zero
-probability of microstructures at the singularity (consistent with the
-zero-entropy result), a peak of maximum structural complexity at an
-intermediate radius, and a long tail of declining structure abundance at
-large radii corresponding to ordinary distributed matter. The location of
-the peak depends on the filter applied. The physical filter --- the
-self-consistent one that reproduces the observed particle spectrum
-an open problem discussed in Paper~I.
 
 % ============================================================
 \section{Discussion}
@@ -324,6 +319,13 @@ gravitational field at that point. The probability of physical trajectories
 reaching the singularity is therefore suppressed by the same compression
 measure that governs the \iame{} framework: paths terminating at a
 zero-measure, structureless state have zero weight.
+
+The behavior of the spectral complexity $\mathcal{C}_s$ deepens this interpretation. 
+The smooth rise and fall in Schwarzschild collapse shows that tidal deformation is 
+an ordered process that naturally exhausts its structural variety. Conversely, the 
+chaotic spikes in Kerr collapse demonstrate that frame-dragging acts as an informational 
+mixer, scrambling the spatial states into hyper-complex configurations before they 
+sink into the final zero-variety endpoint.
 
 \subsection{Relation to existing approaches}
 
@@ -377,25 +379,22 @@ requires.
 
 We have shown that gravitational collapse, analysed through the execution
 trace of a computational simulation, converges to a zero-entropy state
-at the classical singularity. This result holds for both Schwarzschild and
-Kerr geometries and is independent of the simulation architecture and
-discretisation scheme.
+at the classical singularity. This result holds for Schwarzschild, 
+Eddington-Finkelstein, and Kerr geometries and is independent of the 
+simulation architecture and discretisation scheme.
 
+The metrics suite deployed herein successfully acts as a structural phase detector. 
+The bit and block entropies capture the overarching loss of coordinate volume, 
+while the dynamic spectral complexity $\mathcal{C}_s$ maps the physical transitions 
+of the interior landscape---smoothly tracking tidal stretching in non-rotating 
+spacetimes, and mapping the onset of chaotic frame-dragging inside the Kerr ergosphere. 
 The zero-entropy state has a precise geometric interpretation: it
 corresponds to a single, structureless point incapable of supporting
 microstructure, matter, or distinguishable geometry. The singularity is
 therefore not a point where physics breaks down but a minimally 
 trivial geometric shape. 
 
-A secondary result --- the universal lognormal distribution of microstructure
-emergence as a function of radial distance --- suggests that the geometric
-structure of matter around a black hole is determined by the entropy gradient
-of the collapse process rather than by the specific properties of any
-particular matter model. The filter-independence of this distribution across
-more than two hundred structural definitions indicates that it is an
-intrinsic combinatorial property of entropy-varying bitstrings.
-
-Taken together, these results place singularities within a consistent
+These results place singularities within a consistent
 informational framework that requires no new physics, reproduces the
 qualitative predictions of the holographic principle, and connects naturally
 to the cosmological picture developed in Paper~III, where the time-reversed
@@ -408,10 +407,12 @@ structured universe through entropy increase alone.
 \begin{itemize}
     \item \href{simulations/schwarzschild.py}{\texttt{schwarzschild.py}:
           Schwarzschild black hole simulation}
+    \item \href{simulations/schwarzschild_au.py}{\texttt{schwarzschild\_au.py}:
+          Schwarzschild Advanced Unistructural simulation}
     \item \href{simulations/kerr.py}{\texttt{kerr.py}:
           Kerr black hole simulation}
     \item \href{simulations/blackhole.py}{\texttt{blackhole.py}:
-          Common base classes}
+          Common base classes and informational diagnostic suite}
 \end{itemize}
 
 \printbibliography
