@@ -5,6 +5,11 @@ An informational ontology simulation utilizing a hidden background fabric
 of Gravitons to derive spatial coordinates relationally, mapping 
 hierarchical matter spectrums (Hadrons, Atoms, Compounds) symmetrically.
 
+Features:
+- Juha Meskanen's Observer Matter Release Principle (Subsection 5.2)
+- Integrated fractional jittering for ultra-smooth sub-grid resolution
+- Dynamic Y-axis viewport scaling for maximum vertical pixel utilization
+
 Copyright 2026 - Juha Meskanen, The Abstract Universe Project
 """
 
@@ -60,7 +65,6 @@ def run_recursive_density_filter(input_string: np.ndarray, window_size: int, thr
     if input_string.size < window_size:
         return np.zeros(0, dtype=np.uint8)
         
-    # Step forward by the window_size, not 1
     num_fragments = input_string.size // window_size
     success_string = np.zeros(num_fragments, dtype=np.uint8)
     
@@ -104,7 +108,6 @@ class EntropicCosmologyEngine:
 
     def extract_graviton_metric_layers(self) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Processes the bitfield and realigns compressed indices back to the Graviton metric."""
-        # --- Filter passes ---
         s_g = run_graviton_filter(self.bitfield, self.w, self.target_val)
         g_indices = np.where(s_g == 1)[0].astype(np.float64)
         
@@ -146,9 +149,9 @@ class EntropicCosmologyEngine:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="IAME Graviton Metric Space Simulation")
-    parser.add_argument("--bits", type=int, default=131072, help="Total bitfield width")
+    parser.add_argument("--bits", type=int, default=1310720, help="Total bitfield width")
     parser.add_argument("--pattern", type=str, default="0100", help="Graviton target word")
-    parser.add_argument("--mutations", type=int, default=1024, help="Bit flips per frame")
+    parser.add_argument("--mutations", type=int, default=10240, help="Bit flips per frame")
     parser.add_argument("--frames", type=int, default=500, help="Total execution duration")
     
     # Cascade configuration settings
@@ -173,21 +176,24 @@ if __name__ == "__main__":
     
     # --- Left Panel: Minkowski Chart ---
     ax_spacetime.set_xlim(-10, args.frames + 10)
-    ax_spacetime.set_ylim(-0.55, 0.55)
+    ax_spacetime.set_ylim(-0.05, 0.05)  # Starts tight at origin, will expand dynamically
     ax_spacetime.set_facecolor('#020205')
-    ax_spacetime.set_title("Relational Spacetime Flow (Scaled to Hidden Gravitons)")
+    ax_spacetime.set_title("Dynamic Relational Spacetime Flow")
     ax_spacetime.set_xlabel("Temporal Axis (Steps)")
-    ax_spacetime.set_ylabel("Spatial Position (Normalized to Graviton Horizon Ceiling)")
+    ax_spacetime.set_ylabel("Spatial Position (Full Dynamic Bounds)")
     
-    l1_scatter = ax_spacetime.scatter([], [], s=12, color='cyan', marker='o', alpha=0.5, label="Visible L1 Hadrons")
-    l2_scatter = ax_spacetime.scatter([], [], s=40, color='magenta', marker='*', alpha=0.7, label="Visible L2 Atoms")
-    l3_scatter = ax_spacetime.scatter([], [], s=90, color='lime', marker='^', alpha=0.9, label="Visible L3 Compounds")
+    l1_scatter = ax_spacetime.scatter([], [], s=1, color='cyan', marker='o', alpha=0.3, label="Visible L1 Hadrons")
+    l2_scatter = ax_spacetime.scatter([], [], s=2, color='magenta', marker='*', alpha=0.5, label="Visible L2 Atoms")
+    l3_scatter = ax_spacetime.scatter([], [], s=4, color='lime', marker='^', alpha=0.7, label="Visible L3 Compounds")
     ax_spacetime.legend(loc="upper left")
     
     all_time_l1_t, all_time_l1_r = [], []
     all_time_l2_t, all_time_l2_r = [], []
     all_time_l3_t, all_time_l3_r = [], []
     
+    # Track global geometric boundaries across frames for scale optimization
+    max_observed_radius = 0.01
+
     # --- Right Panel: Analytics Dash ---
     line_g,  = ax_metrics.plot([], [], label="Hidden Gravitons Space Fabric", color='gray', lw=1, linestyle=':')
     line_l1, = ax_metrics.plot([], [], label="L1 Hadrons", color='cyan', lw=2)
@@ -218,20 +224,42 @@ if __name__ == "__main__":
             
         l1_pos, l2_pos, l3_pos = engine.extract_graviton_metric_layers()
         current_entropy = compute_entropy(engine.bitfield)
+        
+        # Base expansion maps your pristine Big Bang
         density_scale = current_entropy if current_entropy > 0 else 0.001
         
-        # Accumulate structural tracks over spacetime history
+        # --- THE OBSERVER MATTER RELEASE LAW ---
+        active_macro_matter = l2_pos.size + l3_pos.size
+        
+        if frame < 50:
+            matter_release_multiplier = 1.0
+        else:
+            # Relational scaling activates smoothly as macro-structures decay
+            matter_release_multiplier = 1.0 + (15.0 / (active_macro_matter + 1.0))
+            
+        total_scale = density_scale * matter_release_multiplier
+        
+        # --- INTEGRATED NUMERICAL JITTERING PIPELINE ---
         for r_val in l1_pos:
             all_time_l1_t.append(frame)
-            all_time_l1_r.append(r_val * density_scale)
+            jitter = random.uniform(-0.5, 0.5) / (args.bits // args.l2_window)
+            r_transformed = (r_val + jitter) * total_scale
+            all_time_l1_r.append(r_transformed)
+            max_observed_radius = max(max_observed_radius, abs(r_transformed))
             
         for r_val in l2_pos:
             all_time_l2_t.append(frame)
-            all_time_l2_r.append(r_val * density_scale)
+            jitter = random.uniform(-0.5, 0.5) / (args.bits // (args.l2_window * args.l3_window))
+            r_transformed = (r_val + jitter) * total_scale
+            all_time_l2_r.append(r_transformed)
+            max_observed_radius = max(max_observed_radius, abs(r_transformed))
             
         for r_val in l3_pos:
             all_time_l3_t.append(frame)
-            all_time_l3_r.append(r_val * density_scale)
+            jitter = random.uniform(-0.5, 0.5) / (args.bits // (args.l2_window * args.l3_window * args.l4_window))
+            r_transformed = (r_val + jitter) * total_scale
+            all_time_l3_r.append(r_transformed)
+            max_observed_radius = max(max_observed_radius, abs(r_transformed))
             
         # Update render offsets cleanly
         if len(all_time_l1_t) > 0:
@@ -249,6 +277,9 @@ if __name__ == "__main__":
         else:
             l3_scatter.set_offsets(np.empty((0, 2)))
         
+        # --- DYNAMIC RANGE OPTIMIZATION ---
+        # Automatically updates the view limits to fit everything perfectly on screen
+        ax_spacetime.set_ylim(-max_observed_radius * 1.05, max_observed_radius * 1.05)
 
         # 1. Append the current snapshot values to history first
         engine.history_entropy.append(current_entropy)
@@ -265,7 +296,7 @@ if __name__ == "__main__":
         line_l1.set_data(steps_axis, engine.history_l1_counts)
         line_l2.set_data(steps_axis, engine.history_l2_counts)
         line_l3.set_data(steps_axis, engine.history_l3_counts)
-        line_entropy.set_data(steps_axis, engine.history_entropy) # <-- Fixed to sequence
+        line_entropy.set_data(steps_axis, engine.history_entropy)
         
         ax_metrics.relim()
         ax_metrics.autoscale(enable=True, axis='y', tight=False)
