@@ -240,9 +240,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     # Grid
-    parser.add_argument("--T", type=int, default=300)
-    parser.add_argument("--H", type=int, default=256)
-    parser.add_argument("--W", type=int, default=256)
+    parser.add_argument("--T", type=int, default=400)
+    parser.add_argument("--H", type=int, default=128)
+    parser.add_argument("--W", type=int, default=128)
 
     # Observers
     parser.add_argument("--n_obs", type=int, default=3, help="Number of observer trajectories")
