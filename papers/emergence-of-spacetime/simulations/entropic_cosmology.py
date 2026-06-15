@@ -149,8 +149,8 @@ class EntropicCosmologyEngine:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="IAME Graviton Metric Space Simulation")
-    parser.add_argument("--bits", type=int, default=1310720, help="Total bitfield width")
-    parser.add_argument("--pattern", type=str, default="0100", help="Graviton target word")
+    parser.add_argument("--bits", type=int, default=13107200, help="Total bitfield width")
+    parser.add_argument("--pattern", type=str, default="0001000", help="Graviton target word")
     parser.add_argument("--mutations", type=int, default=10240, help="Bit flips per frame")
     parser.add_argument("--frames", type=int, default=500, help="Total execution duration")
     
@@ -182,9 +182,9 @@ if __name__ == "__main__":
     ax_spacetime.set_xlabel("Temporal Axis (Steps)")
     ax_spacetime.set_ylabel("Spatial Position (Full Dynamic Bounds)")
     
-    l1_scatter = ax_spacetime.scatter([], [], s=1, color='cyan', marker='o', alpha=0.3, label="Visible L1 Hadrons")
-    l2_scatter = ax_spacetime.scatter([], [], s=2, color='magenta', marker='*', alpha=0.5, label="Visible L2 Atoms")
-    l3_scatter = ax_spacetime.scatter([], [], s=4, color='lime', marker='^', alpha=0.7, label="Visible L3 Compounds")
+    l1_scatter = ax_spacetime.scatter([], [], s=0.1, color='blue', marker='o', alpha=0.3, label="Visible L1 Hadrons")
+    l2_scatter = ax_spacetime.scatter([], [], s=0.2, color='magenta', marker='*', alpha=0.5, label="Visible L2 Atoms")
+    l3_scatter = ax_spacetime.scatter([], [], s=0.4, color='lime', marker='^', alpha=0.7, label="Visible L3 Compounds")
     ax_spacetime.legend(loc="upper left")
     
     all_time_l1_t, all_time_l1_r = [], []

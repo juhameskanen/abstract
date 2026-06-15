@@ -1,238 +1,379 @@
 """
-Emergent Spacetime and Particles
-================================
+Time-Reversed Entropic Cosmology: Graviton Space Fabric Metric
+===================================================================
+An informational ontology simulation utilizing a hidden background fabric 
+of Gravitons to derive spatial coordinates relationally, mapping 
+hierarchical matter spectrums (Hadrons, Atoms, Compounds) symmetrically.
 
-Description:
--------------
-Simulate an execution trace of increasing entropy and monitor the corresponding expansion of the emergent spacetime and particle populations.
-Minimal Proof of Concept that complexity isn't added to the universe by external laws, but is a statistical inevitability of a expanding search space (entropy).
+Features:
+- Juha Meskanen's Observer Matter Release Principle (Subsection 5.2)
+- Integrated fractional jittering for ultra-smooth sub-grid resolution
+- FIXED INFLATIONARY GEOMETRY: Dynamic instantaneous Y-axis scaling completely
+  eliminates historical scale trapping and nested cylinder artifacts.
+- RECURSION FILTERING: Dynamic --recursion visibility limits (0 to 3).
+- L0 FABRIC VISUALIZATION: Maps background space fabric coordinates.
+- CONSERVED TOTAL SCALE: Spacetime horizon diameter derived relationally via 
+  hierarchical structural token conservation logic.
 
-Demonstrates that any arbitrarily chosen filter produces a Lognormal Trace, de-mystifying the "Fine-Tuning" problem. 
-The universe doesn't look the way it does because the constants are perfect; it looks this way because any filter acting on increasing entropy will 
-yield a log-normal distribution of structures, with a rapid initial growth (inflation) followed by a long tail of decay (heat death).
-
-
-Emergent Spacetime and Particles: A Computational Ontology
-==========================================================
-
-1. Zero-Entropy Initialization:
-   Represents the Pre-Geometric Vacuum. All mappings yield a single point: 
-   the Initial Singularity. Structure is impossible as p(1) = 0.
-
-2. Entropy Growth & The Quark Epoch:
-   As mutations begin, the first '1' bits allow the simplest sub-patterns 
-   to emerge. This represents the Quark Epoch: a state where only the 
-   most fundamental, high-probability micro-structures can exist.
-
-3. Recursive Hierarchy & Emergence:
-   Higher-order structures (Atoms) are defined as 'Coupled 
-   Patterns'. They require a specific density of lower-level 'hits' 
-   to manifest, naturally creating the sequential epochs of the Big Bang.
-
-4. Lognormal Structural Evolution:
-   The population of micro-structures follows a log-normal distribution.
-   - Inflation: The rapid explosion of Level 1 hits as entropy hits the 
-     critical threshold.
-   - Heat Death: The long, slow decay of complexity as the bitstring 
-     saturates into maximum entropy (random noise).
-
-
-Emergent Properties:
--------------------
-- Entropy increases over time.
-- Hierarchical structures of particles emerge from a minimal rule.
-- Spatial extent grows, while particle sizes remain discrete, 
-  reflecting the separation between spacetime expansion and particle scale.
-- Particle populations follow log-normal-like distribution as a function of
-  mutations.
-- Gravity is statistical bias in the emergence of structures, not a fundamental force.
-
-
-Theoretical Implications: The Informational Singularity
--------------------------------------------------------
-
-1. The Smooth Singularity (Zero-Gravity State):
-In this model, the initial singularity is not a point of infinite density or curvature, but a state of Zero Entropy (H=0). 
-The absence of detectable micro-structures at H=0 implies a perfectly smooth no-gravity state, similar to the gravitational null-point at the center of a planet.
-
-2. Gravity as an Entropic Derivative:
-Gravity is redefined as the statistical pressure of structural emergence. Mathematically, the gravitational 
-force is the derivative of the log-normal distribution of particle populations (dN/dH).
-
-    Inflation: Represents the steep positive gradient as the first particles crystallize from the bitstring.
-
-    Heat Death: Represents the negative gradient as the probability of maintaining complex structures "dries out" against the background noise.
-
-3. Non-Identity of Emergent Particles:
-Particles in this simulation lack inherent "identity." A "particle" is simply a successful pattern-match at a specific coordinate. 
-There is no underlying "object" moving through space; there is only the sequential re-occurrence of a pattern across the bitstring. 
-"Motion" and "Time" are the observer's interpretation of these correlated hits, effectively resolving the Gibbs Paradox by
-making indistinguishability a fundamental property of the information field.
-
-Usage:
-------
-The simulation can be configured via command-line arguments for:
-    --bits           : total bitstring size
-    --steps          : number of simulation steps
-    --bits_per_coord : width of each spacetime fragment
-    --pattern        : bit pattern identifying elementary particles
-
-Example:
---------
-    python simulation.py --bits 1048576 --steps 80000 --bits_per_coord 16 --pattern 0b0010
-
-This minimal model provides a concrete demonstration of how complex 
-structures and spacetime-like behavior tend to  emerge from simple 
-information-theoretic rules with remarkable similarity to observed cosmic phenomena.
-
-Copyright 2019 - Juha Meskanen, The Abstract Universe Project
+Copyright 2026 - Juha Meskanen, The Abstract Universe Project
 """
 
 import random
-import numpy as np
 import argparse
-from numba import njit
-import matplotlib.pyplot as plt
+import numpy as np
 
-@njit
-def entropy_bitstring(bitstring: np.ndarray) -> float:
-    count0 = 0
-    count1 = 0
-    for i in range(bitstring.size):
-        if bitstring[i] == 0:
-            count0 += 1
-        else:
-            count1 += 1
-    total = count0 + count1
-    if total == 0:
-        return 0.0
-    p0 = count0 / total
-    p1 = count1 / total
+# Force TkAgg for clean window handling inside virtual environments
+import matplotlib
+try:
+    matplotlib.use('TkAgg')
+except:
+    pass
+
+import matplotlib.pyplot as plt
+from numba import njit
+
+@njit(fastmath=True)
+def compute_entropy(bitstring: np.ndarray) -> float:
+    n = bitstring.size
+    if n == 0: return 0.0
+    count1 = np.sum(bitstring)
+    count0 = n - count1
+    p0 = count0 / n
+    p1 = count1 / n
+    
     entropy = 0.0
-    if p0 > 0:
-        entropy -= p0 * np.log2(p0)
-    if p1 > 0:
-        entropy -= p1 * np.log2(p1)
+    if p0 > 0.0: entropy -= p0 * np.log2(p0)
+    if p1 > 0.0: entropy -= p1 * np.log2(p1)
     return entropy
 
-@njit
-def space_size_jit(points: np.ndarray) -> int:
-    if points.shape[0] == 0:
-        return 0
-    return int(points.max() - points.min())
+@njit(fastmath=True)
+def run_graviton_filter(bitfield: np.ndarray, w: int, target_val: int) -> np.ndarray:
+    """Slices the raw universe to extract Level 0 Gravitons (Spacetime Fabric)."""
+    num_fragments = bitfield.size // w
+    success_string = np.zeros(num_fragments, dtype=np.uint8)
+    
+    for m in range(num_fragments):
+        val = 0
+        start_idx = m * w
+        for j in range(w):
+            if bitfield[start_idx + j]:
+                val |= (1 << (w - 1 - j))
+                
+        if val == target_val:
+            success_string[m] = 1
+            
+    return success_string
 
-class Simulation:
-    def __init__(self, bits: int, steps: int, bits_per_coord : int, pattern : int):
-        self.steps = steps
-        self.bits = bits
-        self.bits_per_coord = bits_per_coord
-        self.pattern = pattern
-        self.bitstring = np.zeros(bits, dtype=np.uint8)
-        self.history = []
-
-    def recursive_pattern_levels(self, bitstring: np.ndarray) -> list[np.ndarray]:
-        if len(bitstring) < self.bits_per_coord:
-            return []
-
-        n_segments = len(bitstring) // self.bits_per_coord
-        trimmed = bitstring[:n_segments * self.bits_per_coord]
-        reshaped = trimmed.reshape((n_segments, self.bits_per_coord))
-
-        if self.bits_per_coord <= 8:
-            dtype = np.uint8
-        elif self.bits_per_coord <= 16:
-            dtype = np.uint16
-        elif self.bits_per_coord <= 32:
-            dtype = np.uint32
-        else:
-            raise ValueError("bits_per_coord too large, max 32 supported")
-
-        weights = (1 << np.arange(self.bits_per_coord - 1, -1, -1, dtype=dtype))
-        values = np.dot(reshaped.astype(dtype), weights)
-        next_bitstring = (values == dtype(self.pattern)).astype(np.uint8)
-
-        return [(values, next_bitstring)] + self.recursive_pattern_levels(next_bitstring)
-
-    def run(self):
-        for step in range(self.steps):
-            entropy = entropy_bitstring(self.bitstring)
-            levels = self.recursive_pattern_levels(self.bitstring)
-            ones_count = [np.sum(next_bits) for (_, next_bits) in levels]
-
-            space_size = 0
-            if levels:
-                coords0, _ = levels[0]
-                space_size = space_size_jit(coords0)
-
-            snapshot = [float(entropy), float(space_size)]
-            snapshot.extend(float(c) for c in ones_count)
-            self.history.append(snapshot)
-
-            index = random.randint(0, self.bits - 1)
-            self.bitstring[index] ^= 1
-
-    def plot(self):
-        history = np.array(self.history)
-        steps = np.arange(len(history))
-
-        # Create two subplots: Top for original data, Bottom for CMB Fluctuation Band
-        fig, (ax1, ax_cmb) = plt.subplots(2, 1, figsize=(12, 10), gridspec_kw={'height_ratios': [2, 1]})
-
-        # --- TOP PLOT (Original Features) ---
-        num_levels = history.shape[1] - 2
-        colors = plt.cm.viridis(np.linspace(0, 1, num_levels))
-
-        for i in range(num_levels):
-            ax1.plot(steps, history[:, i+2], label=f"Level {i+1}", color=colors[i], alpha=0.7)
-
-        ax1.set_ylabel("Structure Count", color="black")
-        ax2 = ax1.twinx()
-        ax2.plot(steps, history[:, 0], label="Entropy", color="red", linestyle="--")
-        ax2.set_ylabel("Entropy (bits)", color="red")
-
-        ax3 = ax1.twinx()
-        ax3.spines["right"].set_position(("axes", 1.15))
-        ax3.plot(steps, history[:, 1], label="Space Size", color="blue", linestyle=":")
-        ax3.set_ylabel("Space Size", color="blue")
-
-        # Combine legends for top plot
-        h1, l1 = ax1.get_legend_handles_labels()
-        h2, l2 = ax2.get_legend_handles_labels()
-        h3, l3 = ax3.get_legend_handles_labels()
-        ax1.legend(h1 + h2 + h3, l1 + l2 + l3, loc="upper left")
-
-        # --- BOTTOM PLOT (CMB Fluctuation Band) ---
-        # We calculate the jitter of Level 1 (Protons/Initial Particles)
-        l1_data = history[:, 2]
-        window_size = max(10, self.steps // 50)
+@njit(fastmath=True)
+def run_recursive_density_filter(input_string: np.ndarray, window_size: int, threshold: int) -> np.ndarray:
+    """Scans the lower-level trace in non-overlapping blocks to prevent structural double-counting."""
+    if input_string.size < window_size:
+        return np.zeros(0, dtype=np.uint8)
         
-        # Calculate moving average and standard deviation (The Band)
-        l1_mean = np.convolve(l1_data, np.ones(window_size)/window_size, mode='same')
-        l1_std = np.zeros_like(l1_data)
-        for i in range(len(l1_data)):
-            start = max(0, i - window_size // 2)
-            end = min(len(l1_data), i + window_size // 2)
-            l1_std[i] = np.std(l1_data[start:end])
+    num_fragments = input_string.size // window_size
+    success_string = np.zeros(num_fragments, dtype=np.uint8)
+    
+    for m in range(num_fragments):
+        density = 0
+        start_idx = m * window_size
+        for j in range(window_size):
+            density += input_string[start_idx + j]
+            
+        if density >= threshold:
+            success_string[m] = 1
+            
+    return success_string
 
-        ax_cmb.fill_between(steps, l1_mean - l1_std, l1_mean + l1_std, color='gray', alpha=0.3, label="CMB Thermal Band (±1σ)")
-        ax_cmb.plot(steps, l1_mean, color='black', label="Smoothed L1 Trend", linewidth=1.5)
-        ax_cmb.set_xlabel("Step")
-        ax_cmb.set_ylabel("L1 Fluctuations")
-        ax_cmb.legend(loc="upper left")
-        ax_cmb.set_title("Thermal Fluctuation Band (Anisotropy Proxy)")
 
-        fig.suptitle("Evolutionary Trace: Entropy, Spacetime, and CMB Fluctuations")
-        plt.tight_layout()
-        plt.show()
+class EntropicCosmologyEngine:
+    def __init__(self, total_bits: int, pattern_str: str, l2_w: int, l2_t: int, l3_w: int, l3_t: int, l4_w: int, l4_t: int):
+        self.total_bits = total_bits
+        self.w = len(pattern_str)
+        
+        # Configuration levers for the recursive multi-scale observer
+        self.l2_w, self.l2_t = l2_w, l2_t  # Hadron scale
+        self.l3_w, self.l3_t = l3_w, l3_t  # Atom scale
+        self.l4_w, self.l4_t = l4_w, l4_t  # Molecule scale
+        
+        self.target_val = 0
+        for i, char in enumerate(pattern_str):
+            if char == '1':
+                self.target_val |= (1 << (self.w - 1 - i))
+                
+        # H=0 Singularity state
+        self.bitfield = np.zeros(total_bits, dtype=np.uint8)
+        self.step = 0  
+        
+        # Metric timelines
+        self.history_timestamps = []  
+        self.history_entropy = []
+        self.history_g_counts = []
+        self.history_l1_counts = []
+        self.history_l2_counts = []
+        self.history_l3_counts = []
+
+
+    def extract_graviton_metric_layers(self) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        """Processes the bitfield relationally, pulling raw configuration arrays."""
+        s_g = run_graviton_filter(self.bitfield, self.w, self.target_val)
+        g_indices = np.where(s_g == 1)[0].astype(np.float64)
+        
+        s_l1 = run_recursive_density_filter(s_g, window_size=self.l2_w, threshold=self.l2_t)
+        l1_indices = np.where(s_l1 == 1)[0].astype(np.float64)
+        
+        s_l2 = run_recursive_density_filter(s_l1, window_size=self.l3_w, threshold=self.l3_t)
+        l2_indices = np.where(s_l2 == 1)[0].astype(np.float64)
+        
+        s_l3 = run_recursive_density_filter(s_l2, window_size=self.l4_w, threshold=self.l4_t)
+        l3_indices = np.where(s_l3 == 1)[0].astype(np.float64)
+        
+        self.current_g_count = g_indices.size
+        
+        if g_indices.size > 0:
+            l0_realigned = g_indices
+            l1_realigned = l1_indices * self.l2_w
+            l2_realigned = l2_indices * (self.l2_w * self.l3_w)
+            l3_realigned = l3_indices * (self.l2_w * self.l3_w * self.l4_w)
+        else:
+            l0_realigned, l1_realigned, l2_realigned, l3_realigned = np.zeros(0), np.zeros(0), np.zeros(0), np.zeros(0)
+        
+        return l0_realigned, l1_realigned, l2_realigned, l3_realigned
+
+
+    def mutate_state(self, mutations_per_step: int):
+        for _ in range(mutations_per_step):
+            idx = random.randint(0, self.total_bits - 1)
+            self.bitfield[idx] ^= 1
+        self.step += 1
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Emerging spacetime")
-    parser.add_argument("--bits", type=int, default=16384*5, help="Total number of bits in the universe")
-    parser.add_argument("--steps", type=int, default=16384*5, help="Number of simulation steps")
-    parser.add_argument("--bits_per_coord", type=int, default=16, help="Width of each coordinate in bits")
-    parser.add_argument("--pattern", type=lambda x: int(x, 0), default=0b0010, help="Emergent pattern to be detected (supports 0b binary notation)")
-
+    parser = argparse.ArgumentParser(description="IAME Graviton Metric Space Simulation")
+    parser.add_argument("--bits", type=int, default=10*1024, help="Total bitfield width")
+    parser.add_argument("--pattern", type=str, default="10", help="Graviton target word")
+    parser.add_argument("--quantum_mutations", type=int, default=10, help="Absolute time unit (bit flips per tick)")
+    parser.add_argument("--max_time_steps", type=int, default=1000, help="Total chronological depth")
+    parser.add_argument("--recursion", type=int, default=3, choices=[0, 1, 2, 3],
+                        help="Structural visibility horizon: 0=Fabric, 1=+Hadrons, 2=+Atoms, 3=+Compounds")
+    
+    # Cascade configuration settings
+    parser.add_argument("--l2_window", type=int, default=4, help="Hadron window")
+    parser.add_argument("--l2_threshold", type=int, default=2, help="Hadron density threshold")
+    parser.add_argument("--l3_window", type=int, default=6, help="Atom window")
+    parser.add_argument("--l3_threshold", type=int, default=2, help="Atom density threshold")
+    parser.add_argument("--l4_window", type=int, default=10, help="Molecule window")
+    parser.add_argument("--l4_threshold", type=int, default=3, help="Molecule density threshold")
     args = parser.parse_args()
-    sim = Simulation(bits=args.bits, steps=args.steps, bits_per_coord=args.bits_per_coord, pattern=args.pattern)
-    sim.run()
-    sim.plot()
+
+    engine = EntropicCosmologyEngine(
+        args.bits, args.pattern, 
+        args.l2_window, args.l2_threshold, 
+        args.l3_window, args.l3_threshold,
+        args.l4_window, args.l4_threshold
+    )
+    
+    plt.ion()
+    fig, (ax_spacetime, ax_metrics) = plt.subplots(1, 2, figsize=(16, 7))
+    fig.suptitle("IAME Graviton Space Fabric (True Linear-Time Adaptive Simulation)", fontsize=16, fontweight='bold')
+    
+    # --- Left Panel: Minkowski Chart ---
+    ax_spacetime.set_xlim(0, args.max_time_steps)
+    ax_spacetime.set_ylim(-1.5, 1.5)  # Set a stable baseline spatial view bounds
+    ax_spacetime.set_facecolor('#020205')
+    ax_spacetime.set_title("Linear Relational Spacetime Flow")
+    ax_spacetime.set_xlabel("Chronological Cosmic Time (Ticks)")
+    ax_spacetime.set_ylabel("Spatial Position (Normalized Radius)")
+    
+    # Setup layers on the viewport conditionally based on visibility thresholds
+    l0_scatter = ax_spacetime.scatter([], [], s=1, color='gray', marker='.', alpha=0.10, label="L0 Space Fabric")
+    l1_scatter = ax_spacetime.scatter([], [], s=1, color='cyan', marker='o', alpha=0.3, label="Visible L1 Hadrons" if args.recursion >= 1 else "")
+    l2_scatter = ax_spacetime.scatter([], [], s=2, color='magenta', marker='*', alpha=0.5, label="Visible L2 Atoms" if args.recursion >= 2 else "")
+    l3_scatter = ax_spacetime.scatter([], [], s=4, color='lime', marker='^', alpha=0.7, label="Visible L3 Compounds" if args.recursion >= 3 else "")
+    ax_spacetime.legend(loc="upper left")
+    
+    all_time_l0_t, all_time_l0_r = [], []
+    all_time_l1_t, all_time_l1_r = [], []
+    all_time_l2_t, all_time_l2_r = [], []
+    all_time_l3_t, all_time_l3_r = [], []
+
+    # --- Right Panel: Analytics Dash ---
+    line_g,  = ax_metrics.plot([], [], label="Hidden Gravitons Space Fabric", color='gray', lw=1, linestyle=':')
+    line_l1, = ax_metrics.plot([], [], label="L1 Hadrons", color='cyan', lw=2)
+    line_l2, = ax_metrics.plot([], [], label="L2 Atoms", color='magenta', lw=2)
+    line_l3, = ax_metrics.plot([], [], label="L3 Compounds", color='lime', lw=2.5)
+    ax_metrics.set_ylabel("Structural Quantities")
+    ax_metrics.set_xlabel("Chronological Cosmic Time (Ticks)")
+    ax_metrics.set_ylim(bottom=0)
+    
+    ax_entropy = ax_metrics.twinx()
+    line_entropy, = ax_entropy.plot([], [], label="Shannon Entropy", color='red', linestyle='--', lw=1.5)
+    ax_entropy.set_ylabel("Entropy (bits)", color='red')
+    ax_entropy.set_ylim(0, 1.05)
+    
+    lines = [line_g, line_l1, line_l2, line_l3, line_entropy]
+    labels = [l.get_label() for l in lines]
+    ax_metrics.legend(lines, labels, loc="upper left")
+    
+    plt.tight_layout()
+
+    # --- CHRONOLOGICAL TIMESTEP VARIABLES ---
+    current_time_tick = 0
+    last_l1_count = 0
+
+    current_stride = 1  
+    target_l1_growth_per_sample = 50 
+
+    # Capture baseline state metrics at Tick 0
+    l0_pos_raw, l1_pos_raw, l2_pos_raw, l3_pos_raw = engine.extract_graviton_metric_layers()
+    current_entropy = compute_entropy(engine.bitfield)
+    
+    engine.history_timestamps.append(0)
+    engine.history_entropy.append(current_entropy)
+    engine.history_g_counts.append(engine.current_g_count)
+    engine.history_l1_counts.append(l1_pos_raw.size)
+    engine.history_l2_counts.append(l2_pos_raw.size)
+    engine.history_l3_counts.append(l3_pos_raw.size)
+    
+    # --- COSMOLOGICAL TEMPORAL EVENT LOOP ---
+    while current_time_tick < args.max_time_steps:
+        if not plt.fignum_exists(fig.number):
+            break
+            
+        for _ in range(current_stride):
+            engine.mutate_state(args.quantum_mutations)
+            current_time_tick += 1
+            if current_time_tick >= args.max_time_steps:
+                break
+
+        # Snapshot tracking at this specific timestamp
+        l0_pos_raw, l1_pos_raw, l2_pos_raw, l3_pos_raw = engine.extract_graviton_metric_layers()
+        current_entropy = compute_entropy(engine.bitfield)
+        
+        # --- ADAPTIVE SAMPLING VELOCITY CONTROLLER ---
+        current_l1_count = l1_pos_raw.size
+        growth_delta = current_l1_count - last_l1_count
+        
+        if growth_delta > target_l1_growth_per_sample:
+            reduction_ratio = target_l1_growth_per_sample / max(1, growth_delta)
+            current_stride = max(1, int(current_stride * reduction_ratio))
+        else:
+            current_stride = min(500, int(current_stride * 1.1))
+            
+        last_l1_count = current_l1_count
+        
+        # --- FIXED RELATIONAL DIAMETER ENGINE ---
+        # 1. Capture raw, uncorrected entity numbers straight from digital filters
+        raw_g  = int(l0_pos_raw.size)
+        raw_l1 = int(l1_pos_raw.size)
+        raw_l2 = int(l2_pos_raw.size)
+        raw_l3 = int(l3_pos_raw.size)
+        
+        # 2. Compute true cascade conservation bounds (higher structures swallow background blocks)
+        net_l3 = raw_l3
+        net_l2 = max(0, raw_l2 - (net_l3 * int(args.l4_window)))
+        net_l1 = max(0, raw_l1 - (raw_l2 * int(args.l3_window)))
+        net_l0 = max(0, raw_g  - (raw_l1 * int(args.l2_window)))
+        
+        # 3. Aggregate unique observable positions conforming to active --recursion thresholds
+        active_elements = net_l0
+        if args.recursion >= 1: active_elements += net_l1
+        if args.recursion >= 2: active_elements += net_l2
+        if args.recursion >= 3: active_elements += net_l3
+        
+        # 4. Determine total scale based on addressable entities relative to base resolution ceiling
+        max_fabric_width = max(1.0, float(args.bits // engine.w))
+        total_scale = (active_elements / max_fabric_width) * 2.0
+        if total_scale <= 0: total_scale = 0.001
+        
+        # Step 1: Calculate relative distance maps centering all tiers systematically
+        norm_l0 = (l0_pos_raw / max_fabric_width) - 0.5 if l0_pos_raw.size > 0 else np.zeros(0)
+        norm_l1 = (l1_pos_raw / max_fabric_width) - 0.5 if (l1_pos_raw.size > 0 and args.recursion >= 1) else np.zeros(0)
+        norm_l2 = (l2_pos_raw / max_fabric_width) - 0.5 if (l2_pos_raw.size > 0 and args.recursion >= 2) else np.zeros(0)
+        norm_l3 = (l3_pos_raw / max_fabric_width) - 0.5 if (l3_pos_raw.size > 0 and args.recursion >= 3) else np.zeros(0)
+        
+        # Step 2: Symmetric coordinate distribution via index parity polar flips
+        if norm_l0.size > 0:
+            signs_l0 = np.where(np.arange(norm_l0.size) % 2 == 0, 1.0, -1.0)
+            norm_l0 = np.abs(norm_l0) * signs_l0
+            
+        if norm_l1.size > 0:
+            signs_l1 = np.where(np.arange(norm_l1.size) % 2 == 0, 1.0, -1.0)
+            norm_l1 = np.abs(norm_l1) * signs_l1
+            
+        if norm_l2.size > 0:
+            signs_l2 = np.where(np.arange(norm_l2.size) % 2 == 0, 1.0, -1.0)
+            norm_l2 = np.abs(norm_l2) * signs_l2
+            
+        if norm_l3.size > 0:
+            signs_l3 = np.where(np.arange(norm_l3.size) % 2 == 0, 1.0, -1.0)
+            norm_l3 = np.abs(norm_l3) * signs_l3
+        
+        # Append space fabric (L0) trace mappings
+        for r_val in norm_l0:
+            all_time_l0_t.append(current_time_tick)
+            jitter = random.uniform(-0.5, 0.5) / max_fabric_width
+            all_time_l0_r.append((r_val + jitter) * total_scale)
+
+        # Append matter trajectories based on active visibility window settings
+        if args.recursion >= 1:
+            for r_val in norm_l1:
+                all_time_l1_t.append(current_time_tick)
+                jitter = random.uniform(-0.5, 0.5) / max_fabric_width
+                all_time_l1_r.append((r_val + jitter) * total_scale)
+                
+        if args.recursion >= 2:
+            for r_val in norm_l2:
+                all_time_l2_t.append(current_time_tick)
+                jitter = random.uniform(-0.5, 0.5) / max_fabric_width
+                all_time_l2_r.append((r_val + jitter) * total_scale)
+                
+        if args.recursion >= 3:
+            for r_val in norm_l3:
+                all_time_l3_t.append(current_time_tick)
+                jitter = random.uniform(-0.5, 0.5) / max_fabric_width
+                all_time_l3_r.append((r_val + jitter) * total_scale)
+                
+        # Send updated offsets straight to the live viewports
+        if len(all_time_l0_t) > 0:
+            l0_scatter.set_offsets(np.column_stack((all_time_l0_t, all_time_l0_r)))
+        if len(all_time_l1_t) > 0 and args.recursion >= 1:
+            l1_scatter.set_offsets(np.column_stack((all_time_l1_t, all_time_l1_r)))
+        if len(all_time_l2_t) > 0 and args.recursion >= 2:
+            l2_scatter.set_offsets(np.column_stack((all_time_l2_t, all_time_l2_r)))
+        if len(all_time_l3_t) > 0 and args.recursion >= 3:
+            l3_scatter.set_offsets(np.column_stack((all_time_l3_t, all_time_l3_r)))
+        
+        # --- FIXED VIEWPORT DYNAMIC ADJUSTMENT ---
+        current_max_bound = max(0.05, total_scale * 0.55)
+        ax_spacetime.set_ylim(-current_max_bound, current_max_bound)
+
+        # Track true metrics against timestamps
+        engine.history_timestamps.append(current_time_tick)
+        engine.history_entropy.append(current_entropy)
+        engine.history_g_counts.append(engine.current_g_count)
+        engine.history_l1_counts.append(current_l1_count)
+        engine.history_l2_counts.append(l2_pos_raw.size)
+        engine.history_l3_counts.append(l3_pos_raw.size)
+        
+        # Plot lines directly against non-uniform timestamp checkpoints
+        t_axis = engine.history_timestamps
+        line_g.set_data(t_axis, engine.history_g_counts)
+        line_l1.set_data(t_axis, engine.history_l1_counts)
+        line_l2.set_data(t_axis, engine.history_l2_counts)
+        line_l3.set_data(t_axis, engine.history_l3_counts)
+        line_entropy.set_data(t_axis, engine.history_entropy)
+        
+        ax_metrics.relim()
+        ax_metrics.autoscale(enable=True, axis='y', tight=False)
+        ax_metrics.autoscale(enable=True, axis='x', tight=True)
+        ax_metrics.set_ylim(bottom=0)
+        
+        ax_entropy.relim()
+        ax_entropy.autoscale_view(True, True, True)
+        ax_entropy.set_ylim(0, 1.05)
+        
+        fig.canvas.draw_idle()
+        plt.pause(0.001)
+
+    plt.ioff()
+    plt.show()
