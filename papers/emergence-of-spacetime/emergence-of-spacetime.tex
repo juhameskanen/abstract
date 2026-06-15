@@ -80,180 +80,92 @@ them with existing cosmological approaches. Section~\ref{sec:conclusion}
 concludes.
 
 % ============================================================
+% ============================================================
 \section{Setup}
 \label{sec:setup}
 
 \subsection{Configuration Space and Entropy Evolution}
 
-We define an execution trace $S_t$, $t = 0, \ldots, n$, where each $S_t$
-is a binary string of fixed length $L$. The initial state $S_0$ is the
-unique zero-entropy configuration: the all-zero string $0^L$. We evolve
-$S_t$ via random bit-flip mutations, each of which flips a single uniformly
-selected bit. This generates a sequence of states traversing the
-configuration space in approximate order of increasing Shannon entropy,
-starting from the unique minimum.
-
-The Shannon entropy of each state is computed as:
+The system is defined by a binary configuration string $S_t$ of fixed total length $L$. The initial state $S_0$ corresponds to a unique, completely uniform zero-entropy state (the all-zero bitstring), establishing an initial boundary condition where Shannon entropy is minimized:
 \[
-H(S_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t),
+H(S_0) = 0
 \]
-where $p_0(t)$ and $p_1(t)$ are the empirical frequencies of zero- and
-one-bits in $S_t$. The entropy increases monotonically from $H(S_0) = 0$
-toward the maximum $H = 1$ bit as the bit frequencies equalise.
+We evolve the configuration via discrete, random bit-flip mutations. Within the timeless ontology of the \iame{} framework, these mutations do not represent a fundamental dynamical law or a temporal arrow; rather, they serve as a stochastic sampling probe traversing a static ensemble of $2^L$ available configurations along approximately entropy-increasing trajectories, conceptually allied with the Page-Wootters formalism.
 
-\subsection{On the Role of Bit-Flip Mutations}
-
-It is important to clarify what the bit-flip mutation process represents
-within the \iame{} framework. Paper~I establishes that the universe is a
-static, timeless ensemble containing all $2^n$ possible configurations
-simultaneously. There is no fundamental external dynamics or evolution: all
-configurations exist and no physical process generates one from another.
-
-What we perceive as temporal evolution, cosmic expansion, or the arrow of
-time emerges internally as observers navigate ordered sequences within this
-fixed configuration space. The bit-flip mutations of the present paper are
-not proposed as a physical law governing the universe. They are a
-computational sampling strategy: a practical method for traversing the
-configuration space in approximate order of increasing entropy, starting from
-the unique zero-entropy state and moving toward higher-entropy configurations.
-
-Any other sampling strategy that generates an entropy-ordered sequence from
-the same initial state would produce qualitatively identical results. The
-specific trajectory through configuration space does not matter; what matters
-is the entropy level of each visited state, because it is the entropy level,
-not the trajectory, that determines the geometric and structural properties
-of the configuration.
-
-\subsection{Geometric Particle Filter}
-
-Each state $S_t$ is decoded into a three-dimensional geometric configuration
-via a decoding map $D : \{0,1\}^L \to \mathbb{R}^3$. Fixed-length binary
-segments of $S_t$ are decoded as integer coordinates, which are then scaled
-to produce spatial positions. The resulting point cloud is the geometric
-interpretation of $S_t$.
-
-We define a minimal three-level hierarchy of emergent structures:
-
-\textbf{Elementary particles} ($\mathcal{E}$) are defined as pairs of decoded points
-$(p_1, p_2)$ whose spatial separation falls below a distance threshold
-$\delta_1$:
+The instantaneous Shannon entropy of the system at any given evolutionary checkpoint is expressed as:
 \[
-0 < \mathrm{dist}(p_1, p_2) < \delta_1.
+H(S_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t)
 \]
+where $p_0(t)$ and $p_1(t)$ represent the normalized empirical frequencies of $0$- and $1$-bits across the global string $S_t$.
 
-\textbf{Atoms} ($\mathcal{A}$) are defined as triplets of elementary particles
-$(e_1, e_2, e_3)$ satisfying:
+\subsection{Recursive Spatial Fabric and Structural Filtering}
+
+To construct a relational space from a non-embedded bitstring, an internal observer applies a multi-scale cascading filter. Space is not postulated a priori; it is derived from the density of structural matches.
+
+\subsubsection{Level-0: The Spacetime Fabric (Graviton Scale)}
+We define a local target pattern string $P$ of length $w_0$. The global string $S_t$ is parsed into non-overlapping blocks of size $w_0$, yielding a raw background capacity of $N_{max} = L / w_0$ elements. A Level-0 ``graviton'' token exists at index $m$ if the block matches the binary target integer value $V_P$:
 \[
-0 < \mathrm{dist}(e_i, e_j) < \delta_2 \quad \text{for all } i \neq j,
+\sigma_G[m] = \begin{cases} 1 & \text{if } \sum_{j=0}^{w_0-1} S_t[m \cdot w_0 + j] \cdot 2^{w_0 - 1 - j} = V_P \\ 0 & \text{otherwise} \end{cases}
 \]
-with the additional constraint that the three pairwise distances are
-approximately equal, imposing a near-equilateral configuration. The centre
-of an atom is the geometric mean of its constituent points:
+The raw count of detected space fabric elements is $N_G = \sum \sigma_G[m]$.
+
+\subsubsection{Level-$k$: Hierarchical Matter Sub-Scales}
+Higher-order structural tiers (representing Hadrons, Atoms, and Compounds sequentially) are extracted by recursively filtering the underlying layer's output array. For a given structural level $k \in \{1, 2, 3\}$, the input array is scanned using a non-overlapping window of width $w_k$ subject to a density activation threshold $\tau_k$:
 \[
-\mathrm{centre}(\mathrm{atom}) =
-\frac{1}{3}\sum_{i=1}^3 (x_i, y_i, z_i).
+\sigma_k[m] = \begin{cases} 1 & \text{if } \sum_{j=0}^{w_k-1} \sigma_{k-1}[m \cdot w_k + j] \geq \tau_k \\ 0 & \text{otherwise} \end{cases}
 \]
-
-\textbf{Molecules} ($\mathcal{M}$) form when two atom centres are sufficiently close:
-\[
-\mathrm{dist}(\mathrm{centre}(\mathrm{atom}_1),
-\mathrm{centre}(\mathrm{atom}_2)) < \delta_3.
-\]
-
-This hierarchy is intentionally minimal and its specific definitions are
-intentionally arbitrary. The threshold values $\delta_1, \delta_2, \delta_3$
-are free parameters. The point of the geometric filter is not that it
-correctly describes physical particles --- it does not --- but that it
-preserves two qualitative features characteristic of real matter: the
-hierarchical composition of structures from simpler components, and the
-scale invariance of particle size under global expansion (particle sizes are
-set by the distance thresholds, which are fixed, while the decoded spatial
-extent grows with entropy).
-
-\subsection{Recursive Pattern-Matching Filter and Multi-Scale Downsampling Mechanics}
-\label{subsec:recursive_filter}
-
-An alternative, more fundamental filter operates directly on the bitstring $S_t$ without any physical or geometric background embedding, using a recursive structural downsampling scheme governed by asymmetric observer resolutions.
-
-Let the bitstring $S_t$ at step $t$ be sliced into $N$ non-overlapping spatial fragments of coordinate bit-width $w = \text{\texttt{bits\_per\_coord}}$. Each fragment is mapped onto an integer value via a weighted dot product:
-\[
-V_m = \sum_{j=0}^{w-1} B_{m,j} \cdot 2^{w-1-j}, \quad m \in \{0, \dots, N-1\},
-\]
-where $B_{m,j}$ represents the raw bit values within the fragment. 
-
-\textbf{Level 1 Elementary Particles} (Protons) are identified via an arbitrary pattern match configuration scalar $P_{\text{target}}$. A successful pattern match maps onto a boolean success bit within a primary downsampled bitstring $S^{(1)}_t$:
-\[
-S^{(1)}_t[m] = \begin{cases} 1 & \text{if } V_m = P_{\text{target}} \\ 0 & \text{otherwise} \end{cases}
-\]
-The spatial coordinates of these particles are mapped directly to their discrete ordinal element indices $m$ within the newly constructed topological space $S^{(1)}_t$.
-
-\textbf{Higher-Order Structural Levels} ($\text{Level } k > 1$) are extracted recursively by applying a sliding convolutional density window across the preceding trace $S^{(k-1)}_t$. To break structural symmetry and mimic the non-linear scarcity curves found in the physical matter spectrum, each macro-structural level is assigned an independent evaluation window width $W_k$ and a local density activation threshold $T_k$. 
-
-A higher-order structural token manifests in the sequence $S^{(k)}_t$ at ordinal index $i$ if the localized count of underlying constituent hits meets the threshold criteria:
-\[
-S^{(k)}_t[i] = \begin{cases} 1 & \text{if } \sum_{j=0}^{W_k-1} S^{(k-1)}_t[i+j] \ge T_k \\ 0 & \text{otherwise} \end{cases}
-\]
-By scaling $W_k$ and $T_k$ asymmetrically across the hierarchy (e.g., setting a broader window $W_3 > W_2$ and stricter density criteria $T_3 > T_2$), the higher-order structures emerge with distinct, decoupled distribution curves. This mathematical formulation naturally models the nested, non-parallel abundance profiles of atomic and compound molecular scales without introducing hardcoded physical forces.
-
+The raw abundance of entities at level $k$ is given by $N_k = \sum \sigma_k[m]$.
 
 % ============================================================
 \section{Results}
 \label{sec:results}
 
-Evolving the system from $H = 0$ through increasing entropy levels, three
-consistent phenomena emerge.
+Starting from the pristine $H=0$ boundary state, the following macroscopic phenomena emerge consistently as entropy increases:
 
-\textbf{Zero entropy yields a structureless point.} At $H(S_0) = 0$, the
-decoded geometry is a single point: the all-zero bitstring maps to a unique
-configuration regardless of the decoding scheme $D$. No structures of any
-kind are detected by either filter. This is consistent with the zero-entropy
-result of Paper~II and with the Lemma of Section~3.4 of that
-paper: a zero-entropy bitstring decodes to a single structureless state
-under any map.
+\textbf{Zero entropy yields a structureless state.} The all-zero configuration contains no detectable structural matches ($N_G = 0$), mapping naturally under any relational decoding scheme to a single, unextended spatial point.
 
-\textbf{Entropy increase drives spatial expansion.} As entropy increases,
-the decoded spatial extent grows exponentially. The all-zero state maps to a
-single point; small deviations from zero entropy map to small spatial
-configurations; high-entropy states map to configurations spanning the full
-decoded range. The rate of spatial growth is approximately exponential in
-the entropy, reproducing the qualitative behaviour of an expanding universe.
-Crucially, the sizes of detected structures --- set by the distance
-thresholds $\delta_i$ --- do not grow with the global expansion. This is
-analogous to the scale invariance of physical particles under Hubble
-expansion.
+\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$, precipitating a rapid freeze-out of background $L_0$ tokens. The decoded spatial extent expands outward from the initial singularity.
 
-\textbf{Structure counts follow a lognormal distribution.} As entropy increases through intermediate levels, elementary hadrons, atoms, and compound molecules begin to appear. Their counts, plotted as a function of entropy level $H$, trace a beautiful, non-monotonic lognormal abundance profile $\Lambda(H)$:
-\[
-\Lambda(H) = \frac{A}{H \sigma \sqrt{2\pi}} \exp \left( -\frac{(\ln H - \mu)^2}{2\sigma^2} \right),
-\]
-where $A$ represents a scale factor, $\mu$ governs the log-mean parameter location, and $\sigma$ sets the distribution width. At $H = 0$, all structural counts are zero. As random bit-flip mutations break the uniformity of the all-zero bitstring, higher-order correlations emerge super-exponentially, reaching a peak of maximal pattern diversity at intermediate entropy. 
+\textbf{Lognormal abundance of structures.} Because higher-tier matter scales are governed by nested density constraints, their population curves ($N_1, N_2, N_3$) follow non-monotonic, rise-and-fall trajectories resembling lognormal distributions. These populations peak sequentially as a function of entropy before late-stage entropic degradation takes over.
 
-By utilizing the multi-flavor interaction horizon filter rather than a rigid sequence matcher, the combinatorial scarcity cliff is bypassed, establishing a realistic particle population spectrum that mimics the balanced densities of our actual universe. The peak location shifts systematically with hierarchy level, detailing a clear bottom-up cascade: Level 1 Hadrons saturate the system first, providing the necessary density to trigger Level 2 Atomic proximity bonding, which subsequently yields a distinct, delayed evolutionary era for Level 3 Compound Molecules. 
-
-As entropy continues to increase toward its maximum theoretical limit ($H \to 1$), the distribution enters a long, damned tail. In this regime, the bitstring approaches absolute thermodynamic randomization. The random noise erases the structured proximity correlations, wiping out the hierarchical counts and driving the structural spectrum back to zero (representing heat death).
-
-
-\textbf{Statistical Anisotropy Proxy (CMB Fluctuation Band).} 
-By tracking the localized standard deviation of Level 1 counts over a sliding temporal evaluation 
-window of size $W = \text{steps} / 50$, we isolate a structural jitter baseline:
-\[
-\sigma_{\text{L1}}(t) = \sqrt{\frac{1}{W}\sum_{\tau = t - W/2}^{t + W/2} \left( N_{\text{L1}}(\tau) - \bar{N}_{\text{L1}}(t) \right)^2}
-\]
-This rolling fluctuation envelope maps an exact informational analog to the Cosmic Microwave Background (CMB) 
-thermal anisotropy band. Quantum fluctuations are thus stripped of their mystique; they emerge natively 
-as the statistical sampling noise of a discrete information field transitioning through intermediate complexity phases.
+As maximum entropy is approached ($H \to 1$), complex structural hierarchies dissolve. The bound elements break apart, reverting into unaligned radiation-like degrees of freedom—reproducing an informational analogue of cosmic heat death.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/entropy_to_matter.png}
-\caption{Emergent structure count, space expansion, and thermal fluctuation envelope as a function of 
-  simulation step and Shannon entropy. Top Panel: The monotonic rise of global entropy (red dashed line) 
-  and spatial size (blue dotted line) occurs alongside the non-monotonic, lognormal abundance profiles 
-  of Level 1 through Level $n$ recursive structures. Bottom Panel: The rolling statistical variance band ($\pm 1\sigma$) 
-  of Level 1 particle counts tracks the evolution of spatial noise, providing a direct combinatorial proxy for 
-  CMB thermal fluctuation anisotropy.}
+\caption{Left: Emergent particle worldlines in relational spacetime. Right: Entropy and counts of spacetime fabric vs.\ hierarchical structures.}
 \label{fig:entropy-matter}
 \end{figure}
+
+\subsection{The Informational Brake and Relational Scaling Geometry}
+
+A critical result of this multi-scale framework is the emergence of a dynamic, self-stabilizing expansion geometry governed by structural token conservation logic. Because higher-level matter structures are built by grouping lower-level components, they effectively ``swallow'' or bound those sub-grid bits, withdrawing them from the free background metric.
+
+To accurately deduce the true spatial geometry without artifact nesting or scale-trapping, we calculate the net un-swallowed, independent structural units remaining active at any instant. Subject to an observer visibility horizon controlled by maximum recursion depth $R \in \{0, 1, 2, 3\}$, the number of active relational elements $N_{active}$ is given by:
+\[
+N_{active} = \tilde{N}_0 + \sum_{k=1}^{R} \tilde{N}_k
+\]
+where the net, exclusive token counts $\tilde{N}_k$ are constrained by cascading down-sampling subtractions:
+\begin{align*}
+\tilde{N}_3 &= N_3 \\
+\tilde{N}_2 &= \max(0, N_2 - N_3 \cdot w_4) \\
+\tilde{N}_1 &= \max(0, N_1 - N_2 \cdot w_3) \\
+\tilde{N}_0 &= \max(0, N_G - N_1 \cdot w_2)
+\end{align*}
+
+The instantaneous, relational spatial diameter of the horizon ($a_t$) is a direct function of these active elements relative to the total base resolution ceiling of the background fabric:
+\[
+a_t = \left( \frac{N_{active}}{N_{max}} \right) \cdot 2.0
+\]
+
+When mapped onto a symmetric coordinate distribution via alternating index parity signs ($\pm 1$), this metric formulation naturally dictates the spacetime profiles perceived by internal observers:
+\begin{itemize}
+    \item \textbf{Inflationary Burst:} An initial, explosive expansion driven by the rapid, combinatorial generation of the primary $L_0$ space fabric as entropy departs from zero.
+    \item \textbf{The Informational Brake:} An intermediate deceleration phase. As matter precipitates ($N_1, N_2$ grow), large blocks of background fabric are consumed by structures, putting a gentle, mathematical brake on the expansion velocity.
+    \item \textbf{Late-Time Cosmic Drift:} As entropy drives the ultimate decay of higher-order structures back into the background vacuum, the localized matter constraints ease. The expansion rate asymptotes smoothly to a stable, positive Hubble coasting phase without requiring an explicit dark energy terms or a cosmological constant.
+\end{itemize}
+
+
 
 % ============================================================
 \section{Filter Independence}
@@ -398,8 +310,8 @@ The observed Hubble constant ($H_0$) and the illusion of an accelerating cosmic 
 \section*{Simulation Code}
 
 \begin{itemize}
-\item \href{simulations/entropic\_spacetime.py}{\texttt{entropic\_spacetime.py}:
-      Cosmic expansion and Lorentzian metric emergence via relational downsampling}
+\item \href{simulations/emergence\_of\_spacetime.py}{\texttt{emergence\_of\_spacetime.py}:
+      Geometric Manifestation of Entropy Growth}
 \end{itemize}
 
 
