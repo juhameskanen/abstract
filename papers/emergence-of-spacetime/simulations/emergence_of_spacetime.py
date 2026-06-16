@@ -54,24 +54,44 @@ class SpectrumLoader:
         log_max = np.log10(self.T_MAX_YEARS)
         return np.clip((log_t - log_min) / (log_max - log_min), 0.0, 1.0)
 
+
     def _build_interpolators(self):
         self.interpolators = {}
         
         for level_key, level_data in self.data["levels"].items():
             pts = level_data["abundances"]
-            steps = np.array([self._time_to_lookup_fraction(p["time_years"]) for p in pts])
             
-            # Extract raw comoving values
+            # 1. Parse raw data streams explicitly into solid float64 arrays
+            raw_steps = np.array([self._time_to_lookup_fraction(p["time_years"]) for p in pts], dtype=np.float64)
             raw_densities = np.array([p["density_per_m3"] for p in pts], dtype=np.float64)
-            peak_val = max(raw_densities) if max(raw_densities) > 0 else 1.0
             
-            # Normalize each structural layer relative to its own functional peak amplitude.
-            # L0 gets full n_max range, higher-order structures get scaled packing allocations.
-            scale_factor = self.n_max if level_key == "L0" else (self.n_max * 0.25)
-            counts = (raw_densities / peak_val) * scale_factor
+            # 2. Inject the absolute zero boundary condition at the singularity using native NumPy arrays
+            steps = np.concatenate((np.array([0.0]), raw_steps))
             
+            if level_key == "L0":
+                # Space Fabric uses Log-Space to handle the massive volume scaling range
+                log_densities = np.log10(raw_densities + 1e-15)
+                max_log = np.max(log_densities)
+                min_log = np.min(log_densities)
+                
+                norm_volume = (max_log - log_densities) / (max_log - min_log + 1e-15)
+                norm_counts = norm_volume * self.n_max
+                counts = np.concatenate((np.array([0.0]), norm_counts))
+            else:
+                # Matter layers use Linear-Space relative to their localized historical peaks,
+                # ensuring they remain at EXACT zero during the zero-entropy state.
+                peak_val = np.max(raw_densities) if np.max(raw_densities) > 0 else 1.0
+                norm_matter = raw_densities / peak_val
+                norm_counts = norm_matter * (self.n_max * 0.25)
+                
+                # Force the absolute 0-count baseline at the singularity point
+                counts = np.concatenate((np.array([0.0]), norm_counts))
+            
+            # 3. Enforce strict monotonic sorting across the unified domain
             order = np.argsort(steps)
             self.interpolators[level_key] = (steps[order], counts[order])
+    
+            
 
     def get_counts(self, step_fraction: float) -> dict:
         result = {}
@@ -222,13 +242,13 @@ def generate_even_coordinates(count, scale):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Unified IAME Cosmology Visualizer")
-    parser.add_argument("--bits",              type=int,   default=10*1024)
-    parser.add_argument("--pattern",          type=str,   default="10")
-    parser.add_argument("--quantum_mutations",type=int,   default=10)
+    parser.add_argument("--bits",              type=int,   default=65535)
+    parser.add_argument("--pattern",          type=str,   default="01")
+    parser.add_argument("--quantum_mutations",type=int,   default=1000)
     parser.add_argument("--max_time_steps",   type=int,   default=1000)
     parser.add_argument("--recursion",        type=int,   default=3, choices=[0,1,2,3])
     parser.add_argument("--feynman",          action="store_true")
-    parser.add_argument("--spectrum",         type=str,   default=None)
+    parser.add_argument("--spectrum",         type=str,   default="spectrum.json")
 
     parser.add_argument("--l2_window",    type=int, default=8)
     parser.add_argument("--l2_threshold", type=int, default=5)
@@ -294,7 +314,7 @@ if __name__ == "__main__":
     line_l1,      = ax_metrics.plot([], [], label="L1 Hadrons",       color='cyan',    lw=2)
     line_l2,      = ax_metrics.plot([], [], label="L2 Atoms",          color='magenta', lw=2)
     line_l3,      = ax_metrics.plot([], [], label="L3 Compounds",      color='lime',    lw=2.5)
-    line_vacuum,  = ax_metrics.plot([], [], label="Explicit L0 Vacuum Trend (Unconstrained)", color='white', lw=1.5, linestyle='-.')
+    line_vacuum,  = ax_metrics.plot([], [], label="Explicit L0 Vacuum Trend (Unconstrained)", color='blue', lw=1.5, linestyle='-.')
 
     ax_metrics.set_ylabel("Structural Count / Baseline Scale")
     ax_metrics.set_xlabel("Normalized Timeline Steps")
@@ -438,10 +458,18 @@ if __name__ == "__main__":
         ax_entropy.relim()
         ax_entropy.autoscale_view(True, True, True)
 
-        refresh_tick = 15 if spectrum else 5
-        if current_time_tick % refresh_tick == 0:
-            fig.canvas.draw_idle()
-            plt.pause(0.001)
+
+        if spectrum:
+            # Slow down the data sweep slightly so you can watch it open and crawl
+            fig.canvas.draw()
+            fig.canvas.flush_events()
+            plt.pause(0.01)  # Give the OS 10ms to paint the window frame
+        else:
+            refresh_tick = 5
+            if current_time_tick % refresh_tick == 0:
+                fig.canvas.draw_idle()
+                plt.pause(0.001)
+
 
     plt.ioff()
     plt.show()
