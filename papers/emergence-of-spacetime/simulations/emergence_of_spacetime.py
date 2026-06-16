@@ -54,7 +54,6 @@ class SpectrumLoader:
         log_max = np.log10(self.T_MAX_YEARS)
         return np.clip((log_t - log_min) / (log_max - log_min), 0.0, 1.0)
 
-
     def _build_interpolators(self):
         self.interpolators = {}
         
@@ -91,8 +90,6 @@ class SpectrumLoader:
             order = np.argsort(steps)
             self.interpolators[level_key] = (steps[order], counts[order])
     
-            
-
     def get_counts(self, step_fraction: float) -> dict:
         result = {}
         for level_key, (step_arr, cnt_arr) in self.interpolators.items():
@@ -101,9 +98,9 @@ class SpectrumLoader:
 
     def print_summary(self):
         print(f"\nPure Empirical Mode Activated: {self.data['name']}")
-        print(f"  Dynamic Range Ceiling (N_max): {self.n_max:.0f}")
+        print(f"   Dynamic Range Ceiling (N_max): {self.n_max:.0f}")
         for k, v in self.data["levels"].items():
-            print(f"  {k} ({v['name']}): Bound to explicit observation curves.")
+            print(f"   {k} ({v['name']}): Bound to explicit observation curves.")
         print()
 
 
@@ -241,21 +238,48 @@ def generate_even_coordinates(count, scale):
 # ===========================================================================
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Unified IAME Cosmology Visualizer")
-    parser.add_argument("--bits",              type=int,   default=65535)
-    parser.add_argument("--pattern",          type=str,   default="01")
-    parser.add_argument("--quantum_mutations",type=int,   default=1000)
-    parser.add_argument("--max_time_steps",   type=int,   default=1000)
-    parser.add_argument("--recursion",        type=int,   default=3, choices=[0,1,2,3])
-    parser.add_argument("--feynman",          action="store_true")
-    parser.add_argument("--spectrum",         type=str,   default="spectrum.json")
+    parser = argparse.ArgumentParser(
+        description="Unified IAME Cosmology Engine: Maps relational topological coordinates "
+                    "and informational entropy milestones across both algorithmic bitstring modes "
+                    "and empirical database timeline spectrums.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    
+    # Fundamental Engine Configurations
+    parser.add_argument("--bits", type=int, default=65535,
+                        help="Total capacity depth of the fundamental bitfield matrix. Sets the baseline resolution.")
+    parser.add_argument("--pattern", type=str, default="01",
+                        help="The core target token sequence representing structural creation rules.")
+    parser.add_argument("--quantum_mutations", type=int, default=1000,
+                        help="Total number of random bitwise flips executed per step during standard simulation loops.")
+    parser.add_argument("--max_time_steps", type=int, default=1000,
+                        help="Total timeframe steps to run the simulation loop before termination.")
+    parser.add_argument("--recursion", type=int, default=3, choices=[0,1,2,3],
+                        help="Depth tier of structural nesting allowed during standard visualization draws.")
+    parser.add_argument("--feynman", action="store_true",
+                        help="Force topological worldline tracing vector paths instead of standard localized dot clouds.")
+    parser.add_argument("--spectrum", type=str, default="spectrum.json",
+                        help="Path to an observational JSON dataset. Activating this instantly forces Pure Analytical Mode, "
+                             "mapping real comoving densities directly onto the relational space clock.")
+    
+    # Rendering Optimization
+    parser.add_argument("--max_visual_lines", type=int, default=25,
+                        help="Informational Decimation Filter Limit: Sets the maximum visual lines rendered per level "
+                             "in Feynman Space. Drastically improves render frame-rates without impacting calculation arrays.")
 
-    parser.add_argument("--l2_window",    type=int, default=8)
-    parser.add_argument("--l2_threshold", type=int, default=5)
-    parser.add_argument("--l3_window",    type=int, default=6)
-    parser.add_argument("--l3_threshold", type=int, default=3)
-    parser.add_argument("--l4_window",    type=int, default=8)
-    parser.add_argument("--l4_threshold", type=int, default=3)
+    # Matter Hierarchical Processing Windows
+    parser.add_argument("--l2_window", type=int, default=8,
+                        help="Bit window tracking range used when filtering Layer 1 Hadrons out of Layer 0 Fabric fields.")
+    parser.add_argument("--l2_threshold", type=int, default=5,
+                        help="Density activation limit required to confirm Layer 1 Hadron structures inside the target tracking window.")
+    parser.add_argument("--l3_window", type=int, default=6,
+                        help="Bit window tracking range used when filtering Layer 2 Atoms out of Layer 1 Hadron pools.")
+    parser.add_argument("--l3_threshold", type=int, default=3,
+                        help="Density activation limit required to confirm Layer 2 Atom structures inside the target tracking window.")
+    parser.add_argument("--l4_window", type=int, default=8,
+                        help="Bit window tracking range used when filtering Layer 3 Compounds out of Layer 2 Atom structures.")
+    parser.add_argument("--l4_threshold", type=int, default=3,
+                        help="Density activation limit required to confirm Layer 3 Compound structures inside the target tracking window.")
     args = parser.parse_args()
 
     engine = EntropicCosmologyEngine(
@@ -274,6 +298,7 @@ if __name__ == "__main__":
     history_active = []
     history_vacuum = []  
     history_timestamps = []
+    history_entropy_track = []
     history_g_counts = []
     history_l1_counts = []
     history_l2_counts = []
@@ -285,10 +310,23 @@ if __name__ == "__main__":
     mode_label = "Pure Empirical Spectrum" if spectrum else ("Feynman" if args.feynman else "Scatter")
     fig.suptitle(f"IAME Cosmology Engine [{mode_label}]", fontsize=16, fontweight='bold')
 
-    ax_spacetime.set_xlim(0, args.max_time_steps)
+    # Convert graph x-axes to handle true log scales
     ax_spacetime.set_facecolor('#020205')
-    ax_spacetime.set_xlabel("Normalized Timeline Steps")
+    ax_spacetime.set_xlabel("Cosmic Time (Years)")
     ax_spacetime.set_ylabel("Relational Spatial Coordinate")
+    
+    ax_metrics.set_ylabel("Structural Count / Baseline Scale")
+    ax_metrics.set_xlabel("Cosmic Time (Years)")
+    ax_metrics.set_ylim(bottom=0)
+
+    if spectrum:
+        ax_spacetime.set_xscale('log')
+        ax_metrics.set_xscale('log')
+        ax_spacetime.set_xlim(spectrum.T_MIN_YEARS, spectrum.T_MAX_YEARS)
+        ax_metrics.set_xlim(spectrum.T_MIN_YEARS, spectrum.T_MAX_YEARS)
+    else:
+        ax_spacetime.set_xlim(0, args.max_time_steps)
+        ax_metrics.set_xlim(0, args.max_time_steps)
 
     if args.feynman or spectrum:
         ax_spacetime.set_title("Emergent Topological Feynman Space")
@@ -316,15 +354,11 @@ if __name__ == "__main__":
     line_l3,      = ax_metrics.plot([], [], label="L3 Compounds",      color='lime',    lw=2.5)
     line_vacuum,  = ax_metrics.plot([], [], label="Explicit L0 Vacuum Trend (Unconstrained)", color='blue', lw=1.5, linestyle='-.')
 
-    ax_metrics.set_ylabel("Structural Count / Baseline Scale")
-    ax_metrics.set_xlabel("Normalized Timeline Steps")
-    ax_metrics.set_ylim(bottom=0)
-
     ax_entropy = ax_metrics.twinx()
-    line_entropy, = ax_entropy.plot([], [], label="System Phase Indicator", color='red',    linestyle='--', lw=1.5)
+    line_entropy, = ax_entropy.plot([], [], label="Shannon Entropy (Structural)", color='red',   linestyle='--', lw=1.5)
     line_hubble,  = ax_entropy.plot([], [], label="H(t) Relational", color='yellow', linestyle='-',  lw=1.5)
-    ax_entropy.set_ylabel("Phase / H(t)", color='red')
-    ax_entropy.set_ylim(-0.5, 1.05)
+    ax_entropy.set_ylabel("Structural Information Entropy / H(t)", color='red')
+    ax_entropy.set_ylim(-0.05, 1.05)
 
     lines  = [line_g, line_l1, line_l2, line_l3, line_vacuum, line_entropy, line_hubble]
     labels = [l.get_label() for l in lines]
@@ -333,11 +367,7 @@ if __name__ == "__main__":
     plt.tight_layout()
 
     current_time_tick = 0
-    last_l1_count     = 0
-    current_stride    = 1
-    target_l1_growth  = 50
-
-    prev_t = 0
+    prev_t = spectrum.T_MIN_YEARS if spectrum else 0
     prev_l0_x = prev_l1_x = prev_l2_x = prev_l3_x = None
 
     # -----------------------------------------------------------------------
@@ -350,6 +380,11 @@ if __name__ == "__main__":
         if spectrum:
             current_time_tick += 1
             step_fraction = current_time_tick / args.max_time_steps
+            
+            # Map structural execution back to actual timeline values
+            log_min = np.log10(spectrum.T_MIN_YEARS)
+            log_max = np.log10(spectrum.T_MAX_YEARS)
+            current_real_years = 10 ** (log_min + step_fraction * (log_max - log_min))
             
             # PURE EXPLICIT DATA TRAJECTORIES - Fetched directly from JSON fields
             counts   = spectrum.get_counts(step_fraction)
@@ -365,11 +400,19 @@ if __name__ == "__main__":
             net_l1 = raw_l1
             net_l0 = max(1, raw_l0 - (net_l1 + net_l2 + net_l3))
             
-            sim_indicator = step_fraction # Linear timeline sweep replace simulated entropy
+            # CALCULATE STRUCTURAL SHANNON ENTROPY FROM EMERGENCE PROBABILITIES
+            total_tokens = net_l0 + net_l1 + net_l2 + net_l3
+            if total_tokens > 0:
+                p_arr = np.array([net_l0, net_l1, net_l2, net_l3], dtype=np.float64) / total_tokens
+                p_arr = p_arr[p_arr > 0]
+                sim_indicator = -np.sum(p_arr * np.log2(p_arr)) / 2.0  # Normalize to display safely
+            else:
+                sim_indicator = 0.0
         else:
             # Traditional simulated algorithmic filter execution mode
             engine.mutate_state(args.quantum_mutations)
             current_time_tick = engine.step
+            current_real_years = float(current_time_tick)
             
             l0_pos_raw, l1_pos_raw, l2_pos_raw, l3_pos_raw = engine.get_layer_data()
             raw_l0, raw_l1, raw_l2, raw_l3 = l0_pos_raw.size, l1_pos_raw.size, l2_pos_raw.size, l3_pos_raw.size
@@ -388,7 +431,8 @@ if __name__ == "__main__":
 
         history_active.append(active_elements)
         history_vacuum.append(vacuum_elements)
-        history_timestamps.append(current_time_tick)
+        history_timestamps.append(current_real_years)
+        history_entropy_track.append(sim_indicator)
         history_g_counts.append(net_l0)
         history_l1_counts.append(net_l1)
         history_l2_counts.append(net_l2)
@@ -397,14 +441,21 @@ if __name__ == "__main__":
         # Derive H(t) from explicit timeline variations
         _, H_vals = compute_hubble(history_timestamps, history_active)
 
-        # Coordinate generator visualization routing
+        # Coordinate generator visualization routing with Informational Decimation Optimization
         if args.feynman or spectrum:
-            curr_l0_x = generate_even_coordinates(net_l0, total_scale)
-            curr_l1_x = generate_even_coordinates(net_l1, total_scale)
-            curr_l2_x = generate_even_coordinates(net_l2, total_scale)
-            curr_l3_x = generate_even_coordinates(net_l3, total_scale)
+            # Generate absolute full calculation coordinate fields to maintain backend arithmetic fidelity
+            full_l0_x = generate_even_coordinates(net_l0, total_scale)
+            full_l1_x = generate_even_coordinates(net_l1, total_scale)
+            full_l2_x = generate_even_coordinates(net_l2, total_scale)
+            full_l3_x = generate_even_coordinates(net_l3, total_scale)
 
-            if current_time_tick > 1 and prev_l0_x is not None:
+            # Slicing filters applied to cap graphics processing overhead down to custom argument limit
+            curr_l0_x = full_l0_x[::max(1, full_l0_x.size // args.max_visual_lines)]
+            curr_l1_x = full_l1_x[::max(1, full_l1_x.size // args.max_visual_lines)]
+            curr_l2_x = full_l2_x[::max(1, full_l2_x.size // args.max_visual_lines)]
+            curr_l3_x = full_l3_x[::max(1, full_l3_x.size // args.max_visual_lines)]
+
+            if ((spectrum and current_time_tick > 1) or (not spectrum and current_time_tick > 1)) and prev_l0_x is not None:
                 for arr_p, arr_c, col, al, lw in [
                     (prev_l0_x, curr_l0_x, 'gray',    0.05, 0.5),
                     (prev_l1_x, curr_l1_x, 'cyan',    0.35, 1.0),
@@ -414,10 +465,10 @@ if __name__ == "__main__":
                     if arr_p.size > 0 and arr_c.size > 0:
                         for px in arr_p:
                             cx = arr_c[np.argmin(np.abs(arr_c - px))]
-                            ax_spacetime.plot([prev_t, current_time_tick],
+                            ax_spacetime.plot([prev_t, current_real_years],
                                              [px, cx], color=col, alpha=al, lw=lw)
 
-            prev_t    = current_time_tick
+            prev_t    = current_real_years
             prev_l0_x = curr_l0_x
             prev_l1_x = curr_l1_x
             prev_l2_x = curr_l2_x
@@ -429,10 +480,10 @@ if __name__ == "__main__":
                     t_list.append(t)
                     r_list.append(v * total_scale)
 
-            _append(current_time_tick, net_l0, all_time_l0_t, all_time_l0_r)
-            _append(current_time_tick, net_l1, all_time_l1_t, all_time_l1_r)
-            _append(current_time_tick, net_l2, all_time_l2_t, all_time_l2_r)
-            _append(current_time_tick, net_l3, all_time_l3_t, all_time_l3_r)
+            _append(current_real_years, net_l0, all_time_l0_t, all_time_l0_r)
+            _append(current_real_years, net_l1, all_time_l1_t, all_time_l1_r)
+            _append(current_real_years, net_l2, all_time_l2_t, all_time_l2_r)
+            _append(current_real_years, net_l3, all_time_l3_t, all_time_l3_r)
 
             if all_time_l0_t: l0_scatter.set_offsets(np.column_stack((all_time_l0_t, all_time_l0_r)))
             if all_time_l1_t: l1_scatter.set_offsets(np.column_stack((all_time_l1_t, all_time_l1_r)))
@@ -447,29 +498,25 @@ if __name__ == "__main__":
         line_l2.set_data(history_timestamps, history_l2_counts)
         line_l3.set_data(history_timestamps, history_l3_counts)
         line_vacuum.set_data(history_timestamps, history_vacuum)
-        line_entropy.set_data(history_timestamps, [sim_indicator]*len(history_timestamps))
+        line_entropy.set_data(history_timestamps, history_entropy_track)
 
         if len(H_vals) > 1:
             H_display = H_vals / (np.max(np.abs(H_vals)) + 1e-12) * 0.5
             line_hubble.set_data(history_timestamps[:-1], H_display)
 
         ax_metrics.relim()
-        ax_metrics.autoscale(enable=True, axis='both', tight=False)
+        ax_metrics.autoscale(enable=True, axis='y', tight=False)
         ax_entropy.relim()
-        ax_entropy.autoscale_view(True, True, True)
-
 
         if spectrum:
-            # Slow down the data sweep slightly so you can watch it open and crawl
             fig.canvas.draw()
             fig.canvas.flush_events()
-            plt.pause(0.01)  # Give the OS 10ms to paint the window frame
+            plt.pause(0.005)
         else:
             refresh_tick = 5
             if current_time_tick % refresh_tick == 0:
                 fig.canvas.draw_idle()
                 plt.pause(0.001)
-
 
     plt.ioff()
     plt.show()
