@@ -1,19 +1,13 @@
 """
-Time-Reversed Entropic Cosmology: Unified Edition (Fixed Relational Scale)
+Time-Reversed Entropic Cosmology: Pure Empirical Edition
 ===================================================================
 An informational ontology simulation utilizing a hidden background fabric
-of Fabric Quanta to derive spatial coordinates relationally. Maps hierarchical
-matter spectrums symmetrically, featuring both fractional scatter tracing
-and topological proximity-linked Feynman vertex plotting.
+of Fabric Quanta to derive spatial coordinates relationally. 
 
-Features:
-- Juha Meskanen's Observer Matter Release Principle
-- CONSERVED TOTAL SCALE: Spacetime horizon diameter derived relationally via
-  hierarchical structural token conservation logic.
-- Dynamic instantaneous Y-axis scaling to stabilize relational worldline tracing.
-- Dual-Mode Graphics Architecture: Choose between Scatter or Feynman Worldlines.
-- Real Spectrum Mode: Load observed baryonic abundance data from JSON file
-  to produce a first-principles prediction of H(t).
+When a JSON spectrum is provided, this engine operates in a PURE ANALYTICAL 
+MODE: it bypasses the discrete bitfield simulation entirely, extracting both 
+the unconstrained vacuum baseline (L0) and bound matter hierarchies (L1-L3) 
+directly from explicit empirical data curves.
 
 Copyright 2026 - Juha Meskanen, The Abstract Universe Project
 """
@@ -34,17 +28,17 @@ from numba import njit
 
 
 # ===========================================================================
-# SPECTRUM LOADER — maps real cosmological abundance data into simulation units
+# SPECTRUM LOADER — Converts Comoving Densities to Relational Physical Trajectories
 # ===========================================================================
 
 class SpectrumLoader:
     """
-    Loads observed baryonic particle abundance data from a JSON file and
-    provides interpolated N_k(entropy) curves for use in the simulation.
+    Loads comoving abundance data, converts it to a dynamic physical fraction,
+    and scales each structural layer appropriately into the simulation's dynamic range.
     """
 
     T_MAX_YEARS = 13.8e9
-    T_MIN_YEARS = 1e-10
+    T_MIN_YEARS = 1e-4
 
     def __init__(self, json_path: str, n_max: float):
         with open(json_path, 'r') as f:
@@ -53,48 +47,48 @@ class SpectrumLoader:
         self.n_max = n_max
         self._build_interpolators()
 
-    def _time_to_entropy(self, t_years: float) -> float:
+    def _time_to_lookup_fraction(self, t_years: float) -> float:
+        # Maps historical timelines to a normalized 0.0 - 1.0 step domain
         log_t   = np.log10(max(t_years, self.T_MIN_YEARS))
         log_min = np.log10(self.T_MIN_YEARS)
         log_max = np.log10(self.T_MAX_YEARS)
         return np.clip((log_t - log_min) / (log_max - log_min), 0.0, 1.0)
 
     def _build_interpolators(self):
-        l0_densities = [pt["density_per_m3"]
-                        for pt in self.data["levels"]["L0"]["abundances"]]
-        self.peak_l0_density = max(l0_densities)
-
         self.interpolators = {}
+        
         for level_key, level_data in self.data["levels"].items():
             pts = level_data["abundances"]
-            entropies = np.array([self._time_to_entropy(p["time_years"]) for p in pts])
-            counts = np.array(
-                [(p["density_per_m3"] / self.peak_l0_density) * self.n_max
-                 for p in pts]
-            )
-            order = np.argsort(entropies)
-            self.interpolators[level_key] = (entropies[order], counts[order])
+            steps = np.array([self._time_to_lookup_fraction(p["time_years"]) for p in pts])
+            
+            # Extract raw comoving values
+            raw_densities = np.array([p["density_per_m3"] for p in pts], dtype=np.float64)
+            peak_val = max(raw_densities) if max(raw_densities) > 0 else 1.0
+            
+            # Normalize each structural layer relative to its own functional peak amplitude.
+            # L0 gets full n_max range, higher-order structures get scaled packing allocations.
+            scale_factor = self.n_max if level_key == "L0" else (self.n_max * 0.25)
+            counts = (raw_densities / peak_val) * scale_factor
+            
+            order = np.argsort(steps)
+            self.interpolators[level_key] = (steps[order], counts[order])
 
-    def get_counts(self, entropy: float) -> dict:
+    def get_counts(self, step_fraction: float) -> dict:
         result = {}
-        for level_key, (ent_arr, cnt_arr) in self.interpolators.items():
-            result[level_key] = float(np.interp(entropy, ent_arr, cnt_arr))
+        for level_key, (step_arr, cnt_arr) in self.interpolators.items():
+            result[level_key] = float(np.interp(step_fraction, step_arr, cnt_arr))
         return result
 
     def print_summary(self):
-        print(f"\nSpectrum loaded: {self.data['name']}")
-        print(f"  Time unit   : {self.data['time_unit']}")
-        print(f"  Density unit: {self.data['density_unit']}")
-        print(f"  Peak L0 density (normalization ref): {self.peak_l0_density:.3e} /m^3")
-        print(f"  N_max (simulation ceiling): {self.n_max:.0f}")
+        print(f"\nPure Empirical Mode Activated: {self.data['name']}")
+        print(f"  Dynamic Range Ceiling (N_max): {self.n_max:.0f}")
         for k, v in self.data["levels"].items():
-            n_pts = len(v["abundances"])
-            print(f"  {k} ({v['name']}): {n_pts} data points")
+            print(f"  {k} ({v['name']}): Bound to explicit observation curves.")
         print()
 
 
 # ===========================================================================
-# BITSTRING ENGINE
+# BITSTRING ENGINE (Bypassed in Pure Empirical Mode)
 # ===========================================================================
 
 @njit(fastmath=True)
@@ -178,8 +172,6 @@ class EntropicCosmologyEngine:
         s_l3 = run_recursive_density_filter(s_l2, self.l4_w, self.l4_t)
         l3_indices = np.where(s_l3 == 1)[0].astype(np.float64)
 
-        self.current_g_count = g_indices.size
-
         if g_indices.size > 0:
             l0_r = g_indices
             l1_r = l1_indices * self.l2_w
@@ -201,30 +193,22 @@ class EntropicCosmologyEngine:
 # HUBBLE PARAMETER COMPUTATION
 # ===========================================================================
 
-def compute_hubble(history_entropy, history_active, n_max):
-    """
-    Computes the relational Hubble parameter H(t) from the history of
-    active element counts.
-    """
+def compute_hubble(history_steps, history_active):
     if len(history_active) < 2:
         return np.array([]), np.array([])
 
-    ent = np.array(history_entropy)
-    act = np.array(history_active, dtype=float)
+    steps = np.array(history_steps, dtype=float)
+    act   = np.array(history_active, dtype=float)
 
-    dact = np.diff(act)
-    dent = np.diff(ent)
+    dact   = np.diff(act)
+    dsteps = np.diff(steps)
 
-    valid = (np.abs(dent) > 1e-12) & (act[:-1] > 1.0)
+    valid = (np.abs(dsteps) > 1e-12) & (act[:-1] > 1.0)
     H = np.zeros(len(dact))
-    H[valid] = (dact[valid] / dent[valid]) / act[:-1][valid]
+    H[valid] = (dact[valid] / dsteps[valid]) / act[:-1][valid]
 
-    return ent[:-1], H
+    return steps[:-1], H
 
-
-# ===========================================================================
-# COORDINATE GENERATOR
-# ===========================================================================
 
 def generate_even_coordinates(count, scale):
     if count <= 0:  return np.zeros(0)
@@ -233,14 +217,14 @@ def generate_even_coordinates(count, scale):
 
 
 # ===========================================================================
-# MAIN
+# MAIN PROGRAM EXECUTION
 # ===========================================================================
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Unified IAME Cosmology Visualizer")
-    parser.add_argument("--bits",              type=int,   default=32*1024)
+    parser.add_argument("--bits",              type=int,   default=10*1024)
     parser.add_argument("--pattern",          type=str,   default="10")
-    parser.add_argument("--quantum_mutations",type=int,   default=100)
+    parser.add_argument("--quantum_mutations",type=int,   default=10)
     parser.add_argument("--max_time_steps",   type=int,   default=1000)
     parser.add_argument("--recursion",        type=int,   default=3, choices=[0,1,2,3])
     parser.add_argument("--feynman",          action="store_true")
@@ -267,30 +251,34 @@ if __name__ == "__main__":
         spectrum = SpectrumLoader(args.spectrum, n_max)
         spectrum.print_summary()
 
-    # History lists
     history_active = []
-    history_vacuum = []  # Tracks unconstrained matter-free metric trajectory
+    history_vacuum = []  
+    history_timestamps = []
+    history_g_counts = []
+    history_l1_counts = []
+    history_l2_counts = []
+    history_l3_counts = []
 
     plt.ion()
     fig, (ax_spacetime, ax_metrics) = plt.subplots(1, 2, figsize=(16, 7))
 
-    mode_label = "Real Spectrum" if spectrum else ("Feynman" if args.feynman else "Scatter")
+    mode_label = "Pure Empirical Spectrum" if spectrum else ("Feynman" if args.feynman else "Scatter")
     fig.suptitle(f"IAME Cosmology Engine [{mode_label}]", fontsize=16, fontweight='bold')
 
     ax_spacetime.set_xlim(0, args.max_time_steps)
     ax_spacetime.set_facecolor('#020205')
-    ax_spacetime.set_xlabel("Entropic Time Steps")
+    ax_spacetime.set_xlabel("Normalized Timeline Steps")
     ax_spacetime.set_ylabel("Relational Spatial Coordinate")
 
-    if args.feynman:
+    if args.feynman or spectrum:
         ax_spacetime.set_title("Emergent Topological Feynman Space")
-        ax_spacetime.plot([], [], color='gray',    alpha=0.3, label="L0 Fabric Quanta")
+        ax_spacetime.plot([], [], color='gray',    alpha=0.3, label="L0 Fabric Baseline")
         ax_spacetime.plot([], [], color='cyan',    alpha=0.6, label="L1 Hadrons")
         ax_spacetime.plot([], [], color='magenta', alpha=0.7, label="L2 Atoms")
         ax_spacetime.plot([], [], color='lime',    alpha=0.8, label="L3 Compounds")
     else:
         ax_spacetime.set_title("Relational Spacetime Flow")
-        l0_scatter = ax_spacetime.scatter([], [], s=1, color='gray',    marker='.',  alpha=0.10, label="L0 Fabric Quanta")
+        l0_scatter = ax_spacetime.scatter([], [], s=1, color='gray',    marker='.',  alpha=0.10, label="L0 Fabric Baseline")
         l1_scatter = ax_spacetime.scatter([], [], s=1, color='cyan',    marker='o',  alpha=0.30, label="L1 Hadrons")
         l2_scatter = ax_spacetime.scatter([], [], s=2, color='magenta', marker='*',  alpha=0.50, label="L2 Atoms")
         l3_scatter = ax_spacetime.scatter([], [], s=4, color='lime',    marker='^',  alpha=0.70, label="L3 Compounds")
@@ -301,23 +289,21 @@ if __name__ == "__main__":
 
     ax_spacetime.legend(loc="upper left")
 
-    # --- Metrics panel ---
-    line_g,       = ax_metrics.plot([], [], label="L0 Fabric Quanta (Net Unbound)", color='gray', lw=1, linestyle=':')
+    # Metrics panel setup
+    line_g,       = ax_metrics.plot([], [], label="L0 Free Fabric (Relational Pool)", color='gray', lw=1, linestyle=':')
     line_l1,      = ax_metrics.plot([], [], label="L1 Hadrons",       color='cyan',    lw=2)
     line_l2,      = ax_metrics.plot([], [], label="L2 Atoms",          color='magenta', lw=2)
     line_l3,      = ax_metrics.plot([], [], label="L3 Compounds",      color='lime',    lw=2.5)
-    
-    # NEW: Vacuum Baseline Curve (Scale factor if matter did not consume spatial resolution tokens)
-    line_vacuum,  = ax_metrics.plot([], [], label="Vacuum Fabric baseline (Matter-Free)", color='blue', lw=1.5, linestyle='-.')
+    line_vacuum,  = ax_metrics.plot([], [], label="Explicit L0 Vacuum Trend (Unconstrained)", color='white', lw=1.5, linestyle='-.')
 
     ax_metrics.set_ylabel("Structural Count / Baseline Scale")
-    ax_metrics.set_xlabel("Entropic Time Steps")
+    ax_metrics.set_xlabel("Normalized Timeline Steps")
     ax_metrics.set_ylim(bottom=0)
 
     ax_entropy = ax_metrics.twinx()
-    line_entropy, = ax_entropy.plot([], [], label="Shannon Entropy", color='red',    linestyle='--', lw=1.5)
-    line_hubble,  = ax_entropy.plot([], [], label="H(t) relational", color='yellow', linestyle='-',  lw=1.5)
-    ax_entropy.set_ylabel("Entropy / H(t)", color='red')
+    line_entropy, = ax_entropy.plot([], [], label="System Phase Indicator", color='red',    linestyle='--', lw=1.5)
+    line_hubble,  = ax_entropy.plot([], [], label="H(t) Relational", color='yellow', linestyle='-',  lw=1.5)
+    ax_entropy.set_ylabel("Phase / H(t)", color='red')
     ax_entropy.set_ylim(-0.5, 1.05)
 
     lines  = [line_g, line_l1, line_l2, line_l3, line_vacuum, line_entropy, line_hubble]
@@ -335,80 +321,63 @@ if __name__ == "__main__":
     prev_l0_x = prev_l1_x = prev_l2_x = prev_l3_x = None
 
     # -----------------------------------------------------------------------
-    # MAIN LOOP
+    # ANALYTICAL SIMULATION LOOP
     # -----------------------------------------------------------------------
     while current_time_tick < args.max_time_steps:
         if not plt.fignum_exists(fig.number):
             break
 
-        stride_limit = 1 if (args.feynman or spectrum) else current_stride
-
-        for _ in range(stride_limit):
-            engine.mutate_state(args.quantum_mutations)
-            current_time_tick += 1
-            if current_time_tick >= args.max_time_steps:
-                break
-
-        entropy = compute_entropy(engine.bitfield)
-
         if spectrum:
-            counts   = spectrum.get_counts(entropy)
+            current_time_tick += 1
+            step_fraction = current_time_tick / args.max_time_steps
+            
+            # PURE EXPLICIT DATA TRAJECTORIES - Fetched directly from JSON fields
+            counts   = spectrum.get_counts(step_fraction)
             raw_l0   = int(counts.get("L0", 0))
             raw_l1   = int(counts.get("L1", 0))
             raw_l2   = int(counts.get("L2", 0))
             raw_l3   = int(counts.get("L3", 0))
-            l0_pos_raw = np.arange(raw_l0, dtype=np.float64)
-            l1_pos_raw = np.arange(raw_l1, dtype=np.float64)
-            l2_pos_raw = np.arange(raw_l2, dtype=np.float64)
-            l3_pos_raw = np.arange(raw_l3, dtype=np.float64)
+            
+            # Matter elements withdraw resolution directly from the explicit L0 boundary trend
+            vacuum_elements = raw_l0
+            net_l3 = raw_l3
+            net_l2 = raw_l2
+            net_l1 = raw_l1
+            net_l0 = max(1, raw_l0 - (net_l1 + net_l2 + net_l3))
+            
+            sim_indicator = step_fraction # Linear timeline sweep replace simulated entropy
         else:
+            # Traditional simulated algorithmic filter execution mode
+            engine.mutate_state(args.quantum_mutations)
+            current_time_tick = engine.step
+            
             l0_pos_raw, l1_pos_raw, l2_pos_raw, l3_pos_raw = engine.get_layer_data()
-            raw_l0 = int(l0_pos_raw.size)
-            raw_l1 = int(l1_pos_raw.size)
-            raw_l2 = int(l2_pos_raw.size)
-            raw_l3 = int(l3_pos_raw.size)
+            raw_l0, raw_l1, raw_l2, raw_l3 = l0_pos_raw.size, l1_pos_raw.size, l2_pos_raw.size, l3_pos_raw.size
 
-        # -------------------------------------------------------------------
-        # CONSERVATION LOGIC — net unbound counts
-        # -------------------------------------------------------------------
-        net_l3 = raw_l3
-        net_l2 = max(0, raw_l2 - (net_l3 * int(args.l4_window)))
-        net_l1 = max(0, raw_l1 - (raw_l2  * int(args.l3_window)))
-        net_l0 = max(0, raw_l0 - (raw_l1  * int(args.l2_window)))
+            net_l3 = raw_l3
+            net_l2 = max(0, raw_l2 - (net_l3 * int(args.l4_window)))
+            net_l1 = max(0, raw_l1 - (raw_l2  * int(args.l3_window)))
+            net_l0 = max(0, raw_l0 - (raw_l1  * int(args.l2_window)))
+            
+            vacuum_elements = raw_l0
+            sim_indicator = compute_entropy(engine.bitfield)
 
-        if not args.feynman and not spectrum:
-            delta = raw_l1 - last_l1_count
-            if delta > target_l1_growth:
-                current_stride = max(1, int(current_stride * target_l1_growth / max(1, delta)))
-            else:
-                current_stride = min(500, int(current_stride * 1.1))
-            last_l1_count = raw_l1
-
-        # -------------------------------------------------------------------
-        # MATHEMATICAL ALIGNMENT FIX: Relational Scale Factor
-        # Tracking ONLY unconstrained space fabric pool vs. Matter-Free Background
-        # -------------------------------------------------------------------
-        active_elements = net_l0 
-        total_scale     = max(0.001, (active_elements / n_max) * 2.0)
-
-        # The pure GR vacuum baseline profile (unconstrained match count)
-        vacuum_elements = raw_l0
+        # Calculate relational metrics based strictly on unbound spatial token capacities
+        active_elements = max(1, net_l0)
+        total_scale     = (active_elements / n_max) * 4.0
 
         history_active.append(active_elements)
         history_vacuum.append(vacuum_elements)
+        history_timestamps.append(current_time_tick)
+        history_g_counts.append(net_l0)
+        history_l1_counts.append(net_l1)
+        history_l2_counts.append(net_l2)
+        history_l3_counts.append(net_l3)
 
-        # -------------------------------------------------------------------
-        # HUBBLE PARAMETER H(t)
-        # -------------------------------------------------------------------
-        ent_axis, H_vals = compute_hubble(
-            engine.history_entropy + [entropy],
-            history_active,
-            n_max
-        )
+        # Derive H(t) from explicit timeline variations
+        _, H_vals = compute_hubble(history_timestamps, history_active)
 
-        # -------------------------------------------------------------------
-        # VISUALIZATION
-        # -------------------------------------------------------------------
+        # Coordinate generator visualization routing
         if args.feynman or spectrum:
             curr_l0_x = generate_even_coordinates(net_l0, total_scale)
             curr_l1_x = generate_even_coordinates(net_l1, total_scale)
@@ -417,10 +386,10 @@ if __name__ == "__main__":
 
             if current_time_tick > 1 and prev_l0_x is not None:
                 for arr_p, arr_c, col, al, lw in [
-                    (prev_l0_x, curr_l0_x, 'gray',    0.20, 0.8),
-                    (prev_l1_x, curr_l1_x, 'cyan',    0.40, 1.0),
-                    (prev_l2_x, curr_l2_x, 'magenta', 0.60, 1.2),
-                    (prev_l3_x, curr_l3_x, 'lime',    0.80, 1.5),
+                    (prev_l0_x, curr_l0_x, 'gray',    0.05, 0.5),
+                    (prev_l1_x, curr_l1_x, 'cyan',    0.35, 1.0),
+                    (prev_l2_x, curr_l2_x, 'magenta', 0.55, 1.2),
+                    (prev_l3_x, curr_l3_x, 'lime',    0.75, 1.5),
                 ]:
                     if arr_p.size > 0 and arr_c.size > 0:
                         for px in arr_p:
@@ -433,57 +402,43 @@ if __name__ == "__main__":
             prev_l1_x = curr_l1_x
             prev_l2_x = curr_l2_x
             prev_l3_x = curr_l3_x
-
         else:
-            def _append(t, pos_raw, t_list, r_list):
-                norm = (pos_raw / n_max) - 0.5 if pos_raw.size > 0 else np.zeros(0)
-                norm = np.abs(norm) * np.where(np.arange(norm.size) % 2 == 0, 1.0, -1.0)
+            def _append(t, count, t_list, r_list):
+                norm = np.linspace(-0.5, 0.5, count) if count > 0 else np.zeros(0)
                 for v in norm:
                     t_list.append(t)
-                    r_list.append((v + random.uniform(-0.5, 0.5) / n_max) * total_scale)
+                    r_list.append(v * total_scale)
 
-            _append(current_time_tick, l0_pos_raw, all_time_l0_t, all_time_l0_r)
-            if args.recursion >= 1: _append(current_time_tick, l1_pos_raw, all_time_l1_t, all_time_l1_r)
-            if args.recursion >= 2: _append(current_time_tick, l2_pos_raw, all_time_l2_t, all_time_l2_r)
-            if args.recursion >= 3: _append(current_time_tick, l3_pos_raw, all_time_l3_t, all_time_l3_r)
+            _append(current_time_tick, net_l0, all_time_l0_t, all_time_l0_r)
+            _append(current_time_tick, net_l1, all_time_l1_t, all_time_l1_r)
+            _append(current_time_tick, net_l2, all_time_l2_t, all_time_l2_r)
+            _append(current_time_tick, net_l3, all_time_l3_t, all_time_l3_r)
 
             if all_time_l0_t: l0_scatter.set_offsets(np.column_stack((all_time_l0_t, all_time_l0_r)))
-            if all_time_l1_t and args.recursion >= 1: l1_scatter.set_offsets(np.column_stack((all_time_l1_t, all_time_l1_r)))
-            if all_time_l2_t and args.recursion >= 2: l2_scatter.set_offsets(np.column_stack((all_time_l2_t, all_time_l2_r)))
-            if all_time_l3_t and args.recursion >= 3: l3_scatter.set_offsets(np.column_stack((all_time_l3_t, all_time_l3_r)))
+            if all_time_l1_t: l1_scatter.set_offsets(np.column_stack((all_time_l1_t, all_time_l1_r)))
+            if all_time_l2_t: l2_scatter.set_offsets(np.column_stack((all_time_l2_t, all_time_l2_r)))
+            if all_time_l3_t: l3_scatter.set_offsets(np.column_stack((all_time_l3_t, all_time_l3_r)))
 
-        ax_spacetime.set_ylim(-max(0.05, total_scale * 0.55),
-                               max(0.05, total_scale * 0.55))
+        ax_spacetime.set_ylim(-max(0.05, total_scale * 0.55), max(0.05, total_scale * 0.55))
 
-        # Update metrics
-        engine.history_timestamps.append(current_time_tick)
-        engine.history_entropy.append(entropy)
-        engine.history_g_counts.append(net_l0)
-        engine.history_l1_counts.append(net_l1)
-        engine.history_l2_counts.append(net_l2)
-        engine.history_l3_counts.append(net_l3)
-
-        t_axis = engine.history_timestamps
-        line_g.set_data(t_axis,  engine.history_g_counts)
-        line_l1.set_data(t_axis, engine.history_l1_counts)
-        line_l2.set_data(t_axis, engine.history_l2_counts)
-        line_l3.set_data(t_axis, engine.history_l3_counts)
-        
-        # Plot white vacuum baseline trend
-        line_vacuum.set_data(t_axis, history_vacuum)
-        
-        line_entropy.set_data(t_axis, engine.history_entropy)
+        # Realtime graph updating
+        line_g.set_data(history_timestamps,  history_g_counts)
+        line_l1.set_data(history_timestamps, history_l1_counts)
+        line_l2.set_data(history_timestamps, history_l2_counts)
+        line_l3.set_data(history_timestamps, history_l3_counts)
+        line_vacuum.set_data(history_timestamps, history_vacuum)
+        line_entropy.set_data(history_timestamps, [sim_indicator]*len(history_timestamps))
 
         if len(H_vals) > 1:
             H_display = H_vals / (np.max(np.abs(H_vals)) + 1e-12) * 0.5
-            line_hubble.set_data(t_axis[:-1], H_display)
+            line_hubble.set_data(history_timestamps[:-1], H_display)
 
         ax_metrics.relim()
         ax_metrics.autoscale(enable=True, axis='both', tight=False)
         ax_entropy.relim()
         ax_entropy.autoscale_view(True, True, True)
 
-        refresh_tick = 5 if (args.feynman or spectrum) else 1
+        refresh_tick = 15 if spectrum else 5
         if current_time_tick % refresh_tick == 0:
             fig.canvas.draw_idle()
             plt.pause(0.001)
