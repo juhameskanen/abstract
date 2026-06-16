@@ -1,5 +1,5 @@
 """
-Time-Reversed Entropic Cosmology: Unified Edition
+Time-Reversed Entropic Cosmology: Unified Edition (Fixed Relational Scale)
 ===================================================================
 An informational ontology simulation utilizing a hidden background fabric
 of Fabric Quanta to derive spatial coordinates relationally. Maps hierarchical
@@ -41,19 +41,9 @@ class SpectrumLoader:
     """
     Loads observed baryonic particle abundance data from a JSON file and
     provides interpolated N_k(entropy) curves for use in the simulation.
-
-    Time mapping: t_years -> entropy via log-linear scaling anchored to
-    the observed age of the universe (13.8 Gyr = entropy 0.99).
-
-    Density mapping: physical number density (per m^3) -> normalized count
-    N_k / N_max, where N_max is the peak L0 density (used as the reference
-    resolution ceiling of the background fabric).
     """
 
-    # Age of universe in years — the anchor for entropy mapping
     T_MAX_YEARS = 13.8e9
-
-    # Minimum time in years (just after Planck epoch) — maps to entropy ~ 0
     T_MIN_YEARS = 1e-10
 
     def __init__(self, json_path: str, n_max: float):
@@ -64,23 +54,12 @@ class SpectrumLoader:
         self._build_interpolators()
 
     def _time_to_entropy(self, t_years: float) -> float:
-        """
-        Maps cosmic time in years to a normalized entropy parameter in [0, 1].
-        Uses log scaling because early-universe changes span many orders of
-        magnitude in time but are compressed into a small entropy range.
-        """
         log_t   = np.log10(max(t_years, self.T_MIN_YEARS))
         log_min = np.log10(self.T_MIN_YEARS)
         log_max = np.log10(self.T_MAX_YEARS)
         return np.clip((log_t - log_min) / (log_max - log_min), 0.0, 1.0)
 
     def _build_interpolators(self):
-        """
-        Builds one interpolation function per level mapping entropy -> N_k.
-        Densities are normalized relative to the peak L0 density so that
-        N_k values are comparable to the bitstring simulation's N_max.
-        """
-        # Find peak L0 density for normalization
         l0_densities = [pt["density_per_m3"]
                         for pt in self.data["levels"]["L0"]["abundances"]]
         self.peak_l0_density = max(l0_densities)
@@ -89,20 +68,14 @@ class SpectrumLoader:
         for level_key, level_data in self.data["levels"].items():
             pts = level_data["abundances"]
             entropies = np.array([self._time_to_entropy(p["time_years"]) for p in pts])
-            # Normalize: N_k = (density / peak_L0_density) * N_max
             counts = np.array(
                 [(p["density_per_m3"] / self.peak_l0_density) * self.n_max
                  for p in pts]
             )
-            # Sort by entropy (time order)
             order = np.argsort(entropies)
             self.interpolators[level_key] = (entropies[order], counts[order])
 
     def get_counts(self, entropy: float) -> dict:
-        """
-        Returns interpolated N_k counts at the given entropy value.
-        Returns a dict with keys L0, L1, L2, L3.
-        """
         result = {}
         for level_key, (ent_arr, cnt_arr) in self.interpolators.items():
             result[level_key] = float(np.interp(entropy, ent_arr, cnt_arr))
@@ -121,7 +94,7 @@ class SpectrumLoader:
 
 
 # ===========================================================================
-# BITSTRING ENGINE — unchanged from previous version
+# BITSTRING ENGINE
 # ===========================================================================
 
 @njit(fastmath=True)
@@ -140,7 +113,6 @@ def compute_entropy(bitstring: np.ndarray) -> float:
 
 @njit(fastmath=True)
 def run_graviton_filter(bitfield: np.ndarray, w: int, target_val: int) -> np.ndarray:
-    """Extracts Level-0 fabric quanta from the raw bitfield."""
     num_fragments = bitfield.size // w
     success_string = np.zeros(num_fragments, dtype=np.uint8)
     for m in range(num_fragments):
@@ -232,13 +204,7 @@ class EntropicCosmologyEngine:
 def compute_hubble(history_entropy, history_active, n_max):
     """
     Computes the relational Hubble parameter H(t) from the history of
-    active element counts, using the IAME formula:
-
-        a(t)  = N_active(t) / N_max
-        H(t)  = (1/a) * da/dt = (1/N_active) * dN_active/dt
-
-    Returns arrays (entropy_axis, H_values) with the same length as the
-    input histories minus one (finite difference requires two points).
+    active element counts.
     """
     if len(history_active) < 2:
         return np.array([]), np.array([])
@@ -246,11 +212,9 @@ def compute_hubble(history_entropy, history_active, n_max):
     ent = np.array(history_entropy)
     act = np.array(history_active, dtype=float)
 
-    # Finite difference dN/dH (entropy as the time parameter)
     dact = np.diff(act)
     dent = np.diff(ent)
 
-    # Avoid division by zero
     valid = (np.abs(dent) > 1e-12) & (act[:-1] > 1.0)
     H = np.zeros(len(dact))
     H[valid] = (dact[valid] / dent[valid]) / act[:-1][valid]
@@ -274,17 +238,13 @@ def generate_even_coordinates(count, scale):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Unified IAME Cosmology Visualizer")
-    parser.add_argument("--bits",             type=int,   default=10*1024)
+    parser.add_argument("--bits",              type=int,   default=32*1024)
     parser.add_argument("--pattern",          type=str,   default="10")
-    parser.add_argument("--quantum_mutations",type=int,   default=10)
+    parser.add_argument("--quantum_mutations",type=int,   default=100)
     parser.add_argument("--max_time_steps",   type=int,   default=1000)
     parser.add_argument("--recursion",        type=int,   default=3, choices=[0,1,2,3])
     parser.add_argument("--feynman",          action="store_true")
-
-    # NEW: real spectrum mode
-    parser.add_argument("--spectrum", type=str, default=None,
-                        help="Path to JSON spectrum file. When set, observed particle "
-                             "abundances replace the bitstring filter outputs.")
+    parser.add_argument("--spectrum",         type=str,   default=None)
 
     parser.add_argument("--l2_window",    type=int, default=8)
     parser.add_argument("--l2_threshold", type=int, default=5)
@@ -301,15 +261,15 @@ if __name__ == "__main__":
         args.l4_window, args.l4_threshold
     )
 
-    # Load spectrum if provided
     spectrum = None
     n_max = max(1.0, float(args.bits // engine.w))
     if args.spectrum:
         spectrum = SpectrumLoader(args.spectrum, n_max)
         spectrum.print_summary()
 
-    # History for Hubble computation
+    # History lists
     history_active = []
+    history_vacuum = []  # Tracks unconstrained matter-free metric trajectory
 
     plt.ion()
     fig, (ax_spacetime, ax_metrics) = plt.subplots(1, 2, figsize=(16, 7))
@@ -342,11 +302,15 @@ if __name__ == "__main__":
     ax_spacetime.legend(loc="upper left")
 
     # --- Metrics panel ---
-    line_g,       = ax_metrics.plot([], [], label="L0 Fabric Quanta", color='gray',    lw=1, linestyle=':')
+    line_g,       = ax_metrics.plot([], [], label="L0 Fabric Quanta (Net Unbound)", color='gray', lw=1, linestyle=':')
     line_l1,      = ax_metrics.plot([], [], label="L1 Hadrons",       color='cyan',    lw=2)
-    line_l2,      = ax_metrics.plot([], [], label="L2 Atoms",         color='magenta', lw=2)
-    line_l3,      = ax_metrics.plot([], [], label="L3 Compounds",     color='lime',    lw=2.5)
-    ax_metrics.set_ylabel("Structural Count")
+    line_l2,      = ax_metrics.plot([], [], label="L2 Atoms",          color='magenta', lw=2)
+    line_l3,      = ax_metrics.plot([], [], label="L3 Compounds",      color='lime',    lw=2.5)
+    
+    # NEW: Vacuum Baseline Curve (Scale factor if matter did not consume spatial resolution tokens)
+    line_vacuum,  = ax_metrics.plot([], [], label="Vacuum Fabric baseline (Matter-Free)", color='blue', lw=1.5, linestyle='-.')
+
+    ax_metrics.set_ylabel("Structural Count / Baseline Scale")
     ax_metrics.set_xlabel("Entropic Time Steps")
     ax_metrics.set_ylim(bottom=0)
 
@@ -356,7 +320,7 @@ if __name__ == "__main__":
     ax_entropy.set_ylabel("Entropy / H(t)", color='red')
     ax_entropy.set_ylim(-0.5, 1.05)
 
-    lines  = [line_g, line_l1, line_l2, line_l3, line_entropy, line_hubble]
+    lines  = [line_g, line_l1, line_l2, line_l3, line_vacuum, line_entropy, line_hubble]
     labels = [l.get_label() for l in lines]
     ax_metrics.legend(lines, labels, loc="upper left")
 
@@ -387,16 +351,12 @@ if __name__ == "__main__":
 
         entropy = compute_entropy(engine.bitfield)
 
-        # -------------------------------------------------------------------
-        # COUNT SOURCE: real spectrum or bitstring filters
-        # -------------------------------------------------------------------
         if spectrum:
             counts   = spectrum.get_counts(entropy)
             raw_l0   = int(counts.get("L0", 0))
             raw_l1   = int(counts.get("L1", 0))
             raw_l2   = int(counts.get("L2", 0))
             raw_l3   = int(counts.get("L3", 0))
-            # Positional arrays not meaningful in spectrum mode — use even distribution
             l0_pos_raw = np.arange(raw_l0, dtype=np.float64)
             l1_pos_raw = np.arange(raw_l1, dtype=np.float64)
             l2_pos_raw = np.arange(raw_l2, dtype=np.float64)
@@ -409,14 +369,13 @@ if __name__ == "__main__":
             raw_l3 = int(l3_pos_raw.size)
 
         # -------------------------------------------------------------------
-        # CONSERVATION LOGIC — net unbound counts (identical in both modes)
+        # CONSERVATION LOGIC — net unbound counts
         # -------------------------------------------------------------------
         net_l3 = raw_l3
         net_l2 = max(0, raw_l2 - (net_l3 * int(args.l4_window)))
         net_l1 = max(0, raw_l1 - (raw_l2  * int(args.l3_window)))
         net_l0 = max(0, raw_l0 - (raw_l1  * int(args.l2_window)))
 
-        # Adaptive stride (bitstring mode only)
         if not args.feynman and not spectrum:
             delta = raw_l1 - last_l1_count
             if delta > target_l1_growth:
@@ -426,12 +385,17 @@ if __name__ == "__main__":
             last_l1_count = raw_l1
 
         # -------------------------------------------------------------------
-        # RELATIONAL SCALE FACTOR
+        # MATHEMATICAL ALIGNMENT FIX: Relational Scale Factor
+        # Tracking ONLY unconstrained space fabric pool vs. Matter-Free Background
         # -------------------------------------------------------------------
-        active_elements = net_l0 + net_l1 + net_l2 + net_l3
+        active_elements = net_l0 
         total_scale     = max(0.001, (active_elements / n_max) * 2.0)
 
+        # The pure GR vacuum baseline profile (unconstrained match count)
+        vacuum_elements = raw_l0
+
         history_active.append(active_elements)
+        history_vacuum.append(vacuum_elements)
 
         # -------------------------------------------------------------------
         # HUBBLE PARAMETER H(t)
@@ -453,7 +417,7 @@ if __name__ == "__main__":
 
             if current_time_tick > 1 and prev_l0_x is not None:
                 for arr_p, arr_c, col, al, lw in [
-                    (prev_l0_x, curr_l0_x, 'gray',    0.15, 0.5),
+                    (prev_l0_x, curr_l0_x, 'gray',    0.20, 0.8),
                     (prev_l1_x, curr_l1_x, 'cyan',    0.40, 1.0),
                     (prev_l2_x, curr_l2_x, 'magenta', 0.60, 1.2),
                     (prev_l3_x, curr_l3_x, 'lime',    0.80, 1.5),
@@ -504,13 +468,14 @@ if __name__ == "__main__":
         line_l1.set_data(t_axis, engine.history_l1_counts)
         line_l2.set_data(t_axis, engine.history_l2_counts)
         line_l3.set_data(t_axis, engine.history_l3_counts)
+        
+        # Plot white vacuum baseline trend
+        line_vacuum.set_data(t_axis, history_vacuum)
+        
         line_entropy.set_data(t_axis, engine.history_entropy)
 
         if len(H_vals) > 1:
-            # Normalise H for display alongside entropy on same axis
             H_display = H_vals / (np.max(np.abs(H_vals)) + 1e-12) * 0.5
-            
-            # Use t_axis (sliced to match finite difference length) instead of ent_axis
             line_hubble.set_data(t_axis[:-1], H_display)
 
         ax_metrics.relim()
