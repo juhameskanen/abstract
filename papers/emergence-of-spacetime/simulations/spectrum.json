@@ -5,19 +5,19 @@
   "density_unit": "per_cubic_meter_comoving",
   "notes": "Values are approximate placeholders pending verification against PDG/Planck data",
   "levels": {
-    "L0": {
-      "name": "Fabric Quanta",
-      "description": "Background photon/CMB radiation field - free unbound quanta",
+    "L1": {
+      "name": "Leptonic Neutrinos",
+      "description": "Cosmic Neutrino Background - decoupled from thermal plasma at ~1 second, carrying non-zero rest mass",
       "abundances": [
-        {"time_years": 1e-4,   "density_per_m3": 1.0e38},
-        {"time_years": 0.01,   "density_per_m3": 1.0e34},
-        {"time_years": 1.0,    "density_per_m3": 1.0e30},
-        {"time_years": 379000, "density_per_m3": 4.0e14},
-        {"time_years": 1.0e9,  "density_per_m3": 4.0e11},
-        {"time_years": 13.8e9, "density_per_m3": 4.1e8}
+        {"time_years": 3.17e-8,  "density_per_m3": 1.1e38},
+        {"time_years": 0.01,     "density_per_m3": 1.1e34},
+        {"time_years": 1.0,      "density_per_m3": 1.1e30},
+        {"time_years": 379000,   "density_per_m3": 4.4e14},
+        {"time_years": 1.0e9,    "density_per_m3": 4.4e11},
+        {"time_years": 13.8e9,   "density_per_m3": 4.5e8}
       ]
     },
-    "L1": {
+    "L2": {
       "name": "Hadrons",
       "description": "Protons and neutrons - formed at BBN epoch (~1 second to 3 minutes)",
       "abundances": [
@@ -30,7 +30,7 @@
         {"time_years": 13.8e9,   "density_per_m3": 0.24}
       ]
     },
-    "L2": {
+    "L3": {
       "name": "Atoms",
       "description": "Hydrogen and helium atoms - formed at recombination (~379,000 years)",
       "abundances": [
@@ -40,18 +40,6 @@
         {"time_years": 3.0e9,    "density_per_m3": 2.0e5},
         {"time_years": 8.0e9,    "density_per_m3": 5.0e4},
         {"time_years": 13.8e9,   "density_per_m3": 0.22}
-      ]
-    },
-    "L3": {
-      "name": "Molecules",
-      "description": "H2 and heavier molecules - structure formation era (~100M years onward)",
-      "abundances": [
-        {"time_years": 1.0e8,    "density_per_m3": 1.0e2},
-        {"time_years": 5.0e8,    "density_per_m3": 1.0e4},
-        {"time_years": 1.0e9,    "density_per_m3": 5.0e4},
-        {"time_years": 3.0e9,    "density_per_m3": 8.0e4},
-        {"time_years": 8.0e9,    "density_per_m3": 6.0e4},
-        {"time_years": 13.8e9,   "density_per_m3": 2.0e4}
       ]
     }
   }
