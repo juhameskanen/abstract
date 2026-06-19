@@ -14,25 +14,20 @@
 % ============================================================
 \begin{abstract}
 We investigate black hole singularities from an information-theoretic
-perspective within the \iame{} framework. Under the Internal Emergence
+perspective. Under the Internal Emergence
 Principle established in Paper~I, geometric spacetime and the execution
 trace of a computational simulation are two equivalent representations of
 the same underlying informational structure, with neither being more
 fundamental. Standard General Relativity cannot be evolved through
 singularity formation due to numerical divergences and the breakdown of
 the manifold description. The execution trace provides a complementary,
-well-behaved description that remains defined throughout collapse. Analysing
-the spatial informational evolution using a multi-metric diagnostic suite---comprising 
-single-bit Shannon entropy, $n$-bit pattern block entropy, and a dynamic 
-inter-particle spectral complexity measure---we map structural phase transitions 
-across Schwarzschild, Eddington-Finkelstein, and high-spin Kerr geometries. 
-We find that while bit and block entropies decrease monotonically toward zero, the 
-spectral complexity tracks higher-order spatial rearrangements. Schwarzschild 
-collapses exhibit non-monotonic tidal peaks before vanishing, whereas Kerr spacetimes 
-reveal an abrupt transition to chaotic complexity spikes upon breaching the 
-ergosphere due to differential frame-dragging. We argue that these metrics identify the 
-singularity not as a point of infinite curvature but as a state of zero informational variety 
---- a point incapable of supporting microstructure, matter, or distinguishable geometry.
+well-behaved description that remains defined throughout collapse. 
+We argue that the singularity is not a point of infinite curvature
+but a state of zero entropy state. Any mapping of zero entropy
+yields a single geometric object - a point. A zero entropy state
+is incapable of supporting microstructure, matter, or distinguishable geometry, and 
+therefore is not of point of infinite curvature. The failure of
+GR is respresentational, not a break down of physics.
 \end{abstract}
 
 % ============================================================
@@ -46,7 +41,7 @@ curvature diverges and the classical manifold description breaks down
 singularities mark the boundary of applicability of General Relativity and
 that a theory of quantum gravity is required to describe what occurs there.
 
-The present paper proposes a different interpretation. Within the \iame{}
+The present paper proposes a different interpretation. Within the 
 framework developed in Paper~I, geometric spacetime and the execution trace
 of a computational simulation are two representations of the same
 informational structure. This equivalence, which follows from the Internal
@@ -135,7 +130,8 @@ f : \mathcal{C} \to \mathbb{Z}^3, \quad f(b) =
 (\phi(b_1), \phi(b_2), \phi(b_3)),
 \]
 where $\phi : \{0,1\}^k \to \mathbb{Z}$ decodes fixed-length binary segments
-into integers via standard binary representation. Distinct bitstrings decode to distinct integer triples.
+into integers via standard binary representation.
+Distinct bitstrings decode to distinct integer triples.
 Quantisation of continuous coordinates to fixed-width integers eliminates
 spurious entropy contributions from floating-point representation and ensures
 that the entropy of the bitstring faithfully reflects the geometric
@@ -177,7 +173,7 @@ and pattern distributions during spatial collapse.
 
 \subsubsection{Dynamic IAME Spectral Complexity}
 To isolate multi-scale spatial organization from bulk coordinate scaling, we implement 
-the continuous IAME spatial rendering resource cost. Let $\bar{x}(t)$ denote the mean 
+the continuous spatial rendering resource cost. Let $\bar{x}(t)$ denote the mean 
 value of the $N$-particle spatial distribution $x_n(t)$ at time $t$. We isolate the structural 
 AC variance from the bulk background translation by computing a discrete Fourier 
 transform on the centralized deviations $v_n = x_n - \bar{x}$. For each frequency component $k$, 
@@ -213,11 +209,11 @@ $\mathcal{B}_t$ take the same value, i.e.\ $\mathcal{B}_t \in
 single geometric object - a point. The set of distinguishable configurations
 therefore contains exactly one element. \qed
 
-\textbf{Corollary.} A zero-entropy bitstring, under any faithful geometric
+\textbf{Corollary.} A zero-entropy bitstring, under any geometric
 decoding, resolves to a single structureless point. This result is
 independent of the choice of decoding map $f$.
 The zero-entropy state has no internal structure available to encode
-particles, microstructures, or distinguishable geometry.
+microstructures, such as particles.
 
 % ============================================================
 \section{Simulations}
@@ -240,7 +236,7 @@ The informational metrics yield contrasting signatures across different spacetim
 uncovering physical characteristics of the collapse that are invisible to standard curvature calculations.
 
 In all configurations, the single-bit Shannon entropy $H(b_t)$ and pattern block entropy 
-$H_n(b_t)$ decrease monotonically as particles fall inward toward the singularity. Their 
+$H_n(b_t)$ decrease as particles fall inward toward the singularity. Their 
 curves track each other identically, demonstrating that macroscopic structure and microscale binary data 
 variety decay in tandem as the configuration space collapses.
 
@@ -315,17 +311,8 @@ forces a particular topology.
 Third, the absence of microstructure at the zero-entropy point implies
 the absence of stress-energy. With no particles, no matter, and no
 distinguishable geometry at the singularity, there is no source for the
-gravitational field at that point. The probability of physical trajectories
-reaching the singularity is therefore suppressed by the same compression
-measure that governs the \iame{} framework: paths terminating at a
-zero-measure, structureless state have zero weight.
+gravitational field at that point. 
 
-The behavior of the spectral complexity $\mathcal{C}_s$ deepens this interpretation. 
-The smooth rise and fall in Schwarzschild collapse shows that tidal deformation is 
-an ordered process that naturally exhausts its structural variety. Conversely, the 
-chaotic spikes in Kerr collapse demonstrate that frame-dragging acts as an informational 
-mixer, scrambling the spatial states into hyper-complex configurations before they 
-sink into the final zero-variety endpoint.
 
 \subsection{Relation to existing approaches}
 
@@ -365,7 +352,7 @@ is offered as the origin of the thermodynamic arrow of time. The present
 results are consistent with this picture: the final singularity of
 gravitational collapse corresponds to a zero-entropy, maximally ordered
 informational state, while the surrounding spacetime retains its complexity.
-However, the \iame{} framework goes further than Penrose's hypothesis in two
+However, this framework goes further than Penrose's hypothesis in two
 respects. First, it provides a precise, computable measure of the approach
 to the zero-entropy point, rather than a qualitative statement about
 curvature. Second, as shown in Paper~III, a perfectly smooth zero-entropy
