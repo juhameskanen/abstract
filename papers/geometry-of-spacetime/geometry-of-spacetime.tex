@@ -27,7 +27,7 @@ universe, expressed in Planck units, yields $n \approx 184$ bits --- from which
 the number of e-folds per dimension falls to approximately 60, consistent with
 the independently derived lower bound from standard inflationary cosmology.
 Extending the framework to black holes by identifying
-$n_\mathrm{bh} = \log_2(r_s / \ell_P)$, where $r_s$ is  the Schwarzschild radius, we recover the
+$n_{\mathrm{bh}} = \log_2(r_s / \ell_P)$, where $r_s$ is the Schwarzschild radius, we recover the
 Bekenstein--Hawking entropy of a solar-mass black hole to within the geometric
 factor $4\pi$ that converts a flat square to a spherical surface --- a factor
 fixed entirely by the spherical symmetry of General Relativity, not introduced
@@ -178,7 +178,7 @@ in that range. \qed
 
 \textbf{Corollary.} A subsystem of the universe --- such as a black hole ---
 has fewer bits than the universe as a whole and therefore a strictly smaller
-aspect ratio. The hierarchy $\mathcal{A}(n_\mathrm{bh}) < \mathcal{A}(n)$ is
+aspect ratio. The hierarchy $\mathcal{A}(n_{\mathrm{bh}}) < \mathcal{A}(n)$ is
 a structural consequence of the framework, not an additional assumption.
 
 % ============================================================
@@ -273,7 +273,7 @@ We now extend the framework to a localised thermodynamic system --- a black
 hole --- and compare the predicted surface area with the Bekenstein--Hawking
 result.
 
-\subsection{Identifying $n_\mathrm{bh}$}
+\subsection{Identifying $n_{\mathrm{bh}}$}
 
 A black hole is, in this framework, a localised zero-entropy state (the
 singularity) surrounded by an information boundary (the event horizon). The
@@ -283,7 +283,7 @@ against a radial length, we identify the bit count of the black hole with the
 number of bits required to encode $r_s$ in Planck units:
 
 \[
-n_\mathrm{bh} = \log_2 \!\left(\frac{r_s}{\ell_P}\right).
+n_{\mathrm{bh}} = \log_2 \!\left(\frac{r_s}{\ell_P}\right).
 \]
 
 For a solar-mass black hole, $r_s = 2GM_\odot / c^2 \approx 2950$ m, giving:
@@ -292,10 +292,10 @@ For a solar-mass black hole, $r_s = 2GM_\odot / c^2 \approx 2950$ m, giving:
 \frac{r_s}{\ell_P} = \frac{2950}{1.616 \times 10^{-35}} \approx 1.83 \times 10^{38},
 \]
 \[
-n_\mathrm{bh} = \log_2(1.83 \times 10^{38}) \approx 127 \text{ bits.}
+n_{\mathrm{bh}} = \log_2(1.83 \times 10^{38}) \approx 127 \text{ bits.}
 \]
 
-Note that $n_\mathrm{bh} \approx 127 < n \approx 184$, consistent with the
+Note that $n_{\mathrm{bh}} \approx 127 < n \approx 184$, consistent with the
 monotonicity corollary: a black hole contains less information than the full
 universe and therefore has a strictly smaller aspect ratio.
 
@@ -303,11 +303,11 @@ universe and therefore has a strictly smaller aspect ratio.
 
 The event horizon is a two-dimensional surface. By the same logic that gives
 spatial resolution $2^n$ for a one-dimensional radial measure, the
-two-dimensional surface resolution is $(2^{n_\mathrm{bh}})^2 = 2^{2 n_\mathrm{bh}}$
+two-dimensional surface resolution is $(2^{n_{\mathrm{bh}}})^2 = 2^{2 n_{\mathrm{bh}}}$
 Planck areas. The predicted physical surface area is:
 
 \[
-A_\mathrm{model} = 2^{2 n_\mathrm{bh}} \cdot \ell_P^2
+A_{\mathrm{model}} = 2^{2 n_{\mathrm{bh}}} \cdot \ell_P^2
 = (1.83 \times 10^{38})^2 \times (1.616 \times 10^{-35})^2
 \approx 8.7 \times 10^{6} \text{ m}^2.
 \]
@@ -318,16 +318,16 @@ The Bekenstein--Hawking formula gives the surface area and entropy of a
 solar-mass black hole as:
 
 \[
-A_\mathrm{BH} = 4\pi r_s^2 \approx 1.09 \times 10^{8} \text{ m}^2,
+A_{\mathrm{BH}} = 4\pi r_s^2 \approx 1.09 \times 10^{8} \text{ m}^2,
 \]
 \[
-S_\mathrm{BH} = \frac{A_\mathrm{BH}}{4\ell_P^2} \approx 1.05 \times 10^{77} \text{ bits.}
+S_{\mathrm{BH}} = \frac{A_{\mathrm{BH}}}{4\ell_P^2} \approx 1.05 \times 10^{77} \text{ bits.}
 \]
 
 The ratio of the model prediction to the Bekenstein--Hawking result is:
 
 \[
-\frac{A_\mathrm{model}}{A_\mathrm{BH}}
+\frac{A_{\mathrm{model}}}{A_{\mathrm{BH}}}
 = \frac{(r_s/\ell_P)^2}{4\pi(r_s/\ell_P)^2} = \frac{1}{4\pi}.
 \]
 
@@ -335,15 +335,15 @@ The discrepancy is exactly $4\pi$ --- the ratio of the area of a flat square
 of side $r$ to the surface area of a sphere of radius $r$. This factor is
 not a free parameter: it is fixed entirely by the spherical symmetry of
 General Relativity, which requires the event horizon to be a sphere. The
-present model, which computes a flat square resolution $(2^{n_\mathrm{bh}})^2$,
+present model, which computes a flat square resolution $(2^{n_{\mathrm{bh}}})^2$,
 recovers the Bekenstein--Hawking result up to the geometric correction that
 spherical geometry imposes on flat raster geometry.
 
 Equivalently, incorporating the spherical geometry factor:
 
 \[
-A_\mathrm{model} \times 4\pi = 4\pi \times 8.7 \times 10^6 \approx 1.09 \times 10^8 \text{ m}^2
-= A_\mathrm{BH}. \quad \checkmark
+A_{\mathrm{model}} \times 4\pi = 4\pi \times 8.7 \times 10^6 \approx 1.09 \times 10^8 \text{ m}^2
+= A_{\mathrm{BH}}. \quad \checkmark
 \]
 
 The model therefore recovers Bekenstein--Hawking exactly once the geometry of
@@ -382,7 +382,7 @@ correction that reconciles the information-theoretic and geometric descriptions.
 \subsection{Relation to Bekenstein--Hawking and holography}
 
 The Bekenstein--Hawking formula is used here as a verification target, not as
-an input. The model independently identifies $n_\mathrm{bh}$ from the
+an input. The model independently identifies $n_{\mathrm{bh}}$ from the
 Schwarzschild radius, predicts the surface area as a two-dimensional bit
 resolution, and finds that the result matches Bekenstein--Hawking up to the
 spherical geometry factor. This is a non-trivial consistency check: the
@@ -425,8 +425,8 @@ the spacetime block from $n$ alone. Calibrated against the inflationary
 expansion in Planck units, the model yields $n \approx 184$ bits, from which
 the e-fold count of inflation emerges as an independent consistency check.
 
-Extended to black holes via the natural identification $n_\mathrm{bh} =
-\log_2(r_s/\ell_P)$, the framework recovers the Bekenstein--Hawking entropy of
+Extended to black holes via the natural identification
+$n_{\mathrm{bh}} = \log_2(r_s/\ell_P)$, the framework recovers the Bekenstein--Hawking entropy of
 a solar-mass black hole up to the factor $4\pi$ that converts flat raster
 geometry to spherical surface geometry --- a factor fixed entirely by the
 spherical symmetry of General Relativity. No constants of General Relativity

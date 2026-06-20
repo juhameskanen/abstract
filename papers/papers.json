@@ -2,6 +2,27 @@
   "title": "The Abstract Universe Project (AUP)",
   "sections": [
     {
+      "title": "Supplementary Papers",
+      "items": [
+        {
+          "title": "Paper~0: The Axiomatic Foundations",
+          "slug": "informational-derivation-of-reality"
+        },
+        {
+          "title": "Paper~I: Singularities as Zero-Entropy States",
+          "slug": "black-hole-singularities"
+        },
+        {
+          "title": "Paper~II: Emergence of Spacetime",
+          "slug": "emergence-of-spacetime"
+	},
+        {
+          "title": "Paper~III: Geometry of Spacetime",
+          "slug": "emergence-of-spacetime"
+	}
+      ]
+    },
+    {
       "title": "The Theory",
       "items": [
         {
@@ -12,23 +33,6 @@
           "title": "Paper~I: Theory of Everything",
           "slug": "theory-of-everything"
         }
-      ]
-    },
-    {
-      "title": "Supplementary Papers",
-      "items": [
-        {
-          "title": "Paper~0: The Axiomatic Foundations",
-          "slug": "informational-derivation-of-reality"
-        },
-        {
-          "title": "Paper~II: Singularities as Zero-Entropy States",
-          "slug": "black-hole-singularities"
-        },
-        {
-          "title": "Paper~III: Emergence of Spacetime",
-          "slug": "emergence-of-spacetime"
-	}
       ]
     },
     {
