@@ -4,11 +4,6 @@ IAME Cosmological Engine: Absolute Manual Scale Edition
 An informational dashboard mapping structural sinks against a unified
 Causal Planck Time timeline.
 
-FIXES:
-- Manual Right Y-Axis calculation (No more broken secondary_yaxis tools).
-- Robust X-Axis label parser tracking both small seconds and massive years.
-- Dynamic horizontal expansion (RUSH_RATE scales inversely with bit expansion).
-
 Copyright 2026 - Juha Meskanen, The Abstract Universe Project
 """
 

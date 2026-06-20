@@ -3,9 +3,8 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{\textbf{From Bitstring Simulations to Analytical Fields:\\
-A Relational Cosmology Engine with Strict Information Conservation}}
-\author{\textbf{Juha Meskanen} \\ \textit{The Abstract Universe Project}}
+\title{Space-time Curvature as an Information-Theoretic Structure}
+\author{Juha Meskanen}
 \date{June 2026}
 
 \begin{document}
@@ -13,116 +12,385 @@ A Relational Cosmology Engine with Strict Information Conservation}}
 \maketitle
 
 \begin{abstract}
-This paper presents the Interactive Analytical Cosmology Engine, a macroscopic field-theoretic realization of the \iame{} framework. Moving from stochastic bitstring mutations to continuous lognormal density fields, the model enforces strict conservation of total information. The spacetime fabric density is defined as the residual after bound matter structures form. The observed cosmic scale factor emerges purely as a relational ratio between bound matter and free fabric, as perceived by internal observers. This framework reproduces qualitative features of cosmic expansion, including early rapid growth and late-time acceleration, in a simple, deterministic, and interactive manner.
+Papers~I--III established that the universe can be modelled as a finite,
+static bitstring of $n$ bits; that gravitational collapse converges to a
+zero-entropy singularity; that expansion from that singularity is the
+geometric reading of entropy increase; and that the aspect ratio of
+spacetime is determined by $n$ alone. The present paper takes these
+results further by deriving a relational scale factor from strict
+information conservation. Because the bit budget is fixed, every bit
+locked into a composite matter structure is withdrawn from the free
+spacetime fabric, reducing the resolution of observable space as perceived
+by internal observers. This single counting principle reproduces, without
+free parameters, the two boundary solutions of General Relativity ---
+De Sitter vacuum and the Schwarzschild singularity --- as the natural
+extremes of one equation, and recovers the three-phase expansion profile
+of standard cosmology (early rapid growth, matter-driven deceleration,
+late-time acceleration) from analytically defined lognormal matter
+abundance curves established in Paper~II.
 \end{abstract}
 
 \tableofcontents
 \newpage
 
+% ============================================================
 \section{Introduction}
+\label{sec:intro}
 
-The original Time-Reversed Entropic Cosmology simulation relied on a large bitstring evolved through random mutations, with hierarchical structures extracted via recursive pattern-matching filters. While conceptually powerful, this microscopic approach suffered from computational cost, discrete artifacts, and difficulty in exploring parameter space.
+General Relativity admits two extreme solutions that appear, at first
+sight, to be unrelated. De Sitter space describes a universe with no
+matter and a positive cosmological constant, expanding exponentially
+without bound. The Schwarzschild solution describes the opposite extreme:
+all mass concentrated at a single point, spacetime contracted to a
+singularity. Between these extremes, the Friedmann equation governs the
+observed universe --- an expanding geometry whose rate of expansion is
+modulated by the density of matter and vacuum energy.
 
-We therefore developed an analytical field model that captures the essential emergent statistics (lognormal abundance curves) while preserving the core ontological principles — in particular, the conservation of total information and the relational nature of measurement. This engine allows real-time interactive exploration of how different matter spectra affect the perceived cosmic expansion.
+The present paper shows that these three are not independent results but
+three consequences of a single information-theoretic counting principle.
+When the universe is modelled as a closed system of $n$ bits, partitioned
+at each moment between free spacetime fabric and composite matter
+structures, the scale factor perceived by an internal observer is the
+fraction of the bit budget that remains independently addressable. De
+Sitter and Schwarzschild emerge as the two limiting cases of this fraction.
+The Friedmann three-phase profile emerges when matter abundance follows
+the lognormal distribution established in Paper~II.
 
-\section{Theoretical Framework}
+No metric tensor is postulated. No force law is imposed. No cosmological
+constant is introduced as a free parameter. The expansion history of the
+universe is the geometric reading of information conservation.
+
+The paper is structured as follows. Section~\ref{sec:setup} derives the
+relational scale factor from the counting argument and identifies the two
+GR extremes. Section~\ref{sec:results} presents the three-phase expansion
+profile produced by the analytical lognormal model. Section~\ref{sec:gr}
+maps the framework onto Friedmann variables. Section~\ref{sec:discussion}
+discusses the results. Section~\ref{sec:conclusion} states the three
+foundational results. Section~\ref{sec:future} identifies open problems.
+
+% ============================================================
+\section{Setup}
+\label{sec:setup}
 
 \subsection{Information Conservation}
 
-The universe is modeled as a closed informational system with a fixed total information capacity $I_{\text{total}}$. At any moment, this budget is partitioned between:
+The universe is modelled as a closed informational system with a fixed
+total bit count $n$. From Paper~II, random bit-flip mutations drive the
+system from a zero-entropy initial state toward full equilibrium, and
+filters applied to the evolving bitstring extract hierarchical
+micro-structures whose abundances follow lognormal-like distributions.
+Paper~II further established that this lognormal form is independent of
+the filter definition: it is an intrinsic combinatorial property of
+entropy-increasing bitstrings.
 
-- Free spacetime fabric (vacuum / gravitons),
-- Bound structures (hadrons, atoms, compounds).
-
-The fabric density is not independent but defined as the residual:
-\begin{equation}
-\rho_{\text{fabric}}(t) = \max\left( I_{\text{total}} - \rho_{\text{matter}}(t),\ \epsilon \right)
-\end{equation}
-
-where $\rho_{\text{matter}}(t) = L_1(t) + L_2(t) + L_3(t)$, and each $L_k(t)$ is a lognormal density field representing one hierarchical level.
-
-\subsection{Relational Scale Factor}
-
-Internal observers can only measure distances using the emergent structures available to them. The perceived scale factor $R(t)$ is therefore defined relationally as:
-\begin{equation}
-R(t) = \frac{\rho_{\text{matter}}(t)}{\rho_{\text{fabric}}(t)}
-\end{equation}
-
-This formulation captures the Observer Matter Release Principle: when higher-order structures form, they consume free fabric, constraining the perceived space. When these structures later decay, they release information back into the fabric, causing the relational ratio (and thus the perceived size of space) to increase.
-
-\subsection{Mechanism for $\Lambda$CDM-like Expansion}
-
-This simple conservation law naturally generates rich dynamical behavior:
-
-\textbf{1. Early Phase}: Rapid formation of matter pulls information from the fabric, initially constraining expansion.
-
-\textbf{2.Intermediate Phase}: As matter reaches peak abundance, the scale factor grows more slowly.
-
-\textbf{3. Late Phase}: Decay of bound structures returns information to the fabric. As $\rho_{\text{matter}} \to 0$, the denominator shrinks, driving the ratio $R(t)$ upward — producing late-time acceleration without any explicit cosmological constant.
-
-
-\section{Model Implementation}
-
-Each hierarchical level is represented by a normalized lognormal density field:
-\begin{equation}
-L_k(t) = A_k \cdot f_{\text{lognormal}}(t;\ \mu_k,\ \sigma_k)
-\end{equation}
-
-where the function is scaled so that the amplitude parameter $A_k$ directly corresponds to the true peak height, making parameter adjustment intuitive.
-
-The matter fields are coupled through a cascading epoch system:
-\begin{align*}
-\mu_{\text{Hadron}} &= \mu_m \\
-\mu_{\text{Atom}}   &= \mu_m + 0.8 \\
-\mu_{\text{Compound}} &= \mu_m + 1.5
-\end{align*}
-
-with corresponding narrowing of widths to model progressive cooling and structure formation.
-
-\section{User Manual: Dashboard Controls}
-
-The interactive dashboard provides intuitive sliders divided into two groups.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=1.0\textwidth]{figures/iace.png}
-\caption{Lognormals for emergency of particles on the left. The resulting spacetime expansion on the right.}
-\label{fig:iace}
-\end{figure}
-
-
-\subsection{Global Information Pool}
-
-\textbf{Total Info Pool}: Controls the fixed total information budget $I_{\text{total}}$ of the universe.
-
-\subsection{Matter Spectrum Controls}
-
-\textbf{Hadron / Atom / Compound Peak}: True peak amplitudes of each hierarchical level.
-
-\textbf{Matter Era Peak ($\mu_m$)}: Shifts the baseline timing for the entire matter cascade.
-
-\textbf{Matter Spread ($\sigma_m$)}: Controls the overall width of the matter distributions (individual tiers are automatically scaled).
-
-\section{Explorable Cosmological Regimes}
-
-By adjusting the sliders, the engine can reproduce several qualitatively distinct expansion histories:
+At any moment, the $n$ bits are partitioned between two roles:
 
 \begin{itemize}
-\item \textbf{Standard $\Lambda$CDM-like evolutiond}: Balanced matter amplitudes with appropriate timing produce early expansion, a coasting phase, and late-time acceleration.
-\item \textbf{Delayed Inflationary Bounce}: High total pool with delayed matter formation creates a long quiescent phase followed by rapid expansion.
-\item \textbf{Big Crunch / Recollapse}: Strong late-time matter persistence or specific timing can produce a turnaround in the scale factor.
+  \item \textbf{Spacetime fabric} $L_0$: bits not consumed by any
+        composite structure, constituting the free background metric.
+  \item \textbf{Matter hierarchy} $L_1, L_2, \ldots$: bits bound into
+        composite structures at successive levels (e.g.\ hadrons, atoms,
+        compounds).
 \end{itemize}
 
+Because the bit budget is fixed, matter structures do not represent new
+information injected from outside. Every bit locked into a composite
+entity is a bit withdrawn from the free fabric. Information is strictly
+conserved:
+
+\begin{equation}
+  \rho_{\text{fabric}}(t) = n - m(t),
+  \label{eq:conservation}
+\end{equation}
+
+where $m(t) = \sum_k w_k \cdot k(t)$ is the total number of bits consumed
+by matter structures, $k(t)$ is the count of composite entities at each
+level, and $w_k$ is the bit-width of a level-$k$ structure.
+
+\subsection{The Relational Scale Factor}
+\label{sec:scalefactor}
+
+There is no external observer. An internal observer can only measure
+distances using the structures available within the system. The resolution
+of observable space is therefore the total count of independently
+addressable entities --- both free fabric tokens and composite matter
+structures.
+
+Consider $n$ bits, all initially free fabric, giving resolution $n$. When
+one composite structure of width $w$ bits emerges, $w$ fabric tokens are
+consumed and one matter entity is created. The new resolution is:
+
+\[
+(n - w) + 1 = n - (w - 1).
+\]
+
+Resolution decreases by $w - 1$ for every composite entity formed.
+Generalising, if matter structures collectively consume $m(t)$ bits and
+produce $k(t)$ composite entities, the total resolution at time $t$ is:
+
+\[
+\text{Resolution}(t) = \bigl(n - m(t)\bigr) + k(t).
+\]
+
+The two extremes of General Relativity follow immediately from this
+counting argument:
+
+\begin{itemize}
+  \item \textbf{De Sitter limit} ($m = 0,\ k = 0$): all bits are free
+        fabric. Resolution $= n$. An external observer sees pure
+        exponential expansion --- the vacuum solution of General
+        Relativity with $\Lambda > 0$ and $\rho_{\text{matter}} = 0$.
+
+  \item \textbf{Schwarzschild limit} ($m = n,\ k = 1$): all bits are
+        consumed into a single composite entity. Resolution $= 1$. The
+        observable space has contracted to a single point --- the
+        informational counterpart of the black hole singularity
+        established in Paper~I.
+\end{itemize}
+
+These are not boundary conditions imposed by hand. They are the two
+extreme values of the same counting equation, separated by the continuous
+family of states in between.
+
+The relational scale factor, normalised to the maximum resolution $n$, is:
+
+\begin{equation}
+  R(t) = \frac{\bigl(n - m(t)\bigr) + k(t)}{n}
+        = \frac{\rho_{\text{fabric}}(t) + k(t)}{n}.
+  \label{eq:scalefactor}
+\end{equation}
+
+This definition requires no external metric and no postulated background
+geometry. It is a pure counting statement: the scale factor is the
+fraction of the bit budget that remains independently addressable.
+
+\subsection{Analytical Lognormal Model}
+\label{sec:lognormal}
+
+Paper~II demonstrated that the abundance of any extractable structure in
+an entropy-increasing bitstring follows a lognormal-like distribution as a
+function of bit-flip time, independently of the filter used to define the
+structure. The present paper therefore replaces the bitstring simulation
+with analytically defined lognormal abundance curves for each matter level
+$L_k$, each parametrised by a peak location $\mu_k$, width $\sigma_k$,
+and amplitude $A_k$:
+
+\[
+k_j(t) = A_j \cdot \frac{1}{t\sigma_j\sqrt{2\pi}}
+          \exp\!\left(-\frac{(\ln t - \mu_j)^2}{2\sigma_j^2}\right),
+          \qquad j \in \{1, 2, 3\}.
+\]
+
+The free fabric at each step is the residual after subtracting the bits
+consumed by all matter levels:
+
+\[
+\rho_{\text{fabric}}(t) = \max\!\left(n - \sum_j w_j \cdot k_j(t),\ 0\right).
+\]
+
+The scale factor $R(t)$ is then computed from equation~\eqref{eq:scalefactor}.
+The interactive simulation described in Section~\ref{sec:supplementary}
+allows the lognormal parameters and $n$ to be adjusted in real time,
+with the spacetime resolution visualised by dynamically rescaling rulers.
+
+% ============================================================
+\section{Results}
+\label{sec:results}
+
+Figure~\ref{fig:expansion} shows the scale factor $R(t)$ and matter
+abundance curves $k_1(t), k_2(t), k_3(t)$ for one representative
+parameter set. Three phases are visible:
+
+\textbf{Phase 1 --- Early rapid expansion.} Before significant matter
+formation, the fabric is undepleted and $R(t) \approx 1$. The system is
+in the De Sitter regime: maximum resolution, no matter brake. This
+corresponds to the inflationary epoch established in Paper~III.
+
+\textbf{Phase 2 --- Matter-driven contraction.} As $L_1$, $L_2$, and
+$L_3$ structures rise along their lognormal curves, bits are withdrawn
+from the free fabric. $R(t)$ decreases. An internal observer, whose
+measuring rods are built from the same structures, perceives this
+withdrawal as a slowing and reversal of expansion --- the informational
+analogue of gravitational deceleration. No force law is imposed; the
+geometry tightens because information is redistributed.
+
+\textbf{Phase 3 --- Late-time re-expansion.} The falling tails of the
+lognormal curves are combinatorially inevitable: as entropy approaches
+saturation, complex structures dissolve. Bits are released back to the
+free fabric, $\rho_{\text{fabric}}(t)$ recovers, and $R(t)$ rises again.
+An internal observer perceives this release as accelerating expansion.
+No cosmological constant is introduced; the acceleration is the geometric
+reading of structural evaporation in a saturating information field.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/cosmological_model.png}
+\caption{Output of the IAME Space-Time Horizon Engine for one representative
+parameter set ($n = 1.6$, three lognormal matter sinks). The cyan dashed
+curve shows the pure De Sitter background $S(t)$ --- the expansion that
+would be observed in the absence of any matter. The yellow curve
+(\emph{Real Universe Geometry}) is the relational scale factor $R(t)$:
+the De Sitter background depleted by the bits consumed by three
+hierarchical matter structures (dark matter, hadrons, neutrinos), each
+following an independently parametrised lognormal abundance curve (dotted
+lines, lower portion of plot). The vertical red dashed line marks a
+reference epoch. Two features are immediately visible: first, the yellow
+curve tracks the De Sitter background closely at early and late times,
+departing from it during the epoch of peak matter abundance; second, the
+departure produces a visible deceleration followed by late-time
+re-acceleration as the matter curves fall. Both features emerge from
+information conservation alone, with no cosmological constant, inflaton
+field, or dark energy term introduced. The interactive simulator allows
+all lognormal parameters and $n$ to be adjusted in real time; the figure
+shows one illustrative configuration.}
+\label{fig:expansion}
+\end{figure}
+
+% ============================================================
+\section{Mapping to General Relativity}
+\label{sec:gr}
+
+The Friedmann equation governs the expansion of a homogeneous, isotropic
+universe in General Relativity:
+
+\[
+\left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3}\rho_{\text{matter}}
+  + \frac{\Lambda}{3}.
+\]
+
+The present framework maps onto this equation under the identifications:
+
+\begin{equation}
+\rho_{\text{matter}} \;\longleftrightarrow\; \frac{\sum_j k_j(t)}{n},
+\qquad
+\Lambda \;\longleftrightarrow\; \frac{\rho_{\text{fabric}}(t)}{n},
+\qquad
+a \;\longleftrightarrow\; R(t).
+\label{eq:friedmann_map}
+\end{equation}
+
+These identifications are not free parameters. They follow from the
+counting argument: matter entity density maps to $\rho_{\text{matter}}$
+because matter entities brake expansion by consuming fabric; free fabric
+density maps to $\Lambda$ because it drives expansion by providing
+addressable resolution. The cosmological constant is not a parameter of
+the vacuum energy --- it is the fraction of the bit budget that remains
+unbound.
+
+The two GR boundary solutions are recovered exactly:
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\textbf{Limit} & \textbf{Information picture} & \textbf{GR solution} \\
+\hline
+$k = 0,\ m = 0$ & All bits free, $R = 1$ & De Sitter ($\Lambda > 0$, $\rho = 0$) \\
+$k = 1,\ m = n$ & One entity, $R = 1/n$ & Schwarzschild singularity \\
+\hline
+\end{tabular}
+\end{center}
+
+A rigorous proof that $(\dot{R}/R)^2$ is proportional to
+$k(t)/n + \rho_{\text{fabric}}(t)/n$ requires specifying the lognormal
+parameters analytically in terms of $n$. This is identified as the
+primary open problem in Section~\ref{sec:future}.
+
+% ============================================================
 \section{Discussion}
+\label{sec:discussion}
 
-This analytical engine demonstrates that many qualitative features of cosmic evolution can emerge from strict information conservation and relational measurement alone. It serves both as an exploratory tool for the \iame{} framework and as an intuitive demonstration of how expansion can be understood as a geometric consequence of internal observer dynamics rather than an absolute stretching of external space.
+\subsection{Matter as Curvature}
 
-Future work will focus on quantitative fitting to observational data and tighter integration with the original bitstring simulation.
+In General Relativity, matter curves spacetime through the stress-energy
+tensor. In the present framework, matter reduces the resolution of
+observable space by consuming free fabric. These are two descriptions of
+the same phenomenon: the presence of a composite structure makes the
+surrounding space less addressable, which an internal observer reads as
+curvature. Gravity is not a force acting on a background geometry; it is
+the geometric consequence of information being redistributed from fabric
+to structure.
 
+\subsection{The Cosmological Constant Problem}
+
+The cosmological constant problem asks why $\Lambda$ is so small relative
+to the vacuum energy predicted by quantum field theory. In the present
+framework, $\Lambda$ is not a property of the vacuum --- it is the
+fraction of the bit budget that is currently unbound. Its value at any
+cosmic epoch is determined by how much matter has formed and how much has
+decayed. The problem dissolves: there is no vacuum energy to cancel, only
+a fabric density that evolves with the entropy of the universe.
+
+\subsection{No External Time}
+
+The bit-flip parameter $t$ is not an external clock. It is the internal
+measure of entropy increase established in Papers~I--III. The expansion
+history of the universe is parameterised by how far the system has
+progressed from zero entropy toward full saturation, not by an absolute
+time coordinate. This is consistent with the static, timeless picture of
+Paper~I: the entire expansion history is encoded in $n$, and $t$ is the
+internal observer's reading of their position along the entropy gradient.
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper establishes three results.
+
+\textbf{First}, De Sitter space and the Schwarzschild singularity are the
+two extreme values of a single counting equation --- the relational scale
+factor $R(t)$ defined by information conservation. De Sitter corresponds
+to all bits free ($R = 1$); Schwarzschild corresponds to all bits bound
+into one entity ($R = 1/n$). General Relativity's two boundary solutions
+are not independent discoveries but the endpoints of one information-theoretic
+spectrum.
+
+\textbf{Second}, the three-phase expansion profile of standard cosmology
+--- early rapid growth, matter-driven deceleration, late-time acceleration
+--- emerges from $R(t)$ under lognormal matter abundance, without a
+cosmological constant, inflaton field, or dark energy term. The
+acceleration is the geometric reading of structural evaporation as the
+system approaches entropy saturation.
+
+\textbf{Third}, the Friedmann equation maps onto the framework under
+explicit variable identifications that follow from the counting argument
+alone. The cosmological constant is the free fabric fraction; matter
+density is the bound entity fraction; the scale factor is the addressable
+resolution fraction. No constants are fitted to observation.
+
+% ============================================================
+\section{Future Work}
+\label{sec:future}
+
+\subsection*{Analytic Derivation of the Friedmann Equation}
+
+The mapping in equation~\eqref{eq:friedmann_map} is a structural
+correspondence, not a proof. A rigorous derivation requires showing that
+$(\dot{R}/R)^2 \propto k(t)/n + \rho_{\text{fabric}}(t)/n$ holds
+analytically when $k(t)$ follows a lognormal distribution parametrised
+by $n$. This would promote the Friedmann correspondence from an
+identification to a theorem.
+
+\subsection*{Quantum Fields and the Wave Function}
+
+The framework developed in Papers~I--IV recovers the large-scale structure
+of spacetime from information conservation. The remaining foundational
+question is the origin of quantum field dynamics: why does the microcosm
+behave wave-like, and what selects a particular measurement outcome? This
+is addressed in Paper~V.
+
+% ============================================================
 \section*{Supplementary Material}
-The complete interactive Python implementation is available as \texttt{simulations/iace.py}.
+\label{sec:supplementary}
+
+The complete interactive Python implementation is available as
+\texttt{simulations/iace.py}. The simulator accepts user-defined lognormal
+parameters $(\mu_k, \sigma_k, A_k)$ for each matter level and the total
+bit count $n$, and visualises the resulting scale factor profile with
+dynamically rescaling rulers that reflect the changing resolution of
+observable space. It serves both as an exploratory tool and as an
+intuitive demonstration of how expansion emerges from internal observer
+dynamics rather than an absolute stretching of external space.
 
 \printbibliography
 
 \end{document}
-

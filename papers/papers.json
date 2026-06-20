@@ -18,8 +18,13 @@
 	},
         {
           "title": "Paper~III: Geometry of Spacetime",
-          "slug": "emergence-of-spacetime"
+          "slug": "geometry-of-spacetime"
+	},
+        {
+          "title": "Paper~IV: Space-time Curvature",
+          "slug": "spacetime-curvature"
 	}
+	  
       ]
     },
     {
