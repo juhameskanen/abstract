@@ -23,7 +23,11 @@
         {
           "title": "Paper~IV: Space-time Curvature",
           "slug": "spacetime-curvature"
-	}
+	},
+        {
+          "title": "Paper~V: Wavefunction as Compression",
+          "slug": "wavefunction-as-compression"
+        },
 	  
       ]
     },
@@ -44,8 +48,8 @@
       "title": "Less Serious Projects",
       "items": [
         {
-          "title": "Informational Derivation of Reality",
-          "slug": "informational-derivation-of-reality"
+          "title": "Probabilistic Blackhole",
+          "slug": "probabilistic-blackhole"
         },
         {
           "title": "Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles",
@@ -54,10 +58,6 @@
         {
           "title": "Quantum Cosmology: Spectral Complexity and the Measure of Observers in a Static Universe",
           "slug": "quantum-cosmology"
-        },
-        {
-          "title": "Probabilistic Blackhole",
-          "slug": "probabilistic-blackhole"
         },
         {
           "title": "Geodesics as Minimal-Entropy Trajectories in Informational Space",
@@ -74,10 +74,6 @@
         {
           "title": "Spectral MDL",
           "slug": "spectral-mdl"
-        },
-        {
-          "title": "Wavefunction as Compression",
-          "slug": "wavefunction-as-compression"
         },
         {
           "title": "QFT Divergences",

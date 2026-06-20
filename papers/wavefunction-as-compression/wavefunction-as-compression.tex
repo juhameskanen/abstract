@@ -3,114 +3,454 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{The Wave Function as a Compression Algorithm}
+\title{The Wavefunction as Compression Codec:\\
+Spectral Complexity, Emergent Quantum Behaviour,\\
+and the Informational Action Principle}
 
-\date{2019}
+\author{Juha Meskanen}
+\date{June 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  Building on the informational interpretation of reality and the emergence of structure from entropy (Papers II–IV), we propose that the quantum wave function is not a primary physical entity but a universal compression algorithm.
-  In this framework, the deterministic evolution of $\psi$ encodes the most probable, compressed representation of all underlying information.
-  We present a computational simulation in a linear quantum system, demonstrating that coefficient dynamics derived from compression-optimal bases reproduce near-unitary evolution and approximately Hermitian generators.
-  These results suggest that the formal structure of quantum mechanics arises naturally from information-theoretic optimization, supporting a view in which physics is the study of efficiently encoded informational outputs rather than fundamental ontological processes.
+Papers~I--IV established a purely information-theoretic framework in which
+spacetime geometry, gravitational collapse, cosmic expansion, and the
+relational scale factor all emerge from a finite bit budget $n$ without
+hard-coded physical laws. One feature of the observed universe remains
+unexplained by that framework: the wave-like behaviour of the microcosm.
+This paper proposes and investigates the hypothesis that the quantum
+wavefunction is the universe's data-compression codec. Internal observers,
+themselves composed of compressed structures, perceive their constituent
+degrees of freedom as wave-like for the same reason that pixel-observers
+inside an MPEG-compressed movie would perceive their world as governed by
+a Discrete Cosine Transform: they are observing compressed information.
+We formalise this as a \emph{Spectral Complexity} measure $C_s$ --- a
+continuous, computable replacement for Kolmogorov complexity --- and show
+that Solomonoff-like suppression under $C_s$ selects smooth, law-like,
+wave-governed configurations over chaotic ones, resolving the Boltzmann
+brain problem without additional axioms. Numerical simulations demonstrate
+the emergence of inertia and interference from spectral compression alone.
+Most significantly, we present numerical evidence that the minimum-$C_s$
+path through configuration space coincides with the minimum Euclidean
+action path of standard quantum gravity, and state the central conjecture
+of this paper: $C_s \propto S_{\mathrm{Euclidean}}$. If proved, this
+conjecture completes the bridge from the informational framework of
+Papers~I--IV to a full theory of quantum gravity.
 \end{abstract}
 
-\ifdefined\ishtml
-\begin{center}
-\small \href{wavefunction-as-compression.pdf}{Download PDF Version}
-\end{center}
-\fi
+\tableofcontents
+\newpage
 
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
 
-\section{Theoretical Framework}
-Our theory rests on three fundamental assumptions:
+The framework developed in Papers~I--IV recovers a striking range of
+physical structure from a single axiom: the universe is a finite, static,
+timeless system of $n$ bits. Gravitational collapse converges to a
+zero-entropy singularity (Paper~I). Expansion from that singularity is
+the geometric reading of entropy increase, with emergent microstructures
+following filter-independent lognormal distributions (Paper~II). The
+aspect ratio of spacetime is determined by $n$ alone, recovering
+Bekenstein--Hawking entropy to within the geometric factor $4\pi$
+(Paper~III). Matter contracts observable space relationally, reproducing
+the three-phase Friedmann expansion profile without a cosmological
+constant (Paper~IV).
 
-\subsection*{Assumption 1: The Universe is fundamentally abstract and informational.}
-The cosmos is fundamentally informational, characterized by ``white noise,'' representing the myriad of virtual particles and ephemeral fluctuations at the quantum foam level—short-lived, small, random informational structures. However, interspersed within this randomness are sections that encode profound symmetries.
+One feature of the observed universe is not explained by this framework:
+the wave-like behaviour of the microcosm. Particles exhibit interference,
+superposition, and discrete measurement outcomes. The wavefunction is
+complex-valued. Dynamics are unitary. Why?
 
-\subsection*{Assumption 2: Maximally Compressed States}
-In any set of information, the number of highly compressed sequences (those with low Kolmogorov complexity) will statistically dominate over purely random,
-incompressible sequences in terms of \textit{persistence} and \textit{structure}.
-Maximum compression implies maximum probability. Predictable information compresses well, which explains why we find ourselves in a universe that is the most probable one,
-governed by predictable laws of physics.
+This paper proposes a hypothesis and investigates its consequences.
 
-\subsection*{Assumption 3: The Wave Function as the Compression Algorithm}
-The \textbf{wave function $\psi$ is the universal compression algorithm} of the cosmos. The deterministic evolution described by quantum mechanics,
-which governs the behavior of microstructures, is the direct consequence of this algorithm's operation.
+\textbf{The Wavefunction Compression Principle (WCP).}
+\textit{The cosmos waves because we are observing compressed structure.
+The quantum wavefunction is the universe's data-compression codec.}
 
-\section{Computational Simulation}
-To explore the ``wave function-as-compression-coefficients'' idea, we designed a simulation to test its predictions in a linear regime.
+The argument is developed in four steps. Section~\ref{sec:analogy}
+motivates the hypothesis through the MPEG analogy.
+Section~\ref{sec:spectral} formalises spectral complexity as a
+continuous, computable measure and shows how it suppresses Boltzmann
+brains. Section~\ref{sec:simulations} presents numerical results:
+emergence of inertia, interference, and smooth spacetime from spectral
+compression. Section~\ref{sec:conjecture} presents the path comparison
+between minimum spectral complexity and minimum Euclidean action, and
+states the central conjecture. Section~\ref{sec:discussion} discusses
+implications. Section~\ref{sec:conclusion} states the results and open
+problems.
 
-\subsection{Simulation Setup}
-We consider a 1D lattice with $N=64$ sites. We simulate the time evolution of a single-particle tight-binding model, which is a standard representation of a particle hopping between nearest-neighbor sites. This model is governed by a nearest-neighbor hopping Hamiltonian, resulting in complex wave functions $\psi(t)$ over $T=200$ timesteps.
+% ============================================================
+\section{The Compression Hypothesis}
+\label{sec:analogy}
 
-The simulated time evolution adheres to the Schrödinger equation:
+\subsection{The MPEG Analogy}
+
+Consider a conventional MPEG-compressed digital movie. Each frame is
+composed of discrete pixels. If conscious observers existed inside such a
+movie, made of pixels and perceiving only pixel-level interactions, what
+would they observe as their laws of physics?
+
+They would find that their constituent pixels follow mysterious,
+deterministic, wave-like patterns. To a pixel-physicist, these transitions
+would appear fundamental. In reality, they are the mathematical output of
+the Discrete Cosine Transform (DCT) --- the compression basis that MPEG
+codecs use to represent raw pixel data in a maximally compact form.
+
+The parallel with quantum mechanics is direct. The quantum wavefunction
+distributes probability amplitudes across basis states in Hilbert space
+exactly as a spatial Fourier transform distributes image information across
+frequency coefficients. Complex-valued amplitudes are exceptionally
+efficient at encoding relational information: they produce precisely the
+spatial smoothness, structural continuity, and predictive regularity that
+stable observers require.
+
+\textbf{The hypothesis is therefore:} the wave-like behaviour of the
+microcosm is not a primitive feature of reality but the signature of
+compressed information as perceived from within. An observer composed of
+compressed structures will perceive their world as wave-governed for the
+same reason that a pixel-observer would perceive DCT dynamics: the
+compression codec \emph{is} the physics.
+
+\subsection{The Dithering Analogy and the Born Rule}
+
+The Born rule --- the identification of measurement probabilities with
+squared wavefunction amplitudes --- has a natural interpretation under
+this hypothesis.
+
+Consider a rendering engine producing a sphere with intended shading
+intensity $0.85$, on hardware restricted to discrete outputs of $0.8$ or
+$0.9$. The engine employs \emph{dithering}: distributing $0.8$ and $0.9$
+across adjacent pixels with relative frequencies $0.15$ and $0.85$
+respectively, so that the perceived average matches the target. The
+discrete output statistics are determined by the continuous target value.
+
+A quantum superposition
 \[
-i\hbar \frac{\partial}{\partial t} \psi(x,t) = H \psi(x,t)
+|\psi\rangle = \alpha|0.8\rangle + \beta|0.9\rangle
 \]
-where $H$ is the tight-binding Hamiltonian. For simplicity, we set $\hbar=1$.
+is the universe's implementation of this same principle. The Born rule
+$P = |\alpha|^2$ is the probability rule of an optimally compressed
+continuous description rendered through a discrete measurement apparatus.
+The squaring arises because amplitudes are complex-valued: the
+information-theoretic weight of a mode is proportional to the power in
+that mode, which is the squared amplitude.
 
-From the complex wave function $\psi_t$ at each timestep $t$, we generate ``observed frames'' in two variants:
-\begin{enumerate}
-    \item \textbf{Real part:} $x_t = \text{Re}(\psi_t)$
-    \item \textbf{Intensity (probability density):} $x_t = |\psi_t|^2$
-\end{enumerate}
+This does not constitute a derivation of the Born rule --- that would
+require a proof from the spectral complexity axioms alone. It is offered
+as a motivation: the Born rule is what optimal compression looks like when
+a continuous description meets a discrete measurement.
 
-\subsection{Data Processing and Analysis}
-\begin{enumerate}
-    \item \textbf{Principal Component Analysis (PCA):} We applied PCA to the dataset of frames $\{x_t\}_{t=1}^{T}$. PCA finds an orthogonal basis that best captures the variance in the data. We projected the data onto the top 8 principal components, yielding coefficient vectors $\{c_t\}$ where $c_t \in \mathbb{R}^8$.
-    \item \textbf{Linear Propagator Fitting:} Assuming the compression process generates deterministic evolution in the coefficient space, we fit a linear propagator matrix $G$ between successive vectors using least squares:
-    \[
-    c_{t+1} \approx G c_t
-    \]
-    \item \textbf{Unitarity and Hermiticity Test:} We test if the propagator $G$ is approximately unitary ($G^\dagger G \approx I$) and if the generator $H_{gen} = -i \log G$ is approximately Hermitian ($H_{gen}^\dagger \approx H_{gen}$).
-\end{enumerate}
+% ============================================================
+\section{Spectral Complexity}
+\label{sec:spectral}
 
-\subsection{Results and Plots}
-The simulation produced the following key visualizations:
+\subsection{From Kolmogorov to Spectral Complexity}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-1.png}
-    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-2.png} \\
-    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-3.png}
-    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-4.png}
-    \caption{PCA components (real part) 1 through 4.}
+Kolmogorov complexity provides the theoretical foundation for minimal
+description length but is fundamentally uncomputable, discrete, and
+discontinuous. It cannot smoothly support stable prediction, continuous
+spacetime geometry, or the gradual evolutionary reasoning of an internal
+observer.
+
+The observational evidence suggests that physical systems already possess
+a natural mode of information representation: decomposition into spectral
+modes. This motivates a continuous, computable replacement.
+
+\begin{definition}[Spectral Complexity]
+The \emph{spectral complexity} $C_s(\Psi)$ of a state $\Psi$ is the total
+informational cost required to uniquely specify the amplitudes, frequencies,
+and phases of the spectral modes composing $\Psi$:
+\[
+C_s(\Psi) = C_{\mathrm{base}} + \sum_{i=1}^{N}
+\left[ C(\phi_i) + C(A_i) + \frac{\omega_i}{\Delta\omega} \right]
+\]
+where $C_{\mathrm{base}}$ is the $\mathcal{O}(1)$ cost of the underlying
+trigonometric subroutines, $C(\phi_i)$ is the fixed-width bit cost of
+encoding the phase $\phi_i \in [0, 2\pi)$, $C(A_i)$ is the bit depth
+required to encode amplitude $A_i$, and $\omega_i / \Delta\omega$ is the
+dominant term representing the linear resource cost of tracking mode
+frequency $\omega_i$ relative to the minimum resolution $\Delta\omega$.
+\end{definition}
+
+Three properties of this measure are essential.
+
+\textbf{Computability.} Unlike Kolmogorov complexity, $C_s$ is directly
+computable from the spectral decomposition of any state.
+
+\textbf{Continuity.} $C_s$ assigns a smooth, continuous cost gradient
+across neighbouring states. Small perturbations in frequency or amplitude
+produce small changes in complexity.
+
+\textbf{Linear frequency scaling.} The dominant cost term $\omega_i /
+\Delta\omega$ scales linearly with frequency. This mirrors the physical
+relation $E = \hbar\omega$: energy scales linearly with frequency.
+Under Solomonoff suppression $P \propto 2^{-C_s}$, this linear cost
+produces exponential suppression of high-frequency modes:
+\[
+P \propto 2^{-\omega/\Delta\omega} = e^{-(\ln 2)\,\omega/\Delta\omega},
+\]
+which is a Boltzmann distribution with $\beta = \ln 2 / \Delta\omega$.
+The identification $\hbar = \Delta\omega / \ln 2$ connects the minimum
+frequency resolution of the spectral complexity measure to Planck's
+constant. This is not a derivation but a precise identification that
+warrants further investigation.
+
+\subsection{Resolution of the Boltzmann Brain Problem}
+
+Under the Solomonoff prior $P(s) \propto 2^{-L(s)}$ applied to spectral
+complexity, the probability of a configuration is exponentially
+suppressed by its spectral cost. Chaotic, high-entropy configurations ---
+Boltzmann brains, random fluctuations, disordered universes --- have high
+spectral complexity: they require many high-frequency modes with large
+amplitudes to describe. Their probability under $C_s$ is therefore
+exponentially suppressed relative to smooth, law-like, compressible
+configurations.
+
+This resolves the Boltzmann brain problem without additional axioms. The
+selection of structured observers is not a fine-tuning accident. It is a
+direct consequence of the measure: smooth, predictable data compresses
+better than chaos, and the spectral complexity measure weights
+configurations by their compressibility. We do not find ourselves in a
+chaotic universe because chaotic universes are exponentially expensive to
+describe.
+
+% ============================================================
+\section{Numerical Results}
+\label{sec:simulations}
+
+\subsection{Emergence of Smooth Spacetime}
+
+Applying the spectral complexity cost function as a selection weight to
+the bitstring evolution of Paper~II --- replacing uniform sampling with
+$C_s$-weighted sampling --- immediately suppresses the high-entropy white
+noise of the unweighted ensemble. The dominant configurations are those
+with low spectral complexity: smoothly varying, wave-governed spatial
+profiles. Symmetric wave packets and lattice-like structures emerge as the
+most probable outcomes without being hard-coded.
+
+\subsection{Emergence of Inertia and Interference}
+
+Two specifically quantum-mechanical phenomena emerge from spectral
+compression in numerical simulation, without any imposed equations of
+motion.
+
+\textbf{Inertia.} A localised wave packet moving through the spectral
+field maintains its velocity without external forcing. The minimum-$C_s$
+continuation of a moving packet is the packet continuing to move: any
+deflection increases the spectral cost by introducing new frequency
+components. Resistance to deflection --- inertia --- is the geometric
+consequence of spectral economy.
+
+\textbf{Interference.} When two wave packets overlap, the minimum-$C_s$
+description of the combined state is not the sum of two independent
+descriptions but a single spectral decomposition of the superposition.
+The cross-terms --- interference fringes --- are cheaper to encode than
+two separate packets because they share spectral modes. Interference
+emerges as the compression-optimal description of overlapping structures.
+
+Simulation videos demonstrating both phenomena are available at
+\url{https://github.com/juhameskanen/abstract/blob/main/gallery/emergent_gravity.gif}.
+
+% ============================================================
+\section{The Central Conjecture: $C_s \propto S_{\mathrm{Euclidean}}$}
+\label{sec:conjecture}
+
+\subsection{Background}
+
+Hawking's Euclidean path integral approach to quantum gravity
+\cite{hawking1979} computes the wave function of the universe by summing
+over all compact Euclidean geometries weighted by $e^{-S_E}$, where $S_E$
+is the Euclidean action obtained by Wick rotation $t \to -i\tau$. The
+minimum-action path through configuration space corresponds to the most
+probable geometry --- the classical solution --- while quantum corrections
+arise from fluctuations around it.
+
+The Wheeler--DeWitt equation \cite{dewitt1967}
+\[
+\hat{H}|\Psi\rangle = 0
+\]
+expresses the same content in canonical form: the universe has no external
+time, consistent with the static, timeless axiom of Paper~I. The
+wavefunction of the universe is a solution to this constraint.
+
+\subsection{Numerical Path Comparison}
+
+We implemented both the minimum-$C_s$ path and the minimum-Euclidean-action
+path on a $256 \times 256$ surface containing two Gaussian potential peaks
+(Figure~\ref{fig:paths}, left panel). The minimum-$C_s$ path was computed
+by selecting, at each step, the continuation that minimises the spectral
+complexity increment. The minimum Euclidean action path was computed by
+standard variational methods.
+
+Figure~\ref{fig:paths} (right panel) shows the two paths plotted as
+amplitude versus position along the $x$-axis. The Euclidean action path
+(red) and the informational action path (blue dashed) track each other
+closely across the full trajectory, including the sharp minimum near
+$x = 8$ where the path descends between the two potential peaks.
+The agreement is qualitative but robust: both paths select the same
+geometric route through the potential landscape.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/path-comparison.png}
+\caption{Left: 3D potential surface ($256\times256$) with two Gaussian
+peaks. The red curve shows the minimum Euclidean action path; the blue
+dashed curve shows the minimum spectral complexity (informational action)
+path. Right: Path comparison projected onto the $x$-axis. Euclidean
+action (red solid) and informational action (blue dashed) track each
+other closely across the full trajectory, including the deep minimum near
+$x = 8$. The correspondence is numerical and qualitative; a rigorous
+proof of proportionality is the primary open problem of this paper.}
+\label{fig:paths}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-5.png}
-    \includegraphics[width=0.45\textwidth]{figures/wavefunction-as-compresssion-6.png}
-    \caption{Left: Singular values of fitted propagator $G$. Right: Reconstruction MSE vs number of PCA components.}
-\end{figure}
+\subsection{The Conjecture}
 
-\subsection{Positive Support}
-The simulation yielded significant positive support for the hypothesis. In a clean, linear-unitary toy model, a compression-optimal linear basis produces coefficient dynamics that are demonstrably \textbf{near-unitary} and possess a \textbf{near-Hermitian generator}. This behavior precisely matches the predictions of our informational theory.
+The numerical correspondence motivates the following:
 
+\begin{conjecture}[Informational Action Principle]
+\label{conj:action}
+Let $\Psi$ be a path through the configuration space of a finite
+informational system with bit count $n$. Let $C_s(\Psi)$ denote the
+spectral complexity of $\Psi$ and $S_E(\Psi)$ denote the Euclidean action
+of the corresponding geometric path. Then:
+\[
+C_s(\Psi) \propto S_E(\Psi),
+\]
+with proportionality constant determined by $n$ and the minimum frequency
+resolution $\Delta\omega$.
+\end{conjecture}
 
-\section{Discussion and Caveats}
-While the simulation provides compelling initial support, we acknowledge several limitations:
+If Conjecture~\ref{conj:action} holds, the consequences are immediate:
+
 \begin{itemize}
-    \item \textbf{Linearity Assumption:} PCA is a linear transform. If the relationship between bitstrings and amplitudes is nonlinear.
-    \item \textbf{Decoherence:} The model neglects the effects of open quantum systems.
+  \item The Euclidean path integral $\int \mathcal{D}g\, e^{-S_E}$ is
+        the Solomonoff prior $\sum_\Psi 2^{-C_s(\Psi)}$ over spectral
+        configurations. Quantum gravity is Solomonoff induction over
+        compressed descriptions of geometry.
+  \item The Wheeler--DeWitt constraint $\hat{H}|\Psi\rangle = 0$ expresses
+        the timelessness of Paper~I: the universe has no external clock,
+        and the wavefunction is the spectral complexity distribution over
+        all configurations consistent with the bit budget $n$.
+  \item The Planck constant $\hbar$ is identified with
+        $\Delta\omega / \ln 2$: the minimum spectral resolution of the
+        informational system, converted from nats to bits.
 \end{itemize}
 
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What Has Been Established and What Has Not}
+
+This paper establishes the following. The WCP hypothesis is internally
+consistent with the framework of Papers~I--IV and resolves the Boltzmann
+brain problem without new axioms. Spectral complexity is a well-defined,
+continuous, computable measure that suppresses chaotic configurations
+exponentially. Inertia and interference emerge numerically from spectral
+compression without imposed dynamics. The minimum-$C_s$ path and the
+minimum Euclidean action path agree numerically on a test surface.
+
+This paper does not establish the following. The Born rule is not derived
+from spectral complexity axioms. The conjecture $C_s \propto S_E$ is not
+proved. The identification $\hbar = \Delta\omega / \ln 2$ is a
+correspondence, not a derivation. These are the primary targets for
+subsequent work.
+
+\subsection{Relation to Existing Approaches}
+
+Verlinde's entropic gravity \cite{verlinde2011} derives Newtonian gravity
+from thermodynamic entropy gradients. Jacobson \cite{jacobson1995} derives
+the Einstein field equations from the thermodynamics of local Rindler
+horizons. Both approaches recover gravitational dynamics from
+information-theoretic principles. The present framework is complementary:
+rather than deriving gravitational equations from entropy, it proposes
+that the path-integral measure of quantum gravity is the spectral
+complexity prior, and that the two are proportional.
+
+\subsection{The Role of $n$}
+
+Throughout Papers~I--V, the integer $n$ plays the role of the universe's
+single free parameter. Paper~III showed that $n \approx 184$ bits,
+calibrated against the inflationary aspect ratio. The proportionality
+constant in Conjecture~\ref{conj:action} is expected to depend on $n$
+and $\Delta\omega$. A complete theory would express both $\hbar$ and $G$
+as functions of $n$ alone, eliminating all free parameters from
+fundamental physics.
+
+% ============================================================
 \section{Conclusion}
-We propose that reality can be viewed as a geometric interpretation of information, with the wave function acting as a universal compression algorithm.
-Finiteness observed in physics is not merely a boundary condition, but statistical phenomenon. The universe does not deal in infinities because infinities
-cannot be efficiently stored or propagated by a maximally compressing system and are hence unprobable.
+\label{sec:conclusion}
 
-\section*{Simulation Software}
+This paper establishes three results and states one conjecture.
+
+\textbf{First}, the Wavefunction Compression Principle provides a
+hypothesis for why the microcosm waves: internal observers composed of
+compressed structures perceive their world as wave-governed because the
+compression codec of the universe is the wavefunction. This hypothesis is
+consistent with all results of Papers~I--IV and requires no new axioms.
+
+\textbf{Second}, spectral complexity --- a continuous, computable
+replacement for Kolmogorov complexity with linear frequency cost ---
+exponentially suppresses chaotic configurations under Solomonoff-like
+induction. Structured, law-like, compressible universes dominate the
+measure. The Boltzmann brain problem is resolved as a consequence of the
+measure, not by fine-tuning.
+
+\textbf{Third}, numerical simulation demonstrates that inertia and
+interference emerge from spectral compression alone, without imposed
+equations of motion, and that the minimum spectral complexity path
+through a potential landscape agrees numerically with the minimum
+Euclidean action path.
+
+\textbf{Conjecture} (Informational Action Principle): $C_s \propto
+S_{\mathrm{Euclidean}}$, with proportionality constant determined by $n$
+and $\Delta\omega$. If proved analytically or demonstrated to arbitrary
+numerical precision, this conjecture identifies quantum gravity as
+Solomonoff induction over compressed geometric descriptions, completes
+the bridge from the informational framework of Papers~I--V to a full
+theory of quantum gravity, and derives $\hbar$ as the minimum spectral
+resolution of a finite informational universe.
+
+% ============================================================
+\section*{Open Problems}
+\label{sec:open}
+
+\begin{enumerate}
+  \item \textbf{Prove Conjecture~\ref{conj:action}.} Either analytically,
+        by showing that the spectral complexity functional and the
+        Euclidean action functional are proportional under the
+        informational metric of Paper~III; or numerically, by extending
+        the path comparison to higher-dimensional surfaces and quantifying
+        the deviation.
+
+  \item \textbf{Derive the Born rule.} Show that $P = |\alpha|^2$ follows
+        from the spectral complexity axioms, using Gleason's theorem or a
+        direct information-theoretic argument.
+
+  \item \textbf{Derive $\hbar$ from $n$.} If $\hbar = \Delta\omega / \ln 2$
+        and $\Delta\omega$ is the minimum frequency resolution of a system
+        with $n$ bits, express $\hbar$ as a function of $n$ and verify
+        against the observed value using $n \approx 184$ from Paper~III.
+
+  \item \textbf{Derive $G$ from $n$.} Paper~III recovered Bekenstein--Hawking
+        entropy up to $4\pi$ without using $G$. A complete theory should
+        express Newton's constant as a function of $n$ alone.
+\end{enumerate}
+
+% ============================================================
+\section*{Simulation Code}
 
 \begin{itemize}
-\item \href{simulations/wavefunction-as-compression.py}{wavefunction-as-compression.py: Wavefunction as compression}
+  \item Spectral compression POC, emergent inertia and interference:
+        \url{https://github.com/juhameskanen/abstract}
+  \item Path comparison (minimum $C_s$ vs minimum Euclidean action):
+        supplementary material \texttt{simulations/path\_comparison.py}
 \end{itemize}
 
-\PrintGlossary
 \printbibliography
 
 \end{document}
