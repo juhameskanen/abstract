@@ -1,0 +1,28 @@
+\documentclass[11pt]{combine}
+\usepackage{combinet} % Resolves titles and TOC handling
+\input{common.tex}
+\input{glossary.tex}
+
+\graphicspath{figures/}
+\addbibresource{references.bib}
+
+\title{Collection of Research Papers}
+\author{Juha Meskanen (Editor)}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents % Automatically generates a TOC of all sub-papers
+\clearpage
+
+% Import your subdocuments without modifying them
+\begin{papers}
+    \import{informational-derivation-of-reality/}{informational-derivation-of-reality}
+    \import{black-hole-singularities/}{black-hole-singularities}
+\end{papers}
+
+\end{document}
+
+
+

@@ -3,76 +3,279 @@
 
 \section{The Mystery}
 
-Microscopic reality appears fundamentally wave-like.
-Fine---quantum foundations has brought us to a point where we can begin to understand why.
-But as human observers, we do not inhabit an abstract, high-dimensional Hilbert space; we inhabit a tangible, three-dimensional geometry.
-
-Why? And more pressingly: why does matter cause this geometry to curve?
-
-Accepting the equations of General Relativity without understanding the deep,
-underlying \textit{reason} for this curvature is one of the most profound frustrations in modern physics.
+Microscopic reality appears fundamentally wave-like. 
+But as human observers, we do not inhabit an abstract, high-dimensional Hilbert space; 
+we inhabit a tangible, three-dimensional geometry. 
+Why? And more pressingly: why does matter cause this geometry to curve? 
+Accepting the equations of General Relativity without understanding the deep, 
+underlying \textit{reason} for this curvature is one of the most profound frustrations in physics. 
 We are told that mass bends space, but we are rarely told what space is actually made of such that it \textit{can} be bent.
 
-As Chapter~\nameref{chap:from-nothing-to-something} demonstrated,
-if we take a purely geometric interpretation of a random informational system starting from a state of zero entropy,
-it naturally evolves into a spacetime profile that remarkably matches the explosive expansion of our early universe.
-But this pure, unblemished expansion only lasts for the opening act.
-At later times, neutrons, hadrons, and complex matter structures freeze out of the vacuum, deviating the cosmos from a path of simple, uniform entropic ballooning.
+\subsection*{The Deep Reason}
 
-To understand why, let us assume the universe is fundamentally static, finite, and informational.
-It operates on a strict, unyielding \textit{bit budget}.
-Let us hypothesize that these minimal informational fragments---the raw pixels of binary state matches---are what we perceive as empty space.
-If we were to simulate a completely random, unconstrained shuffling of these bits, the math yields a classic de Sitter space:
-a pure, uniform vacuum universe devoid of matter, exactly as defined by the vacuum solutions of General Relativity. 
+As Chapter~\nameref{chap:from-nothing-to-something} demonstrated, a purely geometric interpretation of a 
+random informational system starting from a state of zero entropy yields the curve
+\[
+S(t) = I_{\text{max}} \cdot (1 - e^{-k \cdot t}).
+\]
+This curve grows rapidly at early times and flattens out as it approaches maximum saturation ($I_{\text{max}}$). 
+We obtained this curve when starting from the all-zero bitstring and flipping bits randomly, one by one.
 
-But our universe is not empty. And we are not looking the universe from outside! To see why it curves, we must
-anchor the observer \textit{inside} this system, forcing her to be constructed from the very same fluctuating
-informational currency she is trying to measure.
-In such a universe, any attempt to measure distance cannot use an absolute, external metric.
 
-Distances in the universe can only be gauged using measuring rods constructed out of the structures of the universe.
+\section*{Deriving General Relativity from Information}
+
+According to Chapter~\nameref{chap:humans-as-axiomatic-systems}, time is an internal property of observers, and 
+that the universe must be fundamentally static, timeless and finite. It therefore has to operate
+on a strict, unyielding \textit{bit budget}. 
+What we observe as empty space must emerge from this static finite information --- the execution trace of the computational equivalence.
+
+We define the universe as $n$ bits, giving a total of $2^n$ possible configurations. 
+
+By sorting these configurations into increasing entropy order (the expanding entropy we observe) 
+via random bit mutations, one obtains a typical thermodynamical system rushing toward full equilibrium (maximum entropy $n$).
+
+\textbf{Deriving Time.} 
+The only meaningful minimal time step in such a system is one bit-flip. 
+The bit-flip space is natively logarithmic. 
+From thermodynamics we know the system takes $n \ln n$ bit-flips to reach equilibrium and full saturation of entropy. 
+Identifying one bit-flip with the minimum time resolution (a Planck time unit, $t_P$), the total time span is
+
+\[
+t_{\text{span}} = n \ln n \cdot t_P.
+\]
+
+\textbf{The Space Size Function: $x(n)$.} 
+
+The number of bits also determine the maximum resolution for the spatial dimension of space.
+
+\[
+x_{\text{size}} = 2^n \cdot \ell_P.
+\]
+
+\textbf{Deriving the Aspect Ratio of Spacetime} 
+
+Because the speed of light is $c = \frac{\ell_P}{t_P} = 1$ in natural units, we can relate the physical space size and the time span using only $n$ and $c$:
+
+\[
+x_{\text{size}}(n) = \frac{2^n}{n \ln n} \cdot c \cdot t_{\text{span}}.
+\]
+
+This shows that the spatial dimension ($2^n$) scales exponentially relative to the temporal dimension ($n \ln n$).
+
+By dividing the spatial resolution  by the time resolution:
+
+
+\[
+c = \frac{2^n}{n \ln(n)}
+\]
+
+
+Geometrically, $c$ is the aspect ratio of the universe block.
+
+It is the structural conversion factor between the spatial dimension and the time dimension.
+Because this ratio is determined entirely by $n$, the geometry of the entire spacetime
+block is locked in place by the number of bits. 
+
+
+\section*{The Number of Bits in the Universe}
+
+
+During its first moments the evolution of the universe the size of the universe increased exponentially. 
+This inflationary period corresponds remarkably well to an expanding thermodynamic system exploding
+from a zero entropy state.
+
+During inflation, the universe expanded exponentially with speed measured using \textit{e-folds ($N$)}, where the size of the universe scales by a factor of $e^N$.
+
+According to the Standard cosmological models inflation lasted for about $10^{-35}\text{ seconds}$.
+During the period the universe expanded by at least $60\text{ e-folds}$, meaning its size multiplied
+by a factor of $e^{60}$, which is roughly $10^{26}$.
+
+We can convert this to the aspect ratio—the effective "speed" or expansion rate of that specific epoch in SI units:
+
+\[
+\text{Aspect Ratio (Inflation)} = \frac{\Delta \text{Scale}}{\Delta \text{Time}} = \frac{10^{26}\text{ m}}{10^{-35}\text{ s}} = 10^{61}\text{ m/s}
+\]
+
+
+Plug in the structural aspect ratio ($10^{61}$) into the aspect-ratio equation:
+
+$$
+\frac{2^n}{n \ln(n)} = 10^{61}
+$$
+
+$10^{61}$ bits is quite a lot. In binary form, which software developers can better understand:
+
+$\approx \mathbf{215.75\text{ bits}}$
+
+And this is just for one dimension. Because the universe we observe has three spatial dimensions
+we have to multiply it by three:
+
+The total number of bits in the universe: \Large \approx \mathbf{647.25\text{ bits}}
+
+
+\subsection*{Age of the Universe}
+
+A system consisting of $2^647$ bits can be arranged in $2^(2^647)$ ways.
+
+This is not a number we can write out. It is a $1$ followed by roughly $3 \times 10^{60}$ zeros.
+
+The current estimated number of particles in the visible universe is around $10^{80}$. We would
+soon run out of atoms. 
+
+Simulating such a thermodynamical system would be challenging too.
+If we turned every single atom in the universe into a supercomputer, and let them count configurations
+from the Big Bang until today, they wouldn't even scratch the first decimal place of $2^{10^{61}}$.
+
+If time is a random walk through these configurations, a time resolution of $n \ln(n)$ where $n = 10^{61}$ gives:
+
+\[
+\text{time\_resolution} = 10^{61} \times \ln(10^{61}) \approx 1.4 \times 10^{62} \text{ Planck times}
+\]
+
+Because $10^{61}$ bits creates an absolutely vast spatial resolution ($2^{10^{61}}$), the
+denominator ($n \ln(n)$) acts as an incredibly tight brake on the system.
+The ratio between them—the "speed" or aspect ratio—becomes an unfathomably large number.
+
+\subsection*{Reaching Full Equilibrium}
+
+In thermodynamics, a system with $n$ bits starting at zero entropy ($S=0$) maximizes its entropy when it has explored the configuration space uniformly.
+
+With $2^{(10^{61})}$ possible arrangements, a simple random walk of length $n \ln(n)$ means the
+universe has only explored a microscopic fraction of its total phase space.
+It implies that our current universe is still in the absolute infancy of its journey toward full equilibrium.
+The "rush" toward heat death is barely even a single step into an unimaginably vast maze of states.
+
+
+
+
+\section*{Gravity: Deviation from Thermodynamical Expansion}
+
+\textbf{Einstein's de Sitter Vacuum Solution} describes exponentially and
+infinitely expanding empty space. When we map linear coordinate time to the logarithmic bit-flip time of our model, 
+the linear expansion transforms into our statistical entropy curve. According to general
+relativity, empty space behaves as purely thermodynamical system rushing towards full saturation of entropy.
+
+This naturally maps the event horizon (which expands at the speed of light in the Einstein manifold) 
+onto a finite horizon of size $2^n$.
+
+However, the universe is not empty space. It consists of matter and energy in form of particles.
+We observe electrons, positrons, quards, so called Hadrons making up matter. Energy takes the form
+of Bosons - photons, gluons, Higgs, to name a few. When these are injected into Einstein's
+Stress Energy Tensor, the pure exponentially expanding De Sitter space turns into the currently
+observed reasonably expanding universe.
+
+In the cosmic timeline, the pure, unblemished inflatory expansion only lasted for the opening act. 
+At later times, neutrons, hadrons, and complex matter structures frozen out of the vacuum, 
+deviating the cosmos from simple uniform entropic expansion.
+
+If De Sitter is one extreme, then what is the other? It is called a black hole. It represents the other
+extreme end of General Relativity.
+
+This naturally maps to another event horizon - the event horizon of a black hole.
+According to Berkenstein-Hawking the surface area of a black hole is proportional to its entropy.
+And entropy is a measure of information - a finite horizon of size $2^n$.
+
+
+
+\subsection*{Informational Derivation of the Black Hole Event Horizon}
+
+Are we on the right track?  Let's double check. 
+
+According to Berkenstein-Hawking theorems, the surface area of a black hole
+is proportional to its entropy. And entropy is a measure of information - bits. 
+
+So we can use the aspect-ratio hypothesis derived above to bypass Bekenstein-Hawking's
+area formula entirely and derive the physical surface area of a black hole using the aspect ratio equation.
+
+If a black hole is a localized thermodynamic system with $n$ bits,
+its physical dimensions must satisfy the "aspect ratio" rule.
+
+The structural geometry equation for the black hole is:
+
+\[
+\text{Surface Area (in Planck units)} = \frac{n^2}{n \ln(2)} = \frac{n}{\ln(2)}
+\]
+
+
+The Bekenstein-Hawking calculates that a solar-mass black hole has an entropy of roughly $10^{77}$ bits.
+
+If we plug this into our formula:
+
+\[
+\text{Area} = \frac{10^{77}}{\ln(2)} \approx \mathbf{1.44 \times 10^{77} \text{ Planck areas}}
+\]
+
+One Planck area is $l_p^2 \approx 2.61 \times 10^{-70} \text{ m}^2$.
+
+\[
+\text{Physical Area} = (1.44 \times 10^{77}) \times (2.61 \times 10^{-70} \text{ m}^2) \approx \mathbf{3.76 \times 10^7 \text{ m}^2}
+\]
+
+
+A surface area of $3.76 \times 10^7 \text{ m}^2$ corresponds to a sphere with a radius of about 1.73 km.
+
+In standard astrophysics, a solar-mass black hole has a Schwarzschild radius of about **3 kilometers** (giving a surface area of roughly $1.1 \times 10^8 \text{ m}^2$).
+
+Our formula gets us to the exact same order of magnitude ($10^7$ to $10^8$ square meters) entirely from a pure,
+information-theoretic ratio!
+
+It adds up;  $\frac{n^2}{n\ln 2}$ geometry correctly scales the massive information of a black hole
+down to its tight, physical boundary without needing to plug in General Relativity constants like $G$ or $c$.
+
+We have built a purely digital structural model for a event horizon.
+
 
 
 \subsection*{The Dynamic Measuring Tape Illusion}
 
-If we could view the universe from the outside, it might look like a simple informational gas expanding into a void, rushing toward maximum entropy and flattening out into a featureless gray smear. It would be like a parabola.
-But we do not live on the outside. We are trapped on the inside, using physical structures---quarks, hadrons, and molecular bonds---as our standard rulers.
+We are not external observers. To understand curvature we must anchor the observer \textit{inside} the system, 
+constructed from the very same fluctuating informational currency she is trying to measure. 
+In such a universe, distances cannot be gauged with an absolute external metric. 
+Measuring rods must be built from the emergent structures of the universe itself.
 
-As global entropy increases, emergent structures inevitably precipitate out of the vacuum, strictly dictated by their nested, lognormal probability curves. First come neutrons and hadrons, followed much later by atoms and complex molecular compounds. Crucially, these new structures are not something novel being injected into the cosmos from the outside. They are paid for out of the exact same fixed informational bit budget as the spacetime fabric itself.
+From the outside, the universe would look like a simple informational gas expanding toward maximum entropy 
+and flattening into a featureless state --- a parabolic saturation curve. 
+But we live inside. Our rulers are made of quarks, hadrons, and molecular bonds.
 
-Imagine an initial, pristine patch of vacuum consisting of exactly 100 space-fabric tokens.
-Suddenly, the system's entropy shifts, and the first neutron freezes into existence.
-If this neutron requires an informational configuration equivalent to ten individual space-fabric tokens to
-maintain its structural coherence, those bits must be withdrawn from active circulation.
-The local space resolution instantly drops from 100 to 91.
+As global entropy increases, emergent structures precipitate out of the vacuum according to nested log-normal probability distributions. 
+These structures are not added from outside; they are paid for from the fixed informational bit budget of the spacetime fabric itself.
 
-Because 91 pixels of space must now span the same relational horizon previously occupied by 100,
-the background fabric is stretched taut.
-From the perspective of an internal observer whose very measuring rod has just been redefined by that new neutron, the space has contracted. 
-
-This is the deep, hidden nature of General Relativity: gravity is not a physical pulling force, nor is it an intrinsic bending of an abstract mathematical canvas. It is the localized, informational downsampling of the vacuum,
-driven by the structural overhead of matter.
+Imagine an initial pristine patch of vacuum consisting of exactly 100 space-fabric tokens. 
+When the first neutron freezes into existence and requires the informational equivalent of ten tokens, 
+those bits are withdrawn from the active vacuum. 
+The local spatial resolution instantly drops from 100 to 91. 
+The same relational horizon must now be spanned by fewer tokens, stretching the background fabric. 
+From the internal observer's perspective --- whose measuring rod has itself been redefined --- space appears to have contracted locally.
 
 
-\subsection*{The Hubble Tension}
+\subsection*{The Shape of the Universe}
 
-This paradigm provides a stunningly elegant solution to what astrophysicists currently call the ``Hubble Tension''---a full-blown identity crisis in modern cosmology. When astronomers measure the expansion rate of the modern, nearby universe by observing local supernovae, they get one sharp number. But when they take the Cosmic Microwave Background (CMB) radiation map from the dawn of time and use General Relativity to extrapolate what the modern expansion rate \textit{should} be, they get a fundamentally different number. 
+As established in Paper~III, the probability of emergence of structures in the increasing-entropy walk follows a log-normal distribution. 
+This naturally explains the observed evolution in the $\Lambda$CDM model.
 
-The two results disagree far beyond the margins of instrumental error. Something fundamental is broken in our standard model.
+The early universe underwent a huge inflationary phase. 
+Shortly afterward, photons, neutrinos, hadrons, quarks, and electrons emerged. 
+The presence of matter slows the expansion (as described by GR), leading to the observed Hubble history. 
+The baffling acceleration curve is explained by the log-normal probability density of emergent structures.
 
-The informational interpretation of gravity suggests that the universe isn't broken; our assumptions are. Because the relational proportions of elementary particles vary naturally over the epic lifetime of an entropic system, the measuring rods we use to gauge the deep past are physically and relationally non-comparable to the measuring rods we use today. The ruler itself has been changing length as the universe's bit allocation has shifted across the cosmic timeline.
+When the log-normal distribution peaks, the creation of complex matter structures peaks. 
+Because these structures consume tokens from the finite entropic budget, the geometry we observe is the relational reflection of this balance. 
+Early on, the rapid conversion of vacuum tokens into matter puts a statistical brake on perceived expansion. 
+Later, as the log-normal tail decays, complex structures gradually dissolve, releasing tokens back into the vacuum. 
+The local metric loosens. To an internal observer with a shrinking matter-based ruler, space appears to accelerate outward.
 
-\subsection*{The Persistent Cosmic Drift}
+This framework also reinterprets cosmic heat death informationally: 
+in the deep future, as the log-normal tails flatten toward zero, the probability of stable matter fades. 
+All borrowed bits return to the background pool. 
+The universe dissolves its structures and returns to pure, unblemished, static spacetime fabric --- 
+a simple, beautifully predictable statistical random system.
 
-Another enduring mystery is the true nature of dark matter and dark energy, and their counter-intuitive impact on the cosmic expansion rate. For nearly a century, physicists assumed that the expansion of the universe must be slowing down, acting as a gentle gravitational brake as the matter content tugged backward on space. However, modern observations have revealed the exact opposite: the expansion of the universe is actively speeding up. 
-
-This baffling acceleration is natively explained by the lognormal probability density of emergent structures. When a lognormal distribution peaks, the creation of complex matter structures peaks along with it. Because these structures are forged directly from the universe's finite entropic capacity, the geometry we observe is merely the relational reflection of this balancing act. 
-
-During the early universe, the rate at which empty spacetime fabric was being converted into complex matter architectures was accelerating. More and more tokens were being locked up, putting a severe statistical brake on the perceived expansion of space. 
-
-But lognormal curves possess an inevitable, asymmetric downward slope. At later cosmic times, the probability of maintaining these highly complex, bound matter hierarchies slowly but surely decays. As these structures gradually break down, they release their trapped informational tokens back into the vacuum. The local metric constraints loosen. To an internal observer using a shrinking, fading matter-based ruler, space appears to be accelerating outward.
-
-This model ultimately provides a profound, informational reimagining of cosmic heat death. In the deep future, as the lognormal tails flatten toward zero, the probability of matter existing fades entirely away. The universe dissolves its structures, returning every borrowed bit back to the background pool. Left as pure, unblemished spacetime fabric, the cosmos returns to its original state: a simple, beautifully predictable, and perfectly static statistical random system.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/lamdacoldmdm.png}
+\caption{Entropic unconstrained expansion minus emergence of statistical structures}
+\label{fig:lamdacdm}
+\end{figure}
 
 
 \section{Geometry as Compression}

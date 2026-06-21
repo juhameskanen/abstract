@@ -14,83 +14,71 @@ Emergent Structure from Zero-Entropy Initial States}
 
 % ============================================================
 \begin{abstract}
-  We present a purely statistical, information-theoretic model that duplicates the
-  inflationary and accelerating evolution of the universe without any hard-coded physical laws,
-  equations of motion, metric tensors, or imposed initial irregularities.
-  Beginning under the \iame{} framework from a perfectly smooth, zero-entropy bitstring—the
-  unique all-zero state—we evolve the system through random bit-flip mutations
-  that incrementally increase Shannon entropy, interpreting each state relationally as a spatial configuration.
-  As entropy increases, three striking phenomena emerge natively from the underlying combinatorics:
-  \begin{itemize}
-  \item An exponential spatial expansion originating from a single structureless point.
-  \item Hierarchical particle-like matter spectrum whose emergent abundance follows a non-monotonic lognormal distribution.
-  \item A late-stage transition into an accelerating cosmic expansion characterized by a positive Hubble constant,
-    driven entirely by the relational metric transformations of an embedded observer as higher-order macro-structures decay.
-  \end{itemize}
-  The universality of these results across distinct geometric decoding schemes and non-embedded
-  pattern-matching representations demonstrates that this evolution is an intrinsic property of entropy-increasing configurations,
-  rather than an artifact of a specific filter design. We conclude that cosmic expansion is the geometric
-  manifestation of increasing informational entropy.
-  This result provides a foundational resolution to the initial conditions problem:
-  no residual quantum scale irregularities are required to generate a rich, persistent, and accelerating universe.
+  Paper~I demonstrated that gravitational collapse, analysed through the execution trace of a computational simulation,
+  converges to a zero-entropy state at the classical singularity.
+  The present paper asks what happens when we begin at that point and move in the opposite direction.
+  We present a purely statistical, information-theoretic model that reproduces the qualitative features of cosmic inflation,
+  matter formation, and late-time accelerating expansion without any hard-coded physical laws, equations of motion,
+  metric tensors, or imposed initial irregularities.
 \end{abstract}
 
 % ============================================================
+
 \section{Introduction}
 \label{sec:intro}
 
-Paper~II showed that gravitational collapse, analysed through the execution
-trace of a computational simulation, converges to a zero-entropy state
-at the classical singularity. The geometric description diverges; the
-informational description converges to the simplest possible state. The
-singularity is not a pathological endpoint but a geometric point.
+Starting from the zero-entropy state and increasing entropy through random bit-flip mutations,
+we ask what geometric and structural features emerge? Do they resemble those of the observed universe?
 
-The present paper asks what happens when we begin at that geometric point
-and move in the opposite direction. Starting from the unique zero-entropy state
---- the all-zero bitstring, the same informational state that
-corresponds to the singularity --- and increasing entropy through random
-mutations, what geometric and structural features emerge? Do they resemble
-those of the observed universe?
+The key insight is that space itself is not a background structure into which matter is placed.
+Space emerges relationally from the density of the minimal detectable substructures of the bitstring.
+When entropy is zero, no structures exist and the universe is a single unextended point.
+As entropy increases, minimal structures  proliferate, and their uniform distribution across the bitstring is
+perceived by an internal observer as spatial expansion.
+Expansion is the geometric reading of entropy increase.
 
-The central hypothesis is that cosmic expansion and the formation of
-structure are, from the informational perspective of the \iame{} framework,
-the geometric interpretation of a monotonically increasing entropy process.
-Entropy increase is not a consequence of expansion; expansion is the
-geometric reading of entropy increase. The two are the same phenomenon seen
-through different lenses.
+This reframing has three immediate consequences.
 
-This hypothesis has a direct implication for the initial conditions problem.
-A longstanding puzzle in cosmology is why the universe began in such an
-exceptionally ordered state. Standard approaches, including Penrose's Weyl
-curvature hypothesis \cite{penrose1979}, assume that the initial state was
-smooth only within the limits imposed by quantum uncertainty: some residual
-irregularity at the quantum scale is taken as necessary. In the present
-framework, this assumption is unnecessary. The initial state is perfectly
-smooth by construction --- zero entropy, uniquely determined, admitting no
-fluctuations of any kind. The richness of the universe that emerges from it
-is not a consequence of imposed irregularities but of entropy increase alone.
+First, it resolves the initial conditions problem without appeal to quantum fluctuations or fine-tuning.
+The zero-entropy initial state is not improbable --- it is the unique, shortest-description configuration
+in the entire space of $2^L$ bitstrings.
 
-The paper is structured as follows. Section~\ref{sec:setup} describes the
-computational setup, the geometric and combinatorial filter definitions, and
-the role of bit-flip mutations. Section~\ref{sec:results} presents the
-numerical results. Section~\ref{sec:robustness} establishes the
-filter-independence of the lognormal result. Section~\ref{sec:discussion}
-interprets the findings in the context of the \iame{} framework and compares
-them with existing cosmological approaches. Section~\ref{sec:conclusion}
-concludes.
+Second, it provides a native mechanism for both matter formation and gravitational deceleration.
+As entropy increases, higher-order bound structures emerge. These more complex structures are not
+new information injected to the bistring, the only way to form them is to use the same bits that
+are used for representing the spactime fabric. Composite structures therefore withdraw
+constituent structures from the free background metric, reducing spatial resolution.
+An internal observer perceives this withdrawal as a slowing of expansion --- the informational
+analogue of gravitational attraction, emerging without any force law.
 
-% ============================================================
+Third, it produces late-time accelerating expansion without a cosmological constant.
+Bound structures inevitably decay as entropy approaches its maximum --- their lognormal abundance curves have
+falling tails by combinatorial necessity, not by assumption.
+As they decay, \fabric{} are released back into the free metric, producing a late-stage expansion boost that an
+internal observer reads as acceleration.
+
+The paper is structured as follows. Section~\ref{sec:setup} describes the bitstring setup,
+the \fabric{} filter, and the recursive density filters that extract hierarchical matter structures.
+Section~\ref{sec:results} presents the numerical results.
+Section~\ref{sec:robustness} establishes the filter-independence of the lognormal result across more
+than two hundred filter definitions.
+Section~\ref{sec:discussion} interprets the findings and compares them with standard cosmological approaches.
+Section~\ref{sec:conclusion} concludes.
+
+
 % ============================================================
 \section{Setup}
 \label{sec:setup}
 
 \subsection{Configuration Space and Entropy Evolution}
 
-The system is defined by a binary configuration string $S_t$ of fixed total length $L$. The initial state $S_0$ corresponds to a unique, completely uniform zero-entropy state (the all-zero bitstring), establishing an initial boundary condition where Shannon entropy is minimized:
+The system is defined by a binary configuration string $S_t$ of fixed total length $L$.
+The initial state $S_0$ corresponds to a unique, completely uniform zero-entropy state (the all-zero bitstring),
+establishing an initial boundary condition where Shannon entropy is minimized:
 \[
 H(S_0) = 0
 \]
-We evolve the configuration via discrete, random bit-flip mutations. Within the timeless ontology of the \iame{} framework, these mutations do not represent a fundamental dynamical law or a temporal arrow; rather, they serve as a stochastic sampling probe traversing a static ensemble of $2^L$ available configurations along approximately entropy-increasing trajectories, conceptually allied with the Page-Wootters formalism.
+We evolve the configuration via discrete, random bit-flip mutations.
 
 The instantaneous Shannon entropy of the system at any given evolutionary checkpoint is expressed as:
 \[
@@ -98,19 +86,25 @@ H(S_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t)
 \]
 where $p_0(t)$ and $p_1(t)$ represent the normalized empirical frequencies of $0$- and $1$-bits across the global string $S_t$.
 
+
 \subsection{Recursive Spatial Fabric and Structural Filtering}
 
-To construct a relational space from a non-embedded bitstring, an internal observer applies a multi-scale cascading filter. Space is not postulated a priori; it is derived from the density of structural matches.
+\subsubsection*{Level-0: The Spacetime Fabric (\fabric{} Scale)}
 
-\subsubsection{Level-0: The Spacetime Fabric (Graviton Scale)}
-We define a local target pattern string $P$ of length $w_0$. The global string $S_t$ is parsed into non-overlapping blocks of size $w_0$, yielding a raw background capacity of $N_{max} = L / w_0$ elements. A Level-0 ``graviton'' token exists at index $m$ if the block matches the binary target integer value $V_P$:
+We define a minimal local target pattern string $P$ of length $w_0$.
+The global string $S_t$ is parsed into non-overlapping blocks of size $w_0$,
+yielding a raw background capacity of $N_{max} = L / w_0$ elements. A Level-0 ``space fabric'' token exists at
+index $m$ if the block matches the binary target integer value $V_P$:
 \[
 \sigma_G[m] = \begin{cases} 1 & \text{if } \sum_{j=0}^{w_0-1} S_t[m \cdot w_0 + j] \cdot 2^{w_0 - 1 - j} = V_P \\ 0 & \text{otherwise} \end{cases}
 \]
 The raw count of detected space fabric elements is $N_G = \sum \sigma_G[m]$.
 
-\subsubsection{Level-$k$: Hierarchical Matter Sub-Scales}
-Higher-order structural tiers (representing Hadrons, Atoms, and Compounds sequentially) are extracted by recursively filtering the underlying layer's output array. For a given structural level $k \in \{1, 2, 3\}$, the input array is scanned using a non-overlapping window of width $w_k$ subject to a density activation threshold $\tau_k$:
+\subsubsection*{Level-$k$: Hierarchical Matter Sub-Scales}
+Higher-order structural tiers (representing Hadrons, Atoms, and Compounds sequentially) are extracted by
+recursively filtering the underlying layer's output array.
+For a given structural level $k \in \{1, 2, 3\}$, the input array is scanned using a non-overlapping
+window of width $w_k$ subject to a density activation threshold $\tau_k$:
 \[
 \sigma_k[m] = \begin{cases} 1 & \text{if } \sum_{j=0}^{w_k-1} \sigma_{k-1}[m \cdot w_k + j] \geq \tau_k \\ 0 & \text{otherwise} \end{cases}
 \]
@@ -122,13 +116,18 @@ The raw abundance of entities at level $k$ is given by $N_k = \sum \sigma_k[m]$.
 
 Starting from the pristine $H=0$ boundary state, the following macroscopic phenomena emerge consistently as entropy increases:
 
-\textbf{Zero entropy yields a structureless state.} The all-zero configuration contains no detectable structural matches ($N_G = 0$), mapping naturally under any relational decoding scheme to a single, unextended spatial point.
+\textbf{Zero entropy yields a structureless state.} The all-zero configuration contains no detectable structural matches ($N_G = 0$),
+mapping naturally under any relational decoding scheme to a single, unextended spatial point. This is the initial state - the singularity.
 
-\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$, precipitating a rapid freeze-out of background $L_0$ tokens. The decoded spatial extent expands outward from the initial singularity.
+\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$, precipitating a rapid freeze-out of background $L_0$ \fabric{}s.
+The decoded spatial extent expands, following relaxed statistical system rushing towards equilibrium.
 
-\textbf{Lognormal abundance of structures.} Because higher-tier matter scales are governed by nested density constraints, their population curves ($N_1, N_2, N_3$) follow non-monotonic, rise-and-fall trajectories resembling lognormal distributions. These populations peak sequentially as a function of entropy before late-stage entropic degradation takes over.
+\textbf{Lognormal abundance of structures.} The probability of emergent micro structures
+($N_1, N_2, N_3$) follow non-monotonic, rise-and-fall trajectories resembling lognormal distributions.
+These populations peak sequentially as a function of entropy before late-stage entropic degradation takes over.
 
-As maximum entropy is approached ($H \to 1$), complex structural hierarchies dissolve. The bound elements break apart, reverting into unaligned radiation-like degrees of freedom—reproducing an informational analogue of cosmic heat death.
+As maximum entropy is approached ($H \to 1$), complex structural hierarchies dissolve. 
+
 
 \begin{figure}[h]
 \centering
@@ -137,86 +136,17 @@ As maximum entropy is approached ($H \to 1$), complex structural hierarchies dis
 \label{fig:entropy-matter}
 \end{figure}
 
-\subsection{The Informational Brake and Relational Scaling Geometry}
-
-A critical result of this multi-scale framework is the emergence of a dynamic, self-stabilizing expansion geometry governed by structural token conservation logic. Because higher-level matter structures are built by grouping lower-level components, they effectively ``swallow'' or bound those sub-grid bits, withdrawing them from the free background metric.
-
-To accurately deduce the true spatial geometry without artifact nesting or scale-trapping, we calculate the net un-swallowed, independent structural units remaining active at any instant. Subject to an observer visibility horizon controlled by maximum recursion depth $R \in \{0, 1, 2, 3\}$, the number of active relational elements $N_{active}$ is given by:
-\[
-N_{active} = \tilde{N}_0 + \sum_{k=1}^{R} \tilde{N}_k
-\]
-where the net, exclusive token counts $\tilde{N}_k$ are constrained by cascading down-sampling subtractions:
-\begin{align*}
-\tilde{N}_3 &= N_3 \\
-\tilde{N}_2 &= \max(0, N_2 - N_3 \cdot w_4) \\
-\tilde{N}_1 &= \max(0, N_1 - N_2 \cdot w_3) \\
-\tilde{N}_0 &= \max(0, N_G - N_1 \cdot w_2)
-\end{align*}
-
-The instantaneous, relational spatial diameter of the horizon ($a_t$) is a direct function of these active elements relative to the total base resolution ceiling of the background fabric:
-\[
-a_t = \left( \frac{N_{active}}{N_{max}} \right) \cdot 2.0
-\]
-
-When mapped onto a symmetric coordinate distribution via alternating index parity signs ($\pm 1$), this metric formulation naturally dictates the spacetime profiles perceived by internal observers:
-\begin{itemize}
-    \item \textbf{Inflationary Burst:} An initial, explosive expansion driven by the rapid, combinatorial generation of the primary $L_0$ space fabric as entropy departs from zero.
-    \item \textbf{The Informational Brake:} An intermediate deceleration phase. As matter precipitates ($N_1, N_2$ grow), large blocks of background fabric are consumed by structures, putting a gentle, mathematical brake on the expansion velocity.
-    \item \textbf{Late-Time Cosmic Drift:} As entropy drives the ultimate decay of higher-order structures back into the background vacuum, the localized matter constraints ease. The expansion rate asymptotes smoothly to a stable, positive Hubble coasting phase without requiring an explicit dark energy terms or a cosmological constant.
-\end{itemize}
-
-
-\section{First-principles solution to the Hubble Tension}
-
-The "Early Universe" observers (looking at the Cosmic Microwave Background via Planck) measure the cosmic expansion rate (the Hubble constant, $H_0$) to be around $67.4 \text{ km/s/Mpc}$.
-Meanwhile, the "Late Universe" observers (looking at nearby supernovae via the Hubble and James Webb telescopes) measure it to be around
-$73.0 \text{ km/s/Mpc}$. The error bars don't overlap. Something is wrong.
-
-This information-theoretic toy model shows exactly why this discrepancy might not be a failure of our instruments,
-but a systemic illusion caused by an observer assuming their measuring rod is static.
-
-\subsection*{The Crisis Solved via Relational Downsampling}
-
-In standard cosmology, physicists treat space as an absolute, objective fabric that stretches,
-while assuming that fundamental particles remain perfectly rigid, unchanging constants from the Big Bang to today.
-
-In this model, space is a secondary illusion constructed entirely from the ratio of unbound spacetime fabric tokens ($L_0$) to bound,
-hierarchical matter clusters ($M(t)$).
-
-\[
-\text{Measuring Rod Geometry } \propto \frac{\text{Free Fabric Tokens}}{\text{Bound Matter Clusters}}
-\]
-
-When we look deep into cosmic history toward the dawn of the universe, we aren't just looking across distance;
-we are looking at an era of a completely different entropic profile:
-
-\begin{itemize}
-\item \textbf{1. The Early Universe (High Matter Clustering Era):}
-When looking at the CMB or early structures, the universe was in its peak organizational phase. Runaway cascades of Hadrons, Atoms, and Compounds were freezing out. Because higher-level matter "swallows" and locks up massive blocks of the background bitfield, the observer's relative measuring rod is mathematically elongated. Space appears tightly bound, denser, and its expansion rate—when calculated using that era's structural baseline—feels structurally suppressed (the lower $67.4$ value).
-\item \textbf{2. The Late Universe (Entropic Structural Decay Era):}
-  As our simulation demonstrates in its late-stage tail, maximum entropy ($H \to 1$) eventually forces complex matter hierarchies to dissolve. Bound clusters break apart, releasing their trapped $L_0$ tokens back into the unaligned vacuum.
-  To an internal observer living in this era, the influx of released background fabric causes local metric dilation. Our measuring rods are shrinking relative to the background resolution. Because our rods are smaller, the distance between galaxies appears to be accelerating outward at a faster rate (the higher $73.0$ value).
-\end{itemize}
-
-The Hubble Tension exists because cosmologists are trying to fit data from two entirely different thermodynamic regimes into a single, static cosmic scale factor ($a(t)$).
-
-This paper establishes that the particle spectrum is not a fixed backdrop.
-The ratio of matter to space fabric naturally undergoes a non-monotonic lognormal shift across the cosmic
-timeline driven entirely by informational combinatorics.
-
-When we look at the dawn of the universe, we are looking at a system with a different relational density baseline.
-The "crisis" vanishes because the Hubble parameter is a subjective measurement dependent on the local entropic
-degradation of the observer’s own structural anchors.
-
 
 
 % ============================================================
 \section{Filter Independence}
 \label{sec:robustness}
 
-The most significant result of this paper is not the lognormal distribution
-itself but its universality. We tested more than two hundred distinct filter
-definitions, including:
+The most significant result of this paper is the lognormal distribution
+itself and its universality. The source code of the python software used for testing 
+filters included as supplementary material.
+
+We tested more than two hundred distinct filter definitions, including:
 
 \begin{itemize}
 \item Geometric filters with varying distance thresholds $\delta_1,
@@ -232,6 +162,7 @@ definitions, including:
       for example, $010110100010$ --- and counting its occurrences in $S_t$
       as a function of entropy level.
 \end{itemize}
+
 
 In every case, the qualitative result is the same: zero structure at zero
 entropy, a lognormal-shaped emergence curve, and long-tailed decay at high
@@ -260,7 +191,7 @@ particle definitions, but the same statistical distribution.
 \subsection{Expansion as entropy increase}
 
 The identification of cosmic expansion with entropy increase is not merely
-analogical. In the \iame{} framework, the geometric and informational
+analogical. The geometric and informational
 descriptions of a physical configuration are the same object viewed through
 different lenses. The statement that the universe is expanding is, in this
 framework, the geometric reading of the statement that the entropy of the
@@ -269,34 +200,8 @@ phenomena but one phenomenon with two descriptions.
 
 This has a sharp implication. The arrow of time, the thermodynamic second
 law, and the expansion of the universe are not three independent features of
-the observed world. They are one feature: the monotonic increase of
-informational entropy, which reads as temporal succession from the
-observer's internal perspective, as expansion from the geometric perspective,
-and as entropy increase from the thermodynamic perspective.
+the observed world. They are one feature.
 
-\subsection{The Relational Metric: Matter Decay as the Origin of the Hubble Constant}
-\label{subsec:relational_metric}
-
-A critical challenge for informational cosmological models relying on raw entropy progression is the "freeze-out" problem: as the global bitstring approaches maximum thermodynamic equilibrium ($H \to 1$), the net rate of entropy change ($\Delta H / \Delta t$) asymptotically approaches zero, implying a stalling cosmic expansion rate. 
-
-The \iame{} framework resolves this paradox natively by enforcing the principle of observer relational metrics. An embedded observer, structurally composed of Level 1 particles, can only measure spatial distances relative to the abundance of those foundational structures. The perceived geometric volume of the spatial manifold is fundamentally co-dependent on the total population sum of Level 1 tokens.
-
-During the intermediate entropy eras, the creation of Level 2 Atoms and Level 3 Molecules locks multiple Level 1 constituents into localized, higher-order macro-tokens, effectively binding these degrees of freedom. However, as the system rushes toward maximum randomization, these higher-order structures inevitably decay. The dissolution of Level 3 and Level 2 clusters liberates their constituents, triggering a massive, late-stage surge in independent Level 1 particle counts.
-
-Because the observer’s spatial metric is tied directly to this foundational population, the physical evaporation of matter is interpreted internally as a constant, driven expansion of space. Quantum "dark energy" and the observed Hubble constant ($H_0$) are thus stripped of their status as external parameters; they emerge natively as the geometric reading of macro-structural decay within a saturating information field.
-
-\subsection{Resolution of the initial conditions problem}
-
-The standard formulation of the initial conditions problem asks why the
-universe began in such a low-entropy, highly ordered state. This question
-presupposes that low-entropy initial states are improbable and require
-explanation. Within the \iame{} framework, the zero-entropy initial state
-requires no explanation at all: it is the unique, maximally compressible
-configuration. Under the compression measure $P(c) \propto 2^{-\mathcal{C}(c)}$,
-the zero-entropy state has the shortest description of any state in the
-configuration space. It dominates the measure not by accident but because it
-is the simplest possible starting point. The question is not why the universe
-began in a low-entropy state but why one would expect anything else.
 
 \subsection{Comparison with Penrose's Weyl curvature hypothesis}
 
@@ -307,48 +212,60 @@ final singularities: the initial singularity had vanishing Weyl curvature
 Weyl curvature (chaotic, disordered). This is a geometric statement about
 the initial state, motivated by the need to explain the arrow of time.
 
-The present results go further in two respects. First, the initial state
-here is not merely smooth within quantum limits but perfectly smooth:
-zero entropy, uniquely determined, admitting no fluctuations. The universe
-this generates is already rich enough to reproduce the qualitative features
-of matter organisation and spatial expansion. No residual quantum
-irregularities are required. Second, the smoothness of the initial state is
-not an assumption but a derivation: within the \iame{} framework, the
-compression measure selects the zero-entropy initial state as the most
-probable starting point, so a smooth beginning is the expected outcome, not
-a lucky accident.
+The present results suggests that the initial state
+is not merely smooth within quantum limits but perfectly smooth:
+zero entropy, uniquely determined, admitting no fluctuations. Yet 
+qualitative features of matter organisation and spatial expansion can emerge.
+No residual quantum irregularities are required. 
 
-\subsection{The Boltzmann brain problem}
 
-A persistent difficulty for frameworks that postulate a large or infinite
-configuration space is the Boltzmann brain problem: in a sufficiently large
-ensemble, random high-entropy fluctuations that momentarily produce a
-conscious observer are exponentially more numerous than structured,
-persistent observers embedded in a low-entropy universe. The compression
-measure of the \iame{} framework suppresses these fluctuations directly:
-high-entropy configurations have high description length and are
-exponentially disfavoured. The lognormal emergence profile is the
-quantitative signature of this suppression: structure peaks at intermediate
-entropy and decays at high entropy, so the highest-entropy configurations
-are precisely the ones with the least structure, not the most.
+\subsection{Comparison to General Relativity}
+
+The bit-flip space is natively logarithmic. Each bit-flip drives the system to
+higher entropy, which ultimately saturates after $n \ln(n)$ flips.
+
+$$
+S(t) = I_{\max}\bigl(1 - e^{-kt}\bigr)
+$$
+
+
+Under the substitution $t \to \ln t$, the De Sitter scale factor $a(t) \propto e^{Ht}$
+transforms to $a \propto t^H$, which matches the saturation curve $S(t) = I_{\max}(1-e^{-kt})$ in
+the bit-flip parameterisation.
+
+
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper establishes three foundational results within the \iame{} framework.
+This paper establishes three foundational results:
 
 First, cosmic expansion is shown to be the pure geometric interpretation of increasing informational entropy.
-Beginning from the unique zero-entropy state identified in Paper~II as the informational singularity, entropy-driven mutations drive the systematic expansion of the spatial manifold without requiring a cosmological constant, ad-hoc inflaton fields, or hard-coded equations of motion.
+Beginning from the unique zero-entropy state identified in Paper~I as the informational singularity,
+entropy-driven mutations drive the systematic expansion of the spatial manifold without requiring a cosmological constant,
+ad-hoc inflaton fields, or hard-coded equations of motion.
 
-Second, a realistic particle abundance spectrum emerges natively from a multi-scale, recursive observer downsampling filter.
-By shifting from rigid pattern-matching to convolutional density horizons governed by independent window sizes $W_k$ and activation thresholds $T_k$, the model breaks combinatorial parallel symmetry.
-This yields a healthy population cascade: an early saturation of Level 1 Hadrons, followed by the localized crystallization of Level 2 Atoms, and a distinct, delayed evolutionary era for Level 3 Compound Molecules.
+Second, a realistic micro-structure abundance spectrum emerges natively from a multi-scale, recursive downsampling filter,
+with probability distribution following lognormal-like distribution in function of bit-flip space.
 
-Third, by enforcing a background-independent, relational spatial metric anchored to the maximum extent of the observer's active Level 1 horizon, the simulation resolves the thermodynamic freeze-out paradox.
-As the global information field approaches maximum equilibrium and macro-matter decays, the sudden late-stage liberation of constituent Level 1 particles warps the spatial coordinates.
-The universe undergoes a non-linear geometric transition from a flat Euclidean section into a hyperbolic, Lorentzian spacetime cone. 
+Third, the bit-flip space is natively logarithmic.
+Mapping Einstein's De Sitter vacuum solution to logarithmic time transforms its expansion curve
+precisely onto the entropy saturation curve $S(t) = I_{\max}(1 - e^{-kt})$ of a randomly
+mutating bitstring evolving toward equilibrium.
+Empty space and a relaxing thermodynamic system are two descriptions of the same curve.
 
-The observed Hubble constant ($H_0$) and the illusion of an accelerating cosmic expansion rate are thus stripped of their status as external parameters; they emerge natively as the internal geometric reading of structural evaporation within a saturating informational ontology.
+\section{Open Questions and Future Directions}
+
+The emergence of localized microstructures naturally invites the hypothesis that these
+configurations serve as the informational correlates of physical particles, fundamentally
+giving rise to matter and energy.
+Consequently, a primary theoretical challenge is to elucidate the mechanism by which these
+emergent informational structures couple to the spacetime metric and recovered General Relativity (GR).
+
+Furthermore, within a static, timeless informational framework, the constraints governing the
+dimensionality and boundaries of spatial and temporal domains remain to be fully defined.
+Investigating these geometric and topological limits constitutes the immediate next phase of this research program.
+
 
 \section*{Simulation Code}
 
