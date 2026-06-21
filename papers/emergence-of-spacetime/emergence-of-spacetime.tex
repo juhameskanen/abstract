@@ -3,9 +3,7 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{Spacetime Expansion as Geometric Manifestation\\of Increasing Entropy:\\
-Emergent Structure from Zero-Entropy Initial States}
-
+\title{Emergent Spacetime Structures from Zero-Entropy Initial States}
 \author{Juha Meskanen}
 \date{2012 \dots 2026}
 
@@ -14,7 +12,7 @@ Emergent Structure from Zero-Entropy Initial States}
 
 % ============================================================
 \begin{abstract}
-  Paper~I demonstrated that gravitational collapse, analysed through the execution trace of a computational simulation,
+  Paper~II \cite{meskanen2002} demonstrated that gravitational collapse, analysed through the execution trace of a computational simulation,
   converges to a zero-entropy state at the classical singularity.
   The present paper asks what happens when we begin at that point and move in the opposite direction.
   We present a purely statistical, information-theoretic model that reproduces the qualitative features of cosmic inflation,
@@ -23,7 +21,6 @@ Emergent Structure from Zero-Entropy Initial States}
 \end{abstract}
 
 % ============================================================
-
 \section{Introduction}
 \label{sec:intro}
 
@@ -31,9 +28,9 @@ Starting from the zero-entropy state and increasing entropy through random bit-f
 we ask what geometric and structural features emerge? Do they resemble those of the observed universe?
 
 The key insight is that space itself is not a background structure into which matter is placed.
-Space emerges relationally from the density of the minimal detectable substructures of the bitstring.
+Space emerges relationally from the density of the minimal detectable substructures of information.
 When entropy is zero, no structures exist and the universe is a single unextended point.
-As entropy increases, minimal structures  proliferate, and their uniform distribution across the bitstring is
+As entropy increases, minimal structures proliferate, and their uniform distribution across the bitstring is
 perceived by an internal observer as spatial expansion.
 Expansion is the geometric reading of entropy increase.
 
@@ -43,22 +40,11 @@ First, it resolves the initial conditions problem without appeal to quantum fluc
 The zero-entropy initial state is not improbable --- it is the unique, shortest-description configuration
 in the entire space of $2^L$ bitstrings.
 
-Second, it provides a native mechanism for both matter formation and gravitational deceleration.
-As entropy increases, higher-order bound structures emerge. These more complex structures are not
-new information injected to the bistring, the only way to form them is to use the same bits that
-are used for representing the spactime fabric. Composite structures therefore withdraw
-constituent structures from the free background metric, reducing spatial resolution.
-An internal observer perceives this withdrawal as a slowing of expansion --- the informational
-analogue of gravitational attraction, emerging without any force law.
-
-Third, it produces late-time accelerating expansion without a cosmological constant.
-Bound structures inevitably decay as entropy approaches its maximum --- their lognormal abundance curves have
-falling tails by combinatorial necessity, not by assumption.
-As they decay, \fabric{} are released back into the free metric, producing a late-stage expansion boost that an
-internal observer reads as acceleration.
+Second, it provides a native mechanism for matter formation.
+As entropy increases, higher-order structures emerge. 
 
 The paper is structured as follows. Section~\ref{sec:setup} describes the bitstring setup,
-the \fabric{} filter, and the recursive density filters that extract hierarchical matter structures.
+the \texttt{fabric} filter, and the recursive density filters that extract hierarchical matter structures.
 Section~\ref{sec:results} presents the numerical results.
 Section~\ref{sec:robustness} establishes the filter-independence of the lognormal result across more
 than two hundred filter definitions.
@@ -89,11 +75,11 @@ where $p_0(t)$ and $p_1(t)$ represent the normalized empirical frequencies of $0
 
 \subsection{Recursive Spatial Fabric and Structural Filtering}
 
-\subsubsection*{Level-0: The Spacetime Fabric (\fabric{} Scale)}
+\subsubsection*{Level-0: The Spacetime Fabric (\texttt{fabric} Scale)}
 
 We define a minimal local target pattern string $P$ of length $w_0$.
 The global string $S_t$ is parsed into non-overlapping blocks of size $w_0$,
-yielding a raw background capacity of $N_{max} = L / w_0$ elements. A Level-0 ``space fabric'' token exists at
+yielding a raw background capacity of $N_{\max} = L / w_0$ elements. A Level-0 ``space fabric'' token exists at
 index $m$ if the block matches the binary target integer value $V_P$:
 \[
 \sigma_G[m] = \begin{cases} 1 & \text{if } \sum_{j=0}^{w_0-1} S_t[m \cdot w_0 + j] \cdot 2^{w_0 - 1 - j} = V_P \\ 0 & \text{otherwise} \end{cases}
@@ -119,23 +105,19 @@ Starting from the pristine $H=0$ boundary state, the following macroscopic pheno
 \textbf{Zero entropy yields a structureless state.} The all-zero configuration contains no detectable structural matches ($N_G = 0$),
 mapping naturally under any relational decoding scheme to a single, unextended spatial point. This is the initial state - the singularity.
 
-\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$, precipitating a rapid freeze-out of background $L_0$ \fabric{}s.
+\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$, precipitating a rapid freeze-out of background $L_0$ \texttt{fabric}s.
 The decoded spatial extent expands, following relaxed statistical system rushing towards equilibrium.
 
 \textbf{Lognormal abundance of structures.} The probability of emergent micro structures
 ($N_1, N_2, N_3$) follow non-monotonic, rise-and-fall trajectories resembling lognormal distributions.
-These populations peak sequentially as a function of entropy before late-stage entropic degradation takes over.
-
-As maximum entropy is approached ($H \to 1$), complex structural hierarchies dissolve. 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/entropy_to_matter.png}
 \caption{Left: Emergent particle worldlines in relational spacetime. Right: Entropy and counts of spacetime fabric vs.\ hierarchical structures.}
 \label{fig:entropy-matter}
 \end{figure}
-
 
 
 % ============================================================
@@ -149,20 +131,12 @@ filters included as supplementary material.
 We tested more than two hundred distinct filter definitions, including:
 
 \begin{itemize}
-\item Geometric filters with varying distance thresholds $\delta_1,
-      \delta_2, \delta_3$ spanning two orders of magnitude;
-\item Geometric filters using different hierarchy definitions (pairs,
-      triplets, quadruplets; equilateral, isoceles, and arbitrary
-      configurations);
-\item Different decoding maps $D$, including linear, logarithmic, and
-      random projections from bitstrings to spatial coordinates;
-\item Recursive pattern-matching filters with varying substring lengths $k$
-      and varying composition rules;
-\item Arbitrary pattern counting: selecting a fixed pattern at random ---
-      for example, $010110100010$ --- and counting its occurrences in $S_t$
-      as a function of entropy level.
+\item Geometric filters with varying distance thresholds $\delta_1, \delta_2, \delta_3$ spanning two orders of magnitude;
+\item Geometric filters using different hierarchy definitions (pairs, triplets, quadruplets; equilateral, isosceles, and arbitrary configurations);
+\item Different decoding maps $D$, including linear, logarithmic, and random projections from bitstrings to spatial coordinates;
+\item Recursive pattern-matching filters with varying substring lengths $k$ and varying composition rules;
+\item Arbitrary pattern counting: selecting a fixed pattern at random --- for example, $010110100010$ --- and counting its occurrences in $S_t$ as a function of entropy level.
 \end{itemize}
-
 
 In every case, the qualitative result is the same: zero structure at zero
 entropy, a lognormal-shaped emergence curve, and long-tailed decay at high
@@ -223,16 +197,12 @@ No residual quantum irregularities are required.
 
 The bit-flip space is natively logarithmic. Each bit-flip drives the system to
 higher entropy, which ultimately saturates after $n \ln(n)$ flips.
-
-$$
+\[
 S(t) = I_{\max}\bigl(1 - e^{-kt}\bigr)
-$$
-
-
+\]
 Under the substitution $t \to \ln t$, the De Sitter scale factor $a(t) \propto e^{Ht}$
 transforms to $a \propto t^H$, which matches the saturation curve $S(t) = I_{\max}(1-e^{-kt})$ in
 the bit-flip parameterisation.
-
 
 
 \section{Conclusion}
@@ -240,8 +210,8 @@ the bit-flip parameterisation.
 
 This paper establishes three foundational results:
 
-First, cosmic expansion is shown to be the pure geometric interpretation of increasing informational entropy.
-Beginning from the unique zero-entropy state identified in Paper~I as the informational singularity,
+First, cosmic expansion is shown to be the pure geometric interpretation of increasing informational informational entropy.
+Beginning from the unique zero-entropy state identified in Paper~II \cite{meskanen2002} as the informational singularity,
 entropy-driven mutations drive the systematic expansion of the spatial manifold without requiring a cosmological constant,
 ad-hoc inflaton fields, or hard-coded equations of motion.
 
@@ -270,10 +240,8 @@ Investigating these geometric and topological limits constitutes the immediate n
 \section*{Simulation Code}
 
 \begin{itemize}
-\item \href{simulations/emergence\_of\_spacetime.py}{\texttt{emergence\_of\_spacetime.py}:
-      Geometric Manifestation of Entropy Growth}
+\item \href{simulations/emergence_of_spacetime.py}{\texttt{emergence\_of\_spacetime.py}: Geometric Manifestation of Entropy Growth}
 \end{itemize}
-
 
 \printbibliography
 

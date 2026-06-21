@@ -14,13 +14,13 @@
 % ============================================================
 \begin{abstract}
 We investigate black hole singularities from an information-theoretic
-perspective. Under the Internal Emergence
-Principle established in Paper~I, geometric spacetime and the execution
+perspective. Under the principles established in
+Paper~I \cite{meskanen2001}, geometric spacetime and the execution
 trace of a computational simulation are two equivalent representations of
 the same underlying informational structure, with neither being more
 fundamental. Standard General Relativity cannot be evolved through
 singularity formation due to numerical divergences and the breakdown of
-the manifold description. The execution trace provides a complementary,
+the manifold description. However, the execution trace provides a complementary,
 well-behaved description that remains defined throughout collapse. 
 We argue that the singularity is not a point of infinite curvature
 but a state of zero entropy state. Any mapping of zero entropy
@@ -41,16 +41,15 @@ curvature diverges and the classical manifold description breaks down
 singularities mark the boundary of applicability of General Relativity and
 that a theory of quantum gravity is required to describe what occurs there.
 
-The present paper proposes a different interpretation. Within the 
-framework developed in Paper~I, geometric spacetime and the execution trace
+The present paper proposes a different interpretation.
+Geometric spacetime and the execution trace
 of a computational simulation are two representations of the same
-informational structure. This equivalence, which follows from the Internal
-Emergence Principle (IEP) without additional assumptions, allows the
+informational structure. This equivalence allows the
 singularity to be approached from the informational side even when the
 geometric description fails. The central question is not what the geometry
 does at the singularity --- it diverges, by definition --- but what the
 execution trace does. The answer, we find, is that the informational variety 
-of the execution trace collapses into a trivial state.
+of the execution trace collapses into a trivial zero entropy state.
 
 To rigorously isolate this collapse, we evaluate the spatial state under three 
 distinct information-theoretic lenses: microscopic bitwise diversity, localized pattern 
@@ -69,7 +68,8 @@ The regularisation is not imposed but derived from the informational
 structure of the collapse process itself.
 
 The paper is structured as follows. Section~\ref{sec:framework} summarises
-the relevant results from Paper~I. Section~\ref{sec:methods} defines the
+the relevant results from Paper~I \cite{meskanen2001}.
+Section~\ref{sec:methods} defines the
 execution trace, the geometric encoding, and the multi-metric complexity suite.
 Section~\ref{sec:simulations} presents the numerical results for
 Schwarzschild, Advanced Unistructural (AU), Eddington-Finkelstein (EF), and Kerr geometries. 
@@ -77,17 +77,15 @@ Section~\ref{sec:discussion} interprets the results and discusses their physical
 Section~\ref{sec:conclusion} concludes.
 
 % ============================================================
-\section{Framework: Informational Equivalence of Geometry and Computation}
+\section{Informational Equivalence of Geometry and Computation}
 \label{sec:framework}
 
 The argument of this paper rests on the proposition established in
-Paper~I, which we summarise here for completeness.
+Paper~I \cite{meskanen2001}, which we summarise here for completeness.
 
 \textbf{Corollary (Representational equivalence).} The geometric description of a
 physical process and the computational description of its simulation are two
 representations of the same informational structure, with neither being more fundamental.
-This equivalence is not an interpretive convenience but a structural consequence
-of the IEP.
 
 The representational equivalence is what licenses the approach of this
 paper. When the geometric description fails --- as it does at the singularity
@@ -324,9 +322,9 @@ geometry \cite{mathur2005}. Both approaches introduce new physics to
 regularise the singularity.
 
 The present approach requires no new physics. The regularisation is a
-consequence of the informational equivalence established in Paper~I: when
+consequence of the informational equivalence established in Paper~I \cite{meskanen2001}: when
 the execution trace converges to zero entropy, the geometric description
-simply has nothing to describe. The singularity is resolved not by
+has no emergent micro structures to describe. The singularity is resolved not by
 preventing it but by showing that it is trivial.
 
 \subsection{Holographic consistency}
@@ -342,23 +340,6 @@ configuration; the Bekenstein-Hawking entropy measures the information
 accessible to an external observer. The present framework is consistent with
 both.
 
-\subsection{Relation to Penrose's Weyl curvature hypothesis}
-
-Penrose's Weyl curvature hypothesis \cite{penrose1979} proposes that the
-initial singularity of the universe was characterised by vanishing Weyl
-curvature --- a smooth, highly ordered state --- while final singularities
-(black holes) are characterised by diverging Weyl curvature. This asymmetry
-is offered as the origin of the thermodynamic arrow of time. The present
-results are consistent with this picture: the final singularity of
-gravitational collapse corresponds to a zero-entropy, maximally ordered
-informational state, while the surrounding spacetime retains its complexity.
-However, this framework goes further than Penrose's hypothesis in two
-respects. First, it provides a precise, computable measure of the approach
-to the zero-entropy point, rather than a qualitative statement about
-curvature. Second, as shown in Paper~III, a perfectly smooth zero-entropy
-initial state generates a rich, structured universe through entropy increase
-alone, without the residual quantum irregularities that Penrose's framework
-requires.
 
 % ============================================================
 \section{Conclusion}
@@ -367,7 +348,7 @@ requires.
 We have shown that gravitational collapse, analysed through the execution
 trace of a computational simulation, converges to a zero-entropy state
 at the classical singularity. This result holds for Schwarzschild, 
-Eddington-Finkelstein, and Kerr geometries and is independent of the 
+and Kerr geometries and is independent of the 
 simulation architecture and discretisation scheme.
 
 The metrics suite deployed herein successfully acts as a structural phase detector. 
@@ -381,12 +362,6 @@ microstructure, matter, or distinguishable geometry. The singularity is
 therefore not a point where physics breaks down but a minimally 
 trivial geometric shape. 
 
-These results place singularities within a consistent
-informational framework that requires no new physics, reproduces the
-qualitative predictions of the holographic principle, and connects naturally
-to the cosmological picture developed in Paper~III, where the time-reversed
-process --- expansion from a zero-entropy initial state --- produces a
-structured universe through entropy increase alone.
 
 % ============================================================
 \section*{Simulation Code}
