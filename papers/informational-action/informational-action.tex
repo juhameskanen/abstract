@@ -11,7 +11,7 @@
 \maketitle
 
 \begin{abstract}
-To support the central hypothesis of Paper~VI \cite{meskanen2026} — that the wavefunction is the universe’s spectral compression codec and that we observe wave-like microstructure because we perceive compressed information — we present a constructive proof-of-concept in Wheeler-DeWitt minisuperspace. 
+To support the central hypothesis of Paper~VI \cite{meskanen2026} — that the wavefunction is the universe’s spectral compression codec and that we observe wave-like microstructure because we perceive compressed information — we present a constructive proof-of-concept in Wheeler-DeWitt \cite{dewitt1967} minisuperspace. 
 
 We demonstrate that the paths minimizing spectral complexity \(C_s\) (as implemented in the \texttt{Wavefunction} class) coincide with those minimizing the Euclidean action \(S_E\). Across ensembles of perturbed histories with both gravitational and scalar degrees of freedom, the Spearman rank correlation between \(C_s\) and \(S_E\) exceeds 0.96, and the classical Hawking no-boundary instanton is unambiguously the joint global minimum. These results provide strong numerical evidence that classical geodesics emerge as the informationally minimal trajectories in a timeless informational universe.
 \end{abstract}
@@ -24,7 +24,7 @@ The central claim of Paper~VI \cite{meskanen2026} is that the quantum wavefuncti
 
 In this framework, any configuration of information can be encoded into many possible wavefunctions. Smooth, phase-coherent wavefunctions admit vastly more efficient (lower-cost) spectral descriptions. Consequently, such states dominate the statistical measure via a Solomonoff-like prior \(P(\psi) \propto 2^{-C_s(\psi)}\), where \(C_s\) is the spectral complexity defined through frequency and phase costs.
 
-This paper provides a constructive bridge to standard quantum cosmology. We show that the dominant contributions to the Euclidean path integral (Hawking’s no-boundary proposal) are precisely the histories that minimize spectral complexity in a minisuperspace realization of Wheeler-DeWitt space. Classical geodesics thus emerge as the informationally cheapest trajectories.
+This paper provides a constructive bridge to standard quantum cosmology. We show that the dominant contributions to the Euclidean path integral (Hawking’s no-boundary proposal \cite{hawking1979}) are precisely the histories that minimize spectral complexity in a minisuperspace realization of Wheeler-DeWitt space. Classical geodesics thus emerge as the informationally cheapest trajectories.
 
 \section{Geometric Setup}
 
@@ -46,7 +46,7 @@ C_s(\psi) = \sum_{i \in \text{retained}} \left( \frac{|\omega_i|}{\Delta \omega}
 
 where modes are selected by a fidelity engine retaining enough power to explain a target fraction (typically 99\%) of the total, the reference mode (highest amplitude) pays zero phase cost, and frequency cost is linear in \(|\omega|\).
 
-This measure is both \emph{smooth} and \emph{computable} in practice. Unlike uncomputable Kolmogorov complexity over Turing machines, the dominant cost arises from the sum of frequencies of retained modes. For any realistic smooth wavefunction the cost of individual \(\sin()\) or \(\cos()\) basis functions is effectively constant and vanishingly small; the complexity is carried by the number and magnitude of frequencies required. This makes \(C_s\) a natural, differentiable proxy for algorithmic compressibility in the physical setting.
+This measure is both \emph{smooth} and \emph{computable} in practice. Unlike uncomputable Kolmogorov complexity \cite{kolmogorov1965} over Turing machines, the dominant cost arises from the sum of frequencies of retained modes. For any realistic smooth wavefunction the cost of individual \(\sin()\) or \(\cos()\) basis functions is effectively constant and vanishingly small; the complexity is carried by the number and magnitude of frequencies required. This makes \(C_s\) a natural, differentiable proxy for algorithmic compressibility in the physical setting.
 
 Under Solomonoff-like induction the prior becomes \(P(\psi) \propto 2^{-C_s(\psi)}\), yielding exponential suppression of high-frequency (rough) configurations — precisely analogous to the \(e^{-S_E}\) weighting in the Euclidean path integral.
 
@@ -98,9 +98,12 @@ We have shown through explicit construction and extensive numerical experimentat
 
 All Python implementations, including the \texttt{Wavefunction} class and the full minisuperspace POCs (pure gravity and gravity + scalar), are available in the accompanying repository. These reproduce the reported results exactly and allow further exploration of different potentials, boundary conditions, and fidelity thresholds.
 
-\begin{thebibliography}{9}
-\bibitem{meskanen2026}
-Meskanen, T. (2026). The Wavefunction as Compression. \emph{Paper~VI} (unpublished manuscript).
-\end{thebibliography}
+\begin{itemize}
+\item euclidean\_vs\_spectral.py - Proof-of-concept
+\item spectral.py - comparison of classical, euclidean and spectral paths in 3D space
+\end{itemize}
+
+
+\printbibliography
 
 \end{document}
