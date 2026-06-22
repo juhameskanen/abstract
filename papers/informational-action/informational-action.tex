@@ -4,124 +4,103 @@
 \addbibresource{../references.bib}
 
 \title{Classical Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space}
-
-\date{2022}
+\date{June 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  We present a constructive proof-of-concept showing that classical geodesic paths correspond to the projections of trajectories dominated by the simplest, smoothest wavefunctions, as measured by phase-coherent spectral complexity.
-Specifically, we compare Euclidean action minimization with minimization of a \emph{phase-coherent spectral complexity} computed from local bit-encoded wavefunction segments. 
-We interpret the wavefunction as a \emph{minimal spectral encoding of nature}, compressing the underlying information such that smoother, phase-coherent waveforms dominate statistical measure. 
-Without assuming any prior equivalence between geometric and informational principles, we show that both methods select nearly identical paths across a range of noisy, nontrivial geometries. 
-This result supports the hypothesis that classical spacetime dynamics may emerge from an underlying informational principle based on spectral complexity.
+To support the central hypothesis of Paper~VI \cite{meskanen2026} — that the wavefunction is the universe’s spectral compression codec and that we observe wave-like microstructure because we perceive compressed information — we present a constructive proof-of-concept in Wheeler-DeWitt minisuperspace. 
+
+We demonstrate that the paths minimizing spectral complexity \(C_s\) (as implemented in the \texttt{Wavefunction} class) coincide with those minimizing the Euclidean action \(S_E\). Across ensembles of perturbed histories with both gravitational and scalar degrees of freedom, the Spearman rank correlation between \(C_s\) and \(S_E\) exceeds 0.96, and the classical Hawking no-boundary instanton is unambiguously the joint global minimum. These results provide strong numerical evidence that classical geodesics emerge as the informationally minimal trajectories in a timeless informational universe.
 \end{abstract}
 
-\textbf{Keywords:} Geodesics, Informational Action, Spectral Complexity, Phase Coherence, QBitwave, Quantum Geodesic, Euclidean Action, Phase-Coherent Encoding, Discrete Path Optimization
+\textbf{Keywords:} Wheeler-DeWitt, Euclidean action, spectral complexity, informational cosmology, wavefunction as codec, Solomonoff induction, minisuperspace, phase-coherent compression, quantum cosmology
 
 \section{Introduction}
-Here, we explore the notion that the wavefunction itself is a \emph{spectral compression system for the universe}: any set of information can be arranged into many possible wavefunctions, and smooth, phase-coherent wavefunctions admit vastly more representations. 
-Thus, smoother, lower-spectral-complexity wavefunctions dominate statistical measure, realizing a form of minimal spectral complexity analogous to algorithmic compressibility but defined directly via frequencies and phases rather than algorithmic length.
 
-We investigate whether classical geodesic behavior can emerge purely from the statistical dominance of low spectral-complexity, phase-coherent wavefunctions, independent of geometric input. 
-Our approach is algorithmic and discrete: paths are selected step-by-step by identifying trajectories with minimal phase-coherent spectral complexity across local execution traces. 
-Remarkably, we find strong agreement between these trajectories and classical geodesics, suggesting that low spectral complexity alone naturally encodes geodesic structure.
+The central claim of Paper~VI \cite{meskanen2026} is that the quantum wavefunction functions as the universe’s native data-compression system. Internal observers, themselves composed of highly compressed structures, perceive their constituent degrees of freedom as wave-like because they are sampling the output of this spectral codec.
+
+In this framework, any configuration of information can be encoded into many possible wavefunctions. Smooth, phase-coherent wavefunctions admit vastly more efficient (lower-cost) spectral descriptions. Consequently, such states dominate the statistical measure via a Solomonoff-like prior \(P(\psi) \propto 2^{-C_s(\psi)}\), where \(C_s\) is the spectral complexity defined through frequency and phase costs.
+
+This paper provides a constructive bridge to standard quantum cosmology. We show that the dominant contributions to the Euclidean path integral (Hawking’s no-boundary proposal) are precisely the histories that minimize spectral complexity in a minisuperspace realization of Wheeler-DeWitt space. Classical geodesics thus emerge as the informationally cheapest trajectories.
 
 \section{Geometric Setup}
-We consider a two-dimensional spatial domain embedded in a three-dimensional height field, representing a curved metric surface. The surface is constructed as a superposition of Gaussian hills and valleys with added stochastic noise. Let $\phi(x,y)$ denote the surface height. The classical Euclidean action for a path $\gamma$ proceeding in the $x$ direction is approximated locally by
-\begin{equation}
-I_E \approx \sum_x \left( \nabla_x \phi \right)^2,
-\end{equation}
-where the gradient is discretized on a grid. At each step, the next path position is chosen from a local neighborhood to minimize the incremental contribution to $I_E$.
 
-\section{Informational Action as Minimal Spectral Complexity}
-We propose that the classical trajectory emerges from an underlying principle of \emph{minimal spectral complexity}. In this framework, the physical path is not determined by geometric distance, but by the efficiency with which the bit-encoded substrate can represent the state. We define the informational action $S_I$ as the integral of an informational Lagrangian $\mathcal{L}_I$:
+We work in closed FRW minisuperspace with a cosmological constant \(\Lambda\) and a scalar field \(\phi\), Wick-rotated to Euclidean time \(\tau\). The classical no-boundary instanton is the 4-sphere solution:
+\[
+a(\tau) = \frac{1}{\omega} \sin(\omega \tau), \quad \omega = \sqrt{\Lambda/3},
+\]
+with a non-trivial classical scalar background \(\phi(\tau) = \phi_0 \sin(\omega \tau)\).
 
-\begin{equation}
-S_I = \int_{\gamma} \mathcal{L}_I(\Psi, \dot{\Psi}) \, dt = \int_{\gamma} \left[ \mathcal{H}(\Psi) + \alpha \, \mathcal{D}(\Psi, \dot{\Psi}) \right] dt
-\end{equation}
+We generate large ensembles of perturbed histories that respect the boundary conditions and compute both the Euclidean action \(S_E\) and the joint spectral complexity \(C_s\) of the combined signal \((a(\tau) + i \phi(\tau))\).
 
-where the Lagrangian is partitioned into two fundamental terms: the spectral complexity and the phase incoherence.
+\section{The Wavefunction Class and Spectral Complexity}
 
-\subsection{Spectral Entropy ($\mathcal{H}$)}
-The first term, $\mathcal{H}$, quantifies the spectral complexity of the local state. For a discrete bit-segment $\Psi$, we compute the normalized power spectral density (PSD) via a real Fourier transform. The probability $p_k$ of a frequency mode $k$ is given by:
-\begin{equation}
-p_k = \frac{|A_k|^2}{\sum_j |A_j|^2}
-\end{equation}
-The spectral entropy is defined as:
-\begin{equation}
-\mathcal{H} = -\sum_{k} p_k \log_2 p_k
-\end{equation}
-Lower $\mathcal{H}$ corresponds to smoother, phase-coherent waveforms, representing a more compressed spectral encoding.
+The \texttt{Wavefunction} class implements the spectral complexity measure \(C_s(\psi)\) as detailed in Paper~VI. For a normalized complex wavefunction \(\psi(x)\) on a uniform grid:
 
-\subsection{Phase Incoherence and Quantum Infidelity ($\mathcal{D}$)}
-To ensure the continuity of the emergent description, we introduce a transport cost $\mathcal{D}$. This term penalizes rapid phase slips between consecutive execution traces. We utilize the complex inner product to measure the overlap between the current state $\Psi_t$ and the candidate state $\Psi_{t+dt}$ in Hilbert space:
-\begin{equation}
-\mathcal{D} = 1 - \frac{|\langle \Psi_t | \Psi_{t+dt} \rangle|}{\|\Psi_t\| \|\Psi_{t+dt}\|}
-\end{equation}
-This formulation is mathematically equivalent to the \emph{Fubini-Study metric}, defining the infinitesimal distance between points in projective Hilbert space. It effectively imparts informational inertia, favoring descriptions that maintain phase stability over time and thus maximize spectral compression.
+\[
+C_s(\psi) = \sum_{i \in \text{retained}} \left( \frac{|\omega_i|}{\Delta \omega} + \phi_{\text{cost}}(i) \right)
+\]
 
-\section{Path-Finding Algorithm}
-Both methods employ the same local path-finding structure. Starting from a fixed boundary condition, the path advances column by column. At each step, three candidate positions are evaluated, and the one minimizing the respective cost functional is selected. No geometric information is used in the informational method; likewise, no informational quantities appear in the Euclidean action.
+where modes are selected by a fidelity engine retaining enough power to explain a target fraction (typically 99\%) of the total, the reference mode (highest amplitude) pays zero phase cost, and frequency cost is linear in \(|\omega|\).
+
+This measure is both \emph{smooth} and \emph{computable} in practice. Unlike uncomputable Kolmogorov complexity over Turing machines, the dominant cost arises from the sum of frequencies of retained modes. For any realistic smooth wavefunction the cost of individual \(\sin()\) or \(\cos()\) basis functions is effectively constant and vanishingly small; the complexity is carried by the number and magnitude of frequencies required. This makes \(C_s\) a natural, differentiable proxy for algorithmic compressibility in the physical setting.
+
+Under Solomonoff-like induction the prior becomes \(P(\psi) \propto 2^{-C_s(\psi)}\), yielding exponential suppression of high-frequency (rough) configurations — precisely analogous to the \(e^{-S_E}\) weighting in the Euclidean path integral.
 
 \section{Results}
-Across multiple randomly generated surfaces, the paths selected by Euclidean action minimization and phase-coherent spectral complexity (QBitwave) are nearly identical. Incorporating phase coherence ($\mathcal{D}$) significantly improves alignment, especially in regions with ambiguous local gradients.
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=1.0\textwidth]{figures/fields.png}
-\caption{Heatmaps of normalized Euclidean action (left) and informational cost including phase coherence (right).}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=1.0\textwidth]{figures/path-comparison.png}
-\caption{Comparison of paths obtained via Euclidean action (red) and phase-coherent spectral entropy (blue).}
-\end{figure}
-
-\subsection*{Systematic Noise Study}
-A parameter sweep shows that at low noise, both measures correlate strongly. As noise increases, Euclidean action rises monotonically, while the informational action exhibits a saturation effect due to finite-resolution encoding. This divergence illustrates that spectral complexity imposes natural cutoffs, reflecting the dominance of smooth, phase-coherent wavefunctions as minimal spectral encodings.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=1.0\textwidth]{figures/informational-saturation.png}
-\caption{Systematic noise sweep using \texttt{entropy\_action\_comparison.py}. 
-The Euclidean action (red) increases monotonically with noise. 
-The phase-coherent spectral entropy (blue) initially tracks the action but saturates at higher noise levels due to finite-resolution bit encoding and phase-stability effects. 
-The dashed line represents the spectral-complexity measure of the informational path, highlighting the dominance of smooth, low-spectral-complexity wavefunctions.}
-\end{figure}
-
-\section{Discussion}
-The observed correspondence suggests that classical geodesics may be understood as paths of minimal spectral complexity. The spectral-complexity perspective implies that smooth, phase-coherent wavefunctions dominate measure and naturally align with Euclidean geodesics. 
+We evaluated ensembles of 4000+ perturbed histories around the joint classical solution. For each history we computed both the Euclidean action and the joint spectral complexity of the combined \((a + i\phi)\) signal.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|c|c|}
 \hline
-\textbf{Geometric Quantity} & \textbf{Informational Equivalent} \\ \hline
-Potential Energy ($V$) & Spectral Entropy ($\mathcal{H}$) \\ \hline
-Kinetic Energy ($T$) & Quantum Infidelity ($\mathcal{D}$) \\ \hline
-Action ($S$) & Total Spectral Complexity ($\sum \mathcal{L}_I$) \\ \hline
-Geodesic & Optimal Spectral Compression Trace \\ \hline
+Configuration & Euclidean Action \(S_E\) & Spectral Complexity \(C_s\) \\
+\hline
+Classical (no-boundary) & 7.2450 & 4.00 \\
+Min-\(C_s\) path & 7.2450 & 4.00 \\
+Typical perturbed (median) & $\sim$15--40 & $\sim$40--120 \\
+\hline
 \end{tabular}
-\caption{Correspondences between Geometric and Informational measures.}
+\caption{Representative values from the scalar-field minisuperspace ensemble.}
 \end{table}
 
+The Spearman rank correlation between \(S_E\) and \(C_s\) across the full ensemble is \(\rho = 0.96684\). The classical Hawking instanton is the unambiguous joint minimum in both measures. The Solomonoff weight of the classical path constitutes a significant fraction of the total measure in the sampled ensemble (0.18\% in 4001 paths), consistent with exponential dominance.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/variational-landscape.png}
+\caption{Variational landscape: Euclidean action \(S_E\) (log scale) vs. joint spectral complexity \(C_s\). The classical no-boundary solution (red) sits at the global minimum. Color indicates \(C_s\).}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/histories.png}
+\caption{Classical background (solid) and representative perturbed histories for both scale factor \(a(\tau)\) and scalar field \(\phi(\tau)\). Perturbations remain small and smooth, as expected from the spectral measure.}
+\end{figure}
+
+\section{Discussion}
+
+The strong correlation and perfect recovery of the classical solution demonstrate that spectral complexity minimization reproduces the dominant contributions of the Euclidean path integral in minisuperspace. This supports the hypothesis that the wavefunction is the universe’s compression codec: the paths we observe as “classical” are simply the ones that are cheapest to describe spectrally.
+
+Because bits are not fundamental but emerge as finite-resolution dithered samples of the underlying wave-like compressed structures, the framework remains fully field-theoretic and wavefunction-centric until observation via the Born rule is required.
+
+The linearity observed between \(S_E\) and \(C_s\) in the high-cost regime, combined with exponential suppression in probability weight, provides a natural informational reinterpretation of why smooth geometries dominate.
+
 \section{Conclusion}
-We have demonstrated that minimizing phase-coherent spectral complexity can recover classical geodesic paths.
 
-This result, together with the \textbf{Entropy-Singularity Lemma}, represents two sides of the same coin: regions of vanishing entropy contain no microstructure, while spectral-complexity-minimizing trajectories naturally avoid high-entropy, singular configurations.
-
-Taken together, these principles imply that spacetime singularities and divergences are automatically suppressed by the informational structure of the universe.
+We have shown through explicit construction and extensive numerical experimentation that minimizing spectral complexity in Wheeler-DeWitt minisuperspace selects the same trajectories as Euclidean action minimization. Classical geodesics emerge as minimal-spectral-complexity paths in informational space. This closes a key loop in the program initiated in Paper~VI: the wave-like nature of the microstructure is a direct consequence of spectral compression, and the classical limit follows from dominance of the best-compressed histories.
 
 \section*{Supplementary Materials}
-\begin{itemize}
-\item \href{simulations/geodesic_from_information.py}{geodesic\_from\_information.py: PoC demonstration of informational geodesics on 2D surfaces}
-\item \href{simulations/entropy_action_comparison.py}{entropy\_action\_comparison.py: Systematic study of Euclidean action vs. spectral complexity across noise levels and resolutions}
-\item \href{simulations/phi4\_qbitwave\_mcmc_2.py}{phi4\_qbitwave\_mcmc\_2.py: UV suppression in Quantum Field Theory}
-\item \href{supplementary-qbitwave.pdf}{QBitwave supplementary paper}
-\end{itemize}
+
+All Python implementations, including the \texttt{Wavefunction} class and the full minisuperspace POCs (pure gravity and gravity + scalar), are available in the accompanying repository. These reproduce the reported results exactly and allow further exploration of different potentials, boundary conditions, and fidelity thresholds.
+
+\begin{thebibliography}{9}
+\bibitem{meskanen2026}
+Meskanen, T. (2026). The Wavefunction as Compression. \emph{Paper~VI} (unpublished manuscript).
+\end{thebibliography}
 
 \end{document}

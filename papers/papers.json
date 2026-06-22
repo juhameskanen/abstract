@@ -1,97 +1,41 @@
 {
-  "title": "The Abstract Universe Project (AUP)",
+  "title": "Real Theory of Everything",
   "sections": [
     {
-      "title": "Supplementary Papers",
+      "title": "Papers",
       "items": [
         {
-          "title": "Paper~0: The Axiomatic Foundations",
+          "title": "Paper~1: Informational Derivation of Reality",
           "slug": "informational-derivation-of-reality"
         },
         {
-          "title": "Paper~I: Singularities as Zero-Entropy States",
+          "title": "Paper~II: Black Hole Singularities as Zero Entropy States",
           "slug": "black-hole-singularities"
         },
         {
-          "title": "Paper~II: Emergence of Spacetime",
+          "title": "Paper~III: Emergence of Spacetime",
           "slug": "emergence-of-spacetime"
 	},
         {
-          "title": "Paper~III: Geometry of Spacetime",
+          "title": "Paper~IV: The Geometry of Spacetime as an Information-Theoretic Structure",
           "slug": "geometry-of-spacetime"
 	},
         {
-          "title": "Paper~IV: Space-time Curvature",
-          "slug": "spacetime-curvature"
+          "title": "Paper~V: Space-time Curvature as an Information-Theoretic Structure",
+          "slug": "cosmological-model"
 	},
         {
-          "title": "Paper~V: Wavefunction as Compression",
+          "title": "Paper~VI: Wavefunction as Compression",
           "slug": "wavefunction-as-compression"
-        }
-      ]
-    },
-    {
-      "title": "The Theory",
-      "items": [
-        {
-          "title": "Introduction",
-          "slug": "introduction"
         },
         {
-          "title": "Paper~I: Theory of Everything",
-          "slug": "theory-of-everything"
-        }
-      ]
-    },
-    {
-      "title": "Less Serious Projects",
-      "items": [
-        {
-          "title": "Probabilistic Blackhole",
-          "slug": "probabilistic-blackhole"
-        },
-        {
-          "title": "Spectral Minimality and Structure Formation in High-Entropy Wavefunction Ensembles",
-          "slug": "formation-of-structures"
-	},
-        {
-          "title": "Quantum Cosmology: Spectral Complexity and the Measure of Observers in a Static Universe",
-          "slug": "quantum-cosmology"
-        },
-        {
-          "title": "Geodesics as Minimal-Entropy Trajectories in Informational Space",
+          "title": "Paper~VII: Classical Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space",
           "slug": "informational-action"
-        },
-        {
-          "title": "Emergent Gravity I",
-          "slug": "quantum-gravity"
-        },
-        {
-          "title": "Emergent Gravity II",
-          "slug": "quantum-gravity-2"
-        },
-        {
-          "title": "Spectral MDL",
-          "slug": "spectral-mdl"
-        },
-        {
-          "title": "QFT Divergences",
-          "slug": "qft-divergences",
-          "children": [
-            {
-              "title": "QBitwave",
-              "slug": "supplementary"
-            }
-          ]
-        },
-        {
-          "title": "Emergence of Time",
-          "slug": "emergence-of-time"
         }
       ]
     },
     {
-      "title": "Miscellaneous Materials",
+      "title": "Supplementary Materials",
       "items": [
         {
           "title": "A Study in Significant Whitespace in YAML and Mental Collapse",

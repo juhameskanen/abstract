@@ -1,170 +1,139 @@
+"""
+poc_spectral_vs_euclidean.py
+Main Proof-of-Concept for the paper:
+"Classical Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space"
+
+Demonstrates strong alignment between Euclidean action minimization and spectral complexity
+minimization in Wheeler-DeWitt minisuperspace with gravity + scalar field.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-from wavefunction import Wavefunction
 from scipy.stats import spearmanr
+from wavefunction import Wavefunction
 
-# Assumes your fixed Wavefunction class is imported or defined above
-# from your_module import Wavefunction
-
-def compute_wdw_euclidean_action(a_val: float, Lambda: float = 1.0, G: float = 1.0) -> float:
-    """
-    Computes the regularized Euclidean action S_E for a closed mini-superspace 
-    instanton boundary of scale factor 'a'.
+def compute_euclidean_action(a_path, phi_path, dtau, Lambda=1.0):
+    a = np.clip(a_path, 1e-4, None)
+    da = np.gradient(a, dtau)
+    dphi = np.gradient(phi_path, dtau)
     
-    For a < \sqrt{3/\Lambda}, the de Sitter instanton gives:
-    S_E(a) = - (3\pi / 2G * \Lambda) * (1 - (\Lambda * a^2 / 3))^(3/2)
-    """
-    # Boundary threshold check for the under-the-barrier tunneling region
-    if a_val**2 < (3.0 / Lambda):
-        # Semiclassical instanton action matching the Hawking no-boundary ground state
-        factor = (1.0 - (Lambda * a_val**2 / 3.0))**(1.5)
-        S_E = - (3.0 * np.pi / (2.0 * G * Lambda)) * factor
-    else:
-        # Oscillatory regime (above the barrier / classically allowed expansion)
-        S_E = 0.0
-    return float(S_E)
+    integrand = (-a + 0.15 * (da**2) / a +
+                 0.5 * a * (dphi**2) +
+                 0.5 * a**3 * (phi_path**2)) + (Lambda / 3.0) * a**3
+    boundary = 2.0 * a[-1]
+    return float(np.sum(integrand) * dtau + boundary)
 
-def generate_cosmological_path(steps: int = 40, Lambda: float = 1.0) -> list[Wavefunction]:
-    """
-    Generates a sequence of states across the mini-superspace metric profile.
-    The scale factor 'a' shifts, translating to the evolution of the WDW ground state.
-    """
-    path = []
-    # Explore the tunneling regime up to the classical turning point a_max = \sqrt{3/\Lambda}
-    a_max = np.sqrt(3.0 / Lambda)
-    a_values = np.linspace(0.1, a_max * 0.95, steps)
-    
-    for a in a_values:
-        # Map the spatial metric profile to a localized state in scale factor space
-        # Using a Gaussian configuration profile centered at scale factor 'a'
-        N = 256
-        dx = 0.05
-        grid = np.arange(N) * dx
-        
-        # Conjugate momentum tracking based on the instanton trajectory
-        k0 = np.sqrt(abs(1.0 - (Lambda * a**2 / 3.0))) / dx
-        
-        psi = np.exp(-((grid - a) ** 2) / (4 * 0.5**2)) * np.exp(1j * k0 * grid)
-        
-        # Initialize with your compression-codec limits
-        wf = Wavefunction(psi, dx=dx, fidelity_target=0.995)
-        path.append((a, wf))
-        
-    return path
 
-# ---------------------------------------------------------------------------
-# Run WDW Cosmological Verification
-# ---------------------------------------------------------------------------
+def analytic_hawking_trajectory(tau_grid, Lambda=1.0):
+    omega = np.sqrt(Lambda / 3.0)
+    a_max = 1.0 / omega
+    return a_max * np.sin(omega * tau_grid)
+
+
 if __name__ == "__main__":
-    steps = 40
+    N_steps = 2000
     Lambda = 1.0
-    G = 1.0
-    
-    print("=" * 70)
-    print("POC: WDW Mini-Superspace Cosmology vs. Compression Codec")
-    print("=" * 70)
-    
-    path_data = generate_cosmological_path(steps=steps, Lambda=Lambda)
-    
-    cs_values = []
-    se_values = []
-    a_axis = []
-    
-    for a, wf in path_data:
-        c_s = wf.spectral_complexity()
-        s_e = compute_wdw_euclidean_action(a, Lambda=Lambda, G=G)
-        
-        cs_values.append(c_s)
-        se_values.append(-s_e)
-        a_axis.append(a)
-        
-    cs_values = np.array(cs_values)
-    se_values = np.array(se_values)
-    
-    # Check the real invariant correlation
-    r_value = np.corrcoef(cs_values, se_values)[0, 1]
-   
-    print(f"\n[Result] Number of Cosmological Geometries: {steps}")
-    print(f"[Result] Wheeler-DeWitt Pearson R Correlation: {r_value:.6f}")
+    tau_max = np.pi / (2.0 * np.sqrt(Lambda / 3.0))
+    tau_grid = np.linspace(1e-4, tau_max, N_steps)
+    dtau = tau_grid[1] - tau_grid[0]
 
-    # Extract the pure frequency term from the modes, ignoring grid amplitude/phase bits
-    pure_freq_costs = []
-    for a, wf in path_data:
-        modes = wf.compute_compressed_modes()
-        pure_freq_costs.append(sum(abs(m.frequency) / wf.delta_omega for m in modes))
+    # Classical background with non-trivial scalar
+    a_class = analytic_hawking_trajectory(tau_grid, Lambda)
+    phi0 = 0.8
+    phi_class = phi0 * np.sin(np.sqrt(Lambda / 3.0) * tau_grid)
 
-    r_pure = np.corrcoef(pure_freq_costs, np.abs(se_values))[0, 1]
-    print(f"Pure Frequency Resource Correlation: {r_pure:.6f}")
+    window = np.sin(np.pi * np.arange(N_steps) / (N_steps - 1))**2
 
-    # Test the exact analytical scaling ratio between momentum and volume action
-    r_exact_geometry = np.corrcoef(cs_values, np.abs(se_values)**(1/3))[0, 1]
+    # Classical
+    signal_class = a_class + 1j * phi_class
+    wf_class = Wavefunction(signal_class * window, dx=dtau, fidelity_target=0.99)
+    cs_class = wf_class.spectral_complexity()
+    action_class = compute_euclidean_action(a_class, phi_class, dtau, Lambda)
 
-    print(f"Analytical Scaling Verification:")
-    print(f"  Current Pearson R              : {r_value:.6f}")
-    print(f"  True Instanton-Exponent Match  : {r_exact_geometry:.6f}")
-    
+    print("Classical retained modes:")
+    wf_class.spectral_complexity(verbose=True)
 
+    # Generate ensemble
+    np.random.seed(42)
+    num_paths = 5000
+    results = []
 
-    rho, _ = spearmanr(cs_values, np.abs(se_values))
-    print(f"[Validation] Spearman Rank Correlation (ρ): {rho:.6f}")
+    for i in range(-1, num_paths):   # -1 = classical
+        if i == -1:
+            a_path = a_class.copy()
+            phi_path = phi_class.copy()
+            label = "Classical"
+        else:
+            noise_a = np.sin(np.pi * tau_grid / tau_max) * np.random.normal(0, 1.0, N_steps)
+            noise_phi = np.sin(np.pi * tau_grid / tau_max) * np.random.normal(0, 0.8, N_steps)
+            a_path = np.clip(a_class + noise_a * np.random.uniform(0.008, 0.18), 1e-3, None)
+            phi_path = phi_class + noise_phi * np.random.uniform(0.06, 0.40)
+            label = f"Pert_{i}"
 
-    # -----------------------------------------------------------------------
-    # Plotting Invariant Trends
-    # -----------------------------------------------------------------------
-    fig, ax1 = plt.subplots(figsize=(10, 5))
-    
-    color = 'tab:blue'
-    ax1.set_xlabel('Scale Factor $a$ (Mini-superspace Geometry)')
-    ax1.set_ylabel('Spectral Complexity $C_s$ (bits)', color=color)
-    ax1.plot(a_axis, cs_values, color=color, linewidth=2, marker='o')
-    ax1.tick_params(axis='y', labelcolor=color)
-    
-    ax2 = ax1.twinx()  
-    color = 'tab:red'
-    ax2.set_ylabel('Hawking Euclidean Action $S_E$', color=color)
-    ax2.plot(a_axis, se_values, color=color, linewidth=2, linestyle='--', marker='x')
-    ax2.tick_params(axis='y', labelcolor=color)
-    
-    plt.title(f"Quantum Cosmology Validation\nPearson $R = {r_value:.5f}$")
-    fig.tight_layout()
+        action = compute_euclidean_action(a_path, phi_path, dtau, Lambda)
+        signal = a_path + 1j * phi_path
+        wf = Wavefunction(signal * window, dx=dtau, fidelity_target=0.99)
+        cs = wf.spectral_complexity()
+
+        results.append({
+            "label": label,
+            "action": action,
+            "complexity": cs,
+            "a": a_path,
+            "phi": phi_path
+        })
+
+    # Analysis
+    actions = np.array([r["action"] for r in results])
+    complexities = np.array([r["complexity"] for r in results])
+    rho, _ = spearmanr(complexities, actions)
+    min_idx = np.argmin(complexities)
+
+    print("\n=== FINAL RESULTS ===")
+    print(f"Spearman ρ                    : {rho:.5f}")
+    print(f"Classical Action / C_s        : {action_class:.4f} / {cs_class:.2f}")
+    print(f"Min-C_s Action                : {results[min_idx]['action']:.4f} ({results[min_idx]['label']})")
+
+    weights = 2.0 ** (-complexities)
+    weights /= weights.sum()
+    print(f"Classical Solomonoff fraction : {weights[0]*100:.5f}%")
+
+    # === Save figures for the paper ===
+    plt.figure(figsize=(12, 5))
+    plt.scatter(actions, complexities, c=complexities, cmap='viridis', alpha=0.6, s=6)
+    plt.plot(action_class, cs_class, 'ro', markersize=12, markeredgecolor='k', label='Classical')
+    plt.xscale('log')
+    plt.xlabel('Euclidean Action $S_E$')
+    plt.ylabel('Spectral Complexity $C_s$')
+    plt.title(f'Spectral vs Euclidean — Spearman $\\rho = {rho:.5f}$')
+    plt.legend()
+    plt.grid(True, alpha=0.4)
+    plt.colorbar(label='$C_s$')
+    plt.tight_layout()
+    plt.savefig('../figures/variational_landscape.png', dpi=300, bbox_inches='tight')
     plt.show()
 
+    # Second figure: example histories
+    plt.figure(figsize=(12, 6))
+    idx = 300
+    ax1 = plt.gca()
+    ax1.plot(tau_grid, a_class, 'r-', lw=2.5, label='a(τ) Classical')
+    ax1.plot(tau_grid, results[idx]["a"], 'b-', alpha=0.75, label='a(τ) Perturbed')
+    ax1.set_ylabel('Scale factor a(τ)', color='r')
+    ax1.tick_params(axis='y', labelcolor='r')
 
-    # Transform the boundary complexity to match the 4D bulk spacetime scaling
-    cs_transformed = (cs_values - cs_values.min()) ** 3
+    ax2 = ax1.twinx()
+    ax2.plot(tau_grid, phi_class, 'm-', lw=2.0, label='φ(τ) Classical')
+    ax2.plot(tau_grid, results[idx]["phi"], 'g--', alpha=0.8, label='φ(τ) Perturbed')
+    ax2.set_ylabel('Scalar field φ(τ)', color='g')
+    ax2.tick_params(axis='y', labelcolor='g')
 
-    # Normalize both curves between 0 and 1 to compare pure shape/geometry
-    cs_normalized = (cs_transformed - cs_transformed.min()) / (cs_transformed.max() - cs_transformed.min())
-    se_normalized = (np.abs(se_values) - np.abs(se_values).min()) / (np.abs(se_values).max() - np.abs(se_values).min())
-
-    # Check the linear correlation now that they share the same geometric space
-    r_linear_perfect = np.corrcoef(cs_normalized, se_normalized)[0, 1]
-
-    # --- Plotting the Shared Space ---
-    plt.figure(figsize=(9, 5))
-    plt.plot(a_axis, cs_normalized, 'b-', linewidth=3, label='Holographic Informational Action $(C_s)^3$')
-    plt.plot(a_axis, se_normalized, 'r--', linewidth=2, label='Hawking Euclidean Bulk Action $|S_E|$')
-
-    plt.xlabel('Scale Factor $a$ (Mini-superspace Geometry)', fontsize=11)
-    plt.ylabel('Normalized Action Scale [0, 1]', fontsize=11)
-    plt.title(f'Visual Verification in Shared 4D Spacetime Space\nLinear Pearson $R = {r_linear_perfect:.6f}$', fontsize=12, fontweight='bold')
-    plt.legend(loc='best', frameon=True)
-    plt.grid(True, linestyle=':', alpha=0.6)
-    plt.show()    
-
-    # Normalize both arrays to a strict [0, 1] scale to compare their pure geometric profiles
-    cs_norm = (cs_values - cs_values.min()) / (cs_values.max() - cs_values.min())
-    se_norm = (np.abs(se_values) - np.abs(se_values).min()) / (np.abs(se_values).max() - np.abs(se_values).min())
-
-    # --- Plotting the Intrinsic Informational Space ---
-    plt.figure(figsize=(6, 6))
-    plt.plot(se_norm, cs_norm, 'g-', linewidth=3, label='Codec Mapping Profile')
-    plt.plot([0, 1], [0, 1], 'k--', alpha=0.5, label='Perfect Identity Line (R=1.0)')
-
-    plt.xlabel('Normalized Hawking Euclidean Action $|S_E|$', fontsize=11)
-    plt.ylabel('Normalized Spectral Complexity $C_s$', fontsize=11)
-    plt.title('Coordinate-Free Informational Action Space', fontsize=12, fontweight='bold')
-    plt.legend(loc='best')
-    plt.grid(True, linestyle=':', alpha=0.6)
-    plt.gca().set_aspect('equal', adjustable='box')
-    plt.show()    
+    ax1.set_xlabel('$\\tau$')
+    ax1.set_title('Classical and Perturbed Histories')
+    ax1.grid(True, alpha=0.4)
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper right')
+    plt.tight_layout()
+    plt.savefig('../figures/example_histories.png', dpi=300, bbox_inches='tight')
+    plt.show()
