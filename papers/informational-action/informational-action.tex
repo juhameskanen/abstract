@@ -22,7 +22,7 @@ We demonstrate that the paths minimizing spectral complexity \(C_s\) (as impleme
 
 The central claim of Paper~VI \cite{meskanen2026} is that the quantum wavefunction functions as the universe’s native data-compression system. Internal observers, themselves composed of highly compressed structures, perceive their constituent degrees of freedom as wave-like because they are sampling the output of this spectral codec.
 
-In this framework, any configuration of information can be encoded into many possible wavefunctions. Smooth, phase-coherent wavefunctions admit vastly more efficient (lower-cost) spectral descriptions. Consequently, such states dominate the statistical measure via a Solomonoff-like prior \(P(\psi) \propto 2^{-C_s(\psi)}\), where \(C_s\) is the spectral complexity defined through frequency and phase costs.
+In this framework, any configuration of information can be encoded into many possible wavefunctions. Smooth, phase-coherent wavefunctions admit vastly more efficient (lower-cost) spectral descriptions. Consequently, such states dominate the statistical measure via a Solomonoff-like \cite{solomonoff1964} prior \(P(\psi) \propto 2^{-C_s(\psi)}\), where \(C_s\) is the spectral complexity defined through frequency and phase costs.
 
 This paper provides a constructive bridge to standard quantum cosmology. We show that the dominant contributions to the Euclidean path integral (Hawking’s no-boundary proposal \cite{hawking1979}) are precisely the histories that minimize spectral complexity in a minisuperspace realization of Wheeler-DeWitt space. Classical geodesics thus emerge as the informationally cheapest trajectories.
 
@@ -72,14 +72,20 @@ The Spearman rank correlation between \(S_E\) and \(C_s\) across the full ensemb
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1.0\textwidth]{figures/variational-landscape.png}
-\caption{Variational landscape: Euclidean action \(S_E\) (log scale) vs. joint spectral complexity \(C_s\). The classical no-boundary solution (red) sits at the global minimum. Color indicates \(C_s\).}
+\includegraphics[width=1.0\textwidth]{figures/minimum_paths.png}
+\caption{Minimum-cost paths vs Hawking solution}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1.0\textwidth]{figures/histories.png}
-\caption{Classical background (solid) and representative perturbed histories for both scale factor \(a(\tau)\) and scalar field \(\phi(\tau)\). Perturbations remain small and smooth, as expected from the spectral measure.}
+\includegraphics[width=1.0\textwidth]{figures/distributions.png}
+\caption{$C_s$ and $S_E$ distributions + roughness partial}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/scatter_cs_vs_se.png}
+\caption{Scatter $S_E$ vs $C_s$}
 \end{figure}
 
 \section{Discussion}
@@ -99,9 +105,9 @@ We have shown through explicit construction and extensive numerical experimentat
 All Python implementations, including the \texttt{Wavefunction} class and the full minisuperspace POCs (pure gravity and gravity + scalar), are available in the accompanying repository. These reproduce the reported results exactly and allow further exploration of different potentials, boundary conditions, and fidelity thresholds.
 
 \begin{itemize}
-\item euclidean\_vs\_spectral.py - Proof-of-concept
 \item euclidean\_vs\_spectral\_2.py - Proof-of-concept 2
-\item euclidean\_vs\_spectral\_3.py - Proof-of-concept  3
+\item euclidean\_vs\_spectral\_3.py - Proof-of-concept 3
+\item wavefunction.py - Documented wavefunction class implementing the spectral complexity measure
 \item spectral.py - comparison of classical, euclidean and spectral paths in 3D space
 \end{itemize}
 
