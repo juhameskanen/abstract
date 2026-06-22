@@ -22,7 +22,7 @@
 	},
         {
           "title": "Paper~V: Space-time Curvature as an Information-Theoretic Structure",
-          "slug": "cosmological-model"
+          "slug": "emergence-of-gr"
 	},
         {
           "title": "Paper~VI: Wavefunction as Compression",
@@ -31,7 +31,11 @@
         {
           "title": "Paper~VII: Classical Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space",
           "slug": "informational-action"
-        }
+        },
+        {
+            "title": "Paper~VIII: Inflation, Cosmological and Hubble Constants",
+          "slug": "cosmological-model"
+	}
       ]
     },
     {

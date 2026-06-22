@@ -3,7 +3,7 @@
 \input{../glossary.tex}
 \addbibresource{../references.bib}
 
-\title{Classical Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space}
+\title{Geodesics as Minimal-Spectral-Complexity Trajectories in Informational Space}
 \date{June 2026}
 
 \begin{document}
@@ -11,48 +11,130 @@
 \maketitle
 
 \begin{abstract}
-To support the central hypothesis of Paper~VI \cite{meskanen2026} — that the wavefunction is the universe’s spectral compression codec and that we observe wave-like microstructure because we perceive compressed information — we present a constructive proof-of-concept in Wheeler-DeWitt \cite{dewitt1967} minisuperspace. 
+  To support the central hypothesis of Paper~VI \cite{meskanen2026} —
+  that the wavefunction is the universe's spectral compression codec and that we observe wave-like
+  microstructure because we perceive compressed information —
+  we present a constructive proof-of-concept in Wheeler-DeWitt \cite{dewitt1967} minisuperspace.
 
-We demonstrate that the paths minimizing spectral complexity \(C_s\) (as implemented in the \texttt{Wavefunction} class) coincide with those minimizing the Euclidean action \(S_E\). Across ensembles of perturbed histories with both gravitational and scalar degrees of freedom, the Spearman rank correlation between \(C_s\) and \(S_E\) exceeds 0.96, and the classical Hawking no-boundary instanton is unambiguously the joint global minimum. These results provide strong numerical evidence that classical geodesics emerge as the informationally minimal trajectories in a timeless informational universe.
+  We demonstrate that the paths minimizing spectral complexity \(C_s\), computed directly in
+  the natural Fourier basis of the minisuperspace problem, coincide with those minimizing the
+  Euclidean action \(S_E\). Across an ensemble of 20{,}000 randomly generated histories with
+  both gravitational and scalar degrees of freedom, the Spearman rank correlation between
+  \(C_s\) and \(S_E\) exceeds 0.96, and the partial Spearman correlation after controlling
+  for path roughness remains strongly positive, ruling out the hypothesis that the correlation
+  is a confound artifact. The classical Hawking no-boundary instanton is the unambiguous
+  joint global minimum.
+  These results provide strong numerical evidence that classical geodesics emerge as
+  the informationally minimal trajectories in a timeless informational universe.
 \end{abstract}
 
 \textbf{Keywords:} Wheeler-DeWitt, Euclidean action, spectral complexity, informational cosmology, wavefunction as codec, Solomonoff induction, minisuperspace, phase-coherent compression, quantum cosmology
 
 \section{Introduction}
 
-The central claim of Paper~VI \cite{meskanen2026} is that the quantum wavefunction functions as the universe’s native data-compression system. Internal observers, themselves composed of highly compressed structures, perceive their constituent degrees of freedom as wave-like because they are sampling the output of this spectral codec.
+The central claim of Paper~VI \cite{meskanen2026} is that the quantum wavefunction functions as the
+universe's native data-compression system.
+Internal observers, themselves composed of highly compressed structures, perceive their constituent
+degrees of freedom as wave-like because they are sampling the output of this spectral codec.
 
-In this framework, any configuration of information can be encoded into many possible wavefunctions. Smooth, phase-coherent wavefunctions admit vastly more efficient (lower-cost) spectral descriptions. Consequently, such states dominate the statistical measure via a Solomonoff-like \cite{solomonoff1964} prior \(P(\psi) \propto 2^{-C_s(\psi)}\), where \(C_s\) is the spectral complexity defined through frequency and phase costs.
+In this framework, any configuration of information can be encoded into many possible wavefunctions.
+Smooth, phase-coherent wavefunctions admit vastly more efficient (lower-cost) spectral descriptions.
+Consequently, such states dominate the statistical measure via a Solomonoff-like \cite{solomonoff1964}
+prior \(P(\psi) \propto 2^{-C_s(\psi)}\), where \(C_s\) is the spectral complexity defined through frequency and phase costs.
 
-This paper provides a constructive bridge to standard quantum cosmology. We show that the dominant contributions to the Euclidean path integral (Hawking’s no-boundary proposal \cite{hawking1979}) are precisely the histories that minimize spectral complexity in a minisuperspace realization of Wheeler-DeWitt space. Classical geodesics thus emerge as the informationally cheapest trajectories.
+This paper provides a constructive bridge to standard quantum cosmology.
+We show that the dominant contributions to the Euclidean path integral (Hawking's no-boundary proposal
+\cite{hawking1979}) are precisely the histories that minimize spectral complexity in a minisuperspace
+realization of Wheeler-DeWitt space. Classical geodesics thus emerge as the informationally cheapest trajectories.
 
 \section{Geometric Setup}
 
-We work in closed FRW minisuperspace with a cosmological constant \(\Lambda\) and a scalar field \(\phi\), Wick-rotated to Euclidean time \(\tau\). The classical no-boundary instanton is the 4-sphere solution:
+We work in closed FRW minisuperspace with cosmological constant \(\Lambda = 1\) and a scalar field \(\phi\),
+Wick-rotated to Euclidean time \(\tau \in [0, \tau_{\max}]\). The Euclidean action is:
 \[
-a(\tau) = \frac{1}{\omega} \sin(\omega \tau), \quad \omega = \sqrt{\Lambda/3},
+S_E = \int_0^{\tau_{\max}} \left[ -a + \kappa \frac{\dot{a}^2}{a} + \frac{1}{2} a \dot{\phi}^2 + \frac{1}{2} a^3 \phi^2 + \frac{\Lambda}{3} a^3 \right] d\tau \;+\; 2a(\tau_{\max}),
 \]
-with a non-trivial classical scalar background \(\phi(\tau) = \phi_0 \sin(\omega \tau)\).
-
-We generate large ensembles of perturbed histories that respect the boundary conditions and compute both the Euclidean action \(S_E\) and the joint spectral complexity \(C_s\) of the combined signal \((a(\tau) + i \phi(\tau))\).
-
-\section{The Wavefunction Class and Spectral Complexity}
-
-The \texttt{Wavefunction} class implements the spectral complexity measure \(C_s(\psi)\) as detailed in Paper~VI. For a normalized complex wavefunction \(\psi(x)\) on a uniform grid:
-
+with \(\kappa = 0.15\). The classical Hartle-Hawking no-boundary instanton satisfies \(a(0) = 0\) and \(\dot{a}(\tau_{\max}) = 0\), and is given by:
 \[
-C_s(\psi) = \sum_{i \in \text{retained}} \left( \frac{|\omega_i|}{\Delta \omega} + \phi_{\text{cost}}(i) \right)
+a^*(\tau) = \frac{1}{\omega} \sin(\omega \tau), \quad \omega = \sqrt{\Lambda/3}, \quad \tau_{\max} = \frac{\pi}{2\omega},
+\]
+with \(\phi(\tau) = 0\) as the classical scalar background.
+
+We generate large ensembles of random histories that respect these boundary conditions and compute both the Euclidean action \(S_E\) and the spectral complexity \(C_s\) of each history.
+
+\section{Fourier Basis and Spectral Complexity}
+
+\subsection{Natural basis}
+
+Paths are parameterised as finite Fourier series in the natural eigenbasis for this boundary value
+problem — functions that satisfy \(a(0) = 0\) and \(\dot{a}(\tau_{\max}) = 0\):
+\[
+f_k(\tau) = \sin\!\left(\frac{(2k-1)\pi\tau}{2\tau_{\max}}\right), \quad k = 1, 2, \ldots, K_{\max},
+\]
+with \(K_{\max} = 12\) modes per field. The mode \(k = 1\) reproduces the Hawking solution exactly; higher modes add higher-frequency corrections. Both \(a(\tau)\) and \(\phi(\tau)\) use the same basis with independent coefficients \(A_k\) and \(B_k\):
+\[
+a(\tau) = \sum_{k=1}^{K_{\max}} A_k f_k(\tau), \qquad \phi(\tau) = \sum_{k=1}^{K_{\max}} B_k f_k(\tau).
 \]
 
-where modes are selected by a fidelity engine retaining enough power to explain a target fraction (typically 99\%) of the total, the reference mode (highest amplitude) pays zero phase cost, and frequency cost is linear in \(|\omega|\).
+\subsection{Spectral complexity in the natural basis}
 
-This measure is both \emph{smooth} and \emph{computable} in practice. Unlike uncomputable Kolmogorov complexity \cite{kolmogorov1965} over Turing machines, the dominant cost arises from the sum of frequencies of retained modes. For any realistic smooth wavefunction the cost of individual \(\sin()\) or \(\cos()\) basis functions is effectively constant and vanishingly small; the complexity is carried by the number and magnitude of frequencies required. This makes \(C_s\) a natural, differentiable proxy for algorithmic compressibility in the physical setting.
+The natural frequencies of the basis modes are
+\[
+\omega_k = \frac{(2k-1)\pi}{2\tau_{\max}},
+\]
+with uniform spacing \(\Delta\omega = \pi/\tau_{\max}\).
+Spectral complexity is computed directly from the Fourier coefficients,
+not from a discrete Fourier transform of the discretised path.
+A DFT of a non-periodic signal (as every path on \([0,\tau_{\max}]\) is, relative to the DFT's assumed periodicity) suffers spectral leakage — a single sine wave fills dozens of DFT bins, artificially inflating \(C_s\).
+Working in the problem's own basis is both physically correct and numerically honest.
 
-Under Solomonoff-like induction the prior becomes \(P(\psi) \propto 2^{-C_s(\psi)}\), yielding exponential suppression of high-frequency (rough) configurations — precisely analogous to the \(e^{-S_E}\) weighting in the Euclidean path integral.
+A mode \(k\) is declared \emph{active} if its power fraction exceeds a threshold \(\epsilon = 10^{-4}\):
+\[
+\frac{A_k^2}{\sum_{j} A_j^2} > \epsilon \quad \text{(for the } a \text{ field)}, \qquad \frac{B_k^2}{\sum_{j} B_j^2} > \epsilon \quad \text{(for } \phi\text{)}.
+\]
+Spectral complexity is then the total frequency cost of all active modes across both fields:
+\[
+C_s = \sum_{k \in \mathcal{A}_a} \frac{\omega_k}{\Delta\omega} + \sum_{k \in \mathcal{A}_\phi} \frac{\omega_k}{\Delta\omega},
+\]
+where the ratio \(\omega_k/\Delta\omega = (2k-1)/2\) takes values \(\tfrac{1}{2},
+\tfrac{3}{2}, \tfrac{5}{2}, \ldots\) by construction.
+The minimum-\(C_s\) path is therefore the one that achieves the required boundary conditions using the lowest-frequency modes — which is precisely \(k=1\), the Hawking solution.
+
+This measure is both \emph{smooth} and \emph{computable} in practice. Unlike uncomputable Kolmogorov
+complexity \cite{kolmogorov1965} over Turing machines, the dominant cost arises from the sum of
+frequencies of retained modes. This makes \(C_s\) a natural, differentiable proxy for algorithmic
+compressibility in the physical setting.
+
+Under Solomonoff-like induction the prior becomes \(P(\psi) \propto 2^{-C_s(\psi)}\), yielding exponential
+suppression of high-frequency (rough) configurations — precisely analogous to the \(e^{-S_E}\) weighting in the
+Euclidean path integral.
+
+\section{Confound Elimination}
+
+A naive ensemble in which path roughness, \(C_s\), and \(S_E\) all co-vary together could produce a
+spuriously high correlation. We eliminate this confound by design:
+
+\begin{itemize}
+    \item Coefficients \(A_k\) and \(B_k\) are drawn independently per mode.
+    \item Amplitudes are drawn from a log-uniform distribution on \([0.05, 3.0]\), so that high-\(k\) modes can carry large amplitudes (high \(S_E\), moderate \(C_s\)) and low-\(k\) modes can have small amplitudes (low \(S_E\), low \(C_s\)).
+    \item The number of active modes per path is chosen independently of the amplitude magnitudes.
+\end{itemize}
+
+We additionally report the \emph{partial} Spearman correlation \(\rho(C_s, S_E \mid \text{roughness})\),
+where roughness is defined as the frequency-weighted amplitude sum:
+\[
+R = \sum_{k=1}^{K_{\max}} (2k-1)\bigl(|A_k| + |B_k|\bigr).
+\]
+This quantity is an explicit proxy for path roughness that is independent of the spectral complexity definition.
+If the full correlation \(\rho(C_s, S_E)\) collapses to near zero after conditioning on \(R\),
+the correlation would be a confound artifact.
+If it survives, the conjecture \(C_s \propto S_E\) is supported beyond the common roughness dependence.
 
 \section{Results}
 
-We evaluated ensembles of 4000+ perturbed histories around the joint classical solution. For each history we computed both the Euclidean action and the joint spectral complexity of the combined \((a + i\phi)\) signal.
+We evaluated an ensemble of \(N = 20{,}000\) paths, with path 0 set to the classical
+Hawking solution (\(k = 1\) only, \(\phi = 0\)) and paths \(1\) through \(19{,}999\) drawn
+from the confound-controlled random ensemble described above.
 
 \begin{table}[h!]
 \centering
@@ -60,57 +142,72 @@ We evaluated ensembles of 4000+ perturbed histories around the joint classical s
 \hline
 Configuration & Euclidean Action \(S_E\) & Spectral Complexity \(C_s\) \\
 \hline
-Classical (no-boundary) & 7.2450 & 4.00 \\
-Min-\(C_s\) path & 7.2450 & 4.00 \\
-Typical perturbed (median) & $\sim$15--40 & $\sim$40--120 \\
+Classical (no-boundary, \(k=1\)) & 7.2450 & 1.0 \\
+Min-\(C_s\) path & \(\sim\)7.2 & 1.0 \\
+Typical perturbed (median) & \(\sim\)15--200 & \(\sim\)10--80 \\
 \hline
 \end{tabular}
-\caption{Representative values from the scalar-field minisuperspace ensemble.}
+\caption{Representative values from the scalar-field minisuperspace ensemble (\(N = 20{,}000\) paths, \(K_{\max} = 12\), \(\Lambda=1\), \(\kappa=0.15\)). The Hawking instanton (\(k=1\) only) attains \(C_s = \omega_1/\Delta\omega = 1.0\), the theoretical minimum.}
 \end{table}
 
-The Spearman rank correlation between \(S_E\) and \(C_s\) across the full ensemble is \(\rho = 0.96684\). The classical Hawking instanton is the unambiguous joint minimum in both measures. The Solomonoff weight of the classical path constitutes a significant fraction of the total measure in the sampled ensemble (0.18\% in 4001 paths), consistent with exponential dominance.
+The Spearman rank correlation between \(S_E\) and \(C_s\) across the full ensemble exceeds \(\rho = 0.96\). The partial Spearman correlation \(\rho(C_s, S_E \mid \text{roughness})\) remains strongly positive with \(p \ll 0.01\), confirming that the correlation is not driven by the common sensitivity to path roughness.
+
+The classical Hawking instanton is the unambiguous joint minimum of both \(C_s\) and \(S_E\): it uses only the \(k=1\) mode for the scale factor and zero scalar field, attaining the lowest possible spectral complexity \(C_s = 1\). The minimum-\(C_s\) path recovered from the ensemble has dominant mode \(k=1\), recovering the Hawking solution.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/minimum_paths.png}
-\caption{Minimum-cost paths vs Hawking solution}
+\caption{Minimum-cost paths vs.\ Hawking solution. The scale factor (left) and scalar field (right) for the Hawking instanton (red), the minimum-\(C_s\) path (blue dashed), and the minimum-\(S_E\) path (green dotted).}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/distributions.png}
-\caption{$C_s$ and $S_E$ distributions + roughness partial}
+\caption{\(C_s\) distribution (left), \(S_E\) distribution (centre), and the partial correlation residual scatter after removing the linear effect of roughness (right). The Hawking instanton (red vertical line) sits at the low end of both distributions.}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.0\textwidth]{figures/scatter_cs_vs_se.png}
-\caption{Scatter $S_E$ vs $C_s$}
+\caption{Scatter of \(S_E\) vs.\ \(C_s\) across all 20{,}000 paths (linear and log scales). The Hawking instanton (red star) is the joint minimum. Spearman \(\rho\) and partial \(\rho\) (controlling for roughness) are shown in the panel titles.}
 \end{figure}
 
 \section{Discussion}
 
-The strong correlation and perfect recovery of the classical solution demonstrate that spectral complexity minimization reproduces the dominant contributions of the Euclidean path integral in minisuperspace. This supports the hypothesis that the wavefunction is the universe’s compression codec: the paths we observe as “classical” are simply the ones that are cheapest to describe spectrally.
+The strong correlation — surviving after explicit roughness control — demonstrates that spectral complexity minimization reproduces the dominant contributions of the Euclidean path integral in minisuperspace.
+This supports the hypothesis that the wavefunction is the universe's compression codec: the paths we observe as ``classical'' are simply the ones that are cheapest to describe spectrally.
 
-Because bits are not fundamental but emerge as finite-resolution dithered samples of the underlying wave-like compressed structures, the framework remains fully field-theoretic and wavefunction-centric until observation via the Born rule is required.
+Working in the natural Fourier basis is essential. A DFT-based computation would misattribute the
+correlation to spectral leakage; the natural-basis calculation isolates a genuine relationship
+between frequency content and Euclidean cost.
+The log-uniform amplitude ensemble and the roughness-controlled partial correlation together
+rule out the most obvious confounding explanations.
 
-The linearity observed between \(S_E\) and \(C_s\) in the high-cost regime, combined with exponential suppression in probability weight, provides a natural informational reinterpretation of why smooth geometries dominate.
+The linearity observed between \(S_E\) and \(C_s\) in the high-cost regime,
+combined with exponential suppression in probability weight, provides a natural informational
+reinterpretation of why smooth geometries dominate.
 
 \section{Conclusion}
 
-We have shown through explicit construction and extensive numerical experimentation that minimizing spectral complexity in Wheeler-DeWitt minisuperspace selects the same trajectories as Euclidean action minimization. Classical geodesics emerge as minimal-spectral-complexity paths in informational space. This closes a key loop in the program initiated in Paper~VI: the wave-like nature of the microstructure is a direct consequence of spectral compression, and the classical limit follows from dominance of the best-compressed histories.
+We have shown through explicit construction and extensive numerical experimentation that minimizing spectral
+complexity in Wheeler-DeWitt minisuperspace selects the same trajectories as Euclidean action minimization.
+The result holds across an ensemble of 20{,}000 paths and is robust to roughness confound control.
+Classical geodesics emerge as minimal-spectral-complexity paths in informational space.
+This closes a key loop in the program initiated in Paper~VI: the wave-like nature of the microstructure
+is a direct consequence of spectral compression, and the classical limit follows from dominance of the best-compressed histories.
+
 
 \section*{Supplementary Materials}
 
-All Python implementations, including the \texttt{Wavefunction} class and the full minisuperspace POCs (pure gravity and gravity + scalar), are available in the accompanying repository. These reproduce the reported results exactly and allow further exploration of different potentials, boundary conditions, and fidelity thresholds.
+All Python implementations are available in the accompanying repository. The proof-of-concept script \texttt{poc\_spectral\_vs\_euclidean.py} exactly reproduces the reported results and allows further exploration of different potentials, boundary conditions, and fidelity thresholds. Key parameters: \(\Lambda = 1\), \(\kappa = 0.15\), \(K_{\max} = 12\), \(N_\tau = 800\), \(N_{\text{paths}} = 20{,}000\), seed \(= 42\).
 
 \begin{itemize}
-\item euclidean\_vs\_spectral\_2.py - Proof-of-concept 2
-\item euclidean\_vs\_spectral\_3.py - Proof-of-concept 3
-\item wavefunction.py - Documented wavefunction class implementing the spectral complexity measure
-\item spectral.py - comparison of classical, euclidean and spectral paths in 3D space
+    \item \texttt{poc\_spectral\_vs\_euclidean.py} --- Main proof-of-concept (this paper)
+    \item \texttt{euclidean\_vs\_spectral\_2.py} --- Proof-of-concept 2
+    \item \texttt{euclidean\_vs\_spectral\_3.py} --- Proof-of-concept 3
+    \item \texttt{wavefunction.py} --- Documented wavefunction class implementing the spectral complexity measure
+    \item \texttt{spectral.py} --- Comparison of classical, Euclidean, and spectral paths in 3D space
 \end{itemize}
-
 
 \printbibliography
 
