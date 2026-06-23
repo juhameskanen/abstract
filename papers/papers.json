@@ -5,6 +5,10 @@
       "title": "Papers",
       "items": [
         {
+          "title": "Introduction",
+          "slug": "introduction"
+        },
+        {
           "title": "Paper~1: Informational Derivation of Reality",
           "slug": "informational-derivation-of-reality"
         },
@@ -13,7 +17,7 @@
           "slug": "black-hole-singularities"
         },
         {
-          "title": "Paper~III: Emergence of Spacetime",
+          "title": "Paper~III: Emergent  Spacetime Structures from Zero-Entropy Initial States",
           "slug": "emergence-of-spacetime"
 	},
         {
@@ -35,6 +39,10 @@
         {
             "title": "Paper~VIII: Inflation, Cosmological and Hubble Constants",
           "slug": "cosmological-model"
+	},
+        {
+            "title": "Paper~IX: Real Theory of Everything",
+          "slug": "real-theory-of-everything"
 	}
       ]
     },

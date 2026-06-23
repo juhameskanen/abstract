@@ -253,7 +253,7 @@ if __name__ == "__main__":
 
     plt.ion()
     fig, (ax_spacetime, ax_metrics) = plt.subplots(1, 2, figsize=(16, 7))
-    fig.suptitle(f"IAME Cosmology Engine [HYBRID CORE MODE]", fontsize=16, fontweight='bold')
+    fig.suptitle(f"Real Cosmology Engine [HYBRID CORE MODE]", fontsize=16, fontweight='bold')
 
     ax_spacetime.set_facecolor('#020205')
     ax_spacetime.set_xlabel("Cosmic Time")

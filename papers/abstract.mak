@@ -25,12 +25,18 @@ endif
 all: $(ALL_TARGETS)
 	@echo "All documents successfully compiled!"
 
+pdf: $(PDFS)
+	@echo "PDFs done"
+
+html: $(HTML_DIRS)
+	@echo "PDFs done"
+
 %.pdf: %.tex
 	@echo "Building $@ with profile flags..."
 	latexmk -pdf -quiet -interaction=nonstopmode \
 	    -pdflatex="pdflatex %O '$(PROF_MACRO)\input{%S}'" $<
 
-# This target pattern is safe; if $(HTML_DIRS) is empty, this rule simply won't trigger
+
 $(HTML_DIRS): html-%: %.tex
 	@echo "Building $@..."
 	make4ht -c $*.cfg -d $@ $< "xhtml,2,sections+,next"
