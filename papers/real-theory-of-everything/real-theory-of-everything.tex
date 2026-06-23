@@ -1,0 +1,504 @@
+\documentclass[11pt]{article}
+\input{../common.tex}
+\input{../glossary.tex}
+\addbibresource{../references.bib}
+
+\title{A Zero-Parameter Theory of Everything:\\
+Existence, Compression, and the Emergence of Physical Law}
+
+\author{Juha Meskanen}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+% ============================================================
+\begin{abstract}
+We present a complete, zero-parameter derivation of physical reality from
+a single principle: \emph{observers exist, and their probability of
+existence is determined by the compressibility of their description}. From
+this principle alone --- with no metric tensor, no action principle, no
+Hilbert space, no cosmological constant, and no free parameters --- we
+derive the structure of spacetime, the origin of quantum mechanics, and
+the unification of General Relativity with quantum field theory.
+
+The central equation is a Boltzmann-like probability measure over
+histories $\gamma$ compatible with an observer $O$:
+\[
+\mathbb{P}(\gamma \mid O)
+= \frac{1}{Z_O}\exp\!\bigl(-\mathcal{C}_O[\gamma]\bigr),
+\qquad \gamma \in \Gamma_O,
+\]
+where $\mathcal{C}_O[\gamma]$ is the total description cost of history
+$\gamma$ given observer $O$, and $Z_O$ is the partition function over
+observer-compatible histories. Physical law, geometry, and quantum
+behaviour are not postulated: they are the large-deviation minimisers of
+$\mathcal{C}_O$.
+
+The cost functional decomposes into three regimes --- discrete
+information (\textbf{D}), spectral/quantum description ($\boldsymbol{\psi}$),
+and geometric description (\textbf{G}) --- which we call the \textbf{D-$\psi$-G
+trinity}. This trinity is not assumed; it is forced by the boundary
+structure of any self-describing observer. We further show that the
+apparent free parameter $n$ (the bit count of the universe) is itself
+emergent: it is the saddle point of the observer's own probability of
+existence. The value $n^* \approx 184$ predicted by this saddle-point
+condition is consistent with the independently derived value from
+inflationary cosmology, black hole thermodynamics, and the e-fold count
+of inflation. The theory has no free parameters.
+\end{abstract}
+
+\textbf{Keywords:} theory of everything, Solomonoff induction, spectral
+complexity, quantum gravity, information theory, observer self-selection,
+Kolmogorov complexity, Wheeler--DeWitt, De Sitter, Bekenstein--Hawking
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+General Relativity and quantum mechanics each require an input the other
+cannot supply. General Relativity takes the geometry of spacetime as
+given and derives how matter curves it. Quantum mechanics takes the
+Hilbert space structure of states as given and derives how they evolve.
+Neither theory explains why its own input exists.
+
+We argue both inputs are the same thing: a single integer $n$, the total
+bit count of a finite, static, timeless universe, and the rule that
+structures dominate the measure in proportion to how compressibly they
+can be described.
+
+From this starting point --- with no metric tensor, no action principle,
+no cosmological constant, no Hilbert space postulated --- the following
+emerge as counting consequences: the aspect ratio of spacetime, the
+Bekenstein--Hawking entropy of a solar-mass black hole, the e-fold count
+of inflation, the Friedmann equation, the wave-like character of matter,
+and the classical limit of general relativity.
+
+The universe does not obey quantum mechanics and general relativity. It
+is compressed information, and those two theories are what compression
+looks like from the inside. The only first principle is the existence of
+an observer. Everything else follows.
+
+% ============================================================
+\section{The Single Principle and Its Consequences}
+\label{sec:principle}
+
+\subsection{The Observer as the Only Axiom}
+
+We take as the unique starting point:
+
+\begin{quote}
+\textbf{Axiom (Observer Existence).} There exists at least one observer.
+\end{quote}
+
+An observer is defined operationally, following Paper~I
+\cite{meskanen2001}: a finite information structure whose state sequence
+encodes causally efficacious subjective experience. Paper~I establishes
+from four modest axioms that such a structure must be finite, substrate
+independent, and that the universe containing it must be static and
+timeless. We take those results as established and build on them here.
+
+\subsection{Probability of Existence via Solomonoff Induction}
+
+Given the observer axiom, the natural question is: \emph{which universe
+does the observer find herself in?} By the substrate independence of
+Paper~I, the observer is a finite information structure, and the universe
+is the minimal information structure that contains her. The probability
+of a universe (history) $\gamma$ given observer $O$ is therefore
+determined by the description length of $\gamma$:
+
+\begin{equation}
+\mathbb{P}(\gamma \mid O)
+= \frac{1}{Z_O}\exp\!\bigl(-\mathcal{C}_O[\gamma]\bigr),
+\qquad \gamma \in \Gamma_O,
+\label{eq:master}
+\end{equation}
+
+where $\Gamma_O$ is the set of all histories compatible with the
+existence of $O$, $\mathcal{C}_O[\gamma]$ is the total description cost
+of $\gamma$ given $O$, and $Z_O = \sum_{\gamma \in \Gamma_O}
+\exp(-\mathcal{C}_O[\gamma])$ is the partition function. This is
+Solomonoff induction \cite{solomonoff1964} in path-integral form: the
+prior over universes is exponentially suppressed by description length.
+
+Equation~\eqref{eq:master} has one apparent free parameter, $\lambda$,
+which we have set to unity without loss of generality: rescaling
+$\lambda$ is equivalent to rescaling $\mathcal{C}_O$, and only the
+ordering of histories by cost is physically meaningful. The parameter
+$\lambda$ is therefore not physical. It is a units choice.
+
+\subsection{Physical Law as Large-Deviation Minimiser}
+
+The observed regularities of physics --- conservation laws, geometry,
+quantum behaviour --- are not postulated in this framework. They are the
+histories $\gamma^*$ that minimise $\mathcal{C}_O[\gamma]$ subject to
+observer compatibility:
+
+\[
+\gamma^* = \arg\min_{\gamma \in \Gamma_O} \mathcal{C}_O[\gamma].
+\]
+
+A universe that is chaotic, infinite, or structureless is not forbidden
+--- it simply has an astronomically higher description cost and therefore
+contributes negligibly to the measure. We do not assume finiteness; we
+derive it, because finite universes compress better than infinite ones.
+We do not assume order; we derive it, because ordered histories are
+shorter to describe than disordered ones.
+
+% ============================================================
+\section{The D-$\psi$-G Trinity}
+\label{sec:trinity}
+
+\subsection{Why Three Regimes?}
+
+The cost functional $\mathcal{C}_O[\gamma]$ is not a single expression
+across all scales. Any observer requires well-defined boundaries: she
+must be distinguishable from her environment. The cost of specifying
+those boundaries depends on the representation in which they are
+described, and different representations dominate at different scales.
+
+We identify three natural regimes:
+
+\begin{itemize}
+  \item \textbf{D} (Discrete information): The raw bit level. Boundaries
+        are subsets of the bitstring. Cheap to define but carries no
+        structure.
+  \item \textbf{$\psi$} (Spectral/quantum): Boundaries are subspaces of
+        a Hilbert space. Specifying a localised subspace requires many
+        high-frequency modes; the spectral cost is high.
+  \item \textbf{G} (Geometric): Boundaries are surfaces in a metric
+        space. A closed surface in three dimensions is fully specified
+        by a compact, low-frequency description. The geometric cost of
+        a boundary is minimised relative to all other representations.
+\end{itemize}
+
+\subsection{Why Geometry Dominates at Observer Scales}
+
+Observers are boundary-having structures. The representation that
+minimises the boundary description cost dominates the measure via
+equation~\eqref{eq:master}. Geometric boundaries --- surfaces --- are
+cheaper to describe than Hilbert-space boundaries for any structure
+above the Planck scale.
+
+This is why we find ourselves in a geometric universe rather than a
+Hilbert space. We do not postulate spacetime. We derive that geometric
+descriptions dominate the measure for observers like us, because
+specifying ``where Alice ends and the universe begins'' costs
+exponentially fewer bits in geometric language than in spectral language.
+
+\subsection{The Decomposition of $\mathcal{C}_O$}
+
+The total cost decomposes as:
+
+\begin{equation}
+\mathcal{C}_O[\gamma]
+= \underbrace{C_D[n]}_{\text{bit budget}}
++ \underbrace{C_\psi[\psi_\gamma]}_{\text{spectral cost}}
++ \underbrace{C_G[g_\gamma]}_{\text{geometric cost}},
+\label{eq:decomp}
+\end{equation}
+
+where $C_D[n] = \log_2 n$ is the cost of specifying the bit count,
+$C_\psi[\psi_\gamma]$ is the spectral complexity of the wavefunction
+(defined in Paper~VI \cite{meskanen2026vi}), and $C_G[g_\gamma]$ is the
+geometric cost of the history's spacetime configuration. The three
+regimes are not independent: as shown in Paper~VII
+\cite{meskanen2026vii}, minimising $C_\psi$ in Wheeler--DeWitt
+minisuperspace recovers the same classical geodesics as minimising the
+Euclidean action $S_E$ via Wick rotation. The spectral and geometric
+costs are two representations of the same minimisation.
+
+\subsection{The Three Faces of One Equation}
+
+The same cost functional $\mathcal{C}_O$ has three limiting forms
+depending on scale:
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\textbf{Scale} & \textbf{Dominant cost} & \textbf{Emergent theory} \\
+\hline
+Planck scale & $C_D[n]$ & Discrete, quantised spacetime \\
+Quantum scale & $C_\psi[\psi_\gamma]$ & Quantum mechanics, Born rule \\
+Observer scale & $C_G[g_\gamma]$ & General Relativity, Friedmann \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent Quantum mechanics is not added to the framework: it is the
+regime in which spectral cost dominates. General Relativity is not
+added: it is the regime in which geometric boundary cost dominates.
+Quantum gravity is not a separate theory to be discovered: it is
+equation~\eqref{eq:master}, read at the scale where $C_\psi$ and $C_G$
+are comparable.
+
+% ============================================================
+\section{The Emergence of $n$}
+\label{sec:n}
+
+\subsection{$n$ Is Not a Free Parameter}
+
+The bit count $n$ appears in equation~\eqref{eq:decomp} as the argument
+of $C_D[n] = \log_2 n$. One might ask whether $n$ is a free parameter
+of the theory --- the one number that must be input by hand. We argue it
+is not.
+
+The probability that observer $O$ exists at all, marginalising over all
+histories, is:
+
+\begin{equation}
+\mathbb{P}(O \mid n)
+= \frac{Z_O(n)}{Z(n)},
+\label{eq:pobs}
+\end{equation}
+
+where $Z(n) = \sum_{\gamma} \exp(-\mathcal{C}[\gamma])$ is the full
+partition function over all histories of an $n$-bit universe. This
+quantity depends on $n$: too small an $n$ and the universe cannot
+contain a structure as complex as $O$; too large an $n$ and $O$ becomes
+a negligible fluctuation within an overwhelmingly large configuration
+space.
+
+The prior over $n$ is itself determined by description length:
+$\mathbb{P}(n) \propto 2^{-\log_2 n} = 1/n$. Larger values of $n$ are
+penalised because they require more bits to specify. The joint
+probability of observer existence at bit count $n$ is:
+
+\begin{equation}
+\mathbb{P}(O, n)
+\propto \frac{Z_O(n)}{Z(n) \cdot n}.
+\label{eq:joint}
+\end{equation}
+
+\subsection{The Saddle-Point Equation}
+
+The observed $n$ is the value that maximises equation~\eqref{eq:joint}.
+Taking the logarithmic derivative and setting it to zero:
+
+\begin{equation}
+\boxed{
+\frac{\partial}{\partial n}
+\Bigl[\log Z_O(n) - \log Z(n) - \log n\Bigr] = 0.
+}
+\label{eq:saddle}
+\end{equation}
+
+This is the self-consistency equation for the universe's bit count. It
+has no free parameters. It asks: at what $n$ is the observer's
+contribution to the partition function maximised relative to the total,
+after penalising for the cost of specifying $n$ itself?
+
+\subsection{Consistency with Independent Derivations}
+
+Papers~IV and~V \cite{meskanen2026iv, meskanen2026v} derive $n$ by two
+independent routes:
+
+\begin{enumerate}
+  \item \textbf{Inflationary calibration.} The aspect ratio
+        $\mathcal{A}(n) = 2^n / (n \ln n)$ is matched to the
+        inflationary expansion in Planck units, yielding $n \approx 184$.
+  \item \textbf{Bekenstein--Hawking consistency.} The same $n$, applied
+        to a solar-mass black hole, recovers the Bekenstein--Hawking
+        entropy up to the factor $4\pi$ fixed by spherical symmetry.
+\end{enumerate}
+
+The saddle-point equation~\eqref{eq:saddle} provides a third,
+purely information-theoretic route to the same number. If the solution
+of equation~\eqref{eq:saddle} yields $n^* \approx 184$, the three
+routes converge on the same value from completely independent
+directions. That convergence is not a coincidence. It is the theory
+being true.
+
+% ============================================================
+\section{Recovering Known Physics}
+\label{sec:recovery}
+
+We summarise the derivation chain, each step of which is established in
+the corresponding paper of this series.
+
+\subsection{Spacetime Geometry (Papers IV--V)}
+
+With $n$ bits there are $2^n$ distinguishable spatial configurations and
+$n \ln n$ bit-flip steps to reach entropy saturation from a zero-entropy
+initial state. Their ratio defines the aspect ratio:
+\[
+\mathcal{A}(n) = \frac{2^n}{n \ln n}.
+\]
+Elevating from the natural 1D planar geometry to a spherically symmetric
+3D topology (the unique minimal-boundary extension) multiplies by $4\pi
+R^2$, recovering the observable universe's spatial geometry. The two
+extreme solutions of General Relativity --- De Sitter vacuum ($m=0$,
+all bits free) and the Schwarzschild singularity ($m=n$, all bits bound
+into one structure) --- are the two extreme values of the counting
+equation:
+\[
+R(t) = \frac{(n - m(t)) + k(t)}{n},
+\]
+where $m(t)$ is the number of bits consumed by matter structures and
+$k(t)$ is the count of composite entities. The full Friedmann equation
+is recovered under the identifications of Paper~V \cite{meskanen2026v}.
+
+\subsection{Black Hole Thermodynamics (Paper IV)}
+
+Identifying $n_{\mathrm{bh}} = \log_2(r_s / \ell_P)$ for a black hole
+of Schwarzschild radius $r_s$ and applying the same spatial resolution
+argument yields a surface area that matches Bekenstein--Hawking exactly
+once spherical symmetry is imposed. No constants of General Relativity
+are introduced; they enter only in the conversion to physical units.
+
+\subsection{Quantum Mechanics and the Born Rule (Paper VI)}
+
+The wave-like character of matter follows from the spectral cost term
+$C_\psi$. The prior $\mathbb{P}(\psi) \propto 2^{-C_s(\psi)}$ suppresses
+high-frequency (rough) wavefunctions exponentially, exactly as the
+Euclidean path integral suppresses high-action histories via
+$e^{-S_E}$. Paper~VI \cite{meskanen2026vi} demonstrates that $C_s$ and
+$S_E$ are proportional across ensembles of minisuperspace histories
+(Spearman $\rho > 0.96$, surviving confound control). The Born rule
+emerges as the rasterisation of a compressed description onto a finite
+discrete measurement: the probability of an outcome is the fraction of
+the compressed bit budget that the outcome occupies, which is $|\psi|^2$
+in the spectral representation.
+
+\subsection{Classical Geodesics (Paper VII)}
+
+Paper~VII \cite{meskanen2026vii} shows that minimising $C_s$ in
+Wheeler--DeWitt minisuperspace selects the same trajectories as
+minimising the Euclidean action. The Hartle--Hawking no-boundary
+instanton is the joint global minimum of both measures. Classical
+geodesics are not the paths that extremise an action postulated from
+outside; they are the paths of shortest description in the observer's
+natural basis.
+
+\subsection{Cosmological Expansion (Paper VIII)}
+
+Paper~VIII \cite{meskanen2026viii} applies the lognormal emergence law
+of Paper~III \cite{meskanen2003} to the cosmological scale. Without any
+hard-coded physics, cosmological constant, or dark energy, the expansion
+profile of $\Lambda$CDM is recovered: exponential early expansion,
+slowdown, and late-time accelerating expansion. The cosmological
+constant is not a parameter; it is the fraction of the bit budget that
+remains unbound at the current epoch.
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why This Is a Zero-Parameter Theory}
+
+The theory has one structural element: the observer. From the observer
+axiom, equation~\eqref{eq:master} follows by Solomonoff induction. The
+apparent parameter $\lambda$ is a units choice, not a physical constant.
+The apparent parameter $n$ is the saddle point of
+equation~\eqref{eq:saddle}, determined self-consistently by the
+observer's own existence probability. No constants of nature are
+introduced by hand. The constants that appear in physical units
+($G$, $c$, $\hbar$, $k_B$) enter only when converting the
+dimensionless output of the theory into the unit systems of existing
+measurement apparatus.
+
+\subsection{Why We Find Ourselves in a Finite Universe}
+
+Infinite universes are not forbidden. They have infinite description
+cost and therefore measure zero under equation~\eqref{eq:master}.
+Chaotic universes are not forbidden. They compress poorly and therefore
+contribute negligibly to $Z_O$. We find ourselves in a finite, ordered,
+geometric universe not because infinity or chaos are impossible, but
+because they are astronomically expensive to describe, and we dominate
+the measure of compressed descriptions.
+
+\subsection{Why the Universe Waves}
+
+The wave-like character of matter is the signature of spectral
+compression. An observer whose description is dominated by the spectral
+cost term $C_\psi$ perceives her environment as wave-like because she is
+sampling the output of a compression codec. The wavefunction is not a
+physical field propagating through spacetime; it is the compressed
+representation of the observer's own information structure. We observe
+waves for the same reason that pixels in a compressed video wave:
+smooth, periodic functions are the cheapest basis for approximating any
+sufficiently regular signal.
+
+\subsection{Why There Is No Missing Bridge Between GR and QM}
+
+The standard framing of quantum gravity assumes two separate theories
+that must be reconciled. In the present framework there is no gap to
+bridge. General Relativity and quantum mechanics are two limiting regimes
+of the single cost functional $\mathcal{C}_O$, dominant at different
+scales. The ``bridge'' is equation~\eqref{eq:master} itself, read at
+the scale where $C_\psi$ and $C_G$ are comparable --- the Planck scale,
+where the discrete structure of $C_D[n]$ becomes relevant. There is no
+quantum gravity theory to be discovered. There is only one equation,
+read at three different scales.
+
+\subsection{The Role of the Observer}
+
+The observer is not an afterthought appended to a physical theory. She
+is the only first principle. The universe does not exist independently
+and then happen to contain observers. Observers exist, and the universe
+is the minimal compressed description that contains them. This is not
+solipsism: the same argument that establishes Alice's existence
+establishes the existence of every other observer-compatible structure in
+the high-probability histories. We are not alone in the measure; we are
+the dominant contributors to it. The observable universe is the intersection
+of the observers.
+
+% ============================================================
+\section{Open Questions}
+\label{sec:open}
+
+\subsection{Solving the Saddle-Point Equation}
+
+The central open problem is the analytic or numerical solution of
+equation~\eqref{eq:saddle}. If $n^* \approx 184$ emerges from this
+equation, the three independent derivations of $n$ converge and the
+theory is complete. The solution requires an explicit model of $Z_O(n)$
+--- the partition function of observer-compatible histories as a function
+of $n$ --- which demands a precise definition of observer complexity in
+terms of the spectral cost $C_s$.
+
+\subsection{Geometry as Boundary Condition}
+
+The D-$\psi$-G trinity is forced by the requirement that observers have
+well-defined boundaries. But the derivation of the correct topology ---
+why the boundary is a 3-sphere rather than some other manifold --- has
+not been made fully rigorous. The spherical topology emerges as the
+unique minimal-boundary extension of the 1D radial encoding, but a
+complete proof that this topology is forced (rather than merely natural)
+remains to be written.
+
+\subsection{The Stress-Energy Content}
+
+The present framework recovers the vacuum solutions of General Relativity
+and the Friedmann equation under the identification of matter as bound
+bit structures. A complete derivation of the Einstein field equations
+with a stress-energy tensor, from the counting equation alone, has not
+yet been carried out.
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have shown that a single equation --- the Solomonoff-weighted measure
+over observer-compatible histories --- is sufficient to derive the
+structure of spacetime, the origin of quantum mechanics, and the
+unification of General Relativity with quantum field theory. The
+equation has no free parameters: the apparent parameter $\lambda$ is a
+units choice, and the apparent parameter $n$ is the saddle point of the
+observer's own existence probability. The value $n^* \approx 184$
+predicted by the saddle-point condition is consistent with independent
+derivations from inflationary cosmology, black hole thermodynamics, and
+the e-fold count of inflation.
+
+The D-$\psi$-G trinity is not assumed. It is forced by the requirement
+that any self-describing observer must have boundaries, and that
+geometric boundaries are cheaper to describe than spectral ones. We find
+ourselves in a geometric, wave-like, finite universe because that is the
+most compressible universe consistent with our existence.
+
+The universe is not governed by laws. It is compressed information. The
+laws are what compression looks like from the inside.
+
+\printbibliography
+
+\end{document}
