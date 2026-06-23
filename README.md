@@ -1,4 +1,4 @@
-#  IAM¬(D-ψ-G)
+#  Real Theory of Everything
 
 A candidate framework for everything where reality emerges as the large-deviation minimum of observer-compatible histories.
 
