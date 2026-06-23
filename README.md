@@ -6,11 +6,11 @@ Reality is not assumed — it is what a structured observer is most likely to ex
 
 ## Overview
 
-The existence of the observer ("I am") is taken as the sole primitive. Everything else — physics, mathematics, and the structure of experience — is derived as the most probable emergent configuration consistent with that observer.
+The existence of the observer is taken as the sole primitive. Everything else — physics,  and the structure of experience — is derived as the most probable emergent configuration consistent with that observer.
 
-Observed physical laws, mathematical structures, and coherent reality itself are the configurations that minimize a spectral and geometric joint compressibility cost under observer constraints.
+Observed physical laws, mathematical structures, and coherent reality itself are the configurations that minimize informational cost under observer constraints.
 
-No fundamental discreteness, finiteness, spacetime, or informational ontology is assumed at the base level. The theory seeks to explain not only quantum gravity but a broad range of phenomena through the single lens of **probability of emergence**.
+No fundamental discreteness, finiteness, spacetime, or informational ontology is assumed at the base level. The theory seeks to explain not only quantum gravity but a broad range of phenomena through the single lens of probability of emergence.
 
 ## Core Equations
 
@@ -29,7 +29,7 @@ The notation **D-ψ-G** captures the joint compressibility principle:
 
 - Physics and laws are not hardcoded — they emerge probabilistically.
 - Strong emphasis on computational validation through Python simulations.
-- Minimalist ontology: begins only from the existence of the observer ("I am").
+- Minimalist ontology: begins only from the existence of the observer.
 - No prior commitment to finiteness, discreteness, or informational fundamentalism.
 
 ## Contents
