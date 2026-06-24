@@ -1,6 +1,6 @@
 DOCS       := theory-of-everything
 
-include ../abstract.mak
+include ../../makes/abstract.mak
 
-include ../upload.mak
+include ../../makes/upload.mak
 

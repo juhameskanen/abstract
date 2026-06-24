@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# June, 2026 DEPRECATED.
+# Replaced by the pure Makefile based build system, which is
+# much easier to understand by simple physicists
+
 # 1. SETUP PATHS
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"

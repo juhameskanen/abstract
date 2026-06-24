@@ -1,0 +1,28 @@
+
+\usepackage{tocloft}
+
+% --- Article Specific Theorems ---
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{axiom}{Axiom}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+
+\makeatletter
+\let\remark\@undefined
+\let\endremark\@undefined
+\makeatother
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newtcbtheorem[number within=section]{principle}{Principle}%
+{colback=blue!5,colframe=blue!50!black,fonttitle=\bfseries}{principle}
+
+% --- Article TOC Layout ---
+\setlength{\cftbeforesecskip}{1.0em}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+

@@ -1,0 +1,45 @@
+% === core_packages.tex ===
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{amscd}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage{xspace}
+\usepackage[backend=biber, style=numeric]{biblatex}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{etoolbox}
+\usetikzlibrary{arrows.meta, shapes, positioning, calc, cd, shapes.geometric, backgrounds}
+\usepackage[en-US]{datetime2}
+
+% --- Math & Ontology Macros ---
+\newcommand{\entropy}{S}
+\newcommand{\opponent}{opponent}
+\newcommand{\aside}[1]{[\emph{\opponent}: ``#1'']}
+\newcommand{\paper}[1]{[\emph{#1}: ``#1'']}
+\newcommand{\iame}{Real\textsuperscript{e}}
+\newcommand{\iameverything}{Real\textsuperscript{everything}}
+\newcommand{\fabric}{voxel}
+\newcommand{\Fabric}{Voxel}
+\newcommand{\pdflink}[1]{}
+
+% --- Global Layout Defaults ---
+\geometry{letterpaper, margin=1in}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=magenta,
+    urlcolor=blue
+}
+\hfuzz=5pt \vfuzz=5pt \hbadness=10000 \vbadness=10000
+
+\author{\iame}

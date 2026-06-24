@@ -1,0 +1,31 @@
+% === book_preamble.tex ===
+
+% --- Book Specific Theorems (Numbered by Chapter) ---
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{axiom}{Axiom}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+
+\makeatletter
+\let\remark\@undefined
+\let\endremark\@undefined
+\makeatother
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% Theorem numbering tracks chapters cleanly here
+\newtcbtheorem[number within=chapter]{principle}{Principle}%
+{colback=blue!5,colframe=blue!50!black,fonttitle=\bfseries}{principle}
+
+% --- Profilation ---
+\newtoggle{theology}
+\toggletrue{theology}   % default
+\providecommand{\buildtheology}{true}
+\ifdefstring{\buildtheology}{true}
+  {\toggletrue{theology}}
+  {\togglefalse{theology}}
+

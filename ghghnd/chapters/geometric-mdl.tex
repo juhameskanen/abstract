@@ -35,8 +35,8 @@ By sorting these configurations into increasing entropy order (the expanding ent
 via random bit mutations, one obtains a typical thermodynamical system rushing toward full equilibrium (maximum entropy $n$).
 
 \textbf{Deriving Time.} 
-The only meaningful minimal time step in such a system is one bit-flip. 
-The bit-flip space is natively logarithmic. 
+The only meaningful minimal time step in such a system is one bit-flip; randomly mutate bits, one by one, by randomly choosing either one or zero.
+Such a bit-flip space is natively logarithmic. 
 From thermodynamics we know the system takes $n \ln n$ bit-flips to reach equilibrium and full saturation of entropy. 
 Identifying one bit-flip with the minimum time resolution (a Planck time unit, $t_P$), the total time span is
 
@@ -54,31 +54,8 @@ x_{\text{size}} = 2^n \cdot \ell_P.
 
 \textbf{Deriving the Aspect Ratio of Spacetime} 
 
-Because the speed of light is $c = \frac{\ell_P}{t_P} = 1$ in natural units, we can relate the physical space size and the time span using only $n$ and $c$:
-
-\[
-x_{\text{size}}(n) = \frac{2^n}{n \ln n} \cdot c \cdot t_{\text{span}}.
-\]
-
-This shows that the spatial dimension ($2^n$) scales exponentially relative to the temporal dimension ($n \ln n$).
-
-By dividing the spatial resolution  by the time resolution:
-
-
-\[
-c = \frac{2^n}{n \ln(n)}
-\]
-
-
-Geometrically, $c$ is the aspect ratio of the universe block.
-
-It is the structural conversion factor between the spatial dimension and the time dimension.
-Because this ratio is determined entirely by $n$, the geometry of the entire spacetime
-block is locked in place by the number of bits. 
-
-
-\section*{The Number of Bits in the Universe}
-
+By dividing spatial resolution with temporal resolution gives is something all graphics programmers are very familiar of - the aspect ratio.
+This time it is not a pixel aspect ratio of the monitor, but the aspect ratio of the nature.
 
 During its first moments the evolution of the universe the size of the universe increased exponentially. 
 This inflationary period corresponds remarkably well to an expanding thermodynamic system exploding
@@ -90,62 +67,77 @@ According to the Standard cosmological models inflation lasted for about $10^{-3
 During the period the universe expanded by at least $60\text{ e-folds}$, meaning its size multiplied
 by a factor of $e^{60}$, which is roughly $10^{26}$.
 
-We can convert this to the aspect ratio—the effective "speed" or expansion rate of that specific epoch in SI units:
+We can plug these numbers into our aspect ratio equation. But to get dimensionless aspect ratio we need
+to express both size of the spatial and temporal dimensions in the same units. According to physics there is
+minimal resolution for both distances and time, called Planck unit. So by expressing the size and duration
+of the inflatory period of the early universe in Planck units:
 
 \[
-\text{Aspect Ratio (Inflation)} = \frac{\Delta \text{Scale}}{\Delta \text{Time}} = \frac{10^{26}\text{ m}}{10^{-35}\text{ s}} = 10^{61}\text{ m/s}
+\Delta t_P = \frac{\Delta t}{t_P} = \frac{10^{-35}}{5.39 \times 10^{-44}}
+           \approx 1.86 \times 10^{8} \text{ Planck times},
 \]
 
+\[
+\Delta x_P = \frac{\Delta x}{\ell_P} = \frac{10^{26}}{1.616 \times 10^{-35}}
+           \approx 6.19 \times 10^{60} \text{ Planck lengths}.
+\]
 
-Plug in the structural aspect ratio ($10^{61}$) into the aspect-ratio equation:
+The dimensionless inflationary aspect ratio is then:
 
-$$
-\frac{2^n}{n \ln(n)} = 10^{61}
-$$
+\[
+\mathcal{A}_{\mathrm{inf}} = \frac{\Delta x_P}{\Delta t_P}
+= \frac{6.19 \times 10^{60}}{1.86 \times 10^{8}} \approx 3.3 \times 10^{52}.
+\]
 
-$10^{61}$ bits is quite a lot. In binary form, which software developers can better understand:
+To solve the number of bits $n$ corresponding thermodynamical system expanding with such a profile we set $\mathcal{A}(n) = \mathcal{A}_{\mathrm{inf}}$
+and solve:
 
-$\approx \mathbf{215.75\text{ bits}}$
+\[
+\frac{2^n}{n \ln n} = 3.3 \times 10^{52}.
+\]
 
-And this is just for one dimension. Because the universe we observe has three spatial dimensions
-we have to multiply it by three:
+This equation has no closed-form solution and is solved numerically. Binary
+search over $n \in [1, 300]$ yields:
+
+\[
+\boxed{n \approx 184 \text{ bits.}}
+\]
+
+\noindent Verification: $2^{184} / (184 \times \ln 184) \approx 3.3 \times 10^{52}$. \checkmark
+
+
+We now know the number of the universe: it is: $LARGE 10^{52}$
+
+Programmers are more familiar with binary systems. Mapping the above number to binary based gives us $\LARGE 2^{184}$ bits.
+
+Modern computers are all $64$ bit systems these day. $184$ feels astonishingly small. 
 
 The total number of bits in the universe: $\Large \approx \mathbf{647.25\text{ bits}}$
 
+We can apply this same equation to any event horizon, such as a solar mass black hole, to get the number of bits in it.
+By doing it we discover that we don't get the exact same number as Berkenstein and Hawking through their black hole entropy laws.
+Our figure is off by $4\pi$. 
 
-\subsection*{Age of the Universe}
+The reason for this is that the geometry of aspect-ratio we worked out is the aspect ratio of a rectangle.
+Based on all observable evidence, and even General Relativity, we don't live in flat plane with open edges, more than
+we live on earth that is flat, as argued by flat eathers. According to GR's we are living in an universe that
+must meet sperical symmetry. To turn surface area of a rectangle to sphere we must multiply by $4\pi$, which gives
+us exactly the number Berkenstein and Hawking computed. 
 
-A system consisting of $2^647$ bits can be arranged in $2^(2^647)$ ways.
+As an example, the size of the minimal Schwarzschild black hole radius the bit count 
+would be $\approx 127$ bits. Again, the difference to the bit count of the the entire universe $\approx 184$
+feels quite small. 
 
-This is not a number we can write out. It is a $1$ followed by roughly $3 \times 10^{60}$ zeros.
 
-The current estimated number of particles in the visible universe is around $10^{80}$. We would
-soon run out of atoms. 
-
-Simulating such a thermodynamical system would be challenging too.
-If we turned every single atom in the universe into a supercomputer, and let them count configurations
-from the Big Bang until today, they wouldn't even scratch the first decimal place of $2^{10^{61}}$.
-
-If time is a random walk through these configurations, a time resolution of $n \ln(n)$ where $n = 10^{61}$ gives:
-
-\[
-\text{time\_resolution} = 10^{61} \times \ln(10^{61}) \approx 1.4 \times 10^{62} \text{ Planck times}
-\]
-
-Because $10^{61}$ bits creates an absolutely vast spatial resolution ($2^{10^{61}}$), the
-denominator ($n \ln(n)$) acts as an incredibly tight brake on the system.
-The ratio between them—the "speed" or aspect ratio—becomes an unfathomably large number.
 
 \subsection*{Reaching Full Equilibrium}
 
 In thermodynamics, a system with $n$ bits starting at zero entropy ($S=0$)
 maximizes its entropy when it has explored the configuration space uniformly.
 
-With $2^{(10^{61})}$ possible arrangements, a simple random walk of length $n \ln(n)$ means the
-universe has only explored a microscopic fraction of its total phase space.
-It implies that our current universe is still in the absolute infancy of its journey toward full equilibrium.
+With $2^184$ possible arrangements, a simple random walk of length $n \ln(n)$ means the
+universe is still in the absolute infancy of its journey toward full equilibrium.
 The "rush" toward heat death is barely even a single step into an unimaginably vast maze of states.
-
 
 
 

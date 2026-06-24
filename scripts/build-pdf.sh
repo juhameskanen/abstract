@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# June, 2026 DEPRECATED.
+# Replaced by the pure Makefile based build system, which is
+# much easier to understand by simple physicists
+
 # Configuration
 JSON_FILE="papers/papers.json"
 PDF_OUT_DIR="pdf-output"

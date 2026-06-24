@@ -24,6 +24,8 @@ FINAL_HTML  = index.html
 DIST_DIR    = dist
 TAR_FILE    = aup.tar.gz
 
+PACKAGES=$(FINAL_PDF)
+
 # 2. Define Phony Target Groups
 # Creates lists like: pdf-introduction pdf-foo ...
 PDF_TARGETS    := $(addprefix pdf-,$(PAPER_DIRS))
@@ -38,7 +40,7 @@ CLEAN_TARGETS  := $(addprefix clean-,$(PAPER_DIRS))
 all: pdf html
 pdf: $(PDF_TARGETS) $(FINAL_PDF)
 html: $(HTML_TARGETS) $(FINAL_HTML) package_html
-upload: $(UPLOAD_TARGETS)
+upload: $(UPLOAD_TARGETS) $(FINAL_PDF)
 clean: $(CLEAN_TARGETS) clean_root
 
 # --- Pattern Rules for Sub-Paper Execution ---
