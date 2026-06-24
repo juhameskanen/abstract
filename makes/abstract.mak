@@ -20,7 +20,7 @@ else
 endif
 # --------------------------------------------------------
 
-.PHONY: all clean purge $(DOCS) upload
+.PHONY: all clean purge $(DOCS) upload install
 
 all: $(ALL_TARGETS)
 	@echo "All documents successfully compiled!"

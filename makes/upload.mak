@@ -14,7 +14,7 @@ upload:
 	done
 
 
-uploadpackages:
+install:
 	@echo "Starting explicit file upload..."
 	@for doc in $(PACKAGES); do \
 		echo "Uploading $$doc to $(REMOTE_DIR)..."; \

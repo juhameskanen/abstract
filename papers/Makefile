@@ -12,6 +12,8 @@ PAPERS_LIST := \
 	real-theory-of-everything:Real_Theory_of_Everything
 
 
+REMOTE_DIR := meskanen/abstract
+
 # Extract just the slugs/directories for target mapping
 PAPER_DIRS := $(foreach p,$(PAPERS_LIST),$(word 1,$(subst :, ,$p)))
 
@@ -24,7 +26,8 @@ FINAL_HTML  = index.html
 DIST_DIR    = dist
 TAR_FILE    = aup.tar.gz
 
-PACKAGES=$(FINAL_PDF)
+# packages to be installed (uploaded)
+PACKAGES=$(FINAL_PDF) $(TAR_FILE)
 
 # 2. Define Phony Target Groups
 # Creates lists like: pdf-introduction pdf-foo ...
@@ -40,8 +43,11 @@ CLEAN_TARGETS  := $(addprefix clean-,$(PAPER_DIRS))
 all: pdf html
 pdf: $(PDF_TARGETS) $(FINAL_PDF)
 html: $(HTML_TARGETS) $(FINAL_HTML) package_html
-upload: $(UPLOAD_TARGETS) $(FINAL_PDF)
+upload: $(UPLOAD_TARGETS)
 clean: $(CLEAN_TARGETS) clean_root
+
+include ../makes/upload.mak
+
 
 # --- Pattern Rules for Sub-Paper Execution ---
 # These dynamically match "pdf-slug" or "html-slug", switch into that dir, and run Make.
@@ -67,8 +73,6 @@ $(CLEAN_TARGETS): clean-%:
 $(FINAL_PDF): $(FINAL_TEX)
 	@latexmk -pdf -quiet -interaction=nonstopmode \
 	    -pdflatex="pdflatex %O '$(PROF_MACRO)\input{%S}'" $(FINAL_TEX)
-
-
 
 
 $(FINAL_TEX): $(HEADER_TEX) $(FOOTER_TEX)
