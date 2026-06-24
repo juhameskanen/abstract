@@ -7,6 +7,7 @@ PAPERS_LIST := \
 	geometry-of-spacetime:The_Geometry_of_Spacetime_as_an_Information-Theoretic_Structure \
 	emergence-of-gr:Space-time_Curvature_as_an_Information-Theoretic_Structure \
 	wavefunction-as-compression:Wavefunction_as_Compression \
+	emergence-of-qm:Emergence_of_Particles:Fermions_Bosons_and_Pauli_Exclusion \
 	informational-action:Classical_Geodesics_as_Minimal-Spectral-Complexity_Trajectories_in_Informational_Space \
 	cosmological-model:Inflation,_Cosmological_and_Hubble_Constants \
 	real-theory-of-everything:Real_Theory_of_Everything

@@ -1,0 +1,227 @@
+\documentclass[11pt]{article}
+\input{../../preamble.tex}
+\input{../../paper_preamble.tex}
+\addbibresource{../references.bib}
+
+\title{Emergence of Quantum Mechanics: Fermions, Bosons and Pauli Exclusion}
+\author{Juha Meskanen}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Papers~V \cite{meskanen2026v} established that Quantum Mechanical wavefunction
+  is the compression codec.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+Bosons don't exist as fundamental objects. They are explanatory fictions — the story we tell
+about why fermions (pixels) move the way they do, when we don't know
+they're being sampled from a wavefunction.
+
+The actual causal chain is:
+
+\[
+\text{wavefunction (codec)} \xrightarrow{\text{Born rule sampling}} \text{fermion configurations (pixel frames)}
+\]
+
+But an observer who only sees the pixel outputs, not the codec, invents a story:
+
+\[
+\text{fermion} \xrightarrow{\text{"virtual boson exchange"}} \text{fermion}
+\]
+
+The boson is the compression residual made into a noun.
+It's not wrong — it's a valid effective description — but it's not fundamental.
+
+The analogy is exact: In MPEG, macroblocks don't "exchange" anything.
+The DCT coefficients just are what they are.
+But if one only watched the decoded pixels and tried to explain their correlations
+without knowing about DCT, one would invent something that looks exactly like boson exchange.
+
+
+
+% ============================================================
+\section{Setup}
+\label{sec:setup}
+
+We take a sequence of pixel frames. We compress them with $\psi$.
+We hypothetize that the off-diagonal residuals — the "bosons" — reproduce the correct correlation structure
+between fermion positions, without any interaction term being put in by hand.
+
+
+\section{2x2 Minimal Video}
+
+TODO
+
+The minimum complexity states ($C_s = 0$) — uniform frames, all pixels same —
+already carry maximum boson signal $\sqrt{3}/2$. And crucially, videos $5 \rightarrow 10$ which
+are checkerboard patterns flipping to their inverse, also hit $\sqrt{3}/2$ at $C_s = 3$.
+
+The vacuum configuration (uniform, zero information content) and the maximally
+anti-correlated configuration (checkerboard flip) produce identical boson signal.
+
+That's not trivial — it suggests the boson signal is tracking something topological about
+the pixel transition, not just the complexity.
+
+
+\section{Experiment 2:}
+
+Instead of just measuring the norm of the off-diagonal, we look at the structure of the
+off-diagonal matrix — specifically:
+\begin{itemize}
+\item Is it symmetric or antisymmetric? (spin-0 vs spin-1 candidate)
+\item Does it propagate? (is there a spatial pattern that shifts between frames?)
+\item Is it quantised? (does the signal come in discrete units?)
+\end{itemize}
+
+
+
+\subsection*{The key result — video (1,2):}
+
+A single fermion hops from site 0 to site 1. The boson matrix is purely antisymmetric — not approximately,
+exactly. Its eigenvalues are $\pm 0.5$, symmetric about zero.
+And the forward hop $(1,2)$ and reverse hop $(2,1)$ produce identical boson structure
+with opposite momentum $k = \pm 0.157$.
+
+That is exactly what one would expect from a particle/antiparticle pair.
+
+\textbf{The block hop (3,12):}
+
+Two fermions move together $[1100] \rightarrow [0011]$. The boson has momentum $k = 2\pi/10$ —
+a longer wavelength, lower energy mediator carrying two fermions.
+Different particle, different $k$.
+
+What this seems to demonstate: the boson isn't just a correlation residual in the abstract. It has:
+\begin{itemize}
+\item Definite antisymmetry — fermionic exchange signature built in
+\item Definite momentum — propagation direction from the hop direction  
+\item Particle/antiparticle pairing — forward and reverse hops are related by $k \rightarrow -k$
+\end{itemize}
+
+All from the codec structure alone. No interaction term put in by hand.
+
+The claim: the compression residual of a single fermion hop is a purely antisymmetric,
+propagating, quantised object with opposite momentum for the reverse process.
+That looks like a photon.
+
+\section{Experiment 3: More Complex Videos}
+
+We scale the video up — longer chains, more frames — to see if the momentum
+quantisation follows $k = 2\pi n / L$?
+
+\subsection*{The key result — analytically exact:}
+
+For any single fermion hop $0 \rightarrow d$, regardless of $L$ or $d$:
+
+\[
+\psi = \frac{1}{\sqrt{2}}(e_0 + i \cdot e_d)
+\]
+
+The boson matrix has exactly two non-zero entries:
+
+\[
+B_{0,d} = +\frac{i}{2}, \quad B_{d,0} = -\frac{i}{2}
+\]
+
+Always purely antisymmetric. Always eigenvalues $\pm\frac{1}{2}$. Always.
+
+And the phase of $B_{0,d}$ is always $-\pi/2$, so:
+
+\[
+k \cdot d = -\frac{\pi}{2} \quad \Rightarrow \quad k = -\frac{\pi}{2d}
+\]
+
+This isn't a momentum in the plane-wave sense — it's a phase relationship between the two fermion sites.
+The boson encodes exactly one number: the $\pi/2$ phase shift between where the fermion was and where it went.
+
+Physically the boson is a quarter-turn in phase space. That's a propagator. That's exactly what a photon does in QED.
+
+The real structure is $\pi/2$ invariant.
+
+The compression residual of a single fermion hop is an antisymmetric, purely imaginary,
+$\pm\frac{1}{2}$-eigenvalued object carrying a universal $\pi/2$ phase — independent
+of chain length and hop distance.
+
+
+\section{Experiment 4}
+
+We check whether two-fermion hops break this universality, and whether that breaking has physical meaning.
+
+\subsection*{Result 1: Universality of Phase}
+
+The $\pi/2$ phase is universal for single hops — and partially survives in two-fermion hops.
+
+Every two-fermion boson matrix contains entries with phase $-\pi/2$.
+But it also acquires new phases: $0$ and $+\pi/2$.
+The boson matrix for two fermions is a superposition of single-hop bosons — one per fermion pair.
+The $-\pi/2$ entries are the individual hops. The $0$ and $+\pi/2$ entries are the inter-fermion correlations
+— the part that has no single-particle analogue.
+
+\subsection*{Result 2: Path Independence}
+
+Crossing is indistinguishable from non-crossing.
+Fermions passing through each other produce the identical boson matrix as
+fermions going the same direction.
+The codec doesn't care about trajectory — only about initial and final pixel configurations.
+This is path independence falling out for free.
+
+
+\subsection*{Result 3: Pauli Exclusion}
+
+The Pauli test is the most striking result:
+
+\begin{itemize}
+
+\item Two fermions at the same site: $\|\psi\| = \sqrt{2}$, boson matrix is exactly zero.
+  No compression residual. No boson.
+  The wavefunction is real-valued and uniform — the codec has nothing to encode.
+  Double occupancy is not forbidden by a rule — it produces no boson, meaning it's
+  invisible to the codec. It simply doesn't compress.
+
+\item Two fermions hopping to the same site: boson matrix is non-zero but the phases
+  break the $\pi/2$ universality.
+  The codec is struggling — it's trying to describe something the pixel model can't cleanly represent.
+
+\end{itemize}
+
+Single-fermion hops $\rightarrow$ universal $-\pi/2$ boson (the photon).
+
+Double occupancy $\rightarrow$ zero boson (Pauli exclusion = zero compressibility).
+
+Multi-fermion hops $\rightarrow$ superposition of single bosons + interaction residuals.
+
+Pauli exclusion isn't a postulate — it's the statement that double occupancy has zero compression residual,
+making it informationally invisible.
+
+
+
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+
+% ============================================================
+\section{Future Work}
+\label{sec:future}
+
+
+
+% ============================================================
+\section*{Supplementary Material}
+\label{sec:supplementary}
+
+
+
+\printbibliography
+
+\end{document}

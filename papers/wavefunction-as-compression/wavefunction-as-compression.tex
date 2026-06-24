@@ -144,6 +144,37 @@ require a proof from the spectral complexity axioms alone. It is offered
 as a motivation: the Born rule is what optimal compression looks like when
 a continuous description meets a discrete measurement.
 
+
+\subsection{Fermions, Bosons and Pauli Exclusion}
+
+Fermions play the role of pixels - real particles, sampled from the wavefunction through Born rule.
+
+Bosons don't exist as fundamental objects. They are explanatory fictions — the story we tell about
+why fermions (pixels) move the way they do, when we don't know they're being sampled from a wavefunction.
+
+The actual causal chain is:
+
+\[
+\text{wavefunction (codec)} \xrightarrow{\text{Born rule sampling}} \text{fermion configurations (pixel frames)}
+\]
+
+But an observer who only sees the pixel outputs, not the codec, invents a story:
+
+\[
+\text{fermion} \xrightarrow{\text{"virtual boson exchange"}} \text{fermion}
+\]
+
+The boson is the compression residual made into a noun. It's not wrong — it's a valid effective description —
+but it's not fundamental.
+
+The analogy is exact: in MPEG, macroblocks don't "exchange" anything.
+The DCT coefficients just are what they are. But if one only watched the decoded pixels
+and tried to explain their correlations without knowing about DCT, one would invent something
+that looks exactly like boson exchange.
+
+This explains natively why fermions suffer from Pauli exclusion whereas bosons not.
+
+
 % ============================================================
 \section{Spectral Complexity}
 \label{sec:spectral}
