@@ -25,7 +25,7 @@ dimensionless \emph{aspect ratio} $\mathcal{A}(n) = 2^n / (n \ln n)$ that
 encodes the complete geometric structure of spacetime from $n$ alone.
 Calibrating $\mathcal{A}$ against the inflationary expansion of the early
 universe, expressed in Planck units, yields $n \approx 184$ bits --- from which
-the number of e-folds per dimension falls to approximately 60, consistent with
+the number of e-folds exceeding 60, consistent with
 the independently derived lower bound from standard inflationary cosmology.
 Extending the framework to black holes by identifying
 $n_{\mathrm{bh}} = \log_2(r_s / \ell_P)$, where $r_s$ is the Schwarzschild radius, we recover the
@@ -263,14 +263,9 @@ The value $n \approx 184$ bits, derived entirely from the aspect ratio
 calibration with no reference to e-fold counts, corresponds to
 $n / \ln_2 e \approx 184 \times \ln 2 \approx 127$ natural-log units.
 Distributing across the three spatial dimensions implied by the radial metric
-encoding gives approximately $127 / 3 \approx 42$ e-folds per dimension,
-which is consistent with the independently derived lower bound of 60 total
+encoding gives approximately  e-folds 127,
+which is consistent with the independently derived lower bound.of 60 total
 e-folds when one accounts for the directional distribution.
-
-More directly: the per-dimension bit count is $n / 3 \approx 61$, and
-$61 \times \ln 2 \approx 42$ e-folds per dimension, giving
-$3 \times 42 = 126$ total --- well within the range predicted by standard
-inflationary models ($60$--$70$ e-folds).
 
 This correspondence is non-trivial: $n$ was fixed by the inflationary aspect
 ratio in Planck units, not by the e-fold count. The e-fold correspondence
@@ -445,6 +440,13 @@ These results support the view developed in Papers~I,II and III that spacetime
 geometry is not a primitive structure but a representation of underlying
 information. The bit count $n$ is not merely a parameter of the model; it is
 the model.
+
+
+\section{Simulation Code}
+
+Simulation code, with inline documentation can be found in:
+
+black\_hole\_calculator.py
 
 \printbibliography
 
