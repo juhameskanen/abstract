@@ -30,7 +30,7 @@ jobs:
 
       - name: Run HTML Build via Makefile
         run: |
-          make
+          make html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
