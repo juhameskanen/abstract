@@ -1,9 +1,8 @@
 name: Build and Deploy HTML (GitHub Pages)
 
 on:
-  workflow_run:
-    workflows: ["Build and Upload PDFs"]
-    types: [completed]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -14,8 +13,6 @@ permissions:
 jobs:
   build-html:
     runs-on: ubuntu-latest
-    # Only run if the PDF build succeeded or if triggered manually
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
 
@@ -26,11 +23,14 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc jq
+          sudo apt-get install -y \
+            pandoc jq \
+            texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-extra-utils
 
       - name: Run HTML Build via Makefile
         run: |
-          make html
+          make
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
