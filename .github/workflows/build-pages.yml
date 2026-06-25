@@ -27,7 +27,8 @@ jobs:
             pandoc jq \
             texlive-latex-recommended texlive-latex-extra \
             texlive-fonts-recommended texlive-extra-utils \
-            texlive-science
+            texlive-science \
+            texlive-bibtex-extra biber
 
       - name: Run HTML Build via Makefile
         run: |
