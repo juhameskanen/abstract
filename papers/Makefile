@@ -127,3 +127,4 @@ package_html:
 clean_root:
 	rm -f body.tex $(FINAL_TEX) $(FINAL_PDF) body.html $(FINAL_HTML) $(TAR_FILE)
 	rm -rf $(DIST_DIR)
+	rm aup.*
