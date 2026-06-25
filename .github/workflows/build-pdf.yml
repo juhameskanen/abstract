@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Build via Makefile
         run: |
-          make
+          make pdf
 
       - name: Upload All PDFs
         uses: actions/upload-artifact@v4
