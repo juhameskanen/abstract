@@ -26,7 +26,8 @@ jobs:
           sudo apt-get install -y \
             pandoc jq \
             texlive-latex-recommended texlive-latex-extra \
-            texlive-fonts-recommended texlive-extra-utils
+            texlive-fonts-recommended texlive-extra-utils \
+            texlive-science
 
       - name: Run HTML Build via Makefile
         run: |
