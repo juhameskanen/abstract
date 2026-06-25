@@ -28,23 +28,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc jq
 
-      - name: Download all PDF Artifacts
-        uses: dawidd6/action-download-artifact@v3
-        with:
-          workflow: build-pdf.yml
-          run_id: ${{ github.event.workflow_run.id }}
-          path: all-pdfs
-          search_artifacts: true
-
-      - name: Run HTML Build Script
+      - name: Run HTML Build via Makefile
         run: |
-          chmod +x scripts/build-pages.sh
-          ./scripts/build-pages.sh
+          make
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: html
+          path: papers/dist
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4

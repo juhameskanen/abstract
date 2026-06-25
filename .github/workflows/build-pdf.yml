@@ -20,14 +20,13 @@ jobs:
             texlive-bibtex-extra biber latexmk lmodern \
             ghostscript jq
 
-      - name: Run PDF Build Script
+      - name: Run Build via Makefile
         run: |
-          chmod +x scripts/build-pdf.sh
-          ./scripts/build-pdf.sh
+          make
 
       - name: Upload All PDFs
         uses: actions/upload-artifact@v4
         with:
           name: all-pdfs
-          path: pdf-output/*.pdf
+          path: papers/*.pdf
           retention-days: 1
