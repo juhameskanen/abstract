@@ -16,11 +16,22 @@ upload:
 
 install:
 	@echo "Starting explicit file upload..."
-	@for doc in $(PACKAGES); do \
+	@for doc in $(HTML_PACKAGES); do \
 		echo "Uploading $$doc to $(REMOTE_DIR)..."; \
 		curl -s -F "filename=@$$doc" \
 		        -F "folder=$(REMOTE_DIR)" \
 		        -F "overwrite=1" \
+		        -F "unzip=1" \
+		        -F "from=$(USER_EMAIL)" \
+		        -F "submit=Upload" \
+		        $(UPLOAD_URL) | grep -E "Error|succesfully" || true; \
+	done
+	@for doc in $(PDF_PACKAGES); do \
+		echo "Uploading $$doc to $(REMOTE_DIR)..."; \
+		curl -s -F "filename=@$$doc" \
+		        -F "folder=$(REMOTE_DIR)" \
+		        -F "overwrite=1" \
+		        -F "unzip=0" \
 		        -F "from=$(USER_EMAIL)" \
 		        -F "submit=Upload" \
 		        $(UPLOAD_URL) | grep -E "Error|succesfully" || true; \

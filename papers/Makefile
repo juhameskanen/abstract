@@ -1,18 +1,24 @@
 
+# List of papers and their titles.
+# The reason for dir:title split is the Latex ecosystem incapable to compose a set of papers
+# from stand-alone papers. 
+
 PAPERS_LIST := \
 	introduction:Introduction \
 	informational-derivation-of-reality:The_Axiomatic_Foundations_of_Reality \
-	black-hole-singularities:Black_Hole_Singularities \
+	black-hole-singularities:Black_Hole_Singularities_as_Zero_Entropy_States \
 	emergence-of-spacetime:Emergent_Spacetime_Structures_from_Zero-Entropy_Initial_States \
 	geometry-of-spacetime:The_Geometry_of_Spacetime_as_an_Information-Theoretic_Structure \
 	emergence-of-gr:Space-time_Curvature_as_an_Information-Theoretic_Structure \
 	wavefunction-as-compression:Wavefunction_as_Compression \
-	emergence-of-qm:Emergence_of_Particles:Fermions_Bosons_and_Pauli_Exclusion \
+	emergence-of-qm:Emergence_of_Quantum_Mechanics,_Fermions_Bosons_and_Pauli_Exclusion \
+	unification-of-gr-qm:Emergence_of_General_Relativity,_Geodesics,_Curvature,_and_Gravitational_Waves_as_Compression_Residuals \
 	informational-action:Classical_Geodesics_as_Minimal-Spectral-Complexity_Trajectories_in_Informational_Space \
 	cosmological-model:Inflation,_Cosmological_and_Hubble_Constants \
-	real-theory-of-everything:Real_Theory_of_Everything
+	real-theory-of-everything:Real_Theory_of_Everything_TODO
 
 
+# install directory
 REMOTE_DIR := meskanen/abstract
 
 # Extract just the slugs/directories for target mapping
@@ -28,7 +34,8 @@ DIST_DIR    = dist
 TAR_FILE    = aup.tar.gz
 
 # packages to be installed (uploaded)
-PACKAGES=$(FINAL_PDF) $(TAR_FILE)
+HTML_PACKAGES=$(TAR_FILE)
+PDF_PACKAGES=$(FINAL_PDF)
 
 # 2. Define Phony Target Groups
 # Creates lists like: pdf-introduction pdf-foo ...
