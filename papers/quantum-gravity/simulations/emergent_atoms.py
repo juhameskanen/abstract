@@ -1,29 +1,29 @@
 """
 Emergent atom simulation
 
-This script imports QBitwave to replace parametric wavefunctions with 
+This script imports wavefunction to replace parametric wavefunctions with 
 bit-substrate emergent wavefunctions.
 """
 
 import numpy as np
 import argparse
 from typing import List, Tuple, Optional, Any
-from qbitwave import QBitwave
+from wavefunction import Wavefunction
 from simulation_engine import GravitySim
 
 # --- The Bridge: Mapping Bits to Space ---
 
-class QBitwaveAdapter:
+class WavefunctionAdapter:
     """
-    Adapts the discrete QBitwave bit-substrate to a 2D spatial interface.
+    Adapts the discrete Wavefunction bit-substrate to a 2D spatial interface.
     This allows the simulation to treat a bitstring as a physical wave.
     """
     def __init__(self, center: np.ndarray, sigma: float, bit_length: int = 512):
         self.center = np.array(center, dtype=float)
         self.sigma = sigma
-        # Initialize QBitwave with a random bitstring
+        # Initialize Wavefunction with a random bitstring
         initial_bits = [np.random.randint(0, 2) for _ in range(bit_length)]
-        self.qbit = QBitwave(bitstring=initial_bits, fixed_basis_size=8)
+        self.qbit = Wavefunction(bitstring=initial_bits, fixed_basis_size=8)
         
     def evaluate(self, points: np.ndarray, t: float) -> np.ndarray:
         """Maps spatial coordinates to bit-indices to return complex amplitudes."""
@@ -59,8 +59,8 @@ class EmergentGravitySim(GravitySim):
         self.t = 0.0
         
         # Observers now 'carry' a bitstring-based wavefunction
-        self.wavefunctions: List[QBitwaveAdapter] = [
-            QBitwaveAdapter(pos, blob_sigma) for pos in self.positions
+        self.wavefunctions: List[WavefunctionAdapter] = [
+            WavefunctionAdapter(pos, blob_sigma) for pos in self.positions
         ]
 
     def compute_pdf(self, grid_points: np.ndarray) -> np.ndarray:

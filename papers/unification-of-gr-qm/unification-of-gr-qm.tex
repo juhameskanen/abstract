@@ -322,15 +322,15 @@ the point-source singularity already present in classical field theory):
 \[
   V(R) = -\frac{\|W_M\|\cdot\|W_m\|}{4\pi R}.
 \]
-With $\|W_M\| = M/\sqrt{2}$ and $\|W_m\| = m/\sqrt{2}$ (each mass
-contributes $1/\sqrt{2}$ per Planck unit of $n_\text{bh}$):
+With $\|W_M\| = M/\sqrt{2}$ and $\|W_m\| = m/\sqrt{2}$
+(each mass contributes $1/\sqrt{2}$ per Planck unit of $n_{\text{bh}}$):
 \[
   V(R) = -\frac{M\,m}{8\pi\,R},
 \]
 giving $G = 1/(8\pi)$ in Planck units.
 Numerical verification confirms $A(r)\cdot r = 1/(2\sqrt{2\pi})$ is
 constant to machine precision across all $r$, and the force law
-$F = -\mathrm{d}V/\mathrm{d}R \propto 1/R^2$ holds exactly.
+$F = -\frac{\mathrm{d}V}{\mathrm{d}R} \propto 1/R^2$ holds exactly.
 \end{proof}
  
 \subsection*{The $4\pi$ factor and consistency with Paper~IV}
@@ -353,7 +353,7 @@ The force law $F(r) \propto 1/r^2$ follows analytically from $V(r) \propto 1/r$.
 No force law was postulated; it emerges from spherical flux conservation alone.
  
 %------------------------------------------------------------
-\section{$G$ as a Consistency Condition}
+\section{G as a Consistency Condition}
 \label{sec:G}
  
 Standard physics treats $G$ as a dimensionful coupling constant measured by
@@ -404,7 +404,49 @@ The unification is not a postulate.
 It is the observation that quantum mechanics and general relativity are both
 descriptions of the same density matrix decomposition applied to different
 degrees of freedom, in a universe of $n$ bits.
- 
+
+
+\subsection{Why We Inevitably Find Ourselves in an Expanding Universe}
+
+The lognormal matter abundance established in Paper~III is not the complete probability
+measure over observer configurations. It is only one factor. The complete measure is:
+
+\[
+P(\text{observer at } t) \;\propto\; \underbrace{2^{-C_s(t)}}_{\text{Solomonoff weight}} \;\times\; \underbrace{|\mathcal{E}(t)|}_{\text{equivalence class size}}
+\]
+
+where $C_s(t)$ is the spectral complexity of the configuration at time $t$, and $|\mathcal{E}(t)|$ is the number of distinct bitstring arrangements that realise the same observer — the same internal structure, the same Alice.
+
+The Solomonoff weight alone would place every observer at the singularity: $C_s = 0$, weight $= 1$, maximum probability.
+But the singularity supports no observer, because zero entropy means no internal distinctions, no equivalence class, no structure.
+
+The equivalence class size $|\mathcal{E}(t)|$ is the lognormal of this paper: it peaks on the rising side of the entropy curve,
+where structures are abundant and complex enough to support an internal observer.
+
+Crucially, however, the singularity also dominates the equivalence class measure.
+The zero-entropy state can be realised in $2^n$ ways — every bitstring maps to it under the zero-entropy equivalence relation,
+because all zero-entropy states are identical.
+Any more complex structure is exponentially suppressed in the number of realisations:
+
+\[
+|\mathcal{E}(\text{singularity})| = 2^n, \qquad
+|\mathcal{E}(\text{complex structure})| \ll 2^n.
+\]
+
+The combined measure at the singularity is therefore $2^{-0} \times 2^n = 2^n$ --- enormous,
+but entirely observer-free.
+The first configuration on the rising side of the lognormal that supports an observer of sufficient complexity is where we inevitably find ourselves.
+
+The rising side of the lognormal is, by definition, an expanding universe:
+entropy is increasing, structures are forming, free fabric is being consumed.
+The falling side — where structures dissolve and the probability gradient points back toward the singularity — is the interior of a black hole.
+A black hole and the observable universe are the same $2^n$ configurations,
+traversed from opposite sides of the lognormal peak.
+
+We inevitably find ourselves from an expanding universe.
+
+
+
 \subsection{What is not yet shown}
  
 The present results are exact at the level of toy models: discrete sites,
@@ -476,8 +518,8 @@ a sphere.
 \section{Future Work}
 \label{sec:future}
  
-\subsection{Derivation of $\|W\| \propto M$}
- 
+\subsection{Derivation of \texorpdfstring{$\|W\| \propto M$}{|W| proportional to M}}
+
 Theorem~4 assumes that the graviton amplitude of a mass $M$ scales as $M$.
 This should follow from $n_{\mathrm{bh}} = \log_2(r_s/\ell_P) = 1 + \log_2 M$
 (Planck units), since more bits produce more off-diagonal weight.
@@ -533,5 +575,5 @@ Python experiments:
 \end{itemize}
  
 \printbibliography
- 
+
 \end{document}

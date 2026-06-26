@@ -442,6 +442,10 @@ and what remains open.
         bound bit structures (Paper~V).
   \item The proportionality $\|W\| \propto M$ needed to make
         Theorem~4 of Paper~VIII fully self-contained.
+  \item The correct topology: why the boundary is a 3-sphere rather than some other manifold?
+        The minimum-complexity compact boundaryless 2-boundary in 3D Euclidean space is $S^2$,
+        with surface area $4\pi r^2$. Under Solomonoff induction, all other topologies are exponentially suppressed.
+        The factor $4\pi$ is therefore not a free parameter but a topological selection result.
 \end{itemize}
 
 \paragraph{Open.}
@@ -456,8 +460,6 @@ and what remains open.
         from the spectral cost $C_\psi$ in physical units.
   \item Massive bosons ($W$, $Z$, Higgs) and the gauge structure of
         the Standard Model.
-  \item The correct topology: why the boundary is a 3-sphere rather
-        than some other manifold.
 \end{itemize}
 
 % ============================================================
@@ -546,6 +548,16 @@ model (fermions as pixels, bosons as compression residuals) and derives
 the quantum formalism from it, but does not yet have a proof that the
 model forces the full Hilbert space structure.
 
+
+\subsection{Is the Zero-Parameter Goal Realistic?}
+
+I initially tried to set the first principle of the framework as assume nothing,
+which was itself an assumption.
+Any axiomatic system — mathematics included — requires at least one assumption.
+The minimum may be just one parameter: the definition of the observer.
+Everything else could then follow from that.
+
+
 % ============================================================
 \section{Open Problems}
 \label{sec:open}
@@ -623,6 +635,13 @@ Whether this operation is itself a theorem of the organising
 equation~\eqref{eq:master}, or whether additional structure is needed,
 is the central unresolved question.
 The present paper is a progress report on the way to an answer.
+
+\section{Simulations}
+
+\begin{itemize}
+\item \texttt{emergent\_smoothness.py} - Minimal POC demonstrating the $G-\psi-D$ trinity. Not physics yet, but something smooth - emergent motion, inertia and interference.
+\end{itemize}
+
 
 \printbibliography
 

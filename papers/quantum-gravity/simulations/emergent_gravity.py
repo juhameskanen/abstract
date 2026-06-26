@@ -1,395 +1,335 @@
 """
-Wavefunction-Based Gravity Simulation with Inertia
-==================================================
+emergent_gravity.py
+===================
+Minimal POC demonstrating the G-ψ-D trinity.
 
-This module implements a 2D simulation demonstrating the emergence of gravity, inertia and quantum mechanics from informational compression.
+  G — Gravity-like attraction emerges from overlapping Gaussian
+      probability distributions. No force law is postulated.
+      Observers cluster because the joint PDF |Σψ_i|² has higher
+      density between observers, so Born-rule sampled particles
+      accumulate there, making smooth trajectories toward neighbours
+      naturally lower-cost than trajectories away.
 
-Core Idea:
-----------
-The central hypothesis is that physical laws are emergent artifacts of
-informational compression and observer filter. Observers are modeled as compressed informational
-structures: the more compressible an observer's trajectory, the more copies
-of that observer exist in the underlying informational substrate, and the
-higher the probability that such an observer will be realized. Since smooth,
-predictable motion compresses best, observers overwhelmingly find themselves
-in worlds with smooth, law-like physics.
+  ψ — Each observer is a complex-valued wavefunction. Its Gaussian
+      envelope defines the spatial probability density. Particles
+      are Born-rule samples from the joint |ψ_total|². The observer
+      phase is the natural frequency ω₀ = 2π/T of the trajectory
+      wavefunction — the minimum-complexity closed worldline frequency
+      from Theorem 1. No free parameter.
 
-Simulation Mapping:
--------------------
-- **Random Noise Substrate**: Represented by resampled particle positions,
-  drawn each step from a probability density formed by interference of all
-  observer wavefunctions.
-
-- **Observers as Compressed Structures**: Each observer is modeled as a
-  parametric Gaussian-shell wavefunction (`Wavefunction`) plus an associated
-  Gaussian filter (`ObserverWindow`).
-
-- **Filtering**: Observer windows weight local particles, producing smooth
-  soft-assignment of particles to observers.
-
-- **Compression Principle (MDL)**: Candidate trajectories for each observer
-  are evaluated with a *compressibility cost function* in phase-frequency
-  space. Small changes in velocity are cheaper (more compressible) than large,
-  erratic deviations.
-
-- **Emergent Inertia**: By always selecting the lowest-cost (most compressible)
-  candidate, observers naturally follow smooth, continuous paths. Inertia thus
-  arises as an informationally optimal bias, not a fundamental law.
-
-- **Emergent Quantum Mechanics**: Particles follow determinstic wavefunction, 
-  QM natively emerges reflecting the complex wavefunction compression.
-
-Usage:
-------
-Run directly from the command line:
-
-    python quantum_gravity.py --particles 8192 --steps 400 --sigma 0.12
-
-This produces a dynamic visualization where initially random observers evolve
-into smooth, inertial trajectories under the informational compression rule.
-
-Relation to Theory:
--------------------
-This code serves as a proof-of-concept for the paper's claim that inertia and
-predictable physical laws emerge from the dominance of compressed observer
-histories. The simulation operationalizes the **Compression-Existence
-Principle**: compression → multiplicity → probability → predictability.
+  D — Inertia from spectral complexity. The observer's trajectory
+      is encoded as a complex worldline ψ_traj(t) = x(t) + i·y(t).
+      At each step, N candidates are drawn from the Born-rule distributed 
+      local particles. The candidate minimising C_s of the extended 
+      trajectory is chosen. Smooth paths win purely because they are 
+      more probable, they have lower C_s and therefore higher Solomonoff
+      weight 2^{-C_s}.
 """
 
-import numpy as np
-from typing import List, Tuple
 import argparse
+import numpy as np
 import matplotlib.pyplot as plt
-from scipy.stats import multivariate_normal
-from simulation_engine import GravitySim
+import matplotlib.animation as animation
+from matplotlib.gridspec import GridSpec
+from typing import List, Optional
+import sys
+sys.path.insert(0, '/home/claude')
+from wavefunction import Wavefunction
 
 
+# ── Observer ──────────────────────────────────────────────────────────────────
 
-class GaussianBlobObserver:
-    """Parametric (2D) wavefunction: soft disk / Gaussian shell + phase/time dependence, for representing an observer"""
-    def __init__(
-        self,
-        center: np.ndarray,
-        radius: float = 0.08,
-        sigma: float = 0.03,
-        amplitude: float = 1.0,
-        omega: float = 0.0,
-        phase: float = 0.0,
-    ):
-        self.center = np.array(center, dtype=float)
-        self.radius = float(radius)
-        self.sigma = float(sigma)
-        self.amplitude = float(amplitude)
-        self.omega = float(omega)
-        self.phase = float(phase)
+class Observer:
+    """
+    A single observer: a Gaussian blob with a complex-valued spatial
+    wavefunction and a trajectory wavefunction for inertia.
+    """
 
-    def evaluate(self, points: np.ndarray, t: float) -> np.ndarray:
-        """
-        Evaluate complex psi at given points (N x 2). Returns complex array length N.
-        Default shape: Gaussian shell around radius.
-        """
-        # radial distance
-        r = np.linalg.norm(points - self.center, axis=1)
-        # gaussian shell amplitude envelope
-        env = np.exp(-((r - self.radius) ** 2) / (2 * self.sigma ** 2))
-        # optional smoothstep version commented; env is smooth enough
-        psi = self.amplitude * env * np.exp(-1j * (self.omega * t - self.phase))
-        return psi
+    TRAJ_LEN = 16   # number of past positions kept for C_s computation
 
-    def copy(self):
-        return GaussianBlobObserver(self.center.copy(), self.radius, self.sigma, self.amplitude, self.omega, self.phase)
+    def __init__(self, pos: np.ndarray, sigma: float, phase: float = 0.0):
+        self.pos    = np.array(pos, dtype=float)
+        self.sigma  = sigma
+        self.phase  = phase
+        self.traj: List[complex] = [complex(pos[0], pos[1])]
 
+    def spatial_amplitude(self, points: np.ndarray) -> np.ndarray:
+        r2 = np.sum((points - self.pos) ** 2, axis=1)
+        return np.exp(-r2 / (2.0 * self.sigma ** 2)) * np.exp(1j * self.phase)
 
-class ObserverWindow:
-    """A Gaussian 'observer' filter centered at same center as wavefunction (shape-preserving)."""
-    def __init__(self, center: np.ndarray, sigma: float):
-        self.center = np.array(center, dtype=float)
-        self.sigma = float(sigma)
-
-    def evaluate(self, points: np.ndarray) -> np.ndarray:
-        r2 = np.sum((points - self.center) ** 2, axis=1)
-        return np.exp(-0.5 * r2 / (self.sigma ** 2))
-
-    def move_to(self, new_center: np.ndarray):
-        self.center = np.array(new_center, dtype=float)
-
-
-
-class EmergentGravitySim(GravitySim):
-
-    def __init__(
-        self,
-        n_particles: int = 4096,
-        n_steps: int = 200,
-        blob_sigma: float = 0.09,
-        n_candidates: int = 16,
-        initial_speed: float = 0.01,
-        eta_center: float = 0.15,
-        keep_width: bool = True,
-    ) -> None:
-        """
-        eta_center: small learning rate when updating centers from assigned particles
-        keep_width: if True, radius/sigma are kept fixed to preserve shape
-        """
-        super().__init__(n_particles=n_particles, n_steps=n_steps, blob_sigma=blob_sigma)
-        self.n_candidates = n_candidates
-        self.initial_speed = initial_speed
-        self.eta_center = eta_center
-        self.keep_width = keep_width
-
-        # Time for wavefunction time-evolution (keeps the same pace as steps)
-        self.t = 0.0
-        self.dt = 1.0  # step in "time" per simulation iteration (can be adjusted)
-
-        # Create parametric wavefunctions initialized from base positions
-        self.wavefunctions: List[GaussianBlobObserver] = []
-        for pos in self.positions:
-            # radius ~ blob_sigma scale (tweakable)
-            wf = GaussianBlobObserver(center=pos.copy(), radius=0.06, sigma=max(1e-3, self.blob_sigma * 0.8),
-                              amplitude=1.0, omega=0.0, phase=0.0)
-            self.wavefunctions.append(wf)
-
-        # Observer windows (Gaussian filters) used for soft assignment and shape preservation
-        self.observers: List[ObserverWindow] = [ObserverWindow(wf.center.copy(), self.blob_sigma) for wf in self.wavefunctions]
-
-        # Wavefunction memory: store list of (phase,freq) per blob (for inertia)
-        self.wavefunction_memory: List[List[Tuple[float, float]]] = [[] for _ in range(len(self.wavefunctions))]
-        # Initialize memory with tiny tangential velocities (phase/freq pairs)
-        self.initialize_memory()
-
-    # ----- memory helpers (phase/freq) -----
-
-    def velocity_to_phasefreq(self, velocity: np.ndarray) -> Tuple[float, float]:
-        angle = np.arctan2(velocity[1], velocity[0])
-        magnitude = float(np.linalg.norm(velocity))
-        return float(angle), float(magnitude)
-
-    def phasefreq_to_velocity(self, phase: float, freq: float) -> np.ndarray:
-        return np.array([freq * np.cos(phase), freq * np.sin(phase)], dtype=float)
-
-    def record_velocity(self, blob_idx: int, velocity: np.ndarray) -> None:
-        """Append (phase,freq) to memory (keeps memory growth)."""
-        phase, freq = self.velocity_to_phasefreq(velocity)
-        self.wavefunction_memory[blob_idx].append((phase, freq))
-
-    def get_velocity(self, blob_idx: int) -> np.ndarray:
-        mem = self.wavefunction_memory[blob_idx]
-        if not mem:
-            # default small tangential-like kick
-            return np.random.normal(scale=self.initial_speed, size=2)
-        phase, freq = mem[-1]
-        return self.phasefreq_to_velocity(phase, freq)
-
-    def initialize_memory(self):
-        """Seed memory with small tangential velocities relative to COM."""
-        com = self.positions.mean(axis=0)
-        for i, wf in enumerate(self.wavefunctions):
-            r_rel = wf.center - com
-            if np.linalg.norm(r_rel) < 1e-8:
-                v0 = np.random.normal(scale=self.initial_speed, size=2)
-            else:
-                v0 = self.initial_speed * np.array([-r_rel[1], r_rel[0]]) / np.linalg.norm(r_rel)
-            self.record_velocity(i, v0)
-
-    # ---- PDF / sampling ----
-
-    def compute_pdf(self, grid_points: np.ndarray) -> np.ndarray:
-        """
-        Override base method: compute pdf from sum of complex wavefunctions.
-        Returns normalized pdf (sums to 1).
-        """
-        psi_total = np.zeros(grid_points.shape[0], dtype=np.complex128)
-        for wf in self.wavefunctions:
-            psi_total += wf.evaluate(grid_points, self.t)
-        pdf = np.abs(psi_total) ** 2
-        # small floor then normalize to avoid degenerate zero arrays
-        pdf += 1e-20
-        pdf /= pdf.sum()
-        return pdf
-
-    # ---- soft assignment (observer windows) ----
-
-    def soft_assign_weights(self, particle_positions: np.ndarray) -> np.ndarray:
-        """
-        Compute soft assignment weights W: shape (n_blobs, n_particles)
-        w_i(x) ~ O_i(x) * |psi_i(x)|^2
-        normalized per particle so sum_i w_i = 1.
-        """
-        n = particle_positions.shape[0]
-        m = len(self.wavefunctions)
-        W = np.zeros((m, n), dtype=float)
-
-        # Evaluate |psi_i|^2 and observer at particle locations
-        for i, (wf, obs) in enumerate(zip(self.wavefunctions, self.observers)):
-            psi_i = wf.evaluate(particle_positions, self.t)
-            obs_vals = obs.evaluate(particle_positions)
-            # weight proportional to observer window times local |psi|^2
-            W[i, :] = obs_vals * (np.abs(psi_i) ** 2)
-
-        # normalize per particle
-        s = W.sum(axis=0, keepdims=True)
-        s[s <= 0] = 1.0  # avoid division by zero
-        W /= s
-        return W
-
-    # ---- update / M-step (cheap, stable) ----
-
-    def update_wavefunction_centers(self, particles: np.ndarray, W: np.ndarray) -> None:
-        """
-        Update each wavefunction's center with a small step toward the weighted mean
-        of the particles assigned by soft weights W (shape: n_blobs x n_particles).
-        """
-        n_blobs = len(self.wavefunctions)
-        # avoid moving too far in one iteration -> inertia-like behavior
-        for i in range(n_blobs):
-            weights = W[i]
-            tot = weights.sum()
-            if tot <= 0:
-                continue
-            mean = (weights[:, None] * particles).sum(axis=0) / tot
-            # small step toward mean
-            new_center = (1.0 - self.eta_center) * self.wavefunctions[i].center + self.eta_center * mean
-            self.wavefunctions[i].center = new_center
-            # also move observer window center to follow
-            self.observers[i].move_to(new_center)
-
-    # ---- candidate-selection & phase/velocity memory update (inertia) ----
-
-    def wavefunction_cost(self, blob_idx: int, candidate_velocity: np.ndarray) -> float:
-        """
-        Simple compressibility cost in phase/freq space (small change preferred).
-        Lower cost -> more compressible.
-        """
-        mem = self.wavefunction_memory[blob_idx]
-        if not mem:
+    def trajectory_cs(self) -> float:
+        if len(self.traj) < 4:
             return 0.0
-        last_phase, last_freq = mem[-1]
-        cand_phase, cand_freq = self.velocity_to_phasefreq(candidate_velocity)
-        # angular wrap
-        d_phase = np.mod(cand_phase - last_phase + np.pi, 2 * np.pi) - np.pi
-        d_freq = cand_freq - last_freq
-        return d_phase * d_phase + d_freq * d_freq
+        psi = np.array(self.traj, dtype=complex)
+        try:
+            wf = Wavefunction(psi, dx=1.0)
+            return wf.spectral_complexity()
+        except Exception:
+            return 0.0
 
-    def select_candidate_and_record(self, blob_idx: int, candidates: List[Tuple[np.ndarray, np.ndarray]], current_pos: np.ndarray) -> np.ndarray:
+    def solomonoff_weight(self) -> float:
+        return 2.0 ** (-self.trajectory_cs())
+
+    def candidate_cs(self, candidate: np.ndarray) -> float:
+        extended = self.traj + [complex(candidate[0], candidate[1])]
+        if len(extended) < 4:
+            return 0.0
+        psi = np.array(extended[-self.TRAJ_LEN:], dtype=complex)
+        try:
+            wf = Wavefunction(psi, dx=1.0)
+            return wf.spectral_complexity()
+        except Exception:
+            return float('inf')
+
+    def move_to(self, new_pos: np.ndarray) -> None:
+        self.pos = np.array(new_pos, dtype=float)
+        self.traj.append(complex(new_pos[0], new_pos[1]))
+        if len(self.traj) > self.TRAJ_LEN:
+            self.traj.pop(0)
+        T = len(self.traj)
+        self.phase = 2.0 * np.pi / T
+
+
+# ── Simulation ────────────────────────────────────────────────────────────────
+
+class EmergentGravitySim:
+    """
+    The G-ψ-D trinity simulation with particle-density-weighted proposals.
+    """
+
+    N_CANDIDATES = 64     # Part 2: Increased candidate pool to find tiny gradients
+    GRID_SIZE    = 80     # spatial grid resolution
+
+    def __init__(
+        self,
+        n_blobs:     int   = 3,
+        n_particles: int   = 4096,
+        n_steps:     int   = 200,
+        sigma:       float = 0.12,
+    ) -> None:
+        self.n_particles = n_particles
+        self.n_steps     = n_steps
+        self.sigma       = sigma
+
+        angles = np.linspace(0, 2 * np.pi, n_blobs, endpoint=False)
+        r      = 0.28
+        cx, cy = 0.5, 0.5
+        self.observers: List[Observer] = [
+            Observer(
+                pos   = np.array([cx + r * np.cos(a), cy + r * np.sin(a)]),
+                sigma = sigma,
+                phase = float(i) * 2 * np.pi / n_blobs,
+            )
+            for i, a in enumerate(angles)
+        ]
+
+        x = np.linspace(0, 1, self.GRID_SIZE)
+        y = np.linspace(0, 1, self.GRID_SIZE)
+        X, Y = np.meshgrid(x, y)
+        self.grid_points = np.column_stack([X.ravel(), Y.ravel()])
+        self.particles = self._resample()
+
+        self.step_idx:    List[int]   = []
+        self.distances:   List[float] = []
+        self.cs_vals:     List[float] = []
+        self.sw_vals:     List[float] = []
+        self._acc_pdf: Optional[np.ndarray] = None
+
+    def _joint_pdf(self) -> np.ndarray:
+        psi_total = np.zeros(self.grid_points.shape[0], dtype=complex)
+        for obs in self.observers:
+            psi_total += obs.spatial_amplitude(self.grid_points)
+        pdf = np.abs(psi_total) ** 2
+        s   = pdf.sum()
+        if s < 1e-30:
+            return np.ones(len(pdf)) / len(pdf)
+        return pdf / s
+
+    def _resample(self) -> np.ndarray:
+        pdf = self._joint_pdf()
+        idx = np.random.choice(len(self.grid_points), size=self.n_particles, p=pdf)
+        return self.grid_points[idx].copy()
+
+    def _assigned_particles(self, obs: Observer) -> np.ndarray:
+        dist = np.linalg.norm(self.particles - obs.pos, axis=1)
+        return self.particles[dist < 3.0 * obs.sigma]
+
+    def _best_next_pos(self, obs: Observer) -> np.ndarray:
         """
-        Given candidates (position, velocity), choose best by wavefunction_cost
-        and record the chosen velocity into memory. Return chosen position.
+        Choose the next position by generating candidates along directions matching 
+        local Born-rule sampled particle positions, utilizing a tight step size ε.
         """
-        best_cost = float("inf")
-        best_c = None
-        best_v = None
-        for c, v in candidates:
-            cost = self.wavefunction_cost(blob_idx, v)
-            if cost < best_cost:
-                best_cost, best_c, best_v = cost, c, v
-        if best_v is None:
-            best_v = np.random.normal(scale=1e-3, size=2)
-            best_c = current_pos + best_v
-        # record chosen velocity into memory
-        self.record_velocity(blob_idx, best_v)
-        return best_c
+        # Part 1: Tiny step size relative to sigma (ε ~ σ / 100)
+        epsilon = self.sigma / 100.0  
 
-    # ---- high-level update used inside run() (keeps the candidate loop) ----
+        # Grab particle distribution assigned to this observer
+        assigned = self._assigned_particles(obs)
+        candidates = []
 
-    def update_positions(self, new_particles: np.ndarray) -> None:
-        """
-        High-level update for each blob:
-         - we use assign_particles_to_blob() to detect local particles (same as MDL).
-         - compute soft-weights W on the whole particle set to update centers (EM-like).
-         - then, for each blob, generate candidates around the local target and use
-           wavefunction memory to pick the most compressible candidate; move center to it.
-        """
-        # Soft-assign using entire particle set (cheap)
-        W = self.soft_assign_weights(new_particles)
-
-        # Update centers with small step (shape-preserving)
-        self.update_wavefunction_centers(new_particles, W)
-
-        # Now for each blob, perform candidate selection around its local target (same logic as MDL)
-        new_positions = []
-        for i, wf in enumerate(self.wavefunctions):
-            pos = wf.center.copy()
-            # local assigned using same rule as before (for compatibility)
-            assigned = self.assign_particles_to_blob(i)
+        for _ in range(self.N_CANDIDATES):
             if len(assigned) > 0:
-                target_pos = assigned.mean(axis=0)
-                # use base-class generator if available; fallback to simple sampling
-                try:
-                    candidates = self.generate_candidates_for_blob(i, target_pos, velocity=self.get_velocity(i))
-                except Exception:
-                    # fallback: generate a small set of candidates around target
-                    candidates = []
-                    noise = max(1e-6, self.blob_sigma * 0.5)
-                    for _ in range(self.n_candidates):
-                        c = target_pos + np.random.normal(scale=noise, size=2)
-                        v = c - pos
-                        if np.linalg.norm(v) > 1e-9:
-                            candidates.append((c, v))
-                    if not candidates:
-                        v = np.random.normal(scale=1e-3, size=2)
-                        candidates.append((pos + v, v))
-
-                choice = self.select_candidate_and_record(i, candidates, pos)
-
-                # Move the parametric wavefunction center directly to chosen candidate
-                self.wavefunctions[i].center = np.array(choice, dtype=float)
-                self.observers[i].move_to(choice)
-                new_positions.append(np.array(choice, dtype=float))
+                # Draw candidate directions directly via Born-rule sampling
+                p_k = assigned[np.random.choice(len(assigned))]
+                vec = p_k - obs.pos
+                dist = np.linalg.norm(vec)
+                
+                if dist > 1e-8:
+                    unit_vec = vec / dist
+                else:
+                    angle = np.random.uniform(0, 2 * np.pi)
+                    unit_vec = np.array([np.cos(angle), np.sin(angle)])
+                
+                candidate = obs.pos + epsilon * unit_vec
             else:
-                # if no assigned particles, do a small inertial step from memory
-                v_prev = self.get_velocity(i)
-                new_center = pos + v_prev
-                self.wavefunctions[i].center = new_center
-                self.observers[i].move_to(new_center)
-                self.record_velocity(i, v_prev)
-                new_positions.append(new_center)
+                # Fallback to a uniform direction step if no particles fall within 3σ
+                angle = np.random.uniform(0, 2 * np.pi)
+                candidate = obs.pos + epsilon * np.array([np.cos(angle), np.sin(angle)])
 
-        # For compatibility with base class expectations:
-        # update self.positions to the current centers (so plotting/statistics works)
-        self.positions = np.array([wf.center.copy() for wf in self.wavefunctions])
+            candidate = np.clip(candidate, 0.01, 0.99)
+            candidates.append(candidate)
 
-        # advance internal time
-        self.t += self.dt
+        # Include staying stationary
+        candidates.append(obs.pos.copy())
 
-    # We might optionally expose method to tweak wavefunction params, e.g. change radius or omega
-    def tweak_wavefunction_params(self, blob_idx: int, **kwargs):
-        wf = self.wavefunctions[blob_idx]
-        for k, v in kwargs.items():
-            if hasattr(wf, k):
-                setattr(wf, k, v)
+        # Select candidate that minimizes the trajectory spectral complexity
+        scores = [(obs.candidate_cs(c), c) for c in candidates]
+        scores.sort(key=lambda x: x[0])
+        _, best_pos = scores[0]
 
-    
+        return best_pos
+
+    def _update_observers(self) -> None:
+        new_positions = [self._best_next_pos(obs) for obs in self.observers]
+        for obs, new_pos in zip(self.observers, new_positions):
+            obs.move_to(new_pos)
+
+    def _record_stats(self, step: int) -> None:
+        self.step_idx.append(step)
+        positions = np.array([o.pos for o in self.observers])
+        n = len(positions)
+        if n >= 2:
+            dists = [np.linalg.norm(positions[i] - positions[j])
+                     for i in range(n) for j in range(i+1, n)]
+            self.distances.append(float(np.mean(dists)))
+        else:
+            self.distances.append(0.0)
+        cs_list = [o.trajectory_cs() for o in self.observers]
+        sw_list = [o.solomonoff_weight() for o in self.observers]
+        self.cs_vals.append(float(np.mean(cs_list)))
+        self.sw_vals.append(float(np.mean(sw_list)))
+
+    def run(self, output: str = "emergent_gravity.gif", fps: int = 12, writer: str = "pillow") -> None:
+        plt.style.use('dark_background')
+        fig = plt.figure(figsize=(13, 6), facecolor='#080810')
+        gs  = GridSpec(2, 2, figure=fig, left=0.04, right=0.98, top=0.93, bottom=0.09, hspace=0.45, wspace=0.35)
+
+        ax_sim  = fig.add_subplot(gs[:, 0])
+        ax_dist = fig.add_subplot(gs[0, 1])
+        ax_cs   = fig.add_subplot(gs[1, 1])
+
+        ax_sim.set_facecolor('#000008')
+        ax_sim.set_xlim(0, 1); ax_sim.set_ylim(0, 1)
+        ax_sim.set_xticks([]); ax_sim.set_yticks([])
+
+        colours = ['#7dd3fc', '#fbbf24', '#a78bfa', '#34d399', '#f87171', '#fb923c'][:len(self.observers)]
+
+        img = ax_sim.imshow(np.zeros((self.GRID_SIZE, self.GRID_SIZE)), origin='lower', extent=[0,1,0,1],
+                            cmap='magma', vmin=0, vmax=1, interpolation='bicubic', aspect='auto')
+        scat = ax_sim.scatter(self.particles[:,0], self.particles[:,1], s=0.3, c='cyan', alpha=0.12, edgecolors='none')
+        blob_dots = [ax_sim.plot([], [], 'o', color=c, ms=8, zorder=5)[0] for c in colours]
+        blob_trails = [ax_sim.plot([], [], '-', color=c, alpha=0.4, lw=1)[0] for c in colours]
+        title = ax_sim.set_title('', color='#94a3b8', fontsize=10)
+
+        line_dist, = ax_dist.plot([], [], color='#7dd3fc', lw=1.5)
+        ax_dist.set_ylabel('Mean distance', color='#7dd3fc', fontsize=8)
+        ax_dist.set_xlabel('Step', fontsize=8)
+        ax_dist.tick_params(colors='#475569', labelsize=7)
+        ax_dist.set_facecolor('#0a0a18')
+        ax_dist.grid(True, color='#1e1e36', lw=0.5)
+
+        line_cs, = ax_cs.plot([], [], color='#a78bfa', lw=1.5, label='C_s')
+        line_sw, = ax_cs.plot([], [], color='#34d399', lw=1.5, linestyle='--', label='2^{-C_s}')
+        ax_cs.set_ylabel('C_s  /  Solomonoff weight', color='#94a3b8', fontsize=8)
+        ax_cs.set_xlabel('Step', fontsize=8)
+        ax_cs.tick_params(colors='#475569', labelsize=7)
+        ax_cs.set_facecolor('#0a0a18')
+        ax_cs.grid(True, color='#1e1e36', lw=0.5)
+        ax_cs.legend(fontsize=7, loc='upper right', facecolor='#0a0a18', edgecolor='#1e1e36')
+
+        fig.suptitle('G-ψ-D Trinity  ·  Emergent Gravity from Compression', color='#dde3ee', fontsize=11, y=0.99)
+
+        def update(step: int):
+            pdf = self._joint_pdf()
+            self.particles = self._resample()
+            self._update_observers()
+            self._record_stats(step)
+
+            if self._acc_pdf is None:
+                self._acc_pdf = pdf.copy()
+            else:
+                self._acc_pdf = 0.8 * self._acc_pdf + 0.2 * pdf
+
+            field = self._acc_pdf.reshape(self.GRID_SIZE, self.GRID_SIZE)
+            fmax  = field.max()
+            if fmax > 1e-30:
+                field = field / fmax
+            img.set_data(field)
+            scat.set_offsets(self.particles)
+
+            for i, (obs, dot, trail) in enumerate(zip(self.observers, blob_dots, blob_trails)):
+                dot.set_data([obs.pos[0]], [obs.pos[1]])
+                traj_arr = np.array([[z.real, z.imag] for z in obs.traj], dtype=float)
+                trail.set_data(traj_arr[:,0], traj_arr[:,1])
+
+            title.set_text(f'Step {step+1}  ·  C_s = {self.cs_vals[-1]:.1f}  ·  2^{{-C_s}} = {self.sw_vals[-1]:.4f}')
+
+            t = np.array(self.step_idx)
+            line_dist.set_data(t, self.distances)
+            ax_dist.relim(); ax_dist.autoscale_view()
+
+            line_cs.set_data(t, self.cs_vals)
+            line_sw.set_data(t, self.sw_vals)
+            ax_cs.relim(); ax_cs.autoscale_view()
+
+            return [img, scat] + blob_dots + blob_trails + [line_dist, line_cs, line_sw, title]
+
+        print(f"Running {self.n_steps} steps …")
+        ani = animation.FuncAnimation(fig, update, frames=self.n_steps, blit=False, interval=80)
+
+        if writer == 'pillow':
+            ani.save(output, writer='pillow', fps=fps)
+        else:
+            w = animation.FFMpegWriter(fps=fps, bitrate=1800)
+            ani.save(output, writer=w)
+
+        print(f"Saved → {output}")
+        plt.close(fig)
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Emergent Gravity Simulation")
-    parser.add_argument("--file", type=str, default="emergent_gravity", help="Filename for the video to be created")
-    parser.add_argument("--sigma", type=float, default=0.12, help="Blob sigma")
-    parser.add_argument("--particles", type=int, default=8192, help="Number of particles")
-    parser.add_argument("--steps", type=int, default=200, help="Number of steps")
-    parser.add_argument("--res", type=int, default=120, help="Resolution of the output video")
-    parser.add_argument('--format', choices=['gif', 'mp4'], default='gif', help="Output format: gif for README, mp4 for high-res")
+    parser = argparse.ArgumentParser(description='G-ψ-D Trinity: emergent gravity from compression.')
+    parser.add_argument('--blobs',     type=int,   default=3, help='Number of observers (default 3)')
+    parser.add_argument('--particles', type=int,   default=4096, help='Number of particles (default 4096)')
+    parser.add_argument('--steps',     type=int,   default=200, help='Simulation steps (default 200)')
+    parser.add_argument('--sigma',     type=float, default=0.12, help='Observer Gaussian width (default 0.12)')
+    parser.add_argument('--k_mod',     type=float, default=0.0,
+                        help='Spatial phase modulation frequency for visible interference (default 0.0)')
+    parser.add_argument('--file',      type=str,   default='emergent_gravity', help='Output filename without extension')
+    parser.add_argument('--format',    choices=['gif', 'mp4'], default='gif', help='Output format (default gif)')
+    parser.add_argument('--fps',       type=int,   default=12, help='Frames per second (default 12)')
     args = parser.parse_args()
 
-    if args.format == 'gif':
-        # Optimized for GitHub README (small file size)
-        sim_res = min(args.res, 60) 
-        sim_fps = 12
-        output_name = f"{args.file}.gif"
-        writer_type = 'pillow'
-    else:
-        # Optimized for serious review (high fidelity)
-        sim_res = args.res
-        sim_fps = 24
-        output_name = f"{args.file}.mp4"
-        writer_type = 'ffmpeg'
-
+    output = f"{args.file}.{args.format}"
+    writer = 'pillow' if args.format == 'gif' else 'ffmpeg'
 
     sim = EmergentGravitySim(
-        n_particles=args.particles,
-        n_steps=args.steps,
-        blob_sigma=args.sigma
+        n_blobs     = args.blobs,
+        n_particles = args.particles,
+        n_steps     = args.steps,
+        sigma       = args.sigma,
     )
-    sim.run(output_name, res=sim_res, fps=sim_fps, writer=writer_type)
+    sim.run(output=output, fps=args.fps, writer=writer)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
