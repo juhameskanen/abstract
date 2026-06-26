@@ -12,6 +12,7 @@ PAPERS_LIST := \
 	emergence-of-gr:Space-time_Curvature_as_an_Information-Theoretic_Structure \
 	wavefunction-as-compression:Wavefunction_as_Compression \
 	emergence-of-qm:Emergence_of_Quantum_Mechanics,_Fermions_Bosons_and_Pauli_Exclusion \
+	universal-boson-theorem:The_Universal_Boson_Theorem-Particle_Species_from_Codec_Geometry \
 	unification-of-gr-qm:Emergence_of_General_Relativity,_Geodesics,_Curvature,_and_Gravitational_Waves_as_Compression_Residuals \
 	informational-action:Classical_Geodesics_as_Minimal-Spectral-Complexity_Trajectories_in_Informational_Space \
 	cosmological-model:Inflation,_Cosmological_and_Hubble_Constants \

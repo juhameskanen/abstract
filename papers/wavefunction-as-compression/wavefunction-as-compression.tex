@@ -27,18 +27,12 @@ themselves composed of compressed structures, perceive their constituent
 degrees of freedom as wave-like for the same reason that pixel-observers
 inside an MPEG-compressed movie would perceive their world as governed by
 a Discrete Cosine Transform: they are observing compressed information.
-We formalise this as a \emph{Spectral Complexity} measure $C_s$ --- a
+We formalise and implement this as a \emph{Spectral Complexity} measure $C_s$ --- a
 continuous, computable replacement for Kolmogorov complexity --- and show
 that Solomonoff-like suppression under $C_s$ selects smooth, law-like,
 wave-governed configurations over chaotic ones, resolving the Boltzmann
 brain problem without additional axioms. Numerical simulations demonstrate
 the emergence of inertia and interference from spectral compression alone.
-Most significantly, we present numerical evidence that the minimum-$C_s$
-path through configuration space coincides with the minimum Euclidean
-action path of standard quantum gravity, and state the central conjecture
-of this paper: $C_s \propto S_{\mathrm{Euclidean}}$. If proved, this
-conjecture completes the bridge from the informational framework of
-Papers~I--V to a full theory of quantum gravity.
 \end{abstract}
 
 \tableofcontents
@@ -48,7 +42,7 @@ Papers~I--V to a full theory of quantum gravity.
 \section{Introduction}
 \label{sec:intro}
 
-The framework developed in Papers~I--V recovers a striking range of
+The framework developed in Papers~I--V recovers a range of
 physical structure from a single axiom: the universe is a finite, static,
 timeless system of $n$ bits. Gravitational collapse converges to a
 zero-entropy singularity (Paper~I). Expansion from that singularity is
@@ -77,10 +71,7 @@ Section~\ref{sec:spectral} formalises spectral complexity as a
 continuous, computable measure and shows how it suppresses Boltzmann
 brains. Section~\ref{sec:simulations} presents numerical results:
 emergence of inertia, interference, and smooth spacetime from spectral
-compression. Section~\ref{sec:conjecture} presents the path comparison
-between minimum spectral complexity and minimum Euclidean action, and
-states the central conjecture. Section~\ref{sec:discussion} discusses
-implications. Section~\ref{sec:conclusion} states the results and open
+compression. Section~\ref{sec:conclusion} states the results and open
 problems.
 
 % ============================================================
@@ -283,135 +274,7 @@ The cross-terms --- interference fringes --- are cheaper to encode than
 two separate packets because they share spectral modes. Interference
 emerges as the compression-optimal description of overlapping structures.
 
-Simulation videos demonstrating both phenomena are available at
-\url{https://github.com/juhameskanen/abstract/blob/main/gallery/emergent_gravity.gif}.
 
-% ============================================================
-\section{The Central Conjecture: $C_s \propto S_{\mathrm{Euclidean}}$}
-\label{sec:conjecture}
-
-\subsection{Background}
-
-Hawking's Euclidean path integral approach to quantum gravity
-\cite{hawking1979} computes the wave function of the universe by summing
-over all compact Euclidean geometries weighted by $e^{-S_E}$, where $S_E$
-is the Euclidean action obtained by Wick rotation $t \to -i\tau$. The
-minimum-action path through configuration space corresponds to the most
-probable geometry --- the classical solution --- while quantum corrections
-arise from fluctuations around it.
-
-The Wheeler--DeWitt equation \cite{dewitt1967}
-\[
-\hat{H}|\Psi\rangle = 0
-\]
-expresses the same content in canonical form: the universe has no external
-time, consistent with the static, timeless axiom of Paper~I. The
-wavefunction of the universe is a solution to this constraint.
-
-\subsection{Numerical Path Comparison}
-
-We implemented both the minimum-$C_s$ path and the minimum-Euclidean-action
-path on a $256 \times 256$ surface containing two Gaussian potential peaks
-(Figure~\ref{fig:paths}, left panel). The minimum-$C_s$ path was computed
-by selecting, at each step, the continuation that minimises the spectral
-complexity increment. The minimum Euclidean action path was computed by
-standard variational methods.
-
-Figure~\ref{fig:paths} (right panel) shows the two paths plotted as
-amplitude versus position along the $x$-axis. The Euclidean action path
-(red) and the informational action path (blue dashed) track each other
-closely across the full trajectory, including the sharp minimum near
-$x = 8$ where the path descends between the two potential peaks.
-The agreement is qualitative but robust: both paths select the same
-geometric route through the potential landscape.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.95\textwidth]{figures/path-comparison.png}
-\caption{Left: 3D potential surface ($256\times256$) with two Gaussian
-peaks. The red curve shows the minimum Euclidean action path; the blue
-dashed curve shows the minimum spectral complexity (informational action)
-path. Right: Path comparison projected onto the $x$-axis. Euclidean
-action (red solid) and informational action (blue dashed) track each
-other closely across the full trajectory, including the deep minimum near
-$x = 8$. The correspondence is numerical and qualitative; a rigorous
-proof of proportionality is the primary open problem of this paper.}
-\label{fig:paths}
-\end{figure}
-
-\subsection{The Conjecture}
-
-The numerical correspondence motivates the following:
-
-\begin{conjecture}[Informational Action Principle]
-\label{conj:action}
-Let $\Psi$ be a path through the configuration space of a finite
-informational system with bit count $n$. Let $C_s(\Psi)$ denote the
-spectral complexity of $\Psi$ and $S_E(\Psi)$ denote the Euclidean action
-of the corresponding geometric path. Then:
-\[
-C_s(\Psi) \propto S_E(\Psi),
-\]
-with proportionality constant determined by $n$ and the minimum frequency
-resolution $\Delta\omega$.
-\end{conjecture}
-
-If Conjecture~\ref{conj:action} holds, the consequences are immediate:
-
-\begin{itemize}
-  \item The Euclidean path integral $\int \mathcal{D}g\, e^{-S_E}$ is
-        the Solomonoff prior $\sum_\Psi 2^{-C_s(\Psi)}$ over spectral
-        configurations. Quantum gravity is Solomonoff induction over
-        compressed descriptions of geometry.
-  \item The Wheeler--DeWitt constraint $\hat{H}|\Psi\rangle = 0$ expresses
-        the timelessness of Paper~I: the universe has no external clock,
-        and the wavefunction is the spectral complexity distribution over
-        all configurations consistent with the bit budget $n$.
-  \item The Planck constant $\hbar$ is identified with
-        $\Delta\omega / \ln 2$: the minimum spectral resolution of the
-        informational system, converted from nats to bits.
-\end{itemize}
-
-% ============================================================
-\section{Discussion}
-\label{sec:discussion}
-
-\subsection{What Has Been Established and What Has Not}
-
-This paper establishes the following. The WCP hypothesis is internally
-consistent with the framework of Papers~I--V and resolves the Boltzmann
-brain problem without new axioms. Spectral complexity is a well-defined,
-continuous, computable measure that suppresses chaotic configurations
-exponentially. Inertia and interference emerge numerically from spectral
-compression without imposed dynamics. The minimum-$C_s$ path and the
-minimum Euclidean action path agree numerically on a test surface.
-
-This paper does not establish the following. The Born rule is not derived
-from spectral complexity axioms. The conjecture $C_s \propto S_E$ is not
-proved. The identification $\hbar = \Delta\omega / \ln 2$ is a
-correspondence, not a derivation. These are the primary targets for
-subsequent work.
-
-\subsection{Relation to Existing Approaches}
-
-Verlinde's entropic gravity \cite{verlinde2011origin} derives Newtonian gravity
-from thermodynamic entropy gradients. Jacobson \cite{jacobson1995} derives
-the Einstein field equations from the thermodynamics of local Rindler
-horizons. Both approaches recover gravitational dynamics from
-information-theoretic principles. The present framework is complementary:
-rather than deriving gravitational equations from entropy, it proposes
-that the path-integral measure of quantum gravity is the spectral
-complexity prior, and that the two are proportional.
-
-\subsection{The Role of $n$}
-
-Throughout Papers~I--VI, the integer $n$ plays the role of the universe's
-single free parameter. Paper~IV showed that $n \approx 184$ bits,
-calibrated against the inflationary aspect ratio. The proportionality
-constant in Conjecture~\ref{conj:action} is expected to depend on $n$
-and $\Delta\omega$. A complete theory would express both $\hbar$ and $G$
-as functions of $n$ alone, eliminating all free parameters from
-fundamental physics.
 
 % ============================================================
 \section{Conclusion}
@@ -422,8 +285,7 @@ This paper establishes three results and states one conjecture.
 \textbf{First}, the Wavefunction Compression Principle provides a
 hypothesis for why the microcosm waves: internal observers composed of
 compressed structures perceive their world as wave-governed because the
-compression codec of the universe is the wavefunction. This hypothesis is
-consistent with all results of Papers~I--V and requires no new axioms.
+compression codec of the universe is the wavefunction. 
 
 \textbf{Second}, spectral complexity --- a continuous, computable
 replacement for Kolmogorov complexity with linear frequency cost ---
@@ -434,9 +296,7 @@ measure, not by fine-tuning.
 
 \textbf{Third}, numerical simulation demonstrates that inertia and
 interference emerge from spectral compression alone, without imposed
-equations of motion, and that the minimum spectral complexity path
-through a potential landscape agrees numerically with the minimum
-Euclidean action path.
+equations of motion.
 
 \textbf{Conjecture} (Informational Action Principle): $C_s \propto
 S_{\mathrm{Euclidean}}$, with proportionality constant determined by $n$
@@ -452,9 +312,7 @@ resolution of a finite informational universe.
 \label{sec:open}
 
 \begin{enumerate}
-  \item \textbf{Prove Conjecture~\ref{conj:action}.} Either analytically,
-        by showing that the spectral complexity functional and the
-        Euclidean action functional are proportional under the
+  \item \textbf{Show that the spectral complexity and the Euclidean action functional are proportional} under the
         informational metric of Paper~IV; or numerically, by extending
         the path comparison to higher-dimensional surfaces and quantifying
         the deviation.
@@ -477,11 +335,16 @@ resolution of a finite informational universe.
 \section*{Simulation Code}
 
 \begin{itemize}
-  \item Spectral compression POC, emergent inertia and interference:
-        \url{https://github.com/juhameskanen/abstract}
-  \item Path comparison (minimum $C_s$ vs minimum Euclidean action):
-        supplementary material \texttt{simulations/path\_comparison.py}
+  \item \texttt{wavefunction.py}: Complex-valued wavefunction with Spectral Complexity measure. 
+  \item \texttt{emergent\_inertia\_interference.py}: Spectral compression POC, demonstrating emergent inertia and interference.
 \end{itemize}
+
+The \texttt{wavefunction} package can be installed from python \textit(pypi) repository.
+
+\begin{lstlisting}[language=bash, caption=Example usage]
+pip install wavefunction
+python simulations/emergent\_inertia\_intererence.py --blobs 3 --steps 400 --k\_mod 30
+\end{lstlisting}
 
 \printbibliography
 
