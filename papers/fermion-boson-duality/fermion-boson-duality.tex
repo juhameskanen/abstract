@@ -3,8 +3,8 @@
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
 
-\title{Fermion-Boson Duality:\\
-Particle Classification from Codec Geometry}
+\title{Fermion Structure and Particle Classification\\
+from Codec Geometry}
 \author{Juha Meskanen}
 \date{June 2026}
 
@@ -24,29 +24,26 @@ Then:
   \|B\| &= \sqrt{\frac{n-1}{n}} \quad \text{(Universal Boson Norm)}, \\
   \|F\|^2 + \|B\|^2 &= 1 \quad \text{(Conservation Law)}.
 \end{align*}
-All three results are phase-independent and hold for arbitrary $n \geq 1$.
-The conservation law is a Pythagorean identity on Hilbert space:
-$\|\rho\|^2 = 1$ for any pure state, and $\rho$ splits orthogonally
-into $F$ and $B$.
-The winding number $m$ of the phase pattern determines the spin of
-the emergent boson.
-Together, the pair $(n, m)$ classifies the known gauge bosons of the
-electromagnetic and strong sectors.
-Within the $n{=}2$ sector, the winding number also distinguishes
-charged leptons ($m{=}1$) from neutral leptons ($m{=}0$), providing
-a natural codec home for neutrinos without additional postulates.
-The fermion spin-$1/2$ structure is inherited from the universal
-$-\pi/2$ phase of Paper~VII, which encodes the spinor double-cover
-directly in the codec geometry.
-The particle mass hierarchy organises into a near-integer sequence
-in $\log_2(m/m_e)$ space with step size $\approx 4$ bits, consistent
-with the minimum fermionic codec unit.
-The $n{=}4$, $m{=}2$ state is the unique spin-2 object in the
-classification; its physical identification is left open pending
-cross-layer analysis with the geometric gravity derivation of
-Papers~IV--V.
-No interaction terms, coupling constants, or gauge symmetries are
-introduced by hand.
+All three results are phase-independent and hold for arbitrary
+$n \geq 1$.
+The winding number $m$ of the phase pattern determines the internal
+symmetry of the fermion's compression residual.
+
+The central claim of this paper differs from the Standard Model in
+a foundational respect: bosons are not fundamental particles.
+They are the codec's internal record of fermion transitions, and
+are never directly observed.
+Every physical observation is a fermion observation.
+The particle classification developed here is therefore a
+\emph{fermion} classification: the pair $(n, m)$ describes the
+fermion's complexity class, and what Standard Model language calls
+a ``gauge boson'' is the name we give to correlations between
+fermion events that would otherwise require an unexplained interaction
+term.
+Under this reframing, the open problems of the framework reduce
+to purely fermionic questions: why fermions come in three generations,
+why they carry the charges they carry, and why their trajectories
+produce the force laws they produce.
 \end{abstract}
 
 \tableofcontents
@@ -56,36 +53,42 @@ introduced by hand.
 \section{Introduction}
 \label{sec:intro}
 
-The informational framework of Papers~I--VII treats the universe as
-a finite static bitstring of $n \approx 184$ bits.
-Internal observers traverse the $2^n$ configurations along paths of
-minimum description length.
-The quantum wavefunction is the compression codec; fermions are its
-localised diagonal content; bosons are its off-diagonal residuals.
+The codec framework of Papers~I--VII treats the universe as a finite
+static bitstring of $n \approx 184$ bits.
+Fermions are localised excitations --- pixels --- encoded as
+normalised complex wavefunctions.
+Bosons are compression residuals: the off-diagonal entries of the
+density matrix $\rho = |\psi\rangle\langle\psi|$ that remain after
+the per-site fermionic diagonal is removed.
 
-Paper~VII showed that a two-site fermion hop produces a boson matrix
-$B$ with $\|B\| = \sin(2\theta)/\sqrt{2}$, purely antisymmetric
-structure, and a universal $-\pi/2$ phase encoding the Born rule
-exactly.
-That result was derived analytically and confirmed numerically to
-floating-point precision for all system sizes and hop distances.
+Paper~VII showed that a two-site fermion hop produces a compression
+residual $B$ with $\|B\| = \sin(2\theta)/\sqrt{2}$, purely
+antisymmetric structure, and a universal $-\pi/2$ phase encoding the
+Born rule exactly.
+That result is about the \emph{fermion's motion} --- the boson is
+what the codec records when a fermion moves, not a separate particle
+that mediates the motion.
 
-The present paper asks the complementary question: what is the
-universal structure of the \emph{fermionic} content, and how do the
-two relate?
-The answer is a conservation law that subsumes all previous results
-and classifies the boson spectrum from two integers.
+The present paper asks: what is the universal structure of the
+fermionic content itself, and how does it organise into the particle
+spectrum we observe?
+
+The answer has two parts.
+First, three exact theorems establish the norm structure of any
+$n$-site fermion, culminating in a conservation law that subsumes
+all previous results.
+Second, the pair $(n, m)$ --- sites and winding number --- classifies
+the fermion complexity classes.
+The classification is purely fermionic: no interaction terms,
+coupling constants, or gauge symmetries are introduced.
+What Standard Model language calls bosons are derived labels for
+correlations between fermion events, not independent objects.
 
 A note on scope: gravity was derived in Papers~IV--V at the geometric
-layer, from the bit-rope metric, the Ricci/Weyl decomposition, and
-the Friedmann equation emerging from the bit budget.
-That derivation is independent of the wavefunction codec and is not
-revisited here.
-The present paper operates entirely at the codec layer, explaining
-why observers perceive quantum mechanical behaviour and classifying
-the particles that emerge from the compression structure.
-The relationship between the geometric and codec layers is an open
-problem addressed in future work.
+layer, independently of the wavefunction codec.
+That derivation is not revisited here.
+The relationship between the geometric and codec layers is addressed
+in the Discussion.
 
 %------------------------------------------------------------
 \section{Setup}
@@ -101,8 +104,9 @@ We split $\rho$ into two orthogonal parts:
   F = \operatorname{diag}(\rho), \qquad
   B = \rho - \operatorname{diag}(\rho),
 \]
-where $F$ is the fermionic diagonal (per-site occupancy vector,
-real and non-negative) and $B$ is the bosonic off-diagonal matrix.
+where $F$ is the fermionic diagonal (per-site occupancy, real and
+non-negative) and $B$ is the off-diagonal matrix encoding
+inter-site correlations.
 
 An \emph{$n$-site equal superposition} is
 \[
@@ -115,9 +119,10 @@ Fourier modes
   \phi_k^{(m)} = \frac{2\pi mk}{n},
   \quad m = 0, 1, \ldots, \lfloor n/2 \rfloor,
 \]
-where $m$ is the \emph{winding number}.
+where $m$ is the \emph{winding number} --- the number of full phase
+rotations around the ring.
 These are the minimum-$C_s$ states on the ring, ordered by ascending
-spectral complexity cost.
+spectral complexity.
 
 %------------------------------------------------------------
 \section{Three Exact Theorems}
@@ -181,7 +186,9 @@ special case.
 
 \begin{corollary}[Pauli exclusion]
 For a localised fermion $\psi = e_j$: $\|F\| = 1$, $\|B\| = 0$.
-No boson is produced; double occupancy has zero compression residual.
+No compression residual is produced.
+Double occupancy has zero off-diagonal content and is
+informationally invisible.
 \end{corollary}
 
 Table~\ref{tab:norms} summarises the theorems for small $n$.
@@ -205,13 +212,13 @@ All rows satisfy $\|F\|^2 + \|B\|^2 = 1$ exactly.}
 \end{table}
 
 %------------------------------------------------------------
-\section{Fermion Spin-$1/2$ from the Universal Phase}
+\section{Fermion Spin Structure}
 \label{sec:halfinteger}
 
-The winding number $m$ determines the \emph{integer} spin of the
-emergent boson $B$.
-The \emph{half-integer} spin of the underlying fermion is encoded
-separately, in the universal phase structure established in Paper~VII.
+The winding number $m$ determines the symmetry of the fermion's
+compression residual.
+The half-integer spin of the fermion itself is encoded separately,
+in the universal phase structure established in Paper~VII.
 
 For any single fermion hop, the off-diagonal entries of $B$ carry a
 universal $-\pi/2$ phase.
@@ -221,121 +228,92 @@ This is precisely the spinor double-cover structure of spin-$1/2$:
 a $2\pi$ rotation returns a fermion to its state only up to a sign,
 while a $4\pi$ rotation is the identity.
 
-The F/B conservation law therefore unifies two structures in a single
+The conservation law therefore unifies two structures in a single
 codec object:
 \begin{itemize}
-  \item The diagonal $F$ carries half-integer spin (inherited from
-        the $-\pi/2$ universal phase of the fermion hop).
-  \item The off-diagonal $B$ carries integer spin $m$ (determined by
-        the winding number of the phase pattern).
+  \item The diagonal $F$ carries half-integer spin, inherited from
+        the $-\pi/2$ universal phase of the fermion hop.
+  \item The off-diagonal $B$ carries the internal symmetry class
+        determined by the winding number $m$.
 \end{itemize}
 This is not a postulate; it follows from the imaginary encoding
 $\psi = f_0 + if_1$ and the definition of $B$, as shown in Paper~VII.
 
 %------------------------------------------------------------
-\section{Spin from Winding Number}
-\label{sec:spin}
+\section{Fermion Complexity Classes}
+\label{sec:classes}
 
-The norms $\|F\|$ and $\|B\|$ depend only on $n$.
-The \emph{identity} of the boson is determined by the winding number
-$m$, which fixes the symmetry of $B$ under transposition:
+The norms $\|F\|$ and $\|B\|$ depend only on $n$ --- the number of
+sites across which the fermion is delocalised.
+The internal structure of the compression residual is determined
+by the winding number $m$.
+Together, $(n, m)$ defines a \emph{fermion complexity class}.
+
+The symmetry of the off-diagonal $B$ under transposition determines
+whether the fermion can propagate freely or is confined:
 
 \begin{itemize}
-  \item $B = -B^\top$ (antisymmetric): spin-1 vector boson, free
-        asymptotic state.
-  \item $B = B^\top$ (symmetric): spin-0 scalar or spin-2 tensor,
-        free asymptotic state.
-  \item Mixed (neither): confined, cannot exist as a free asymptotic
-        state (see Section~\ref{sec:confinement}).
+  \item $B = -B^\top$ (antisymmetric, $m$ odd for $n{=}2$):
+        the fermion's residual has self-contained antisymmetric
+        structure and can propagate as a free asymptotic state.
+  \item $B = B^\top$ (symmetric, $m{=}0$):
+        the residual has self-contained symmetric structure
+        and propagates freely with scalar character.
+  \item Mixed symmetry ($n \geq 3$, $m \geq 1$):
+        the residual has no self-contained symmetry class.
+        The fermion requires reference to its source configuration
+        to be described --- it cannot propagate as a free asymptotic
+        state.
+        This is the information-theoretic basis of confinement
+        (see Section~\ref{sec:confinement}).
 \end{itemize}
 
-\begin{definition}[Codec spin]
-The codec spin of an $n$-site boson with winding number $m$ is $s = m$.
-\end{definition}
-
-For the physically relevant cases:
-the $n{=}2$, $m{=}1$ state gives an antisymmetric $B$ (spin-1,
-photon); the $n{=}3$, $m{=}0$ state gives a symmetric $B$ (spin-0,
-Higgs candidate); the $n{=}3$, $m{=}1$ state gives mixed symmetry
-(confined, gluon).
-
 %------------------------------------------------------------
-\section{The $n{=}2$ Sector: Leptons and Electromagnetism}
+\section{The $n{=}2$ Fermion: Leptons}
 \label{sec:n2}
 
-The $n{=}2$ sector accommodates both the charged lepton and the
-neutrino within the same codec geometry, distinguished by the winding
-number $m$.
+The $n{=}2$ sector is the simplest non-trivial fermion: a two-site
+equal superposition with $\|F\| = \|B\| = 1/\sqrt{2}$.
 
-\subsection{Charged lepton and photon ($m=1$)}
+\subsection{Charged lepton ($m=1$)}
 
-For $\psi = (e_0 + ie_1)/\sqrt{2}$ (winding $m{=}1$), the boson
-matrix $B$ is purely antisymmetric with eigenvalues $\pm 1/2$ and
-universal $-\pi/2$ phase (Paper~VII).
-This is the photon: massless, spin-1, free asymptotic state.
-The underlying fermion is the charged lepton (electron, muon, or tau
-depending on the spectral complexity level --- see
-Section~\ref{sec:masses}).
+For $\psi = (e_0 + ie_1)/\sqrt{2}$ (winding $m{=}1$), the
+compression residual $B$ is purely antisymmetric with eigenvalues
+$\pm 1/2$ and the universal $-\pi/2$ phase of Paper~VII.
+The fermion has a self-contained antisymmetric residual and
+propagates freely.
+This is the charged lepton.
 
-\subsection{Neutrino ($m=0$)}
+What Standard Model language calls a ``photon'' is the name given to
+the correlation between two such fermion events: when one charged
+lepton recoils, another does so in a correlated way.
+The codec encodes this correlation in the off-diagonal of $\rho$.
+No photon particle is required; the fermion's complexity class
+already contains the full correlation structure.
 
-For $\psi = (e_0 + e_1)/\sqrt{2}$ (winding $m{=}0$, symmetric
-phases), the boson matrix $B$ is purely \emph{symmetric} with
-eigenvalues $\pm 1/2$ and zero net phase winding.
-This is a spin-0 scalar residual carrying no electromagnetic phase
-structure.
-The underlying fermion is electrically neutral: the neutrino.
+\subsection{Neutral fermion ($m=0$)}
 
-Within the $n{=}2$ sector, the winding number $m$ acts as the
-charge selector:
+For $\psi = (e_0 + e_1)/\sqrt{2}$ (winding $m{=}0$), the
+residual $B$ is purely symmetric with eigenvalues $\pm 1/2$ and
+zero net phase winding.
+The fermion has zero electromagnetic phase structure: it is
+electrically neutral.
+This is the neutrino.
+
+Within the $n{=}2$ sector, the winding number acts as the charge
+selector:
 \begin{itemize}
-  \item $m = 0$: zero phase winding, zero electromagnetic coupling
-        $\Rightarrow$ \textbf{neutrino} (charge 0).
-  \item $m = 1$: one phase winding, unit electromagnetic coupling
-        $\Rightarrow$ \textbf{charged lepton} (charge $\pm 1$).
+  \item $m = 0$: zero phase winding $\Rightarrow$ neutral fermion
+        (neutrino).
+  \item $m = 1$: one phase winding $\Rightarrow$ charged fermion
+        (electron, muon, or tau, depending on complexity level).
 \end{itemize}
 Electric charge is the $\mathrm{U}(1)$ winding number within the
 $n{=}2$ sector.
-No additional postulate is required; the neutrino and charged lepton
-are the two minimum-$C_s$ states of the same two-site codec.
-
-\begin{remark}
-This identification gives a clean algorithmic charge rule: charge
-$= m$ within the $n{=}2$ sector.
-For the $n{=}3$ sector (quarks), fractional charge $1/3$ per site
-arises from the per-site probability $|\psi_k|^2 = 1/3$, a separate
-mechanism.
-A unified charge formula covering both sectors is an open problem.
-\end{remark}
-
-\subsection{Massive vector bosons ($W$, $Z$) --- conjecture}
-
-The $W^\pm$ and $Z$ bosons are spin-1, massive, and sit at mass
-rungs 17--18 in the log-mass ladder (Section~\ref{sec:masses}).
-Their spin-1 structure is consistent with $n{=}2$, $m{=}1$ --- the
-same codec object as the photon.
-The mass difference between the photon (massless) and $W$/$Z$
-(massive) is conjectured to arise from their position relative to
-the lognormal peak in bit-flip space: within-peak hops produce
-massless residuals; cross-peak hops produce massive ones.
-
-\begin{conjecture}[$W$/$Z$ as massive $n{=}2$, $m{=}1$ residuals]
-The $W^\pm$ and $Z$ bosons are compression residuals of cross-peak
-fermion hops with $n{=}2$, $m{=}1$ structure.
-They share the antisymmetric symmetry class of the photon but acquire
-mass from the complexity cost of crossing the lognormal peak.
-The mixing with the scalar sector (Higgs mechanism in the Standard
-Model) corresponds in the codec to the interaction between the
-$n{=}2$ residual and the $n{=}3$, $m{=}0$ scalar at the lognormal
-crossing point.
-\end{conjecture}
-
-This conjecture is consistent with the mass placement and spin
-assignments but is not yet derived from first principles within the
-framework.
+No additional postulate is required.
 
 %------------------------------------------------------------
-\section{The $n{=}3$ Sector: Quarks and Gluons}
+\section{The $n{=}3$ Fermion: Quarks and Confinement}
 \label{sec:n3}
 
 \subsection{Fractional occupancy}
@@ -343,101 +321,94 @@ framework.
 For a three-site equal superposition, each site carries probability
 $|\psi_k|^2 = 1/3$.
 This is the per-site occupancy of a quark in a colour triplet.
-The exact value $1/3$ requires no postulate; it is the Born-rule
+The value $1/3$ requires no postulate: it is the Born-rule
 probability of finding the fermion on any one colour site.
 
-\subsection{Gluon and colour symmetry ($m=1$)}
+\subsection{Colour structure ($m=1$)}
 
-For winding $m{=}1$, the boson matrix has off-diagonal entries with
-equal magnitude:
+For winding $m{=}1$, the compression residual has off-diagonal
+entries with equal magnitude:
 \[
-  |B_{ij}| = \frac{1}{3} \quad \text{for all } i \neq j.
+  |B_{ij}| = \frac{1}{3} \quad \text{for all colour pairs } i \neq j.
 \]
-This is exact colour symmetry: the boson couples equally to all
-three colour pairs.
-No $\mathrm{SU}(3)$ symmetry is imposed; it emerges from the
-equal-superposition constraint and Theorem~\ref{thm:boson}.
-The mixed symmetry of $B$ (neither symmetric nor antisymmetric)
-implies confinement (Section~\ref{sec:confinement}).
-This is the gluon.
+This is exact colour symmetry, emerging from the equal-superposition
+constraint and Theorem~\ref{thm:boson}.
+No $\mathrm{SU}(3)$ symmetry is imposed.
 
-\subsection{Higgs candidate ($m=0$)}
+What Standard Model language calls a ``gluon'' is the name given to
+the correlation between quark colour changes.
+The mixed symmetry of $B$ for $n{=}3$, $m{=}1$ means this
+correlation has no self-contained symmetry class --- see
+Section~\ref{sec:confinement}.
 
-For winding $m{=}0$, the boson matrix is purely symmetric.
-This is a spin-0, colour-neutral scalar with three-fold internal
-structure --- a Higgs candidate.
-Its identification with the physical Higgs boson requires derivation
-of the mass generation mechanism, which is an open problem.
+\subsection{Scalar sector ($m=0$)}
+
+For winding $m{=}0$, the residual is purely symmetric: a spin-0,
+colour-neutral scalar with three-fold internal structure.
+Whether this corresponds to the physical Higgs boson requires
+derivation of the mass generation mechanism, which is open.
 
 %------------------------------------------------------------
-\section{Colour Confinement}
+\section{Confinement from Mixed Symmetry}
 \label{sec:confinement}
 
-The photon boson matrix ($n{=}2$, $m{=}1$) is purely antisymmetric.
-Antisymmetry is a self-contained symmetry class: its best projection
-onto the antisymmetric subspace is itself, with zero residual.
-The photon can propagate freely as an asymptotic state.
+The $n{=}2$, $m{=}1$ fermion (charged lepton) has a purely
+antisymmetric residual.
+Antisymmetry is self-contained: projection onto the antisymmetric
+subspace recovers the residual exactly, with zero error.
+The fermion can be described as a free asymptotic state.
 
-The gluon boson matrix ($n{=}3$, $m{=}1$) has mixed symmetry.
-Its best projection onto either self-contained class (symmetric or
+The $n{=}3$, $m{=}1$ fermion (quark) has a mixed-symmetry residual.
+Projection onto either self-contained class (symmetric or
 antisymmetric) leaves a nonzero residual of magnitude
-$\approx 0.408$, verified numerically to floating-point precision.
-A mixed-symmetry object always requires reference to the fermion
+$\approx 0.408$, verified numerically.
+A mixed-symmetry fermion always requires reference to the
 configuration from which it arose.
 
 \begin{conjecture}[Confinement from mixed symmetry]
-A boson matrix $B$ with mixed symmetry cannot exist as a free
-asymptotic state under any minimum-description-length codec.
+A fermion whose compression residual $B$ has mixed symmetry cannot
+be described as a free asymptotic state under any
+minimum-description-length codec.
 Colour confinement is a structural consequence of the three-site
-codec geometry.
+codec geometry, not a separately imposed force law.
 \end{conjecture}
 
 %------------------------------------------------------------
-\section{The $n{=}4$ State}
-\label{sec:n4}
-
-For $n{=}4$, $m{=}2$, the boson matrix $B$ is symmetric with
-codec spin $s = 2$.
-This is the unique spin-2 object in the classification.
-
-Its physical identification is left open.
-Gravity was derived in Papers~IV--V at the geometric layer, from
-the bit-rope metric and the Ricci/Weyl decomposition, independently
-of the wavefunction codec.
-Whether the $n{=}4$, $m{=}2$ codec object and the geometric
-graviton are the same physical entity requires a dedicated
-cross-layer analysis that goes beyond the scope of this paper.
-We note the coincidence of spin quantum numbers without claiming
-a derivation.
-
-%------------------------------------------------------------
-\section{The Boson Classification}
+\section{The Fermion Classification}
 \label{sec:dictionary}
 
-Table~\ref{tab:dictionary} summarises the boson classification.
-Entries marked (conjecture) are physically motivated but not yet
-derived from first principles.
+Table~\ref{tab:dictionary} presents the fermion complexity classes.
+The right-hand column gives the Standard Model label for the
+fermion event correlations that an observer using that language
+would identify --- not the name of a fundamental particle, but
+the name given to a pattern of fermion behaviour.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{ccccll}
+\begin{tabular}{cccclll}
 \toprule
-$(n,m)$ & $\|F\|$ & $\|B\|$ & Spin & Particle & Status \\
+$(n,m)$ & $\|F\|$ & $\|B\|$ & Symmetry & Fermion class
+        & SM correlation label & Status \\
 \midrule
-$(1,0)$ & $1$          & $0$          & —   & vacuum / Pauli ground & exact \\
-$(2,0)$ & $1/\sqrt{2}$ & $1/\sqrt{2}$ & $0$ & neutrino              & exact \\
-$(2,1)$ & $1/\sqrt{2}$ & $1/\sqrt{2}$ & $1$ & photon                & exact \\
-$(2,1)$ & $1/\sqrt{2}$ & $1/\sqrt{2}$ & $1$ & $W^\pm$, $Z$ (massive)& conjecture \\
-$(3,0)$ & $1/\sqrt{3}$ & $\sqrt{2/3}$ & $0$ & Higgs candidate       & conjecture \\
-$(3,1)$ & $1/\sqrt{3}$ & $\sqrt{2/3}$ & confined & gluon            & exact \\
-$(4,2)$ & $1/2$        & $\sqrt{3}/2$ & $2$ & spin-2 object         & open \\
+$(1,0)$ & $1$ & $0$ & — &
+  Localised, no residual & vacuum & exact \\
+$(2,0)$ & $1/\sqrt{2}$ & $1/\sqrt{2}$ & symmetric &
+  Neutral lepton & neutrino & exact \\
+$(2,1)$ & $1/\sqrt{2}$ & $1/\sqrt{2}$ & antisymmetric &
+  Charged lepton & electron/muon/tau & exact \\
+$(3,0)$ & $1/\sqrt{3}$ & $\sqrt{2/3}$ & symmetric &
+  Colour-neutral scalar & Higgs sector & conjecture \\
+$(3,1)$ & $1/\sqrt{3}$ & $\sqrt{2/3}$ & mixed &
+  Colour-charged, confined & quark/gluon & exact \\
+$(4,2)$ & $1/2$ & $\sqrt{3}/2$ & symmetric &
+  Spin-2 fermion class & open & open \\
 \bottomrule
 \end{tabular}
-\caption{Boson classification from codec geometry.
-``Exact'' means derived from Theorems~1--3 without additional
-assumptions.
-``Conjecture'' means physically motivated but not yet derived.
-``Open'' means the physical identification is not yet established.}
+\caption{Fermion complexity classes.
+The ``SM correlation label'' column gives the Standard Model name
+for the correlation pattern an observer would attribute to this
+fermion class.
+These are derived labels, not fundamental particles.}
 \label{tab:dictionary}
 \end{table}
 
@@ -445,11 +416,10 @@ assumptions.
 \section{The Mass Hierarchy}
 \label{sec:masses}
 
-The spectral complexity $C_s$ of Paper~VI assigns an information cost
-proportional to the dominant wavenumber $\omega$ of the fermionic
-wavefunction.
+The spectral complexity $C_s$ assigns an information cost
+proportional to the dominant wavenumber of the fermionic wavefunction.
 Under Solomonoff induction, $P(\psi) \propto 2^{-C_s(\psi)}$, so
-observable particles are ordered by ascending $C_s$.
+observable fermions are ordered by ascending $C_s$.
 
 The minimum fermionic codec unit is 4 bits, arising from the four
 binary choices required to specify one fermion hop: which site,
@@ -461,31 +431,161 @@ of the mass ladder.
 \centering
 \begin{tabular}{lrrrl}
 \toprule
-Particle & Mass (MeV) & $\log_2(m/m_e)$ & Nearest int. & Notes \\
+Fermion & Mass (MeV) & $\log_2(m/m_e)$ & Nearest int. & Notes \\
 \midrule
-Electron &       $0.511$ &  $0.00$ &  $0$ & lepton generation 1 \\
-Muon     &     $105.66$  &  $7.69$ &  $8$ & lepton generation 2 \\
-Tau      &    $1776.86$  & $11.76$ & $12$ & lepton generation 3 \\
-W boson  &  $80\,377$    & $17.26$ & $17$ & massive, spin-1 (conjecture) \\
-Z boson  &  $91\,188$    & $17.45$ & $17$ & massive, spin-1 (conjecture) \\
-Higgs    & $125\,250$    & $17.90$ & $18$ & scalar (conjecture) \\
+Electron &       $0.511$ &  $0.00$ &  $0$ & generation 1 \\
+Muon     &     $105.66$  &  $7.69$ &  $8$ & generation 2 \\
+Tau      &    $1776.86$  & $11.76$ & $12$ & generation 3 \\
 \bottomrule
 \end{tabular}
-\caption{Known particle masses in $\log_2(m/m_e)$ space.
-The near-integer sequence suggests a discrete complexity ladder
-with 4-bit granularity.
+\caption{Charged lepton masses in $\log_2(m/m_e)$ space.
+The near-integer sequence with 4-bit granularity suggests a discrete
+complexity ladder.
 Deviations from exact integers are interpreted as compression gains
 under Solomonoff induction.}
 \label{tab:masses}
 \end{table}
 
-The lepton generations are identified as the same fermionic knot
-topology at successive compression levels, separated by $\approx 4$
-bits per generation (0, 8, 12 bits relative to the electron).
-A falsifiable prediction follows: no stable particle should exist
-above $\approx$ rung 20, corresponding to $\sim 10\times$ the Higgs
-mass ($\sim 1.25$\,TeV).
-No such particle has been observed at the LHC.
+The three charged lepton generations are the same $n{=}2$, $m{=}1$
+fermion class at successive complexity levels, separated by
+$\approx 4$ bits per generation (0, 8, 12 bits relative to the
+electron).
+A falsifiable prediction follows: no stable charged fermion should
+exist beyond the tau, because the lognormal probability distribution
+of Paper~V places a finite upper bound on observable complexity.
+No fourth charged lepton has been observed.
+
+The quark mass hierarchy spans a wider range and has not yet been
+mapped to the ladder.
+This is identified as the primary open calculation.
+
+%------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why we only observe fermions}
+
+The foundational asymmetry of the codec framework is this: fermions
+are pixels, bosons are compression residuals.
+A pixel can be observed --- it is a localised excitation at a
+definite site, sampled by the Born rule.
+A compression residual cannot be observed directly, because it is
+not a configuration of the system --- it is the codec's internal
+record of how the configuration changed.
+
+Consider what actually happens in a particle physics experiment.
+An electron enters a detector.
+The detector registers a hit at a definite location.
+Another electron, some distance away, is deflected.
+Standard Model language inserts a photon between these two events
+and says the photon ``mediated the interaction.''
+But no detector ever registers a photon as a localised pixel.
+What detectors register are always fermion events --- photoelectric
+hits, track ionisations, Cherenkov rings.
+The photon is the name we give to the correlation between those
+events.
+
+In the codec framework, that correlation is already present in the
+off-diagonal of the density matrix.
+The fermion in $n{=}2$, $m{=}1$ superposition has an antisymmetric
+residual $B$ that encodes, exactly and completely, the correlation
+structure between its transition events.
+No separate photon particle is needed.
+The Standard Model photon is a derived label, not a fundamental
+object.
+
+This is not a new claim in physics.
+It echoes the Wheeler--Feynman absorber theory, the S-matrix
+programme of the 1960s, and the modern amplitudes programme --- all
+of which question whether the virtual particle picture is physically
+necessary.
+The codec framework makes the claim precise: virtual particles are
+codec artifacts, and real particles are fermions.
+
+\subsection{What the open problems reduce to}
+
+The previous version of this paper listed eight open problems,
+most of which concerned boson physics: W/Z mass generation, the
+Higgs mechanism, gauge symmetry unification, the graviton
+identification.
+Under the fermion-first reframing, these dissolve or transform.
+
+The W and Z bosons are observed as fermion recoil events at specific
+energy scales.
+The question is not ``what is the W boson?'' but ``why do fermion
+transitions at mass-rung 17 produce correlation patterns that
+are massive and short-ranged?''
+That is a question about the lognormal probability distribution of
+Paper~V: fermion transitions near or above the lognormal peak
+are suppressed and short-range.
+The answer is already in the framework; it needs to be made
+quantitative.
+
+The Higgs mechanism in the Standard Model gives mass to the W and Z
+by coupling them to a scalar field.
+In the codec framework, the question is simpler: why does the
+$n{=}2$ fermion class acquire a mass gap above the electron?
+The mass ladder answer is: because each successive generation costs
+4 more bits, and the lognormal distribution exponentially suppresses
+higher-complexity states.
+The Higgs is not needed as a separate mechanism.
+
+The graviton question is genuinely open and worth stating carefully.
+Gravity was derived in Papers~IV--V at the geometric layer, from
+the aspect ratio and counting equations.
+The $n{=}4$, $m{=}2$ fermion class has codec spin 2.
+Whether these are the same physical object requires a cross-layer
+analysis.
+We note the coincidence without claiming a derivation.
+
+\subsection{The three genuine open problems}
+
+Stripped of boson physics, the genuine open problems are:
+
+\begin{enumerate}
+  \item \textbf{Why three generations of charged leptons and not four.}
+        The mass ladder predicts suppression above complexity rung 12.
+        Making this bound quantitative from the lognormal of Paper~V
+        is a calculation, not a postulate.
+
+  \item \textbf{Why quarks have the masses they have.}
+        The six quarks span several orders of magnitude and have not
+        yet been placed on the complexity ladder.
+        This is the primary open calculation.
+
+  \item \textbf{Why the fermion force laws have the form they have.}
+        The $1/r^2$ force law was derived in Paper~VII from graviton
+        flux conservation.
+        The electromagnetic $1/r^2$ law should follow from the same
+        argument applied to the $n{=}2$, $m{=}1$ fermion's
+        antisymmetric residual.
+        This derivation is not yet complete.
+\end{enumerate}
+
+Everything else --- boson masses, gauge symmetry groups, coupling
+constants --- is a derived description of fermion correlation
+patterns, not a fundamental open problem.
+
+\subsection{The relationship between geometric and codec layers}
+
+Papers~IV--V derived the geometric structure of spacetime from the
+aspect ratio and counting equations, without reference to the
+wavefunction codec.
+Papers~VI--VIII derive quantum mechanics and particle structure from
+the wavefunction codec, without reference to the geometric layer.
+
+Both derivations are self-consistent.
+The question is how they connect.
+The natural bridge is the worldline: a fermion's trajectory through
+spacetime is a complex worldline $\psi_{\text{traj}}(t) = x(t) + iy(t)$,
+and Paper~VII showed that the minimum spectral complexity closed
+worldline is the ellipse --- Kepler's orbit.
+The fermion codec and the geometric gravity are therefore not
+independent: the minimum-$C_s$ worldline in the geometric spacetime
+is exactly the trajectory selected by the fermion's Solomonoff
+induction.
+A full derivation of this bridge is the primary target of the
+next paper.
 
 %------------------------------------------------------------
 \section{Open Problems}
@@ -493,47 +593,33 @@ No such particle has been observed at the LHC.
 
 \begin{enumerate}
 
-\item \textbf{Unified charge formula.}
-  Within $n{=}2$, charge $= m$ (winding number).
-  Within $n{=}3$, charge $= 1/3$ (per-site occupancy).
-  A single formula covering both sectors is not yet available.
+  \item \textbf{Why three generations.}
+        Quantify the lognormal upper bound on observable fermion
+        complexity, giving a derived prediction for the number of
+        charged lepton generations.
 
-\item \textbf{$W$/$Z$ mass from first principles.}
-  The conjecture that $W$/$Z$ are massive $n{=}2$, $m{=}1$ residuals
-  arising from cross-peak hops requires a derivation of the mass
-  generation mechanism from the lognormal structure.
+  \item \textbf{Quark mass hierarchy.}
+        Place the six quarks on the complexity ladder and verify
+        4-bit granularity.
 
-\item \textbf{Higgs mass generation.}
-  The identification of $(3,0)$ as the Higgs candidate requires
-  derivation of how a spin-0 three-site residual generates mass for
-  the $W$ and $Z$.
+  \item \textbf{Electromagnetic force law from fermion residual.}
+        Apply the graviton flux argument of Paper~VII to the
+        $n{=}2$, $m{=}1$ antisymmetric residual and derive the
+        Coulomb $1/r^2$ law.
 
-\item \textbf{Three generations only.}
-  The lepton ladder has rungs at 0, 8, 12 bits.
-  A fourth generation at $\approx 16$ bits is not observed.
-  The lognormal probability distribution places a finite upper bound
-  on observable complexity; making this bound quantitative is an open
-  calculation.
+  \item \textbf{Confinement as theorem.}
+        Prove that mixed-symmetry fermion residuals cannot be free
+        asymptotic states under any minimum-description-length codec.
 
-\item \textbf{Quark mass hierarchy.}
-  The six quarks span a wide mass range not yet mapped to the
-  log-mass ladder.
+  \item \textbf{Cross-layer synthesis.}
+        Connect the geometric gravity of Papers~IV--V to the
+        fermion worldline codec.
+        Determine whether the $n{=}4$, $m{=}2$ fermion class and
+        the geometric graviton are the same physical entity.
 
-\item \textbf{Cross-layer synthesis.}
-  Gravity is derived geometrically in Papers~IV--V.
-  The $n{=}4$, $m{=}2$ spin-2 codec object may or may not be the
-  same physical entity.
-  A dedicated cross-layer analysis is required.
-
-\item \textbf{Many-fermion extension.}
-  Tensor products of single-fermion wavefunctions are needed for
-  the full Fock space and composite particles.
-
-\item \textbf{Confinement as theorem.}
-  The mixed-symmetry confinement argument is a conjecture.
-  A proof that mixed-symmetry objects cannot be free asymptotic
-  states under any minimum-description-length codec would promote
-  it to a theorem.
+  \item \textbf{Many-fermion extension.}
+        Extend the single-fermion codec to tensor products,
+        giving composite particles and the full Fock space.
 
 \end{enumerate}
 
@@ -543,34 +629,30 @@ No such particle has been observed at the LHC.
 
 \textbf{Exact results:}
 \begin{enumerate}
-\item $\|F\| = 1/\sqrt{n}$ for any $n$-site equal superposition
-      (Theorem~\ref{thm:fermion}).
-\item $\|B\| = \sqrt{(n-1)/n}$ for any $n$-site equal superposition
-      (Theorem~\ref{thm:boson}).
-\item $\|F\|^2 + \|B\|^2 = 1$ for any pure state
-      (Theorem~\ref{thm:conservation}).
+\item $\|F\| = 1/\sqrt{n}$ for any $n$-site equal superposition.
+\item $\|B\| = \sqrt{(n-1)/n}$ for any $n$-site equal superposition.
+\item $\|F\|^2 + \|B\|^2 = 1$ for any pure state.
 \item Fermion spin-$1/2$ is encoded in the universal $-\pi/2$ phase
-      of Paper~VII (four hops $= 4\pi$ rotation $=$ identity).
+      of Paper~VII.
 \item Pauli exclusion: $\|B\| = 0$ for any localised fermion.
 \item Colour symmetry: $|B_{ij}| = 1/3$ for all colour pairs in the
-      $n{=}3$, $m{=}1$ state.
-\item Neutrino as $n{=}2$, $m{=}0$: charge-0 lepton with no
-      electromagnetic phase winding.
+      $n{=}3$, $m{=}1$ class.
+\item Charge as winding number: $m = 0$ gives neutral fermion,
+      $m = 1$ gives charged fermion, within the $n{=}2$ sector.
 \end{enumerate}
 
 \textbf{Conjectures (physically motivated, not yet derived):}
 \begin{enumerate}
-\item[8.] $W^\pm$, $Z$ as massive $n{=}2$, $m{=}1$ cross-peak
-      residuals.
-\item[9.] Higgs as $n{=}3$, $m{=}0$ scalar residual.
-\item[10.] Colour confinement from mixed symmetry of the gluon
-      matrix.
+\item[8.] Confinement from mixed symmetry of the $n{=}3$, $m{=}1$
+      fermion residual.
+\item[9.] $n{=}3$, $m{=}0$ as the scalar sector underlying the
+      Higgs mass generation pattern.
 \end{enumerate}
 
 \textbf{Open:}
 \begin{enumerate}
-\item[11.] Physical identification of the $n{=}4$, $m{=}2$ spin-2
-      object.
+\item[10.] Physical identification of the $n{=}4$, $m{=}2$ spin-2
+      fermion class and its relation to geometric gravity.
 \end{enumerate}
 
 %------------------------------------------------------------
@@ -579,7 +661,7 @@ No such particle has been observed at the LHC.
 
 We have proved that the density matrix of a fermion in equal
 superposition across $n$ sites splits orthogonally into a fermionic
-diagonal $F$ and a bosonic off-diagonal $B$ satisfying
+diagonal $F$ and an off-diagonal residual $B$ satisfying
 \[
   \|F\| = \frac{1}{\sqrt{n}}, \quad
   \|B\| = \sqrt{\frac{n-1}{n}}, \quad
@@ -587,20 +669,30 @@ diagonal $F$ and a bosonic off-diagonal $B$ satisfying
 \]
 The conservation law is exact for any pure state and subsumes the
 Paper~VII result as a special case.
-The winding number $m$ determines boson spin; the fermion spin-$1/2$
-structure is inherited from the universal $-\pi/2$ phase of
-Paper~VII.
-The pair $(n, m)$ classifies the photon, neutrino, and gluon exactly,
-and provides motivated conjectures for the Higgs and massive vector
-bosons.
-The particle mass hierarchy organises into a near-integer sequence
-in $\log_2(m/m_e)$ with 4-bit granularity and predicts no stable
-particle above $\sim 1.25$\,TeV.
 
-The $n{=}4$, $m{=}2$ spin-2 object is noted without a physical
-identification claim.
-Gravity was derived independently at the geometric layer in
-Papers~IV--V and is not revisited here.
+The central reframing of this paper is that bosons are not
+fundamental particles.
+They are the codec's internal record of fermion transitions.
+Every physical observation is a fermion observation.
+The Standard Model boson table is a derived description of fermion
+correlation patterns, not an independent particle ontology.
+
+Under this reframing, the particle classification is a
+\emph{fermion} classification.
+The pair $(n, m)$ describes the fermion's complexity class.
+The $n{=}2$ sector gives charged leptons and neutrinos, distinguished
+by winding number.
+The $n{=}3$ sector gives confined colour-charged fermions (quarks)
+and a scalar sector.
+The mass hierarchy organises into a near-integer sequence in
+$\log_2(m/m_e)$ with 4-bit granularity and predicts no stable
+charged fermion beyond the tau.
+
+The open problems reduce to three purely fermionic questions: why
+three lepton generations, why the quark masses have the values they
+have, and whether the $1/r^2$ electromagnetic force law follows from
+the fermion residual structure by the same argument that gives
+gravity in Paper~VII.
 
 %------------------------------------------------------------
 \section*{Supplementary Material}
@@ -614,43 +706,13 @@ Papers~IV--V and is not revisited here.
         Fractional occupancy; symmetry errors; confinement
         projection residuals.
   \item \texttt{s4\_mass\_spectrum.py} ---
-        Mass hierarchy; lepton ladder; 4-bit codec unit;
-        LHC upper-bound prediction.
+        Lepton mass hierarchy; 4-bit codec unit; upper-bound
+        prediction.
   \item \texttt{s5\_fermion\_boson\_conservation.py} ---
         Theorems~\ref{thm:fermion} and \ref{thm:conservation};
         theta-dependent conservation; full spectrum summary.
 \end{itemize}
 
-%------------------------------------------------------------
-\begin{thebibliography}{99}
-
-\bibitem{meskanen2001}
-J.~Meskanen,
-\textit{Axiomatic Foundations of the Informational Universe},
-Paper~0, IAME Collaboration (2001).
-
-\bibitem{meskanen2026iv}
-J.~Meskanen,
-\textit{Emergence of Spacetime Geometry from Bitstring Compression},
-Paper~IV, IAME Collaboration (2026).
-
-\bibitem{meskanen2026v}
-J.~Meskanen,
-\textit{Emergence of General Relativity},
-Paper~V, IAME Collaboration (2026).
-
-\bibitem{meskanen2026vi}
-J.~Meskanen,
-\textit{The Wavefunction as Compression},
-Paper~VI, IAME Collaboration (2026).
-
-\bibitem{meskanen2026vii}
-J.~Meskanen,
-\textit{Emergence of Quantum Mechanics: Fermions, Bosons and
-Pauli Exclusion},
-Paper~VII, IAME Collaboration (2026).
-
-\end{thebibliography}
+\printbibliography
 
 \end{document}
-
