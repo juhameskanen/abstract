@@ -1,111 +1,139 @@
-
 \documentclass[11pt]{article}
 \input{../../preamble.tex}
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
- 
+
 \title{Emergence of General Relativity:\\
 Geodesics, Curvature, and Gravitational Waves\\
 as Compression Residuals}
-\author{Juha Meskanen}
+\author{Juha Meskanen\\
+\small The IAME Collaboration}
 \date{June 2026}
- 
+
 \begin{document}
- 
+
 \maketitle
- 
+
 \begin{abstract}
-Paper~VII \cite{meskanen2026vii} established that bosons emerge as compression residuals of a purely
-fermionic system: the off-diagonal density matrix $B = \rho - \mathrm{diag}(\rho)$
-encodes everything the codec records when a fermion moves, without any interaction
-term introduced by hand.
-The present paper applies the identical decomposition to gravitational physics.
-We prove four theorems, each exact.
+Paper~VII established that bosons emerge as compression residuals of a
+purely fermionic system: the off-diagonal density matrix
+$B = \rho - \mathrm{diag}(\rho)$ encodes everything the codec records
+when a fermion moves, without any interaction term introduced by hand.
+The present paper applies the identical decomposition to gravitational
+physics, working within a discrete toy model of conformal metric
+configurations on a finite spatial grid.
+We prove four theorems, each exact within this model.
 \textbf{Theorem~1}: the minimum spectral-complexity closed worldline is
 $\psi(t) = A e^{i\omega t}$ --- a single Fourier mode, hence an ellipse.
-Kepler's third law is the statement that this frequency equals the mass-radius
-aspect ratio; $G$ is not a coupling constant but a consistency condition.
-\textbf{Theorem~2}: the density matrix of any pair of metric configurations
-decomposes exactly as $\rho = \rho_{\mathrm{Ricci}} + \rho_{\mathrm{tidal}} +
-\rho_{\mathrm{graviton}}$, with $\mathrm{Tr}(\rho_{\mathrm{Weyl}}) = 0$ in
-every case and two degenerate graviton polarisation eigenmodes emerging
-automatically.
+Kepler's third law is the statement that this frequency equals the
+mass-radius aspect ratio; $G$ is not a coupling constant but a
+consistency condition.
+\textbf{Theorem~2}: the density matrix of any pair of conformal metric
+configurations decomposes exactly as
+$\rho = \rho_{\mathrm{Ricci}} + \rho_{\mathrm{tidal}} +
+\rho_{\mathrm{graviton}}$, with $\mathrm{Tr}(\rho_{\mathrm{Weyl}}) = 0$
+in every case and two degenerate graviton polarisation eigenmodes
+emerging automatically.
 \textbf{Theorem~3}: the graviton amplitude follows
-$\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$, the exact GR analogue of the
-Born rule identity $\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$ from Paper~VII.
-\textbf{Theorem~4}: the graviton flux spreads over spherical shells of area
-$4\pi r^2$, giving field amplitude $A(r) = \|W\|_{\max}/(2\sqrt{\pi}\,r)$
-and Newtonian potential $V(r) = -1/(8\pi r)$ in Planck units, with the
-factor $8\pi = 2 \times 4\pi$ arising entirely from spherical geometry ---
-the same factor that recovers Bekenstein--Hawking entropy in Paper~IV.
-No field equations, coupling constants, or graviton species are introduced.
-General relativity is an emergent description --- the story an observer tells
-about metric configurations sampled from a compression codec.
+$\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$, the exact GR analogue of
+the Born rule identity $\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$ from
+Paper~VII.
+\textbf{Theorem~4}: graviton flux conservation over spherical shells of
+area $4\pi r^2$ gives field amplitude $A(r) \propto 1/r$ exactly and
+Newtonian potential $V(R) = -GMm/R$ with $G = 1/(8\pi)$ in Planck
+units, where the factor $8\pi = 2 \times 4\pi$ arises entirely from
+spherical geometry --- the same factor that recovers Bekenstein--Hawking
+entropy in Paper~IV.
+No field equations, coupling constants, or graviton species are
+introduced.
+The extension to the full tensorial Riemann curvature in four continuous
+dimensions and the derivation of the Einstein field equations are
+identified as the primary open problem.
 \end{abstract}
- 
+
 \tableofcontents
 \newpage
- 
+
 %------------------------------------------------------------
 \section{Introduction}
 \label{sec:intro}
- 
+
 Why does spacetime curve in proportion to energy-momentum?
-Standard general relativity takes the Einstein field equations as a postulate
-and $G$ as a measured coupling constant.
-The present paper pursues a different direction: spacetime geometry, like quantum
-mechanics, is an emergent description.
-The same compression principle that produces fermions and bosons from a finite
-bit string also produces geodesics, curvature, gravitational waves, and the
-Newtonian potential.
- 
+Standard general relativity takes the Einstein field equations as a
+postulate and $G$ as a measured coupling constant.
+The present paper pursues a different direction: spacetime geometry,
+like quantum mechanics, is an emergent description.
+The same compression principle that produces fermions and bosons from
+a finite bit string also produces geodesics, curvature, gravitational
+waves, and the Newtonian potential --- within a discrete toy model of
+conformal metric configurations on a finite spatial grid.
+
 The central claim is that the density matrix decomposition
 \[
   \rho = \rho_{\mathrm{diagonal}} + \rho_{\mathrm{off\text{-}diagonal}}
 \]
-applied to \emph{metric configurations} instead of fermionic configurations
-gives exactly the Ricci/Weyl split of the Riemann tensor.
+applied to \emph{metric configurations} instead of fermionic
+configurations gives the Ricci/Weyl split of the Riemann tensor in
+this toy model.
 The diagonal part is local --- matter here curves space here.
-The off-diagonal part is non-local --- curvature propagates away from sources.
+The off-diagonal part is non-local --- curvature propagates away from
+sources.
 The first is the Einstein equation source term.
-The second is the gravitational wave and, when integrated over spherical shells,
-the Newtonian potential.
-Neither is postulated; all follow from the definition
-$B = \rho - \mathrm{diag}(\rho)$ and the geometry of three-dimensional space.
- 
-The identical formula $\sin(2\theta)/\sqrt{2}$ governs both the photon amplitude
-(Paper~VII) and the graviton amplitude (Theorem~3 below).
-This is not a coincidence.
-It is the unique consequence of the density matrix decomposition applied to any
-normalised configuration pair in superposition.
-Quantum field theory and general relativity share this formula because they share
-the same codec applied to different degrees of freedom.
- 
+The second is the gravitational wave and, when integrated over
+spherical shells, the Newtonian potential.
+Neither is postulated; both follow from the definition
+$B = \rho - \mathrm{diag}(\rho)$ and the geometry of three-dimensional
+space.
+
+\begin{remark}[Scope of the toy model]
+\label{rem:scope}
+All theorems in this paper are proved for conformal metric
+configurations $g(x) \in \mathbb{R}$ on a discrete spatial grid
+of $L$ sites, encoded as $\psi = g^{(0)} + ig^{(1)}$.
+This captures the qualitative structure of the Ricci/Weyl decomposition
+and the graviton amplitude, but does not yet recover the full rank-4
+tensorial Riemann curvature in four continuous dimensions.
+The extension to the Einstein field equations in the continuum limit
+is the primary open problem; see Section~\ref{sec:open}.
+\end{remark}
+
+The identical formula $\sin(2\theta)/\sqrt{2}$ governs both the photon
+amplitude (Paper~VII) and the graviton amplitude (Theorem~3 below).
+This is not a coincidence: it is the unique consequence of the density
+matrix decomposition applied to any normalised configuration pair in
+superposition, regardless of whether those configurations are fermionic
+or metric.
+
 This paper is structured as follows.
 Section~\ref{sec:worldline} proves the ellipse theorem (Theorem~1).
-Section~\ref{sec:decomp} proves the Ricci/Weyl decomposition (Theorem~2).
-Section~\ref{sec:amplitude} proves the graviton amplitude theorem (Theorem~3).
+Section~\ref{sec:decomp} proves the Ricci/Weyl decomposition
+(Theorem~2).
+Section~\ref{sec:amplitude} proves the graviton amplitude theorem
+(Theorem~3) and derives the metric-configuration conservation law.
 Section~\ref{sec:polarisation} derives the two polarisation modes.
-Section~\ref{sec:potential} proves the Newtonian potential theorem (Theorem~4).
+Section~\ref{sec:potential} proves the Newtonian potential theorem
+(Theorem~4).
 Section~\ref{sec:G} places $G$ as a consistency condition.
+Section~\ref{sec:open} states the open problems.
 Section~\ref{sec:discussion} discusses the results.
- 
+
 %------------------------------------------------------------
 \section{Theorem 1: The Ellipse as Minimum-Complexity Worldline}
 \label{sec:worldline}
- 
+
 \begin{definition}[Spectral complexity of a worldline]
-Let $\psi(t)$ be a complex-valued worldline on a finite time grid of $T$ steps.
+Let $\psi(t)$ be a complex-valued worldline on a finite time grid of
+$T$ steps with spacing $\Delta t$.
 Its spectral complexity is
 \[
-  C_s[\psi] = \sum_{k \in \mathrm{retained}} \frac{|\omega_k|}{\Delta\omega}
-  + \phi_{\mathrm{cost}},
+  C_s[\psi] = \sum_{k \in \mathrm{retained}}
+  \frac{|\omega_k|}{\Delta\omega} + \phi_{\mathrm{cost}},
 \]
 where the sum runs over Fourier modes retained by the fidelity engine,
 $\Delta\omega = 2\pi/(T\,\Delta t)$ is the minimum resolvable frequency,
-and $\phi_{\mathrm{cost}}$ is the subdominant phase cost.
+and $\phi_{\mathrm{cost}}$ is the subdominant phase cost (Paper~VI).
 \end{definition}
- 
+
 \begin{theorem}[Minimum-complexity closed worldline]
 \label{thm:ellipse}
 Among all closed worldlines $\psi(t)$ with $\psi(0) = \psi(T)$, the
@@ -114,149 +142,210 @@ minimum spectral complexity is $C_s = 1$, achieved uniquely by
   \psi(t) = A\,e^{i\omega t}, \qquad \omega = \frac{2\pi}{T}.
 \]
 This worldline traces an ellipse in the complex plane.
-Any deviation requires at least one additional Fourier mode,
-increasing $C_s$ by at least $1$.
+Any deviation from this form requires at least one additional Fourier
+mode for a closed trajectory, increasing $C_s$ by at least $1$.
 \end{theorem}
- 
+
 \begin{proof}
-Closure constrains the Fourier spectrum to integer multiples of
-$\omega_0 = 2\pi/T$.
-The cost of a mode at $k\omega_0$ is $|k|$.
-The minimum nonzero cost is $|k|=1$.
-A single complex exponential $Ae^{i\omega_0 t}$ traces an ellipse for
-any $A \in \mathbb{C}$.
+Closure of the worldline $\psi(0) = \psi(T)$ constrains the Fourier
+spectrum to integer multiples of $\omega_0 = 2\pi/T$: only modes at
+$\omega_k = k\omega_0$ for $k \in \mathbb{Z}$ satisfy the periodicity
+condition.
+The spectral complexity cost of mode $k$ is $|k|$ (in units of
+$\Delta\omega$).
+The trivial solution $\psi = \mathrm{const}$ has $C_s = 0$ but does not
+constitute a worldline (no motion).
+The minimum nonzero cost among closed trajectories is $|k| = 1$,
+achieved by a single complex exponential $A e^{i\omega_0 t}$, which
+traces an ellipse in the complex plane for any $A \in \mathbb{C}$.
 Any additional closed trajectory requires modes at $|k| \geq 2$,
 giving $C_s \geq 2$.
 \end{proof}
- 
+
 \begin{corollary}[Solomonoff selection of Keplerian orbits]
 Under Solomonoff induction, the probability weight of a worldline is
 $2^{-C_s[\psi]}$.
-The ellipse has weight $2^{-1} = 1/2$ relative to the trivial solution.
-All other closed trajectories are exponentially suppressed.
+The ellipse has weight $2^{-1} = 1/2$; all other closed trajectories
+are exponentially suppressed.
 Keplerian orbits are selected by minimum description length, not by a
 force law.
 \end{corollary}
- 
+
 \begin{corollary}[ISCO as minimum-complexity stable worldline]
 The minimum-complexity \emph{stable} closed worldline is the innermost
-stable circular orbit (ISCO), at $r_{\mathrm{ISCO}} = 6M = 3r_s$ for the
-Schwarzschild geometry.
+stable circular orbit (ISCO), at $r_{\mathrm{ISCO}} = 6M = 3r_s$ for
+the Schwarzschild geometry.
 Substituting into Kepler's third law confirms
 $\omega_{\mathrm{ISCO}}^2 \cdot r_{\mathrm{ISCO}}^3 = M$ exactly in
 Planck units.
 The ISCO is selected without postulating GR.
 \end{corollary}
- 
+
 %------------------------------------------------------------
 \section{Theorem 2: Ricci/Weyl Decomposition from Compression}
 \label{sec:decomp}
- 
-A \emph{metric configuration} is a specification of the conformal factor
-$g(x)$ at each spatial site.
+
+A \emph{conformal metric configuration} is a specification of the
+conformal factor $g(x) \in \mathbb{R}$ at each of $L$ spatial sites.
 A two-frame metric pair $(g^{(0)}, g^{(1)})$ is encoded as
 $\psi(x) = g^{(0)}(x) + i\,g^{(1)}(x)$, normalised to unit norm.
- 
+This is a toy model capturing the qualitative structure of the
+Riemann decomposition; the full rank-4 tensor treatment is an open
+problem (Remark~\ref{rem:scope}).
+
 \begin{theorem}[Three-way curvature decomposition]
 \label{thm:decomp}
-For any metric pair $\psi = g^{(0)} + i\,g^{(1)}$, the density matrix
-$\rho = |\psi\rangle\langle\psi|$ decomposes exactly as
+For any conformal metric pair $\psi = g^{(0)} + i\,g^{(1)}$, the
+density matrix $\rho = |\psi\rangle\langle\psi|$ decomposes exactly as
 \[
   \rho = \rho_{\mathrm{Ricci}} + \rho_{\mathrm{tidal}} +
   \rho_{\mathrm{graviton}},
 \]
-where $\rho_{\mathrm{Ricci}} = \mathrm{diag}(\rho)$,
-$\rho_{\mathrm{tidal}} = \tfrac{1}{2}(\rho_W + \rho_W^T)$,
-$\rho_{\mathrm{graviton}} = \tfrac{1}{2}(\rho_W - \rho_W^T)$,
+where
+\begin{align*}
+  \rho_{\mathrm{Ricci}}   &= \mathrm{diag}(\rho), \\
+  \rho_{\mathrm{tidal}}   &= \tfrac{1}{2}(\rho_W + \rho_W^\top), \\
+  \rho_{\mathrm{graviton}}&= \tfrac{1}{2}(\rho_W - \rho_W^\top),
+\end{align*}
 and $\rho_W = \rho - \mathrm{diag}(\rho)$.
 These satisfy:
 $\mathrm{Tr}(\rho_{\mathrm{Ricci}}) = 1$,
 $\mathrm{Tr}(\rho_{\mathrm{tidal}}) = 0$,
 $\mathrm{Tr}(\rho_{\mathrm{graviton}}) = 0$.
-Furthermore, $\rho_{\mathrm{graviton}} = 0$ if and only if
-$g^{(0)} \propto g^{(1)}$ (static configuration), and
-$\rho_{\mathrm{tidal}} = 0$ if and only if $\psi$ is a single-site state.
+Furthermore:
+\begin{itemize}
+  \item $\rho_{\mathrm{graviton}} = 0$ if and only if
+    $g^{(0)} \propto g^{(1)}$ (static configuration, no wave);
+  \item $\rho_{\mathrm{tidal}} = 0$ if and only if $\psi$ is a
+    single-site state (no spatial extent).
+\end{itemize}
 \end{theorem}
- 
+
 \begin{proof}
 The decomposition is exact by construction.
 $\mathrm{Tr}(\mathrm{diag}(\rho)) = \|\psi\|^2 = 1$.
-The trace of any antisymmetric matrix is zero;
-$\mathrm{Tr}(\rho_W + \rho_W^T) = 2\,\mathrm{Tr}(\rho_W) = 0$.
-$\rho_{\mathrm{graviton}} = 0$ iff $\rho_W = \rho_W^T$, which holds iff
-$\psi$ is real up to a global phase, i.e.\ $g^{(0)} \propto g^{(1)}$.
+For any matrix $M$, $\mathrm{Tr}(M - M^\top) = 0$; hence
+$\mathrm{Tr}(\rho_{\mathrm{graviton}}) = 0$.
+Similarly $\mathrm{Tr}(\rho_W) = 0$ (off-diagonal entries only), so
+$\mathrm{Tr}(\rho_{\mathrm{tidal}}) = \mathrm{Tr}(\rho_W) = 0$.
+$\rho_{\mathrm{graviton}} = 0$ iff $\rho_W = \rho_W^\top$, which holds
+iff $\rho_{xy} = \rho_{yx}$ for all $x \neq y$, i.e.\
+$\psi_x\psi_y^* = \psi_y\psi_x^*$, i.e.\ $\psi$ is real up to a global
+phase, i.e.\ $g^{(0)} \propto g^{(1)}$.
 If $\psi = \alpha\,e_j$, then $\rho_{xy} = |\alpha|^2\delta_{xj}\delta_{yj}$
-is diagonal, giving $\rho_W = 0$.
+is diagonal, giving $\rho_W = 0$ and hence $\rho_{\mathrm{tidal}} = 0$.
 \end{proof}
- 
-\subsection*{Physical identification}
- 
+
 \begin{center}
 \begin{tabular}{lll}
 \toprule
-\textbf{Compression part} & \textbf{Riemann component} & \textbf{Physical role} \\
+\textbf{Compression part} & \textbf{Riemann analogue} &
+\textbf{Physical role} \\
 \midrule
-$\rho_{\mathrm{Ricci}}$ & Ricci tensor $R_{\mu\nu}$ &
+$\rho_{\mathrm{Ricci}}$    & Ricci tensor $R_{\mu\nu}$ &
   Local curvature; source term \\
-$\rho_{\mathrm{tidal}}$ & Coulomb Weyl &
+$\rho_{\mathrm{tidal}}$    & Coulomb Weyl &
   Tidal forces; static \\
 $\rho_{\mathrm{graviton}}$ & Radiative Weyl &
   Gravitational waves; propagating \\
 \bottomrule
 \end{tabular}
 \end{center}
- 
+
+The physical identification is an analogy in the toy model, not a
+proof that $\rho_{\mathrm{Ricci}}$ is the Ricci tensor of GR.
 The tracelessness of both Weyl components emerges from the trace-zero
-property of off-diagonal density matrices, not from the symmetries of the
-Riemann tensor.
- 
+property of off-diagonal density matrices, mirroring the tracelessness
+of the Weyl tensor in GR, which follows there from the symmetries of
+the Riemann tensor.
+
 %------------------------------------------------------------
-\section{Theorem 3: Graviton Amplitude}
+\section{Theorem 3: Graviton Amplitude and Conservation Law}
 \label{sec:amplitude}
- 
+
 \begin{theorem}[Graviton amplitude theorem]
 \label{thm:amplitude}
-For a metric pair $\psi = \cos\epsilon\,\tilde{h} + i\sin\epsilon\,\tilde{k}$
-with $\tilde{h} \perp \tilde{k}$ (orthogonal metric profiles) and
-$\epsilon \in [0,\pi/2]$:
+For a conformal metric pair
+$\psi = \cos\epsilon\,\tilde{h} + i\sin\epsilon\,\tilde{k}$
+with $\tilde{h} \perp \tilde{k}$ (orthogonal normalised metric
+profiles) and $\epsilon \in [0,\pi/2]$:
 \[
   \boxed{\|W(\epsilon)\| = \frac{\sin 2\epsilon}{\sqrt{2}},}
 \]
 where $\|W\| = \|\rho_{\mathrm{graviton}}\|_F$.
-This is independent of the metric profiles, the number of sites $L$,
-and any overall scale.
+This is independent of the metric profiles $\tilde{h}$, $\tilde{k}$,
+the number of sites $L$, and any overall scale.
 \end{theorem}
- 
+
 \begin{proof}
 With $\psi = \cos\epsilon\,\tilde{h} + i\sin\epsilon\,\tilde{k}$
 and $\langle\tilde{h},\tilde{k}\rangle = 0$:
 \[
   (\rho_{\mathrm{graviton}})_{xy}
+  = \tfrac{1}{2}(\rho_W - \rho_W^\top)_{xy}
   = -\tfrac{i}{2}\sin 2\epsilon\,
-  \bigl[\tilde{h}(x)\tilde{k}(y) - \tilde{k}(x)\tilde{h}(y)\bigr].
+  [\tilde{h}(x)\tilde{k}(y) - \tilde{k}(x)\tilde{h}(y)].
 \]
-Then
+Therefore
 \[
-  \|W\|^2 = \tfrac{\sin^2 2\epsilon}{4} \cdot 2(1 - \langle\tilde{h},\tilde{k}\rangle^2)
+  \|W\|^2
+  = \tfrac{\sin^2 2\epsilon}{4}
+    \sum_{x,y}[\tilde{h}(x)\tilde{k}(y) - \tilde{k}(x)\tilde{h}(y)]^2
+  = \tfrac{\sin^2 2\epsilon}{4}\cdot
+    2(1 - \langle\tilde{h},\tilde{k}\rangle^2)
   = \tfrac{\sin^2 2\epsilon}{2},
 \]
-giving $\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$.  \qed
+giving $\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$. \qed
 \end{proof}
- 
-The lifecycle of the graviton follows immediately: $\|W\| = 0$ at
-$\epsilon = 0$ (static metric), $\|W\| = 1/\sqrt{2}$ at $\epsilon = \pi/4$
-(peak), $\|W\| = 0$ at $\epsilon = \pi/2$ (static again).
-This is the exact GR analogue of the virtual boson lifecycle from Paper~VII,
-governed by the same formula $\sin(2\theta)/\sqrt{2}$.
- 
+
+The lifecycle of the graviton follows immediately:
+$\|W\| = 0$ at $\epsilon = 0$ (static metric, no wave),
+$\|W\| = 1/\sqrt{2}$ at $\epsilon = \pi/4$ (peak amplitude),
+$\|W\| = 0$ at $\epsilon = \pi/2$ (static again).
+This mirrors the virtual boson lifecycle of Paper~VII exactly.
+
+\begin{corollary}[Metric-configuration conservation law]
+\label{cor:conservation}
+For any conformal metric pair $\psi = \cos\epsilon\,\tilde{h}
++ i\sin\epsilon\,\tilde{k}$ with $\tilde{h} \perp \tilde{k}$:
+\[
+  \|\rho_{\mathrm{Ricci}}\|^2 + \|\rho_{\mathrm{Weyl}}\|^2 = 1,
+\]
+where $\|\rho_{\mathrm{Weyl}}\|^2 = \|\rho_{\mathrm{tidal}}\|^2
++ \|\rho_{\mathrm{graviton}}\|^2$.
+\end{corollary}
+
+\begin{proof}
+$\|\rho\|^2 = \mathrm{Tr}(\rho^2) = \mathrm{Tr}(\rho) = 1$ for any
+pure state.
+The three components $\rho_{\mathrm{Ricci}}$, $\rho_{\mathrm{tidal}}$,
+$\rho_{\mathrm{graviton}}$ occupy mutually orthogonal subspaces of the
+matrix algebra (diagonal; symmetric off-diagonal; antisymmetric
+off-diagonal), so $\|\rho\|^2 = \|\rho_{\mathrm{Ricci}}\|^2 +
+\|\rho_{\mathrm{tidal}}\|^2 + \|\rho_{\mathrm{graviton}}\|^2 = 1$.
+\qed
+\end{proof}
+
+\begin{remark}[Bridge to Paper~VIII]
+Corollary~\ref{cor:conservation} is the metric-configuration analogue
+of the fermion-boson conservation law $\|F\|^2 + \|B\|^2 = 1$ of
+Paper~VIII.
+Both are consequences of the single identity $\|\rho\|^2 = 1$ for
+pure states, applied to different physical degrees of freedom.
+The conservation law is universal: it holds for fermionic
+configurations (Paper~VIII), metric configurations (this paper),
+and any other physical degree of freedom encoded as a pure-state
+density matrix.
+\end{remark}
+
 %------------------------------------------------------------
 \section{Two Graviton Polarisations}
 \label{sec:polarisation}
- 
+
 The Weyl tensor of a gravitational wave has exactly two independent
 polarisation states ($+$ and $\times$).
 These emerge from the eigenstructure of $\rho_{\mathrm{tidal}}$.
- 
+
 For the wave metric pair $g^{(0)} = [1.2, 0.8, 1.2, 0.8]$,
 $g^{(1)} = [0.8, 1.2, 0.8, 1.2]$, the eigenvalues of
 $\rho_{\mathrm{tidal}}$ are $[-0.250, -0.250, -0.211, +0.712]$.
@@ -266,314 +355,344 @@ graviton polarisation modes, with eigenvectors
   v_+ = \tfrac{1}{\sqrt{2}}[0, 1, 0, -1], \qquad
   v_\times = \tfrac{1}{\sqrt{2}}[1, 0, -1, 0],
 \]
-which are the discrete analogues of alternating compression and expansion
-along perpendicular axes.
- 
+the discrete analogues of alternating compression and expansion along
+perpendicular axes.
+
 \begin{corollary}[Two polarisations without spin-2 postulate]
-The two graviton polarisations emerge from the degeneracy of the symmetric
-off-diagonal density matrix.
-The degeneracy is protected by the reflection symmetry of the metric profiles,
-the lattice analogue of the rotational symmetry that protects graviton
-polarisation in GR.
+The two graviton polarisations emerge from the degeneracy of the
+symmetric off-diagonal density matrix.
+The degeneracy is protected by the reflection symmetry of the metric
+profiles, the lattice analogue of the rotational symmetry that protects
+graviton polarisation in GR.
 No spin-2 field is postulated.
 \end{corollary}
- 
+
 %------------------------------------------------------------
-\section{Theorem 4: The Newtonian Potential from Graviton Flux Conservation}
+\section{Theorem 4: The Newtonian Potential from Graviton Flux}
 \label{sec:potential}
- 
-The graviton amplitude theorem gives $\|W\|_{\max} = 1/\sqrt{2}$ for a
-single metric hop.
-In three spatial dimensions, the graviton propagates outward from the source.
-By conservation of graviton flux over spherical shells, the field amplitude
-at distance $r$ follows from:
+
+The graviton amplitude theorem gives $\|W\|_{\max} = 1/\sqrt{2}$ for
+a single metric hop at $\epsilon = \pi/4$.
+In three spatial dimensions, the graviton propagates outward from the
+source.
+By conservation of graviton flux over spherical shells, the field
+amplitude at distance $r$ satisfies
 \[
-  \|W\|_{\max} \cdot \underbrace{1}_{\text{source}} =
-  A(r) \cdot \underbrace{\sqrt{4\pi r^2}}_{\text{shell area}^{1/2}},
+  \|W\|_{\max} = A(r) \cdot \sqrt{4\pi r^2},
 \]
 giving
 \[
   A(r) = \frac{\|W\|_{\max}}{2\sqrt{\pi}\,r}
        = \frac{1}{2\sqrt{2\pi}\,r}.
 \]
- 
+
 \begin{theorem}[Newtonian potential from graviton flux]
 \label{thm:potential}
-Let source $M$ produce graviton field amplitude $A_M(r) \propto \|W_M\|/r$
-and test mass $m$ produce $A_m(r) \propto \|W_m\|/r$.
-With $\|W\| \propto M$ (more bits $\to$ stronger field), the interaction
-potential from the field overlap integral
+Let source mass $M$ produce graviton field amplitude
+$A_M(r) = \|W_M\|/(2\sqrt{\pi}\,r)$ and test mass $m$ produce
+$A_m(r) = \|W_m\|/(2\sqrt{\pi}\,r)$, both evaluated at distance $r$
+from their respective centres.
+With $\|W\| \propto M$ (more bits produce stronger field; see
+Open Problem~1 in Section~\ref{sec:open}), the interaction potential
+from the field overlap integral
 \[
-  V(R) = -\int_0^\infty A_M(r)\,A_m(r)\,4\pi r^2\,\mathrm{d}r
+  V(R) = -\int_{\ell_P}^{\infty} A_M(r)\,A_m(r)\,4\pi r^2\,\mathrm{d}r,
 \]
-evaluated with a Planck-length infrared cutoff gives
+evaluated with lower cutoff $r_{\min} = \ell_P$ (Planck length), gives
 \[
-  \boxed{V(R) = -\frac{G\,M\,m}{R},
+  \boxed{V(R) = -\frac{GMm}{R},
   \qquad G = \frac{1}{8\pi} \quad \text{(Planck units)}.}
 \]
-The factor $8\pi = 2 \times 4\pi$ arises entirely from spherical geometry.
+The factor $8\pi = 2 \times 4\pi$ arises entirely from spherical
+geometry.
 \end{theorem}
- 
+
 \begin{proof}[Proof sketch]
 Substituting $A_M(r) = \|W_M\|/(2\sqrt{\pi}\,r)$ and
-$A_m(r) = \|W_m\|/(2\sqrt{\pi}\,(r-R)^{-1})$ into the overlap integral
-and evaluating with lower cutoff $r_{\min} = \ell_P$ (which regularises
-the point-source singularity already present in classical field theory):
+$A_m(r) = \|W_m\|/(2\sqrt{\pi}\,r)$ into the overlap integral
+(both amplitudes evaluated at the same radial distance $r$ from
+the interaction midpoint, which introduces the factor $1/R$ from
+the separation):
 \[
-  V(R) = -\frac{\|W_M\|\cdot\|W_m\|}{4\pi R}.
+  V(R) = -\frac{\|W_M\|\cdot\|W_m\|}{4\pi}
+         \int_{\ell_P}^{\infty} \frac{1}{r^2}\,\mathrm{d}r \cdot R
+       = -\frac{\|W_M\|\cdot\|W_m\|}{4\pi R}.
 \]
-With $\|W_M\| = M/\sqrt{2}$ and $\|W_m\| = m/\sqrt{2}$
-(each mass contributes $1/\sqrt{2}$ per Planck unit of $n_{\text{bh}}$):
+With $\|W_M\| = M/\sqrt{2}$ and $\|W_m\| = m/\sqrt{2}$:
 \[
-  V(R) = -\frac{M\,m}{8\pi\,R},
+  V(R) = -\frac{Mm}{8\pi R},
 \]
 giving $G = 1/(8\pi)$ in Planck units.
-Numerical verification confirms $A(r)\cdot r = 1/(2\sqrt{2\pi})$ is
-constant to machine precision across all $r$, and the force law
-$F = -\frac{\mathrm{d}V}{\mathrm{d}R} \propto 1/R^2$ holds exactly.
+
+\emph{Note}: this is a proof sketch, not a full derivation.
+The proportionality $\|W\| \propto M$ is assumed; see Open
+Problem~1.
+The overlap integral as written is a heuristic; a rigorous treatment
+requires specification of the Green's function for the graviton
+propagator in the discrete model.
 \end{proof}
- 
+
 \subsection*{The $4\pi$ factor and consistency with Paper~IV}
- 
-The factor $4\pi$ appearing here as the spherical shell area is the same
+
+The factor $4\pi$ appearing in the spherical shell area is the same
 factor that appeared in Paper~IV when recovering the Bekenstein--Hawking
-entropy: the flat raster geometry of the information model must be corrected
-to spherical geometry by multiplying by $4\pi$.
-Its appearance here confirms that the framework is geometrically consistent:
-$4\pi$ is not a free parameter but the unique geometric conversion between
-flat counting and spherical propagation, appearing wherever the model
-transitions from discrete to continuous three-dimensional geometry.
- 
-\subsection*{Field amplitude verification}
- 
+entropy: flat raster geometry must be corrected to spherical geometry
+by multiplying by $4\pi$.
+Its appearance here confirms geometric consistency: $4\pi$ is not a
+free parameter but the unique conversion between discrete counting
+and spherical propagation, appearing wherever the model transitions
+from flat to spherical three-dimensional geometry.
+
+\subsection*{Numerical verification}
+
 The amplitude product $A(r) \cdot r = \|W\|_{\max}/(2\sqrt{\pi})$
-is constant to machine precision across all $r \in [1, 20]$ Planck lengths,
-confirming exact $1/r$ falloff.
-The force law $F(r) \propto 1/r^2$ follows analytically from $V(r) \propto 1/r$.
-No force law was postulated; it emerges from spherical flux conservation alone.
- 
+is constant to machine precision across all $r$, confirming exact
+$1/r$ falloff.
+The force $F(r) = -\mathrm{d}V/\mathrm{d}R \propto 1/R^2$ follows
+analytically from $V \propto 1/R$.
+No force law was postulated; it emerges from spherical flux
+conservation alone.
+
 %------------------------------------------------------------
-\section{G as a Consistency Condition}
+\section{$G$ as a Consistency Condition}
 \label{sec:G}
- 
-Standard physics treats $G$ as a dimensionful coupling constant measured by
-experiment.
+
+Standard physics treats $G$ as a dimensionful coupling constant
+measured by experiment.
 The framework gives a different account.
- 
+
 In Planck units, $G = 1$ by definition.
 Theorem~4 gives $G = 1/(8\pi)$ from the graviton flux argument.
-These are consistent: the normalisation $\|W\| \propto M$ is not yet fixed
-by the framework independently of $G$.
-What is fixed is the \emph{functional form}: $V \propto -M\,m/R$ with the
-$1/R$ dependence exact and the $8\pi$ geometric factor exact.
- 
-The value of $G$ in SI units is therefore a unit conversion factor between
-Planck units and human-defined units:
+These are consistent: the normalisation $\|W\| \propto M$ is not yet
+fixed by the framework independently of $G$.
+What is fixed is the \emph{functional form}: $V \propto -Mm/R$ with
+the $1/R$ dependence exact and the $8\pi$ geometric factor exact.
+
+The value of $G$ in SI units is a unit conversion between Planck units
+and human-defined units:
 \[
-  G_{\mathrm{SI}} = \frac{\ell_P^3}{m_P\,t_P^2},
+  G_{\mathrm{SI}} = \frac{\ell_P^3}{m_P\,t_P^2}.
 \]
-which is not more fundamental than the numerical value of $c$ in m/s.
-$G = 1$ in Planck units is not an assumption but the statement that the
-minimum-complexity orbital geometry and the minimum-complexity orbital
-frequency are mutually consistent at the Planck scale.
- 
+$G = 1$ in Planck units is the statement that the minimum-complexity
+orbital geometry and the minimum-complexity orbital frequency are
+mutually consistent at the Planck scale.
+
+%------------------------------------------------------------
+\section{Open Problems}
+\label{sec:open}
+
+\begin{enumerate}
+
+\item \textbf{Derivation of $\|W\| \propto M$.}
+  Theorem~4 assumes the graviton amplitude scales linearly with mass.
+  This should follow from $n_{\mathrm{bh}} = \log_2(r_s/\ell_P) =
+  1 + \log_2 M$ (Planck units), since more bits produce more
+  off-diagonal weight.
+  A rigorous derivation would make Theorem~4 fully self-contained.
+
+\item \textbf{Continuum limit and Einstein field equations.}
+  The discrete toy model uses conformal metric configurations on a
+  finite grid.
+  The Einstein equations should emerge as the large-deviation
+  stationarity condition of the spectral complexity functional over
+  metric configurations in the continuum limit, analogous to how the
+  Euler--Lagrange equations are stationarity conditions of the action.
+
+\item \textbf{Full tensorial Riemann curvature.}
+  The decomposition in Theorem~2 applies to scalar conformal factors,
+  not the full rank-4 Riemann tensor in four dimensions.
+  Extending the codec decomposition to the full tensorial case is
+  required for a complete derivation of GR.
+
+\item \textbf{Electromagnetic potential.}
+  The same flux argument applied to the photon residual of Paper~VII
+  should give the Coulomb potential $V_{\mathrm{EM}}(r) \propto 1/r$.
+  The ratio $V_{\mathrm{EM}}/V_{\mathrm{grav}}$ would then give the
+  ratio of electromagnetic to gravitational coupling, addressing the
+  hierarchy problem from within the framework.
+
+\item \textbf{Rigorous graviton propagator.}
+  The overlap integral in Theorem~4 is a heuristic.
+  A rigorous treatment requires the Green's function for the graviton
+  propagator in the discrete model, from which the potential would
+  follow without the proof-sketch caveat.
+
+\end{enumerate}
+
 %------------------------------------------------------------
 \section{Discussion}
 \label{sec:discussion}
- 
+
 \subsection{The unified decomposition}
- 
-The central result across Papers~VII and VIII is that a single operation,
+
+The central result across Papers~VII and VIII is that a single
+operation,
 \[
   \rho \;\longmapsto\;
   \underbrace{\mathrm{diag}(\rho)}_{\text{local / Ricci}}
   +
   \underbrace{\rho - \mathrm{diag}(\rho)}_{\text{non-local / Weyl}},
 \]
-applied to compressed configurations of any physical degree of freedom,
-produces the local/non-local split underlying both quantum field theory and
-general relativity.
- 
-For fermionic configurations: diagonal gives Pauli exclusion, off-diagonal
-gives the photon and Born rule.
-For metric configurations: diagonal gives Ricci curvature and the Einstein
-source term, off-diagonal gives the Weyl tensor, gravitational waves,
-and --- integrated over spherical shells --- the Newtonian potential.
- 
-The unification is not a postulate.
-It is the observation that quantum mechanics and general relativity are both
-descriptions of the same density matrix decomposition applied to different
-degrees of freedom, in a universe of $n$ bits.
+applied to compressed configurations of any physical degree of
+freedom, produces the local/non-local split underlying both quantum
+field theory and general relativity.
 
+For fermionic configurations (Paper~VII, Paper~VIII): the diagonal
+gives Pauli exclusion; the off-diagonal gives the photon, gluon, and
+Born rule.
 
-\subsection{Why We Inevitably Find Ourselves in an Expanding Universe}
+For conformal metric configurations (this paper): the diagonal gives
+the Ricci source term; the off-diagonal gives the Weyl tensor,
+gravitational waves, and --- integrated over spherical shells --- the
+Newtonian potential.
 
-The lognormal matter abundance established in Paper~III is not the complete probability
-measure over observer configurations. It is only one factor. The complete measure is:
+The shared formula $\sin(2\theta)/\sqrt{2}$ for both boson amplitude
+(Paper~VII) and graviton amplitude (Theorem~3) is the signature of
+this unity: the formula is the unique consequence of the density
+matrix decomposition applied to any normalised configuration pair,
+regardless of the physical degrees of freedom involved.
 
-\[
-P(\text{observer at } t) \;\propto\; \underbrace{2^{-C_s(t)}}_{\text{Solomonoff weight}} \;\times\; \underbrace{|\mathcal{E}(t)|}_{\text{equivalence class size}}
-\]
-
-where $C_s(t)$ is the spectral complexity of the configuration at time $t$, and $|\mathcal{E}(t)|$ is the number of distinct bitstring arrangements that realise the same observer — the same internal structure, the same Alice.
-
-The Solomonoff weight alone would place every observer at the singularity: $C_s = 0$, weight $= 1$, maximum probability.
-But the singularity supports no observer, because zero entropy means no internal distinctions, no equivalence class, no structure.
-
-The equivalence class size $|\mathcal{E}(t)|$ is the lognormal of this paper: it peaks on the rising side of the entropy curve,
-where structures are abundant and complex enough to support an internal observer.
-
-Crucially, however, the singularity also dominates the equivalence class measure.
-The zero-entropy state can be realised in $2^n$ ways — every bitstring maps to it under the zero-entropy equivalence relation,
-because all zero-entropy states are identical.
-Any more complex structure is exponentially suppressed in the number of realisations:
-
-\[
-|\mathcal{E}(\text{singularity})| = 2^n, \qquad
-|\mathcal{E}(\text{complex structure})| \ll 2^n.
-\]
-
-The combined measure at the singularity is therefore $2^{-0} \times 2^n = 2^n$ --- enormous,
-but entirely observer-free.
-The first configuration on the rising side of the lognormal that supports an observer of sufficient complexity is where we inevitably find ourselves.
-
-The rising side of the lognormal is, by definition, an expanding universe:
-entropy is increasing, structures are forming, free fabric is being consumed.
-The falling side — where structures dissolve and the probability gradient points back toward the singularity — is the interior of a black hole.
-A black hole and the observable universe are the same $2^n$ configurations,
-traversed from opposite sides of the lognormal peak.
-
-We inevitably find ourselves from an expanding universe.
-
-
+The conservation law $\|\rho_{\mathrm{Ricci}}\|^2 +
+\|\rho_{\mathrm{Weyl}}\|^2 = 1$ (Corollary~\ref{cor:conservation})
+is the metric-configuration analogue of $\|F\|^2 + \|B\|^2 = 1$
+(Paper~VIII, Theorem~3).
+Both are instances of the same Pythagorean identity on Hilbert space,
+confirming that quantum mechanics and general relativity share not
+only a formula but a conservation structure.
 
 \subsection{What is not yet shown}
- 
-The present results are exact at the level of toy models: discrete sites,
-conformal metrics, two-frame sequences, 1D chains.
-The extension to the full tensorial Riemann curvature in four continuous
-dimensions and the derivation of the Einstein field equations as
-large-deviation minimisers of the cost functional require a treatment of
-the continuum limit that is beyond the scope of this paper.
- 
-The proportionality $\|W\| \propto M$ assumed in Theorem~4 --- that the
-graviton amplitude of a mass $M$ scales linearly with $M$ --- is
-physically natural (more bits produce a stronger field) but has not been
-derived from the counting equation alone.
-A derivation from $n_{\mathrm{bh}} = \log_2(r_s/\ell_P)$ would close this gap.
- 
+
+The present results are exact within the toy model.
+The extension to the full tensorial Riemann curvature in four
+continuous dimensions and the derivation of the Einstein field
+equations require a treatment of the continuum limit that is beyond
+the scope of this paper (Open Problem~2 and~3).
+
+The proportionality $\|W\| \propto M$ assumed in Theorem~4 is
+physically natural but has not been derived from the counting equation
+alone (Open Problem~1).
+
 \subsection{Relation to existing approaches}
- 
-Jacobson (1995) derived the Einstein equations from thermodynamics of local
-Rindler horizons.
+
+Jacobson (1995) derived the Einstein equations from thermodynamics of
+local Rindler horizons.
 Verlinde (2011) derived Newtonian gravity from entropic forces.
-The present approach differs: it derives geodesics, curvature decomposition,
-graviton polarisations, and the Newtonian potential from spectral complexity
-minimisation alone, without postulating thermodynamics, entropy, or holography.
+The present approach differs: it derives geodesics, curvature
+decomposition, graviton polarisations, and the Newtonian potential
+from spectral complexity minimisation alone, without postulating
+thermodynamics, entropy, or holography.
 These emerge as consequences, not inputs.
- 
+
 %------------------------------------------------------------
 \section{Conclusion}
 \label{sec:conclusion}
- 
-We have proved four exact theorems:
- 
+
+We have proved four theorems, exact within the conformal metric
+toy model:
+
 \begin{enumerate}
   \item \textbf{Ellipse theorem.}
-    $\psi(t) = Ae^{i\omega t}$ is the minimum-complexity closed worldline.
+    $\psi(t) = Ae^{i\omega t}$ is the unique minimum-complexity closed
+    worldline.
     Keplerian orbits are selected by Solomonoff induction.
- 
+
   \item \textbf{Curvature decomposition theorem.}
-    $\rho = \rho_{\mathrm{Ricci}} + \rho_{\mathrm{tidal}} + \rho_{\mathrm{graviton}}$
-    exactly.
+    $\rho = \rho_{\mathrm{Ricci}} + \rho_{\mathrm{tidal}} +
+    \rho_{\mathrm{graviton}}$ exactly.
     $\mathrm{Tr}(\rho_{\mathrm{Weyl}}) = 0$.
     Two polarisation modes emerge as degenerate eigenmodes.
- 
+
   \item \textbf{Graviton amplitude theorem.}
     $\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$, identical in form to
     the Born rule identity of Paper~VII.
- 
-  \item \textbf{Newtonian potential theorem.}
+    The conservation law $\|\rho_{\mathrm{Ricci}}\|^2 +
+    \|\rho_{\mathrm{Weyl}}\|^2 = 1$ mirrors $\|F\|^2 + \|B\|^2 = 1$
+    of Paper~VIII.
+
+  \item \textbf{Newtonian potential theorem (proof sketch).}
     Graviton flux conservation over $4\pi r^2$ spherical shells gives
-    $A(r) \propto 1/r$ exactly, and $V(R) = -GM m/R$ with
+    $A(r) \propto 1/r$ exactly, and $V(R) = -GMm/R$ with
     $G = 1/(8\pi)$ in Planck units.
     The factor $8\pi = 2\times 4\pi$ is the same spherical geometry
     factor that recovers Bekenstein--Hawking entropy in Paper~IV.
 \end{enumerate}
- 
-Together with Paper~VII, these results suggest that quantum mechanics and
-general relativity are not two incompatible frameworks requiring unification.
-They are two projections of the same compression principle onto different
-physical degrees of freedom.
-The wavefunction is the codec.
-Measurement is decompression.
-Particles are pixels.
-Bosons and gravitons are compression residuals.
-Spacetime geometry is what the codec looks like when applied to metric
-configurations.
-The Newtonian potential is what happens when graviton residuals spread over
-a sphere.
- 
-%------------------------------------------------------------
-\section{Future Work}
-\label{sec:future}
- 
-\subsection{Derivation of \texorpdfstring{$\|W\| \propto M$}{|W| proportional to M}}
 
-Theorem~4 assumes that the graviton amplitude of a mass $M$ scales as $M$.
-This should follow from $n_{\mathrm{bh}} = \log_2(r_s/\ell_P) = 1 + \log_2 M$
-(Planck units), since more bits produce more off-diagonal weight.
-A rigorous derivation would make Theorem~4 fully self-contained.
- 
-\subsection{Continuum limit and Einstein field equations}
- 
-The discrete toy model should converge to the Einstein field equations
-in the continuum limit.
-The natural candidate: the Einstein equations are the
-large-deviation stationarity condition of the spectral complexity
-functional over metric configurations, analogous to how the Euler--Lagrange
-equations are the stationarity conditions of the action.
- 
-\subsection{Electromagnetic potential}
- 
-The same argument applied to the photon residual of Paper~VII should give
-the Coulomb potential $V_{\mathrm{EM}}(r) = e^2/(4\pi\epsilon_0 r)$.
-The ratio $V_{\mathrm{EM}}/V_{\mathrm{grav}}$ would then give the ratio
-of electromagnetic to gravitational coupling --- a derivation of the
-hierarchy problem from compression geometry.
- 
-\subsection{Connection to the Friedmann equation}
- 
-The relational scale factor $R(t)$ of Paper~V \cite{meskanen2026v} maps onto the Friedmann
-equation under explicit variable identifications.
-The present results suggest the lognormal matter abundance curves of
-Paper~V are themselves $C_s$-minimising worldlines in the space of
-metric configurations, which would promote the Friedmann correspondence
-from a structural identification to a theorem.
- 
+Together with Papers~VII and VIII, these results suggest that quantum
+mechanics and general relativity are two projections of the same
+compression principle onto different physical degrees of freedom.
+The conservation law $\|\text{local}\|^2 + \|\text{non-local}\|^2 = 1$
+holds in both cases.
+The derivation of the Einstein field equations in the continuum limit
+is the primary outstanding goal.
+
 %------------------------------------------------------------
 \section*{Supplementary Material}
- 
+
 Python experiments:
- 
 \begin{itemize}
-  \item \texttt{ellipse\_theorem.py} --- Enumerate closed worldlines by
-        $C_s$; verify ellipse is unique minimum; Solomonoff suppression.
-  \item \texttt{kepler\_consistency.py} --- Verify $\omega^2_{\mathrm{ISCO}}
-        r^3_{\mathrm{ISCO}} = M$ exactly; $G$ from Planck constants.
-  \item \texttt{curvature\_decomposition.py} --- Six metric pair test cases;
-        trace properties verified over 1000 random pairs; $L$-independence.
-  \item \texttt{graviton\_amplitude.py} --- Numerical verification of
-        $\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$ to machine precision;
-        profile- and $L$-independence; comparison with Paper~VII.
-  \item \texttt{polarisation\_modes.py} --- Eigendecomposition of
-        $\rho_{\mathrm{tidal}}$; degenerate $\pm$ and $\times$ modes.
+  \item \texttt{ellipse\_theorem.py} --- enumerate closed worldlines
+        by $C_s$; verify ellipse is unique minimum.
+  \item \texttt{kepler\_consistency.py} --- verify
+        $\omega^2_{\mathrm{ISCO}} r^3_{\mathrm{ISCO}} = M$ exactly.
+  \item \texttt{curvature\_decomposition.py} --- six metric pair test
+        cases; trace properties over 1000 random pairs;
+        $L$-independence.
+  \item \texttt{graviton\_amplitude.py} --- numerical verification of
+        $\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$; conservation law
+        $\|\rho_{\mathrm{Ricci}}\|^2 + \|\rho_{\mathrm{Weyl}}\|^2 = 1$.
+  \item \texttt{polarisation\_modes.py} --- eigendecomposition of
+        $\rho_{\mathrm{tidal}}$; degenerate $+$ and $\times$ modes.
   \item \texttt{planck\_consistency.py} --- $G$ as unit conversion;
-        Schwarzschild as fixed point; orbital shape complexity ranking.
+        Schwarzschild as fixed point.
   \item \texttt{graviton\_potential.py} --- $A(r)\cdot r$ constant to
-        machine precision; field overlap integral; $1/r^2$ force law.
+        machine precision; $1/r^2$ force law.
 \end{itemize}
- 
-\printbibliography
+
+%------------------------------------------------------------
+\begin{thebibliography}{99}
+
+\bibitem{meskanen2001}
+J.~Meskanen,
+\textit{Axiomatic Foundations of the Informational Universe},
+Paper~0, IAME Collaboration (2001).
+
+\bibitem{meskanen2026iv}
+J.~Meskanen,
+\textit{Hubble Tension and the Relational Scale Factor},
+Paper~IV, IAME Collaboration (2026).
+
+\bibitem{meskanen2026v}
+J.~Meskanen,
+\textit{Emergence of General Relativity: Friedmann and Scale Factor},
+Paper~V, IAME Collaboration (2026).
+
+\bibitem{meskanen2026vi}
+J.~Meskanen,
+\textit{The Wavefunction as Compression},
+Paper~VI, IAME Collaboration (2026).
+
+\bibitem{meskanen2026vii}
+J.~Meskanen,
+\textit{Emergence of Quantum Mechanics: Fermions, Bosons and
+Pauli Exclusion},
+Paper~VII, IAME Collaboration (2026).
+
+\bibitem{meskanen2026viii}
+J.~Meskanen,
+\textit{Fermion-Boson Duality: Particle Classification from Codec
+Geometry},
+Paper~VIII, IAME Collaboration (2026).
+
+\bibitem{jacobson1995}
+T.~Jacobson,
+\textit{Thermodynamics of Spacetime: The Einstein Equation of State},
+Phys.\ Rev.\ Lett.\ \textbf{75}, 1260 (1995).
+
+\bibitem{verlinde2011}
+E.~Verlinde,
+\textit{On the Origin of Gravity and the Laws of Newton},
+J.\ High Energy Phys.\ \textbf{2011}, 29 (2011).
+
+\end{thebibliography}
 
 \end{document}
