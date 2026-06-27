@@ -143,7 +143,6 @@ def verify_theorem(n_max: int = 10, n_trials: int = 1000, seed: int = 42) -> Non
     print("  n=1: localised fermion, no boson (B=0 exactly, Pauli exclusion)")
     print("  n=2: photon regime,  ||B|| = 1/sqrt(2)  = 0.70711...")
     print("  n=3: gluon regime,   ||B|| = sqrt(2/3)  = 0.81650...")
-    print("  n=4: graviton regime,||B|| = sqrt(3/4)  = 0.86603...")
     print("  All deviations from exact are floating-point noise only.")
 
 

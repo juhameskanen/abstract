@@ -129,3 +129,23 @@ clean_root:
 	rm -f body.tex $(FINAL_TEX) $(FINAL_PDF) body.html $(FINAL_HTML) $(TAR_FILE)
 	rm -rf $(DIST_DIR)
 	rm aup.*
+
+# Dependencies
+
+aup.tex: header.tex body.tex footer.tex Makefile
+
+body.tex: geometry-of-spacetime/geometry-of-spacetime.tex
+body.tex: informational-action/informational-action.tex
+body.tex: wavefunction-as-compression/wavefunction-as-compression.tex
+body.tex: fermion-boson-duality/fermion-boson-duality.tex
+body.tex: real-theory-of-everything/real-theory-of-everything.tex
+body.tex: emergence-of-spacetime/emergence-of-spacetime.tex
+body.tex: emergence-of-qm/emergence-of-qm.tex
+body.tex: quantum-cosmology/quantum-cosmology.tex
+body.tex: black-hole-singularities/black-hole-singularities.tex
+body.tex: emergence-of-gr/emergence-of-gr.tex
+body.tex: introduction/introduction.tex
+body.tex: unification-of-gr-qm/unification-of-gr-qm.tex
+body.tex: informational-derivation-of-reality/informational-derivation-of-reality.tex
+body.tex: cosmological-model/cosmological-model.tex
+body.tex: theory-of-everything/theory-of-everything.tex
