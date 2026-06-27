@@ -1,4 +1,4 @@
-DOCS       := universal-boson-theorem
+DOCS       := fermion-boson-duality
 
 include ../../makes/abstract.mak
 
