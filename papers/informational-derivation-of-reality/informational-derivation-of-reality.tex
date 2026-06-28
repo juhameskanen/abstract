@@ -118,23 +118,26 @@ without it:
 \[
 A_4: H + S \;\neq\; H.
 \]
-Rejecting this axiom commits one to accepting that subjective experience is
-causally inert --- the philosophical zombie position \cite{chalmers1995facing}
---- which makes subjective experience permanently undetectable and therefore outside the
-scope of any empirical investigation.
+Rejecting this axiom commits one to accepting that subjective experience
+is causally inert not affecting the behavior of a human.
 
 % ============================================================
 \section{Deduction 1: Substrate Independence and Time as an Internal Property}
 \label{sec:deductions}
 
-We present two thought experiments, each of which establishes a constraint
-on where consciousness can reside. Together they establish that consciousness
-is a property of information structure, not of the substrate or process that
-carries it.
+We present two thought experiments to establish that the universe we observe
+must be ultimately substrate independent and timeless.
+
 
 \subsection{The Optimisation Argument}
 
 Consider a digitized human DNA, and a simulation of it running on a computer.
+If consciousness is produced by human DNA, it must also be produced by an
+identical digital simulation. Both entities share the same axiomatic structure;
+just as the equation $2 + 2 = 4$ holds true regardless of whether it is applied
+to apples or bananas, mathematical equivalence remains invariant across
+biological and digital mediums.
+
 The simulation consists of code (the laws of physics as implemented) and data (the state of the
 simulated universe at each timestep). Denote the running simulation
 $T_{\mathrm{alg}}$. The simulation generates a simulated human, say Alice.
@@ -168,11 +171,19 @@ through $A_4$. Its existence would constitute an addition to the physical
 laws of $A_2$, contradicting the completeness of that axiom.
 
 \begin{quote}
-\textbf{Conclusion 1.} Consciousness is a property of the information
-structure of the execution trace, not of the process that generates it.
-A static bitstring encoding a conscious observer's state sequence contains
-that observer's conscious experience. Time and subjective experience emerge
-solely from the internal structure of information.
+  \textbf{Conclusion 1.} Consciousness is a property of the information
+  structure of the execution trace, not of the process that generates it.
+  A static bitstring encoding a conscious observer's state sequence contains
+  that observer's conscious experience. Time and subjective experience emerge
+  solely from the internal structure of information.
+\end{quote}
+
+\begin{quote}
+  \textbf{Conclusion 2.} The optimisation argument yields a family of distinct execution
+  traces $\{T_1, T_2, \ldots\}$, each encoding the same observer state sequence.
+  The observer Alice $E_{\mathrm{int}}$ is not any particular trace but the equivalence
+  class $[A] = \{T_i : T_i \sim T_j \iff E_{\mathrm{int}}(T_i) = E_{\mathrm{int}}(T_j)\}$.
+  Real-world Alice is one member of this class, not a privileged representative.
 \end{quote}
 
 \subsection{The Multi-threaded Argument}
@@ -193,7 +204,7 @@ again a new physical constant not derivable from $A_1$ through $A_4$,
 contradicting the completeness of $A_2$.
 
 \begin{quote}
-\textbf{Conclusion 2.} Conscious experience cannot depend on the contiguity
+\textbf{Conclusion 3.} Conscious experience cannot depend on the contiguity
 or density of its encoding in any external execution trace. What matters is
 the internal structure of the information --- the relational order of Alice's
 state sequence --- not its arrangement in any external substrate.
@@ -201,21 +212,21 @@ state sequence --- not its arrangement in any external substrate.
 
 \subsection{Substrate Independence}
 
-Conclusions 1 and 2 together establish the central result of this paper.
+Conclusions 1 and 3 together establish the central result of this paper.
 
 \begin{quote}
-\textbf{Substrate Independence.} Consciousness is a property of certain
+\textbf{Substrate Independence.} Consciousness is a property described by certain
 finite information structures. The physical substrate in which such a
 structure is instantiated --- silicon, neurons, magnetic domains, or static
-bitstring --- does not determine whether the structure is conscious. A
-computer running a simulation of a conscious observer and the simulation
+bitstring --- does not determine whether the structure describes consciousness.
+A computer running a simulation of a conscious observer and the simulation
 itself are two arrangements of the same information. Neither is causally
-prior to the other. Neither is more fundamental.
+prior to the other. Neither is more fundamental. 
 \end{quote}
 
-This is not a claim that all information structures are conscious. It is a
+This is not a claim that all information structures describe consciousness. It is a
 claim that consciousness is determined by information structure rather than
-by substrate. The specific structures that are conscious are those satisfying
+by substrate. The specific structures that describe consciousness are those satisfying
 $A_1$ through $A_4$: structures that encode the state sequence of a
 DNA-based observer with causally efficacious subjective experience.
 
@@ -309,6 +320,19 @@ of quantum coherence in biological systems.
 \section{Discussion}
 \label{sec:discussion}
 
+
+\subsection*{About Observer Equivalence Classes}
+
+The analogy between Conclusion 2 and the Born rule is precise: sampling from $|\psi|^2$ 
+multiple times does not create multiple distinct particles—it merely traces out descriptions 
+of the same underlying $\psi$. The particle is the equivalence class, while the samples 
+are its representatives.
+
+Correspondingly, running a DNA simulation multiple times does not create multiple 
+instances of Alice; rather, it traces out different representations of the same "Alice" 
+equivalence class. Computers do not create new information.
+
+
 \subsection{Quantum Computation}
 
 Axiom~3 does not restrict to classical computation. The computability claim
@@ -329,7 +353,7 @@ If a computer running a simulation of a physical system and the physical
 system itself are two arrangements of the same information, then every
 property of the physical system must be reflected in the execution trace of
 its simulation. We may not understand all the features of the universe
-because we are looking it from inside. But we understand computers perfectly.
+because we are looking it from inside. But we understand computers.
 
 
 % ============================================================
