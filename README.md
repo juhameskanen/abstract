@@ -29,7 +29,7 @@ The notation **D-ψ-G** captures the joint compressibility principle:
 
 - Physics and laws are not hardcoded — they emerge probabilistically.
 - Strong emphasis on computational validation through Python simulations.
-- Minimalist ontology: begins only from the existence of the observer.
+- Minimalist ontology: begins only from the existence of the observer, and the observed four axioms.
 - No prior commitment to finiteness, discreteness, or informational fundamentalism.
 
 ## Contents
@@ -41,6 +41,10 @@ The notation **D-ψ-G** captures the joint compressibility principle:
 - **[Project Wiki](https://github.com/juhameskanen/abstract/wiki)** — Research notes and discussions.
 - **[CHANGELOG](CHANGELOG.md)** — Project history.
 - **[LICENSE](LICENSE.md)** — License information.
+
+## PyPI Packages
+- **[Spectral Complexity](https://pypi.org/project/wavefunction)  Complex-valued wavefunction class for **Spectral Complexity** measure. 
+
 
 ## Simulation Gallery
 
@@ -57,13 +61,20 @@ Starting from a well-defined observer, the simulations resolve the most probable
 
 ## Philosophy & Approach
 
-¬(D-ψ-G) is a **physics** project. Concepts must be computable, simulatable, or mathematically derivable. The existence of the observer is treated operationally as an empirically given subsystem. While the work touches deep foundational questions, the goal remains falsifiable, predictive physics rather than pure philosophy.
+This is a **physics** project, not philosophy. Concepts must be computable, simulatable, or mathematically derivable. The existence of the observer is treated operationally as an empirically given subsystem. While the work touches deep foundational questions, the goal remains falsifiable, predictive physics rather than pure philosophy.
 
-## Contributing
+## Open Problems
 
-Contributions are welcome, particularly:
+The Open major problems: 
+- Paper~8: **Many-fermion extension.**
+  Extend the single-fermion codec to tensor products, giving composite particles and the full Fock space.
+- Paper~9: **Full tensorial Riemann curvature.**
+  The decomposition in Theorem~2 applies to scalar conformal factors, not yet the full rank-4 Riemann tensor in four dimensions.
+  Extending the codec decomposition to the full tensorial case is required for a complete derivation of GR.
 
-Open problem: Fermionic exclusion — stable particle distinguishability under collision — is not yet reproduced by the compression measure and constitutes the current theoretical frontier.
+Each paper has Open Problems section to lists more detailed list of open issues, in case there are any.
+
+Contributions are welcome, particularly to above listed two major issues.
 
 
 ## License & Disclaimer
