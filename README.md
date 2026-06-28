@@ -1,80 +1,51 @@
-#  Real Theory of Everything
+# Real Theory of Everything
 
-A candidate framework for everything where reality emerges as the large-deviation minimum of observer-compatible histories.
+## Unification of Quantum Mechanics and General Relativity
 
-Reality is not assumed — it is what a structured observer is most likely to experience.
-
-## Overview
-
-The existence of the observer is taken as the sole primitive. Everything else — physics,  and the structure of experience — is derived as the most probable emergent configuration consistent with that observer.
-
-Observed physical laws, mathematical structures, and coherent reality itself are the configurations that minimize informational cost under observer constraints.
-
-No fundamental discreteness, finiteness, spacetime, or informational ontology is assumed at the base level. The theory seeks to explain not only quantum gravity but a broad range of phenomena through the single lens of probability of emergence.
-
-## Core Equations
+The framework derives both quantum mechanics and general relativity from a single operation applied to compressed configurations:
 
 $$
-\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O} \exp\left(-\lambda\mathcal{C}_O[\gamma]\right), \qquad \gamma \in \Gamma_O
+\rho \;\longmapsto\; \underbrace{\mathrm{diag}(\rho)}_{\text{local}} + \underbrace{\rho - \mathrm{diag}(\rho)}_{\text{non-local}}
 $$
 
-Observed regularities (physical laws, geometry, quantum behavior, etc.) are the large-deviation minimizers of the cost functional $\mathcal{C}_O[\gamma]$ over observer-compatible histories $\gamma$.
+Applied to **fermionic configurations**, the diagonal encodes Pauli exclusion; 
+the off-diagonal produces photons, gluons, and the Born rule — with amplitude $\sin(2\theta)/\sqrt{2}$ exact.
 
-The notation **D-ψ-G** captures the joint compressibility principle:
-- **D** — Raw discrete information (data/description)
-- **ψ** — Spectral/quantum description (wavefunctions minimizing spectral cost)
-- **G** — Geometric/gravity description (minimizing geometric cost)
+Applied to **metric configurations**, the diagonal gives the Ricci source term (matter curves local space); 
+the off-diagonal gives the Weyl tensor, gravitational waves, and — integrated over 
+spherical shells — the Newtonian potential $V(R) = -GMm/R$ with $G = 1/(8\pi)$ in Planck units.
 
-## Key Features
+In both cases the same conservation law holds:
 
-- Physics and laws are not hardcoded — they emerge probabilistically.
-- Strong emphasis on computational validation through Python simulations.
-- Minimalist ontology: begins only from the existence of the observer, and the observed four axioms.
-- No prior commitment to finiteness, discreteness, or informational fundamentalism.
+$$
+\|\text{local}\|^2 + \|\text{non-local}\|^2 = 1
+$$
+
+QM and GR are two projections of the same compression principle onto different physical degrees of freedom. 
+The shared formula $\sin(2\theta)/\sqrt{2}$ is the signature of this unity.
+
+## Open Problems:
+- Extending the scalar conformal toy model to the full rank-4 Riemann tensor and deriving the Einstein field equations as the large-deviation stationarity condition of the spectral complexity functional in the continuum limit (Open Problem, Paper IX).
+
 
 ## Contents
 
 - **[The Visualized Theory](gallery.md)** — Gallery of simulations showing emergent gravity, inertia, and atomic structures.
 - **[Papers & HTML Versions](https://juhameskanen.github.io/abstract/)** — Compiled papers (HTML + PDF).
-- **[Source Code & LaTeX](https://github.com/juhameskanen/abstract)** — All papers and simulations.
-- **[QBitwave Project](https://github.com/juhameskanen/abstract/wiki/QBitWave)** — Wavefunction as emergent compression.
 - **[Project Wiki](https://github.com/juhameskanen/abstract/wiki)** — Research notes and discussions.
+- **[Spectral Complexity](https://pypi.org/project/wavefunction)** — Complex-valued wavefunction class for **Spectral Complexity** measure. 
 - **[CHANGELOG](CHANGELOG.md)** — Project history.
 - **[LICENSE](LICENSE.md)** — License information.
-
-## PyPI Packages
-- **[Spectral Complexity](https://pypi.org/project/wavefunction)  Complex-valued wavefunction class for **Spectral Complexity** measure. 
 
 
 ## Simulation Gallery
 
 Starting from a well-defined observer, the simulations resolve the most probable (most compressible) static configuration. Time, dynamics, stable atoms, gravitational attraction, and wave-like behavior all emerge as part of this timeless resolution — they are not evolved step-by-step but appear as intrinsic features of the optimal description.
 
-## Current Status
 
-**Under construction** — Many chapters and simulations are in draft or intermediate form. Content evolves regularly as the work progresses.
+## Contributions
 
-[![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
-
-[![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
-
-
-## Philosophy & Approach
-
-This is a **physics** project, not philosophy. Concepts must be computable, simulatable, or mathematically derivable. The existence of the observer is treated operationally as an empirically given subsystem. While the work touches deep foundational questions, the goal remains falsifiable, predictive physics rather than pure philosophy.
-
-## Open Problems
-
-The Open major problems: 
-- Paper~8: **Many-fermion extension.**
-  Extend the single-fermion codec to tensor products, giving composite particles and the full Fock space.
-- Paper~9: **Full tensorial Riemann curvature.**
-  The decomposition in Theorem~2 applies to scalar conformal factors, not yet the full rank-4 Riemann tensor in four dimensions.
-  Extending the codec decomposition to the full tensorial case is required for a complete derivation of GR.
-
-Each paper has Open Problems section to lists more detailed list of open issues, in case there are any.
-
-Contributions are welcome, particularly to above listed two major issues.
+Contributions are  welcome, particularly to above listed two major issues.
 
 
 ## License & Disclaimer
@@ -85,4 +56,10 @@ Usage for academic study and non-commercial research is permitted with proper ci
 THE THEORY IS PROVIDED "AS IS". Use at your own risk of ontological crisis or wavefunction collapse.
 
 ---
-©Copyright 2001 ... 2025 - The Abstract Universe Project. All rights reserved.
+©Copyright 2001 ... 2026 - The Abstract Universe Project. All rights reserved.
+
+[![Build and Upload PDFs](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pdf.yml) – Builds and uploads the latest PDF versions of the papers
+
+[![Build and Deploy HTML (GitHub Pages)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml/badge.svg)](https://github.com/juhameskanen/abstract/actions/workflows/build-pages.yml) – Generates and deploys HTML versions of papers to GitHub Pages
+
+
