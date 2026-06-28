@@ -1,7 +1,6 @@
 # Common makefile for building papers
 
 PDFS       := $(DOCS:=.pdf)
-REMOTE_DIR := meskanen/abstract
 
 TRASH_EXTS := 4ct 4tc css idv lg tmp xref dvi html svg bbl fdb_latexmk \
               aux glo ist fls toc run.xml bfc blg bcf log out
