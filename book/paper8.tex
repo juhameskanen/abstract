@@ -1,0 +1,297 @@
+\chapter{The Particle Spectrum from Codec Geometry}
+
+In the previous chapter we proved four exact results from the single
+definition $B = \rho - \mathrm{diag}(\rho)$: Pauli exclusion, the
+universal boson, the Born rule identity, and the virtual propagator
+lifecycle. All followed from the codec structure alone, with no
+interaction terms introduced.
+
+This chapter extends the analysis. The previous results concerned a
+fermion hopping between two sites. The question now is: what happens
+when a fermion is delocalised across $n$ sites? The answer will be
+three exact theorems about the norm structure of any fermion, a
+conservation law that subsumes all previous results, and a
+classification of the particle spectrum that requires no gauge
+symmetry groups, coupling constants, or postulated particle species.
+
+\section{The Universal Norm Theorems}
+
+Consider a fermion in equal superposition across $n$ sites:
+
+\[
+\psi_k = \frac{1}{\sqrt{n}}\,e^{i\phi_k}, \quad k = 0, \ldots, n-1,
+\]
+
+for arbitrary real phases $\phi_k$. Split the density matrix
+$\rho = |\psi\rangle\langle\psi|$ into its diagonal and off-diagonal
+parts:
+
+\[
+F = \mathrm{diag}(\rho), \qquad B = \rho - \mathrm{diag}(\rho).
+\]
+
+Three things are true about these objects, for any $n$ and any choice
+of phases.
+
+\textbf{Universal Fermion Norm.} $\|F\| = 1/\sqrt{n}$.
+
+\textit{Proof.} $F_k = |\psi_k|^2 = 1/n$ for all $k$, so $\|F\|^2 =
+\sum_k 1/n^2 = 1/n$. \qed
+
+\textbf{Universal Boson Norm.} $\|B\| = \sqrt{(n-1)/n}$.
+
+\textit{Proof.} $|\rho_{ij}|^2 = 1/n^2$ for all $i \neq j$. There
+are $n(n-1)$ off-diagonal pairs, giving $\|B\|^2 = n(n-1)/n^2 =
+(n-1)/n$. \qed
+
+\textbf{Conservation Law.} $\|F\|^2 + \|B\|^2 = 1$.
+
+\textit{Proof.} For any pure state $\rho^2 = \rho$, so
+$\|\rho\|^2 = \mathrm{Tr}(\rho^2) = \mathrm{Tr}(\rho) = 1$. Since
+$F$ and $B$ occupy orthogonal subspaces, the result follows. \qed
+
+All three results are phase-independent. They hold for any $n \geq 1$
+and any choice of $\phi_k$. The conservation law subsumes the
+two-site result of the previous chapter: setting $n = 2$ and
+$\psi(\theta) = \cos\theta\,e_i + i\sin\theta\,e_j$ recovers
+$\|F\|^2 + \|B\|^2 = 1$ as a special case.
+
+The physical reading is direct. As a fermion delocalises across more
+sites, its fermionic content $\|F\|$ decreases as $1/\sqrt{n}$ while
+its bosonic content $\|B\|$ increases toward 1. The more spread out
+the fermion, the richer its compression residual. The conservation
+law ensures these always balance.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+$n$ & $\|F\|$ & $\|B\|$ & $\|F\|^2$ & $\|B\|^2$ \\
+\midrule
+1 & $1$          & $0$          & $1$   & $0$ \\
+2 & $1/\sqrt{2}$ & $1/\sqrt{2}$ & $1/2$ & $1/2$ \\
+3 & $1/\sqrt{3}$ & $\sqrt{2/3}$ & $1/3$ & $2/3$ \\
+4 & $1/2$        & $\sqrt{3}/2$ & $1/4$ & $3/4$ \\
+\bottomrule
+\end{tabular}
+\caption{Universal fermion and boson norms. Every row satisfies
+$\|F\|^2 + \|B\|^2 = 1$ exactly.}
+\end{table}
+
+\section{The Winding Number and Internal Symmetry}
+
+The norms $\|F\|$ and $\|B\|$ depend only on $n$. The internal
+structure of the compression residual --- its symmetry under
+transposition --- depends on the phase pattern, specifically on the
+winding number $m$: the number of full phase rotations the pattern
+makes around the ring of $n$ sites.
+
+The natural minimum-complexity phase patterns on an $n$-site ring are
+the discrete Fourier modes $\phi_k^{(m)} = 2\pi mk/n$, ordered by
+ascending spectral complexity. The symmetry of $B$ under these
+patterns determines whether the fermion can exist as a free asymptotic
+state:
+
+\begin{itemize}
+    \item \textbf{Antisymmetric} ($B = -B^\top$, achieved by $m$ odd
+    for $n = 2$): the residual has self-contained antisymmetric
+    structure. The fermion can propagate as a free asymptotic state.
+
+    \item \textbf{Symmetric} ($B = B^\top$, achieved by $m = 0$):
+    the residual has self-contained symmetric structure and propagates
+    freely with scalar character.
+
+    \item \textbf{Mixed symmetry} ($n \geq 3$, $m \geq 1$): the
+    residual has no self-contained symmetry class. Projecting onto
+    either the symmetric or antisymmetric subspace leaves a nonzero
+    residual. The fermion cannot be described as a free asymptotic
+    state without reference to its source configuration.
+\end{itemize}
+
+The pair $(n, m)$ --- sites and winding number --- defines a
+\emph{fermion complexity class}. This is the complete specification.
+No gauge groups, coupling constants, or symmetry postulates are
+required.
+
+\section{The $n = 2$ Sector: Leptons}
+
+The two-site fermion has $\|F\| = \|B\| = 1/\sqrt{2}$ --- equal
+fermionic and bosonic content.
+
+For winding $m = 1$, the compression residual $B$ is purely
+antisymmetric, with eigenvalues $\pm 1/2$ and the universal $-\pi/2$
+phase of the previous chapter. The fermion has a self-contained
+antisymmetric residual and propagates freely. This is the charged
+lepton --- electron, muon, or tau, depending on the complexity level.
+
+What Standard Model language calls a photon is the name given to the
+correlation between two such fermion events. When one charged lepton
+recoils, another does so in a correlated way. The codec encodes this
+correlation in the off-diagonal of $\rho$. No separate photon particle
+is required.
+
+For winding $m = 0$, the residual $B$ is purely symmetric, with zero
+net phase winding. The fermion has no electromagnetic phase structure
+and is electrically neutral. This is the neutrino.
+
+Electric charge, within the $n = 2$ sector, is the winding number.
+$m = 0$ gives a neutral fermion; $m = 1$ gives a charged fermion. No
+additional postulate is needed.
+
+\section{The $n = 3$ Sector: Quarks and Confinement}
+
+For three-site equal superposition, each site carries probability
+$|\psi_k|^2 = 1/3$. This is the per-site occupancy of a quark in a
+colour triplet. The value $1/3$ is not postulated; it is the Born-rule
+probability of finding the fermion on any one colour site.
+
+For winding $m = 1$, the compression residual has off-diagonal entries
+of equal magnitude:
+
+\[
+|B_{ij}| = \frac{1}{3} \quad \text{for all colour pairs } i \neq j.
+\]
+
+This is exact colour symmetry, emerging from the equal-superposition
+constraint and the universal boson norm theorem. No $\mathrm{SU}(3)$
+symmetry is imposed.
+
+What Standard Model language calls a gluon is the correlation between
+quark colour changes. The mixed symmetry of $B$ for $n = 3$, $m = 1$
+means this correlation has no self-contained symmetry class. Projecting
+onto either self-contained class leaves a nonzero residual of magnitude
+approximately $0.408$, verified numerically. A mixed-symmetry fermion
+always requires reference to the configuration from which it arose.
+
+This is the information-theoretic basis of confinement. A fermion whose
+compression residual has mixed symmetry cannot be described as a free
+asymptotic state under any minimum-description-length codec. Colour
+confinement is a structural consequence of three-site codec geometry,
+not a separately imposed force law. This remains a conjecture --- the
+open problem is to prove it as a theorem.
+
+\section{The Complete Classification}
+
+The fermion complexity classes organise the particle spectrum without
+remainder. The table below lists the exact results and distinguishes
+them from conjectures.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cclll}
+\toprule
+$(n,m)$ & Symmetry & Fermion class & SM label & Status \\
+\midrule
+$(1,0)$ & --- & Localised, no residual & vacuum & exact \\
+$(2,0)$ & symmetric & Neutral lepton & neutrino & exact \\
+$(2,1)$ & antisymmetric & Charged lepton & electron/muon/tau & exact \\
+$(3,0)$ & symmetric & Colour-neutral scalar & Higgs sector & conjecture \\
+$(3,1)$ & mixed & Colour-charged, confined & quark/gluon & exact \\
+$(4,2)$ & symmetric & Spin-2 class & open & open \\
+\bottomrule
+\end{tabular}
+\caption{Fermion complexity classes. The SM label column gives the
+Standard Model name for the correlation pattern an observer would
+attribute to this class --- derived labels, not fundamental particles.}
+\end{table}
+
+The SM labels in the right column are not names of fundamental
+objects. They are the names given to patterns of fermion behaviour by
+observers who do not know they are watching a compression codec. No
+detector has ever registered a photon, gluon, or $W$ boson as a
+localised pixel. Detectors register fermion events. The force carriers
+are the story told about the correlations between those events.
+
+\section{The Mass Hierarchy}
+
+Under Solomonoff induction, $P(\psi) \propto 2^{-C_s(\psi)}$, so
+observable fermions are ordered by ascending spectral complexity.
+The minimum fermionic codec unit is 4 bits, arising from the four
+binary choices required to specify one fermion hop: which site, which
+frame, real or imaginary component, and sign of the phase.
+
+The three charged lepton generations are the same $n = 2$, $m = 1$
+fermion class at successive complexity levels:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrl}
+\toprule
+Fermion & Mass (MeV) & $\log_2(m/m_e)$ & Nearest integer \\
+\midrule
+Electron & $0.511$    & $0.00$  & $0$ \\
+Muon     & $105.66$   & $7.69$  & $8$ \\
+Tau      & $1776.86$  & $11.76$ & $12$ \\
+\bottomrule
+\end{tabular}
+\caption{Charged lepton masses in $\log_2(m/m_e)$ space. The
+near-integer sequence with 4-bit granularity suggests a discrete
+complexity ladder.}
+\end{table}
+
+The separations are approximately $0$, $8$, and $12$ bits relative to
+the electron --- near-integer multiples of the 4-bit codec unit. The
+deviations from exact integers are interpreted as compression gains
+under Solomonoff induction.
+
+A falsifiable prediction follows: no stable charged fermion should
+exist beyond the tau, because the lognormal probability distribution
+of Chapter~3 places a finite upper bound on observable complexity. No
+fourth charged lepton has been observed.
+
+The quark mass hierarchy spans several orders of magnitude and has
+not yet been placed on the complexity ladder. This is the primary open
+calculation.
+
+\section{Two Layers and the Bridge Between Them}
+
+The framework now has two independent derivations running in parallel.
+
+Chapters~2 through 5 derived the geometric structure of spacetime ---
+expansion, gravity, black hole entropy, the Friedmann equation ---
+from the aspect ratio and information conservation, without reference
+to the wavefunction codec.
+
+Chapters~6 through 8 derive quantum mechanics and the particle
+spectrum from the wavefunction codec, without reference to the
+geometric layer.
+
+Both derivations are self-consistent and exact within their domain.
+The question is how they connect.
+
+The natural bridge is the worldline. A fermion's trajectory through
+spacetime is a complex worldline $\psi_{\mathrm{traj}}(t) = x(t) +
+iy(t)$. The minimum spectral complexity closed worldline is a single
+Fourier mode --- a complex exponential tracing an ellipse. This is
+Kepler's orbit. The minimum-$C_s$ worldline in the geometric spacetime
+is exactly the trajectory selected by the fermion's Solomonoff
+induction.
+
+The geometric and codec layers are not independent. They are two
+projections of the same compression principle onto different physical
+degrees of freedom. The derivation of the bridge --- showing that the
+Einstein field equations emerge as the stationarity condition of $C_s$
+over metric configurations --- is the primary target of the next
+chapter.
+
+\section{What This Chapter Establishes}
+
+Three exact theorems and one conservation law follow from the
+definition $B = \rho - \mathrm{diag}(\rho)$ applied to $n$-site
+equal superpositions: universal fermion norm $1/\sqrt{n}$, universal
+boson norm $\sqrt{(n-1)/n}$, and conservation $\|F\|^2 + \|B\|^2 =
+1$ for any pure state.
+
+The pair $(n, m)$ classifies all fermion complexity classes. The
+$n = 2$ sector gives charged leptons and neutrinos distinguished by
+winding number. The $n = 3$ sector gives confined colour-charged
+fermions and a scalar sector. The mass hierarchy organises into a
+near-integer sequence with 4-bit granularity and predicts no stable
+charged fermion beyond the tau.
+
+Three open problems remain: why three lepton generations and not four,
+why the quark masses have the values they have, and whether the $1/r^2$
+electromagnetic force law follows from the $n = 2$, $m = 1$ fermion
+residual by the same flux argument that gives gravity. These are
+calculation problems, not conceptual ones. The framework is already
+in place.

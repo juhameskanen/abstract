@@ -1,6 +1,6 @@
 # -- Configuration --
 # Easily expand this by adding space-separated directories
-DOCS := ghghnd papers
+DOCS := ghghnd papers book
 
 # -- Phony Targets --
 .PHONY: all pdf html clean help

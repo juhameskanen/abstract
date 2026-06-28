@@ -1,0 +1,285 @@
+\chapter{Sanity Check: Two Stress Tests of the Framework}
+
+Ten chapters in, a careful reader should be asking an uncomfortable
+question. We have derived gravity, quantum mechanics, the particle
+spectrum, and the expansion of the universe from a single operation
+applied to density matrices. The results are clean, the formulas
+elegant, the connections between layers surprising in their precision.
+This is exactly when a scientist should worry.
+
+Is the framework uncovering something real, or have we constructed an
+elaborate mathematical mirror that reflects whatever we point it at?
+This chapter applies two deliberate stress tests designed to answer
+that question. We do not choose tests the framework is likely to pass.
+We choose tests it could fail.
+
+\section{The Risk}
+
+The specific failure mode to guard against is this: spectral complexity
+$C_s$ is defined in terms of Fourier modes and frequency costs. The
+Euclidean action $S_E$ of quantum cosmology also penalises rough,
+high-frequency trajectories. If the correlation between $C_s$ and $S_E$
+is simply a consequence of both quantities penalising roughness, then
+the framework has told us nothing. It has merely relabelled the action
+in information-theoretic language and called the relabelling a
+derivation.
+
+The cosmological stress test faces a parallel risk. The three-phase
+expansion profile --- inflation, deceleration, re-acceleration --- is a
+known result of standard cosmology. If the lognormal matter curves
+merely reproduce it by construction, we have fitted known data with
+flexible parameters and dressed the fit in a new vocabulary.
+
+Both risks are real. Both are addressed directly.
+
+\section{Stress Test 1: Wheeler-DeWitt Minisuperspace}
+
+\subsection{The Setup}
+
+We work in a closed Friedmann-Robertson-Walker minisuperspace with
+cosmological constant $\Lambda = 1$ and a scalar field $\phi$,
+Wick-rotated to Euclidean time $\tau \in [0, \tau_{\max}]$. The
+Euclidean action is:
+
+\[
+S_E = \int_0^{\tau_{\max}} \left[ -a + \kappa \frac{\dot{a}^2}{a}
++ \frac{1}{2} a \dot{\phi}^2 + \frac{1}{2} a^3 \phi^2
++ \frac{\Lambda}{3} a^3 \right] d\tau + 2a(\tau_{\max}),
+\]
+
+with $\kappa = 0.15$. The classical Hartle-Hawking no-boundary
+instanton satisfies $a(0) = 0$ and $\dot{a}(\tau_{\max}) = 0$, with
+exact solution:
+
+\[
+a^*(\tau) = \frac{1}{\omega}\sin(\omega\tau), \quad
+\omega = \sqrt{\Lambda/3}, \quad
+\tau_{\max} = \frac{\pi}{2\omega}, \quad \phi(\tau) = 0.
+\]
+
+We parameterise trajectory histories in the natural eigenbasis of this
+boundary value problem --- functions that satisfy both boundary
+conditions exactly:
+
+\[
+f_k(\tau) = \sin\!\left(\frac{(2k-1)\pi\tau}{2\tau_{\max}}\right),
+\quad k = 1, 2, \ldots, 12.
+\]
+
+The mode $k = 1$ reproduces the Hawking solution exactly. Higher modes
+add higher-frequency corrections. Both $a(\tau)$ and $\phi(\tau)$ are
+expanded in this basis with independent coefficients.
+
+This basis choice is not cosmetic. A standard discrete Fourier
+transform applied to a non-periodic signal suffers spectral leakage:
+a single sine wave populates dozens of DFT bins, artificially inflating
+$C_s$. Working in the problem's own basis eliminates this artifact and
+isolates a genuine relationship between frequency content and Euclidean
+cost.
+
+\subsection{Eliminating the Confound}
+
+The roughness confound is eliminated by construction. Coefficients are
+drawn from a log-uniform distribution on $[0.05, 3.0]$, decoupling
+amplitude from frequency. This allows high-frequency modes to carry
+large amplitudes and low-frequency modes to carry small ones, breaking
+the automatic correlation between roughness and either quantity
+independently.
+
+We then compute the partial Spearman correlation
+$\rho(C_s, S_E \mid R)$, where the roughness proxy is:
+
+\[
+R = \sum_{k=1}^{12} (2k-1)\bigl(|A_k| + |B_k|\bigr).
+\]
+
+If the full correlation between $C_s$ and $S_E$ collapses to near zero
+after conditioning on $R$, the framework has failed the test: the
+correlation is a roughness artifact. If it survives, something genuine
+is present.
+
+\subsection{Results}
+
+Across an ensemble of 20,000 randomly generated paths, the Spearman
+rank correlation between $S_E$ and $C_s$ exceeds $\rho = 0.96$. The
+partial Spearman correlation after controlling for roughness remains
+strongly positive with $p \ll 0.01$.
+
+The Hartle-Hawking no-boundary instanton is the unambiguous joint
+global minimum of both quantities. It uses only the $k = 1$ mode,
+attaining spectral complexity $C_s = \omega_1/\Delta\omega = 1$ ---
+the theoretical minimum for a non-trivial trajectory. The minimum-$C_s$
+path recovered from the ensemble has dominant mode $k = 1$, recovering
+the Hawking solution.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & $S_E$ & $C_s$ \\
+\midrule
+Classical (Hartle-Hawking, $k=1$) & $7.245$ & $1.0$ \\
+Minimum-$C_s$ path recovered & ${\sim}7.2$ & $1.0$ \\
+Typical perturbed path (median) & $15$--$200$ & $10$--$80$ \\
+\bottomrule
+\end{tabular}
+\caption{Minisuperspace ensemble statistics ($N = 20{,}000$ paths). The
+classical no-boundary instanton achieves the theoretical minimum
+$C_s = 1.0$.}
+\end{table}
+
+\subsection{What This Establishes}
+
+The correlation between $C_s$ and $S_E$ is not a roughness artifact.
+It survives explicit confound control and is not degraded by the
+log-uniform amplitude distribution that decouples roughness from
+frequency content.
+
+The Hartle-Hawking instanton is selected by spectral complexity
+minimisation for the same reason it is selected by the Euclidean path
+integral: it is the lowest-frequency closed trajectory consistent with
+the boundary conditions. In both frameworks, this trajectory dominates
+because high-frequency alternatives are exponentially suppressed ---
+in the path integral by $e^{-S_E}$, in the codec framework by
+$2^{-C_s}$.
+
+Classical geodesics emerge as the informationally cheapest paths
+through configuration space. This closes a key loop: the wave-like
+behaviour of the microcosm is a consequence of spectral compression,
+and the classical limit follows from the dominance of the
+best-compressed histories.
+
+\section{Stress Test 2: The Three-Phase Expansion from Lognormal Matter}
+
+\subsection{The Setup}
+
+Chapter~3 established that matter abundance in an entropy-increasing
+bitstring follows a lognormal distribution, independently of the filter
+used to define matter. This is a strong, filter-independent result.
+
+The present test asks whether the three-phase expansion profile of
+standard cosmology --- early rapid growth, matter-driven deceleration,
+late-time re-acceleration --- follows from the relational scale factor
+of Chapter~5 when matter abundance is given by these lognormal curves,
+without introducing a cosmological constant, inflaton field, or dark
+energy term.
+
+We replace the bitstring simulation with analytically defined lognormal
+abundance curves for three hierarchical matter levels:
+
+\[
+k_j(t) = A_j \cdot \frac{1}{t\sigma_j\sqrt{2\pi}}
+\exp\!\left(-\frac{(\ln t - \mu_j)^2}{2\sigma_j^2}\right),
+\quad j \in \{1, 2, 3\}.
+\]
+
+The free fabric at each step is the residual after subtracting the bits
+consumed by all matter levels:
+
+\[
+\rho_{\mathrm{fabric}}(t) =
+\max\!\left(n - \sum_j w_j \cdot k_j(t),\ 0\right).
+\]
+
+The relational scale factor follows from information conservation:
+
+\[
+R(t) = \frac{\rho_{\mathrm{fabric}}(t) + k(t)}{n}.
+\]
+
+No dynamics are imposed. No cosmological constant is introduced. The
+expansion history is determined entirely by how the fixed bit budget is
+partitioned between free fabric and bound matter at each moment.
+
+\subsection{Three Phases from One Equation}
+
+The resulting $R(t)$ produces three distinct phases.
+
+\textbf{Phase 1 --- Early rapid expansion.} Before significant matter
+formation, the fabric is undepleted and $R(t) \approx 1$. The system
+is in the De Sitter regime: maximum resolution, no matter brake. This
+is the inflationary epoch.
+
+\textbf{Phase 2 --- Matter-driven deceleration.} As structure rises
+along the lognormal curves, bits are withdrawn from the free fabric.
+$R(t)$ decreases. An internal observer whose measuring rods are built
+from the same structures perceives this withdrawal as gravitational
+deceleration. No force law is imposed. The geometry tightens because
+information is redistributed from fabric to structure.
+
+\textbf{Phase 3 --- Late-time re-acceleration.} The falling tails of
+the lognormal curves are combinatorially inevitable: as entropy
+approaches saturation, complex structures dissolve. Bits are released
+back to the free fabric, $\rho_{\mathrm{fabric}}(t)$ recovers, and
+$R(t)$ rises again. An internal observer perceives this structural
+evaporation as accelerating expansion. No dark energy term is
+introduced.
+
+\subsection{The Hubble Tension}
+
+The framework offers a structural account of the Hubble tension without
+adding new parameters. The tension arises because measurements of $H_0$
+from the early universe (CMB) and from the late universe (Type Ia
+supernovae) disagree at the $4$--$5\sigma$ level.
+
+In the framework, the relational scale factor is determined by counting
+discrete informational nodes. As the total count of active structure
+changes over cosmic history, the fundamental measuring unit of the
+internal observer rescales with it. Measuring across the deep past
+versus the near past uses different informational rods because the
+density of structural nodes has evolved. The Hubble tension is a
+ranging artefact of a system that has changed its quantisation density
+between the two epochs of measurement.
+
+This is not a resolution of the tension --- it is a reframing that
+identifies where to look for the resolution. Making it quantitative
+requires placing specific particle species on the complexity ladder and
+computing how their lognormal peaks affect the effective ruler at each
+epoch. That calculation is identified as an open problem.
+
+\subsection{What This Establishes}
+
+Three-phase expansion emerges from information conservation and
+lognormal matter abundance alone. No cosmological constant, inflaton
+field, or dark energy is introduced. The three phases are structural
+consequences of how a finite bit budget is partitioned: undepleted
+early, depleted during peak matter formation, recovered during
+structural evaporation.
+
+This does not prove the framework is the correct description of our
+universe. The lognormal parameters $(\mu_j, \sigma_j, A_j)$ are not
+yet derived from first principles --- they are set by the filter
+definition, which is not yet uniquely determined. Making the prediction
+quantitative requires deriving the lognormal parameters from the
+fermion complexity classes of Chapter~8. That is an open calculation.
+
+What the test establishes is that the qualitative structure of cosmic
+expansion is not put in by hand. It is a consequence of a principle
+--- information conservation --- that was established independently in
+Chapter~5 from the bit-budget argument.
+
+\section{The Verdict}
+
+Neither stress test breaks the framework.
+
+The Wheeler-DeWitt test establishes that $C_s \propto S_E$ is not a
+roughness artefact. The correlation survives explicit confound control
+at Spearman $\rho > 0.96$, and the Hartle-Hawking instanton is the
+joint global minimum of both quantities. Classical geodesics are
+informationally minimal trajectories.
+
+The cosmological test establishes that three-phase expansion follows
+from information conservation and the lognormal matter distribution,
+without dark energy or fine-tuned initial conditions.
+
+Both results are quantitatively limited. The $C_s \propto S_E$
+proportionality is demonstrated numerically but not proved analytically
+--- that proof is the Informational Action Principle conjecture of
+Chapter~6, still open. The cosmological model reproduces the qualitative
+phases but not yet the precise Hubble constant or the quantitative
+matter fractions, because the lognormal parameters are not yet derived
+from the fermion classification.
+
+These limitations are stated honestly. But the stress tests have done
+their job: the framework is not hallucinating in Fourier space. The
+structure it finds is there.
