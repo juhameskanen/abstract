@@ -1,161 +1,266 @@
-\chapter{Epilogue: Towards a Zero-Parameter Theory of Everything}
-\label{ch:epilogue}
+\chapter{Epilogue: One Assumption, One Principle, One Equation}
 
+Every chapter in this book has followed the same discipline: state what
+is proved, state what is conjectured, and do not conflate the two. This
+final chapter applies that same discipline to the framework as a whole.
 
-We synthesize a comprehensive physical and informational architecture in which both quantum mechanics and general relativity emerge from a singular, zero-parameter anthropic principle: \emph{observers exist, and their probability of existence is determined by the algorithmic compressibility of their description}. The foundational object of reality is established as a path-integral over histories $\gamma$ compatible with an observer $O$, weighted by a Solomonoff-Boltzmann measure $\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O}\exp(-\mathcal{C}_O[\gamma])$. We present the analytical convergence of our framework across preceding volumes: the off-diagonal density matrix split $\rho \mapsto \mathrm{diag}(\rho) + (\rho - \mathrm{diag}(\rho))$ universally dictates both subatomic boson propagation ($\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$) and macroscopic gravitational structure ($\|W(\epsilon)\| = \sin(2\epsilon)/\sqrt{2}$). We show how the global cost functional naturally divides into a discrete (\textbf{D}), spectral ($\boldsymbol{\psi}$), and geometric (\textbf{G}) trinity, forcing the emergence of quantized spacetime, quantum field theory, and general relativity as scale-dependent effective descriptions of a single master compression codec.
+We began with a bold claim: assume nothing, derive everything. The claim
+did not survive contact with its own logic. Assuming nothing is itself
+an assumption. Any axiomatic system requires at least one starting
+point. The question is not whether to make an assumption but which
+assumption is minimal.
 
+The answer the framework converges on is this: one assumption, one
+parameter, one equation.
 
-\section{Introduction: The Shared Ignorance of Modern Physics}
-\label{sec:epi_intro}
+\section{The Minimum Assumption}
 
-Modern theoretical physics is built upon a foundation of mutual evasion. General Relativity takes the smooth, continuous geometry of a four-dimensional spacetime manifold as an unexamined postulate and derives how energy-momentum curves it. Quantum mechanics takes the complex Hilbert space structure of states and the unitary evolution of the Schr\"odinger equation as given and derives how those states evolve. Neither theory possesses the internal vocabulary to explain why its own fundamental structural input exists. 
+The single assumption is the existence of an observer.
 
-The program developed across this research framework dismantles this division. We suggest that both inputs—the geometric arena of relativity and the linear superposition of quantum mechanics—are the inevitable mathematical consequences of a single integer $n \approx 184$ bits representing the information budget of a finite, static, timeless universe. When this static data structure is sampled by an internal observer, regularities emerge not because they are enforced by dynamical laws or hard-coded Lagrangians, but because **ordered configurations are shorter to describe than chaotic ones**. 
+Not a specific observer. Not a human, not a brain, not a physical
+system of any particular kind. The assumption is only that there exists
+at least one finite information structure whose state sequence encodes
+causally efficacious subjective experience --- the operational
+definition established in Chapter~1. We don't argue to know what it is,
+just that there is one.
 
-This final chapter serves as a comprehensive progress report and structural synthesis. By reviewing the exact analytical breakthroughs of our previous chapters, we demonstrate that quantum mechanics and general relativity are not separate physical domains that require an exotic, high-dimensional mathematical glue. Instead, they are two mathematical projections of a single, universal data-compression codec acting on different physical degrees of freedom.
+This is not an empty assumption. Chapter~1 proved from four modest
+empirical axioms that such a structure must be finite, substrate
+independent, and that the universe containing it must be static and
+timeless. The existence of the observer forces the existence of a finite
+bit count $n$. The universe is the minimal information structure that
+contains the observer.
 
+Everything else in the framework is a consequence of this starting
+point, combined with one principle: structures are weighted by their
+compressibility.
 
-\section{The Mastering Principle: Solomonoff Path Integrals}
-\label{sec:epi_master}
+\section{The Organising Equation}
 
-We anchor the entire framework to a singular operational axiom:
-
-\begin{quote}
-\textbf{Axiom (Observer Existence).} There exists at least one self-describing, finite informational structure whose state sequences encode causally efficacious subjective experience.
-\end{quote}
-
-If an observer exists as a localized packet of highly compressed data, what is the probability distribution of the world they experience around them? Following algorithmic information theory and Solomonoff induction, the universe does not select histories via a blind temporal evolution. Instead, the background fabric populates a path-integral measure where the statistical weight of any history $\gamma$ is determined strictly by its description length:
-
-\begin{equation}
-\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O}\exp\!\bigl(-\mathcal{C}_O[\gamma]\bigr), \qquad \gamma \in \Gamma_O
-\label{eq:epi_master_eq}
-\end{equation}
-
-where $\Gamma_O$ represents the total set of all data configurations compatible with the observer's existence, $\mathcal{C}_O[\gamma]$ is the algorithmic description cost of that history, and $Z_O$ is the structural partition function:
-
-$$Z_O = \sum_{\gamma \in \Gamma_O} \exp\bigl(-\mathcal{C}_O[\gamma]\bigr)$$
-
-In this formulation, the traditional thermodynamic inverse temperature ($\lambda$) is set to unity. This is not a fine-tuning choice; it reflects the fact that scaling the description cost merely redefines the arbitrary units of information. Only the strict ordering of histories by their algorithmic brevity carries physical consequences. The physical laws of our universe are simply the large-deviation minimizers of this global complexity functional:
-
-$$\gamma^* = \arg\min_{\gamma \in \Gamma_O} \mathcal{C}_O[\gamma]$$
-
-A universe governed by predictable, differentiable physical laws is not mandated by a creator or an arbitrary law; it is selected because **a structured, law-abiding universe is informationally cheaper to render than a chaotic one**. Random, lawless configurations are not forbidden; they are simply compressed poorly by the codec, causing their probability weight within $Z_O$ to be exponentially suppressed.
-
-
-\section{The Unifying Structural Proofs}
-\label{sec:epi_proofs}
-
-The conceptual validity of this zero-parameter approach is verified by a stark mathematical reality: the exact same matrix operation maps the fundamental behavior of both subatomic particle forces and macroscopic spacetime curvature. 
-
-If we take any normalized configuration pair—whether it represents a particle hopping between two spatial sites or two successive frames of a spatial metric—and express it as a complex-valued pure state wavefunction $\psi$, we can construct its global density matrix $\rho = |\psi\rangle\langle\psi|$. When we isolate the off-diagonal data residuals ($B = \rho - \mathrm{diag}(\rho)$) left behind by the codec, the core formalisms of modern physics emerge spontaneously.
-
-\subsection{The Subatomic Projection (Quantum Mechanics)}
-When this diagonal/off-diagonal split is applied to a discrete, purely fermionic network of pixels, it yields the following verified analytical properties:
-* **Pauli Exclusion:** For any stationary, unperturbed fermion, the off-diagonal residual drops identically to $B = 0$. Double occupancy is informationally invisible to the codec; Pauli exclusion is revealed to be the statement that a saturated pixel requires zero data overhead to track.
-* **The Born Rule Identity:** For a quantum state existing in a spatial superposition $\psi(\theta) = \cos\theta\,e_i + i\sin\theta\,e_j$, the Frobenius norm of the off-diagonal compression matrix tracks as:
-$$\|B(\theta)\| = \frac{\sin 2\theta}{\sqrt{2}}$$
-The physical amplitude of a force-mediating boson is not an independent field variable; it is the exact interference term of the Born rule, expressed as an algorithmic residual.
-
-\subsection{The Macroscopic Projection (General Relativity)}
-When this exact same matrix operation is applied to conformal metric configurations $\psi(x) = g^{(0)}(x) + i\,g^{(1)}(x)$ on a spatial grid, the exact same mathematical engine generates the core structures of General Relativity:
-* **The Ricci/Weyl Curvature Split:** The density matrix separates cleanly into three mutually orthogonal algebraic subspaces:
-$$\rho = \underbrace{\mathrm{diag}(\rho)}_{\rho_{\mathrm{Ricci}}} + \underbrace{\frac{1}{2}\bigl(\rho_W + \rho_W^\top\bigr)}_{\rho_{\mathrm{tidal}}} + \underbrace{\frac{1}{2}\bigl(\rho_W - \rho_W^\top\bigr)}_{\rho_{\mathrm{graviton}}}$$
-The trace-zero properties of off-diagonal matrices mathematically force the **tracelessness of the Weyl tensor** ($\mathrm{Tr}(\rho_{\mathrm{Weyl}}) = 0$) without imposing geometric symmetries by hand.
-* **The Graviton Propagator:** For orthogonal metric states mixing across an angle $\epsilon$, the radiative graviton amplitude maps as:
-$$\|W(\epsilon)\| = \frac{\sin 2\epsilon}{\sqrt{2}}$$
-This identity is structurally identical to the subatomic Born rule formula. The graviton and the photon are born from the same computational womb.
-
-
-\section{The D-$\psi$-G Trinity}
-\label{sec:epi_trinity}
-
-The analytical convergence of our models indicates that the universal description cost functional $\mathcal{C}_O[\gamma]$ naturally decomposes into three scale-dependent operational regimes:
-
-$$\mathcal{C}_O[\gamma] = C_D[n] + C_\psi[\psi_\gamma] + C_G[g_\gamma]$$
-
-This tripartite structure is forced by the mathematical constraints of self-description. An observer must establish boundaries to separate themselves from the environment, and the cost of rendering those boundaries changes depending on the resolution of the screen:
-
-1. **The Discrete Regime (\textbf{D}):** At the absolute bedrock scale, boundaries are treated as raw subsets of a static bitstring. The cost is purely combinatorial ($C_D = \log_2 n$). This manifests as discrete, quantized Planck-scale pixels.
-2. **The Spectral Regime ($\boldsymbol{\psi}$):** At microscopic scales, boundaries are encoded as subspaces of a spatial frequency function space. The spectral cost functional penalizes high-frequency, non-coherent paths, forcing smooth wave-like behavior and generating the phenomena of quantum mechanics.
-3. **The Geometric Regime (\textbf{G}):** At macroscopic scales, boundaries are rendered as smooth, closed surfaces embedded in a continuous metric space. Because smooth manifolds maximize description economy over large networks, the cost functional suppresses irregular geometries, giving rise to the smooth field behaviors of General Relativity.
-
-This hierarchy explains the scale-dependent crossover points observed in our universe without requiring fine-tuned parameters:
-
-\begin{center}
-\begin{tabular}{llll}
-\hline
-\textbf{Regime} & \textbf{Mathematical Target} & \textbf{Scale Dynamics} & \textbf{Observed Physics} \\
-\hline
-\textbf{D} (Discrete) & Bitstring Sets & Planck Scale ($\ell_P$) & Quantized Spacetime \\
-$\boldsymbol{\psi}$ (Spectral) & Function Subspaces & Quantum Scale & Quantum Field Theory / Born Rule \\
-\textbf{G} (Geometric) & Metric Manifolds & Macro Scale & General Relativity / Friedmann \\
-\hline
-\end{tabular}
-\end{center}
-
-
-\section{The Self-Selection of the 184-Bit Budget}
-\label{sec:epi_saddle}
-
-Throughout our cosmological derivations, a specific informational value repeatedly emerged: a target budget of $n \approx 184$ bits. We can now show that $n$ is not an arbitrary input parameter. It is the **universal saddle point** of the observer's own existence probability.
-
-The probability that an observer $O$ manifests within a universe of size $n$, marginalizing over all possible histories, is expressed as:
-
-$$\mathbb{P}(O \mid n) = \frac{Z_O(n)}{Z(n)}$$
-
-Applying a standard uninformative description prior to the size of the universe itself ($\mathbb{P}(n) \propto 1/n$), the joint probability that both the observer and their universe co-exist is governed by:
-
-$$\mathbb{P}(O, n) \propto \frac{Z_O(n)}{Z(n) \cdot n}$$
-
-The value of $n$ that maximizes this joint probability is found by taking the derivative of the log-likelihood and finding its stationary point:
+Given an observer $O$, the probability of a history $\gamma$ compatible
+with $O$'s existence is:
 
 \begin{equation}
-\frac{\partial}{\partial n} \Bigl[\log Z_O(n) - \log Z(n) - \log n\Bigr] = 0
-\label{eq:epi_saddle_eq}
+\mathbb{P}(\gamma \mid O)
+= \frac{1}{Z_O}\exp\!\bigl(-\mathcal{C}_O[\gamma]\bigr),
+\qquad \gamma \in \Gamma_O,
+\label{eq:master}
 \end{equation}
 
-This saddle-point equation represents the ultimate convergence of the framework. It states that if a universe has too few bits ($n \ll 184$), it lacks the structural complexity to encode a stable, self-describing observer structure. If a universe has too many bits ($n \gg 184$), the total number of chaotic, uncompressible histories ($Z(n)$) expands exponentially, diluting the statistical probability of finding an ordered, observer-compatible reality down to zero. 
+where $\mathcal{C}_O[\gamma]$ is the total description cost of history
+$\gamma$ given observer $O$, $\Gamma_O$ is the set of all histories
+compatible with $O$'s existence, and $Z_O$ is the normalisation.
 
-The value $n \approx 184$ is the optimal informational sweet spot where a universe is large enough to build an observer's mind, yet small enough to remain highly compressed, orderly, and coherent.
+This is Solomonoff induction in path-integral form. The apparent
+inverse-temperature parameter has been set to unity, which is not
+fine-tuning: rescaling it merely redefines the units of description
+cost. Only the ordering of histories by compressibility is physically
+meaningful.
 
+The physical laws we observe are the large-deviation minimisers of
+$\mathcal{C}_O$:
 
-\section{The Unified Ledger of Physics}
-\label{sec:epi_ledger}
+\[
+\gamma^* = \arg\min_{\gamma \in \Gamma_O} \mathcal{C}_O[\gamma].
+\]
 
-By reinterpreting physical reality as the emergent choreography of an optimized data compression codec, the historical anomalies of physics resolve into a single unified ledger:
+A universe governed by predictable, differentiable laws is not
+mandated from outside. It is selected because ordered configurations
+are shorter to describe than chaotic ones. Chaotic universes are not
+forbidden; they are exponentially suppressed.
 
-\begin{center}
-\begin{tabular}{lll}
-\hline
-\textbf{Physical Phenomenon} & \textbf{Traditional Postulate} & \textbf{Informational Reality} \\
-\hline
-Pauli Exclusion Principle & Hard-coded wave asymmetry & Zero off-diagonal residual cost \\
-The Born Rule & Fundamental axiom of probability & Frobenius norm of the off-diagonal residual \\
-Weyl Curvature Tracelessness & Spacetime tensor symmetries & Algebraic trace-zero off-diagonal identity \\
-Gravitational Waves & Dynamic metric field ripple & Antisymmetric off-diagonal metric residual \\
-Newtonian Gravity ($1/R$) & Inverse-square force law & Three-dimensional spherical flux conservation \\
-Keplerian Elliptical Orbits & Gravitational force vectors & Minimum spectral-complexity closed path ($C_s=1$) \\
-Cosmic Re-acceleration & Dark Energy / Constant $\Lambda$ & Evaporation of structural knots at entropy saturation \\
-The Cosmological Constant & Fine-tuned vacuum energy density & Global bit-rate quantization limit of the codec \\
-\hline
-\end{tabular}
-\end{center}
+\section{What the Framework Has Established}
 
+Ten chapters of exact results support this picture. We state them
+honestly, separating what is proved from what is conjectured.
 
-\section{Conclusion: The Final Render}
-\label{sec:epi_conclusion}
+\subsection*{Exact results}
 
-The historic mission of physics has been to find the ultimate building blocks of matter and the fundamental laws that govern their interactions. This search has ended in a strange, fractured landscape where the rules of the atom refuse to speak to the rules of the stars.
+These results are analytically derived and numerically verified. They
+require no free parameters beyond the definition of the density matrix
+decomposition.
 
-The framework synthesized in this volume suggests that this fracture is entirely an illusion. The universe is not an objective, material machine constructed from independent pieces colliding in a cold vacuum. **The universe is a single, closed, beautifully optimized 184-bit data structure.** Space is not a stage; it is a grid of pixels. Time is not a flowing river; it is the sequence of steps through which the codec refreshes its data matrix. Gravity is not a pulling force; it is the geometric manifestation of a data-saving macroblock. And quantum mechanics is not a bizarre paradox; it is simply what compressed information looks like when viewed from the inside.
+The diagonal/off-diagonal split $\rho \mapsto \mathrm{diag}(\rho) +
+(\rho - \mathrm{diag}(\rho))$ applied to fermionic configurations
+gives: Pauli exclusion as zero compression residual; boson amplitude
+$\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$ independent of system size;
+the Born rule as the interference term of the density matrix; the
+virtual propagator lifecycle without field theory.
 
-We no longer need to search for a separate equation for the microscopic and the macroscopic world. The pixels have aligned, the code is optimized, and the master ledger is balanced. The screen is clear, and the rendering of reality is complete.
+The same split applied to metric configurations gives: the Ricci/Weyl
+decomposition with tracelessness exact; two graviton polarisation modes
+as degenerate eigenmodes; graviton amplitude $\|W(\epsilon)\| =
+\sin(2\epsilon)/\sqrt{2}$; the Newtonian potential $V(R) = -GMm/R$
+with $G = 1/(8\pi)$ in Planck units from flux conservation alone;
+Keplerian orbits as minimum-complexity closed worldlines.
 
+The conservation law $\|\mathrm{local}\|^2 + \|\mathrm{non-local}\|^2
+= 1$ holds for fermionic and metric configurations alike, as a direct
+consequence of $\|\rho\|^2 = 1$ for pure states.
 
-\section*{Supplementary Material}
+The aspect ratio $\mathcal{A}(n) = 2^n/(n\ln n)$ calibrated against
+inflationary expansion in Planck units gives $n \approx 184$, with the
+e-fold count and Bekenstein-Hawking entropy recovered as independent
+consistency checks.
 
-\begin{itemize}
-    \item \texttt{simulations/emergent\_smoothness.py} --- A complete numerical proof-of-concept demonstrating the cross-scale synthesis of the \textbf{D}-$\boldsymbol{\psi}$-\textbf{G} trinity, showing how localized discrete data transitions generate smooth, wave-like interference and macroscopic geometric trajectories under a unified minimization engine.
-\end{itemize}
+The Spearman correlation between spectral complexity $C_s$ and
+Euclidean action $S_E$ in Wheeler-DeWitt minisuperspace exceeds
+$\rho = 0.96$ across 20,000 paths, with the partial correlation
+surviving explicit roughness confound control. The Hartle-Hawking
+instanton is the joint global minimum of both quantities.
 
+\subsection*{Strongly suggested but not yet derived}
 
+The three-phase expansion profile of standard cosmology --- inflation,
+deceleration, re-acceleration --- emerges from the relational scale
+factor under lognormal matter abundance without a cosmological constant.
+The Hubble tension is a ranging artefact of a system whose
+quantisation density has evolved between measurement epochs. The
+$4\pi$ factor appears independently in Bekenstein-Hawking recovery, the
+Newtonian potential, and the aspect ratio calculation, and in each case
+it is the unique conversion between flat counting and spherical
+propagation.
+
+\subsection*{Open}
+
+The saddle-point equation
+
+\[
+\frac{\partial}{\partial n}
+\Bigl[\log Z_O(n) - \log Z(n) - \log n\Bigr] = 0
+\]
+
+should select $n^* \approx 184$ from the requirement that the universe
+be large enough to contain a self-describing observer yet small enough
+to remain compressible. This has not been verified because no tractable
+expression for $Z_O(n)$ is currently available. This is the central
+open problem of the programme.
+
+The D-$\psi$-G decomposition of the cost functional
+
+\[
+\mathcal{C}_O[\gamma] = C_D[n] + C_\psi[\psi_\gamma] + C_G[g_\gamma]
+\]
+
+is conjectured, not derived. The three regimes --- discrete at Planck
+scale, spectral at quantum scale, geometric at macroscopic scale ---
+are motivated by the exact results but have not been shown to follow
+from equation~\eqref{eq:master} without additional assumptions.
+
+The continuum limit: recovering the full Einstein field equations from
+the discrete toy model of Chapter~9. The derivation of massive bosons,
+the gauge structure of the Standard Model, and the quark mass
+hierarchy. The electromagnetic force law from the $n=2$, $m=1$ fermion
+residual. The proportionality $\|W\| \propto M$ needed to close the
+Newtonian potential theorem.
+
+\section{The Shared Formula}
+
+The most striking result across the series is that
+
+\[
+\frac{\sin(2\alpha)}{\sqrt{2}}
+\]
+
+governs both the boson amplitude (Chapter~7) and the graviton
+amplitude (Chapter~9), for entirely different physical degrees of
+freedom.
+
+The explanation is algebraic. For any state
+$\psi = \cos\alpha\,u + i\sin\alpha\,v$ with $u \perp v$ and $\|u\|
+= \|v\| = 1$, the off-diagonal norm of $\rho = |\psi\rangle\langle\psi|$
+satisfies
+
+\[
+\|\rho - \mathrm{diag}(\rho)\|_F = \frac{|\sin 2\alpha|}{\sqrt{2}}
+\]
+
+as a pure algebraic identity, independent of what $u$ and $v$
+represent. The formula is not a feature of quantum mechanics or of
+gravity. It is a feature of the density matrix decomposition applied
+to any normalised superposition of two orthogonal configurations.
+
+Quantum mechanics and general relativity share this formula because
+they are both projections of the same compression operation onto
+different physical degrees of freedom. This is the conjecture the
+framework is built to prove.
+
+\section{What Is Not Claimed}
+
+The framework is not a completed theory. It is a collection of exact
+results in discrete toy models, a set of structural correspondences
+with known physics, and a conjectured organising equation.
+
+The toy models use one-dimensional chains, scalar conformal metric
+factors, and two-frame sequences. Extensions to four continuous
+dimensions, the full rank-4 Riemann tensor, and the Fock space of
+many-fermion systems remain to be carried out. The framework does not
+yet derive the masses of elementary particles, the coupling constants
+of the Standard Model, or the value of $\hbar$ in physical units from
+$n$ alone.
+
+The claim that the framework is a zero-parameter theory is too strong.
+It has one parameter in the sense that matters: the definition of the
+observer. Given that definition, $n$ is expected to be fixed by the
+saddle-point equation rather than fitted to data. Whether that
+expectation survives rigorous calculation is an open question.
+
+What can be said honestly is this: the results accumulated across ten
+chapters were not put in by hand. Pauli exclusion, the Born rule, the
+Ricci/Weyl split, gravitational wave polarisations, the Newtonian
+potential, Keplerian orbits, inflationary expansion, and
+Bekenstein-Hawking entropy all follow from the single operation
+$B = \rho - \mathrm{diag}(\rho)$ applied to compressed configurations,
+combined with the principle that compressible histories dominate the
+measure.
+
+Whether the principle alone is sufficient to derive everything
+that remains open is the question the research programme exists to
+answer.
+
+\section{The Path Forward}
+
+Three problems are foundational. Everything else depends on them.
+
+\textbf{First}: solve the saddle-point equation and recover $n^*
+\approx 184$. This requires a tractable model of the observer partition
+function $Z_O(n)$. Even a toy model that captures the qualitative
+dependence --- too few bits cannot support a self-describing observer,
+too many bits drown the ordered histories in a sea of chaos --- would
+be a significant step.
+
+\textbf{Second}: derive the D-$\psi$-G decomposition from
+equation~\eqref{eq:master}. Show that the boundary structure of any
+self-describing observer forces the cost functional to split into
+discrete, spectral, and geometric regimes. This would convert the
+trinity from a conjecture to a theorem.
+
+\textbf{Third}: take the continuum limit of the discrete metric toy
+model and recover the Einstein field equations as the stationarity
+conditions of $C_G$ over metric configurations. This is the bridge
+between the exact toy-model results of Chapter~9 and the full
+apparatus of general relativity.
+
+If these three problems are solved, the remaining open questions ---
+the Standard Model gauge structure, the quark mass hierarchy, the
+derivation of $\hbar$ --- become calculations within an established
+framework rather than foundational challenges.
+
+\section{A Final Remark}
+
+The project began in 2001 with a simple observation: a computer running
+a simulation and the simulation itself are two arrangements of the same
+information. Neither is more fundamental. The observer is an
+equivalence class of descriptions, not any particular description.
+
+Twenty-five years of development have not changed that starting point.
+They have only made it more precise. The observer is the invariant. The
+density matrix is the equivalence class representative. The Born rule
+is the probability measure on the class. The wavefunction is the codec
+that selects which representative the observer experiences.
+
+Quantum mechanics and general relativity are two ways of reading the
+same compressed structure. One reads the pixels. The other reads the
+geometry they form. The codec is the same in both cases.
+
+That is the claim. The proof is still being written.
