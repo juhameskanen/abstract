@@ -18,6 +18,7 @@ PAPERS_LIST := \
 	unification-of-gr-qm:Emergence_of_General_Relativity,_Geodesics,_Curvature,_and_Gravitational_Waves_as_Compression_Residuals \
 	informational-action:Classical_Geodesics_as_Minimal-Spectral-Complexity_Trajectories_in_Informational_Space \
 	cosmological-model:Inflation,_Cosmological_and_Hubble_Constants \
+	energy-information-equivalence:Energy_Information_Equivalence_From_Spectral_Complexity \
 	real-theory-of-everything:Real_Theory_of_Everything_Draft
 
 
