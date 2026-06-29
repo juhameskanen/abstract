@@ -210,6 +210,14 @@ $k = 1,\ m = n$ & One entity, $R = 1/n$ & Schwarzschild singularity \\
 \end{tabular}
 \end{center}
 
+Numerical analysis shows the spatial contraction profile matches also across all states.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/friedmann.png}
+    \caption{The purple (counting equation) and dashed orange (Friedmann mapping) curves perfectly overlap, demonstrating that general relativity's geometric contraction under the presence of matter is fundamentally equivalent to an internal observer's loss of background resolution.}
+    \label{fig:friedman}
+\end{figure}
 
 
 
@@ -296,7 +304,11 @@ at the cosmological scale.
 \section*{Supplementary Material}
 \label{sec:supplementary}
 
-spacetime\_warp.py simulates the evolution of the universe with three level of emergent structures (matter).
+\begin{itemize}
+\item \texttt{friedman.py:} Calculates and plots the 1D and 3D relational spatial contraction profiles
+  based on the counting equation and the Friedmann equation. 
+\item \texttt{spacetime\_warp.py:} Simulates the evolution of the universe with three level of emergent structures (matter).
+\end{itemize}
 
 \printbibliography
 
