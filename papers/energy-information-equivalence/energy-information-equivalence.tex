@@ -4,7 +4,7 @@
 \addbibresource{../references.bib}
 
 \title{Energy--Information Equivalence $E=mc^2$ from Spectral Complexity}
-\author{Meskanen}
+\author{Juha Meskanen}
 \date{June 2026}
 
 \begin{document}
@@ -12,14 +12,15 @@
 \maketitle
 
 \begin{abstract}
-  We derive the energy--information equivalence $E = mc^2$ within the codec framework.
-  The rest energy of a massive fermion is the spectral complexity cost of its minimum-description-length closed worldline, evaluated per unit observer time.
-  Numerical verification using the official \texttt{Wavefunction} engine confirms all claims to high precision.
-  In Planck units ($c=\hbar=1$), $E_{\mathrm{rest}} = M$.
+  We show that the spectral complexity formalism is consistent with the relativistic energy-mass relation.
+  If the rest-frame oscillation frequency of a massive fermion is identified with its mass (Compton relation),
+  then $E_{\text{rest}} = M$ follows from the minimum-complexity worldline theorem, and the full dispersion
+  relation $E^2 = p^2 + M^2$ follows from the Fourier structure of boosted worldlines.
+  A first-principles derivation of the Compton relation from the bit-counting equation remains an open problem
 \end{abstract}
 
 \section{Introduction}
-The central hypothesis of the codec framework identifies the quantum wavefunction as the universe's native data-compression system.
+The central hypothesis of the quantum wavefunction is the universe's native data-compression system.
 Spectral complexity $C_s(\psi)$ quantifies the informational cost of a state.
 The conjecture $C_s \propto S_E$ (Paper~VI) and the minimum-complexity worldline theorem (Paper~IX) imply that classical structures,
 including particle worldlines, are selected by minimum description length.
@@ -50,7 +51,7 @@ Graviton and fermion-boson conservation laws ensure consistency across sectors.
 
 \section{Numerical Verification}
 
-We implemented four claims using the official \texttt{Wavefunction} class, available at pypi repository.
+We implemented four claims using python.
 
 \begin{table}[h]
 \centering
@@ -78,13 +79,15 @@ Figure~\ref{fig:summary} visualises the key relations.
 \end{figure}
 
 \section{Discussion}
-The equivalence follows without new postulates.
-It unifies the informational, quantum, and gravitational layers of the framework.
-Open extensions include continuum limits and explicit boosted states.
+
+TODO
 
 
 \section{Supplementary Materials}
 
-\texttt{simulations/energy\_information\_equivalence.py}
+\begin{itemize}
+\item \texttt{simulations/energy\_information\_equivalence.py} - The claims
+\item \texttt{wavefunction} - Wavefunction class with Spectral Complexity measure, available at pypi.org
+\end{itemize}
 
 \end{document}
