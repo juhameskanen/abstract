@@ -3,6 +3,8 @@
 # The reason for dir:title split is the Latex ecosystem incapable to compose a set of papers
 # from stand-alone papers. 
 
+NAME=aup
+
 PAPERS_LIST := \
 	introduction:Introduction \
 	informational-derivation-of-reality:The_Axiomatic_Foundations_of_Reality \
@@ -20,19 +22,21 @@ PAPERS_LIST := \
 
 
 # install directory
-REMOTE_DIR := meskanen/abstract
+REMOTE_DIR := meskanen/abstract/papers
 
 # Extract just the slugs/directories for target mapping
 PAPER_DIRS := $(foreach p,$(PAPERS_LIST),$(word 1,$(subst :, ,$p)))
 
 # Configurable Files
-HEADER_TEX  = header.tex
-FOOTER_TEX  = footer.tex
-FINAL_TEX   = aup.tex
-FINAL_PDF   = aup.pdf
-FINAL_HTML  = index.html
-DIST_DIR    = dist
-TAR_FILE    = aup.tar.gz
+HEADER_TEX  = templates/header.tex
+FOOTER_TEX  = templates/footer.tex
+HEADER_HTML  = templates/header_html
+FOOTER_HTML  = templates/footer_html
+FINAL_TEX   = $(NAME).tex
+FINAL_PDF   = $(NAME).pdf
+FINAL_HTML  = papers.html
+DIST_DIR    = html-papers
+TAR_FILE    = $(NAME).tar.gz
 
 # packages to be installed (uploaded)
 HTML_PACKAGES=$(TAR_FILE)
@@ -99,7 +103,7 @@ $(FINAL_TEX): $(HEADER_TEX) $(FOOTER_TEX)
 	@echo "Assembling master PDF..."
 
 
-$(FINAL_HTML): header.html footer.html
+$(FINAL_HTML): $(HEADER_HTML) $(FOOTER_HTML)
 	@echo "Generating HTML body..."
 	@rm -f body.html
 	@echo "<ul>" > body.html
@@ -110,12 +114,13 @@ $(FINAL_HTML): header.html footer.html
 		echo "    <li><a href=\"$$slug/html-$$slug/$$slug.html\">$$title</a></li>" >> body.html; \
 	done
 	@echo "</ul>" >> body.html
-	@cat header.html body.html footer.html > $(FINAL_HTML)
+	@cat $(HEADER_HTML) body.html $(FOOTER_HTML) > $(FINAL_HTML)
 
 package_html:
 	@echo "Preparing distribution directory..."
 	@rm -rf $(DIST_DIR) && mkdir -p $(DIST_DIR)
 	@cp $(FINAL_HTML) $(DIST_DIR)/
+	@cp $(FINAL_HTML) $(DIST_DIR)/index.html
 	@for slug in $(PAPER_DIRS); do \
 		if [ -d "$$slug/html-$$slug" ]; then \
 			mkdir -p "$(DIST_DIR)/$$slug"; \
@@ -128,11 +133,11 @@ package_html:
 clean_root:
 	rm -f body.tex $(FINAL_TEX) $(FINAL_PDF) body.html $(FINAL_HTML) $(TAR_FILE)
 	rm -rf $(DIST_DIR)
-	rm aup.*
+	rm $(NAME).*
 
 # Dependencies
 
-aup.tex: header.tex body.tex footer.tex Makefile
+$(NAME).tex: $(HEADER_TEX) body.tex $(FOOTER_TEX) Makefile
 
 body.tex: geometry-of-spacetime/geometry-of-spacetime.tex
 body.tex: informational-action/informational-action.tex

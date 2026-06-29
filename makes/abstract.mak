@@ -28,7 +28,7 @@ pdf: $(PDFS)
 	@echo "PDFs done"
 
 html: $(HTML_DIRS)
-	@echo "PDFs done"
+	@echo "HTMLs done"
 
 %.pdf: %.tex
 	@echo "Building $@ with profile flags..."

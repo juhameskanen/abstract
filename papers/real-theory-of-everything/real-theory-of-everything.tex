@@ -3,7 +3,7 @@
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
 
-\title{Towards a Zero-Parameter Theory of Everything:\\
+\title{One-Parameter Theory of Everything:\\
 Existence, Compression, and the Emergence of Physical Law}
 
 \author{Juha Meskanen}
@@ -27,6 +27,7 @@ histories $\gamma$ compatible with an observer $O$:
 \]
 where $\mathcal{C}_O[\gamma]$ is the total description cost of history
 $\gamma$ given observer $O$.
+
 Rather than deriving this from first principles --- a task left for
 future work --- we collect here the evidence that it is the correct
 organising equation.
@@ -367,11 +368,11 @@ physically motivated but not yet derived.
 
 The bit count $n$ appears in equation~\eqref{eq:decomp} as
 $C_D[n] = \log_2 n$.
-We conjecture that $n$ is not a free parameter but the saddle point
+It would be tempting to conjecture that $n$ is not a free parameter but the saddle point
 of the observer's own existence probability.
 
 The probability that observer $O$ exists at all, marginalising over
-all histories at bit count $n$, is:
+all histories at bit count $n$, is then:
 \[
 \mathbb{P}(O \mid n)
 = \frac{Z_O(n)}{Z(n)}.
@@ -391,6 +392,7 @@ observer's probability of existence --- is formally:
 \label{eq:saddle}
 \end{equation}
 
+
 \subsection{Consistency with Independent Estimates}
 
 Papers~IV and~V \cite{meskanen2026iv, meskanen2026v} derive a
@@ -405,7 +407,9 @@ That convergence has not yet been verified.
 The saddle-point equation requires an explicit model of $Z_O(n)$ ---
 the partition function of observer-compatible histories as a function
 of $n$ --- for which no tractable expression is currently available.
-This is the central open problem of the programme.
+
+
+
 
 % ============================================================
 \section{Summary of Recovered Physics}
@@ -496,7 +500,9 @@ between discrete and spherical geometry (Papers~IV--V).
 In each case it is not a free parameter but the geometric conversion
 between flat counting and spherical propagation.
 Its consistent appearance is encouraging but not yet understood at the
-level of the cost functional.
+level of the cost functional. We settle to  assuming sperical symmetry is the minimal
+geometric shape satisfying the observer condition.
+
 
 \subsection{What This Framework Is and Is Not}
 
@@ -553,7 +559,7 @@ model forces the full Hilbert space structure.
 
 I initially tried to set the first principle of the framework as assume nothing,
 which was itself an assumption.
-Any axiomatic system — mathematics included — requires at least one assumption.
+Any axiomatic system — mathematics included — requires at least one axiom.
 The minimum may be just one parameter: the definition of the observer.
 Everything else could then follow from that.
 
@@ -565,11 +571,13 @@ Everything else could then follow from that.
 We list the primary open problems in order of foundational priority.
 
 \begin{enumerate}
-  \item \textbf{The saddle-point equation.}
-        Solving equation~\eqref{eq:saddle} requires an explicit model
-        of $Z_O(n)$.
-        A tractable approximation to the observer partition function,
-        even in a toy model, would be a significant step.
+  \item \textbf{Continuum limit.}
+        The fullEinstein field equations should emerge as the
+        large-deviation stationarity conditions of $C_G$ over metric
+        configurations in the continuum limit of the discrete model
+        of Paper~VIII.
+        This requires a treatment of the limit that is beyond the
+        scope of the current toy models.
 
   \item \textbf{Emergence of energy.}
         The spectral cost $C_\psi$ is an information-theoretic
@@ -578,19 +586,10 @@ We list the primary open problems in order of foundational priority.
         requires a derivation of the unit conversion from Planck units
         to SI, analogous to the treatment of $G$ in Paper~VIII.
 
-  \item \textbf{Derivation of the D-$\psi$-G decomposition.}
-        Equation~\eqref{eq:decomp} is conjectured, not derived.
-        A proof that the boundary structure of any self-describing
-        observer forces this three-way split would convert the
-        conjecture into a theorem.
-
-  \item \textbf{Continuum limit.}
-        The Einstein field equations should emerge as the
-        large-deviation stationarity conditions of $C_G$ over metric
-        configurations in the continuum limit of the discrete model
-        of Paper~VIII.
-        This requires a treatment of the limit that is beyond the
-        scope of the current toy models.
+  \item \textbf{The Multi-fermion Machinery.}
+        The single-fermion results already
+        establish the essential structure. Extending to tensor products is a
+        technical programme, not a conceptual one.
 
   \item \textbf{The topology question.}
         Why is the observer's boundary a 3-sphere?
@@ -598,11 +597,18 @@ We list the primary open problems in order of foundational priority.
         boundary extension of the 1D encoding, but a proof that no
         other topology can dominate the measure has not been given.
 
-  \item \textbf{Massive bosons and gauge structure.}
-        Paper~VII identifies a photon-like massless boson.
-        Massive mediators and the $\mathrm{SU}(3) \times \mathrm{SU}(2)
-        \times \mathrm{U}(1)$ gauge structure of the Standard Model
-        are not yet addressed.
+  \item \textbf{The saddle-point equation.}
+        Solving equation~\eqref{eq:saddle} requires an explicit model
+        of $Z_O(n)$.
+        A tractable approximation to the observer partition function,
+        even in a toy model, would be a significant step.
+
+  \item \textbf{Derivation of the D-$\psi$-G decomposition.}
+        Equation~\eqref{eq:decomp} is conjectured, not derived.
+        A proof that the boundary structure of any self-describing
+        observer forces this three-way split would convert the
+        conjecture into a theorem.
+
 \end{enumerate}
 
 % ============================================================

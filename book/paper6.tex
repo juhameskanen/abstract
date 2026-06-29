@@ -1,20 +1,12 @@
 \chapter{The Universe as an MPEG: The Wavefunction as Data Compression}
 
-Over the preceding chapters we built a rigorous, quantitative universe
-from a strict 184-bit budget. We watched empty space self-assemble from
-a zero-entropy initial state. We proved that matter ties knots in the
-information fabric, and that gravity is the geometric reading of those
-knots. The large-scale structure of spacetime --- its expansion history,
-its black hole entropy, its cosmological constant --- all followed from
-a single counting principle without a single hardcoded physical law.
-
 One feature of the observed universe remains unexplained. The microcosm
 waves. Particles exist in superposition, interfere like ripples on water,
 and snap into discrete outcomes upon measurement. The wavefunction is
 complex-valued. Dynamics are unitary. Why?
 
-Standard quantum mechanics answers: this is how things are. Accept the
-axioms and calculate. This chapter offers a different answer. The quantum
+Standard quantum mechanics answers: this is how things are, shut-up 
+and calculate. This chapter offers a different answer. The quantum
 world waves because we are observing compressed information from the
 inside.
 
@@ -80,11 +72,9 @@ apparatus. The squaring arises because amplitudes are complex-valued: the
 information-theoretic weight of a spectral mode is proportional to the
 power in that mode, which is the squared amplitude.
 
-This is not a derivation of the Born rule from scratch. It is a
+This is not a derivation of the Born rule from scratch yet. It is a
 motivation: the Born rule is precisely what optimal compression looks
-like when a continuous description meets a discrete measurement. A
-rigorous derivation from the spectral complexity axioms is an open
-problem stated at the end of this chapter.
+like when a continuous description meets a discrete measurement. 
 
 \section{Fermions, Bosons, and What Is Actually Fundamental}
 
@@ -129,17 +119,20 @@ approach --- but the compression picture makes it precise.
 
 To render the compression hypothesis quantitative,
 we require a metric that assigns an informational cost to physical states.
-While Kolmogorov complexity provides the necessary theoretical foundation,
-it is inherently uncomputable and non-continuous.
 
-This limitation becomes clearer when evaluating Kolmogorov complexity in the
-context of complex-valued sinusoidal functions.
+Kolmogorov complexity from Algorithmic Information Theory (AIT) provides the
+necessary theoretical foundation. However, Kolmogorov is inherently
+uncomputable and non-continuous.
+
+However, lets take a closer look what Kolmogorov complexity says
+about complex-valued sinusoidal functions.
 Crucially, the cosine function represents the simplest continuous periodic function.
-Furthermore, because it only needs to be implemented once—functioning effectively
-as a per-class resource—the intrinsic algorithmic complexity of any real-world wavefunction is vanishingly small.
-The true informational overhead resides not in the foundational function, but in the specific modes themselves.
+Furthermore, because it is a per-class resource, the intrinsic algorithmic complexity
+of any real-world wavefunction is vanishingly small.
+The true informational overhead resides not in the foundational function,
+but in the specific modes themselves --- not in the code but data.
 
-To address this, we replace Kolmogorov complexity with a continuous, computable alternative.
+So we replace Kolmogorov complexity with a continuous, computable alternative.
 
 \begin{quote}
 \textbf{Spectral Complexity.} The spectral complexity $C_s(\Psi)$ of a
@@ -192,13 +185,17 @@ The Boltzmann brain problem asks: why do we find ourselves in an ordered
 universe rather than as isolated brains in a sea of chaos, when chaos is
 statistically more probable? Under $C_s$-weighted sampling, the answer
 is that chaos is too expensive. Chaotic configurations require
-exponentially more bits to describe than smooth ones. The universe does
-not render them because it cannot afford to.
+exponentially more bits to describe than smooth ones. They are exponentially
+inprobable.
 
 This resolves the problem without fine-tuning and without modifying
 cosmology. Structured observers in law-governed universes dominate the
 $C_s$ measure not because they were selected by some anthropic argument
-but because they compress better.
+but because they compress better and are therefore more probable dominating
+the measure.
+
+Smooth predictable data compresses best. 
+
 
 \section{What Emerges from Spectral Compression}
 
@@ -228,37 +225,6 @@ principle: the universe prefers descriptions with low spectral
 complexity, and the most compressible descriptions of physical
 configurations are wave-like ones.
 
-\section{The Informational Action Principle}
-
-This leads to the central conjecture of the chapter.
-
-In classical and quantum physics, particles find their trajectories by
-minimising the Euclidean action $S_{\mathrm{Euclidean}}$. This
-variational principle underlies both classical mechanics and the
-path-integral formulation of quantum field theory. Where does it come
-from?
-
-\begin{quote}
-\textbf{Conjecture (Informational Action Principle).}
-$C_s \propto S_{\mathrm{Euclidean}}$, with proportionality constant
-determined by $n$ and $\Delta\omega$.
-\end{quote}
-
-If this conjecture holds --- analytically or to arbitrary numerical
-precision --- then the action principle of physics is not a postulate.
-It is Solomonoff induction operating over compressed geometric
-descriptions. Particles follow minimum-action trajectories because
-minimum-action trajectories have minimum spectral complexity, and the
-universe exponentially suppresses everything else.
-
-The conjecture would also complete two open identifications from
-earlier chapters. Planck's constant $\hbar$ would be the minimum
-spectral resolution $\Delta\omega/\ln 2$ of a 184-bit universe.
-Newton's constant $G$ would be expressible as a function of $n$ alone,
-completing the derivation that Chapter~4 left at the factor $4\pi$.
-
-Neither identification is proved here. Both are stated as open problems.
-
 \section{What This Chapter Establishes}
 
 Three results and one conjecture follow from the compression hypothesis.
@@ -278,13 +244,3 @@ Third, numerical simulation demonstrates that inertia and interference
 emerge from spectral compression alone, without imposed equations of
 motion.
 
-The conjecture --- $C_s \propto S_{\mathrm{Euclidean}}$ --- would, if
-proved, identify quantum gravity with Solomonoff induction over
-compressed geometric descriptions, derive $\hbar$ from $n$, and close
-the bridge between the informational framework and a full theory of
-quantum mechanics and gravity. That proof is the primary open problem
-of the series.
-
-The next chapter applies the compression picture to the detailed
-structure of fermions and asks what the codec geometry implies about
-the particle spectrum.
