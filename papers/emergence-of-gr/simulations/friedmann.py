@@ -98,7 +98,7 @@ def simulate_spacetime_contraction(
         color="purple",
         linewidth=4,
         alpha=0.7,
-        label="Your Observable 3D Space $a_{obs}$",
+        label="Counting Equation $a_{obs}$",
     )
     ax2.plot(
         k_particles,
@@ -106,7 +106,7 @@ def simulate_spacetime_contraction(
         color="tab:orange",
         linestyle="--",
         linewidth=2.5,
-        label="Corrected Friedmann Mapping",
+        label="Friedmann",
     )
     ax2.set_xlabel("Matter Entities ($k$) $\\rightarrow$ Progress of Collapse")
     ax2.set_ylabel("Observable Spatial Measure ($4\\pi R^2$)")
