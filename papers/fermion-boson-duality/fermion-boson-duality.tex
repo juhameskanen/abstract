@@ -41,9 +41,13 @@ a ``gauge boson'' is the name we give to correlations between
 fermion events that would otherwise require an unexplained interaction
 term.
 Under this reframing, the open problems of the framework reduce
-to purely fermionic questions: why fermions come in three generations,
-why they carry the charges they carry, and why their trajectories
-produce the force laws they produce.
+to purely fermionic questions: what distinguishes the charged lepton
+generations, why fermions carry the charges they carry, and why
+their trajectories produce the force laws they produce.
+A combinatorial argument for a 4-bit codec unit per fermion hop is
+noted but is explicitly not connected by any derivation to the
+observed lepton mass gaps, which are unequal (7.69 and 4.07 bits)
+and do not both round to a common unit.
 \end{abstract}
 
 \tableofcontents
@@ -408,56 +412,78 @@ $(4,2)$ & $1/2$ & $\sqrt{3}/2$ & symmetric &
 The ``SM correlation label'' column gives the Standard Model name
 for the correlation pattern an observer would attribute to this
 fermion class.
-These are derived labels, not fundamental particles.}
+These are derived labels, not fundamental particles.
+``Status'' refers to the $(n,m)$ norm structure of
+Section~\ref{sec:theorems}, which is exact in every row; it does
+\emph{not} certify that all SM particles sharing a label are
+distinguished by the framework.
+In particular the three charged leptons share the single class
+$(2,1)$ and are not yet distinguished by mass --- see
+Section~\ref{sec:masses}.}
 \label{tab:dictionary}
 \end{table}
 
 %------------------------------------------------------------
-\section{The Mass Hierarchy}
+\section{Mass and the Missing Generation Index}
 \label{sec:masses}
 
 The spectral complexity $C_s$ assigns an information cost
 proportional to the dominant wavenumber of the fermionic wavefunction.
-Under Solomonoff induction, $P(\psi) \propto 2^{-C_s(\psi)}$, so
-observable fermions are ordered by ascending $C_s$.
+Under Solomonoff induction, $P(\psi) \propto 2^{-C_s(\psi)}$, so a
+genuine mass-from-complexity relation would order observable fermions
+by ascending $C_s$.
 
-The minimum fermionic codec unit is 4 bits, arising from the four
-binary choices required to specify one fermion hop: which site,
-which frame, real or imaginary component, and sign of the phase.
-This gives $2^4 = 16$ configurations per hop, setting the granularity
-of the mass ladder.
+The $(n,m)$ classification of Section~\ref{sec:classes} does not yet
+support this.
+All three charged leptons --- electron, muon, tau --- occupy the
+\emph{same} class, $(n,m) = (2,1)$.
+The classification distinguishes charge and confinement
+($m$ as winding number, $n$ as site count) but contains no third
+parameter that could distinguish particles of different mass within
+a class.
+A genuine derivation of the lepton mass hierarchy from $C_s$ therefore
+requires extending the classification with an explicit generation
+index, which does not yet exist in this framework.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{lrrrl}
+\begin{tabular}{lrrl}
 \toprule
-Fermion & Mass (MeV) & $\log_2(m/m_e)$ & Nearest int. & Notes \\
+Fermion & Mass (MeV) & $\log_2(m/m_e)$ & Notes \\
 \midrule
-Electron &       $0.511$ &  $0.00$ &  $0$ & generation 1 \\
-Muon     &     $105.66$  &  $7.69$ &  $8$ & generation 2 \\
-Tau      &    $1776.86$  & $11.76$ & $12$ & generation 3 \\
+Electron &       $0.511$ &  $0.00$ & \\
+Muon     &     $105.66$  &  $7.69$ & \\
+Tau      &    $1776.86$  & $11.76$ & \\
 \bottomrule
 \end{tabular}
 \caption{Charged lepton masses in $\log_2(m/m_e)$ space.
-The near-integer sequence with 4-bit granularity suggests a discrete
-complexity ladder.
-Deviations from exact integers are interpreted as compression gains
-under Solomonoff induction.}
+The two gaps are $7.69$ and $4.07$ bits respectively --- not equal
+to each other, and not both close to a common integer unit.
+No formula in this paper computes these numbers from $C_s$.}
 \label{tab:masses}
 \end{table}
 
-The three charged lepton generations are the same $n{=}2$, $m{=}1$
-fermion class at successive complexity levels, separated by
-$\approx 4$ bits per generation (0, 8, 12 bits relative to the
-electron).
-A falsifiable prediction follows: no stable charged fermion should
-exist beyond the tau, because the lognormal probability distribution
-of Paper~V places a finite upper bound on observable complexity.
-No fourth charged lepton has been observed.
+A combinatorial argument is sometimes proposed as a candidate origin
+for a discrete mass unit: one fermion hop requires four binary
+choices (which site, which frame, real or imaginary component, sign
+of phase), giving $2^4 = 16$ configurations and suggesting a 4-bit
+granularity.
+This argument is independently motivated but is \emph{not} connected
+by any derivation to the $C_s$ formula of Paper~VI or to the observed
+mass gaps in Table~\ref{tab:masses}.
+No construction in this framework takes $(n,m) = (2,1)$ together with
+a generation label and outputs $C_s = 8$ or $C_s = 12$.
+The near-integer appearance of $7.69 \to 8$ relies on rounding a
+number that is not itself derived, and the second gap ($4.07$) is
+not close to the same unit that the first gap is rounded to.
 
-The quark mass hierarchy spans a wider range and has not yet been
-mapped to the ladder.
-This is identified as the primary open calculation.
+We therefore do not claim a mass ladder.
+The honest status is: the $(n,m)$ classification correctly separates
+fermions by charge and confinement class, but says nothing yet about
+why three charged-lepton masses exist within the single class
+$(2,1)$, or what values they should take.
+This is stated as an open problem in Section~\ref{sec:open} rather
+than as a partial result.
 
 %------------------------------------------------------------
 \section{Discussion}
@@ -513,22 +539,24 @@ Under the fermion-first reframing, these dissolve or transform.
 The W and Z bosons are observed as fermion recoil events at specific
 energy scales.
 The question is not ``what is the W boson?'' but ``why do fermion
-transitions at mass-rung 17 produce correlation patterns that
+transitions at those energy scales produce correlation patterns that
 are massive and short-ranged?''
 That is a question about the lognormal probability distribution of
-Paper~V: fermion transitions near or above the lognormal peak
-are suppressed and short-range.
-The answer is already in the framework; it needs to be made
-quantitative.
+Paper~V: fermion transitions near or above the lognormal peak are
+expected to be suppressed and short-range.
+This connection is plausible but not yet quantitative, and does not
+rely on any claimed mass ladder.
 
 The Higgs mechanism in the Standard Model gives mass to the W and Z
 by coupling them to a scalar field.
-In the codec framework, the question is simpler: why does the
-$n{=}2$ fermion class acquire a mass gap above the electron?
-The mass ladder answer is: because each successive generation costs
-4 more bits, and the lognormal distribution exponentially suppresses
-higher-complexity states.
-The Higgs is not needed as a separate mechanism.
+In the codec framework, the prior question is more basic: why does
+the $n{=}2$, $m{=}1$ fermion class contain particles of more than
+one mass at all, when the $(n,m)$ classification of
+Section~\ref{sec:classes} has no parameter to distinguish them
+(Section~\ref{sec:masses})?
+Until that generation index is identified, no statement about a
+Higgs-like mass generation mechanism can be derived from this
+framework; it remains speculative.
 
 The graviton question is genuinely open and worth stating carefully.
 Gravity was derived in Papers~IV--V at the geometric layer, from
@@ -543,15 +571,18 @@ We note the coincidence without claiming a derivation.
 Stripped of boson physics, the genuine open problems are:
 
 \begin{enumerate}
-  \item \textbf{Why three generations of charged leptons and not four.}
-        The mass ladder predicts suppression above complexity rung 12.
-        Making this bound quantitative from the lognormal of Paper~V
-        is a calculation, not a postulate.
+  \item \textbf{What distinguishes the charged lepton generations.}
+        The $(n,m)$ classification places electron, muon, and tau in
+        the same class, $(2,1)$.
+        No parameter in the present framework varies across them.
+        Identifying such a parameter --- and only then asking whether
+        it explains the observed masses, and whether it caps the
+        count at three --- is the prerequisite open problem.
 
   \item \textbf{Why quarks have the masses they have.}
         The six quarks span several orders of magnitude and have not
-        yet been placed on the complexity ladder.
-        This is the primary open calculation.
+        been connected to $C_s$ in any form, pending resolution of
+        the generation-index problem above.
 
   \item \textbf{Why the fermion force laws have the form they have.}
         The $1/r^2$ force law was derived in Paper~VII from graviton
@@ -577,7 +608,7 @@ the wavefunction codec, without reference to the geometric layer.
 Both derivations are self-consistent.
 The question is how they connect.
 The natural bridge is the worldline: a fermion's trajectory through
-spacetime is a complex worldline $\psi_{\text{traj}}(t) = x(t) + iy(t)$,
+spacetime is a complex worldline $\psi_\text{traj}(t) = x(t) + iy(t)$,
 and Paper~VII showed that the minimum spectral complexity closed
 worldline is the ellipse --- Kepler's orbit.
 The fermion codec and the geometric gravity are therefore not
@@ -593,14 +624,16 @@ next paper.
 
 \begin{enumerate}
 
-  \item \textbf{Why three generations.}
-        Quantify the lognormal upper bound on observable fermion
-        complexity, giving a derived prediction for the number of
-        charged lepton generations.
+  \item \textbf{A generation index for charged leptons.}
+        Identify a parameter, absent from the present $(n,m)$
+        classification, that distinguishes electron, muon, and tau.
+        Only once such a parameter exists can its connection (if any)
+        to $C_s$, to the observed mass gaps, and to the number of
+        generations be assessed.
 
   \item \textbf{Quark mass hierarchy.}
-        Place the six quarks on the complexity ladder and verify
-        4-bit granularity.
+        Connect the six quark masses to $C_s$, pending resolution of
+        the generation-index problem above.
 
   \item \textbf{Electromagnetic force law from fermion residual.}
         Apply the graviton flux argument of Paper~VII to the
@@ -651,7 +684,13 @@ next paper.
 
 \textbf{Open:}
 \begin{enumerate}
-\item[10.] Physical identification of the $n{=}4$, $m{=}2$ spin-2
+\item[10.] A generation index distinguishing electron, muon, and tau
+      within the single class $(2,1)$.
+      No such parameter exists in the present framework; the
+      previously claimed 4-bit mass ladder is not a derived
+      consequence of $C_s$ and is withdrawn (see
+      Section~\ref{sec:masses}).
+\item[11.] Physical identification of the $n{=}4$, $m{=}2$ spin-2
       fermion class and its relation to geometric gravity.
 \end{enumerate}
 
@@ -684,15 +723,16 @@ The $n{=}2$ sector gives charged leptons and neutrinos, distinguished
 by winding number.
 The $n{=}3$ sector gives confined colour-charged fermions (quarks)
 and a scalar sector.
-The mass hierarchy organises into a near-integer sequence in
-$\log_2(m/m_e)$ with 4-bit granularity and predicts no stable
-charged fermion beyond the tau.
+The classification does not yet distinguish the three charged lepton
+generations, which all occupy the single class $(2,1)$; identifying
+the missing generation index is left as an open problem rather than
+asserted as a derived mass ladder.
 
-The open problems reduce to three purely fermionic questions: why
-three lepton generations, why the quark masses have the values they
-have, and whether the $1/r^2$ electromagnetic force law follows from
-the fermion residual structure by the same argument that gives
-gravity in Paper~VII.
+The open problems reduce to three purely fermionic questions: what
+distinguishes the lepton generations, why the quark masses have the
+values they have, and whether the $1/r^2$ electromagnetic force law
+follows from the fermion residual structure by the same argument
+that gives gravity in Paper~VII.
 
 %------------------------------------------------------------
 \section*{Supplementary Material}
@@ -706,11 +746,13 @@ gravity in Paper~VII.
         Fractional occupancy; symmetry errors; confinement
         projection residuals.
   \item \texttt{s4\_mass\_spectrum.py} ---
-        Lepton mass hierarchy; 4-bit codec unit; upper-bound
-        prediction.
+        Reports observed lepton $\log_2(m/m_e)$ values and the
+        combinatorial 4-bit argument side by side, without asserting
+        a connection between them; see Section~\ref{sec:masses}.
   \item \texttt{s5\_fermion\_boson\_conservation.py} ---
         Theorems~\ref{thm:fermion} and \ref{thm:conservation};
         theta-dependent conservation; full spectrum summary.
+  \item \texttt{mass\_ladder\_audit.py} --- Audit the mass ladder conclusions.
 \end{itemize}
 
 \printbibliography
