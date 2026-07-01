@@ -15,9 +15,9 @@ PAPERS_LIST := \
 	wavefunction-as-compression:Wavefunction_as_Compression \
 	emergence-of-qm:Emergence_of_Quantum_Mechanics,_Fermions_Bosons_and_Pauli_Exclusion \
 	fermion-boson-duality:Fermion-Boson_Duality,_The_Complete_Particle_Spectrum_from_Codec_Geometry \
+	cosmological-model:Cosmological_Expansion_and_Dark_Matter_as_Emergent_Informational_Phenomena \
 	unification-of-gr-qm:Emergence_of_General_Relativity,_Geodesics,_Curvature,_and_Gravitational_Waves_as_Compression_Residuals \
 	informational-action:Classical_Geodesics_as_Minimal-Spectral-Complexity_Trajectories_in_Informational_Space \
-	cosmological-model:Inflation,_Cosmological_and_Hubble_Constants \
 	energy-information-equivalence:Energy_Information_Equivalence_From_Spectral_Complexity \
 	real-theory-of-everything:Real_Theory_of_Everything_Draft
 
