@@ -1,5 +1,6 @@
 DOCS       := geometry-of-spacetime
 
-include ../../makes/abstract.mak
+REMOTE_DIR := meskanen/abstract
 
+include ../../makes/abstract.mak
 include ../../makes/upload.mak

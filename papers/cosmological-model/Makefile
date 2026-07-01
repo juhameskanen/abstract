@@ -1,5 +1,7 @@
 DOCS       := cosmological-model
 
+REMOTE_DIR := meskanen/abstract
+
 include ../../makes/abstract.mak
 
 include ../../makes/upload.mak
