@@ -3,27 +3,41 @@
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
 
-\title{Space-time Curvature as an Information-Theoretic Structure}
+\title{Cosmological Expansion and Dark Matter as Emergent\\
+       Informational Phenomena}
 \author{Juha Meskanen}
-\date{June 2026}
+\date{July 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  Papers~I--IV \cite{meskanen2001, meskanen2002, meskanen2003, meskanen2026iv}
-  established that the universe can be modelled as a finite,
-static bitstring of $n$ bits; that gravitational collapse converges to a
-zero-entropy singularity; that expansion from that singularity is the
-geometric reading of entropy increase; and that the shape aspect ratio of
-spacetime is determined by $n$ alone. The Paper~V \cite{meskanen2026v} 
-derive a relational scale factor from strict
-information conservation. This paper applies the model
-at cosmological scale to recover the three-phase expansion profile
-of standard cosmology (early rapid growth, matter-driven deceleration,
-late-time acceleration) from analytically defined lognormal matter
-abundance curves established in Paper~III \cite{meskanen2003}.
+Papers~I--V established that the universe is a finite static bitstring
+of $2^n$ where $n \approx 184$ bits; that gravitational collapse converges to a
+zero-entropy singularity; that expansion is the geometric reading of
+entropy increase; that the aspect ratio of spacetime is fixed by $n$
+alone; and that a relational scale factor $R(t)$ emerges from strict
+information conservation via the counting equation
+$R(t) = (\rho_{\text{fabric}}(t) + k(t))/n$.
+The present paper applies this framework at cosmological scale and
+establishes three results.
+First, the three-phase expansion profile of standard cosmology ---
+early rapid growth, matter-driven deceleration, late-time acceleration
+--- emerges from $R(t)$ when matter abundance follows lognormal curves
+in bit-flip time, with no cosmological constant, inflaton field, or
+dark energy term.
+Second, the informational level hierarchy $L_0 \supset L_{\rm DM}
+\supset L_{\nu} \supset L_{\rm bar}$ provides a natural mechanism for
+dark matter: $L_{\rm DM}$ structures are the first-order lognormal
+condensates of the entropy gradient, gravitating via the counting
+equation by exactly the same mechanism as ordinary matter, but
+constitutionally unable to produce the boson compression residuals
+that ordinary matter sheds.
+Third, the lognormal form is a prediction of the \theory{} framework for
+$L_{\rm DM}$, not an input: Paper~III demonstrated filter-invariant
+lognormal emergence across more than two hundred independent filter
+definitions applied to entropy-increasing bitstrings.
 \end{abstract}
 
 \tableofcontents
@@ -33,133 +47,406 @@ abundance curves established in Paper~III \cite{meskanen2003}.
 \section{Introduction}
 \label{sec:intro}
 
-The present paper shows that the Friedmann three-phase profile
-emerges when matter abundance follows
-the lognormal distribution established in Paper~III.
+The present paper addresses two questions that standard cosmology
+answers with separate, independently postulated mechanisms: why does
+the universe expand in three phases (early inflationary growth,
+matter-driven deceleration, late-time acceleration), and what is dark
+matter?
+
+In $\Lambda$CDM, late-time acceleration requires a cosmological
+constant $\Lambda$ whose physical origin remains unexplained; dark
+matter requires a new particle species whose nature has not been
+determined after decades of direct-detection effort.
+
+The present paper shows that both phenomena are consequences of the
+single informational counting principle established in Papers~I--V.
+No new parameters are introduced. No new particles are postulated.
+The cosmological constant and dark matter both dissolve into the
+level structure of the bit budget.
+
+The paper is structured as follows.
+Section~\ref{sec:hierarchy} establishes the informational level
+hierarchy and identifies dark matter with the first emergent level.
+Section~\ref{sec:bosons} states the boson mechanism that makes
+$L_{\rm DM}$ electromagnetically invisible.
+Section~\ref{sec:lognormal} recalls the lognormal abundance law from
+Paper~III and applies it to each level.
+Section~\ref{sec:expansion} derives the three-phase expansion profile.
+Section~\ref{sec:data} discusses the relationship to $\Lambda$CDM
+observational data.
+Section~\ref{sec:conclusion} states the three foundational results.
+Section~\ref{sec:future} identifies open problems.
 
 % ============================================================
-\section{Setup}
-\label{sec:setup}
+\section{The Informational Level Hierarchy}
+\label{sec:hierarchy}
 
-\subsection{Information Conservation}
-
-The universe is modelled as a closed informational system with a fixed
-total bit count $n$. 
-
-\subsection{Analytical Lognormal Model}
-\label{sec:lognormal}
-
-Paper~III demonstrated that the abundance of any extractable structure in
-an entropy-increasing bitstring follows a lognormal-like distribution as a
-function of bit-flip time, independently of the filter used to define the
-structure. The present paper therefore replaces the bitstring simulation
-with analytically defined lognormal abundance curves for each matter level
-$L_k$, each parametrised by a peak location $\mu_k$, width $\sigma_k$,
-and amplitude $A_k$:
-
-\[
-k_j(t) = A_j \cdot \frac{1}{t\sigma_j\sqrt{2\pi}}
-          \exp\!\left(-\frac{(\ln t - \mu_j)^2}{2\sigma_j^2}\right),
-          \qquad j \in \{1, 2, 3\}.
-\]
-
-The free fabric at each step is the residual after subtracting the bits
-consumed by all matter levels:
-
-\[
-\rho_{\text{fabric}}(t) = \max\!\left(n - \sum_j w_j \cdot k_j(t),\ 0\right).
-\]
-
-The scale factor $R(t)$ is then computed from equation:
+The bit budget $n$ is partitioned at each moment between the
+spacetime fabric $L_0$ (free, independently addressable bits) and a
+nested sequence of composite structures $L_{\rm DM}, L_\nu, L_{\rm bar},
+\ldots$ formed by the entropy gradient $dS/dt$.
+The partition is exact at every tick:
 
 \begin{equation}
-  R(t) = \frac{\bigl(n - m(t)\bigr) + k(t)}{n}
-        = \frac{\rho_{\text{fabric}}(t) + k(t)}{n}.
+  n = \rho_{\text{fabric}}(t) + \sum_k w_k \cdot N_k(t),
+  \label{eq:budget}
+\end{equation}
+
+where $w_k$ is the bit-width of a level-$k$ entity and $N_k(t)$ is
+its instantaneous count. Information is strictly conserved; no bits
+enter or leave the system.
+
+The four levels relevant at cosmological scale are:
+
+\begin{description}
+  \item[$L_0$ --- Spacetime fabric.]
+    Bits not consumed by any composite structure.
+    This is the rope of Paper~IV: its length at time $t$ is
+    $\rho_{\text{fabric}}(t) = S(t) \cdot n - m(t)$, where
+    $S(t) = I_{\max}(1 - e^{-kt})$ is the total unfolded entropy
+    and $m(t) = \sum_k w_k N_k(t)$ is the total bits consumed by
+    structures.
+
+  \item[$L_{\rm DM}$ --- Dark matter.]
+    The first-order condensates of the entropy gradient: the earliest
+    and simplest structures to emerge as $dS/dt$ rises from zero.
+    Their existence is a \textbf{prediction} of the framework (see
+    Section~\ref{sec:lognormal}), not a postulate.
+    Their bit-width $w_{\rm DM}$ is smaller than that of hadronic
+    structures.
+
+  \item[$L_\nu$ --- Neutrinos.]
+    Second-order structures, emerging later than $L_{\rm DM}$ along
+    the entropy gradient.
+
+  \item[$L_{\rm bar}$ --- Baryons.]
+    Third-order structures (protons, neutrons), emerging later still.
+    Higher composite states (atoms, molecules) are relabellings of the
+    same baryon number and do not enter the counting equation
+    separately: a water molecule withdraws the same number of bits
+    from $L_0$ as its constituent hadrons, because it is the same
+    bits restructured, not new bits consumed.
+\end{description}
+
+The relational scale factor is:
+
+\begin{equation}
+  R(t) = \frac{\rho_{\text{fabric}}(t) + k(t)}{n},
   \label{eq:scalefactor}
 \end{equation}
 
-The interactive simulation described in Section~\ref{sec:supplementary}
-allows the lognormal parameters and $n$ to be adjusted in real time,
-with the spacetime resolution visualised by dynamically rescaling rulers.
+where $k(t) = \sum_k N_k(t)$ is the total count of composite entities
+(each counts as one addressable token, regardless of its bit-width).
 
 % ============================================================
-\section{Results}
-\label{sec:results}
+\section{Why Dark Matter is Dark: Bosons as Compression Residuals}
+\label{sec:bosons}
 
-Figure~\ref{fig:expansion} shows the scale factor $R(t)$ and matter
-abundance curves $k_1(t), k_2(t), k_3(t)$ for one representative
-parameter set. Three phases are visible:
+In the \theory{} framework there is no electromagnetic force as a
+separately postulated interaction. Bosons --- including photons ---
+are compression residuals: the information shed at the boundary of a
+fermionic compression event. When a fermion structure forms, it
+compresses a region of the bitstring; the bits that cannot be absorbed
+into the compressed structure are emitted as a boson. The boson is
+the exhaust of the compression, not a mediator exchanged between
+pre-existing charges.
 
-\textbf{Phase 1 --- Early rapid expansion.} Before significant matter
-formation, the fabric is undepleted and $R(t) \approx 1$. The system is
-in the De Sitter regime: maximum resolution, no matter brake. This
-corresponds to the inflationary epoch established in Paper~IV \cite{meskanen2026iv}.
+This framing has a direct consequence for dark matter. $L_{\rm DM}$
+structures are first-order condensates: they form earlier, from a
+simpler compression template, than the $L_\nu$ and $L_{\rm bar}$
+structures that give rise to photon-type residuals.
+An $L_{\rm DM}$ compression event sheds residuals of a different
+symmetry class --- or no residual detectable by an $L_{\rm bar}$-level
+instrument at all --- because the compression geometry that produces
+photon-type bosons has not yet emerged at that level of the hierarchy.
 
-\textbf{Phase 2 --- Matter-driven contraction.} As $L_1$, $L_2$, and
-$L_3$ structures rise along their lognormal curves, bits are withdrawn
-from the free fabric. $R(t)$ decreases. An internal observer, whose
-measuring rods are built from the same structures, perceives this
-withdrawal as a slowing and reversal of expansion --- the informational
-analogue of gravitational deceleration. No force law is imposed; the
-geometry tightens because information is redistributed.
+Consequently:
 
-\textbf{Phase 3 --- Late-time re-expansion.} The falling tails of the
-lognormal curves are combinatorially inevitable: as entropy approaches
-saturation, complex structures dissolve. Bits are released back to the
-free fabric, $\rho_{\text{fabric}}(t)$ recovers, and $R(t)$ rises again.
+\begin{itemize}
+  \item $L_{\rm DM}$ gravitates by the counting equation
+    (equation~\ref{eq:scalefactor}): it withdraws bits from $L_0$,
+    reducing $\rho_{\text{fabric}}(t)$, which an internal observer
+    reads as curvature. This is identical to how $L_{\rm bar}$
+    gravitates; the mechanism is level-independent.
+  \item $L_{\rm DM}$ does not interact with $L_{\rm bar}$-level
+    detectors electromagnetically, not because it is ``hidden'' or
+    ``weakly coupled'', but because the boson residuals it sheds do
+    not belong to the compression class that $L_{\rm bar}$ instruments
+    are constituted to register.
+\end{itemize}
+
+This is not a new postulate. It follows from the boson-as-residual
+principle established in Papers~VIII--XI for the particle spectrum,
+applied to the cosmological hierarchy. The ``darkness'' of dark matter
+is a structural consequence of its level, not a property requiring
+separate explanation.
+
+% ============================================================
+\section{Lognormal Matter Abundance}
+\label{sec:lognormal}
+
+Paper~III established that the abundance of any extractable structure
+in an entropy-increasing bitstring follows a lognormal-like
+distribution as a function of bit-flip time $t$, independently of
+the filter used to define the structure (verified across more than
+two hundred filter definitions). This result is stated here as an
+\textbf{exact result} for the class of finite bitstring models; its
+extension to the physical universe is a \textbf{hypothesis} that the
+simulations are designed to test.
+
+The entropy gradient $dS/dt = I_{\max} k e^{-kt}$ acts as the sole
+driving force for structure formation: once $dS/dt \to 0$ (white
+noise, entropy saturated), no new structures can emerge and all
+existing ones dissolve toward the ground state. This is enforced
+analytically by gating the lognormal with the entropy gradient:
+
+\begin{equation}
+  N_k(t) = A_k \cdot
+    \frac{\exp\!\left(-\frac{(\ln t - \mu_k)^2}{2\sigma_k^2}\right)}
+         {t\,\sigma_k\sqrt{2\pi}}
+    \cdot e^{-k_{\rm rate}\,t},
+  \label{eq:lognormal}
+\end{equation}
+
+where $A_k$, $\mu_k$, $\sigma_k$ are level-specific amplitude, peak
+location, and width in bit-flip time, and the factor $e^{-k_{\rm rate}t}$
+ensures $N_k \to 0$ as the entropy gradient vanishes. The gate is not
+an additional postulate; it is the mathematical statement that
+$dS/dt$ is the only source of order.
+
+The saturation timescale is $t_{\rm sat} = n \ln n \approx 960$
+bit-flip ticks for $n = 184$, and the unfolded rope length at time
+$t$ is $S(t) \cdot n$. The constraint
+
+\begin{equation}
+  m(t) = \sum_k w_k N_k(t) \leq S(t) \cdot n
+  \label{eq:constraint}
+\end{equation}
+
+must hold at all times: structure formation cannot exceed the entropy
+that has been released. Violation of this constraint --- more knots
+than rope length --- produces the informational analogue of a
+singularity and is treated as a parameter boundary condition, not
+a physical prediction.
+
+\paragraph{Status of the lognormal hypothesis for each level.}
+
+\begin{description}
+  \item[$L_{\rm DM}$.]
+    \textbf{Prediction of the framework.} Paper~III's filter-independence
+    result guarantees lognormal emergence for any first-order structure
+    in an entropy-increasing bitstring. No external data constrains
+    $\mu_{\rm DM}$, $\sigma_{\rm DM}$, or $A_{\rm DM}$; these are
+    open parameters to be fixed by matching to observational anchors
+    once $E = mc^2$ is derived within the framework.
+
+  \item[$L_\nu$, $L_{\rm bar}$.]
+    \textbf{Hypothesis under test.} $\Lambda$CDM predicts monotonically
+    diluting number densities $n(t) = n_0 (1+z(t))^3$ for both
+    species after their respective freeze-out epochs: no rise, no
+    peak, no fall. The lognormal form in equation~(\ref{eq:lognormal})
+    is a genuinely different prediction that disagrees with $\Lambda$CDM.
+    Section~\ref{sec:data} discusses what would be required for an
+    honest falsifiability test.
+\end{description}
+
+% ============================================================
+\section{The Three-Phase Expansion Profile}
+\label{sec:expansion}
+
+Figure~\ref{fig:expansion} shows $R(t)$, $S(t)$, and the three
+matter abundance curves for one representative parameter set.
+Three phases are immediately visible.
+
+\textbf{Phase 1 --- Early rapid expansion.}
+Before significant matter formation ($N_k \approx 0$ for all $k$),
+$\rho_{\text{fabric}}(t) \approx S(t) \cdot n$ and
+$R(t) \approx S(t)$.
+The system is in the De~Sitter regime: the scale factor tracks the
+entropy saturation curve, which rises steeply from the singularity.
+No inflaton field is required; the rapid early growth is the
+geometric reading of maximum entropy gradient.
+
+\textbf{Phase 2 --- Matter-driven deceleration.}
+As $L_{\rm DM}$, $L_\nu$, and $L_{\rm bar}$ structures rise along
+their lognormal curves, bits are withdrawn from $L_0$.
+$\rho_{\text{fabric}}(t)$ falls below $S(t) \cdot n$ and $R(t)$
+departs downward from the De~Sitter background.
+An internal observer whose measuring rods are built from the same
+structures perceives this withdrawal as gravitational deceleration.
+No force law is imposed; the geometry tightens because information
+is redistributed from fabric to structure.
+
+\textbf{Phase 3 --- Late-time re-expansion.}
+The falling tails of the lognormal curves are combinatorially
+inevitable: as entropy approaches saturation, the gradient that
+drives structure formation vanishes, and structures dissolve back
+toward white noise.
+Bits are released to $L_0$; $\rho_{\text{fabric}}(t)$ recovers and
+$R(t)$ rises again.
 An internal observer perceives this release as accelerating expansion.
-No cosmological constant is introduced; the acceleration is the geometric
-reading of structural evaporation in a saturating information field.
+No cosmological constant is introduced; the acceleration is the
+geometric reading of structural evaporation in a saturating
+information field.
+
+The three-phase profile is not tuned. It is the generic shape of
+$R(t)$ whenever (i) matter abundance follows equation~(\ref{eq:lognormal})
+and (ii) the constraint~(\ref{eq:constraint}) is satisfied.
+Its qualitative features are insensitive to the specific values of
+$\mu_k$, $\sigma_k$, $A_k$, provided the parameter set does not
+violate the rope constraint.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/cosmological_model.png}
-\caption{Output of the Space-Time Horizon Engine for one representative
-parameter set ($n = 1.6$, three lognormal matter sinks). The cyan dashed
-curve shows the pure De Sitter background $S(t)$ --- the expansion that
-would be observed in the absence of any matter. The yellow curve
-(\emph{Real Universe Geometry}) is the relational scale factor $R(t)$:
-the De Sitter background depleted by the bits consumed by three
-hierarchical matter structures (dark matter, hadrons, neutrinos), each
-following an independently parametrised lognormal abundance curve (dotted
-lines, lower portion of plot). The vertical red dashed line marks a
-reference epoch. Two features are immediately visible: first, the yellow
-curve tracks the De Sitter background closely at early and late times,
-departing from it during the epoch of peak matter abundance; second, the
-departure produces a visible deceleration followed by late-time
-re-acceleration as the matter curves fall. Both features emerge from
-information conservation alone, with no cosmological constant, inflaton
-field, or dark energy term introduced. The interactive simulator allows
-all lognormal parameters and $n$ to be adjusted in real time; the figure
-shows one illustrative configuration.}
+\includegraphics[width=0.95\textwidth]{figures/spacetime_worldlines.png}
+\caption{Output of the emergent-spacetime worldline simulation for one
+representative parameter set ($n = 184$). \emph{Left:} Minkowski
+spacetime diagram. The white envelope is the spacetime fabric boundary
+$\pm\rho_{\rm fabric}(t)/(2n)$, emerging from a single point at
+$t = 0$ (zero-entropy singularity). Yellow worldlines show the
+predicted $L_{\rm DM}$ dark matter population (lognormal hypothesis);
+cyan and magenta worldlines show $L_\nu$ and $L_{\rm bar}$
+respectively, with number densities taken from the $\Lambda$CDM
+reference baseline (see Section~\ref{sec:data}).
+\emph{Right:} The white bold curve is the spacetime fabric
+$\rho_{\rm fabric}(t)/n$ --- the rope length minus knots. The red
+dashed curve is the total entropy $S(t) = I_{\max}(1-e^{-kt})$;
+the orange curve is $R(t)$ from equation~(\ref{eq:scalefactor}).
+The departure of the white curve below the red dashed curve during
+the matter-dominated epoch, followed by its recovery toward $S(t)$
+at late times, is the three-phase expansion profile emerging from
+information conservation alone.
+Amplitude scaling between number densities and bit-counts is a
+placeholder pending the derivation of $E = mc^2$ within the framework
+(see Section~\ref{sec:future}).}
 \label{fig:expansion}
 \end{figure}
 
+% ============================================================
+\section{Relationship to \texorpdfstring{$\Lambda$}{Lambda}CDM Observational Data}
+\label{sec:data}
+
+The $\Lambda$CDM number-density curves used as a reference baseline
+for $L_\nu$ and $L_{\rm bar}$ in Figure~\ref{fig:expansion} are not
+theory-independent observational facts. They are derived quantities
+within a specific theoretical framework: $n(t) = n_0(1+z(t))^3$,
+where $z(t)$ is obtained by integrating the Friedmann equation with
+Planck~2018 parameters ($H_0 = 67.4$~km/s/Mpc, $\Omega_m = 0.315$,
+$\Omega_\Lambda = 0.685$).
+Feeding these curves into the \theory{} simulation tests the \theory{}
+framework against a $\Lambda$CDM prediction, not against raw data.
+
+The actual observational anchors that $\Lambda$CDM is itself fitted
+to --- the CMB power spectrum, the Type~Ia supernova distance-redshift
+relation, the baryon acoustic oscillation scale, the light element
+abundances from BBN --- are what the \theory{} framework must ultimately
+be tested against. A proper falsifiability test would require:
+
+\begin{enumerate}
+  \item Deriving $E = mc^2$ within the framework, to convert
+    informational bit-counts to energy-momentum and thence to
+    observable quantities.
+  \item Using the aspect-ratio time-calibration of Paper~IV
+    (a single observational anchor fixing $n = 184$) to convert
+    bit-flip ticks to physical time without free parameters.
+  \item Comparing the resulting $R(t)$ directly to the
+    distance-redshift relation of the Type~Ia supernova datasets,
+    not to $\Lambda$CDM's derived expansion history.
+\end{enumerate}
+
+This programme is identified as future work in
+Section~\ref{sec:future}. The present paper establishes the
+qualitative mechanism and the correct level hierarchy; the
+quantitative confrontation with raw data awaits Step~1.
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-The three-phase expansion profile of standard cosmology
---- early rapid growth, matter-driven deceleration, late-time acceleration
---- emerges from $R(t)$ under lognormal matter abundance, without a
-cosmological constant, inflaton field, or dark energy term. The
-acceleration is the geometric reading of structural evaporation as the
-system approaches entropy saturation.
+This paper establishes three results.
 
+\textbf{First}, the three-phase expansion profile of standard
+cosmology --- early rapid growth, matter-driven deceleration,
+late-time acceleration --- emerges from the relational scale factor
+$R(t)$ when matter abundance follows lognormal curves gated by the
+entropy gradient, with no cosmological constant, inflaton field, or
+dark energy term. The acceleration is the geometric reading of
+structural evaporation as the system approaches entropy saturation.
+
+\textbf{Second}, dark matter is identified with the first-order
+emergent level $L_{\rm DM}$ of the informational hierarchy. It
+gravitates via the counting equation by exactly the same mechanism
+as ordinary matter --- by withdrawing bits from the spacetime fabric
+--- and is electromagnetically invisible not because it is weakly
+coupled but because it sheds compression residuals of a different
+symmetry class than the photon-type bosons that $L_{\rm bar}$-level
+detectors are constituted to register. This requires no new particle
+species and no new coupling constant.
+
+\textbf{Third}, the lognormal abundance form is a prediction of the
+\theory{} framework for $L_{\rm DM}$ (following from Paper~III's
+filter-invariant emergence result) and a \emph{hypothesis under test}
+for $L_\nu$ and $L_{\rm bar}$, where it differs from $\Lambda$CDM's
+monotonically diluting prediction. Whether that hypothesis is
+correct is an open question; it can be decided once $E = mc^2$ is
+derived within the framework and the simulation is compared directly
+to raw observational anchors rather than to $\Lambda$CDM derived
+curves.
+
+% ============================================================
+\section{Open Problems}
+\label{sec:future}
+
+\subsection*{Derivation of $E = mc^2$}
+
+The amplitude scaling between informational bit-counts and
+physical energy-momentum is the critical missing link. Without it,
+the number densities from the cosmological data cannot be converted
+to bit-widths $w_k$, and the simulation cannot be compared
+quantitatively to observation. This derivation is being pursued in
+the discrete counting arena $\mathcal{C}_D$ of the framework.
+
+\subsection*{The 5:1 Dark-Matter-to-Baryon Ratio}
+
+The observed ratio $\rho_{\rm DM}/\rho_{\rm bar} \approx 5$ is a
+sharp, dimensionless quantity that the \theory{} framework should reproduce
+from the relative amplitudes and bit-widths of $L_{\rm DM}$ and
+$L_{\rm bar}$ alone, once $E = mc^2$ is available to convert
+bit-counts to mass-energy. Whether this ratio is derivable from
+first principles or must be fitted is an open question.
+
+\subsection*{Quantitative Confrontation with Raw Observational Anchors}
+
+As discussed in Section~\ref{sec:data}, the proper falsifiability
+test is a direct comparison of $R(t)$ to the Type~Ia supernova
+distance-redshift relation and the CMB power spectrum, using only
+the single observational anchor ($n = 184$) established in Paper~IV.
+This requires completing the $E = mc^2$ derivation first.
+
+\subsection*{Bit-Width Derivation for Each Level}
+
+The bit-widths $w_{\rm DM}$, $w_\nu$, $w_{\rm bar}$ are currently
+treated as free illustrative parameters. The spectral complexity
+machinery of Papers~VIII--XI should, in principle, fix these from
+the structure of the compression events at each level.
 
 % ============================================================
 \section*{Supplementary Material}
 \label{sec:supplementary}
 
-The complete interactive Python implementation is available as
-\texttt{simulations/cosmological\_model.py}. The simulator accepts user-defined lognormal
-parameters $(\mu_k, \sigma_k, A_k)$ for each matter level and the total
-bit count $n$, and visualises the resulting scale factor profile with
-dynamically rescaling rulers that reflect the changing resolution of
-observable space. It serves both as an exploratory tool and as an
-intuitive demonstration of how expansion emerges from internal observer
-dynamics rather than an absolute stretching of external space.
+\begin{itemize}
+  \item \texttt{spacetime\_worldlines.py}: Simulates and visualises
+    the emergent spacetime diagram. Accepts $n$, lognormal parameters
+    $(\mu_k, \sigma_k, A_k)$ for each level, and an optional JSON
+    file of cosmological number-density data as CLI arguments.
+    Produces both the Minkowski worldline diagram and the metric
+    curves panel. Requires \texttt{numpy}, \texttt{scipy},
+    \texttt{matplotlib}.
+  \item \texttt{observed\_baryonic\_spectrum.json}: Physically derived
+    $\Lambda$CDM reference baseline for $L_\nu$ and $L_{\rm bar}$
+    number densities, computed from the Planck~2018 Friedmann equation
+    with full methodology and limitations documented inline.
+\end{itemize}
 
 \printbibliography
 

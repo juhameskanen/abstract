@@ -1,0 +1,56 @@
+{
+  "name": "Observed Baryonic Spectrum (Physically Derived)",
+  "description": "Real cosmological number densities by epoch, derived from the flat LambdaCDM Friedmann equation (Planck 2018 parameters: H0=67.4 km/s/Mpc, Omega_m=0.315, Omega_Lambda=0.685, Omega_r=9.18e-5) and standard particle-physics anchor values, NOT pulled from an unverified third party.",
+  "time_unit": "years",
+  "density_unit": "per_cubic_meter_comoving",
+  "methodology": {
+    "z_of_t": "Numerically integrated t(a) = int_0^a da'/(a' H0 E(a')) with E(a)=sqrt(Omega_r a^-4 + Omega_m a^-3 + Omega_Lambda), inverted for a(t). Validated against the well-measured recombination redshift: this calculation gives z=1077 at t=379,000 yr, within ~1% of the standard z~1089, and a total computed age of 13.79 Gyr vs. the measured 13.787 Gyr.",
+    "L1_neutrinos": "n(t) = n0 * (1+z(t))^3, exact (1+z)^3 dilution. Valid because total neutrino number is conserved after decoupling (~1s, T~1MeV), well before any of these table entries. n0 = 3.36e8 /m^3, the standard literature value for the total relic neutrino+antineutrino number density today, summed over all 3 flavors (~336/cm^3).",
+    "L2_hadrons": "n(t) = n0 * (1+z(t))^3, exact (1+z)^3 dilution. Valid because baryon number is exactly conserved after baryogenesis, well before BBN. n0 = 0.25 /m^3, derived from Omega_b*h^2 = 0.0224 (Planck 2018): rho_b,0 = Omega_b_h2 * 1.878e-26 kg/m^3 / h^2 ... divided by the proton mass.",
+    "L3_atoms": "n(t) = n2(t) * neutral_fraction(z(t)). neutral_fraction = 1 - x_e(z), where x_e(z) is an ionization-fraction model with TWO transitions: recombination (ionized -> neutral) centered z=1089, width 80 in z; and reionization (neutral -> ionized) centered z=7.7, width 1.5 in z, both standard Planck-consistent values. A floor of 0.12 is applied post-reionization (z<7.7) to represent the residual cold/molecular neutral gas retained in galaxies even after the diffuse IGM reionizes -- THIS FLOOR IS THE LEAST RIGOROUS PIECE: it is a rough order-of-magnitude estimate (literature estimates for the cold/neutral gas fraction of total baryons today range roughly 10-20%), not a precision figure. Tighten this if better fidelity is needed."
+  },
+  "known_limitations": [
+    "Or (radiation density) uses a standard literature value, not independently re-derived here.",
+    "The neutral_fraction floor (0.12) for post-reionization galactic gas is an order-of-magnitude placeholder.",
+    "Helium is not treated separately; L2/L3 treat all baryons as a single conserved species with proton-mass-equivalent number density, which is a fine approximation for number-density-level work but loses the separate H/He recombination physics (helium recombines earlier than hydrogen)."
+  ],
+  "levels": {
+    "L1": {
+      "name": "Relic Neutrinos (Cosmic Neutrino Background)",
+      "description": "Decoupled from thermal plasma at t~1s (T~1 MeV). Number conserved thereafter; density is exact (1+z)^3 dilution from today's anchor value.",
+      "abundances": [
+        {"time_years": 3.17e-8, "redshift": 4.887e9, "density_per_m3": 3.9216e37},
+        {"time_years": 0.01,    "redshift": 8.700e6, "density_per_m3": 2.2129e29},
+        {"time_years": 1.0,     "redshift": 8.695e5, "density_per_m3": 2.2090e26},
+        {"time_years": 379000,  "redshift": 1076.8,  "density_per_m3": 4.2074e17},
+        {"time_years": 1.0e9,   "redshift": 5.654,   "density_per_m3": 9.8987e10},
+        {"time_years": 13.8e9,  "redshift": 0.0,     "density_per_m3": 3.36e8}
+      ]
+    },
+    "L2": {
+      "name": "Hadrons (Baryons: protons + neutrons)",
+      "description": "Baryon number conserved after baryogenesis (well before BBN at t~1-200s). Density is exact (1+z)^3 dilution from today's anchor value (Omega_b h^2 = 0.0224).",
+      "abundances": [
+        {"time_years": 3.17e-8, "redshift": 4.887e9, "density_per_m3": 2.9178e28},
+        {"time_years": 3.17e-6, "redshift": 4.887e8, "density_per_m3": 2.9178e25},
+        {"time_years": 3.17e-3, "redshift": 1.545e7, "density_per_m3": 9.2259e20},
+        {"time_years": 3.17,    "redshift": 4.881e5, "density_per_m3": 2.9076e16},
+        {"time_years": 379000,  "redshift": 1076.8,  "density_per_m3": 3.1305e8},
+        {"time_years": 1.0e9,   "redshift": 5.654,   "density_per_m3": 7.3651e1},
+        {"time_years": 13.8e9,  "redshift": 0.0,     "density_per_m3": 0.25}
+      ]
+    },
+    "L3": {
+      "name": "Atoms (neutral hydrogen + helium)",
+      "description": "n2(t) * neutral_fraction(z(t)). Zero before recombination (omitted; ionized plasma has no atoms yet). Rises through recombination (z~1089), plateaus through the dark ages (~90%+ neutral), then drops sharply at reionization (z~7.7) to a residual ~12% floor representing cold galactic gas.",
+      "abundances": [
+        {"time_years": 379000,  "redshift": 1076.8, "neutral_fraction": 0.5754, "density_per_m3": 1.8012e8},
+        {"time_years": 5.0e8,   "redshift": 9.558,  "neutral_fraction": 0.9225, "density_per_m3": 2.7144e2},
+        {"time_years": 1.0e9,   "redshift": 5.654,  "neutral_fraction": 0.12,   "density_per_m3": 8.8381},
+        {"time_years": 3.0e9,   "redshift": 2.181,  "neutral_fraction": 0.12,   "density_per_m3": 0.96575},
+        {"time_years": 8.0e9,   "redshift": 0.5837, "neutral_fraction": 0.12,   "density_per_m3": 0.11916},
+        {"time_years": 13.8e9,  "redshift": 0.0,    "neutral_fraction": 0.12,   "density_per_m3": 0.03}
+      ]
+    }
+  }
+}
