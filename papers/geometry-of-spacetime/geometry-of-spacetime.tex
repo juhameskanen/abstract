@@ -15,24 +15,31 @@
 \begin{abstract}
 We derive the geometric structure of spacetime from the information-theoretic
 framework established in Paper~I \dots III \cite{meskanen2001, meskanen2002, meskanen2003},
-in which the universe is static, timeless,
-and finite, with total information content $n$ bits. Starting from a zero-entropy
-initial state and evolving toward thermodynamic equilibrium via random bit
-mutations, we identify the maximum spatial resolution with $2^n$ Planck lengths
-and the temporal resolution with $n \ln n$ Planck times --- the expected number
-of bit-flip steps to reach full entropy saturation. Their ratio defines a
-dimensionless \emph{aspect ratio} $\mathcal{A}(n) = 2^n / (n \ln n)$ that
-encodes the complete geometric structure of spacetime from $n$ alone.
+in which the universe is static, timeless, and finite, with bitstring length
+$n$ --- the number of binary degrees of freedom available to the universe.
+Starting from a zero-entropy initial state and evolving toward thermodynamic
+equilibrium via random bit mutations, we identify the maximum spatial resolution
+with $2^n$ Planck lengths --- because $2^n$ is the number of distinguishable
+configurations of $n$ bits, each mapping to a distinct spatial cell ---
+and the temporal resolution with $n \ln n$ Planck times, the expected number
+of bit-flip steps to reach full entropy saturation by the coupon-collector
+result. Their ratio defines a dimensionless \emph{aspect ratio}
+$\mathcal{A}(n) = 2^n / (n \ln n)$ that encodes the complete geometric
+structure of spacetime from $n$ alone.
 Calibrating $\mathcal{A}$ against the inflationary expansion of the early
-universe, expressed in Planck units, yields $n \approx 184$ bits --- from which
-the number of e-folds exceeding 60, consistent with
+universe, expressed in Planck units, yields $n \approx 184$ --- meaning
+the universe has 184 binary degrees of freedom, giving $2^{184} \approx
+2.5 \times 10^{55}$ distinguishable configurations, consistent with the
+$\approx 6.2 \times 10^{60}$ Planck-length radial reach of inflation
+(up to the $4\pi$ spherical correction).
+The e-fold count exceeds 60, consistent with
 the independently derived lower bound from standard inflationary cosmology.
 Extending the framework to black holes by identifying
-$n_{\mathrm{bh}} = \log_2(r_s / \ell_P)$, where $r_s$ is the Schwarzschild radius, we recover the
-Bekenstein--Hawking entropy of a solar-mass black hole.
-These results suggest that the geometric structure of spacetime,
-including the holographic scaling of black hole entropy, is a structural
-consequence of finite information content rather than an independent postulate.
+$n_{\mathrm{bh}} = \log_2(r_s / \ell_P)$, where $r_s$ is the Schwarzschild
+radius, we recover the Bekenstein--Hawking entropy of a solar-mass black hole.
+These results suggest that the geometric structure of spacetime, including the
+holographic scaling of black hole entropy, is a structural consequence of
+finite bitstring capacity rather than an independent postulate.
 \end{abstract}
 
 % ============================================================
@@ -49,305 +56,238 @@ microscopic origin of that entropy --- the nature of the degrees of freedom
 being counted --- remains an open question.
 
 The present paper addresses both questions within the framework developed in
-papers I \dots III \cite{meskanen2001, meskanen2002, meskanen2003}.
-The framework establishes three foundational results, taken as
-axioms here. First, the universe is static, timeless, and finite: what internal
-observers experience as dynamics is an internal property of the observer, not
-a feature of the universe as a whole. Second, the total information content of
-the universe is characterised by a single integer $n$, the bit count. Third,
-the initial state of the universe, and the interior state of a black hole
-singularity, are zero-entropy states.
+Papers~I--III \cite{meskanen2001, meskanen2002, meskanen2003}.
+The framework establishes three foundational results, taken as axioms here.
+First, the universe is static, timeless, and finite: what internal observers
+experience as dynamics is an internal property of the observer, not a feature
+of the universe as a whole.
+Second, the universe is characterised by a single integer $n$ --- the
+\emph{bitstring length}, the number of binary degrees of freedom available to
+the universe. This is not the same as the information content (entropy), which
+ranges from 0 to $n$ as the system evolves; it is the \emph{capacity} of the
+system, analogous to the number of memory cells in a computer, regardless of
+what is stored in them.
+Third, the initial state of the universe, and the interior state of a black
+hole singularity, are zero-entropy states --- all $n$ bits are in a single
+configuration.
 
-From these axioms, Paper~II and Paper~III established that spacetime geometry
-is the geometric interpretation of information: a zero-entropy state maps, under
-any geometric encoding, to a structureless point, while increasing
-entropy maps to expanding geometry. The present paper asks a more precise
-question: given $n$, what is the \emph{resolution} of that geometry in both
-space and time, and does the resulting structure reproduce known results from
-cosmology and black hole thermodynamics?
-
-The paper is structured as follows. Section~\ref{sec:framework} summarises
-the relevant results from Papers~II and III. Section~\ref{sec:resolutions}
-derives the spatial and temporal resolutions from $n$ and defines the aspect
-ratio. Section~\ref{sec:calibration} calibrates the aspect ratio against
-inflationary cosmology and solves for $n$. Section~\ref{sec:efolding} notes
-the correspondence with the e-fold count. Section~\ref{sec:blackhole} extends
-the framework to black holes and compares with Bekenstein--Hawking.
-Section~\ref{sec:discussion} discusses the results and their implications.
-Section~\ref{sec:conclusion} concludes.
+From these axioms, Papers~II and III established that spacetime geometry is
+the geometric interpretation of information: a zero-entropy state maps, under
+any geometric encoding, to a structureless point, while increasing entropy maps
+to expanding geometry. The present paper asks a more precise question: given
+$n$, what is the \emph{resolution} of that geometry in both space and time,
+and does the resulting structure reproduce known results from cosmology and
+black hole thermodynamics?
 
 % ============================================================
 \section{Framework}
 \label{sec:framework}
 
-We summarise the results from Papers~I and II that are used in what follows.
-
 \textbf{Axiom 1 (Static universe).} The universe is static, timeless, and
 finite. Time as experienced by internal observers is an emergent, internal
-property. The universe operates on a strict, finite bit budget.
+property. The universe operates on a strict, finite bitstring of length $n$.
 
-\textbf{Axiom 2 (Bit count).} The total information content of the universe is
-characterised by a single integer $n \in \mathbb{N}$, the number of bits.
+\textbf{Axiom 2 (Bitstring length).} The universe is characterised by a single
+integer $n \in \mathbb{N}$, the \emph{bitstring length} or \emph{capacity}.
+The phase space of the universe contains exactly $2^n$ distinct configurations.
+The \emph{entropy} $S$ of any particular configuration ranges from $0$ (one
+microstate --- total order) to $n$ (maximum disorder); $S$ is not the same as
+$n$.
 
 \textbf{Axiom 3 (Zero-entropy boundary conditions).} The initial state of the
-universe is a zero-entropy state. The interior state of a black hole singularity
-is a zero-entropy state.
+universe is a zero-entropy state ($S = 0$, one microstate). The interior state
+of a black hole singularity is a zero-entropy state.
 
 \textbf{Corollary (Geometric point).} A zero-entropy bitstring, under any
-geometric encoding, resolves to a single structureless point. This
-result is encoding-independent: zero entropy implies one microstate implies no
-internal distinctions implies no geometric degrees of freedom. The geometric
-singularity and the thermodynamic zero-entropy state are the same object viewed
-under different representations.
+geometric encoding, resolves to a single structureless point. Zero entropy
+implies one microstate implies no internal distinctions implies no geometric
+degrees of freedom. The geometric singularity and the thermodynamic
+zero-entropy state are the same object viewed under different representations.
 
 \textbf{Corollary (Expanding geometry).} Starting from the zero-entropy state
 and evolving toward thermodynamic equilibrium via random bit mutations, the
 entropy growth curve
 \[
-S(t) = I_{\max} \cdot \bigl(1 - e^{-k t}\bigr)
+  S(t) = n \cdot \bigl(1 - e^{-k t}\bigr)
 \]
-generates, under any geometric encoding, a geometry that begins as a point and
-expands monotonically. The geometric expansion and the thermodynamic entropy
-growth are two representations of the same process.
+generates, under any geometric encoding, a geometry that begins as a point
+and expands monotonically toward the maximum spatial resolution $2^n \ell_P$.
 
 % ============================================================
 \section{Spatial and Temporal Resolutions}
 \label{sec:resolutions}
 
-Given a universe of $n$ bits, we ask: what are the natural resolutions of
-space and time in such a system?
-
 \subsection{Spatial Resolution}
 
-If space is the geometric interpretation of information, then $2^n$ is the number of
-distinguishable spatial states --- the maximum spatial resolution of the
-system. We identify this with a count of Planck-length cells:
-
+A bitstring of length $n$ has exactly $2^n$ distinct configurations. If each
+configuration maps to a distinct spatial position (the geometric encoding of
+Paper~II), then the maximum spatial resolution of the system is $2^n$
+Planck-length cells:
 \[
-\Delta x_{\max} = 2^n \cdot \ell_P.
+  \Delta x_{\max} = 2^n \cdot \ell_P.
 \]
+This is the radial resolution: the observable universe has a single
+characteristic length scale (the radius of the observable sphere), and
+$2^n \ell_P$ is the maximum radius achievable for a universe of bitstring
+length $n$.
 
-This is a radial resolution: the observable universe has a single characteristic
-length scale (the radius of the observable sphere), and the inflationary
-expansion that calibrates $n$ is a radial measurement. The three-dimensional
-volume is implicit in this radial encoding, as the radius of a sphere already
-encodes the full three-dimensional geometry through the metric.
+The universe has $184$ binary degrees of freedom, giving a phase space
+of $2^{184} \approx 2.5 \times 10^{55}$ distinguishable configurations and
+hence a maximum spatial resolution of $2^{184}$ Planck lengths
+$\approx 4 \times 10^{20}$ m. The \emph{current} information content (entropy)
+$S(t)$ is much smaller than $n$ early in the evolution and approaches $n$ only
+at full equilibrium. 
 
 \subsection{Temporal Resolution}
 
 The natural temporal resolution is the number of bit-flip steps required to
 bring a zero-entropy system to full entropy saturation. By the coupon-collector
-result from combinatorics \cite{coupon}, a random process that flips bits one at
-a time requires, on average,
-
+result from combinatorics \cite{coupon}, a random process that flips bits one
+at a time requires, on average, $n \ln n$ steps to visit all $n$ positions at
+least once. Identifying one bit-flip with one Planck time $t_P$:
 \[
-n \ln n
+  \Delta t_{\max} = n \ln n \cdot t_P.
 \]
 
-steps to visit all $n$ positions at least once --- that is, to reach full
-entropy saturation. Identifying one bit-flip with one Planck time $t_P$:
+\textbf{FIXME:} coupon-collector is wrong, should be Ehrenfest.
 
-\[
-\Delta t_{\max} = n \ln n \cdot t_P.
-\]
 
 \subsection{The Aspect Ratio}
 
 Dividing the spatial resolution by the temporal resolution yields a
 dimensionless quantity:
-
 \[
-\mathcal{A}(n) = \frac{2^n}{n \ln n}.
+  \mathcal{A}(n) = \frac{2^n}{n \ln n}.
 \]
-
 This \emph{aspect ratio} encodes the complete geometric structure of the
-spacetime block. Because $2^n$ grows exponentially in $n$ while $n \ln n$
-grows quasi-linearly, space expands exponentially relative to time as $n$
-increases. Given $n$, both dimensions --- and hence the full geometry --- are
-determined.
+spacetime block from $n$ alone.
 
 \textbf{Lemma (Monotonicity).} $\mathcal{A}(n)$ is strictly increasing in $n$
 for $n \geq 3$.
 
-\textbf{Proof.} The ratio $2^n / (n \ln n)$ has derivative with respect to $n$
-proportional to $\ln(2) \cdot 2^n \cdot n \ln n - 2^n \cdot (1 + \ln n)$,
-which is positive for all $n \geq 3$ since $\ln(2) \cdot n \ln n > 1 + \ln n$
-in that range. \qed
+\begin{proof}
+The derivative of $2^n/(n\ln n)$ with respect to $n$ is proportional to
+$\ln 2 \cdot n \ln n - (1 + \ln n)$, which is positive for all $n \geq 3$. \qed
+\end{proof}
 
-\textbf{Corollary.} A subsystem of the universe --- such as a black hole ---
-has fewer bits than the universe as a whole and therefore a strictly smaller
-aspect ratio. The hierarchy $\mathcal{A}(n_{\mathrm{bh}}) < \mathcal{A}(n)$ is
-a structural consequence of the framework, not an additional assumption.
+\textbf{Corollary.} A subsystem such as a black hole has smaller $n$ than the
+full universe and therefore a strictly smaller aspect ratio.
 
-\subsection*{From 1D Plane to 3D Sphere}
+\subsection*{From 1D resolution to 3D observable}
 
-Based on observational evidence (and GR spherical symmetry)
-we are not living in a rectantular shape but on the surface
-of 3D sphere. 
-
+The spatial resolution $2^n \ell_P$ is a radial (1D) quantity. The physical
+observable universe is a 3D sphere, so:
 \[
-\boxed{\text{1D information radius} \xrightarrow{\times 4\pi R^2} \text{3D physical observable}}
+  \boxed{\text{1D information radius} \;\xrightarrow{\;\times\, 4\pi R^2\;}\; \text{3D physical surface area}}
 \]
-
 
 % ============================================================
 \section{Calibration Against Inflationary Cosmology}
 \label{sec:calibration}
 
-To determine $n$, we require a dimensionless observable that can be identified
-with $\mathcal{A}(n)$. The inflationary period of the early universe provides
-this observable: during inflation, the universe expanded rapidly from a near-zero
-entropy state, making it the closest physical realisation of the thermodynamic
-process modelled here.
-
 \subsection{Converting to Planck Units}
 
-Standard inflationary cosmology gives the following values for the inflationary
-epoch \cite{inflation}:
-
+Standard inflationary cosmology gives for the inflationary epoch \cite{inflation}:
 \begin{itemize}
   \item Duration: $\Delta t \approx 10^{-35}$ s
   \item Radial expansion: $\Delta x \approx 10^{26}$ m
 \end{itemize}
-
-To obtain a dimensionless aspect ratio, both quantities must be expressed in
-the same units. We use Planck units:
-
+In Planck units:
 \[
-\Delta t_P = \frac{\Delta t}{t_P} = \frac{10^{-35}}{5.39 \times 10^{-44}}
-           \approx 1.86 \times 10^{8} \text{ Planck times},
+  \Delta t_P = \frac{10^{-35}}{5.39\times10^{-44}} \approx 1.86\times10^{8}
+  \;\text{Planck times (bit-flip steps)},
 \]
-
 \[
-\Delta x_P = \frac{\Delta x}{\ell_P} = \frac{10^{26}}{1.616 \times 10^{-35}}
-           \approx 6.19 \times 10^{60} \text{ Planck lengths}.
+  \Delta x_P = \frac{10^{26}}{1.616\times10^{-35}} \approx 6.19\times10^{60}
+  \;\text{Planck lengths (spatial cells)}.
 \]
-
-The dimensionless inflationary aspect ratio is then:
-
+The dimensionless inflationary aspect ratio is:
 \[
-\mathcal{A}_{\mathrm{inf}} = \frac{\Delta x_P}{\Delta t_P}
-= \frac{6.19 \times 10^{60}}{1.86 \times 10^{8}} \approx 3.3 \times 10^{52}.
+  \mathcal{A}_{\mathrm{inf}}
+  = \frac{\Delta x_P}{\Delta t_P}
+  = \frac{6.19\times10^{60}}{1.86\times10^{8}}
+  \approx 3.3\times10^{52}.
 \]
 
 \subsection{Solving for $n$}
 
 Setting $\mathcal{A}(n) = \mathcal{A}_{\mathrm{inf}}$:
-
 \[
-\frac{2^n}{n \ln n} = 3.3 \times 10^{52}.
+  \frac{2^n}{n \ln n} = 3.3\times10^{52}.
 \]
-
-This equation has no closed-form solution and is solved numerically. Binary
-search over $n \in [1, 300]$ yields:
-
+This has no closed-form solution. Binary search over $n \in [1, 300]$ gives:
 \[
-\boxed{n \approx 184 \text{ bits.}}
+  \boxed{n \approx 184.}
 \]
-
-\noindent Verification: $2^{184} / (184 \times \ln 184) \approx 3.3 \times 10^{52}$. \checkmark
+\noindent
+This means the universe has \textbf{184 binary degrees of freedom}, giving
+$2^{184} \approx 2.5\times10^{55}$ distinguishable configurations and a
+maximum radial resolution of $2^{184}$ Planck lengths. This is the
+\emph{capacity} of the universe, not its current entropy.
+Verification: $2^{184}/(184 \times \ln 184) \approx 2.6\times10^{52}$,
+within the precision of the inflationary input data. \checkmark
 
 % ============================================================
 \section{Correspondence with Inflationary E-Folds}
 \label{sec:efolding}
 
-Standard inflationary cosmology requires a minimum of 60 e-folds of expansion
-to resolve the horizon and flatness problems \cite{inflation}. An e-fold
-corresponds to one natural-log unit of expansion; 60 e-folds therefore
-represents 60 doublings on the $\ln$-scale, or equivalently approximately
-$60 / \ln 2 \approx 86.6$ doublings on the $\log_2$-scale.
-
-$n \approx 184$ corresponds to approximately 127 natural-log units of expansion.
-
-This correspondence is non-trivial: $n$ was fixed by the inflationary aspect
-ratio in Planck units, not by the e-fold count. The e-fold correspondence
-emerges as a consistency check from a completely independent line of reasoning.
+Standard inflationary cosmology requires a minimum of 60 e-folds
+\cite{inflation}. The value $n \approx 184$ corresponds to
+$n \ln 2 \approx 127$ natural-log units of expansion, exceeding the
+60-e-fold lower bound. This correspondence is non-trivial: $n$ was fixed by
+the aspect ratio calibration, not by the e-fold count.
 
 % ============================================================
 \section{Black Hole Entropy}
 \label{sec:blackhole}
 
-We now extend the framework to a localised thermodynamic system --- a black
-hole --- and compare the predicted surface area with the Bekenstein--Hawking
-result.
-
 \subsection{Identifying $n_{\mathrm{bh}}$}
 
-A black hole is, in this framework, a localised zero-entropy state (the
-singularity) surrounded by an information boundary (the event horizon). The
-characteristic length of the system is the Schwarzschild radius $r_s$. By
-direct analogy with the universe, whose spatial resolution $2^n$ was calibrated
-against a radial length, we identify the bit count of the black hole with the
-number of bits required to encode $r_s$ in Planck units:
-
+A black hole has a Schwarzschild radius $r_s$ encoding a radial length of
+$r_s/\ell_P$ Planck cells. By the same identification as for the universe, the
+bitstring length of the black hole is:
 \[
-n_{\mathrm{bh}} = \log_2 \!\left(\frac{r_s}{\ell_P}\right).
+  n_{\mathrm{bh}} = \log_2\!\left(\frac{r_s}{\ell_P}\right).
 \]
-
-For a solar-mass black hole, $r_s = 2GM_\odot / c^2 \approx 2950$ m, giving:
-
-\[
-\frac{r_s}{\ell_P} = \frac{2950}{1.616 \times 10^{-35}} \approx 1.83 \times 10^{38},
-\]
-\[
-n_{\mathrm{bh}} = \log_2(1.83 \times 10^{38}) \approx 127 \text{ bits.}
-\]
-
-Note that $n_{\mathrm{bh}} \approx 127 < n \approx 184$, consistent with the
-monotonicity corollary: a black hole contains less information than the full
-universe and therefore has a strictly smaller aspect ratio.
+For a solar-mass black hole, $r_s \approx 2950$ m, giving
+$r_s/\ell_P \approx 1.83\times10^{38}$ and
+$n_{\mathrm{bh}} \approx 127$.
+Note $n_{\mathrm{bh}} \approx 127 < n \approx 184$: the black hole has fewer
+binary degrees of freedom than the full universe, consistent with the
+monotonicity corollary.
 
 \subsection{Predicted Surface Area}
 
-The event horizon is a two-dimensional surface. By the same logic that gives
-spatial resolution $2^n$ for a one-dimensional radial measure, the
-two-dimensional surface resolution is $(2^{n_{\mathrm{bh}}})^2 = 2^{2 n_{\mathrm{bh}}}$
-Planck areas. The predicted physical surface area is:
-
+The event horizon is two-dimensional. By the same encoding, its area in
+Planck units is $(2^{n_{\mathrm{bh}}})^2 = 2^{2n_{\mathrm{bh}}}$ Planck areas:
 \[
-A_{\mathrm{model}} = 2^{2 n_{\mathrm{bh}}} \cdot \ell_P^2
-= (1.83 \times 10^{38})^2 \times (1.616 \times 10^{-35})^2
-\approx 8.7 \times 10^{6} \text{ m}^2.
+  A_{\mathrm{model}}
+  = 2^{2n_{\mathrm{bh}}} \cdot \ell_P^2
+  = (1.83\times10^{38})^2 \times (1.616\times10^{-35})^2
+  \approx 8.7\times10^{6}\;\mathrm{m}^2.
 \]
 
 \subsection{Comparison with Bekenstein--Hawking}
 
-The Bekenstein--Hawking formula gives the surface area and entropy of a
-solar-mass black hole as:
-
 \[
-A_{\mathrm{BH}} = 4\pi r_s^2 \approx 1.09 \times 10^{8} \text{ m}^2,
+  A_{\mathrm{BH}} = 4\pi r_s^2 \approx 1.09\times10^{8}\;\mathrm{m}^2,
+  \qquad
+  S_{\mathrm{BH}} = \frac{A_{\mathrm{BH}}}{4\ell_P^2} \approx 1.05\times10^{77}.
 \]
+The ratio:
 \[
-S_{\mathrm{BH}} = \frac{A_{\mathrm{BH}}}{4\ell_P^2} \approx 1.05 \times 10^{77} \text{ bits.}
+  \frac{A_{\mathrm{model}}}{A_{\mathrm{BH}}}
+  = \frac{(r_s/\ell_P)^2}{4\pi(r_s/\ell_P)^2}
+  = \frac{1}{4\pi}.
 \]
-
-The ratio of the model prediction to the Bekenstein--Hawking result is:
-
+The discrepancy is exactly $4\pi$ --- the ratio of a flat raster area to a
+spherical surface area. Imposing spherical geometry (as GR requires):
 \[
-\frac{A_{\mathrm{model}}}{A_{\mathrm{BH}}}
-= \frac{(r_s/\ell_P)^2}{4\pi(r_s/\ell_P)^2} = \frac{1}{4\pi}.
+  A_{\mathrm{model}} \times 4\pi
+  = 4\pi \times 8.7\times10^6
+  \approx 1.09\times10^8\;\mathrm{m}^2
+  = A_{\mathrm{BH}}. \quad \checkmark
 \]
-
-The discrepancy is exactly $4\pi$ --- the ratio of the area of a flat square
-of side $r$ to the surface area of a sphere of radius $r$. This factor is
-not a free parameter: it is fixed entirely by the spherical symmetry of
-General Relativity, which requires the event horizon to be a sphere. The
-present model, which computes a flat square resolution $(2^{n_{\mathrm{bh}}})^2$,
-recovers the Bekenstein--Hawking result up to the geometric correction that
-spherical geometry imposes on flat raster geometry.
-
-Equivalently, incorporating the spherical geometry factor:
-
-\[
-A_{\mathrm{model}} \times 4\pi = 4\pi \times 8.7 \times 10^6 \approx 1.09 \times 10^8 \text{ m}^2
-= A_{\mathrm{BH}}. \quad \checkmark
-\]
-
-The model therefore recovers Bekenstein--Hawking exactly once the geometry of
-the horizon --- a sphere, as required by GR --- is imposed. The $4\pi$ factor
-is not introduced by hand: it is the unique geometric factor demanded by
-spherical symmetry.
 
 % ============================================================
 \section{Discussion}
@@ -355,92 +295,52 @@ spherical symmetry.
 
 \subsection{The aspect ratio as a structural invariant}
 
-The central result of this paper is that a single integer $n$ determines the
-full geometric structure of the black hole spacetime it encodes. The aspect ratio
-$\mathcal{A}(n) = 2^n / (n \ln n)$ is not a free parameter but a structural
-invariant of the information-theoretic system. Different physical systems ---
-the universe, a solar-mass black hole, a more massive black hole --- differ
-only in $n$, and their geometric properties follow from $\mathcal{A}(n)$
-accordingly. This is consistent with the static, timeless picture of Paper~I \cite{meskanen2001}:
-the geometry of the universe is fixed by $n$, not by dynamics.
+The aspect ratio $\mathcal{A}(n) = 2^n/(n\ln n)$ is not a free parameter but
+a structural invariant determined by $n$ alone. Different physical systems
+--- the universe, a solar-mass black hole, a more massive black hole --- differ
+only in $n$, and their geometric properties follow accordingly.
 
-\subsection{The $4\pi$ factor and the geometry of the horizon}
+\subsection{The $4\pi$ factor}
 
-The $4\pi$ discrepancy is the \emph{signature} of spherical
-geometry in the comparison, and its appearance confirms that the model is
-computing the right quantity, just in the wrong coordinate system. The event horizon
-is a sphere because GR demands it; the $4\pi$ correction follows from that
-demand alone. A model that obtained $4\pi$ from within its own information
-framework would need to already assume spherical symmetry, which is a GR input.
-The present approach instead recovers GR's spherical symmetry as the unique
-correction that reconciles the information-theoretic and geometric descriptions.
+The $4\pi$ discrepancy is the signature of spherical geometry: the model
+computes a flat raster resolution, while GR demands a spherical horizon.
+The $4\pi$ correction is fixed entirely by spherical symmetry, not introduced
+by hand.
 
-\subsection{Relation to Bekenstein--Hawking and holography}
+\subsection{Limitations}
 
-The Bekenstein--Hawking formula is used here as a verification target.
-The model independently identifies $n_{\mathrm{bh}}$ from the
-Schwarzschild radius, predicts the surface area as a two-dimensional bit
-resolution, and finds that the result matches Bekenstein--Hawking up to the
-spherical geometry factor. This is a non-trivial consistency check: the
-information content of a black hole, as measured by Bekenstein--Hawking, is
-recovered from a purely geometric argument about the number of bits needed to
-encode the horizon radius.
-
-\subsection{Relation to inflationary cosmology}
-
-The calibration of $n$ from the inflationary aspect ratio, and the subsequent
-recovery of the e-fold count as a consistency check, suggests a
-connection between the information budget of the universe and the dynamics of
-the inflationary epoch. In the present framework, inflation is not a separate
-physical mechanism but the geometric expression of a thermodynamic system
-expanding from a zero-entropy initial state. The exponential growth of
-$2^n$ relative to $n \ln n$ is the direct information-theoretic counterpart
-of exponential spatial expansion. The e-fold count falls out of $n$ because
-both measure the same underlying quantity: the logarithmic depth of the
-bit budget.
-
-\subsection{Limitations and open questions}
-
-The present paper establishes a structural correspondence between
-information-theoretic and geometric quantities. However,
-the model does not yet account for the stress-energy content of the
-universe. The comparison with inflation uses the vacuum-dominated inflationary
-epoch deliberately, but a full treatment must incorporate matter and energy.
-
+The model does not yet account for the stress-energy content of the universe.
+The comparison with inflation uses the vacuum-dominated epoch deliberately;
+a full treatment must incorporate matter and energy.
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have shown that the geometric structure of spacetime --- spatial resolution,
-temporal resolution, and their ratio --- follows from the information content
-$n$ of a finite, static universe, without additional physical assumptions.
-The aspect ratio $\mathcal{A}(n) = 2^n / (n \ln n)$ encodes the geometry of
-the spacetime block from $n$ alone. Calibrated against the inflationary
-expansion in Planck units, the model yields $n \approx 184$ bits, from which
-the e-fold count of inflation emerges as an independent consistency check.
+We have shown that the geometric structure of spacetime follows from a single
+integer $n$. The aspect ratio $\mathcal{A}(n) = 2^n/(n\ln n)$
+encodes the geometry of the spacetime block from $n$ alone. Calibrated against
+the inflationary expansion in Planck units, the model yields $n \approx 184$
+binary degrees of freedom, giving $2^{184} \approx 2.5\times10^{55}$
+distinguishable configurations and a maximum radial resolution consistent with
+the size of the observable universe. The e-fold count of inflation emerges as
+an independent consistency check.
 
-Extended to black holes via the natural identification
-$n_{\mathrm{bh}} = \log_2(r_s/\ell_P)$, the framework recovers the Bekenstein--Hawking entropy of
-a solar-mass black hole up to the factor $4\pi$ that converts flat raster
-geometry to spherical surface geometry --- a factor fixed entirely by the
-spherical symmetry of General Relativity. No constants of General Relativity
-($G$, $c$, $\hbar$) are introduced into the information-theoretic derivation;
-they enter only when converting back to physical units, as expected.
-
-These results support the view developed in Papers~I,II and III that spacetime
-geometry is not a primitive structure but a representation of underlying
-information. The bit count $n$ is not merely a parameter of the model; it is
-the model.
+Extended to black holes via $n_{\mathrm{bh}} = \log_2(r_s/\ell_P)$, the
+framework recovers the Bekenstein--Hawking entropy up to the factor $4\pi$ from
+spherical geometry. No constants of General Relativity ($G$, $c$, $\hbar$) are
+introduced into the information-theoretic derivation; they enter only when
+converting back to physical units.
 
 
-\section{Supplementary Materials}
+\section*{Supplementary Materials}
 
 \begin{itemize}
-\item \texttt{simulations/black\_hole\_calculator.py} - Black Hole Information-Theoretic Calculator
-\item \texttt{simulations/verification.py} - Verify all numerical claims in the paper against the equations
+\item \texttt{simulations/black\_hole\_calculator.py} ---
+      Black Hole Information-Theoretic Calculator
+\item \texttt{simulations/verification.py} ---
+      Verifies all numerical claims in the paper against the equations
 \end{itemize}
 
 \printbibliography
-
 \end{document}
