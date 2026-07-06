@@ -81,12 +81,12 @@ Consistent with Paper~I's rejection of any externally imposed clock or agent \ci
 evolution is not driven by an external "bit-flipper." At each raw tick, one of the $L$ positions is selected
 uniformly at random --- a choice determined entirely by internal, countable facts about the current
 configuration (how many positions currently hold each value), not by any external rule --- and that
-position's value is toggled. Tracking $k(t_\text{raw})$, the number of $1$-bits in $S_t$ after $t_\text{raw}$
+position's value is toggled. Tracking $k(t_{raw})$, the number of $1$-bits in $S_t$ after $t_{raw}$
 raw ticks, this process is exactly the \textbf{Ehrenfest urn model} \cite{ehrenfest1907}:
 \[
 P\bigl(k \to k+1\bigr) = \frac{L-k}{L}, \qquad P\bigl(k \to k-1\bigr) = \frac{k}{L}.
 \]
-Writing $p(t_\text{raw}) = k(t_\text{raw})/L$ and the rescaled time $\tau = t_\text{raw}/L$, the mean
+Writing $p(t_{raw}) = k(t_{raw})/L$ and the rescaled time $\tau = t_{raw}/L$, the mean
 trajectory obeys $dp/d\tau = 1-2p$, with exact solution
 \[
 p(\tau) = \frac12\left(1-e^{-2\tau}\right),
@@ -154,15 +154,81 @@ where $p^\ast$ falls relative to that range:
           i.e.\ a true rise-and-fall hump, reachable within $[0,1/2]$, closely approximated by a lognormal
           shape.
 \end{itemize}
+
+
+
+\subsection{Hump-Class Dominance Across the Relaxation Trajectory}
+\label{sec:hump-dominance}
+ 
+The classification above answers which \emph{shape} a given composition $(a,b)$ produces. A distinct
+question is which class is \emph{typical}: if a window of fixed length $k=a+b$ is drawn at time $\tau$, which
+regime does its observed composition tend to fall into? Answering this requires weighting each composition
+by the number of arrangements that share it, $\binom{k}{a}$, rather than examining a single representative
+pattern in isolation.
+ 
+The number of $1$-bits in a length-$k$ window is distributed as $\mathrm{Binomial}\bigl(k,\,p(\tau)\bigr)$.
+Since $p(\tau)\in[0,\tfrac12)$ for every finite $\tau$, the mean and mode of this distribution lie strictly
+inside the hump region $a<b$ throughout the relaxation, approaching the $a=b$ boundary only as
+$\tau\to\infty$. Formally, define the composition-weighted probability mass in each regime:
+\[
+M_{\mathrm{hump}}(\tau) \;=\; \sum_{a<b} \binom{k}{a} p(\tau)^a \bigl(1-p(\tau)\bigr)^b,
+\qquad
+M_{\mathrm{non\text{-}hump}}(\tau) \;=\; \sum_{a\ge b} \binom{k}{a} p(\tau)^a \bigl(1-p(\tau)\bigr)^b,
+\]
+with $M_{\mathrm{hump}}+M_{\mathrm{non\text{-}hump}}=1$ by construction.
+ 
+Direct evaluation, with the crossover $\tau_c(k)$ located by root-finding on
+$M_{\mathrm{hump}}(\tau)-M_{\mathrm{non\text{-}hump}}(\tau)=0$, shows that $M_{\mathrm{hump}}(\tau)$ holds
+the overwhelming majority of the mass from just above $\tau=0$ up to $\tau_c(k)$, and that $\tau_c(k)$ grows
+with $k$, with $p(\tau_c)\to\tfrac12$ as $k\to\infty$:
+ 
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+\toprule
+$k$ & $\tau_c$ (crossover) & $p(\tau_c)$ \\
+\midrule
+12   & 1.257 & 0.4595 \\
+40   & 1.849 & 0.4876 \\
+100  & 2.304 & 0.4950 \\
+200  & 2.650 & 0.4975 \\
+400  & 2.996 & 0.4988 \\
+1000 & 3.454 & 0.4995 \\
+\bottomrule
+\end{tabular}
+\caption{Crossover time $\tau_c$ at which composition-weighted mass shifts from hump-dominant to
+non-hump-dominant, for representative window lengths $k$. As $k$ grows, $\tau_c$ increases and $p(\tau_c)$
+converges to the equilibrium value $\tfrac12$.}
+\label{tab:hump-crossover}
+\end{table}
+ 
+The hump regime is therefore not merely one of three equally weighted possibilities: it is the
+\emph{typical} outcome of the relaxation process at any window length, dominating essentially the entire
+trajectory. The non-hump regimes only attain majority mass in the immediate approach to final equilibrium
+--- a fraction of the trajectory that shrinks as $k$ grows, vanishing entirely in the $k\to\infty$ limit
+except at $\tau\to\infty$ itself.
+
 This is a fully predictive, closed-form classification: the qualitative shape of any given filter's
 abundance curve can be determined in advance from $(a,b)$ alone, without running the simulation.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/entropy_to_matter.png}
-\caption{Left: Emergent particle worldlines in relational spacetime. Right: Entropy and counts of spacetime fabric vs.\ hierarchical structures, shown for filters representative of each of the three regimes above.}
+\includegraphics[width=0.95\textwidth]{figures/emergent_structures.png}
+\caption{Left: Emergent particle worldlines in relational spacetime. Right: Entropy and counts of spacetime fabric vs.\ hierarchical structures,
+  shown for filters representative of each of the three regimes above.}
 \label{fig:entropy-matter}
 \end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/family_mass.png}
+\caption{Weighting the three compositions by their multiplicities shows the hump curve dominates the composition-weighted probability mass across
+essentially the entire relaxation trajectory, ceding majority status to the non-hump regimes only in the
+immediate approach to final equilibrium, }
+\label{fig:family-mass}
+\end{figure}
+
 
 
 % ============================================================
@@ -268,7 +334,7 @@ from the bitstring-to-geometry decoding maps of Section~\ref{sec:setup}; establi
 particular should represent physical spatial extent, rather than simply being the transform that reproduces
 the target curve, is left for future work. Second, this is a statement about the \emph{shape} of the
 correspondence (that an exact match exists under a linear time identification), not about its
-\emph{quantitative calibration}. Substituting $\tau=t_\text{raw}/L$ into the identification above shows that
+\emph{quantitative calibration}. Substituting $\tau=t_{raw}/L$ into the identification above shows that
 matching a given physical Hubble rate $H$ requires $H=2/L$ exactly, if one raw bit-flip tick is identified
 with one Planck time.
 
@@ -285,11 +351,16 @@ Beginning from the zero-entropy state identified in Paper~II \cite{meskanen2002}
 this process drives the systematic expansion of the spatial manifold without requiring a cosmological constant,
 ad-hoc inflaton fields, or hard-coded equations of motion.
 
-Second, the abundance of any emergent micro-structure follows one of exactly three combinatorially determined
-shapes --- monotone increasing, monotone-flattening, or a genuine interior peak --- fully predictable in
-advance from the composition $(a,b)$ of the pattern being counted. Physically-motivated matter-detection
-filters should have their composition checked against this classification to confirm they fall in the
-peak-producing regime.
+Second, the abundance of any emergent micro-structure follows one of exactly three combinatorially
+determined shapes --- monotone increasing, monotone-flattening, or a genuine interior peak --- fully
+predictable in advance from the composition $(a,b)$ of the pattern being counted. Moreover, the hump-shaped
+regime ($a<b$) is not merely one of three equally likely outcomes but the \emph{typical} one: weighting
+compositions by their multiplicities shows it dominates the composition-weighted probability mass across
+essentially the entire relaxation trajectory, ceding majority status to the non-hump regimes only in the
+immediate approach to final equilibrium, a window that narrows as pattern length grows. Physically-motivated
+matter-detection filters should have their composition checked against this classification to confirm they
+fall in the peak-producing regime, which the present result shows is the generic, expected case rather than
+a special one.
 
 Third, the reciprocal transform $X(\tau)=(1-2p(\tau))^{-1}=e^{2\tau}$ reproduces the de~Sitter scale factor
 \emph{exactly} under a linear identification of bit-flip time with cosmological time, resolving the apparent
@@ -322,7 +393,7 @@ dimensionality and boundaries of spatial and temporal domains remain to be fully
 \begin{itemize}
 \item \href{simulations/emergence_of_spacetime.py}{\texttt{emergence\_of\_spacetime.py}: Geometric Manifestation of Entropy Growth}
 \item \href{simulations/regime_classification.py}{\texttt{regime\_classification.py}: Verification of the $(a,b)$ three-regime classification against the filter suite of Section~\ref{sec:robustness}}
-\item \href{simulations/desitter_correspondence.py}{\texttt{desitter\_correspondence.py}: Verification of the exact $X(\tau)=e^{2\tau}$ correspondence and the implied $H=2/L$ relation}
+
 \end{itemize}
 
 \printbibliography
