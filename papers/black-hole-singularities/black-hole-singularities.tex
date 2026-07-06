@@ -139,7 +139,7 @@ distinguishability of the encoded states.
 
 To extract both macroscale pattern formation and microscale structural disorder 
 during gravitational collapse, we evaluate the particle coordinate distribution 
-using three complementary informational metrics.
+using two complementary informational metrics.
 
 \subsubsection{Single-Bit Shannon Entropy}
 At each simulation timestep $t$, the full geometric state is mapped onto a 
@@ -169,30 +169,6 @@ inherent in binary integer transitions, $H_n(b_t)$ tracks tightly with $H(b_t)$,
 confirming a high degree of correlation between individual bit state changes 
 and pattern distributions during spatial collapse.
 
-\subsubsection{Dynamic Spectral Complexity}
-To isolate multi-scale spatial organization from bulk coordinate scaling, we implement 
-the continuous spatial rendering resource cost. Let $\bar{x}(t)$ denote the mean 
-value of the $N$-particle spatial distribution $x_n(t)$ at time $t$. We isolate the structural 
-AC variance from the bulk background translation by computing a discrete Fourier 
-transform on the centralized deviations $v_n = x_n - \bar{x}$. For each frequency component $k$, 
-the amplitude is evaluated as:
-\[
-A_k = \sqrt{\mathcal{R}_k^2 + \mathcal{I}_k^2}
-\]
-\[
-\mathcal{R}_k = \sum_{n=0}^{size-1} v_n \cos\left(\frac{2\pi k n}{size}\right), \quad 
-\mathcal{I}_k = -\sum_{n=0}^{size-1} v_n \sin\left(\frac{2\pi k n}{size}\right).
-\]
-To prevent static cutoff masking, we determine a dynamic noise floor threshold 
-$\epsilon = A_{max} \times 10^{-4}$ based on the peak structural mode $A_{max} = \max(A_k)$. 
-The total spectral complexity $\mathcal{C}_s$ is computed as:
-\[
-\mathcal{C}_s = \sum_{k=1}^{size/2} \left[ c_\phi + \frac{\omega_k}{\Delta\omega} \right] \cdot \frac{A_k}{A_{max} + 1e-12} \quad \forall A_k > \epsilon,
-\]
-where $c_\phi = 1.0$ is the baseline rendering node cost, $\omega_k = k$ represents the 
-mode index, and $\Delta\omega = 0.05$ is the frequency normalization step. This metric tracks 
-the relative geometric configuration cost, increasing as structural uniformity breaks down 
-and collapsing to zero when spatial variance disappears.
 
 \subsection{Lemma: Vanishing Entropy Implies Geometric Point}
 
@@ -238,36 +214,13 @@ $H_n(b_t)$ decrease as particles fall inward toward the singularity. Their
 curves track each other identically, demonstrating that macroscopic structure and microscale binary data 
 variety decay in tandem as the configuration space collapses.
 
-However, the dynamic spectral complexity $\mathcal{C}_s$ reveals distinct structural phases 
-depending on the presence of spacetime rotation:
-
-\begin{enumerate}
-    \item \textbf{Non-Rotating Systems (Schwarzschild AU and EF):} The spectral complexity curves 
-    are beautifully smooth and non-monotonic. They begin flat during the initial homogeneous 
-    infall phase. As the cloud approaches the event horizon, $\mathcal{C}_s$ curves upward. This marks 
-    the onset of extreme physical tidal stretching: because the gravitational acceleration scales 
-    as $1/r^2$, inner particles accelerate rapidly away from outer ones, increasing the structural 
-    disorder and spatial frequency variance of the cloud. After this peak, as the particles cross the 
-    horizon and head toward the central singularity, the relative distances collapse uniformly, 
-    driving $\mathcal{C}_s$ smoothly down to a flat zero.
-    
-    \item \textbf{Rotating Systems (Kerr $a=0.9$):} The high-spin equatorial trajectory displays a 
-    chaotic phase transition. For the first half of the execution path, $\mathcal{C}_s$ remains flat at 
-    zero, indicating that the dust cloud maintains a highly uniform, co-rotating orbital structure. 
-    However, upon breaching the ergosphere boundary, the curve transforms into chaotic, high-amplitude 
-    random spikes. This structural explosion is a direct consequence of frame-dragging (the Lense-Thirring effect), 
-    which shears the cloud into an intricate spiral and induces extreme relative coordinate velocity 
-    fluctuations before horizon crossing.
-\end{enumerate}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/schwarzschild_au_metrics.png}
 \caption{Multi-metric informational evolution for a Schwarzschild Advanced Unistructural collapse. 
   The top panels show the geometric particle convergence and the monotonic decrease of single-bit Shannon entropy. 
-  The bottom panels present the structural pattern block entropy and the non-monotonic profile of the 
-  dynamic spectral complexity $\mathcal{C}_s$. The spectral curve smoothly peaks due to tidal elongation 
-  before dropping to zero as the relative coordinate variance vanishes at the singularity.}
+  The bottom panels present the structural pattern block entropy.}
 \label{fig:schwarzschild_au}
 \end{figure}
 
@@ -275,10 +228,7 @@ depending on the presence of spacetime rotation:
 \centering
 \includegraphics[width=0.9\textwidth]{figures/kerr_metrics.png}
 \caption{Multi-metric informational spectrum for a high-spin Kerr ($a=0.9$) dust collapse. 
-  While bit and block entropies decay monotonically, the dynamic spectral complexity $\mathcal{C}_s$ (bottom-right) 
-  exhibits a sharp phase transition. It remains flat at zero during the uniform orbital phase, then erupts 
-  into chaotic spikes upon entering the ergosphere, mapping the physical shearing induced by differential 
-  frame-dragging before coordinate breakdown.}
+  Bit and block entropies decay monotonically.}
 \label{fig:kerr_metrics}
 \end{figure}
 
@@ -345,22 +295,16 @@ both.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have shown that gravitational collapse, analysed through the execution
-trace of a computational simulation, converges to a zero-entropy state
-at the classical singularity. This result holds for Schwarzschild, 
-and Kerr geometries and is independent of the 
-simulation architecture and discretisation scheme.
-
-The metrics suite deployed herein successfully acts as a structural phase detector. 
-The bit and block entropies capture the overarching loss of coordinate volume, 
-while the dynamic spectral complexity $\mathcal{C}_s$ maps the physical transitions 
-of the interior landscape---smoothly tracking tidal stretching in non-rotating 
-spacetimes, and mapping the onset of chaotic frame-dragging inside the Kerr ergosphere. 
-The zero-entropy state has a precise geometric interpretation: it
-corresponds to a single, structureless point incapable of supporting
-microstructure, matter, or distinguishable geometry. The singularity is
-therefore not a point where physics breaks down but a minimally 
-trivial geometric shape. 
+We demonstrate that gravitational collapse, analyzed via the execution trace of a computational simulation, converges to a zero-entropy state at the classical singularity.
+This result holds for both Schwarzschild and Kerr geometries, remaining independent of the simulation architecture and discretization scheme.
+The metric suite deployed herein successfully functions as a structural phase detector.
+Specifically, the bit and block entropies capture the overarching loss of coordinate volume.
+This zero-entropy state admits a precise geometric interpretation: it corresponds to a single, structureless point incapable of supporting microstructure, matter, or distinguishable geometry.
+Consequently, the singularity represents not a breakdown of physics, but rather a minimally trivial geometric configuration.
+These findings suggest that black hole information can be modeled as $2^n$ bitstrings arranged in order of decreasing entropy.
+The zero-entropy extremum maps to the black hole singularity, while the opposing extremum corresponds to the state of maximum entropy.
+Between these two bounds, the entropic trajectory follows the time-reversed evolution of a typical emergent, relaxing thermodynamic system progressing from zero entropy toward full equilibrium.
+from zero entropy towards full equilibrium.
 
 
 % ============================================================

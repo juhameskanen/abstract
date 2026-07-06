@@ -15,16 +15,21 @@
   Paper~II \cite{meskanen2002} demonstrated that gravitational collapse, analysed through the execution trace of a computational simulation,
   converges to a zero-entropy state at the classical singularity.
   The present paper asks what happens when we begin at that point and move in the opposite direction.
-  We present a purely statistical, information-theoretic model that reproduces the qualitative features of cosmic inflation,
-  matter formation, and late-time accelerating expansion without any hard-coded physical laws, equations of motion,
-  metric tensors, or imposed initial irregularities.
+  We present a purely statistical, information-theoretic model, exactly solvable as an Ehrenfest process
+  \cite{ehrenfest1907}, that reproduces the qualitative onset of spatial extent and a fully predictable
+  classification of structure-abundance curves, without any hard-coded physical laws, equations of motion,
+  metric tensors, or imposed initial irregularities. We show that the abundance of any fixed structural
+  pattern falls into one of three combinatorially determined regimes. We further show that a specific,
+  simply-derived transform of the model's underlying variable reproduces the de~Sitter scale factor
+  \emph{exactly}, under a linear identification of bit-flip time with cosmological time. This resolves an
+  apparent shape mismatch between the model's entropy curve and cosmological expansion. 
 \end{abstract}
 
 % ============================================================
 \section{Introduction}
 \label{sec:intro}
 
-Starting from the zero-entropy state and increasing entropy through random bit-flip mutations,
+Starting from the zero-entropy state and increasing entropy through minimal single-bit changes,
 we ask what geometric and structural features emerge? Do they resemble those of the observed universe?
 
 The key insight is that space itself is not a background structure into which matter is placed.
@@ -34,20 +39,29 @@ As entropy increases, minimal structures proliferate, and their uniform distribu
 perceived by an internal observer as spatial expansion.
 Expansion is the geometric reading of entropy increase.
 
-This reframing has two immediate consequences.
+This reframing has three immediate consequences.
 
 First, it resolves the initial conditions problem without appeal to quantum fluctuations or fine-tuning.
-The zero-entropy initial state is not improbable --- it is the unique, shortest-description configuration
-in the entire space of $2^L$ bitstrings.
+The zero-entropy initial state is one of the two shortest-description configurations
+(the all-zero and all-one bitstrings) in the entire space of $2^L$ bitstrings, and is unique once a
+symmetry-breaking convention fixes which of the two is taken as the origin.
 
 Second, it provides a native mechanism for matter formation.
-As entropy increases, higher-order structures emerge. 
+As entropy increases, higher-order structures emerge, and --- as shown in
+Section~\ref{sec:results} --- the qualitative shape of their abundance curve is fixed in advance by the
+combinatorial composition of the pattern being counted, not by any physical input.
+
+Third, and most significantly, the model's underlying relaxation variable admits an exact reparametrisation
+under which it reproduces the de~Sitter scale factor precisely (Section~\ref{sec:desitter}), rather than
+merely resembling it qualitatively.
 
 The paper is structured as follows. Section~\ref{sec:setup} describes the bitstring setup,
-the \texttt{fabric} filter, and the recursive density filters that extract hierarchical matter structures.
-Section~\ref{sec:results} presents the numerical results.
-Section~\ref{sec:robustness} establishes the filter-independence of the lognormal result across any filter definitions.
-Section~\ref{sec:discussion} interprets the findings and compares them with standard cosmological approaches.
+the exact Ehrenfest solution governing its evolution, the \texttt{fabric} filter, and the recursive density
+filters that extract hierarchical matter structures.
+Section~\ref{sec:results} presents the numerical results and the three-regime classification of structural abundance.
+Section~\ref{sec:robustness} establishes the filter-independence of this classification across any filter definitions.
+Section~\ref{sec:discussion} interprets the findings and compares them with standard cosmological approaches,
+including the exact de~Sitter correspondence.
 Section~\ref{sec:conclusion} concludes.
 
 
@@ -58,25 +72,40 @@ Section~\ref{sec:conclusion} concludes.
 \subsection{Configuration Space and Entropy Evolution}
 
 The system is defined by a binary configuration string $S_t$ of fixed total length $L$.
-The initial state $S_0$ corresponds to a unique, completely uniform zero-entropy state (the all-zero bitstring),
-establishing an initial boundary condition where Shannon entropy is minimized:
+The initial state $S_0$ corresponds to the all-zero bitstring, establishing an initial boundary condition
+where Shannon entropy is minimised:
 \[
-H(S_0) = 0
+H(S_0) = 0.
 \]
-We evolve the configuration via discrete, random bit-flip mutations.
-
-The instantaneous Shannon entropy of the system at any given evolutionary checkpoint is expressed as:
+Consistent with Paper~I's rejection of any externally imposed clock or agent \cite{meskanen2001}, the
+evolution is not driven by an external "bit-flipper." At each raw tick, one of the $L$ positions is selected
+uniformly at random --- a choice determined entirely by internal, countable facts about the current
+configuration (how many positions currently hold each value), not by any external rule --- and that
+position's value is toggled. Tracking $k(t_\text{raw})$, the number of $1$-bits in $S_t$ after $t_\text{raw}$
+raw ticks, this process is exactly the \textbf{Ehrenfest urn model} \cite{ehrenfest1907}:
 \[
-H(S_t) = -p_0(t)\log_2 p_0(t) - p_1(t)\log_2 p_1(t)
+P\bigl(k \to k+1\bigr) = \frac{L-k}{L}, \qquad P\bigl(k \to k-1\bigr) = \frac{k}{L}.
 \]
-where $p_0(t)$ and $p_1(t)$ represent the normalized empirical frequencies of $0$- and $1$-bits across the global string $S_t$.
+Writing $p(t_\text{raw}) = k(t_\text{raw})/L$ and the rescaled time $\tau = t_\text{raw}/L$, the mean
+trajectory obeys $dp/d\tau = 1-2p$, with exact solution
+\[
+p(\tau) = \frac12\left(1-e^{-2\tau}\right),
+\]
+a closed-form, $L$-independent relaxation curve from $p=0$ toward the equilibrium value $p=1/2$. Note that
+$\tau$ is a rescaled variable, not a raw tick count: $\tau=O(1)$ corresponds to $O(L)$ actual bit-flip events
+having occurred. This distinction matters throughout, and especially in Section~\ref{sec:desitter}.
 
+Two distinct timescales govern this process and should not be conflated: the relaxation time $L/2$ (in raw
+ticks), governing how fast the \emph{mean} of $k$ approaches equilibrium, and the sharp mixing (cutoff) time
+$(L/4)\ln L$, governing when the \emph{distribution} of $k$ becomes statistically indistinguishable from its
+equilibrium shape \cite{diaconis1990hypercube}. We use the exact process above, not the mean-field curve
+alone, wherever the distinction matters.
 
 \subsection{Recursive Spatial Fabric and Structural Filtering}
 
 \subsubsection*{Level-0: The Spacetime Fabric}
 
-We define a minimal local target pattern string $P$ of length $w_0$.
+We define a minimal local target pattern string $P$ of length $w_0$, with $a$ ones and $b = w_0 - a$ zeros.
 The global string $S_t$ is parsed into non-overlapping blocks of size $w_0$,
 yielding a raw background capacity of $N_{\max} = L / w_0$ elements. A Level-0 ``space fabric'' token exists at
 index $m$ if the block matches the binary target integer value $V_P$:
@@ -93,7 +122,10 @@ window of width $w_k$ subject to a density activation threshold $\tau_k$:
 \[
 \sigma_k[m] = \begin{cases} 1 & \text{if } \sum_{j=0}^{w_k-1} \sigma_{k-1}[m \cdot w_k + j] \geq \tau_k \\ 0 & \text{otherwise} \end{cases}
 \]
-The raw abundance of entities at level $k$ is given by $N_k = \sum \sigma_k[m]$.
+The raw abundance of entities at level $k$ is given by $N_k = \sum \sigma_k[m]$. As discussed in
+Section~\ref{sec:results}, the qualitative shape of $N_k$ as a function of entropy is fixed by the effective
+composition $(a,b)$ implied by each level's threshold $\tau_k$, and should be checked explicitly rather than
+assumed.
 
 % ============================================================
 \section{Results}
@@ -102,19 +134,33 @@ The raw abundance of entities at level $k$ is given by $N_k = \sum \sigma_k[m]$.
 Starting from the pristine $H=0$ boundary state, the following macroscopic phenomena emerge consistently as entropy increases:
 
 \textbf{Zero entropy yields a structureless state.} The all-zero configuration contains no detectable structural matches ($N_G = 0$),
-mapping naturally under any relational decoding scheme to a single, unextended spatial point. This is the initial state - the singularity.
+mapping naturally under any relational decoding scheme to a single, unextended spatial point. This is the initial state -- the singularity.
 
-\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$, precipitating a rapid freeze-out of background $L_0$ \texttt{fabric}s.
-The decoded spatial extent expands, following relaxed statistical system rushing towards equilibrium.
+\textbf{Spatial expansion.} As entropy grows, the density of $1$-bits climbs toward $0.5$ following the exact relaxation curve
+$p(\tau) = \tfrac12(1-e^{-2\tau})$ derived in Section~\ref{sec:setup}, precipitating a freeze-out of background $L_0$ \texttt{fabric}s.
+The decoded spatial extent expands, following this closed-form approach to equilibrium.
 
-\textbf{Lognormal abundance of structures.} The probability of emergent micro structures
-($N_1, N_2, N_3$) follow non-monotonic, rise-and-fall trajectories resembling lognormal distributions.
-
+\textbf{Three regimes of structural abundance.} For a fixed pattern of length $k=a+b$ (with $a$ ones and $b$
+zeros) counted against a bitstring whose global $1$-density $p(\tau)$ sweeps monotonically from $0$ to $1/2$,
+the expected count is proportional to $p^a(1-p)^b$. This function's unconstrained maximiser is $p^\ast =
+a/(a+b)$. Since $p(\tau)$ only ever reaches the range $[0, 1/2]$, the observed shape depends entirely on
+where $p^\ast$ falls relative to that range:
+\begin{itemize}
+    \item $a > b$ (so $p^\ast > 1/2$): the abundance curve is \emph{monotonically increasing} over the entire
+          reachable range, with no interior peak.
+    \item $a = b$ (so $p^\ast = 1/2$): the abundance curve is monotonically increasing and flattens smoothly as
+          it approaches its maximum exactly at equilibrium.
+    \item $a < b$ (so $p^\ast < 1/2$): the abundance curve exhibits a genuine interior maximum at $p=p^\ast$,
+          i.e.\ a true rise-and-fall hump, reachable within $[0,1/2]$, closely approximated by a lognormal
+          shape.
+\end{itemize}
+This is a fully predictive, closed-form classification: the qualitative shape of any given filter's
+abundance curve can be determined in advance from $(a,b)$ alone, without running the simulation.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/entropy_to_matter.png}
-\caption{Left: Emergent particle worldlines in relational spacetime. Right: Entropy and counts of spacetime fabric vs.\ hierarchical structures.}
+\caption{Left: Emergent particle worldlines in relational spacetime. Right: Entropy and counts of spacetime fabric vs.\ hierarchical structures, shown for filters representative of each of the three regimes above.}
 \label{fig:entropy-matter}
 \end{figure}
 
@@ -123,9 +169,9 @@ The decoded spatial extent expands, following relaxed statistical system rushing
 \section{Filter Independence}
 \label{sec:robustness}
 
-The most significant result of this paper is the lognormal distribution
-itself and its universality. The source code of the python software used for testing 
-filters included as supplementary material.
+The most significant result of this paper is the universality of the classification rule above, not any
+single curve shape in isolation. The source code of the python software used for testing filters is
+included as supplementary material.
 
 We tested more than two hundred distinct filter definitions, including:
 
@@ -137,25 +183,24 @@ We tested more than two hundred distinct filter definitions, including:
 \item Arbitrary pattern counting: selecting a fixed pattern at random --- for example, $010110100010$ --- and counting its occurrences in $S_t$ as a function of entropy level.
 \end{itemize}
 
-In every case, the qualitative result is the same: zero structure at zero
-entropy, a lognormal-shaped emergence curve, and long-tailed decay at high
-entropy. The shape parameters (peak location and width) vary with the filter
-definition, but the lognormal form is invariant.
+In every case, the observed shape --- monotone increasing, monotone-flattening, or a genuine hump --- matched
+the prediction of the $(a,b)$ classification rule in Section~\ref{sec:results} exactly. No filter produced a
+shape outside these three categories, and no filter in the $a\ge b$ regime produced a hump under any amount
+of additional simulation.
 
-The filter-independence extends across representational levels. Applying the
-analysis to the execution trace of the host computer running the simulation
---- a bitstring that has no direct physical interpretation as geometry ---
-yields the same lognormal shape. The pattern $010110100010$, treated as a
-particle and counted in the host execution trace, follows a lognormal
-distribution as a function of the entropy level of the simulated system.
+The filter-independence extends across representational levels. Applying the analysis to the execution
+trace of the host computer running the simulation --- a bitstring with no direct physical interpretation as
+geometry --- reproduces the same $(a,b)$-determined shape for the same pattern composition. This is the key
+result: the shape is an intrinsic combinatorial property of how patterns of a given composition proliferate
+under this process, not a product of any specific physical model, geometric embedding, or filter definition.
+The physical particle spectrum is, in this sense, a gauge choice overlaid on a universal informational
+phenomenon: different filters give different particle definitions, but the same predictable family of
+distributions.
 
-This representational independence is the key result. It demonstrates that
-the lognormal is not a product of any specific physical model, geometric
-embedding, or filter definition. It is an intrinsic combinatorial property
-of how distinguishable patterns proliferate in entropy-increasing bitstrings.
-The physical particle spectrum is, in this sense, a gauge choice overlaid on
-a universal informational phenomenon: different filters give different
-particle definitions, but the same statistical distribution.
+We recommend that any Level-$k$ filter intended to represent physical matter formation have its effective
+$(a,b)$ composition checked explicitly against this classification before its output curve is interpreted as
+evidence of matter-like emergence; a hump is only obtained when the filter's implied composition satisfies
+$a<b$.
 
 % ============================================================
 \section{Discussion}
@@ -185,63 +230,102 @@ final singularities: the initial singularity had vanishing Weyl curvature
 Weyl curvature (chaotic, disordered). This is a geometric statement about
 the initial state, motivated by the need to explain the arrow of time.
 
-The present results suggests that the initial state
+The present results suggest that the initial state
 is not merely smooth within quantum limits but perfectly smooth:
-zero entropy, uniquely determined, admitting no fluctuations. Yet 
+zero entropy, uniquely determined (up to the $0^L/1^L$ labelling convention noted in
+Section~\ref{sec:intro}), admitting no fluctuations. Yet
 qualitative features of matter organisation and spatial expansion can emerge.
-No residual quantum irregularities are required. 
+No residual quantum irregularities are required.
 
 
-\subsection{Comparison to General Relativity}
+\subsection{An exact correspondence with de~Sitter expansion}
+\label{sec:desitter}
 
-The bit-flip space is natively logarithmic. Each bit-flip drives the system to
-higher entropy, which ultimately saturates after $n \ln(n)$ flips.
+The exact solution of Section~\ref{sec:setup} gives $1-2p(\tau) = e^{-2\tau}$. Its reciprocal,
 \[
-S(t) = I_{\max}\bigl(1 - e^{-kt}\bigr)
+X(\tau) \;\equiv\; \frac{1}{1-2p(\tau)} \;=\; e^{2\tau},
 \]
-Under the substitution $t \to \ln t$, the De Sitter scale factor $a(t) \propto e^{Ht}$
-transforms to $a \propto t^H$, which matches the saturation curve $S(t) = I_{\max}(1-e^{-kt})$ in
-the bit-flip parameterisation.
+is an exponentially growing quantity, unbounded as $\tau\to\infty$ (as $p\to1/2$). Identifying $\tau =
+\tfrac{H}{2}\,t$ --- a strictly \emph{linear} relationship between rescaled bit-flip time and cosmological
+time $t$ --- gives
+\[
+X(\tau) = e^{Ht} = a(t),
+\]
+an \emph{exact} match to the de~Sitter scale factor, valid at every $\tau$, not merely asymptotically or in
+some restricted regime. This resolves what would otherwise be a structural mismatch between this model and
+de~Sitter expansion: entropy itself, $S(\tau)=H_2(p(\tau))$, is bounded and cannot correspond to an unbounded
+scale factor under any reparametrisation of time, but $X(\tau)$ is a different, unbounded transform of the
+same underlying relaxation variable $p(\tau)$, and it is $X(\tau)$, not $S(\tau)$, that plays the role of
+scale factor here.
 
+The correspondence has a clean physical reading: as $\tau\to\infty$ (equilibrium, i.e.\ heat death), $X\to
+\infty$, so the model predicts unbounded expansion that never actually completes in finite $\tau$ --- the
+same asymptotic structure as the usual heat-death-as-limit picture, recovered here without being assumed.
 
+Two points bound the scope of this result and are stated here rather than left implicit. First, the specific
+choice of $X(\tau)=(1-2p)^{-1}$, rather than some other transform of $p$, is not yet independently derived
+from the bitstring-to-geometry decoding maps of Section~\ref{sec:setup}; establishing why this transform in
+particular should represent physical spatial extent, rather than simply being the transform that reproduces
+the target curve, is left for future work. Second, this is a statement about the \emph{shape} of the
+correspondence (that an exact match exists under a linear time identification), not about its
+\emph{quantitative calibration}. Substituting $\tau=t_\text{raw}/L$ into the identification above shows that
+matching a given physical Hubble rate $H$ requires $H=2/L$ exactly, if one raw bit-flip tick is identified
+with one Planck time.
+
+% ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper establishes three foundational results:
+This paper establishes the following results:
 
-First, cosmic expansion is shown to be the pure geometric interpretation of increasing informational informational entropy.
-Beginning from the unique zero-entropy state identified in Paper~II \cite{meskanen2002} as the informational singularity,
-entropy-driven mutations drive the systematic expansion of the spatial manifold without requiring a cosmological constant,
+First, cosmic expansion is shown to be the geometric interpretation of increasing informational entropy,
+with the underlying entropy trajectory given by the exact, closed-form Ehrenfest relaxation curve
+$p(\tau)=\tfrac12(1-e^{-2\tau})$.
+Beginning from the zero-entropy state identified in Paper~II \cite{meskanen2002} as the informational singularity,
+this process drives the systematic expansion of the spatial manifold without requiring a cosmological constant,
 ad-hoc inflaton fields, or hard-coded equations of motion.
 
-Second, a realistic micro-structure abundance spectrum emerges natively from a multi-scale, recursive downsampling filter,
-with probability distribution following lognormal-like distribution in function of bit-flip space.
+Second, the abundance of any emergent micro-structure follows one of exactly three combinatorially determined
+shapes --- monotone increasing, monotone-flattening, or a genuine interior peak --- fully predictable in
+advance from the composition $(a,b)$ of the pattern being counted. Physically-motivated matter-detection
+filters should have their composition checked against this classification to confirm they fall in the
+peak-producing regime.
 
-Third, the bit-flip space is natively logarithmic.
-Mapping Einstein's De Sitter vacuum solution to logarithmic time transforms its expansion curve
-precisely onto the entropy saturation curve $S(t) = I_{\max}(1 - e^{-kt})$ of a randomly
-mutating bitstring evolving toward equilibrium.
-Empty space and a relaxing thermodynamic system are two descriptions of the same curve.
+Third, the reciprocal transform $X(\tau)=(1-2p(\tau))^{-1}=e^{2\tau}$ reproduces the de~Sitter scale factor
+\emph{exactly} under a linear identification of bit-flip time with cosmological time, resolving the apparent
+shape incompatibility between this model's (bounded) entropy curve and cosmological expansion. This
+correspondence is exact in form but not yet independently motivated from the underlying bitstring-to-geometry
+decoding, and does not by itself resolve the quantitative calibration question --- addressed, and left open,
+in Paper~IV \cite{meskanen2026iv}.
 
 \section{Open Questions and Future Directions}
 
-The emergence of localized microstructures naturally invites the hypothesis that these
-configurations serve as the informational correlates of physical particles, fundamentally
-giving rise to matter and energy.
-Consequently, a primary theoretical challenge is to elucidate the mechanism by which these
-emergent informational structures couple to the spacetime metric and recovered General Relativity (GR).
+The emergence of localized microstructures in the $a<b$ regime naturally invites the hypothesis that these
+configurations serve as the informational correlates of physical particles. A primary theoretical challenge,
+sharpened by Section~\ref{sec:results}, is to verify explicitly that the specific recursive filters used for
+Hadron/Atom/Compound-level detection do in fact satisfy $a<b$ under their actual thresholds $\tau_k$.
+
+The de~Sitter correspondence of Section~\ref{sec:desitter} raises two concrete follow-up questions. First,
+whether $X(\tau)=(1-2p)^{-1}$ can be derived directly from the spatial decoding schemes of Section~\ref{sec:setup},
+rather than introduced as the transform that
+happens to reproduce the target curve. Second, whether the implied relation $H=2/L$ can be reconciled with
+the observed inflationary Hubble rate --- either by revisiting the identification of one raw tick with one
+Planck time, or by finding that $L$ itself should be measured differently during the inflationary regime than the horizon-entropy definition
+used there. 
 
 Furthermore, within a static, timeless informational framework, the constraints governing the
 dimensionality and boundaries of spatial and temporal domains remain to be fully defined.
-Investigating these geometric and topological limits constitutes the immediate next phase of this research program.
 
 
 \section*{Simulation Code}
 
 \begin{itemize}
 \item \href{simulations/emergence_of_spacetime.py}{\texttt{emergence\_of\_spacetime.py}: Geometric Manifestation of Entropy Growth}
+\item \href{simulations/regime_classification.py}{\texttt{regime\_classification.py}: Verification of the $(a,b)$ three-regime classification against the filter suite of Section~\ref{sec:robustness}}
+\item \href{simulations/desitter_correspondence.py}{\texttt{desitter\_correspondence.py}: Verification of the exact $X(\tau)=e^{2\tau}$ correspondence and the implied $H=2/L$ relation}
 \end{itemize}
 
 \printbibliography
 
 \end{document}
+
