@@ -1,6 +1,24 @@
-# Real Theory of Everything
+# $D \text{ - } \psi \text{ - } G$
 
-## Unification of Quantum Mechanics and General Relativity
+## Master Equations
+
+The central object is a Boltzmann-like probability measure over histories $\gamma$ compatible with a structure $O$:
+
+$$
+\mathbb{P}(\gamma \mid O) = \frac{1}{Z_O}\exp\!\bigl(-\mathcal{C}_O[\gamma]\bigr), \qquad \gamma \in \Gamma_O,
+$$
+
+where $\mathcal{C}_O[\gamma]$ is the total description cost of history $\gamma$ given structure $O$.
+
+The cost functional decomposes into three regimes:
+
+$$
+\textbf{D} - \boldsymbol{\psi} - \textbf{G}
+$$
+
+where $\textbf{D}$ is discrete, $\boldsymbol{\psi}$ spectral and $\textbf{G}$ geometric description of structure $O$.
+
+## Unification of QM and GR
 
 The framework derives both quantum mechanics and general relativity from a single operation applied to compressed configurations:
 
@@ -8,10 +26,10 @@ $$
 \rho \;\longmapsto\; \underbrace{\mathrm{diag}(\rho)}_{\text{local}} + \underbrace{\rho - \mathrm{diag}(\rho)}_{\text{non-local}}
 $$
 
-Applied to **fermionic configurations**, the diagonal encodes Pauli exclusion; 
+Applied to fermionic configurations, the diagonal encodes Pauli exclusion; 
 the off-diagonal produces photons, gluons, and the Born rule — with amplitude $\sin(2\theta)/\sqrt{2}$ exact.
 
-Applied to **metric configurations**, the diagonal gives the Ricci source term (matter curves local space); 
+Applied to metric configurations, the diagonal gives the Ricci source term (matter curves local space); 
 the off-diagonal gives the Weyl tensor, gravitational waves, and — integrated over 
 spherical shells — the Newtonian potential $V(R) = -GMm/R$ with $G = 1/(8\pi)$ in Planck units.
 
