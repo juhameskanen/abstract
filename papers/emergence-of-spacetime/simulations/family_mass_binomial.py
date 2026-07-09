@@ -142,8 +142,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--L", type=int, default=12, help="pattern length (default 12)")
     ap.add_argument("--max-tau", type=float, default=1.0)
-    ap.add_argument("--out", type=str, default="family_curves.png")
-    ap.add_argument("--mass-out", type=str, default="family_mass.png",
+    ap.add_argument("--out", type=str, default="family_binomial.png")
+    ap.add_argument("--mass-out", type=str, default="family_mass_binomial.png",
                      help="output file for the 'which family is typical' plot")
     args = ap.parse_args()
     plot_families(args.L, args.max_tau, args.out)
