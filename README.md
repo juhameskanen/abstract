@@ -1,4 +1,4 @@
-# Real Theory of Everything
+# $D \text{ - } \psi \text{ - } G$
 
 ## Master Equations
 
