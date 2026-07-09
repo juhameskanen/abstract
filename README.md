@@ -8,9 +8,9 @@ $$
 \mathbb{P}(\gamma \mid O) = \frac{1}{Z_O}\exp\!\bigl(-\mathcal{C}_O[\gamma]\bigr), \qquad \gamma \in \Gamma_O,
 $$
 
-where $\mathcal{C}_O[\gamma]$ is the total spectral description cost of history $\gamma$ given structure $O$.
+where $\mathcal{C}_O[\gamma]$ is the total description cost of history $\gamma$ given structure $O$.
 
-We conjecture that this structure forces the cost functional to decompose into three regimes:
+The cost functional decomposes into three regimes:
 
 $$
 \textbf{D} - \boldsymbol{\psi} - \textbf{G}
