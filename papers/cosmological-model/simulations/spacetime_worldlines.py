@@ -40,7 +40,7 @@ Amplitude scaling: number densities from the JSON cannot be
   and scaled by a CLI amplitude argument. This is an acknowledged
   placeholder, explicitly flagged.
 
-Copyright 2026 - Juha Meskanen, The Real Collaboration
+Copyright 2026 - Juha Meskanen
 """
 
 import argparse
