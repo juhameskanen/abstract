@@ -1,61 +1,17 @@
 """
-Fixed Schwarzschild Geodesic Simulation (Ingoing EF Coordinates)
-===============================================================
+Schwarzschild Geodesic Simulation based on Counting
+===================================================
 
 This module implements dust cloud collapse into a non-rotating (a=0)
 Schwarzschild black hole using ingoing Eddington-Finkelstein (EF)
-coordinates. These coordinates are regular across the horizon, enabling
-particles to fall smoothly into the black hole without coordinate
-singularities disrupting integration.
+coordinates and the frameworks counting equation. 
+
 
 Purpose
 -------
-This code provides the simplest standard GR baseline for black hole
-collapse. It models geodesics in the Schwarzschild spacetime and serves
-as a reference for both the Kerr EF simulation (rotating case) and the
-Abstract Universe (AU) formulation. Together, these models allow direct
-comparison between strict general relativity and its
-information-theoretic reinterpretations.
+This code provides the simplest black hole
+collapse based on the framworks informational model. 
 
-Key Features
-------------
-- **Metric & Christoffels**: Explicit Christoffel symbols for the
-  ingoing EF metric:
-
-      ds² = -(1 - 2M/r) dv² + 2 dv dr + r² dΩ².
-
-- **Horizon penetration**: The EF system avoids coordinate pathologies
-  at r = 2M, allowing trajectories to cross the horizon naturally.
-- **Dust cloud initialization**: Particles are distributed in spherical
-  shells and given velocity components with configurable tangential
-  fraction.
-- **Geodesic integration**: Adaptive Runge-Kutta scheme evolves the
-  full 8D state vector [v, r, θ, φ, uv, ur, uθ, uφ].
-- **Termination conditions**: When r approaches the central singularity,
-  particles are frozen to prevent numerical blowup.
-- **Cartesian output**: States are converted back into (x, y, z) for
-  visualization and entropy computation.
-
-Scientific Context
-------------------
-This module represents the "classical GR" view of non-rotating black
-holes: matter collapses into a central singularity where entropy trends
-toward zero. In the broader research framework, it underpins the
-derivation of the **Geometry-Singularity Lemma** (*vanishing entropy
-implies geometric singularity*) and serves as the non-rotating
-counterpart to the Kerr EF simulation.
-
-Usage
------
-Instantiate a `SchwarzschildEFGeodesicCloud` and evolve:
-
-    cloud = SchwarzschildEFGeodesicCloud(
-        n=100, r0=6.0, spacing=0.02, bh=BlackHole(mass=1.0)
-    )
-    times, positions = cloud.evolve(dt=1e-3, max_t=20.0)
-
-The returned trajectory array can be used for visualization,
-entropy analysis, and comparison against Kerr and AU simulations.
 
 Copyright 2001 ... 2026 - Juha Meskanen
 The Abstract Universe Project
@@ -115,15 +71,73 @@ def n_step_rk4(state, dt, M):
     k4 = get_deriv(state + dt * k3)
     return state + (dt / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4)
 
-# --- THE CLASS ---
 
-class SchwarzschildEFGeodesicCloud(DustCloud):
+class SchwarzschildCounting(DustCloud):
+    """
+    A pure realization of the pixel conservation equation: rho_fabric = n - m(r)
+    Zero artificial coupling or scaling parameters. All boundaries and forces 
+    emerge strictly from the Black Hole's mass (M), spin (a), and charge (q).
+    """
     def __init__(self, n: int, r0: float, spacing: float, bh: BlackHole,
-                 tangential_fraction: float = 0.8, radial_fraction: float = 0.15,
+                 tangential_fraction: float = 0.8, radial_fraction: float = 0.15, 
                  rng_seed: int = 42) -> None:
-        super().__init__(n, r0, spacing, bh, tangential_fraction, radial_fraction)
-        self.bh = bh
+        
+        # Pull the only physical properties that exist
         self.M = float(bh.mass)
+        self.a = float(getattr(bh, 'spin', 0.0))    # Angular momentum per unit mass
+        self.q = float(getattr(bh, 'charge', 0.0))  # Electric charge
+        
+        # Calculate the real physical outer horizon radius from the metric equations
+        # r_h = M + sqrt(M^2 - a^2 - q^2)
+        discriminant = self.M**2 - self.a**2 - self.q**2
+        if discriminant >= 0:
+            self.r_h = self.M + np.sqrt(discriminant)
+        else:
+            # Naked singularity scenario (no horizon exists physically)
+            self.r_h = 0.0
+            
+        # Background pixel capacity density (Normalized to Planck baseline)
+        self.n = 1.0  # don't confuse to n parameter, which is the number of dust particles
+        
+        super().__init__(n, r0, spacing, bh, tangential_fraction, radial_fraction, rng_seed)
+
+    def calculate_rho_fabric(self, r: float) -> Tuple[float, float]:
+        """
+        Calculates rho_fabric = n - m(r) where m(r) is strictly governed 
+        by the intrinsic physical dimensions of the black hole.
+        """
+        if self.r_h == 0.0 or r > self.r_h:
+            # Outside the physical horizon boundary, matter structure count matches 
+            # the classic external mass footprint
+            m_r = self.M / r
+            dm_dr = -self.M / (r**2 + 1e-16)
+        else:
+            # Inside the horizon, the sin profile dictates how the mass M 
+            # distributes its pixel consumption across its own natural horizon radius r_h.
+            m_r = self.M * (np.sin(np.pi * r / self.r_h))**2
+            dm_dr = self.M * (np.pi / self.r_h) * np.sin(2.0 * np.pi * r / self.r_h)
+
+        # Fundamental counting equation
+        rho_fabric = self.n - m_r
+        d_rho_dr = -dm_dr
+        
+        return rho_fabric, d_rho_dr
+
+    def acceleration(self, pos: np.ndarray, vel: np.ndarray) -> np.ndarray:
+        """
+        Acceleration is the direct, unscaled manifestation of the spatial bit gradient.
+        No alpha coupling variable used.
+        """
+        x, y, z = pos[0], pos[1], pos[2]
+        r = np.sqrt(x*x + y*y + z*z) + 1e-16
+        r_hat = pos / r
+        
+        # Extract the fundamental canvas density change
+        rho_fabric, d_rho_dr = self.calculate_rho_fabric(r)
+        
+        # Acceleration is purely the spatial gradient vector of the fabric density
+        # a = -grad(rho) -> a_mag = -d_rho_dr
+        return -d_rho_dr * r_hat
 
     def evolve(self, dt: float, max_t: float, tolerance: float = 1e-8):
         steps = int(max_t / dt)

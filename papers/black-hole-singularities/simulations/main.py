@@ -12,13 +12,13 @@ import argparse
 from kerr import KerrIEFEquatorialGeodesicCloud
 from schwarzschild import SchwarzschildEFGeodesicCloud
 from schwarzschild_au import SchwarzschildAUGeodesicCloud
+from schwarzschild_counting import SchwarzschildCounting
 from blackhole import BlackHole, DustCloudSimulation
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Collapsing dust cloud black hole simulation "
-                    "with entropy tracking and visualization."
+        description="Collapsing dust cloud black hole simulations."
     )
     parser.add_argument("--num_particles", type=int, default=100, help="Number of dust particles in the cloud")
     parser.add_argument("--mass", type=float, default=1.0, help="Black hole mass parameter")
@@ -28,7 +28,7 @@ def parse_args():
     parser.add_argument("--tangential_fraction", type=float, default=0.9, help="Fraction of initial velocity that is tangential")
     parser.add_argument("--radial_fraction", type=float, default=0.1, help="Fraction of initial velocity that is radial")
     parser.add_argument("--dt", type=float, default=1e-3, help="Time step for integration")
-    parser.add_argument("--max_t", type=float, default=20.0, help="Maximum simulation time")
+    parser.add_argument("--max_t", type=float, default=35.0, help="Maximum simulation time")
     parser.add_argument("--tolerance", type=float, default=1e-6, help="Integration tolerance")
     parser.add_argument("--no_visual", action="store_true", help="Disable visualization")
     parser.add_argument("--animate", action="store_true", help="Render MP4 animation of collapse")
@@ -49,6 +49,8 @@ def main():
     print(f"Blackhole with mass {args.mass} and spin {args.spin}")
 
     simulation_configs = [
+        (SchwarzschildCounting, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
+         args.dt, args.max_t, args.tolerance, "Schwarzschild Counting (a=0.0)"),
         (SchwarzschildAUGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
          args.dt, args.max_t, args.tolerance, "Schwarzschild AU (a=0.0)"),
         (SchwarzschildEFGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
