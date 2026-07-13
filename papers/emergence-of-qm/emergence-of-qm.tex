@@ -16,7 +16,7 @@ Paper~VI \cite{meskanen2026v} presented the hypothesis that the quantum mechanic
 wavefunction is the compression signature of nature: the universe is a finite,
 static bitstring of $n$ bits, and the path an internal observer experiences is the
 one that compresses best under a complex-valued spectral codec.
-The present paper supports this hypothesis with six experiments implemented in Python
+The present paper supports this hypothesis with seven experiments implemented in Python
 and included as supplementary material.
 We show that a photon-like boson emerges as the compression residual of a purely
 fermionic system, without any interaction term introduced by hand.
@@ -28,6 +28,15 @@ for a single fermion in superposition between two sites, the off-diagonal
 system size, site separation, and encoding.
 This equals $\sqrt{2\,P(1-P)}$, the interference term of the Born rule, made
 visible as a matrix norm.
+We further report an exploratory extension in which the same $B$-matrix
+formalism is applied, unchanged, to a two-band lattice Hamiltonian
+$H(k) = m\,\sigma_z + t\sin(k)\,\sigma_x$, giving a boson-residual amplitude
+$\|B(k)\| = |t\sin k|/(\sqrt{2}\,E(k))$ with $E(k)=\sqrt{m^2+(t\sin k)^2}$,
+which recovers the relativistic dispersion relation
+$E^2 = (pc)^2 + (m_0c^2)^2$ as its continuum limit.
+This result is numerically verified but not yet derived from the spectral
+complexity functional $C_s$, and is reported as a genuinely open problem
+rather than a closed theorem.
 These results suggest that quantum mechanics is not a foundational layer of
 reality but an emergent description --- the story an observer tells about
 fermions sampled from a compression codec.
@@ -92,7 +101,7 @@ If one watched only the decoded pixels and tried to explain their correlations
 without knowing about DCT, one would invent something that looks exactly like
 boson exchange.
 
-The six experiments in this paper test whether this picture is self-consistent
+The seven experiments in this paper test whether this picture is self-consistent
 and quantitatively correct.
 
 % ============================================================
@@ -399,10 +408,119 @@ This is the lifecycle of a virtual particle --- a propagator in the language of
 quantum field theory, derived here without postulating field theory.
 
 % ============================================================
+\section{Experiment 7 (Exploratory): Mass, Momentum, and the Dispersion Relation}
+\label{sec:exp7}
+
+\textit{Python: dispersion\_poc.py}
+
+Experiments 1--6 establish the $B$-matrix formalism entirely within a
+\emph{massless, scale-free} regime: $\|B\| = 1/\sqrt{2}$ for any single hop,
+independent of chain length $L$ or hop distance $d$ (\S\ref{sec:exp3}).
+That scale invariance is itself informative: a rest mass sets a scale, so a
+theorem that is exact and scale-free by construction has no room for mass to
+enter as an internal parameter. Momentum, via the hop phase $k = -\pi/(2d)$,
+is already present in the formalism; energy and mass are not, because nothing
+in Experiments 1--6 plays the role of a generator of time evolution or of a
+second internal degree of freedom at a single site. This experiment asks
+whether the existing $B$-matrix machinery survives, unmodified, once such a
+degree of freedom is added, and whether the relativistic dispersion relation
+\[
+  E^2 = (pc)^2 + (m_0c^2)^2
+\]
+can be recovered as a consequence rather than assumed.
+
+\subsection*{Construction}
+
+We introduce a second internal band at a single site (rather than a second
+spatial site) and adopt the standard two-band lattice (Dirac-on-a-lattice
+/ SSH-type) Hamiltonian
+\[
+  H(k) = m\,\sigma_z + t\sin(k)\,\sigma_x,
+\]
+where $m$ is an on-site band-splitting term and $t\sin(k)$ is a
+momentum-dependent inter-band coupling. This Hamiltonian is diagonalised
+\emph{numerically} (not assumed analytically) at each $k$ on a dense grid,
+for several values of $m/t$. The lower-band eigenvector $v(k)$ is mapped onto
+the existing Experiment~6 convention $\psi(\theta) = \cos\theta\,e_A +
+i\sin\theta\,e_B$ by setting $\sin^2\theta$ equal to the numerically computed
+Born-rule population $|v_B(k)|^2$ on the second band. The unmodified
+Experiment~6 formula $B = \rho - \mathrm{diag}(\rho)$ is then applied to this
+$\psi(\theta)$.
+
+\subsection*{Results}
+
+Four claims were checked numerically for $m \in \{0, 0.1, 0.5, 1, 2\}$ (with
+$t=1$) over a dense grid $k \in (-\pi/2, \pi/2)$:
+
+\begin{enumerate}
+  \item \textbf{Eigenvalues.} The numerically diagonalised eigenvalues agree
+        with $E(k) = \sqrt{m^2 + (t\sin k)^2}$ to machine precision
+        ($< 10^{-15}$) at every $m$ and every $k$ tested.
+  \item \textbf{Formalism survives unmodified.} The boson norm computed
+        directly from the $2\times2$ matrix $B = \rho - \mathrm{diag}(\rho)$
+        agrees with the closed-form Experiment~6 result
+        $\sin(2\theta)/\sqrt{2}$ to machine precision
+        ($< 3\times 10^{-16}$). No change to the boson-residual formalism
+        was required to accommodate the reinterpretation of $\theta$ as a
+        momentum/mass mixing angle rather than a spatial-hop angle.
+  \item \textbf{Mass--momentum identity.} Working the eigenvector algebra of
+        $H(k)$ through by hand gives
+        \[
+          \sin^2\theta\,(1-\sin^2\theta) = \frac{(t\sin k)^2}{4E(k)^2}
+          \quad\Longrightarrow\quad
+          \boxed{\|B(k)\| = \frac{|t\sin k|}{\sqrt{2}\,E(k)}.}
+        \]
+        This closed form agrees with the numerically computed boson norm to
+        machine precision ($< 3\times 10^{-13}$) at every $m$ and $k$ tested.
+        At $m = 0$ it reduces \emph{exactly} to the universal
+        $\|B\| = 1/\sqrt{2}$ of Experiments 3--6, recovering the massless
+        case as a special case rather than contradicting it. As $m$ grows
+        relative to $t\sin k$, $\|B(k)\|$ shrinks monotonically toward zero:
+        a more massive state produces a smaller compression residual at
+        fixed momentum.
+  \item \textbf{Continuum limit.} Identifying $t\sin k \to p c$ and $m \to
+        m_0 c^2$ in the small-$k$ regime, $E(k)^2$ agrees with
+        $(pc)^2 + (m_0c^2)^2$ to a relative error that shrinks as $k \to 0$
+        (e.g.\ $\sim 7\times 10^{-4}$ over $|k|<0.05$ at $m=0$, tightening
+        to $\sim 5\times 10^{-7}$ at $m=2$), consistent with the expected
+        $O(k^2)$ lattice correction to the continuum dispersion relation.
+\end{enumerate}
+
+\subsection*{Status of this result}
+
+This experiment shows that the $B$-matrix formalism of Papers~VI--VII is
+\emph{compatible} with a mass term and reproduces the relativistic dispersion
+relation as a continuum limit, once a second internal band and a Hamiltonian
+are introduced. It does \emph{not} show that this construction is forced by
+the framework's own first principles. Specifically:
+\begin{itemize}
+  \item The two-band Hamiltonian $H(k) = m\,\sigma_z + t\sin(k)\,\sigma_x$
+        is imported from standard lattice/Dirac constructions (SSH-type
+        models); it has not been derived from the spectral complexity
+        functional $C_s$ or the cost functional $C_D + C_\psi + C_G$ used
+        elsewhere in the series.
+  \item In particular, it is not yet shown \emph{why} a minimum-description-length
+        codec should prefer a two-band internal structure, nor why the
+        band-splitting term should take the form $m\sigma_z$ specifically.
+        The natural next step is to test whether the same overlap/exclusion
+        cost functional that produces Pauli exclusion in Experiment~4
+        (\S\ref{sec:exp4}), applied to internal (band) rather than spatial
+        degrees of freedom, forces this structure -- or a different one.
+  \item The identification $t\sin k \to pc$, $m \to m_0c^2$ is a relabelling
+        of the lattice dispersion relation, not yet a statement about where
+        the constant $c$ originates within the finite-bit-budget framework
+        of Papers~I--V.
+\end{itemize}
+Consistent with the three-tier accounting adopted in Paper~XI, this result is
+reported as a \emph{strongly suggested correspondence}, not an analytically
+exact theorem in the sense of Experiments 1--6: it is numerically exact given
+its assumptions, but its assumptions are not yet derived.
+
+% ============================================================
 \section{Core Results}
 \label{sec:results}
 
-The six experiments establish four results, each analytically exact:
+Experiments 1--6 establish four results, each analytically exact:
 
 \begin{enumerate}
   \item \textbf{Pauli exclusion.}
@@ -435,13 +553,26 @@ applied to the compressed wavefunction.
 No interaction terms, coupling constants, or postulated particle species were
 introduced.
 
+Experiment~7 adds a fifth, exploratory result, reported at a different
+evidentiary tier:
+
+\begin{enumerate}
+  \setcounter{enumi}{4}
+  \item \textbf{Mass--momentum--boson identity (numerically verified,
+        not yet derived from $C_s$).}
+        Under the two-band extension of \S\ref{sec:exp7},
+        $\|B(k)\| = |t\sin k|/(\sqrt{2}\,E(k))$, which reduces to the
+        universal $1/\sqrt{2}$ of Result~2 at $m=0$ and reproduces
+        $E^2 = (pc)^2+(m_0c^2)^2$ in the continuum limit.
+\end{enumerate}
+
 % ============================================================
 \section{Discussion}
 \label{sec:discussion}
 
 \subsection{Quantum mechanics as an emergent description}
 
-The four results above suggest a coherent picture: quantum mechanics is not
+The results above suggest a coherent picture: quantum mechanics is not
 a foundational layer of reality but the effective description an observer
 constructs when observing fermions that are sampled from a compression codec.
 
@@ -502,6 +633,15 @@ entropy from the same finite bit budget $n$.
 Quantum mechanics is not postulated at the bottom of this hierarchy;
 it emerges at the same level as geometry, from the same codec.
 
+The two-band construction of \S\ref{sec:exp7} places the mass question in
+the same territory as lattice-Dirac and SSH-type condensed-matter models,
+where a relativistic dispersion relation emerges from a discrete lattice
+Hamiltonian in the continuum limit. The present contribution is not the
+lattice-to-continuum result itself, which is standard, but the observation
+that the pre-existing $B$-matrix boson-residual formalism attaches to that
+construction without modification, and assigns a compression-residual
+interpretation to the resulting mass-dependent coupling.
+
 \subsection{Limitations}
 
 The present experiments use a one-dimensional chain of discrete sites.
@@ -513,6 +653,10 @@ Additionally, the experiments demonstrate the emergence of a photon-like
 boson from a scalar codec. Whether the model predicts other bosons, e.g. the
 massive bosons ($W$, $Z$, Higgs) and of the gauge structure of the Standard Model
 are not yet addressed.
+The mass term introduced in \S\ref{sec:exp7} is imported from standard
+lattice constructions rather than derived from $C_s$; deriving the two-band
+structure and the specific form $m\sigma_z$ from the same minimum-description-length
+principle used elsewhere in the series remains open (\S\ref{sec:future}).
 
 % ============================================================
 \section{Future Work}
@@ -528,11 +672,24 @@ the boson matrix structure or must be imposed separately.
 The antisymmetry of $B$ found in Experiment~2 suggests it may emerge
 naturally.
 
+\subsection{Deriving the mass term from $C_s$}
+
+Experiment~7 shows that the boson-residual formalism is compatible with a
+mass term once a two-band Hamiltonian is assumed, but the Hamiltonian itself
+was imported rather than derived. The natural next step is to test whether
+applying the same overlap/exclusion cost functional that produces Pauli
+exclusion in Experiment~4 to an internal (band) degree of freedom, rather
+than a spatial one, forces a band-splitting term of the form $m\sigma_z$ --
+or produces a different structure entirely, which would itself be
+informative. If successful, this would upgrade Result~5 from a numerically
+verified correspondence to an analytically exact theorem on the same footing
+as Results~1--4.
+
 \subsection{Connection to the Friedmann equation}
 
 Paper~VI identified the analytic derivation of the Friedmann equation from
 the relational scale factor $R(t)$. Worldlines in GR are themselves compressible.
-An elliptic orbit is a single Fourier mode — the minimum-complexity trajectory
+An elliptic orbit is a single Fourier mode --- the minimum-complexity trajectory
 consistent with the conserved quantities of the system. PoC to show
 these most probable path through the $2^n$ yield objects orbiting each
 reproducing Keplerian dynamics without a force law.
@@ -563,6 +720,17 @@ They suggest that quantum mechanics is an emergent description: the story
 an observer constructs to explain fermions that are sampled from a
 minimum-description-length codec operating on a finite universe of $n$ bits.
 
+We additionally reported an exploratory extension (Experiment~7) in which
+the same boson-residual formalism, applied to a two-band lattice Hamiltonian,
+reproduces the relativistic dispersion relation $E^2=(pc)^2+(m_0c^2)^2$ as a
+continuum limit. This result is numerically exact given its assumptions, but
+those assumptions -- a two-band internal structure and a specific
+band-splitting term -- are not yet derived from the spectral complexity
+functional $C_s$. We report it as a genuinely open problem, in keeping with
+the three-tier accounting standard of distinguishing exact results, strongly
+suggested correspondences, and open problems, rather than as a closed
+derivation of relativistic mass from first principles.
+
 % ============================================================
 \section*{Supplementary Material}
 \label{sec:supplementary}
@@ -585,6 +753,14 @@ Python experiments:
         analytical proof of $B = 0$ for stationary fermions.
   \item \texttt{theta\_scaling.py} --- Numerical and analytical verification
         of $\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$ across all $L$.
+  \item \texttt{dispersion\_poc.py} --- Two-band lattice Hamiltonian
+        $H(k) = m\sigma_z + t\sin(k)\sigma_x$; numerical diagonalisation;
+        verification of $\|B(k)\| = |t\sin k|/(\sqrt{2}E(k))$ and of the
+        continuum-limit recovery of $E^2=(pc)^2+(m_0c^2)^2$.
+  \item \texttt{exclusion\_poc.py} --- Tests whether the same mechanism that produced Pauli exclusion for spatial
+    sites in the experiment 4 also operates on the internal band degree of freedom introduced in experiment 7 -- and
+    whether it can do any work toward explaining a mass splitting, without
+    importing m by hand this time.
 \end{itemize}
 
 \printbibliography

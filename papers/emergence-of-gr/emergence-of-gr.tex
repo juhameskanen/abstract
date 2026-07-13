@@ -12,20 +12,22 @@
 \maketitle
 
 \begin{abstract}
-  Papers~I--IV \cite{meskanen2001, meskanen2002, meskanen2003, meskanen2026iv}
-  established that the universe can be modelled as a finite,
-static bitstring of $n$ bits; that gravitational collapse converges to a
-zero-entropy singularity; that expansion from that singularity is the
-geometric reading of entropy increase; and that the aspect ratio of
-spacetime is determined by $n$ alone. The present paper takes these
-results further by deriving a relational scale factor from strict
-information conservation. Because the bit budget is fixed, every micro-structure
-must emerge from the same bitstring, reducing the resolution of observable space as perceived
-by internal observers similar how rope length is affected by knots in it.
-This single counting principle reproduces, without
-free parameters, the two boundary solutions of General Relativity ---
-De Sitter vacuum and the Schwarzschild singularity --- as the natural
-extremes of one equation. 
+Papers~I--IV \cite{meskanen2001, meskanen2002, meskanen2003, meskanen2026iv}
+established that the universe can be modelled as a finite, static
+bitstring of $n$ bits; that an internal observer's entropy coordinate
+$\tau$ follows the Ehrenfest bit-flip saturation curve
+$S(\tau) = \tfrac{n}{2}\bigl(1-e^{-2\tau}\bigr)$; and that micro-structures
+emerge from this walk following a lognormal-like abundance curve that
+vanishes at zero entropy and remains small but non-zero at maximum
+entropy. The present paper shows that two different ways of reading this
+single, already-established entropy curve reproduce, as limits, the two
+matter-free solutions that bound the expanding side of the Friedmann
+equation: the \emph{direct} reading reproduces the power-law expansion of
+the empty Milne universe near $\tau=0$; the \emph{reciprocal} reading
+reproduces the exactly constant expansion rate of de~Sitter space at
+every $\tau$, not merely asymptotically. No new mechanism is introduced
+to obtain the second limit from the first --- both are properties of the
+one entropy-saturation curve already derived in Paper~III.
 \end{abstract}
 
 \tableofcontents
@@ -35,270 +37,298 @@ extremes of one equation.
 \section{Introduction}
 \label{sec:intro}
 
-General Relativity admits two extreme solutions that appear, at first
-sight, to be unrelated. De Sitter space describes a universe with no
-matter and a positive cosmological constant, expanding exponentially
-without bound. The Schwarzschild solution describes the opposite extreme:
-all mass concentrated at a single point, spacetime contracted to a
-singularity. Between these extremes, the Friedmann equation governs the
-observed universe --- an expanding geometry whose rate of expansion is
-modulated by the density of matter and vacuum energy.
+The Friedmann equation governs the expansion of a homogeneous, isotropic
+universe. Two matter-free limits bound its expanding solutions on
+opposite sides of the parameter space it covers:
 
-The present paper shows that these three are not independent results but
-three consequences of a single information-theoretic counting principle.
-When the universe is modelled as a closed system of $n$ bits, partitioned
-at each moment between free spacetime fabric and composite matter
-structures, the scale factor perceived by an internal observer is the
-fraction of the bit budget that remains independently addressable. De
-Sitter and Schwarzschild emerge as the two limiting cases of this fraction.
+\begin{itemize}
+  \item \textbf{Milne universe}: $\rho_{\text{matter}}=0$,
+        $\Lambda=0$. Genuinely empty spacetime --- flat Minkowski space
+        written in the coordinates of a family of freely receding
+        inertial observers. The scale factor grows as $a(t)\propto t$,
+        decelerating, with negative spatial curvature $k=-1$ an artefact
+        of the coordinate choice rather than real geometry.
+  \item \textbf{De~Sitter universe}: $\rho_{\text{matter}}=0$,
+        $\Lambda>0$. Also free of ordinary matter, but not of curvature:
+        vacuum energy sources a constant, non-zero expansion rate
+        $H=\dot a/a=\text{const}$, giving exponential, accelerating
+        growth $a(t)\propto e^{Ht}$.
+\end{itemize}
 
-No metric tensor is postulated. No force law is imposed. No cosmological
-constant is introduced as a free parameter. The expansion history of the
-universe is the geometric reading of information conservation.
+These two limits are often treated as unrelated special cases singled
+out for their mathematical simplicity. The present paper shows that both
+emerge, without additional assumptions, from a single object already
+established in this series: the Ehrenfest entropy-saturation curve
+$S(\tau)$ derived in Paper~III. Which of the two limits appears depends
+only on whether an internal observer's notion of spatial resolution
+tracks the entropy consumed so far, or the inverse of the entropy
+remaining before saturation.
 
-The paper is structured as follows. Section~\ref{sec:setup} derives the
-relational scale factor from the counting argument and identifies the two
-GR extremes. Section~\ref{sec:gr}
-maps the framework onto Friedmann variables. Section~\ref{sec:discussion}
-discusses the results. Section~\ref{sec:conclusion} states the three
-foundational results. Section~\ref{sec:future} identifies open problems.
 
 % ============================================================
 \section{Setup}
 \label{sec:setup}
 
-\subsection{Information Conservation}
+\subsection{The Entropy Walk}
 
-The universe is modelled as a closed informational system with a fixed
-total bit count $n$. From Paper~III \cite{meskanen2003}, random bit-flip mutations drive the
-system from a zero-entropy initial state toward full equilibrium, and
-filters applied to the evolving bitstring extract hierarchical
-micro-structures whose abundances follow lognormal-like distributions.
-
-At any moment, the $n$ bits are partitioned between two roles:
-
-\begin{itemize}
-  \item \textbf{Spacetime fabric} $L_0$: bits not consumed by any
-        composite structure, constituting the free background metric.
-  \item \textbf{Matter hierarchy} $L_1, L_2, \ldots$: bits bound into
-        composite structures at successive levels (e.g.\ hadrons, atoms,
-        compounds).
-\end{itemize}
-
-Because the bit budget is fixed, matter structures do not represent new
-information injected from outside. Every bit locked into a composite
-entity is a bit withdrawn from the free fabric. Information is strictly
-conserved:
+From Paper~III \cite{meskanen2003}, an internal observer's entropy
+coordinate $\tau$ (measured in units of bit-flip ticks per bit, $n$
+being the total bit count) follows the Ehrenfest saturation curve:
 
 \begin{equation}
-  \rho_{\text{fabric}}(t) = n - m(t),
+  S(\tau) = \frac{n}{2}\Bigl(1 - e^{-2\tau}\Bigr).
+  \label{eq:ehrenfest}
+\end{equation}
+
+This is a bounded, relaxing process: $S(0)=0$ (zero entropy, the
+founding premise's singularity point) and $S(\tau)\to n/2$ as
+$\tau\to\infty$ (maximum entropy, the founding premise's horizon-like
+equilibrium). It never reaches $S=n$; saturation occurs at exactly half
+the bit budget, consistent with the equilibrium of a fair Ehrenfest
+process.
+
+Micro-structures (matter) emerge from this walk following a
+lognormal-like abundance curve established in Paper~III: zero at
+$S=0$, rising to a peak at intermediate entropy, and settling to a
+small but non-zero value as $S\to n/2$. Writing this abundance function
+as $m(S)$, the fabric/matter partition of Eq.~\eqref{eq:conservation}
+below is understood to be $m(\tau) := m\bigl(S(\tau)\bigr)$, a
+\emph{non-monotonic} function of $\tau$. The closed form of $m(S)$ is not yet derived; see Section~\ref{sec:future}.
+
+\subsection{Information Conservation}
+
+At any entropy coordinate $\tau$, the $n$ bits are partitioned between
+free spacetime fabric and matter structures:
+
+\begin{equation}
+  \rho_{\text{fabric}}(\tau) = n - m(\tau),
   \label{eq:conservation}
 \end{equation}
 
-where $m(t) = \sum_k w_k \cdot k(t)$ is the total number of bits consumed
-by matter structures, $k(t)$ is the count of composite entities at each
-level, and $w_k$ is the bit-width of a level-$k$ structure.
+with $m(\tau)$ as defined above. Because $m(\tau)\approx 0$ at both
+$\tau=0$ and $\tau\to\infty$, this paper's two limiting cases are
+\emph{vacuum} limits in the literal sense --- not merely "$m=0$ by
+assumption" as before, but $m\approx 0$ as a consequence of the
+abundance curve's own shape at both entropy extremes.
 
-\subsection{The Relational Scale Factor}
-\label{sec:scalefactor}
+\subsection{Two Readings of One Curve}
+\label{sec:tworeadings}
 
-An internal observer can only measure
-distances using the structures available within the system. The resolution
-of observable space is therefore the total count of independently
-addressable entities --- both free fabric tokens and composite matter
-structures.
+In the matter-free limit ($m\approx0$), define two candidate relational
+scale factors from the entropy curve $S(\tau)$ alone:
 
-Consider $n$ bits, all initially free fabric, giving resolution $n$. When
-one composite structure of width $w$ bits emerges, $w$ fabric tokens are
-consumed and one matter entity is created. The new resolution is:
+\begin{align}
+  R_{\text{dir}}(\tau) &= \frac{S(\tau)}{n/2}
+    &&\text{(direct reading: consumed entropy)}
+    \label{eq:Rdir}\\[4pt]
+  R_{\text{rec}}(\tau) &= \frac{n/2}{\,n/2 - S(\tau)\,}
+    &&\text{(reciprocal reading: inverse of remaining gap)}
+    \label{eq:Rrec}
+\end{align}
 
-\[
-(n - w) + 1 = n - (w - 1).
-\]
+\textbf{Direct reading, early $\tau$.} Near $\tau=0$, $S(\tau)\approx
+n\tau$ (each tick flips a fresh bit with near-certainty before
+collisions become likely), so $R_{\text{dir}}(\tau)\propto\tau$ to
+leading order. Numerical fitting of $R_{\text{dir}}(\tau)\sim\tau^{p}$
+over $\tau\in(0,\,0.1)$ gives $p\approx0.97$ (Fig.~\ref{fig:milne}),
+consistent with the Milne exponent $p=1$ and clearly distinct from the
+radiation-dominated ($p=0.5$) or matter-dominated ($p=2/3$)
+alternatives. The residual gap from exactly $1$ is attributable to the
+finite fitting window already including some curvature from the
+approach to saturation; a narrower early window brings the fit closer
+to $1$.
 
-Resolution decreases by $w - 1$ for every composite entity formed.
-Generalising, if matter structures collectively consume $m(t)$ bits and
-produce $k(t)$ composite entities, the total resolution at time $t$ is:
-
-\[
-\text{Resolution}(t) = \bigl(n - m(t)\bigr) + k(t).
-\]
-
-The two extremes of General Relativity follow immediately from this
-counting argument:
-
-\begin{itemize}
-  \item \textbf{De Sitter limit} ($m = 0,\ k = 0$): all bits are free
-        fabric. Resolution $= n$. An external observer sees pure
-        exponential expansion --- the vacuum solution of General
-        Relativity with $\Lambda > 0$ and $\rho_{\text{matter}} = 0$.
-
-  \item \textbf{Schwarzschild limit} ($m = n,\ k = 1$): all bits are
-        consumed into a single composite entity. Resolution $= 1$. The
-        observable space has contracted to a single point --- the
-        informational counterpart of the black hole singularity
-        established in Paper~II \cite{meskanen2002}.
-\end{itemize}
-
-These are not boundary conditions imposed by hand. They are the two
-extreme values of the same counting equation, separated by the continuous
-family of states in between.
-
-The relational scale factor, normalised to the maximum resolution $n$, is:
+\textbf{Reciprocal reading, all $\tau$.} The gap-to-equilibrium
+$g(\tau) = n/2 - S(\tau) = \tfrac{n}{2}e^{-2\tau}$ is \emph{exactly}
+exponential at every $\tau$, not merely asymptotically. Its reciprocal
+therefore gives an exactly constant fractional growth rate:
 
 \begin{equation}
-  R(t) = \frac{\bigl(n - m(t)\bigr) + k(t)}{n}
-        = \frac{\rho_{\text{fabric}}(t) + k(t)}{n}.
-  \label{eq:scalefactor}
+  \frac{1}{R_{\text{rec}}}\frac{dR_{\text{rec}}}{d\tau} = 2
+  \qquad\text{for all } \tau,
+  \label{eq:constantH}
 \end{equation}
 
-This definition requires no external metric and no postulated background
-geometry. It is a pure counting statement: the scale factor is the
-fraction of the bit budget that remains independently addressable.
+verified numerically to $10^{-6}$ at $\tau\in\{0.1,0.5,1.0,2.0,2.9\}$
+(Fig.~\ref{fig:desitter}). This is the defining property of de~Sitter
+expansion: a genuinely constant Hubble parameter, here obtained as an
+identity of the same curve used for the direct reading, not through a
+separately introduced exponential ansatz.
 
-The equation is intrinsically 1D and linear. To map to observable 3D sphere
-geometry:
+Both readings originate from the single entropy curve of
+Eq.~\eqref{eq:ehrenfest}; no additional free parameter or mechanism
+distinguishes them beyond the choice of which quantity --- entropy
+consumed, or the inverse of entropy remaining --- an internal observer's
+resolution is built from.
 
-$$a_{\text{obs}} \propto 4\pi \cdot R(t)^2$$
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/milne_reading.png}
+  % figures/milne_reading.png: R_dir(tau) vs tau on early log-log axes,
+  % overlaid with the fitted power law tau^0.97 and reference lines for
+  % tau^1 (Milne), tau^0.5 (radiation), tau^{2/3} (matter).
+  \caption{Direct reading $R_{\text{dir}}(\tau)$, early-$\tau$ power-law
+  fit against Milne/radiation/matter reference exponents.}
+  \label{fig:milne}
+\end{figure}
 
-This converts the linear bit-depletion curve
-into sperical and quadric $\cos^2$-shaped Schwarzschild interior profile.
-
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/desitter_reading.png}
+  % figures/desitter_reading.png: R_rec(tau) on a log-linear axis
+  % (a straight line confirms exponential growth), and (dR/dtau)/R vs
+  % tau on a separate panel showing the constant value 2.
+  \caption{Reciprocal reading $R_{\text{rec}}(\tau)$: exponential growth
+  and exactly constant fractional growth rate across all $\tau$ tested.}
+  \label{fig:desitter}
+\end{figure}
 
 % ============================================================
 \section{Mapping to General Relativity}
 \label{sec:gr}
 
-
-The Friedmann equation governs the expansion of a homogeneous, isotropic
-universe in General Relativity:
+The Friedmann equation is:
 
 \[
 \left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3}\rho_{\text{matter}}
   + \frac{\Lambda}{3}.
 \]
 
-The present framework maps onto this equation under the identifications:
-
-\begin{equation}
-\rho_{\text{matter}} \;\longleftrightarrow\; \frac{\sum_j k_j(t)}{n},
-\qquad
-\Lambda \;\longleftrightarrow\; \frac{\rho_{\text{fabric}}(t)}{n},
-\qquad
-a \;\longleftrightarrow\; R(t).
-\label{eq:friedmann_map}
-\end{equation}
-
-These identifications are not free parameters. They follow from the
-counting argument: matter entity density maps to $\rho_{\text{matter}}$
-because matter entities brake expansion by consuming fabric; free fabric
-density maps to $\Lambda$ because it drives expansion by providing
-addressable resolution. The cosmological constant is not a parameter of
-the vacuum energy --- it is the fraction of the bit budget that remains
-unbound.
-
-The two GR boundary solutions are recovered exactly:
+The two matter-free limits identified above map onto its boundary
+solutions as follows.
 
 \begin{center}
 \begin{tabular}{lll}
 \hline
-\textbf{Limit} & \textbf{Information picture} & \textbf{GR solution} \\
+\textbf{Regime} & \textbf{Information picture} & \textbf{GR solution} \\
 \hline
-$k = 0,\ m = 0$ & All bits free, $R = 1$ & De Sitter ($\Lambda > 0$, $\rho = 0$) \\
-$k = 1,\ m = n$ & One entity, $R = 1/n$ & Schwarzschild singularity \\
+$\tau\to 0$, direct reading & $m\approx0$, $R_{\text{dir}}\propto\tau$
+  & Milne-like ($\rho=0$, $\Lambda=0$) \\
+$\tau\to\infty$, reciprocal reading & $m\approx0$,
+  $\dot R_{\text{rec}}/R_{\text{rec}}=\text{const}$
+  & De~Sitter-like ($\rho=0$, $\Lambda>0$) \\
 \hline
 \end{tabular}
 \end{center}
 
-Numerical analysis shows the spatial contraction profile matches also across all states.
+Under the reciprocal reading, the identification with the cosmological
+constant is direct:
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1.0\textwidth]{figures/friedmann.png}
-    \caption{The purple (counting equation) and dashed orange (Friedmann mapping) curves perfectly overlap,
-      demonstrating that general relativity's geometric contraction under the presence of matter is
-      fundamentally equivalent to an internal observer's loss of background resolution.}
-    \label{fig:friedman}
-\end{figure}
+\begin{equation}
+  \Lambda \;\longleftrightarrow\; \frac{1}{R_{\text{rec}}}
+  \frac{dR_{\text{rec}}}{d\tau} = 2,
+  \label{eq:lambda_map}
+\end{equation}
 
+a constant fixed entirely by the Ehrenfest saturation rate already
+established in Paper~III, not introduced as a free parameter here.
+
+\textbf{What this section does not claim.} The matter-filled regime
+between these two limits --- where $m(\tau)>0$ and the Friedmann
+equation is genuinely modulated by matter density, i.e.\ the actual
+observed history of our universe --- requires the abundance function
+$m(S)$ referenced in Section~\ref{sec:setup}. Its closed form is not yet
+derived, so no claim is made here about reproducing the intermediate,
+matter-dominated Friedmann era quantitatively; only the two bounding
+vacuum limits are established.
 
 % ============================================================
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Matter as Curvature}
+\subsection{Why Two Readings, Not Two Mechanisms}
 
-In General Relativity, matter curves spacetime through the stress-energy
-tensor. In the present framework, matter reduces the resolution of
-observable space by consuming free fabric. These are two descriptions of
-the same phenomenon: the presence of a composite structure makes the
-surrounding space less addressable, which an internal observer reads as
-curvature. Gravity is not a force acting on a background geometry; it is
-the geometric consequence of information being redistributed from fabric
-to structure.
+It is tempting to treat the direct and reciprocal readings as two
+different physical regimes requiring different physics. They are not:
+they are two different quantities computed from the identical entropy
+trajectory $S(\tau)$. This mirrors, in miniature, the real cosmological
+picture: standard $\Lambda$CDM cosmology begins in a hot, dense,
+decelerating phase and is expected to asymptote toward a de~Sitter phase
+in the far future as matter dilutes and the cosmological constant comes
+to dominate. That the present framework's two vacuum limits sit at the
+two ends of the \emph{same} entropy walk, in the same order (Milne-like
+near the origin, de~Sitter-like near saturation), is consistent with
+that overall history, though it does not by itself establish the
+matter-dominated middle era connecting them.
 
-\subsection{The Cosmological Constant Problem}
 
-The cosmological constant problem asks why $\Lambda$ is so small relative
-to the vacuum energy predicted by quantum field theory. In the present
-framework, $\Lambda$ is not a property of the vacuum --- it is the
-fraction of the bit budget that is currently unbound. Its value at any
-cosmic epoch is determined by how much matter has formed and how much has
-decayed. The problem dissolves: there is no vacuum energy to cancel, only
-a fabric density that evolves with the entropy of the universe.
+\subsection{An Open Tension: Power Law versus Curvature}
+
+The direct-reading match to Milne has been checked only at the level of
+the scale-factor \emph{power law} ($R_{\text{dir}}\propto\tau^{p}$,
+$p\approx0.97$). The Milne universe is additionally characterised by
+identically \emph{zero} spacetime curvature everywhere --- it is flat
+Minkowski space in unusual coordinates. Whether the early-$\tau$ limit
+of this framework is genuinely flat, or instead carries a curvature
+divergence more reminiscent of an ordinary Big-Bang-type singularity
+that merely happens to share Milne's power-law exponent, has not been
+checked and is left as an open question. The two possibilities are
+observationally and structurally different, and the present numerics do
+not yet distinguish them.
+
+\subsection{The Cosmological Constant}
+
+Under the reciprocal reading, $\Lambda$ is not a property of the vacuum
+requiring cancellation against a much larger quantum field theory
+estimate; it is the constant fractional rate at which the
+gap-to-saturation shrinks, fixed by the Ehrenfest process itself. $\Lambda$ is an emergent
+counting quantity rather than a fundamental input.
 
 \subsection{No External Time}
 
-The bit-flip parameter $t$ is not an external clock. It is the internal
-measure of entropy increase established in Papers~I--IV. The expansion
-history of the universe is parameterised by how far the system has
-progressed from zero entropy toward full saturation, not by an absolute
-time coordinate. This is consistent with the static, timeless picture of
-Paper~I: the entire expansion history is encoded in $n$, and $t$ is the
-internal observer's reading of their position along the entropy gradient.
+As before, $\tau$ is not an external clock but the internal observer's
+reading of progress along the entropy gradient established in
+Papers~I--IV. The direct and reciprocal readings are two different
+functions of that same internal coordinate, not two different clocks.
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper establishes two key results.
+This paper establishes one result: the Milne and de~Sitter vacuum limits that bound the
+expanding side of the Friedmann equation both emerge from the single
+Ehrenfest entropy-saturation curve of Paper~III, as two different
+readings (direct and reciprocal) of the same underlying quantity, with
+no additional mechanism introduced between them. The reciprocal
+reading's match to constant-$H$ de~Sitter expansion is exact at every
+$\tau$ tested, not merely asymptotic. The direct reading's match to
+Milne's power law is numerically close ($p\approx0.97$ against an ideal
+$1$) with the residual attributed to finite-window fitting bias.
 
-\textbf{First}, De Sitter space and the Schwarzschild singularity are the
-two extreme values of a single counting equation --- the relational scale
-factor $R(t)$ defined by information conservation. De Sitter corresponds
-to all bits free ($R = 1$); Schwarzschild corresponds to all bits bound
-into one entity ($R = 1/n$). General Relativity's two boundary solutions
-are not independent discoveries but the endpoints of one information-theoretic
-spectrum.
-
-\textbf{Second}, the Friedmann equation maps onto the framework under
-explicit variable identifications that follow from the counting argument
-alone. The cosmological constant is the free fabric fraction; matter
-density is the bound entity fraction; the scale factor is the addressable
-resolution fraction. No constants are fitted to observation.
+The Schwarzschild singularity is explicitly not claimed here; it belongs
+to the spatial, black-hole treatment elsewhere in this series. The
+matter-filled Friedmann era connecting the two vacuum limits established
+here remains open, pending a derivation of the abundance function
+$m(S)$.
 
 % ============================================================
 \section{Future Work}
 \label{sec:future}
 
-\subsection*{Analytic Derivation of the Friedmann Equation}
+\subsection*{Deriving $m(S)$ From First Principles}
 
-A rigorous derivation requires showing that
-$(\dot{R}/R)^2 \propto k(t)/n + \rho_{\text{fabric}}(t)/n$ holds
-analytically.
+The single largest open problem carried over from this revision: a
+closed-form derivation of the lognormal-like abundance function $m(S)$,
+from the same counting/complexity principles used elsewhere in this
+series, rather than assumed as a qualitative shape. This is required
+before the matter-filled Friedmann era can be addressed quantitatively.
 
-\subsection*{Quantum Fields and the Wave Function}
+\subsection*{Curvature, Not Just Power Law, at Early $\tau$}
 
-The framework developed in Papers~I--V recovers the large-scale structure
-of spacetime from information conservation. The remaining foundational
-question is the origin of quantum field dynamics: why does the microcosm
-behave wave-like, and what selects a particular measurement outcome? This
-is addressed in Paper~VI.
+Section~\ref{sec:discussion} flags that only the scale-factor exponent,
+not the curvature itself, has been checked against Milne at early
+$\tau$. Resolving this requires a genuine curvature analogue within the
+counting framework, which has not yet been constructed.
 
-\subsection*{Cosmology and Inflatory Expansion }
+\subsection*{Finite-$n$ Stochastic Verification}
 
-Explain the observed modest positive Hubble constant by applying the framework
-at the cosmological scale. 
+The results of Section~\ref{sec:tworeadings} use the closed-form,
+infinite-precision Ehrenfest curve. A finite bit budget $n$ fluctuates
+around equilibrium rather than approaching it smoothly; the reciprocal
+reading's exact constancy should be re-checked against actual stochastic
+trajectories, where it is expected to hold only approximately, with
+fluctuations growing as $\tau\to\infty$ and the gap $g(\tau)$ becomes
+comparable to the chain's natural fluctuation scale.
 
 
 % ============================================================
@@ -306,9 +336,12 @@ at the cosmological scale.
 \label{sec:supplementary}
 
 \begin{itemize}
-\item \texttt{friedman.py:} Calculates and plots the 1D and 3D relational spatial contraction profiles
-  based on the counting equation and the Friedmann equation. 
-\item \texttt{spacetime\_warp.py:} Simulates the evolution of the universe with three level of emergent structures (matter).
+\item \texttt{milne\_desitter\_readings.py:} Computes the direct and
+  reciprocal readings of the Ehrenfest entropy curve; verifies the
+  early-$\tau$ Milne-like power-law exponent and the exact,
+  all-$\tau$ constant-$H$ property of the reciprocal reading.
+\item \texttt{milne\_reading\_plot.py} 
+\item \texttt{desitter\_reading\_plot.py} 
 \end{itemize}
 
 \printbibliography

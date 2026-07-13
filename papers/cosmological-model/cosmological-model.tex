@@ -24,7 +24,7 @@ The present paper applies this framework at cosmological scale and
 establishes three results.
 First, the three-phase expansion profile of standard cosmology ---
 early rapid growth, matter-driven deceleration, late-time acceleration
---- emerges from $R(t)$ when matter abundance follows lognormal curves
+--- emerges from $R(t)$ when matter abundance follows lognormal-like curves
 in bit-flip time, with no cosmological constant, inflaton field, or
 dark energy term.
 Second, the informational level hierarchy $L_0 \supset L_{\rm DM}
@@ -36,7 +36,7 @@ constitutionally unable to produce the boson compression residuals
 that ordinary matter sheds.
 Third, the lognormal form is a prediction of the \theory{} framework for
 $L_{\rm DM}$, not an input: Paper~III demonstrated filter-invariant
-lognormal emergence across comprehensive set of independent filter
+lognormal-like emergence across comprehensive set of independent filter
 definitions applied to entropy-increasing bitstrings.
 \end{abstract}
 
@@ -94,7 +94,8 @@ The partition is exact at every tick:
 
 where $w_k$ is the bit-width of a level-$k$ entity and $N_k(t)$ is
 its instantaneous count. Information is strictly conserved; no bits
-enter or leave the system.
+enter or leave the system. Composite structures are composed from the same bit-budget as the spacetime fabric.
+Therefore, their emergence reduces the observable resolution of the universe, as viewed by internal observers.
 
 The four levels relevant at cosmological scale are:
 
@@ -467,20 +468,8 @@ This requires completing the $E = mc^2$ derivation first.
 \label{sec:supplementary}
 
 \begin{itemize}
-  \item \texttt{spacetime\_worldlines.py}: Simulates and visualises
-    the emergent spacetime diagram. Accepts $n$, lognormal parameters
-    $(\mu_k, \sigma_k, A_k)$ for each level, and an optional JSON
-    file of cosmological number-density data as CLI arguments.
-    Produces both the Minkowski worldline diagram and the metric
-    curves panel. Requires \texttt{numpy}, \texttt{scipy},
-    \texttt{matplotlib}.
-  \item \texttt{observed\_baryonic\_spectrum.json}: Physically derived
-    $\Lambda$CDM reference baseline for $L_\nu$ and $L_{\rm bar}$
-    number densities, computed from the Planck~2018 Friedmann equation
-    with full methodology and limitations documented inline.
-  \item \texttt{verify\_recursive\_emergence.py}: Recursive filter consistency check.
-    Given observed abundance ratios between levels, back out the implied
-    bit-width ratios and check if they form a consistent hierarchy.
+  \item \texttt{emergent\_structure\_relativistic.py}: A parameter-free model of structure formation, built from nothing but a
+bitstring length ``n``.
 \end{itemize}
 
 \printbibliography
