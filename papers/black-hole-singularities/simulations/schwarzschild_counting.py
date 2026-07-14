@@ -141,6 +141,15 @@ class SchwarzschildCounting(DustCloud):
 
         self.r_peak = float(self._r_grid[np.argmax(self._m_grid)])
 
+        # Safe fixed step for the (much faster) leapfrog integrator, derived
+        # from the local "stiffness" of the force curve (max curvature of
+        # dm/dr), not guessed by hand -- this is what avoids repeating the
+        # original fixed-dt energy-injection artifact while still using a
+        # cheap fixed step instead of paying for full adaptive RK45 stiffness.
+        d2m_dr2 = np.gradient(self._dm_dr_grid, self._r_grid)
+        stiffness = np.max(np.abs(d2m_dr2))
+        self._dt_safe = 0.05 / np.sqrt(max(stiffness, 1e-12))
+
         super().__init__(n, r0, spacing, bh, tangential_fraction, radial_fraction, rng_seed)
 
     # ------------------------------------------------------------------
@@ -190,40 +199,84 @@ class SchwarzschildCounting(DustCloud):
     # Deterministic evolution -- adaptive RK45, no fixed-dt artifact risk
     # ------------------------------------------------------------------
 
+    def evolve_leapfrog(self, dt: float, max_t: float, substep_dt: float | None = None) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Fast alternative to evolve(): vectorized velocity-Verlet (leapfrog),
+        symplectic for this purely position-dependent force, so it doesn't
+        accumulate energy drift the way fixed-step RK4/RK45 can -- meaning
+        it can use a much larger, fixed internal step without reintroducing
+        the original energy-injection artifact. `substep_dt` defaults to
+        self._dt_safe, derived from the force curve's own curvature rather
+        than picked by hand. `dt` is the output spacing; internally it is
+        subdivided into substeps of size <= substep_dt.
+        """
+        if substep_dt is None:
+            substep_dt = self._dt_safe
+        n_sub = max(1, int(np.ceil(dt / substep_dt)))
+        h = dt / n_sub
+
+        N = len(self.particles)
+        pos = np.array([p.position() for p in self.particles], dtype=np.float64)
+        vel = np.array([p.velocity() for p in self.particles], dtype=np.float64)
+
+        steps = int(max_t / dt)
+        times = np.arange(steps, dtype=np.float64) * dt
+        positions = np.zeros((steps, N, 3), dtype=np.float64)
+
+        acc = self._acceleration_batch(pos)
+        for step_idx in range(steps):
+            for _ in range(n_sub):
+                vel_half = vel + 0.5 * h * acc
+                pos = pos + h * vel_half
+                acc = self._acceleration_batch(pos)
+                vel = vel_half + 0.5 * h * acc
+            positions[step_idx, :, :] = pos
+
+        return times, positions
+
     def evolve(self, dt: float, max_t: float, tolerance: float = 1e-8) -> Tuple[np.ndarray, np.ndarray]:
         """
         Integrate the dust cloud under the counting-equation acceleration
-        using adaptive RK45 (scipy solve_ivp). `dt` is the OUTPUT time
-        spacing (what you'll see in the returned trajectory), not the
-        integration step -- the solver internally takes whatever step
-        size `tolerance` (rtol/atol) demands, shrinking automatically
-        near the steep part of dm/dr close to r=0. This is what actually
-        fixes the earlier fixed-dt energy-injection artifact, rather than
-        just picking a smaller dt by hand.
+        using adaptive RK45 (scipy solve_ivp), ONE PARTICLE AT A TIME.
+
+        Particles are integrated independently rather than as one coupled
+        6N-dimensional system. That matters here specifically: if even one
+        particle wanders into the steep near-core region, a coupled solve
+        shrinks its adaptive step for the ENTIRE ensemble, since scipy has
+        no way to know the particles don't interact. Since this model has
+        no particle-particle force (each particle only feels the radial
+        counting-equation field), decoupling is exact, not an
+        approximation, and lets particles far from the core stay large-
+        stepped/fast while only the ones actually near the core pay the
+        cost of fine resolution.
+
+        `dt` is the OUTPUT time spacing, not the integration step; the
+        solver internally takes whatever step size `tolerance` (rtol/atol)
+        demands.
         """
         N = len(self.particles)
-        y0 = np.concatenate([np.concatenate([p.position(), p.velocity()]) for p in self.particles])
-
-        def rhs(t, y):
-            y2 = y.reshape(N, 6)
-            pos = y2[:, 0:3]
-            vel = y2[:, 3:6]
-            acc = self._acceleration_batch(pos)
-            dydt = np.empty_like(y2)
-            dydt[:, 0:3] = vel
-            dydt[:, 3:6] = acc
-            return dydt.reshape(-1)
-
         t_eval = np.arange(0.0, max_t, dt)
-        sol = solve_ivp(
-            rhs, (0.0, max_t), y0, method="RK45",
-            t_eval=t_eval, rtol=tolerance, atol=tolerance * 1e-3,
-            max_step=dt,
-        )
-
         steps = len(t_eval)
-        y_out = sol.y.reshape(N, 6, steps)
-        positions = np.transpose(y_out[:, 0:3, :], (2, 0, 1))  # (steps, N, 3)
+        positions = np.zeros((steps, N, 3), dtype=np.float64)
+
+        def rhs_single(t, y):
+            pos = y[0:3]
+            vel = y[3:6]
+            r = np.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2)
+            r_safe = max(r, 1e-9)
+            r_hat = pos / r_safe
+            acc = self.dm_dr_of_r(r_safe) * r_hat
+            return np.concatenate([vel, acc])
+
+        for j, p in enumerate(self.particles):
+            y0 = np.concatenate([p.position(), p.velocity()])
+            sol = solve_ivp(
+                rhs_single, (0.0, max_t), y0, method="RK45",
+                t_eval=t_eval, rtol=tolerance, atol=tolerance * 1e-3,
+                max_step=dt,
+            )
+            positions[:, j, :] = sol.y[0:3, :].T
+
         return t_eval, positions
 
     # ------------------------------------------------------------------
