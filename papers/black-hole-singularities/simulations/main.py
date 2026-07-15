@@ -49,12 +49,12 @@ def main():
     print(f"Blackhole with mass {args.mass} and spin {args.spin}")
 
     simulation_configs = [
-        (SchwarzschildCounting, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
-         args.dt, args.max_t, args.tolerance, "Schwarzschild Counting (a=0.0)"),
         (SchwarzschildAUGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
          args.dt, args.max_t, args.tolerance, "Schwarzschild AU (a=0.0)"),
         (SchwarzschildEFGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
          args.dt, args.max_t, args.tolerance, "Schwarzschild EF (a=0.0)"),
+        (SchwarzschildCounting, (args.num_particles, args.r0, args.spacing, bh, args.tangential_fraction, args.radial_fraction),
+         args.dt, args.max_t, args.tolerance, "Schwarzschild Counting (a=0.0)"),
         (KerrIEFEquatorialGeodesicCloud, (args.num_particles, args.r0, args.spacing, bh, 0.4, 0.6),
          args.dt, args.max_t, args.tolerance, f"Kerr (a={args.spin})")
     ]
