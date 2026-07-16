@@ -82,7 +82,18 @@ By modeling observers as Gaussian blobs, quantum interference and an emergent 'p
     </td><td valign="top">
 Informationally complex Gaussian distributions exhibit effective gravitational attraction and inertial persistence as emergent properties of compression-optimal observer trajectories.
 Smooth, predictable observer paths admit maximal compression and therefore dominate the measure of realizable histories from which Gaussian structures are statistically expected to arise.     
-    </td>
+    </td></tr>
+    <tr>
+    <td>
+    <img width="400" alt="time_dilation" src="https://github.com/user-attachments/assets/142a29c2-3426-481f-98c1-5e71d300f5ce" />
+      <br><i>Expansion profile </i>
+    </td><td valign="top">
+The three-phase expansion profile of standard cosmology --- early rapid growth, matter-driven deceleration,
+late-time re-expansion --- emerges as typical outcome with no cosmological constant, inflaton field,
+or dark energy term assumed. Dark matter is identified with the first-order emergent level $L_{\rm DM}$ of the informational hierarchy. It gravitates via the counting equation by exactly the same mechanism
+as ordinary matter --- by withdrawing bits from the spacetime fabric --- and is electromagnetically invisible not because it is weakly coupled but because it sheds compression residuals of a different
+symmetry class than the photon-type bosons that $L_{\rm bar}$-level detectors are constituted to register.
+    </td></tr>
 </table>
 
 
