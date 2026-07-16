@@ -2,7 +2,7 @@
 Emergent Structure from a Relaxing Bitstring — Multi-Clock (GR-Compatible) Version
 ====================================================================================
 
-This is your original driver script (plotting + CLI), refactored so all the
+Driver script (plotting + CLI), refactored so all the
 core model math lives in `multiclock.py` and is imported here rather than
 duplicated. Behavior is unchanged from the original single-file version.
 """

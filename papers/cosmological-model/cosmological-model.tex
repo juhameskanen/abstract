@@ -6,7 +6,7 @@
 \title{Cosmological Expansion and Dark Matter as Emergent\\
        Informational Phenomena}
 \author{Juha Meskanen}
-\date{July 2026 (revised)}
+\date{July 2026}
 
 \begin{document}
 
@@ -25,7 +25,7 @@ supported by a parameter-light multi-clock simulation. It establishes
 three results. First, the three-phase expansion profile of standard
 cosmology (early rapid growth, matter-driven deceleration, late-time
 re-expansion) emerges when matter abundance follows
-\textbf{hump-shaped curves} derived exactly from the Ehrenfest process
+hump-shaped curves derived exactly from the Ehrenfest process
 acting on finite-width bit patterns, with no cosmological constant,
 inflaton, or dark energy term introduced. This macroscopic profile is
 verified numerically to be independent of $n$ once expressed in
@@ -38,17 +38,19 @@ for filters whose required-zero count exceeds their required-one count
 dominates the typical behavior of a finite window, which is what the
 simulation's structure-fraction actually measures.
 
-The background relaxation dynamics are now genuinely
+The background relaxation dynamics are genuinely
 parameter-free ($k_{\rm rate}=2$ is derived from the Ehrenfest process,
 not fit). Two open, non-derived choices remain in the cosmological
 application specifically -- the late-time evaporation exponent and the
 particle bit-widths -- and are stated as such in
 Section~\ref{sec:future} rather than folded into the headline claims.
-An earlier claim that a specific value $n \approx 184$ was fixed by an
-observational anchor in Paper~IV has been withdrawn; that derivation
-conflated bitstring length with configuration count and is being
-revisited. No result in this paper depends on a specific numerical
-value of $n$.
+Finally, this paper's classical bitstring model is
+explicitly framed (Section~\ref{sec:shadow}) as a statistical shadow
+of the framework's deeper $\psi$-layer content, per the D--$\psi$--G
+ordering, rather than as a fundamental description in its own right;
+its genuine contribution is the demonstration that the three-phase
+profile is a typical, untuned outcome, not a claim that this classical
+layer is where the fundamental physics resides.
 \end{abstract}
 
 \tableofcontents
@@ -61,10 +63,10 @@ value of $n$.
 The present paper addresses two questions that standard cosmology
 answers with separate, independently postulated mechanisms: why does
 the universe expand in three phases (early inflationary growth,
-matter-driven deceleration, late-time re-expansion), and what is dark
+matter-driven deceleration, late-time acceleration), and what is dark
 matter?
 
-In $\Lambda$CDM, late-time re-expansion requires a cosmological
+In $\Lambda$CDM, late-time acceleration requires a cosmological
 constant $\Lambda$ whose physical origin remains unexplained; dark
 matter requires a new particle species whose nature has not been
 determined after decades of direct-detection effort.
@@ -132,10 +134,9 @@ The four levels relevant at cosmological scale are:
     and simplest structures to emerge as $dS/dt$ rises from zero.
     Whether $L_{\rm DM}$'s own composition falls in the hump-producing
     class ($a<b$; Section~\ref{sec:hump}) has not been independently
-    derived from first principles -- it is currently supported only by
+    derived from first principles -- it is currently supported by
     the ensemble argument that hump-producing compositions dominate
-    typical windows of the relevant width. This is weaker than the
-    earlier ``guaranteed prediction'' framing and is stated as such.
+    typical windows of the relevant width. 
     Their bit-width $w_{\rm DM}$ is smaller than that of hadronic
     structures.
 
@@ -211,12 +212,6 @@ separate explanation.
 
 \subsection{The exact closed form}
 
-This section replaces the earlier phenomenological lognormal fit
-(equation~4 of the original version of this paper) with the derived
-result from the Entropy and Emergent Structures analysis. That change
-matters: the earlier form had three free, externally-fitted parameters
-per level ($A_k$, $\mu_k$, $\sigma_k$); the form below has none.
-
 For the symmetric Ehrenfest bit-flip process (start all-zero, flip a
 uniformly random bit each tick), each bit is independently 1 with
 probability, in normalized bit-flip time $\tau = \text{flip
@@ -242,8 +237,7 @@ random position is, in the independent-bit continuum limit:
 
 \subsection{Classification: three shapes, not one}
 
-Contrary to the earlier assumption that any filter produces a
-lognormal-like hump, the shape of equation~(\ref{eq:patternprob}) is
+The shape of equation~(\ref{eq:patternprob}) is
 fully determined, in advance, by the sign of $a-b$:
 
 \begin{center}
@@ -274,9 +268,7 @@ quadratic extremum at $p=1/2$ while a generic asymmetric pattern does
 not) and as $e^{-4\tau}$ for the symmetric $a=b$ case. Critically, the
 plateau is \emph{nonzero}: an $a<b$ pattern does not vanish at
 equilibrium, it approaches a fixed residual probability
-$(0.5)^L$-scale, consistent with the qualitative picture already
-present in the original Paper~III analysis (amplitude decreasing with
-structural complexity, without full extinction).
+$(0.5)^L$-scale.
 
 \subsection{What the simulation actually measures}
 
@@ -290,11 +282,7 @@ fraction is the aggregated probability mass over every hump-producing
 composition of that window, and ``rise'' is the aggregated non-hump
 class. Numerically, this aggregate is a single, unimodal hump for
 every width tested, and dominates (bump fraction $0.66$--$0.9999$
-across $w=6,12,20,40$) rather than being one arbitrarily selected
-filter among many -- this is the corrected, defensible version of the
-earlier ``filter-invariant, verified across 200 filters'' claim, and
-it no longer requires an appeal to which filters happened to be
-tested.
+across $w=6,12,20,40$). 
 
 \subsection{Status of the hump hypothesis for each level}
 
@@ -351,9 +339,9 @@ only partial dissolution to a nonzero relic, which is arguably the
 more interesting and more falsifiable claim, since it forbids a
 universe that returns exactly to the pure-entropy curve.
 
-\subsection{Numerical verification, and what it changed}
+\subsection{Numerical Verification}
 
-A corrected multi-clock simulation (Ehrenfest substrate plus per-scale
+A multi-clock simulation (Ehrenfest substrate plus per-scale
 retarded clocks, one tick per $w$ raw flips for a width-$w$ structure)
 was used to check this mechanism directly rather than assume it.
 Two results from that verification are reported here because they
@@ -368,8 +356,7 @@ affect what can honestly be claimed:
     timing and envelope values at fixed $\tau$ agree to better than
     1\% across two orders of magnitude in $n$. This paper's central
     claim -- three phases, no tuning -- does not depend on any specific
-    calibrated value of $n$, and in particular does not depend on the
-    withdrawn $n\approx184$ claim.
+    calibrated value of $n$.
   \item \textbf{The exact curve is not as smooth as Figure~1
     implies.} With a small number of fixed-bit-width structure
     species (as used throughout this paper's illustrative figures),
@@ -386,8 +373,7 @@ affect what can honestly be claimed:
 \end{enumerate}
 
 The three-phase profile is therefore established as a macroscopic,
-$n$-independent trend, not as a claim that the exact microscopic curve
-is smooth.
+$n$-independent trend.
 
 \begin{figure}[h!]
 \centering
@@ -454,6 +440,48 @@ qualitative mechanism and the correct level hierarchy; the
 quantitative confrontation with raw data awaits Steps~1--2.
 
 % ============================================================
+\section{Status of This Model: A Statistical Shadow, Not a Foundation}
+\label{sec:shadow}
+
+Before stating the paper's conclusions, it is worth being explicit about
+what kind of result this paper actually is.
+
+The framework's own D--$\psi$--G ordering (Entropy and Emergent
+Structures wiki; The Equivalence Class Structure of Physical Reality
+wiki) treats the compressed, complex-valued codec $\psi$ as primitive:
+bits ($D$) are a Born-rule sampled, discrete description of $\psi$, not
+a substrate $\psi$ can be reconstructed from by aggregation, and
+geometry ($G$) is what large-scale $\psi$ structure looks like from
+inside. Standard physics builds upward from $D$; this framework argues
+that direction is backwards.
+
+The cosmological model of this paper operates entirely at the $D$
+layer: a classical bitstring under Ehrenfest dynamics, with no complex
+amplitudes, superposition, or coherence anywhere in its construction.
+This was tested directly, not merely asserted: individual classical
+hop events, encoded one at a time into Paper~VII's single-fermion
+codec ($\psi = f_0 + if_1$), reproduce the exact universal boson norm
+$\|B\|=1/\sqrt2$ to floating-point precision. But averaging classical
+population statistics across many independent trials and treating the
+resulting frequency as a Born-rule amplitude does \emph{not} reproduce
+coherent structure -- the resulting density matrix is exactly diagonal,
+with zero boson signal, in contrast to the nonzero signal a naive
+pure-state ansatz would predict from the same numbers. Coherence is not
+recoverable from classical ensemble statistics by averaging; this is a
+direct, numerical instance of the D--$\psi$--G ordering's claim that
+$D$ is sampled from $\psi$, not the other way around.
+
+This paper's cosmological model should therefore be read as a
+simplified \textbf{statistical shadow} of the framework's deeper
+$\psi$-layer content, not as a fundamental description in its own
+right. However, it shows that the qualitative
+three-phase expansion history is a \emph{typical}, untuned outcome once
+one assumes only information conservation and a finite-width filter --
+no fine-tuning of a cosmological constant, an inflaton potential, or a
+dark energy equation of state is required to get a universe that
+expands, decelerates, and re-expands. 
+
+% ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -483,10 +511,8 @@ detectors are constituted to register.
 for finite windows in a relaxing bitstring -- not a universal property
 of every filter, but the typical one, since hump-producing
 compositions ($a<b$) dominate the aggregate probability mass for the
-widths tested. This is weaker than, and more defensible than, the
-earlier filter-invariance claim, and it correctly predicts a
-disagreement with $\Lambda$CDM's monotonic dilution rather than a
-restatement of it.
+widths tested. This predicts a disagreement with $\Lambda$CDM's monotonic
+dilution.
 
 % ============================================================
 \section{Open Problems}
@@ -494,19 +520,10 @@ restatement of it.
 
 \subsection*{Derivation of $E = mc^2$}
 
-Unchanged from the previous version: the amplitude scaling between
+The amplitude scaling between
 informational bit-counts and physical energy-momentum is the critical
 missing link, pursued in the discrete counting arena $\mathcal{C}_D$.
 
-\subsection*{The time-calibration anchor ($n$) is open, not solved}
-
-The earlier claim that Paper~IV's aspect-ratio argument fixes
-$n\approx184$ has been withdrawn (it conflated bitstring length with
-configuration count). This paper's qualitative results do not depend
-on that number, but the falsifiability programme in
-Section~\ref{sec:data} does need \emph{some} independent time
-anchor, and currently has none. This is now listed explicitly as
-unsolved rather than silently assumed.
 
 \subsection*{The late-time evaporation exponent is not derived}
 
@@ -560,12 +577,8 @@ anchor.
 \label{sec:supplementary}
 
 \begin{itemize}
-  \item \texttt{emergent\_structure\_fixed.py}: multi-clock
-    entropy-unfolding and scale-decomposition model. Supersedes
-    \texttt{emergent\_structure\_relativistic.py}; the earlier version
-    had a units error that silently disabled the per-scale
-    differential-aging mechanism and required a fitted relaxation rate
-    to compensate. The corrected version uses the derived Ehrenfest
+  \item \texttt{emergent\_structure\_relativistic.py}: multi-clock
+    entropy-unfolding and scale-decomposition model. Uses the derived Ehrenfest
     rate ($k_{\rm rate}=2$) by default and exposes the resulting
     differential-aging staircase directly.
 \end{itemize}
