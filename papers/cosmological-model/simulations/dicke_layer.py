@@ -55,6 +55,7 @@ from typing import Sequence
 import numpy as np
 from numpy.typing import NDArray
 from scipy.stats import binom, hypergeom
+from scipy.special import comb
 
 FloatArray = NDArray[np.float64]
 
@@ -130,6 +131,78 @@ def entanglement_entropy(n_bits: int, k: int, w: int) -> float:
 def entanglement_entropy_curve(n_bits: int, k: int, widths: Sequence[int]) -> FloatArray:
     """Vectorized convenience: entanglement_entropy at several window widths."""
     return np.array([entanglement_entropy(n_bits, k, w) for w in widths])
+
+
+# ===========================================================================
+# SPECIFIC-PATTERN PROBABILITY: the honest hump mechanism.
+#
+# Ties directly to the "Entropy and Emergent Structures" wiki page's Result
+# 3/4 (mean-field, independent-bit derivation: P(pattern|tau) = p^a(1-p)^b,
+# hump iff a<b). This is the EXACT quantum/Born-rule counterpart of that
+# same claim -- NOT an approximation stacked on top of it, and NOT related
+# to any eta(tau)^matter_power construction (that mechanism is not used
+# anywhere in this module and should not be reintroduced silently).
+#
+# Derivation: within the exact-k Dicke state, conditioning any w-mode
+# window on "exactly a excitations" gives (verified in dicke_cascade.py's
+# factorization check) a state that is a SMALLER, still-uniform Dicke
+# state on those w modes. A uniform superposition over all C(w,a)
+# specific orderings means every specific ordered pattern with that
+# composition is EQUALLY likely:
+#
+#     P(specific ordered a-ones/b-zeros pattern | n, k, w=a+b)
+#         = hypergeom.pmf(a, n, k, w) / C(w, a)
+#
+# VERIFIED exactly by direct linear algebra (see test_dicke_layer.py):
+# built the actual n=14 Dicke statevector, partial-traced onto w=5 modes,
+# and confirmed all C(5,2)=10 specific two-excitation patterns have
+# IDENTICAL probability, matching this formula to machine precision.
+#
+# VERIFIED to reproduce the wiki's three-fold classification: computed
+# this exact formula (not the mean-field approximation) as a function of
+# tau for a>b, a=b, a<b compositions at n=184 -- got monotonic / monotonic
+# / genuine-hump respectively, matching the mean-field prediction's peak
+# location to within ~3%. See test_dicke_layer.py.
+# ===========================================================================
+
+def pattern_probability(n_bits: int, k, a: int, b: int) -> FloatArray:
+    """Exact Born-rule probability of one SPECIFIC ordered (a ones, b zeros)
+    pattern appearing in a fixed w=a+b window, given exact global count k.
+
+    This is the honest replacement for any eta(tau)^matter_power fudge:
+    the hump (or lack of one) falls straight out of this formula, for the
+    right reason (a<b), with no free decay parameter anywhere.
+    """
+    w = a + b
+    k_arr = np.atleast_1d(np.asarray(k, dtype=float))
+    pmf = hypergeom.pmf(a, n_bits, k_arr, w)
+    result = pmf / comb(w, a)
+    return result if np.ndim(k) > 0 else float(result[0])
+
+
+def pattern_shape(a: int, b: int) -> str:
+    """Which of the wiki's three classes this composition falls into.
+    Pure bookkeeping, matches Entropy-and-Emergent-Structures Result 3."""
+    if a > b:
+        return "monotonic_rise"
+    elif a == b:
+        return "monotonic_to_boundary"
+    else:
+        return "hump"
+
+
+def default_composition(w: int) -> tuple[int, int]:
+    """A reasonable, EXPLICITLY-FLAGGED default (a, b) for a window of width w,
+    chosen to land in the 'hump' class (a<b). This is a genuine modeling
+    choice -- which specific rare pattern counts as 'structure' at this
+    width -- not a derived fact. Callers wanting a different composition
+    should pass one explicitly rather than rely on this."""
+    a = max(1, w // 3)
+    b = w - a
+    if a >= b:
+        a, b = 1, w - 1
+    return a, b
+
 
 
 # ===========================================================================

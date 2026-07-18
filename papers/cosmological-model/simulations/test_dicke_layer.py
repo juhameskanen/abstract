@@ -76,9 +76,52 @@ def test_window_marginal_matches_multiclock_family_fractions():
     check("window_marginal sums to 1", abs(np.sum(p) - 1.0) < 1e-9)
 
 
+def test_pattern_probability_matches_exact_linear_algebra():
+    """The load-bearing check: does a SPECIFIC ordered pattern's probability
+    really equal hypergeom.pmf(a;n,k,w)/C(w,a), i.e. is the state uniform
+    over orderings within a composition sector? Direct statevector proof."""
+    n, k, w, a = 14, 7, 5, 2
+    dim = 2 ** n
+    psi = np.zeros(dim)
+    configs = list(__import__("itertools").combinations(range(n), k))
+    amp = 1 / np.sqrt(len(configs))
+    for cfg in configs:
+        idx = sum(1 << p for p in cfg)
+        psi[idx] = amp
+    psi = psi.reshape([2] * n)
+    psi_mat = psi.reshape(2 ** w, 2 ** (n - w))
+    rho_w = psi_mat @ psi_mat.T
+
+    specific_patterns = [s for s in range(2 ** w) if bin(s).count("1") == a]
+    probs = [rho_w[s, s] for s in specific_patterns]
+    check("all specific orderings within a composition sector are equally likely",
+          np.allclose(probs, probs[0], atol=1e-12))
+    check("pattern_probability() matches the direct diagonal entry exactly",
+          abs(probs[0] - dl.pattern_probability(n, k, a, w - a)) < 1e-12)
+
+
+def test_pattern_probability_reproduces_wiki_three_fold_shape():
+    """Cross-check against the independently-derived wiki Result 3: does the
+    EXACT quantum formula (not the mean-field approximation) land in the
+    same shape class for a>b / a=b / a<b, at real working parameters?"""
+    n_bits = 184
+    t_bf = np.linspace(1e-9, n_bits * np.log(n_bits), 2000)
+    k_arr = np.clip(np.round(dl.k_of_tau(n_bits, t_bf)).astype(int), 0, n_bits)
+
+    for a, b, expected_shape in [(4, 2, "monotonic_rise"), (3, 3, "monotonic_to_boundary"), (2, 4, "hump")]:
+        check(f"pattern_shape({a},{b}) == {expected_shape}", dl.pattern_shape(a, b) == expected_shape)
+        P = dl.pattern_probability(n_bits, k_arr, a, b)
+        peak_idx = np.argmax(P)
+        has_hump = peak_idx < len(t_bf) - 5 and P[peak_idx] > P[-1] * 1.05
+        check(f"exact hump presence matches classification for a={a},b={b}",
+              has_hump == (expected_shape == "hump"))
+
+
 if __name__ == "__main__":
     test_rank1_and_entropy_shortcut()
     test_flat_state_binomial_weights()
     test_clock_inverse_and_consistency_with_multiclock()
     test_window_marginal_matches_multiclock_family_fractions()
+    test_pattern_probability_matches_exact_linear_algebra()
+    test_pattern_probability_reproduces_wiki_three_fold_shape()
     print("\nAll tests passed.")
