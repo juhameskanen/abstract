@@ -18,9 +18,31 @@ from multiclock import (
     years_to_tbf,
 )
 import dicke_layer as dl
-from dicke_cascade import LevelSpec, run_cascade_series
+from dicke_cascade import LevelSpec, run_cascade_series, run_parallel_series
 
 FloatArray = NDArray[np.float64]
+
+
+def quantum_parallel_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec]):
+    """Independent-per-level counterpart to quantum_cascade_series, using
+    run_parallel_series instead of run_cascade_series: every level reads
+    off the SAME shared (n_bits, k(t)) rather than a shrinking leftover
+    substrate, and nothing is multiplied across levels. Appropriate for
+    levels meant to represent coexisting categories (e.g. dark matter +
+    several visible fermion species) rather than a nested formation
+    hierarchy -- see run_parallel_series's docstring for why chaining is
+    the wrong choice for that case.
+    """
+    k_vals = dl.k_of_tau(n_bits, t_bf)
+    k_int = np.clip(np.round(k_vals).astype(int), 0, n_bits)
+    cascade = run_parallel_series(n_bits, k_int.astype(float), levels, mode="class")
+    matter_bits = {}
+    for res in cascade:
+        matter_bits[res.spec.width] = (
+            res.n_windows_available * res.spec.width * res.cumulative_persistent_prob
+        )
+    entropy_bits = n_bits * combinatorial_entropy_bits(n_bits, k_int.astype(float))
+    return cascade, matter_bits, entropy_bits, k_int
 
 
 def quantum_cascade_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec]):
@@ -56,12 +78,13 @@ def quantum_cascade_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec
 
 
 def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
-                          slots_per_scale: int, output_path: str) -> None:
+                          slots_per_scale: int, output_path: str, parallel: bool = False) -> None:
     t_bf = sim.t_bf
     n_bits = sim.n_bits
     widths = [lvl.width for lvl in levels]
 
-    cascade, matter_bits, entropy_bits, k_int = quantum_cascade_series(n_bits, t_bf, levels)
+    series_fn = quantum_parallel_series if parallel else quantum_cascade_series
+    cascade, matter_bits, entropy_bits, k_int = series_fn(n_bits, t_bf, levels)
     total_matter_bits = sum(matter_bits[w] for w in widths)
     size_measure_q = np.clip((entropy_bits - total_matter_bits) / n_bits, 0.0, None)
 
@@ -81,8 +104,9 @@ def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
     fig, ((ax_st, ax_met), (ax_pat, ax_matter)) = plt.subplots(2, 2, figsize=(17, 13))
     comp_str = ", ".join(f"w={lvl.width}:(a={lvl.a},b={lvl.b})" for lvl in levels)
     surv_str = ", ".join(f"w={lvl.width}:{res.survival_prob:.3g}" for lvl, res in zip(levels, cascade))
+    mode_label = "PARALLEL (independent, non-chained)" if parallel else "CASCADED (chained)"
     fig.suptitle(
-        f"PSI-LAYER, CASCADED (counting-equation / class probabilities)\n"
+        f"PSI-LAYER, {mode_label} (counting-equation / class probabilities)\n"
         f"n={n_bits:g}  compositions=[{comp_str}]  |  survival probs=[{surv_str}]\n"
         f"matter_bits peak/entropy_bits peak = "
         f"{total_matter_bits.max():.4f}/{entropy_bits.max():.3f} = "
@@ -111,9 +135,10 @@ def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
     ax_met.set_xlabel("Physical time (years, log scale)")
     ax_met.set_ylabel("probability")
     ax_met.set_xticks(tick_tbf_v); ax_met.set_xticklabels(tick_labels_v, fontsize=7)
+    persist_label = "independent" if parallel else "chained"
     for lvl, res, color in zip(levels, cascade, colors):
         ax_met.plot(t_bf, res.match_prob, color=color, lw=1.2, ls=":", label=f"w={lvl.width} match_prob alone")
-        ax_met.plot(t_bf, res.cumulative_persistent_prob, color=color, lw=1.8, label=f"w={lvl.width} chained")
+        ax_met.plot(t_bf, res.cumulative_persistent_prob, color=color, lw=1.8, label=f"w={lvl.width} {persist_label}")
     ax_met.axvline(t_today_q, color="lime", lw=1.5, ls="--", alpha=0.85)
     ax_met.legend(loc="upper right", fontsize=7, facecolor="#111115", edgecolor="gray", labelcolor="white")
 
@@ -166,6 +191,11 @@ def main() -> None:
                          help="a:b per scale, comma-separated, e.g. '1:5,2:10,3:17'. "
                               "Default: dl.default_composition(w) per width.")
     parser.add_argument("--slots", type=int, default=50)
+    parser.add_argument("--parallel", action="store_true",
+                         help="Treat levels as independent/coexisting (no chaining across "
+                              "levels) instead of a nested formation hierarchy. Use this for "
+                              "e.g. dark matter + several visible fermion species that coexist "
+                              "rather than one nesting inside another's leftover substrate.")
     parser.add_argument("--output", type=str, default="cascade.png")
 
     args = parser.parse_args()
@@ -176,7 +206,8 @@ def main() -> None:
         t_bf_max=args.t_bf_max, t_today=args.t_today, matter_power=args.matter_power,
     )
 
-    plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output)
+    plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output,
+                          parallel=args.parallel)
 
 
 if __name__ == "__main__":

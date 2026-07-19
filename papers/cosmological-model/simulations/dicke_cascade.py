@@ -1,5 +1,5 @@
 """
-dicke_cascade.py -- specific-composition, persistence-aware multi-scale cascade.
+dicke_cascade_v2.py -- specific-composition, persistence-aware multi-scale cascade.
 
 Builds the --scales cascade dicke_layer.py flagged as NOT YET BUILT, using
 three pieces already independently verified in this project rather than
@@ -199,6 +199,82 @@ class CascadeSeriesResult:
     cumulative_match_prob: np.ndarray
     cumulative_persistent_prob: np.ndarray
     entanglement_entropy: np.ndarray
+
+
+def run_parallel_series(
+    n_bits: int, k_array: np.ndarray, levels: Sequence[LevelSpec],
+    mode: str = "class",
+) -> list[CascadeSeriesResult]:
+    """Independent-per-level counterpart to run_cascade_series.
+
+    run_cascade_series CHAINS levels: level i's substrate is level (i-1)'s
+    EXACT leftover (n_substrate -= width, k_substrate -= a), and
+    cumulative_persistent_prob multiplies in every earlier level's
+    match_prob and survival_prob. That's the right model for a genuine
+    FORMATION HIERARCHY (e.g. "does dark matter's own leftover, after it
+    forms, go on to also host visible structure") -- but it is the WRONG
+    model for species that simply coexist rather than nest inside one
+    another (e.g. an electron-type species and a quark-type species are
+    not "the quark only exists among whatever the electron didn't use").
+    Chaining forces exactly that kind of nesting, and because match
+    probabilities are each < 1, chaining compounds them multiplicatively
+    -- in practice this means whichever level is listed first dominates
+    every later level by orders of magnitude, regardless of physical
+    intent (see chat).
+
+    This function instead evaluates every level on the SAME shared
+    (n_bits, k(t)) -- dicke_layer.py's own original "species/scales share
+    the SAME n and the SAME k(tau)" assumption, taken literally instead
+    of overridden by a peeling recursion. Each level still gets its own
+    survival_probability(n_bits, width, width) factor (that piece was
+    independently derived/verified and has nothing to do with chaining),
+    but nothing is multiplied ACROSS levels: level i's
+    cumulative_persistent_prob is just its own match_prob * survival_prob,
+    full stop.
+
+    Use this for a set of levels meant to represent coexisting categories
+    (e.g. dark matter as one entry, several visible fermion species as
+    others). Use run_cascade_series for a genuine nested formation
+    hierarchy instead.
+    """
+    if mode not in ("specific", "class"):
+        raise ValueError(f"mode must be 'specific' or 'class', got {mode!r}")
+    prob_fn = dl.pattern_probability if mode == "specific" else dl.class_probability
+
+    k_array = np.asarray(k_array, dtype=float)
+    results: list[CascadeSeriesResult] = []
+
+    for spec in levels:
+        if spec.width > n_bits:
+            zeros = np.zeros_like(k_array)
+            results.append(CascadeSeriesResult(
+                spec=spec, n_substrate=n_bits, survival_prob=0.0,
+                n_windows_available=0,
+                match_prob=zeros, cumulative_match_prob=zeros,
+                cumulative_persistent_prob=zeros, entanglement_entropy=zeros,
+            ))
+            continue
+
+        k_clipped = np.clip(k_array, 0, n_bits)
+        match_p = prob_fn(n_bits, k_clipped, spec.a, spec.b)
+        surv_p = survival_probability(n_bits, spec.width, spec.width)
+        persistent = match_p * surv_p  # NOT multiplied against any other level
+
+        S_vN = np.array([
+            dl.entanglement_entropy(n_bits, int(round(kk)), spec.width) if kk > 0 else 0.0
+            for kk in k_clipped
+        ])
+
+        results.append(CascadeSeriesResult(
+            spec=spec, n_substrate=n_bits, survival_prob=surv_p,
+            n_windows_available=n_bits // spec.width,
+            match_prob=match_p,
+            cumulative_match_prob=match_p.copy(),        # no chaining: same as match_prob
+            cumulative_persistent_prob=persistent.copy(),  # own survival only, not chained
+            entanglement_entropy=S_vN,
+        ))
+
+    return results
 
 
 def run_cascade_series(
