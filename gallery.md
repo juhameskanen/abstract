@@ -6,7 +6,7 @@
     <td>
       This section admits no simulation. 
     </td><td valign="top">
-Ontological equivalence, substrate independence, static, finite, informationanal, timeless and the centric model. 
+Ontological equivalence, substrate independence, static, finite, informationanal, timeless and observer-centric model. 
 Derivation <i><a href="https://juhameskanen.github.io/abstract/informational-derivation-of-reality/index.html">Paper-1: Informational Derivation of Reality</a></i>
   </td></tr>
   <tr>
