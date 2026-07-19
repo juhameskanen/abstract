@@ -18,15 +18,34 @@ from multiclock import (
     years_to_tbf,
 )
 import dicke_layer as dl
-from dicke_cascade_v2 import LevelSpec, run_cascade_series
+from dicke_cascade import LevelSpec, run_cascade_series
 
 FloatArray = NDArray[np.float64]
 
 
-def quantum_cascade_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec], mode: str = "specific"):
+def quantum_cascade_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec]):
+    """Always uses dicke_cascade_v2's 'class' mode (counting-equation: any
+    arrangement of a excitations in the w-window counts, matching
+    multiclock.family_fractions_exact's count-only fall/bump/rise split).
+
+    'specific' mode (one exact bit ordering) is deliberately NOT offered
+    here: it answers a different question (how much distinguishing
+    information is in one particular microstate) that has no counterpart
+    in the classical statistical-shadow model at all -- the verified
+    classical<->quantum correspondence (window_marginal <-> 
+    family_fractions_exact) is a counts-only object throughout. Chaining
+    'specific' probabilities across a multi-level cascade also compounds
+    the C(w,a) combinatorial suppression multiplicatively level over
+    level, so the total is dominated by whichever scale is listed first
+    regardless of the rest of --scales -- see the module docstring in
+    dicke_cascade_v2.py, which already flags this. dl.pattern_probability
+    itself is still available in dicke_layer.py for other purposes (e.g.
+    a Solomonoff/description-length treatment of specific configurations),
+    just not wired into this spacetime/matter pipeline.
+    """
     k_vals = dl.k_of_tau(n_bits, t_bf)
     k_int = np.clip(np.round(k_vals).astype(int), 0, n_bits)
-    cascade = run_cascade_series(n_bits, k_int.astype(float), levels, mode=mode)
+    cascade = run_cascade_series(n_bits, k_int.astype(float), levels, mode="class")
     matter_bits = {}
     for res in cascade:
         matter_bits[res.spec.width] = (
@@ -37,12 +56,12 @@ def quantum_cascade_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec
 
 
 def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
-                          slots_per_scale: int, output_path: str, mode: str = "specific") -> None:
+                          slots_per_scale: int, output_path: str) -> None:
     t_bf = sim.t_bf
     n_bits = sim.n_bits
     widths = [lvl.width for lvl in levels]
 
-    cascade, matter_bits, entropy_bits, k_int = quantum_cascade_series(n_bits, t_bf, levels, mode=mode)
+    cascade, matter_bits, entropy_bits, k_int = quantum_cascade_series(n_bits, t_bf, levels)
     total_matter_bits = sum(matter_bits[w] for w in widths)
     size_measure_q = np.clip((entropy_bits - total_matter_bits) / n_bits, 0.0, None)
 
@@ -63,7 +82,7 @@ def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
     comp_str = ", ".join(f"w={lvl.width}:(a={lvl.a},b={lvl.b})" for lvl in levels)
     surv_str = ", ".join(f"w={lvl.width}:{res.survival_prob:.3g}" for lvl, res in zip(levels, cascade))
     fig.suptitle(
-        f"PSI-LAYER, CASCADED (mode={mode})\n"
+        f"PSI-LAYER, CASCADED (counting-equation / class probabilities)\n"
         f"n={n_bits:g}  compositions=[{comp_str}]  |  survival probs=[{surv_str}]\n"
         f"matter_bits peak/entropy_bits peak = "
         f"{total_matter_bits.max():.4f}/{entropy_bits.max():.3f} = "
@@ -131,8 +150,34 @@ def parse_levels(scales_raw, compositions_raw):
     return [LevelSpec(width=w, a=a, b=b) for w, (a, b) in zip(widths, comps)]
 
 
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Psi-layer cascade (dicke_cascade_v2) companion to the classical multi-clock demonstrator."
+    )
+    parser.add_argument("--n_bits", type=float, default=184.0)
+    parser.add_argument("--t_bf_max", type=float, default=None,
+                         help="Max raw bit-flip time, in units of n. Default: ln(n), "
+                              "same convention as emergent_structure_relativistic.py.")
+    parser.add_argument("--steps", type=int, default=3000)
+    parser.add_argument("--t_today", type=float, default=None)
+    parser.add_argument("--matter_power", type=float, default=1.0)
+    parser.add_argument("--scales", type=str, default="6,12,20")
+    parser.add_argument("--compositions", type=str, default=None,
+                         help="a:b per scale, comma-separated, e.g. '1:5,2:10,3:17'. "
+                              "Default: dl.default_composition(w) per width.")
+    parser.add_argument("--slots", type=int, default=50)
+    parser.add_argument("--output", type=str, default="cascade.png")
+
+    args = parser.parse_args()
+    levels = parse_levels(args.scales, args.compositions)
+
+    sim = run_simulation(
+        n_bits=args.n_bits, scales=[lvl.width for lvl in levels], steps=args.steps,
+        t_bf_max=args.t_bf_max, t_today=args.t_today, matter_power=args.matter_power,
+    )
+
+    plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output)
+
+
 if __name__ == "__main__":
-    levels = parse_levels("6,12,20", None)
-    sim = run_simulation(n_bits=184, scales=[l.width for l in levels], steps=3000, matter_power=1.0)
-    plot_results_cascade(sim, levels, slots_per_scale=50, output_path="cascade_class.png", mode="class")
-    plot_results_cascade(sim, levels, slots_per_scale=50, output_path="cascade_specific.png", mode="specific")
+    main()

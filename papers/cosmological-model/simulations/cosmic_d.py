@@ -1,6 +1,5 @@
 """
-Emergent Structure from a Relaxing Bitstring — Multi-Clock (GR-Compatible) Version
-====================================================================================
+Discrete, classical, statistical model; emergent Structure from a Relaxing Bitstring — Multi-Clock (GR-Compatible) Version
 
 Driver script (plotting + CLI), refactored so all the
 core model math lives in `multiclock.py` and is imported here rather than
