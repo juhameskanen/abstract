@@ -39,7 +39,7 @@ $$
 \|\text{local}\|^2 + \|\text{non-local}\|^2 = 1
 $$
 
-QM and GR are two projections of the same compression principle onto different physical degrees of freedom. 
+QM and GR are two projections of the same compression principle onto different physical degrees of freedom.
 The shared formula $\sin(2\theta)/\sqrt{2}$ is the signature of this unity.
 
 ## Open Problems:
@@ -51,7 +51,7 @@ The shared formula $\sin(2\theta)/\sqrt{2}$ is the signature of this unity.
 - **[The Visualized Theory](gallery.md)** — Gallery of simulations showing emergent gravity, inertia, and atomic structures.
 - **[Papers & HTML Versions](https://juhameskanen.github.io/abstract/)** — Compiled papers (HTML + PDF).
 - **[Project Wiki](https://github.com/juhameskanen/abstract/wiki)** — Research notes and discussions.
-- **[Spectral Complexity](https://pypi.org/project/wavefunction)** — Complex-valued wavefunction class for **Spectral Complexity** measure. 
+- **[Spectral Complexity](https://pypi.org/project/wavefunction)** — Complex-valued wavefunction class for **Spectral Complexity** measure.
 - **[CHANGELOG](CHANGELOG.md)** — Project history.
 - **[LICENSE](LICENSE.md)** — License information.
 
@@ -70,7 +70,7 @@ Contributions are  welcome, particularly to above listed two major issues.
 
 Usage for academic study and non-commercial research is permitted with proper citation.
 
-**Disclaimer**  
+**Disclaimer**
 THE THEORY IS PROVIDED "AS IS". Use at your own risk of ontological crisis or wavefunction collapse.
 
 ---
