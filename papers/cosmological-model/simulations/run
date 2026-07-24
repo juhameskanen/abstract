@@ -1,0 +1,11 @@
+python3 cosmic.py statistical --scales 6,12,20
+python3 cosmic.py dicke --scales 6,12,20
+python3 cosmic.py wavefunction \
+  --n_bits 184 \
+  --scales 6,12,20 \
+  --phase_strength 0.9 \
+  --spatial_modes 3 \
+  --temporal_modes 3 \
+  --pair_range 1 \
+  --matter_power 1 \
+  --output general_wavefunction_cosmology.png
