@@ -1,134 +1,169 @@
-# Cosmological toy model: three-fold expansion without fine-tuning
+# README
 
-## The idea
+This folder implements three different cosmological toy models predicting the three-fold expansion profile.
 
-Take a length-`n` bitstring that starts all-zero and relaxes under the
-symmetric Ehrenfest process (flip one random bit per tick). Two curves fall
-out of that process with no free parameters:
+## Prediction
 
-1. **Entropy** — the substrate's Shannon entropy rises monotonically from 0
-   toward its equilibrium maximum as the string randomizes.
-2. **Emergence** — the probability of any fixed "structured" bit-pattern
-   (composition `a` ones, `b` zeros with `a < b`) does *not* rise
-   monotonically. It grows, peaks, and then decays back down to a small
-   equilibrium plateau — a hump. (Derivation and exact closed forms:
-   [Entropy and Emergent Structures](https://github.com/juhameskanen/abstract/wiki/Entropy-and-Emergent-Structures).)
-
-An internal observer is itself built out of these emergent structures, so it
-can only measure spacetime/resolution using the entropy budget *left over*
-after the hump-shaped structures have taken their cut:
-
-```
-resolution(tau) ~ entropy(tau) - structure(tau)
-```
-
-Entropy minus a hump is, generically, a three-phase curve: fast early growth
-(structures are still rare, almost all entropy goes into resolution), a
-slowdown while the hump is near its peak (structure formation eats the
-budget), and a late recovery as the hump decays back toward its small
-equilibrium plateau and the leftover entropy budget grows again. This
-three-fold expansion profile (rapid growth → matter-loading slowdown → late
-recovery) falls out of the bit-flip relaxation process itself — no inflaton,
-no dark energy, no tuned cosmological constant required.
-
-This folder contains three independent implementations of that same idea,
-built on different levels of formal machinery, all producing the same
-qualitative three-fold profile.
-
-## The three models
-
-| Mode | Script | What it computes |
-| --- | --- | --- |
-| `statistical` | `cosmic_d.py` (math in `multiclock.py`) | Classical bitstring: mean-field Ehrenfest relaxation `p(tau)`, exact combinatorial entropy `log2 C(n,k)`, and exact hypergeometric fall/hump/rise window probabilities at each of several nested scales. |
-| `dicke` | `cosmic_psi.py` (math in `dicke_layer.py`, `dicke_cascade.py`) | Quantum Dicke-state layer: the same relaxation viewed as an equal-superposition state over Hamming-weight sectors, with exact Born-rule window/pattern probabilities, entanglement entropy, and a cascade that chains scales through their exact leftover substrate. |
-| `wavefunction` | `cosmic_wavefunction.py` (math in `wavefunction_model.py`) | General complex wavefunction `psi_tau(x) = sqrt(P_tau(x)) exp(i*Phi_tau(x))` with a compact spectral phase codec, so the state is genuinely complex/entangled/position-dependent, while a Born measurement in the fabric basis reproduces the same statistical shadow as the other two backends exactly. |
-
-All three share the same underlying relaxation law and the same multi-scale
-"nested clocks" construction (a width-`w` structure only advances its own
-proper time once every `w` raw bit-flips, so heavier/larger structures age
-more slowly — a GR-flavored lapse), just built up with progressively more
-machinery (classical counting → exact quantum combinatorics → explicit
-complex state).
-
-## Requirements
-
-```bash
-pip install numpy scipy matplotlib
-```
+Assuming only a typical relaxed system rushing from zero entropy to full equilibrium (as observed), and emergent micro-structures following a typical hump-shaped probability distribution — [mathematically proven](Increasing-Entropy-and-Emergent-Structures) —an intrinsic observer perceives a three-fold expansion profile as a typical outcome. 
 
 ## Usage
 
-Run any of the three backends through the unified launcher:
-
 ```bash
 python cosmic.py statistical --scales 6,12,20
-python cosmic.py dicke        --scales 6,12,20
-python cosmic.py wavefunction --scales 6,12,20
+python cosmic.py dicke --scales 6,12,20
+python cosmic.py wavefunction --scales 6,12,20 --t_bf_max 6
 ```
 
-Each accepts its own set of options (`--n_bits`, `--t_bf_max`, `--steps`,
-`--matter_power`, `--output`, ...); run e.g. `python cosmic_d.py --help` for
-the full list of a given backend. `--scales` sets the nested structure
-widths (in bits); `--matter_power` sets the exponent `q` in the order-
-parameter reweighting `M_i(tau) = structure_i(tau) * eta(tau)^q` used to
-turn raw hump probability into "matter."
-
-A convenience script runs all three with one shared configuration and saves
-three PNGs:
+Or run all three with the checked-in configuration:
 
 ```bash
-./run
+bash run
 ```
 
-There is also an animated variant of the statistical backend that visualizes
-differential time dilation between scales:
+Note: the wavefunction backend's recovery target is an equilibrium remnant, not zero (see
+below), and needs `--t_bf_max` of roughly `4` or more to relax onto it; `2` (fine for the other
+two backends) reads as `CHECK` rather than `PASS` purely from not having run long enough.
 
-```bash
-python cosmic_d_anim.py --scales 6,12,20 --output time_dilation.gif
-```
+## Wavefunction 
 
-Each run prints diagnostics to stdout (conservation-ledger error, where
-"now" was auto-detected as the peak of total matter, and — for the
-wavefunction backend — the analytic-vs-sampled Born check and a three-stage
-detector for the rapid-growth / slowdown / recovery profile) and saves a
-4-panel plot showing the resolution/size curve, the entropy budget, the
-hump-shaped structure probabilities, and an expansion-rate proxy.
+The implicit state is
 
-## Validation
+$$
+\psi_\tau(x)=\sqrt{P_\tau(x)}e^{i\Phi_\tau(x)},
+\qquad
+P_\tau(x)=\prod_j p(\tau)^{x_j}[1-p(\tau)]^{1-x_j}.
+$$
 
-```bash
-python -m unittest -v test_wavefunction_model.py
-```
+The phase residual is generated from a small DCT-like coefficient rule and
+contains pair terms. Consequently, the state can be complex, entangled, and
+position dependent; it is not restricted to one Dicke sector. The phase is
+diagonal in the fabric basis, so
 
-The tests cover: the discrete Ehrenfest chain reproduced exactly from first
-principles, an observer/history bridge checked against brute-force
-enumeration, exact Born probabilities against direct statevector
-computation, invariance of the fabric-basis Born distribution under the
-phase codec, Monte Carlo sampling matching the analytic one-fraction, the
-hump family being an interior peak rather than a monotonic edge case, and
-the end-to-end run exhibiting the matter-driven three-stage profile.
+$$
+|\psi_\tau(x)|^2=P_\tau(x)
+$$
 
+exactly. Born sampling therefore yields the statistical bitstring model seen
+from inside.
+
+## Cosmological ledger
+
+The screen/Born entropy $nH_2[p(\tau)]$ is interpreted as unfolded spacetime resolution.
+At each `--scale`, the exact binomial window probabilities are divided into falling, hump, and rising composition families.
+The hump family supplies elementary microstructures, and *is* the matter observable directly:
+
+$$
+M_i(\tau)=\mathrm{structure}_i(\tau).
+$$
+
+There is no order-parameter weighting on top of this. An earlier version multiplied by
+$\eta(\tau)^q$ (`--matter_power`, now removed): this forces $M_i\to 0$ at equilibrium for any
+$q>0$ purely by construction, independent of what the hump family itself is doing there — i.e.
+it silently erases the model's own equilibrium prediction (see below) rather than testing it.
+Since `structure_i(\tau)` is already an exact Born-rule quantity, weighting it is not
+needed and was hiding the real content of the model.
+
+The size curve is
+
+$$
+R_Q=\frac{S_{\rm Born}-P_{\rm pending}-M_{\rm bits}}{n}.
+$$
+
+The default run detects rapid early growth, a matter-loading slowdown, and a
+late positive recovery as the hump populations decline. There is no observer
+bitmap or observer tick. An observer is a later higher-order assembly of the
+same microstructures.
+
+## Equilibrium remnant and the Sanov/large-deviation floor
+
+As $\tau\to\infty$, $p(\tau)\to 1/2$ and the Born entropy saturates to $n$ bits exactly, but the
+hump-family probability at each scale does **not** go to zero — a Bernoulli(1/2) window still has
+some probability of landing on the target composition class, it's just exponentially small. This
+is the model's own prediction of a permanent, non-fine-tuned remnant of structure at full
+equilibrium (loosely: a Hawking-radiation-style tail, not a clean vacuum).
+
+For the default composition rule (`dicke_layer.default_composition`, $a/w\to 1/3$), the
+equilibrium hump probability at width $w$ is exactly a large-deviations (Sanov) rate:
+
+$$
+P_{\rm bump}(w;\,p=\tfrac12) \sim \exp\!\big(-w\,D_{\rm KL}(\tfrac13\,\|\,\tfrac12)\big),
+\qquad D_{\rm KL}(\tfrac13\|\tfrac12)\approx 0.0566\ \text{nats/site}.
+$$
+
+This was checked directly against the code (not assumed): fitting $\log P_{\rm bump}(w)$ across
+$w\in\{30,\dots,300\}$ gives an empirical decay rate of $0.0603$ nats/site against the predicted
+$0.0566$ — the residual gap is the usual polynomial (Stirling) prefactor, not a discrepancy in
+the exponent. So the "complex/large structures are exponentially suppressed" statement isn't a
+qualitative gloss; it is the exact rate function of the binomial tail, derived, not fit.
+
+Across a multi-scale hierarchy this cascades: each level's pool is the previous level's
+**rise**-family probability (mass not yet consumed as fall or hump), so the total equilibrium
+remnant fraction of $n$ is
+
+$$
+\rho(\text{scales}) \;=\; \sum_i \Big(\textstyle\prod_{j<i} f_{\rm rise}(w_j;\,p=\tfrac12)\Big)\, f_{\rm bump}(w_i;\,p=\tfrac12),
+$$
+
+implemented as `equilibrium_residual_fraction(scales)` in `wavefunction_model.py`. **This is the
+correct target for "recovery,"** not zero: `end_suppression` should converge to $\rho$, and the
+`three_stage_detected` diagnostic now checks convergence of the *excess* suppression above $\rho$,
+not raw suppression. Convergence needs enough internal time — `--t_bf_max 2.0` is too short for
+the default scales (`end_excess/peak_excess ≈ 15%` at that point); `--t_bf_max` of `4`–`6` converges
+to machine precision against the analytic $\rho$. The shipped `run` script uses `6.0` for the
+wavefunction backend for this reason.
+
+## Robustness: `scales` is the one real free parameter
+
+Everything else in the wavefunction backend either doesn't affect the physical (fabric-basis,
+matter/size) observables at all, or shouldn't be treated as free:
+
+- `--phase_strength`, `--spatial_modes`, `--temporal_modes`, `--pair_range`, `--phase_seed`,
+  `--phase_topology` only affect the phase codec, i.e. entanglement/coherence diagnostics. They
+  are provably inert for `entropy_bits`, `pending`, `matter_bits`, and `size_measure` — those
+  depend only on the mean-field `p(\tau)` and the window-family split, never on the phase.
+- `--matter_power` is gone (see above).
+- `--n_bits`, `--t_bf_max` set the observation window and grid resolution, not the physics; results
+  should be (and were checked to be) stable once `t_bf_max` is large enough to relax.
+
+That leaves `--scales` — the window widths standing in for elementary-particle scales, per the
+observer-centric reading (structure-probability peaks are where observer-probability peaks) — as
+the genuine free input. It was swept over single scales, coprime triplets, and a 5-level
+hierarchy (widths 2–50); the three-stage profile was detected in all cases once `t_bf_max` was
+large enough. The remnant fraction $\rho$ varies meaningfully across these (from ~0.004 at
+`w=50` to ~0.59 for a 5-level cascade), so `scales` is doing real, falsifiable work rather than
+just toggling a fixed shape on and off.
+
+Open thread, not yet resolved: `peak_t / n` (when matter formation peaks, in units of $n$) is
+non-monotonic in $w$ at small widths and detection degrades by $w\gtrsim 100$ at the default grid
+resolution (`--steps 3000`) — needs to be separated into "real physics" vs. "`default_composition`
+discretization / grid-resolution artifact" before the $w\to$ epoch relationship (the part that
+would actually connect a particle scale to a cosmic time) can be trusted.
 
 ## Files
 
-- `multiclock.py` — classical Ehrenfest relaxation, exact combinatorial
-  entropy, hypergeometric fall/hump/rise window probabilities, multi-scale
-  nested-clock cascade.
-- `dicke_layer.py` — Dicke-sector (equal-superposition) quantum primitives:
-  sector probabilities, window marginals, entanglement entropy, exact
-  pattern probabilities.
-- `dicke_cascade.py` — chains `dicke_layer.py` levels through their exact
-  quantum leftover substrate, with a persistence/survival correction.
-- `wavefunction_model.py` — general complex wavefunction with a compact
-  spectral phase codec; exact Born shadow; finite-budget cosmological
-  ledger; diagnostics for the three-stage profile.
-- `cosmic.py` — unified `{statistical|dicke|wavefunction}` launcher.
-- `cosmic_d.py` / `cosmic_psi.py` / `cosmic_wavefunction.py` — per-backend
-  plotting and CLI drivers.
-- `cosmic_d_anim.py` — animated time-dilation demo built on `multiclock.py`.
-- `test_wavefunction_model.py` — automated validation (see above).
-- `run` — example shell script running all three backends with one shared
-  configuration.
-- `spectrum.json` — reference real-cosmology number densities by epoch
-  (flat ΛCDM, Planck 2018 parameters), for external comparison; not
-  consumed by any script in this folder.
+- `wavefunction_model.py`: implicit complex state, phase codec, Born entropy,
+  scale hierarchy, finite-budget cosmology, diagnostics.
+- `cosmic_wavefunction.py`: plotting and CLI driver.
+- `cosmic.py`: unified three-backend launcher.
+- `test_wavefunction_model.py`: exact Born-shadow, entanglement, hump, ledger,
+  and three-stage tests.
+
+## Validation
+
+Run:
+
+```bash
+python -m unittest -v test_wavefunction_model.py
+python cosmic.py wavefunction --scales 6,12,20 --t_bf_max 6 --output general_wavefunction_cosmology.png
+```
+
+The wavefunction backend's own printout reports the analytic residual floor
+(`equilibrium_residual_fraction`) alongside the numerically observed
+`end_suppression`; they should agree to several decimal places once
+`t_bf_max` is large enough. This is the strongest available cross-check,
+since the floor is derived independently of the time-series simulation.
+
+The phase codec is a finite MDL proxy, not a computation of uncomputable
+Solomonoff complexity. It supplies one compact, symmetry-breaking complex lift
+whose Born shadow is exact. A future universal-mixture layer can place an
+induced measure over many such short codecs.

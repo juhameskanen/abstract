@@ -58,7 +58,7 @@ def plot_results(result, output_path: str, slots_per_scale: int = 50) -> None:
         "General complex wavefunction -> Born statistical fabric -> emergent microstructures\n"
         f"n={result.n_bits}, scales={[lvl.width for lvl in result.levels]}, "
         f"phase terms={result.codec.term_count}, clock={result.clock_mode}, "
-        f"matter power={result.matter_power:g}, three-stage diagnostic={phase_status}, "
+        f"residual floor={result.residual_fraction:.4g}, three-stage diagnostic={phase_status}, "
         f"ledger error={result.conservation_max_error:.2e}",
         fontsize=10,
         fontweight="bold",
@@ -222,7 +222,6 @@ def main() -> None:
     parser.add_argument("--t_bf_max", type=float, default=None, help="Maximum normalized time; default ln(n).")
     parser.add_argument("--steps", type=int, default=3000)
     parser.add_argument("--scales", type=str, default="6,12,20")
-    parser.add_argument("--matter_power", type=float, default=0.0)
     parser.add_argument("--clock_mode", choices=("block", "shared"), default="block")
     parser.add_argument("--phase_strength", type=float, default=0.9)
     parser.add_argument("--spatial_modes", type=int, default=3)
@@ -249,7 +248,6 @@ def main() -> None:
         scales=scales,
         steps=args.steps,
         t_bf_max=args.t_bf_max,
-        matter_power=args.matter_power,
         clock_mode=args.clock_mode,
         phase_config=phase_config,
     )
@@ -280,6 +278,8 @@ def main() -> None:
     print(f"  late-recovery median rate      = {diag.recovery_rate:.6e}")
     print(f"  late positive Hubble proxy     = {diag.recovery_hubble_proxy:.6e}")
     print(f"  peak/end resolution suppression= {diag.peak_suppression:.6e} / {diag.end_suppression:.6e}")
+    print(f"  analytic p->0.5 residual floor  = {diag.residual_fraction:.6e}")
+    print(f"  peak/end EXCESS above floor     = {diag.peak_excess_suppression:.6e} / {diag.end_excess_suppression:.6e}")
     print(f"  diagnostic                     = {'PASS' if diag.three_stage_detected else 'CHECK'}")
 
 

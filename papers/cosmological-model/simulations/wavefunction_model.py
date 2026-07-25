@@ -375,6 +375,26 @@ def window_family_fractions(p: FloatArray, width: int) -> tuple[FloatArray, Floa
     return np.asarray(fall), np.asarray(bump), np.asarray(rise)
 
 
+def equilibrium_residual_fraction(scales: Sequence[int]) -> float:
+    """Analytic p->0.5 floor of total_matter_bits / n_bits, cascaded across scales.
+
+    At full equilibrium every level's local pool saturates to a fraction
+    ``prod_{j<i} rise_eq(w_j)`` of n_bits (promoted down from all earlier
+    levels), of which ``bump_eq(w_i)`` becomes structure at level i. This is
+    the non-fine-tuned residual predicted by the hump family's own p=0.5
+    tail -- it need not, and should not, be driven to zero by an extra
+    order-parameter weighting. It is the large-deviation (Sanov) floor: for
+    the default composition a/w -> 1/3, bump_eq(w) ~ exp(-w * KL(1/3||1/2)).
+    """
+    pool_fraction = 1.0
+    residual = 0.0
+    for width in scales:
+        _fall_eq, bump_eq, rise_eq = window_family_fractions(np.array([0.5]), int(width))
+        residual += pool_fraction * float(bump_eq[0])
+        pool_fraction *= float(rise_eq[0])
+    return residual
+
+
 def _level_state(
     tau_raw: FloatArray,
     level_idx: int,
@@ -452,6 +472,9 @@ class ProfileDiagnostics:
     recovery_hubble_proxy: float
     peak_suppression: float
     end_suppression: float
+    residual_fraction: float
+    peak_excess_suppression: float
+    end_excess_suppression: float
     three_stage_detected: bool
 
 
@@ -476,7 +499,7 @@ class QuantumCosmologyResult:
     conservation_max_error: float
     codec: PhaseCodecConfig
     diagnostics: ProfileDiagnostics
-    matter_power: float
+    residual_fraction: float
     clock_mode: str
 
 
@@ -492,6 +515,7 @@ def _profile_diagnostics(
     no_matter_size: FloatArray,
     size: FloatArray,
     matter_bits: FloatArray,
+    residual_fraction: float = 0.0,
 ) -> tuple[FloatArray, FloatArray, ProfileDiagnostics]:
     sigma = max(2.0, len(t) / 300.0)
     smooth_size = gaussian_filter1d(size, sigma=sigma, mode="nearest")
@@ -529,13 +553,21 @@ def _profile_diagnostics(
     suppression = no_matter_size - size
     peak_suppression = float(np.max(suppression))
     end_suppression = float(max(suppression[-1], 0.0))
+    # Recovery is convergence toward the analytic p->0.5 remnant floor, not
+    # toward zero: the hump tails never fully vanish (see
+    # equilibrium_residual_fraction), so demanding end_suppression -> 0 is
+    # itself a hidden fine-tuning of the diagnostic against the model's own
+    # prediction. Above-floor "excess" suppression is what should relax away.
+    excess_suppression = suppression - residual_fraction
+    peak_excess = float(np.max(excess_suppression))
+    end_excess = float(excess_suppression[-1])
     detected = bool(
         0 < peak_idx < len(t) - 1
         and early_rate > loading_rate
         and slowdown > 0.0
         and recovery_rate > 0.0
         and size[-1] > size[peak_idx]
-        and end_suppression < 0.10 * max(peak_suppression, 1e-12)
+        and end_excess < 0.10 * max(peak_excess, 1e-12)
     )
     diagnostics = ProfileDiagnostics(
         matter_peak_time=float(t[peak_idx]),
@@ -546,6 +578,9 @@ def _profile_diagnostics(
         recovery_hubble_proxy=recovery_h,
         peak_suppression=peak_suppression,
         end_suppression=end_suppression,
+        residual_fraction=residual_fraction,
+        peak_excess_suppression=peak_excess,
+        end_excess_suppression=end_excess,
         three_stage_detected=detected,
     )
     return rate, hubble, diagnostics
@@ -556,19 +591,23 @@ def run_wavefunction_cosmology(
     scales: Sequence[int] = (6, 12, 20),
     steps: int = 3000,
     t_bf_max: float | None = None,
-    matter_power: float = 1.0,
     clock_mode: str = "block",
     phase_config: PhaseCodecConfig | None = None,
     k_rate: float = TRUE_K_RATE,
 ) -> QuantumCosmologyResult:
-    """Run the third, general-complex-wavefunction backend."""
+    """Run the third, general-complex-wavefunction backend.
+
+    Matter is the raw hump-family structure probability with no extra
+    order-parameter weighting: the eta(tau)^q damping used by the other two
+    backends forces matter to zero at equilibrium by construction, which
+    would erase the model's own predicted large-deviation remnant. There is
+    no matter_power free parameter here anymore.
+    """
     n_bits = int(n_bits)
     if n_bits < 2:
         raise ValueError("n_bits must be at least 2")
     if steps < 50:
         raise ValueError("steps must be at least 50")
-    if matter_power < 0:
-        raise ValueError("matter_power must be non-negative")
     resolved_max = n_bits * np.log(n_bits) if t_bf_max is None else n_bits * float(t_bf_max)
     if resolved_max <= 0:
         raise ValueError("t_bf_max must be positive")
@@ -585,11 +624,10 @@ def run_wavefunction_cosmology(
     accounted = pending_total + fabric_total + structure_total + levels[-1].promoted
     conservation_error = float(np.max(np.abs(accounted - entropy_bits)))
 
-    eta = np.asarray(order_parameter(t, n_bits, k_rate), dtype=float)
-    weight = eta ** matter_power
     for level in levels:
-        level.matter_bits = level.structure * weight
+        level.matter_bits = level.structure
     total_matter_bits = sum((lvl.matter_bits for lvl in levels), np.zeros_like(t))
+    residual_fraction = equilibrium_residual_fraction(tuple(int(w) for w in scales))
     total_matter_count = sum((lvl.matter_count for lvl in levels), np.zeros_like(t))
 
     no_matter_size = (entropy_bits - pending_total) / n_bits
@@ -609,7 +647,8 @@ def run_wavefunction_cosmology(
     )
 
     size_rate, hubble, diagnostics = _profile_diagnostics(
-        t, entropy_fraction, no_matter_size, size_measure, total_matter_bits
+        t, entropy_fraction, no_matter_size, size_measure, total_matter_bits,
+        residual_fraction=residual_fraction,
     )
 
     return QuantumCosmologyResult(
@@ -632,6 +671,6 @@ def run_wavefunction_cosmology(
         conservation_max_error=conservation_error,
         codec=codec_config,
         diagnostics=diagnostics,
-        matter_power=matter_power,
+        residual_fraction=residual_fraction,
         clock_mode=clock_mode,
     )

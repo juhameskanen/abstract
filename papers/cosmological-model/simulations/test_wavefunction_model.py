@@ -129,7 +129,6 @@ class WavefunctionModelTests(unittest.TestCase):
             n_bits=184,
             scales=(6, 12, 20),
             steps=1400,
-            matter_power=1.0,
             phase_config=PhaseCodecConfig(),
         )
         d = result.diagnostics
@@ -138,7 +137,12 @@ class WavefunctionModelTests(unittest.TestCase):
         self.assertGreater(d.slowdown_strength, 0.0)
         self.assertGreater(d.recovery_rate, 0.0)
         self.assertGreater(d.recovery_hubble_proxy, 0.0)
-        self.assertLess(d.end_suppression, 0.1 * d.peak_suppression)
+        # Recovery targets the analytic p->0.5 remnant floor, not zero: the
+        # hump tails never fully vanish, so end_suppression should converge
+        # close to residual_fraction rather than to 0.
+        self.assertGreater(d.residual_fraction, 0.0)
+        self.assertLess(d.end_excess_suppression, 0.1 * d.peak_excess_suppression)
+        self.assertAlmostEqual(d.end_suppression, d.residual_fraction, delta=0.05)
         peak_idx = int(np.argmax(result.total_matter_bits))
         self.assertGreater(result.size_measure[-1], result.size_measure[peak_idx])
         self.assertLess(result.conservation_max_error, 1e-9)
