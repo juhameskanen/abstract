@@ -50,6 +50,7 @@ from inside.
 
 The screen/Born entropy $nH_2[p(\tau)]$ is interpreted as unfolded spacetime resolution.
 At each `--scale`, the exact binomial window probabilities are divided into falling, hump, and rising composition families.
+
 The hump family supplies elementary microstructures, and *is* the matter observable directly:
 
 $$
