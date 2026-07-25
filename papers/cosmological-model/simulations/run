@@ -1,11 +1,18 @@
-python3 cosmic.py statistical --scales 6,12,20
-python3 cosmic.py dicke --scales 6,12,20
+
+# configure
+scales="6,12,20"
+t_bf_max=2.0
+bits=1024
+
+python3 cosmic.py statistical --n_bits $bits --scales $scales --t_bf_max $t_bf_max  --output classical.png
+python3 cosmic.py dicke  --n_bits $bits --scales $scales --t_bf_max $t_bf_max --output dicke.png
 python3 cosmic.py wavefunction \
-  --n_bits 184 \
-  --scales 6,12,20 \
+  --n_bits $bits \
+  --scales $scales \
   --phase_strength 0.9 \
   --spatial_modes 3 \
   --temporal_modes 3 \
   --pair_range 1 \
-  --matter_power 1 \
-  --output general_wavefunction_cosmology.png
+  --matter_power 0 \
+  --t_bf_max $t_bf_max \
+  --output wavefunction.png

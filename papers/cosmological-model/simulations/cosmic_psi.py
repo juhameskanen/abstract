@@ -185,7 +185,7 @@ def main() -> None:
                               "same convention as emergent_structure_relativistic.py.")
     parser.add_argument("--steps", type=int, default=3000)
     parser.add_argument("--t_today", type=float, default=None)
-    parser.add_argument("--matter_power", type=float, default=1.0)
+    parser.add_argument("--matter_power", type=float, default=0.0)
     parser.add_argument("--scales", type=str, default="6,12,20")
     parser.add_argument("--compositions", type=str, default=None,
                          help="a:b per scale, comma-separated, e.g. '1:5,2:10,3:17'. "

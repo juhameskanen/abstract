@@ -222,7 +222,7 @@ def main() -> None:
     parser.add_argument("--t_bf_max", type=float, default=None, help="Maximum normalized time; default ln(n).")
     parser.add_argument("--steps", type=int, default=3000)
     parser.add_argument("--scales", type=str, default="6,12,20")
-    parser.add_argument("--matter_power", type=float, default=1.0)
+    parser.add_argument("--matter_power", type=float, default=0.0)
     parser.add_argument("--clock_mode", choices=("block", "shared"), default="block")
     parser.add_argument("--phase_strength", type=float, default=0.9)
     parser.add_argument("--spatial_modes", type=int, default=3)

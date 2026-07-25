@@ -171,7 +171,7 @@ def main() -> None:
                               "Pure display-range choice, decoupled from k_rate.")
     parser.add_argument("--steps", type=int, default=3000)
     parser.add_argument("--t_today", type=float, default=None)
-    parser.add_argument("--matter_power", type=float, default=1.0)
+    parser.add_argument("--matter_power", type=float, default=0.0)
     parser.add_argument("--scales", type=str, default="6,12,20")
     parser.add_argument("--slots", type=int, default=50)
     parser.add_argument("--output", type=str, default="emergent_structure_relativistic.png")

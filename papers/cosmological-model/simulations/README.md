@@ -1,7 +1,8 @@
-# General complex-wavefunction backend
+# README
 
-This patch adds a third cosmological simulation choice without modifying the
-existing statistical or Dicke drivers:
+This folder implements three different cosmological toy models predicting the three-fold expansion profile.
+
+## Usage
 
 ```bash
 python cosmic.py statistical --scales 6,12,20
@@ -9,7 +10,7 @@ python cosmic.py dicke --scales 6,12,20
 python cosmic.py wavefunction --scales 6,12,20
 ```
 
-## State represented by the new backend
+## Wavefunction 
 
 The implicit state is
 
