@@ -32,6 +32,8 @@ import matplotlib.pyplot as plt
 from scipy.stats import hypergeom
 from scipy.special import gammaln
 
+from dicke_layer import default_composition
+
 T_PLANCK_YR: float = 1.71e-51
 T_AGE_YR: float = 13.8e9
 
@@ -106,13 +108,26 @@ def order_parameter(tau_raw: FloatArray, n_bits: int, k_rate: float) -> FloatArr
 def family_fractions_exact(
     n_bits: int, k: FloatArray, width: float
 ) -> tuple[FloatArray, FloatArray, FloatArray]:
-    """Exact falling/bump/rising probability mass fractions for one window."""
+    """Exact falling/matched/rising probability mass fractions for one window.
+
+    Split at the wiki-derived a<b target composition
+    (dicke_layer.default_composition), NOT an arbitrary ceil(w/2)
+    occupancy threshold (the previous rule, which had no connection to
+    the Entropy-and-Emergent-Structures derivation). f_bump = P(j == a)
+    is exactly hypergeom.pmf(a, n_bits, k, w) -- the same class-probability
+    "hump" formula dicke_layer.class_probability uses for the Dicke
+    backend's matter term, so this is now literally the same computation,
+    not just the same functional family. f_fall = P(j < a), f_rise =
+    P(j > a); by construction f_fall + f_bump + f_rise == 1 exactly, so
+    the existing fabric/structure/promoted conservation identity still
+    holds to floating-point precision.
+    """
     w = int(round(width))
     k_int = np.clip(np.round(k), 0, n_bits).astype(np.int64)
-    j_thresh = int(np.ceil(w / 2.0))
-    f_fall = hypergeom.pmf(0, n_bits, k_int, w)
-    f_rise = hypergeom.sf(j_thresh - 1, n_bits, k_int, w)
-    f_bump = np.clip(1.0 - f_rise - f_fall, 0.0, 1.0)
+    a, _b = default_composition(w)
+    f_bump = hypergeom.pmf(a, n_bits, k_int, w)
+    f_fall = hypergeom.cdf(a - 1, n_bits, k_int, w)
+    f_rise = np.clip(1.0 - f_fall - f_bump, 0.0, 1.0)
     return f_fall, f_bump, f_rise
 
 

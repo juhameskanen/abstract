@@ -32,6 +32,8 @@ from numpy.typing import NDArray
 from scipy.ndimage import gaussian_filter1d
 from scipy.stats import binom
 
+from dicke_layer import default_composition
+
 FloatArray = NDArray[np.float64]
 ComplexArray = NDArray[np.complex128]
 BoolArray = NDArray[np.bool_]
@@ -352,13 +354,24 @@ class QuantumScaleResult:
 
 
 def window_family_fractions(p: FloatArray, width: int) -> tuple[FloatArray, FloatArray, FloatArray]:
-    """Born probabilities of falling, hump, and rising composition families."""
+    """Born probabilities of falling, matched, and rising composition families.
+
+    Mean-field binomial counterpart of multiclock.family_fractions_exact:
+    split at the wiki-derived a<b target composition
+    (dicke_layer.default_composition), not an arbitrary ceil(w/2)
+    threshold. bump = P(j == a) = binom.pmf(a, width, p) is the same
+    class-probability "hump" formula used (exactly, via hypergeometric)
+    by the Dicke backend and (via exact hypergeometric) by the classical
+    backend -- here evaluated on the mean-field p instead of an exact
+    integer count, consistent with this backend's own p_local
+    representation. fall + bump + rise == 1 exactly by construction.
+    """
     if width < 2:
         raise ValueError("microstructure widths must be at least 2")
-    threshold = int(np.ceil(width / 2.0))
-    fall = binom.pmf(0, width, p)
-    rise = binom.sf(threshold - 1, width, p)
-    bump = np.clip(1.0 - fall - rise, 0.0, 1.0)
+    a, _b = default_composition(width)
+    fall = binom.cdf(a - 1, width, p)
+    bump = binom.pmf(a, width, p)
+    rise = np.clip(1.0 - fall - bump, 0.0, 1.0)
     return np.asarray(fall), np.asarray(bump), np.asarray(rise)
 
 
