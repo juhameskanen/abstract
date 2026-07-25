@@ -14,20 +14,20 @@ python cosmic.py wavefunction --scales 6,12,20
 
 The implicit state is
 
-\[
+$$
 \psi_\tau(x)=\sqrt{P_\tau(x)}e^{i\Phi_\tau(x)},
 \qquad
 P_\tau(x)=\prod_j p(\tau)^{x_j}[1-p(\tau)]^{1-x_j}.
-\]
+$$
 
 The phase residual is generated from a small DCT-like coefficient rule and
 contains pair terms. Consequently, the state can be complex, entangled, and
 position dependent; it is not restricted to one Dicke sector. The phase is
 diagonal in the fabric basis, so
 
-\[
+$$
 |\psi_\tau(x)|^2=P_\tau(x)
-\]
+$$
 
 exactly. Born sampling therefore yields the statistical bitstring model seen
 from inside.
@@ -42,18 +42,18 @@ from inside.
    finite information budget as spacetime fabric.
 4. The existing order-parameter weighting is retained explicitly:
 
-   \[
+   $$
    M_i(\tau)=\mathrm{structure}_i(\tau)\,\eta(\tau)^q,
    \qquad q=\texttt{--matter\_power}.
-   \]
+   $$
 
    The default is `q=1`, matching the current statistical backend. Setting
    `--matter_power 0` is the raw-hump/plateau ablation.
 5. The size curve is
 
-   \[
+   $$
    R_Q=\frac{S_{\rm Born}-P_{\rm pending}-M_{\rm bits}}{n}.
-   \]
+   $$
 
 The default run detects rapid early growth, a matter-loading slowdown, and a
 late positive recovery as the weighted hump populations decline. There is no observer
