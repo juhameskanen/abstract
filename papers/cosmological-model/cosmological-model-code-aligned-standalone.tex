@@ -1,0 +1,855 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black}
+\setlist{itemsep=0.3em,topsep=0.5em}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\title{Cosmological Expansion and Dark Matter as Emergent\\
+Informational Phenomena}
+\author{Juha Meskanen}
+\date{July 2026 -- implementation-aligned revision}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper documents the cosmological model as it is implemented in the
+current simulation code.  The universe is represented by a finite static
+informational structure of $n$ binary degrees of freedom.  The simulation
+uses a raw internal ordering coordinate $T$ and the normalized coordinate
+$\tau=T/n$.  Its substrate layer follows the continuum Ehrenfest mean
+\begin{equation*}
+ p(\tau)=\frac12\left(1-e^{-2\tau}\right),
+ \qquad
+ k(T)=\operatorname{round}\!\bigl(np(T)\bigr),
+\end{equation*}
+and defines the unfolded informational pool by
+$U(T)=\log_2\binom{n}{k(T)}$.  A width-$w$ window is classified with the
+exact finite-population hypergeometric distribution, conditional on the
+implemented integer count $k(T)$.  The three classes used by the code are
+$J=0$ (falling), $0<J<\lceil w/2\rceil$ (structure-forming), and
+$J\geq\lceil w/2\rceil$ (promoted).
+
+Each scale has an internal tick count $q_w(T)=\lfloor T/w\rfloor$ and is
+evaluated at the retarded raw coordinate $T_w=wq_w(T)$.  Recursively
+promoted pools form a nested classical hierarchy.  At every level the
+available pool is partitioned into fabric, structure, promoted, and pending
+sectors, and the resulting telescoping information ledger is exact to
+floating-point precision.  The code defines matter bits by
+$M_i(T)=C_i(T)\eta(T)^q$, where $C_i$ is the structure sector,
+$\eta=e^{-2T/n}$, and the exponent $q$ is an explicit non-derived modeling
+choice whose current default is $q=1$.  The implemented relational size
+measure is
+\begin{equation*}
+ R_D(T)=\frac{U(T)-\sum_i L_i(T)-\sum_i M_i(T)}{n},
+\end{equation*}
+where $L_i$ is the pending multi-clock backlog.  Composite entity counts
+$N_i=M_i/w_i$ are used for worldlines and abundance plots but are not added
+back into $R_D$; in the current implementation matter bits are unavailable
+as free spacetime fabric.
+
+The default run displays three descriptive regimes in internal coordinate
+time: rapid growth of the unfolded pool, a matter-loaded and clock-retarded
+regime in which growth is suppressed and local contractions occur, and, for
+$q>0$, recovery toward the no-matter entropy envelope as the matter weight
+decays.  These are properties of the implemented finite-information model,
+not yet a derivation of an FLRW metric, physical acceleration, or a calibrated
+cosmic time.  A companion $\psi$-layer implementation represents fixed-count
+sectors by Dicke states, uses the same hypergeometric window statistics, and
+supports both genuinely nested cascades and parallel coexisting species.
+The paper separates exact identities, implemented approximations, modeling
+choices, and future physical identifications.
+\end{abstract}
+
+\tableofcontents
+\new page
+
+\section{Purpose and Scope}
+\label{sec:scope}
+
+The foundational ontology of the framework is a finite, static, timeless
+informational universe.  Time is internal to an observer: it is an ordering
+of distinguishable observer-compatible states, not an external parameter in
+which the total universe evolves.  The simulation coordinate $T$ used below
+is therefore an ordinal bookkeeping variable for elementary informational
+transitions.  Running the Python program in laboratory time is a method for
+studying the static relational model; processor time is not identified with
+cosmic time.
+
+The purpose of this paper is narrower than a complete cosmological theory.
+It records the present mathematical content of the implementation in
+\path{multiclock.py}, its classical driver \path{cosmic_d.py}, and the
+spectral companion implemented by \path{dicke_layer.py},
+\path{dicke_cascade.py}, and \path{cosmic_psi.py}.  In particular, the
+paper distinguishes four levels of statement:
+\begin{enumerate}
+  \item exact finite combinatorial identities;
+  \item the mean-shell and retarded-clock approximations actually used by
+        the code;
+  \item explicit modeling choices, such as the matter exponent and window
+        compositions;
+  \item proposed physical interpretations, such as spacetime curvature,
+        dark matter, and cosmological expansion.
+\end{enumerate}
+
+The code is treated as the authoritative specification of the present
+statistical model.  This does not make every comment in the source a theorem.
+Where the implementation uses a continuum approximation to a discrete chain,
+the paper states that qualification explicitly.
+
+\section{Finite Substrate and Internal Ordering}
+\label{sec:substrate}
+
+\subsection{The discrete Ehrenfest chain and the implemented mean curve}
+
+Let $K_T$ denote the number of ones after $T$ elementary bit flips in a
+length-$n$ bitstring.  One uniformly selected bit is toggled at each discrete
+tick.  Conditional on $K_T=k$,
+\begin{equation}
+ \Pr(k\to k+1)=\frac{n-k}{n},
+ \qquad
+ \Pr(k\to k-1)=\frac{k}{n}.
+ \label{eq:birthdeath}
+\end{equation}
+Hence
+\begin{equation}
+ \mathbb{E}[K_{T+1}-K_T\mid K_T=k]=1-\frac{2k}{n}.
+ \label{eq:drift}
+\end{equation}
+Starting from $K_0=0$, the exact discrete expectation is
+\begin{equation}
+ \frac{\mathbb{E}K_T}{n}
+ =\frac12\left[1-\left(1-\frac2n\right)^T\right].
+ \label{eq:discrete-mean}
+\end{equation}
+
+The current implementation uses the continuum, or independent-Poisson,
+form
+\begin{equation}
+ p(T)=\frac12\left(1-e^{-2T/n}\right)
+     =\frac12\left(1-e^{-2\tau}\right),
+ \qquad \tau=\frac{T}{n}.
+ \label{eq:p-code}
+\end{equation}
+The coefficient $2$ is derived from the Ehrenfest drift and is not fitted.
+For the one-flip-per-tick discrete chain, equation~\eqref{eq:p-code} is the
+large-$n$ approximation to equation~\eqref{eq:discrete-mean}; it is exact for
+a corresponding continuous-time process with independent Poisson flip
+clocks.  The code then uses the mean shell
+\begin{equation}
+ k(T)=\operatorname{clip}\!\left(
+       \operatorname{round}[np(T)],0,n\right).
+ \label{eq:k-code}
+\end{equation}
+Thus the implementation does not propagate the complete probability
+distribution of $K_T$.  It evaluates finite-window statistics conditional on
+the rounded mean count.
+
+\subsection{Unfolded informational pool}
+
+The code defines the substrate's unfolded pool by the fixed-count
+combinatorial entropy
+\begin{equation}
+ U(T)=\log_2\binom{n}{k(T)}.
+ \label{eq:unfolded}
+\end{equation}
+The plotted quantity named \texttt{entropy} is
+\begin{equation}
+ E_n(T)=\frac{U(T)}{n}.
+ \label{eq:entropy-normalized}
+\end{equation}
+For finite even $n$, the maximum is
+$\log_2\binom{n}{n/2}/n<1$, approaching one as $n\to\infty$.
+This $U(T)$ is the budget passed into the first scale of the hierarchy.
+It is not the same quantity as the contrast coordinate $2p(T)$, although
+both increase toward saturation on the relaxation-from-zero branch.
+
+The departure from equilibrium used in the matter ansatz is
+\begin{equation}
+ \eta(T)=1-2p(T)=e^{-2T/n}.
+ \label{eq:eta}
+\end{equation}
+
+\subsection{Relation to the theoretical $n/2$ contrast bound}
+
+An internal observer who constructs distance from complementary zero-one
+distinctions can form at most
+\begin{equation}
+ Q_{\max}=\left\lfloor\frac n2\right\rfloor
+ \label{eq:n2bound}
+\end{equation}
+independent elementary contrasts.  This bound is independent of the
+dimension or topology assigned by a later decoder.  The current simulation
+does not explicitly pair zeros and ones.  Instead it uses the entropy pool
+$U(T)$ as an addressable-fabric proxy and normalizes by $n$.  Consequently,
+$R_D$ below is the size measure implemented in the code, not yet the final
+contrast-count metric.  A future metric decoder may rescale or replace this
+proxy using equation~\eqref{eq:n2bound}.
+
+\section{Exact Conditional Window Statistics}
+\label{sec:windows}
+
+For a width-$w$ window in a global shell containing exactly $k$ ones, let
+$J$ be the number of ones in the window.  The conditional distribution is
+hypergeometric:
+\begin{equation}
+ h_w(j\mid n,k)
+ =\Pr(J=j\mid K=k)
+ =\frac{\binom{k}{j}\binom{n-k}{w-j}}{\binom{n}{w}}.
+ \label{eq:hypergeom}
+\end{equation}
+Equation~\eqref{eq:hypergeom} is exact for a uniformly sampled fixed-$k$
+shell.  In the time-series code it is evaluated at the mean-shell value in
+equation~\eqref{eq:k-code}.
+
+Define the threshold
+\begin{equation}
+ j_*(w)=\left\lceil\frac w2\right\rceil.
+ \label{eq:threshold}
+\end{equation}
+The three code-level families are
+\begin{align}
+ f^{(0)}_w(T)
+   &=h_w(0\mid n,k(T)),
+   \label{eq:fall}\\
+ f^{(b)}_w(T)
+   &=\sum_{j=1}^{j_*(w)-1}h_w(j\mid n,k(T)),
+   \label{eq:bump}\\
+ f^{(r)}_w(T)
+   &=\sum_{j=j_*(w)}^{w}h_w(j\mid n,k(T)).
+   \label{eq:rise}
+\end{align}
+Here $f^{(0)}_w$ is the falling all-zero class, $f^{(b)}_w$ is the
+structure-forming or bump class, and $f^{(r)}_w$ is the promoted or rising
+class.
+They obey
+\begin{equation}
+ f^{(0)}_w+f^{(b)}_w+f^{(r)}_w=1.
+ \label{eq:family-partition}
+\end{equation}
+The explicit separation of $J=0$ is important.  A composition with no ones
+is monotonically falling and is not an interior hump.
+
+For comparison, one exact ordered pattern with $a$ required ones and $b$
+required zeros has, in the independent-bit limit,
+\begin{equation}
+ P_{a,b}(p)=p^a(1-p)^b.
+ \label{eq:pattern}
+\end{equation}
+For $0<a<b$ it peaks at $p_*=a/(a+b)<1/2$.  The classical cosmological
+pipeline does not select one fixed $(a,b)$ pattern; it aggregates all
+window compositions in equations~\eqref{eq:fall}--\eqref{eq:rise}.
+
+\section{Multi-Clock Hierarchy}
+\label{sec:multiclock}
+
+\subsection{Scale-dependent ticks}
+
+A width-$w$ composite requires $w$ elementary transitions per internal
+update in the present clock model.  Its own tick count is
+\begin{equation}
+ q_w(T)=\left\lfloor\frac{T}{w}\right\rfloor,
+ \label{eq:own-ticks}
+\end{equation}
+and its state is evaluated at the retarded raw coordinate
+\begin{equation}
+ T_w=wq_w(T)=w\left\lfloor\frac{T}{w}\right\rfloor.
+ \label{eq:retard}
+\end{equation}
+The quantity $q_w$ advances, on average, at rate $1/w$ relative to the raw
+ordering coordinate.  The code stores this as a nominal lapse
+$\ell_w=1/w$.  Equation~\eqref{eq:retard} is a sample-and-hold rule: the
+scale's state changes only when another block of $w$ raw transitions has
+accumulated.
+
+\subsection{Recursive level state}
+
+Consider $m$ levels with widths $w_0,\ldots,w_{m-1}$.  Let $A_i(T)$ be the
+true pool presented to level $i$ at raw coordinate $T$, and let
+$\widetilde A_i(T)$ be the pool visible to that level at its retarded
+coordinate.  The first pool is
+\begin{equation}
+ A_0(T)=U(T),
+ \qquad
+ \widetilde A_0(T)=U(T_{w_0}).
+ \label{eq:first-pool}
+\end{equation}
+At level $i$, define
+\begin{align}
+ L_i(T)&=A_i(T)-\widetilde A_i(T),
+ \label{eq:pending}\\
+ F_i(T)&=\widetilde A_i(T) f^{(0)}_{w_i}(T_{w_i}),
+ \label{eq:fabric}\\
+ C_i(T)&=\widetilde A_i(T) f^{(b)}_{w_i}(T_{w_i}),
+ \label{eq:structure}\\
+ G_i(T)&=\widetilde A_i(T) f^{(r)}_{w_i}(T_{w_i}).
+ \label{eq:promoted}
+\end{align}
+These are, respectively, the pending backlog, fabric sector, raw structure
+sector, and promoted sector.
+The next level receives the promoted output,
+\begin{equation}
+ A_{i+1}(T)=G_i(T).
+ \label{eq:recursion}
+\end{equation}
+In the implementation, evaluating $A_i(T_{w_i})$ recursively retards all
+earlier levels consistently; it is not obtained by merely shifting the
+last array.
+
+Equations~\eqref{eq:family-partition} and \eqref{eq:pending} imply
+\begin{equation}
+ A_i=L_i+F_i+C_i+G_i.
+ \label{eq:level-ledger}
+\end{equation}
+Using equation~\eqref{eq:recursion}, the hierarchy telescopes to
+\begin{equation}
+ \boxed{
+ U(T)=\sum_{i=0}^{m-1}\bigl[L_i(T)+F_i(T)+C_i(T)\bigr]
+      +G_{m-1}(T).}
+ \label{eq:global-ledger}
+\end{equation}
+This is the conservation identity tested by
+\texttt{conservation\_max\_error}.  It is an exact consequence of the
+implemented partition, up to floating-point error.
+
+The classical pipeline is therefore a genuinely nested formation hierarchy.
+A later level is built only from the promoted sector of the preceding level.
+This is appropriate when the levels represent successive stages of one
+formation cascade.  It is not automatically appropriate for distinct
+species that coexist without being nested; the spectral implementation
+provides a separate parallel mode for that case.
+
+\section{Matter Definition and Implemented Size Measure}
+\label{sec:size}
+
+\subsection{Matter weighting}
+
+The raw structure sector $C_i$ is converted into the code's matter sector by
+\begin{equation}
+ M_i(T)=C_i(T)\,\eta(T)^q,
+ \label{eq:matter}
+\end{equation}
+where $q$ is the command-line parameter \texttt{matter\_power}.  The current
+default is $q=1$.  The total matter-bit allocation and the associated entity
+count are
+\begin{equation}
+ M(T)=\sum_i M_i(T),
+ \qquad
+ N(T)=\sum_i\frac{M_i(T)}{w_i}.
+ \label{eq:matter-total}
+\end{equation}
+The auto-selected marker called ``today'' in the figures is
+\begin{equation}
+ T_{\rm today}=\operatorname*{arg\,max}_T N(T).
+ \label{eq:today}
+\end{equation}
+It is a plotting convention, not a derived physical-age calibration.
+
+The exponent $q$ is not fixed by the window combinatorics.  At $q=0$, every
+raw structure bit counts as matter and the equilibrium structure plateau
+survives.  For $q>0$, equation~\eqref{eq:eta} suppresses matter toward late
+internal times.  The model's late behavior therefore depends strongly on a
+currently non-derived choice.
+
+\subsection{Size measure used by \texttt{run\_simulation}}
+
+Let
+\begin{equation}
+ L(T)=\sum_iL_i(T)
+ \label{eq:pending-total}
+\end{equation}
+be the total multi-clock backlog.  The code defines
+\begin{equation}
+ \boxed{
+ R_D(T)=\frac{U(T)-L(T)-M(T)}{n}.}
+ \label{eq:size-code}
+\end{equation}
+This equation replaces the older manuscript formula in which composite
+entity counts were added back into the size measure.  In the present code,
+$N_i=M_i/w_i$ is used to display matter worldlines and abundances, but it is
+not included in equation~\eqref{eq:size-code}.  A $w_i$-bit matter structure
+therefore withdraws all $w_i$ participating bits from the free spacetime
+size budget.
+
+Using the exact ledger~\eqref{eq:global-ledger}, equation~\eqref{eq:size-code}
+can also be written as
+\begin{equation}
+ nR_D
+ =\sum_iF_i+\sum_i(C_i-M_i)+G_{m-1}.
+ \label{eq:size-ledger}
+\end{equation}
+This identity exposes another current modeling convention.  When $q>0$,
+only the fraction $\eta^q$ of the raw structure sector is called matter;
+$C_i-M_i$ remains part of the size measure.  At $q=0$, all raw structure is
+matter and that term vanishes.
+
+\subsection{Informational interpretation}
+
+The mechanism represented by equation~\eqref{eq:size-code} is simple.  No
+new bits enter the static universe.  Bits that are available as independently
+addressable fabric contribute to spatial resolution.  The same bits can be
+organized into larger observer and matter microstructures.  Once allocated
+to such a composite, they are no longer counted as free fabric.  Spatial
+contraction and slower local clocks are therefore two readings of one finite
+budget:
+\begin{equation}
+ \text{composite formation}
+ \quad\Longrightarrow\quad
+ \begin{cases}
+  \text{fewer free spatial distinctions},\\
+  \text{more elementary transitions per composite tick}.
+ \end{cases}
+ \label{eq:curvature-intuition}
+\end{equation}
+The present simulation is a homogeneous global shadow of this idea.  It does
+not yet calculate a local metric, a Ricci tensor, or directional focusing.
+Those require a local, direction-dependent version of the counting deficit.
+
+\section{Spectral Companion}
+\label{sec:spectral}
+
+The $\psi$-layer companion represents a fixed global count by the Dicke state
+\begin{equation}
+ \lvert D_n^k\rangle
+ =\frac{1}{\sqrt{\binom nk}}
+  \sum_{x:\,|x|=k}\lvert x\rangle.
+ \label{eq:dicke}
+\end{equation}
+For a width-$w$ subsystem, the probability of observing $j$ excitations is
+again equation~\eqref{eq:hypergeom}.  The reduced-state entropy is therefore
+\begin{equation}
+ S_{\rm vN}(n,k,w)
+ =-\sum_j h_w(j\mid n,k)\log_2h_w(j\mid n,k).
+ \label{eq:svn}
+\end{equation}
+The code verifies the rank-one block structure underlying this shortcut by
+direct state-vector diagonalization for small systems.
+
+For a specified composition $(a,b)$ with $w=a+b$, the probability of the
+whole composition class is
+\begin{equation}
+ P_{\rm class}(a,b\mid n,k)=h_w(a\mid n,k),
+ \label{eq:classprob}
+\end{equation}
+whereas one exact ordered pattern has probability
+\begin{equation}
+ P_{\rm specific}(a,b\mid n,k)
+ =\frac{h_w(a\mid n,k)}{\binom wa}.
+ \label{eq:specificprob}
+\end{equation}
+The cosmological matter pipeline in \texttt{cosmic\_psi.py} deliberately
+uses the class probability, because matter formation is associated with the
+composition class rather than one chosen ordering.
+
+The conservative persistence probability used by the spectral cascade is
+\begin{equation}
+ s(n,w)=\left(\frac{n-w}{n}\right)^w.
+ \label{eq:survival}
+\end{equation}
+It is the probability that none of the $w$ bits is touched during the next
+$w$ raw flips.  This literal-freeze criterion is exact for the stated event
+but is a lower bound on more permissive composition-preserving persistence.
+
+Two spectral organizations are implemented:
+\begin{description}
+ \item[Nested cascade.]  Each level acts on the exact leftover substrate of
+ the preceding composition, and match and survival probabilities multiply
+ across levels.  This models a genuine formation hierarchy.
+ \item[Parallel species.]  Every level reads the same shared $(n,k(T))$ and
+ receives only its own survival factor.  No cross-species multiplication is
+ applied.  This is the appropriate implemented option for coexisting
+ categories that are not nested inside one another.
+\end{description}
+
+For a level with $n_i$ available substrate bits, the spectral matter-bit
+proxy is
+\begin{equation}
+ M_i^{\psi}(T)
+ =\left\lfloor\frac{n_i}{w_i}\right\rfloor w_i
+   P_i^{\rm persistent}(T),
+ \label{eq:psi-matter}
+\end{equation}
+and the plotted spectral size proxy is
+\begin{equation}
+ R_{\psi}(T)
+ =\max\left\{0,\frac{U(T)-\sum_iM_i^{\psi}(T)}{n}\right\}.
+ \label{eq:psi-size}
+\end{equation}
+The current default composition
+$a=\max(1,\lfloor w/3\rfloor)$, $b=w-a$ is explicitly a modeling choice,
+not a particle-spectrum derivation.
+
+The classical and spectral simulations are companion descriptions rather
+than identical algorithms.  The classical code uses aggregated threshold
+families, a nested multi-clock backlog, and the free exponent $q$.  The
+spectral code uses selected composition classes, literal-freeze persistence,
+and either nested or parallel organization.  Their common exact object is
+the fixed-count hypergeometric window marginal.
+
+\section{Default Numerical Experiment}
+\label{sec:numerics}
+
+\subsection{Protocol}
+
+The default classical run uses the settings in
+Table~\ref{tab:defaults}.
+\begin{table}[ht]
+\centering
+\caption{Default parameters of \texttt{cosmic\_d.py}.}
+\label{tab:defaults}
+\begin{tabular}{lll}
+\toprule
+Quantity & Code value & Status \\
+\midrule
+Bit count & $n=184$ & illustrative finite system \\
+Widths & $(6,12,20)$ & placeholders \\
+Grid points & $3000$ & numerical display choice \\
+Maximum raw coordinate & $T_{\max}=n\ln n$ & display-range choice \\
+Ehrenfest rate & $2$ & derived continuum rate \\
+Matter exponent & $q=1$ & non-derived current default \\
+``Today'' & peak of $N(T)$ & plotting convention \\
+Physical-year labels & log interpolation & plotting only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The optional argument \texttt{--t\_bf\_max} is interpreted in units of $n$
+and then multiplied by $n$.  If it is omitted, the endpoint is $n\ln n$.
+The year-axis function maps the Planck-time label and $13.8$ billion years
+log-uniformly onto the internal coordinate, with the ``now'' label placed at
+equation~\eqref{eq:today}.  This map is not used in any model equation.
+
+\subsection{Reproduced diagnostics}
+
+Running the current default implementation gives
+\begin{align*}
+ \max_T|\text{ledger error}|&=2.84\times10^{-14}\ \text{bits},\\
+ \frac{p(T_{\max})}{1/2}&=0.999970,\\
+ T_{\rm today}&=60.1517,
+ \qquad \tau_{\rm today}=0.326912,\\
+ \max_T N(T)&=9.02814\ \text{entities},\\
+ E_n(T_{\max})&=0.9777745,\\
+ R_D(T_{\max})&=0.9777530.
+\end{align*}
+The distinct retarded raw states visited by the three scales over the
+$3000$-point display grid are $160$, $80$, and $48$, respectively.  Their
+maximum pending fractions are approximately $0.1931$, $0.02885$, and
+$0.04972$ of the total bit budget.
+
+Figure~\ref{fig:default} shows the four quantities that directly enter the
+implemented size equation.  The step structure is not numerical noise; it is
+produced by the retarded coordinates in equation~\eqref{eq:retard}.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/cosmological-model-current-default.png}
+\caption{Current default implementation in normalized internal coordinate
+$\tau=T/n$.  The no-matter entropy pool $U/n$ rises rapidly.  Matter bits and
+the pending multi-clock backlog suppress the implemented size measure
+$R_D$.  The dashed line is the code's auto-selected ``now'', defined as the
+peak total entity count.}
+\label{fig:default}
+\end{figure}
+
+\subsection{Dependence on the matter exponent}
+
+The asymptotic behavior is controlled by the non-derived exponent $q$.
+Table~\ref{tab:qscan} reproduces a scan with all other default settings held
+fixed.
+\begin{table}[ht]
+\centering
+\caption{Sensitivity to the matter exponent $q$.  The relic column is the
+final total entity count divided by its peak value.}
+\label{tab:qscan}
+\begin{tabular}{ccc}
+\toprule
+$q$ & $N(T_{\max})/N_{\max}$ & $R_D(T_{\max})$ \\
+\midrule
+$0$   & $7.343\times10^{-1}$ & $0.24984$ \\
+$0.5$ & $6.440\times10^{-3}$ & $0.97382$ \\
+$1$   & $4.930\times10^{-5}$ & $0.97775$ \\
+$2$   & $2.400\times10^{-9}$ & $0.97777$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/cosmological-model-matter-power.png}
+\caption{The implemented size measure for several values of the free matter
+exponent.  The $q=0$ curve retains the equilibrium structure plateau.  For
+$q>0$, matter is increasingly suppressed by $\eta^q$ and $R_D$ returns
+toward the no-matter entropy envelope.}
+\label{fig:qscan}
+\end{figure}
+
+The late recovery of the default curve is therefore an implemented
+consequence of the $q=1$ matter ansatz, not a theorem following from the bare
+hypergeometric structure fraction.  Any cosmological interpretation of the
+late regime must either derive $q$ or replace equation~\eqref{eq:matter} by a
+persistence rule with no free exponent.
+
+\subsection{Large-$n$ behavior}
+
+At fixed normalized coordinate $\tau$ and fixed finite widths, the continuum
+mean curve is independent of $n$, the normalized combinatorial entropy
+approaches the binary entropy, and the hypergeometric marginal approaches a
+binomial marginal.  The simulations consequently show a stable large-$n$
+shape with finite-size and finite-width corrections.  This is approximate
+convergence, not exact equality for all $n$.  In particular, the clock
+backlog associated with a fixed width scales differently when $w/n$ is not
+small.
+
+\section{What the Implemented Profile Means}
+\label{sec:profile}
+
+The default output can be described in three internal-coordinate regimes.
+The terminology here is deliberately kinematic rather than observational.
+
+\paragraph{I. Entropy-pool growth.}
+At small $T$, $U(T)$ grows rapidly from zero.  Before the matter and pending
+terms become large, $R_D$ follows the same upward tendency.
+
+\paragraph{II. Matter-loaded, clock-retarded growth.}
+The structure fractions rise, matter is allocated from the same finite
+budget, and scale-dependent updates create pending backlogs.  Consequently
+$R_D<U/n$.  Each retarded scale produces plateaus and short contractions when
+its local state updates.  The code therefore implements both a reduced
+spatial budget and slower composite clocks from the same width parameter.
+
+\paragraph{III. Late recovery for $q>0$.}
+The order parameter $\eta^q$ suppresses matter, and pending backlogs vanish as
+the hierarchy saturates.  The size measure approaches the no-matter entropy
+envelope.  For $q=0$, this recovery is incomplete because the raw equilibrium
+structure fraction remains classified as matter.
+
+These regimes should not yet be called inflation, deceleration, or dark-energy
+acceleration in the strict GR/FLRW sense.  Such statements require a physical
+proper-time decoder, an operational metric, a redshift law, and derivatives
+with respect to that proper time.  The implemented result is instead:
+\begin{quote}
+A fixed finite information budget, together with scale-dependent clocks and
+matter allocation from the same substrate, generically suppresses the
+observer's available spatial-resolution proxy relative to the no-matter
+entropy envelope and can produce local contraction followed by recovery.
+\end{quote}
+
+\section{Dark Matter Interpretation}
+\label{sec:darkmatter}
+
+The code itself contains widths and compositions, not experimentally
+identified particle names.  An assignment of one emergent class to dark
+matter is therefore an interpretation layered on the statistical model.
+Within the broader framework, the proposed mechanism is:
+\begin{enumerate}
+  \item an early, relatively simple fermionic microstructure class forms from
+        the same finite fabric budget;
+  \item its participating bits reduce the free spacetime capacity through
+        equation~\eqref{eq:size-code}, so it gravitates by the same counting
+        mechanism as visible matter;
+  \item its compression residual is not in the photon class registered by
+        visible-matter detectors, so it is electromagnetically dark;
+  \item it may coexist with visible species, in which case the spectral
+        parallel implementation is more appropriate than a forced nested
+        cascade.
+\end{enumerate}
+
+This introduces no separate fundamental substrate, but it does define a
+distinct emergent matter class.  The present simulation has not yet derived
+its stability, velocity distribution, clustering, pressure, abundance, or
+perturbation dynamics.  It therefore supplies an ontology and a formation
+mechanism, not yet a complete cosmological dark-matter model.
+
+\section{Connection to Curvature and General Relativity}
+\label{sec:gr}
+
+The global size equation is the homogeneous statistical shadow of a proposed
+local counting mechanism.  At a point $x$, let a direction-dependent count
+$\Delta N(x,k)$ describe the loss of independently usable fabric relations in
+a small causal pencil oriented along a null vector $k^\mu$.  A continuum
+Ricci limit would require a relation of the form
+\begin{equation}
+ \Delta N(x,k;A,\ell)
+ =\gamma A\ell^2 T_{\mu\nu}(x)k^\mu k^\nu
+ +o(A\ell^2),
+ \label{eq:directional-count}
+\end{equation}
+combined with the geometric area-deficit expansion
+\begin{equation}
+ \frac{\Delta A}{A}
+ =-\frac12\ell^2 R_{\mu\nu}(x)k^\mu k^\nu+o(\ell^2).
+ \label{eq:ricci-target}
+\end{equation}
+The present cosmological code does not implement equations
+\eqref{eq:directional-count}--\eqref{eq:ricci-target}.  Its contribution is
+the finite-budget principle and the scale-dependent clock rule that a local
+tensor construction would have to refine.  Demonstrating the Ricci tensor
+from directional counts remains a separate task; the Weyl sector requires
+additional nonlocal relational information.
+
+\section{Model Status and Non-Claims}
+\label{sec:status}
+
+The following statements are established by the present implementation:
+\begin{itemize}
+  \item The conditional finite-window distribution on a fixed-count shell is
+        exactly hypergeometric.
+  \item The fall, structure, and promoted sectors form an exact partition.
+  \item The recursive multi-clock ledger telescopes exactly.
+  \item The matter and size curves are completely reproducible from the
+        documented equations and default parameters.
+  \item The classical and Dicke-state descriptions share the same
+        fixed-count window marginal.
+\end{itemize}
+
+The present implementation does not establish:
+\begin{itemize}
+  \item an exact unconditioned solution of the one-flip discrete chain at
+        every tick;
+  \item a unique physical particle composition for any width;
+  \item a derived value of the matter exponent $q$;
+  \item a physical conversion from bit-flip coordinate to seconds or years;
+  \item an FLRW metric, Hubble function, luminosity distance, or redshift law;
+  \item the Einstein field equations or a quantized Ricci tensor;
+  \item the observed dark-matter abundance or perturbation spectrum.
+\end{itemize}
+
+\section{Open Problems}
+\label{sec:open}
+
+\subsection*{Derive or eliminate the matter exponent}
+The dominant immediate problem is equation~\eqref{eq:matter}.  A preferred
+solution would derive matter from persistent worldline structure, so that
+accidental equilibrium windows are not counted as particles and no external
+power $q$ is required.
+
+\subsection*{Derive widths and compositions}
+The illustrative widths $(6,12,20)$ and the spectral default compositions
+are placeholders.  They must be derived from the microstructure algebra and
+its energy-information relation before particle names or abundance ratios
+can be assigned.
+
+\subsection*{Choose nested and parallel sectors physically}
+A genuine formation chain should use the nested recursion.  Coexisting
+species should use a joint or parallel allocation with an explicit rule that
+prevents the same substrate bits from being assigned to incompatible
+structures.  The current spectral code exposes both modes; the ontology must
+select between them by sector.
+
+\subsection*{Replace literal freeze by structural persistence}
+Equation~\eqref{eq:survival} forbids every constituent bit from being touched.
+A real stable structure may survive internal rearrangements.  The relevant
+quantity is a first-passage or survival probability in the space of valid
+composite states.
+
+\subsection*{Implement the contrast and metric decoder}
+The $n/2$ bound in equation~\eqref{eq:n2bound} should be connected to
+operational rulers made from observer microstructures.  The result must
+determine whether the global count represents a linear scale, an area, or a
+volume and must define null propagation and redshift.
+
+\subsection*{Derive the local Ricci sector}
+The global subtraction in equation~\eqref{eq:size-code} must be promoted to a
+local, directional conserved count and shown to have the continuum expansion
+in equations~\eqref{eq:directional-count}--\eqref{eq:ricci-target}.
+
+\subsection*{Complete the quantum measure}
+The Dicke implementation supplies kinematics and exact marginal statistics.
+A complete quantum cosmology also requires the amplitude or compression
+measure over alternative static informational configurations and a derivation
+of the relevant observation probabilities.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The current simulation implements a precise finite-budget model.  A
+continuum Ehrenfest mean selects a rounded Hamming shell; the shell's
+combinatorial entropy supplies the unfolded pool; exact conditional
+hypergeometric statistics divide finite windows into falling,
+structure-forming, and promoted sectors; and scale-dependent retarded clocks
+organize those sectors into a nested hierarchy with an exact telescoping
+ledger.  Matter is a weighted subset of the structure sector, and the
+implemented size measure subtracts both matter bits and multi-clock backlog
+from the unfolded pool.
+
+The central physical suggestion is preserved without importing information
+from outside the static universe: matter and spacetime are alternative
+organizations of one finite informational budget.  Matter formation reduces
+the free spatial-resolution proxy, while larger structures accumulate fewer
+internal ticks per elementary transition.  The code therefore realizes the
+proposed common origin of spatial contraction and slower clocks at the level
+of a homogeneous statistical demonstrator.
+
+The revision also makes the limitations explicit.  The late recovery of the
+default curve depends on the non-derived $q=1$ matter weighting; the widths
+and compositions are placeholders; the physical metric and proper-time map
+have not been derived; and the model has not yet produced the Ricci tensor or
+an observational cosmology.  These limitations identify concrete next
+steps rather than undermining the exact combinatorial and accounting results
+already present.
+
+\appendix
+\section{Code-to-Equation Map}
+\label{app:code-map}
+
+\begin{table}[ht]
+\centering
+\caption{Primary implementation functions and their mathematical roles.}
+\small
+\begin{tabular}{p{0.37\textwidth}p{0.55\textwidth}}
+\toprule
+Function or field & Mathematical content \\
+\midrule
+\texttt{p\_of\_tau} & Equation~\eqref{eq:p-code} with raw coordinate input. \\
+\texttt{ones\_count\_from\_p} & Rounded mean shell, equation~\eqref{eq:k-code}. \\
+\texttt{combinatorial\_entropy\_bits} & $\log_2\binom nk/n$. \\
+\texttt{ground\_truth\_pool} & Returns $U(T)$ and $k(T)$. \\
+\texttt{order\_parameter} & Equation~\eqref{eq:eta}. \\
+\texttt{family\_fractions\_exact} & Equations~\eqref{eq:fall}--\eqref{eq:rise}. \\
+\texttt{retard} & Equation~\eqref{eq:retard}. \\
+\texttt{level\_state} & Equations~\eqref{eq:pending}--\eqref{eq:recursion}. \\
+\texttt{matter\_content} & Equations~\eqref{eq:matter}--\eqref{eq:matter-total}. \\
+\texttt{size\_measure} & Equation~\eqref{eq:size-code}. \\
+\texttt{window\_marginal} & Equation~\eqref{eq:hypergeom}. \\
+\texttt{class\_probability} & Equation~\eqref{eq:classprob}. \\
+\texttt{pattern\_probability} & Equation~\eqref{eq:specificprob}. \\
+\texttt{run\_cascade\_series} & Nested spectral composition hierarchy. \\
+\texttt{run\_parallel\_series} & Independent coexisting spectral categories. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Reproduction Commands}
+\label{app:commands}
+
+The current classical figure is generated by
+\begin{verbatim}
+python simulations/cosmic_d.py \
+  --n_bits 184 \
+  --scales 6,12,20 \
+  --matter_power 1 \
+  --steps 3000 \
+  --output emergent_structure_relativistic.png
+\end{verbatim}
+The spectral companion can be run as a nested cascade or with coexisting
+parallel categories:
+\begin{verbatim}
+python simulations/cosmic_psi.py --scales 6,12,20 --output cascade.png
+python simulations/cosmic_psi.py --parallel \
+  --scales 6,12,20 --output parallel.png
+\end{verbatim}
+Specific spectral compositions may be supplied with, for example,
+\begin{verbatim}
+--compositions 1:5,2:10,3:17
+\end{verbatim}
+Such compositions remain modeling choices until independently derived.
+
+\end{document}
