@@ -34,26 +34,22 @@ from inside.
 
 ## Cosmological ledger
 
-1. The screen/Born entropy \(nH_2[p(\tau)]\) is interpreted as unfolded
-   spacetime resolution.
-2. At each `--scale`, the exact binomial window probabilities are divided into
-   falling, hump, and rising composition families.
-3. The hump family supplies elementary microstructures. These use the same
-   finite information budget as spacetime fabric.
-4. The existing order-parameter weighting is retained explicitly:
+The screen/Born entropy $nH_2[p(\tau)]$ is interpreted as unfolded spacetime resolution.
+At each `--scale`, the exact binomial window probabilities are divided into falling, hump, and rising composition families.
+The hump family supplies elementary microstructures. These use the same finite information budget as spacetime fabric.
+The existing order-parameter weighting is retained explicitly:
 
-   $$
-   M_i(\tau)=\mathrm{structure}_i(\tau)\,\eta(\tau)^q,
-   \qquad q=\texttt{--matter\_power}.
-   $$
+$$
+M_i(\tau)=\mathrm{structure}_i(\tau)\,\eta(\tau)^q, \qquad q=\texttt{--matter\\_power}
+$$
 
-   The default is `q=1`, matching the current statistical backend. Setting
-   `--matter_power 0` is the raw-hump/plateau ablation.
-5. The size curve is
+The default is `q=1`, matching the current statistical backend. Setting `--matter_power 0` is the raw-hump/plateau ablation.
 
-   $$
-   R_Q=\frac{S_{\rm Born}-P_{\rm pending}-M_{\rm bits}}{n}.
-   $$
+The size curve is
+   
+$$
+R_Q=\frac{S_{\rm Born}-P_{\rm pending}-M_{\rm bits}}{n}.
+$$
 
 The default run detects rapid early growth, a matter-loading slowdown, and a
 late positive recovery as the weighted hump populations decline. There is no observer
