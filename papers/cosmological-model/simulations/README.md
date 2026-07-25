@@ -2,6 +2,10 @@
 
 This folder implements three different cosmological toy models predicting the three-fold expansion profile.
 
+## 
+
+Given a typical relaxed system rushing from zero entropy to full equilibrium (as observed), and emergent micro-structures following a typical hump-shaped probability distribution — [mathematically proven](Increasing-Entropy-and-Emergent-Structures) —an intrinsic observer perceives a three-fold expansion profile as a typical outcome. 
+
 ## Usage
 
 ```bash
