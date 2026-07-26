@@ -1,12 +1,28 @@
 # README
 
-This folder implements three different cosmological toy models predicting the three-fold expansion profile.
+## Objective & Theoretical Framework
 
-## Prediction
+This simulation models cosmological evolution within the $D\text{-}\psi\text{-}G$ framework.
+By assuming an initially zero-entropy state evolving toward thermal equilibrium in a typical relaxed system,
+and applying the proven hump-shaped measure distribution for emergent substructures,
+the framework yields a three-phase cosmological expansion profile as a high-probability outcome for an intrinsic observer.
 
-Assuming only a typical relaxed system rushing from zero entropy to full equilibrium (as observed), and emergent micro-structures following a typical hump-shaped probability distribution — [mathematically proven](Increasing-Entropy-and-Emergent-Structures) —an intrinsic observer perceives a three-fold expansion profile as a typical outcome. 
+## Key Assumptions & Conditioning
+
+**Observer-Conditioned Dynamics:** Observational outcomes in this framework are conditioned on the existence of an observer.
+While macroscopic observer states are not explicitly modeled, the system simulates micro-structural emergent entities 
+analogous to elementary particles across scales. The peak in the probability density for emergent micro-structures corresponds
+directly to the domain where the probability of observer emergence is maximal.
+
+**Thermodynamic Arrow:** The monotonic increase of entropy is treated here as an empirical fact.
+Within the broader mathematical framework, this thermodynamic arrow can be formally derived via Solomonoff induction.
+
 
 ## Usage
+
+This folder implements three different cosmological toy models predicting the three-fold expansion profile.
+
+They can be executed:
 
 ```bash
 python cosmic.py statistical --scales 6,12,20
@@ -19,10 +35,6 @@ Or run all three with the checked-in configuration:
 ```bash
 bash run
 ```
-
-Note: the wavefunction backend's recovery target is an equilibrium remnant, not zero (see
-below), and needs `--t_bf_max` of roughly `4` or more to relax onto it; `2` (fine for the other
-two backends) reads as `CHECK` rather than `PASS` purely from not having run long enough.
 
 ## Wavefunction 
 
