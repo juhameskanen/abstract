@@ -197,19 +197,19 @@ For any single fermion hop from site~$0$ to site~$d$, regardless of $L$ or $d$:
 \]
 The boson matrix has exactly two non-zero entries:
 \[
-  B_{0,d} = +\tfrac{i}{2}, \qquad B_{d,0} = -\tfrac{i}{2}.
+  B_{0,d} = -\tfrac{i}{2}, \qquad B_{d,0} = +\tfrac{i}{2}.
 \]
 For the nearest-neighbour hop ($d=1$, $L=4$) this reads explicitly:
 \[
   B \;=\;
   \begin{pmatrix}
-    0 & +\tfrac{i}{2} & 0 & 0 \\[4pt]
-    -\tfrac{i}{2} & 0 & 0 & 0 \\[4pt]
+    0 & -\tfrac{i}{2} & 0 & 0 \\[4pt]
+    +\tfrac{i}{2} & 0 & 0 & 0 \\[4pt]
     0 & 0 & 0 & 0 \\[4pt]
     0 & 0 & 0 & 0
   \end{pmatrix}.
 \]
-The same $2\times 2$ antisymmetric block $\bigl(\begin{smallmatrix}0&+i/2\\-i/2&0\end{smallmatrix}\bigr)$
+The same $2\times 2$ antisymmetric block $\bigl(\begin{smallmatrix}0&-i/2\\+i/2&0\end{smallmatrix}\bigr)$
 is embedded at positions $(0,d)$ and $(d,0)$ for any hop distance $d$ and
 any chain length $L$; all other entries are zero.
 The matrix is always purely antisymmetric, always has eigenvalues $\pm 1/2$,
@@ -672,14 +672,47 @@ products.
 
 Experiment~7 shows that the boson-residual formalism is compatible with a
 mass term once a two-band Hamiltonian is assumed, but the Hamiltonian itself
-was imported rather than derived. The natural next step is to test whether
-applying the same overlap/exclusion cost functional that produces Pauli
-exclusion in Experiment~4 to an internal (band) degree of freedom, rather
-than a spatial one, forces a band-splitting term of the form $m\sigma_z$ --
-or produces a different structure entirely, which would itself be
-informative. If successful, this would upgrade Result~5 from a numerically
-verified correspondence to an analytically exact theorem on the same footing
-as Results~1--4.
+was imported rather than derived. A first test of whether the same
+overlap/exclusion cost functional that produces Pauli exclusion in
+Experiment~4 forces a band-splitting structure, rather than assuming one,
+has now been carried out (\texttt{exclusion\_poc.py},
+\texttt{exclusion\_poc\_3level.py}; see Supplementary Material).
+
+With two internal bands, Solomonoff/MDL weighting over the band-mixing
+angle $\Delta$ between two fermions' internal states -- using only the
+exclusion cost $\|\Phi\|^2$, with no Hamiltonian and no imported mass
+parameter -- is maximized at $\Delta = \pi/2$: full orthogonality between
+the two fermions' band occupations. This reproduces, from pure MDL
+reasoning, the standard antisymmetric ground state (one fermion per band).
+With only two bands, however, this is partly a fact of linear algebra
+rather than new physics: $\Lambda^2(\mathbb{C}^2)$ is one-dimensional, so the
+reduced single-particle density matrix is forced to the maximally mixed
+state $\mathrm{diag}(1/2,1/2)$, with zero boson residual, for \emph{any}
+choice of the two orbitals. A two-band system therefore cannot, even in
+principle, support a variable residual for a mass term to attach to.
+
+Extending to three internal bands changes this. Because
+$\Lambda^2(\mathbb{C}^3)$ is three-dimensional, the occupied two-fermion
+subspace can be tilted relative to the fixed band basis, and the reduced
+single-particle boson residual $\|B_1\|$ -- evaluated in that fixed basis,
+not the particle's own natural-orbital basis, where it is always exactly
+zero -- becomes nonzero and varies continuously with the tilt angle, up to
+a maximum of $1/(2\sqrt2) \approx 0.354$. This is a genuinely new degree of
+freedom, absent by construction in the two-band case, and it is the first
+structure identified in this framework with the right qualitative shape --
+a continuously variable, band-off-diagonal coherence -- for a mass-like
+parameter to be built from.
+
+Neither script derives an energy scale: both use only counting/overlap
+(exclusion cost or Slater-determinant coherence), never a dynamical term or
+an imported constant with units of energy. Converting ``$\Delta$ is forced
+to $\pi/2$'' or ``the residual coherence varies with tilt'' into ``the two
+bands differ by a specific rest-mass energy $m$'' remains open, and
+plausibly requires relating cost-in-bits to cost-in-energy (e.g.\ via an
+analogue of $k_BT$ or $\hbar\omega$) rather than a relabelling. Until that
+step is taken, Result~5 remains at its current evidentiary tier rather than
+being upgraded to an analytically exact theorem on the footing of
+Results~1--4.
 
 \subsection{Connection to the Friedmann equation}
 
@@ -753,10 +786,23 @@ Python experiments:
         $H(k) = m\sigma_z + t\sin(k)\sigma_x$; numerical diagonalisation;
         verification of $\|B(k)\| = |t\sin k|/(\sqrt{2}E(k))$ and of the
         continuum-limit recovery of $E^2=(pc)^2+(m_0c^2)^2$.
-  \item \texttt{exclusion\_poc.py} --- Tests whether the same mechanism that produced Pauli exclusion for spatial
-    sites in the experiment 4 also operates on the internal band degree of freedom introduced in experiment 7 -- and
-    whether it can do any work toward explaining a mass splitting, without
-    importing m by hand this time.
+  \item \texttt{exclusion\_poc.py} --- Tests whether the same overlap/exclusion
+    cost that produces Pauli exclusion for spatial sites in Experiment~4 also
+    operates on the internal band degree of freedom of Experiment~7. Finds
+    that Solomonoff/MDL weighting over the band-mixing angle $\Delta$ between
+    two fermions' internal states, using only the exclusion cost (no
+    Hamiltonian, no imported mass parameter), is maximized at
+    $\Delta = \pi/2$ -- full orthogonality between the two fermions' band
+    occupations -- reproducing the standard antisymmetric one-fermion-per-band
+    ground state from pure MDL reasoning. Does not yet yield an energy scale.
+  \item \texttt{exclusion\_poc\_3level.py} --- Follow-up testing whether
+    $\geq 3$ internal bands admit a residual boson coherence, in the fixed
+    band basis, that a 2-band system cannot have even in principle (since
+    $\Lambda^2(\mathbb{C}^2)$ is one-dimensional). Finds a nonzero,
+    continuously tunable residual $\|B_1\|$ (up to $1/(2\sqrt2)\approx 0.354$
+    at maximal tilt) once the occupied two-fermion subspace is tilted
+    relative to the band axes -- a new continuous degree of freedom absent
+    in the 2-band case, though not yet tied to a specific mass value.
 \end{itemize}
 
 \printbibliography
