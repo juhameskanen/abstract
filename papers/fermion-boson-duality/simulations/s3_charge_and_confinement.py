@@ -66,7 +66,7 @@ def winding_state(n: int, m: int) -> np.ndarray:
 
     For n=2, uses the physical hop encoding from Paper VII:
       m=0: (1, 1)/sqrt(2)  -- symmetric, neutrino
-      m=1: (1, i)/sqrt(2)  -- antisymmetric, photon/charged lepton
+      m=1: (1, i)/sqrt(2)  -- antisymmetric, charged lepton (SM correlation label: photon)
     For n>=3, uses discrete Fourier modes exp(2*pi*i*m*k/n)/sqrt(n).
     """
     if n == 2:
@@ -207,16 +207,16 @@ def confinement() -> None:
     print("Section 3: Symmetry classification and confinement")
     print("=" * 65)
     print()
-    print(f"  {'(n,m)':>7}  {'Particle':>20}  {'Symmetry':>16}  "
+    print(f"  {'(n,m)':>7}  {'Fermion class':>20}  {'Symmetry':>16}  "
           f"{'Min residual':>14}  {'Confined':>9}")
     print("-" * 75)
 
     cases = [
         (1, 0, "vacuum/Pauli"),
         (2, 0, "neutrino"),
-        (2, 1, "photon"),
-        (3, 0, "Higgs candidate"),
-        (3, 1, "gluon"),
+        (2, 1, "charged lepton"),
+        (3, 0, "scalar sector"),
+        (3, 1, "quark"),
         (4, 2, "spin-2 (open)"),
     ]
 
@@ -236,13 +236,17 @@ def confinement() -> None:
               f"{min_r:>14.4e}  {'YES' if conf else 'no':>9}")
 
     print()
-    print("  Photon (n=2,m=1): residual = 0 -- free asymptotic state.")
-    print("  Gluon  (n=3,m=1): residual > 0 -- cannot be projected onto")
+    print("  Charged lepton (n=2,m=1): residual = 0 -- fermion's residual")
+    print("  has a self-contained symmetry class; can propagate freely.")
+    print("  (SM correlation label for this residual: photon.)")
+    print("  Quark (n=3,m=1): residual > 0 -- cannot be projected onto")
     print("  any self-contained symmetry class without information loss.")
-    print("  The gluon propagator always references its source fermion.")
+    print("  (SM correlation label for this residual: gluon.) The quark's")
+    print("  residual always references its source fermion configuration.")
     print("  This is the codec argument for colour confinement (conjecture).")
     print()
-    print("  n=4 spin-2 object: symmetric, free -- physical ID open.")
+    print("  n=4 spin-2 fermion class: symmetric residual, free -- physical")
+    print("  identification (e.g. graviton) is open.")
 
 
 # ---------------------------------------------------------------------------
