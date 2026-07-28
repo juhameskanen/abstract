@@ -18,33 +18,6 @@ $$
 
 where $\textbf{D}$ is discrete, $\boldsymbol{\psi}$ spectral and $\textbf{G}$ geometric description of structure $O$.
 
-## Unification of QM and GR
-
-The framework derives both quantum mechanics and general relativity from a single operation applied to compressed configurations:
-
-$$
-\rho \;\longmapsto\; \underbrace{\mathrm{diag}(\rho)}_{\text{local}} + \underbrace{\rho - \mathrm{diag}(\rho)}_{\text{non-local}}
-$$
-
-Applied to fermionic configurations, the diagonal encodes Pauli exclusion; 
-the off-diagonal produces photons, gluons, and the Born rule — with amplitude $\sin(2\theta)/\sqrt{2}$ exact.
-
-Applied to metric configurations, the diagonal gives the Ricci source term (matter curves local space); 
-the off-diagonal gives the Weyl tensor, gravitational waves, and — integrated over 
-spherical shells — the Newtonian potential $V(R) = -GMm/R$ with $G = 1/(8\pi)$ in Planck units.
-
-In both cases the same conservation law holds:
-
-$$
-\|\text{local}\|^2 + \|\text{non-local}\|^2 = 1
-$$
-
-QM and GR are two projections of the same compression principle onto different physical degrees of freedom. 
-The shared formula $\sin(2\theta)/\sqrt{2}$ is the signature of this unity.
-
-## Open Problems:
-- Extending the scalar conformal toy model to the full rank-4 Riemann tensor and deriving the Einstein field equations as the large-deviation stationarity condition of the spectral complexity functional in the continuum limit (Open Problem, Paper IX).
-
 
 ## Contents
 
@@ -55,15 +28,6 @@ The shared formula $\sin(2\theta)/\sqrt{2}$ is the signature of this unity.
 - **[CHANGELOG](CHANGELOG.md)** — Project history.
 - **[LICENSE](LICENSE.md)** — License information.
 
-
-## Simulation Gallery
-
-Starting from a well-defined observer, the simulations resolve the most probable (most compressible) static configuration. Time, dynamics, stable atoms, gravitational attraction, and wave-like behavior all emerge as part of this timeless resolution — they are not evolved step-by-step but appear as intrinsic features of the optimal description.
-
-
-## Contributions
-
-Contributions are  welcome, particularly to above listed two major issues.
 
 
 ## License & Disclaimer
