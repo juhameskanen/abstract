@@ -1,48 +1,43 @@
 """
 Supplementary Script S4 — Particle Mass Spectrum in Log2 Space
 ===============================================================
-Paper VIII: "The Universal Boson Theorem: Particle Species from Codec Geometry"
-
+Paper VIII: "Fermion Structure and Particle Classification from Codec Geometry"
 
 Purpose
 -------
-Show that the known particle mass hierarchy organises into a near-integer
-sequence in log2(m/m_e) space, with step size approximately 4 bits.
+Report the known particle masses in log2(m/m_e) space, and report a
+separately-motivated combinatorial 4-bit argument, side by side --
+WITHOUT asserting a derived connection between them. See Section 8
+("Mass and the Missing Generation Index") of the paper and the
+companion script audit_mass_ladder.py, which shows in detail why no
+such connection is currently derivable.
 
-The spectral complexity C_s of Paper VI assigns an information cost to
-each fermionic state proportional to its dominant wavenumber omega.
-Under Solomonoff induction, P(psi) ~ 2^{-C_s(psi)}, so the observable
-particle spectrum is ordered by ascending C_s.
-
-The minimum fermionic codec unit is 4 bits, corresponding to the four
-binary choices required to specify one fermion hop:
-  1. Which site (i or j)
-  2. Which frame (before or after hop)
-  3. Real or imaginary component of the wavefunction
-  4. Sign of the phase
-
-This gives 2^4 = 16 configurations per hop — the granularity of the
-mass ladder.
-
-The lepton generations (electron, muon, tau) are identified as the same
-fermionic knot topology at successive compression levels, separated by
-approximately 4 bits per generation (0, 8, 12 bits relative to electron).
-
-Massive bosons (W, Z, Higgs) appear at bits 17-18, consistent with their
-identification as cross-peak lognormal residuals: compression residuals
-from fermion hops that cross the maximum of the microstructure probability
-distribution (the lognormal peak in bit-flip space).
-
-Deviations from exact integers are interpreted as compression gains:
-the actual particle is slightly cheaper to describe than the
-nearest-integer prediction, consistent with Solomonoff induction
-favouring more compressible states.
+What this script does NOT claim
+--------------------------------
+An earlier version of this script (and of the paper) presented these
+numbers as a "mass ladder" prediction of the framework, including a
+claimed falsifiable bound on new-particle masses. That claim has been
+withdrawn (see Section 8 of the paper and audit_mass_ladder.py):
+  - The (n,m) classification of Section 5 has no third parameter that
+    could distinguish electron/muon/tau, all of which sit in the same
+    class (2,1). No construction here computes C_s for "generation 2"
+    or "generation 3" and gets 8 or 12 bits as output.
+  - The two observed lepton gaps (7.69 and 4.07 bits) are not equal to
+    each other and do not both round cleanly to a shared integer unit.
+  - The "4-bit unit" is a separate, independently-motivated combinatorial
+    count (four binary choices per fermion hop) that is not derived from,
+    or connected by any construction to, the C_s formula of Paper VI or
+    to these mass gaps.
+This script therefore reports the raw log2 mass ratios and the 4-bit
+combinatorial count as two independent, unconnected pieces of
+information. Any apparent near-integer alignment is noted as an
+observation, not evidence of a derivation.
 
 Output
 ------
-Table of known particle masses, log2(m/m_e), nearest integer,
-deviation from integer (compression gain), and identification.
-Plot of the mass ladder in log2 space.
+Table of known particle masses and log2(m/m_e).
+The 4-bit combinatorial argument, reported separately.
+No mass predictions and no falsifiability claims.
 
 """
 
@@ -78,105 +73,89 @@ M_ELECTRON = 0.51100  # MeV
 # ---------------------------------------------------------------------------
 
 def mass_spectrum_table() -> None:
-    """Print the full particle mass table in log2 space."""
+    """Print the raw particle mass table in log2 space. No claims of
+    derivation -- see module docstring and audit_mass_ladder.py."""
     print("=" * 78)
-    print("Particle mass spectrum in log2(m/m_e) space")
+    print("Particle masses in log2(m/m_e) space (raw observation, not a derived quantity)")
     print(f"Reference: electron mass m_e = {M_ELECTRON} MeV")
     print("=" * 78)
     print(f"  {'Particle':>14}  {'Mass (MeV)':>12}  {'log2(m/me)':>11}  "
-          f"{'Nearest int':>11}  {'Compression':>12}  {'Category':>8}")
+          f"{'Nearest int':>11}  {'Deviation':>12}  {'Category':>8}")
     print("-" * 78)
 
     for name, mass, category in PARTICLES:
         log2_ratio   = np.log2(mass / M_ELECTRON)
         nearest_int  = round(log2_ratio)
-        compression  = nearest_int - log2_ratio   # positive = cheaper than predicted
+        deviation    = nearest_int - log2_ratio
         print(f"  {name:>14}  {mass:>12.2f}  {log2_ratio:>11.4f}  "
-              f"{nearest_int:>11d}  {compression:>+12.4f}  {category:>8}")
+              f"{nearest_int:>11d}  {deviation:>+12.4f}  {category:>8}")
 
     print()
-    print("  Compression gain > 0: particle is cheaper to describe than")
-    print("  the nearest-integer prediction (Solomonoff-favoured).")
-    print("  Compression gain < 0: particle costs slightly more (rare).")
+    print("  'Deviation' is nearest-integer minus observed log2 ratio.")
+    print("  No claim is made that particles should land on integers;")
+    print("  this is a description of the raw numbers, not a fit or a")
+    print("  compression-cost calculation. See audit_mass_ladder.py.")
 
 
 def lepton_ladder() -> None:
-    """Analyse the lepton generation structure."""
+    """Report the raw lepton log2 mass gaps. Does not assert they are
+    equally-spaced or connected to a codec unit -- see audit_mass_ladder.py,
+    which shows the two gaps (7.69, 4.07 bits) are unequal and do not both
+    round cleanly to a shared integer unit."""
     print()
     print("=" * 60)
-    print("Lepton generation ladder")
+    print("Lepton log2 mass gaps (raw observation)")
     print("=" * 60)
 
     leptons = [(n, m, c) for n, m, c in PARTICLES if c == "lepton"]
     log2_masses = [(name, np.log2(mass / M_ELECTRON))
                    for name, mass, _ in leptons]
 
-    print(f"\n  {'Generation':>12}  {'log2(m/me)':>11}  "
-          f"{'Bits above e':>13}  {'Step':>6}")
+    print(f"\n  {'Particle':>12}  {'log2(m/me)':>11}  {'Gap from prev':>14}")
     print("-" * 50)
 
     prev = None
     for name, log2m in log2_masses:
         step = log2m - prev if prev is not None else 0.0
-        above = log2m
         step_str = f"{step:+.4f}" if prev is not None else "—"
-        print(f"  {name:>12}  {log2m:>11.4f}  {above:>13.4f}  {step_str:>6}")
+        print(f"  {name:>12}  {log2m:>11.4f}  {step_str:>14}")
         prev = log2m
 
     print()
-    print("  Expected step size from 4-bit codec unit: 4 bits per generation")
-    print("  Observed: e→mu ~7.7 bits (≈8), mu→tau ~4.1 bits (≈4)")
-    print("  The 8-bit e→mu gap = two 4-bit codec steps.")
-    print("  The 4-bit mu→tau gap = one 4-bit codec step.")
-    print("  Lepton generations are the same knot at successive")
-    print("  compression levels, not three independent particle species.")
+    print("  The two gaps (7.69, 4.07 bits) are NOT equal to each other,")
+    print("  and 7.69/4 = 1.92 is not an integer, so they do not both")
+    print("  round cleanly to a shared 4-bit unit. All three charged")
+    print("  leptons occupy the single (n,m)=(2,1) class of Section 5;")
+    print("  the classification has no third parameter to distinguish")
+    print("  them. A generation index is an open problem (Section 10),")
+    print("  not something this script demonstrates.")
 
 
 def codec_unit_argument() -> None:
-    """Show the 4-bit codec unit and its role in the mass ladder."""
+    """Show the 4-bit combinatorial count as an independently-motivated,
+    UNCONNECTED argument -- not a prediction and not a fit to the masses
+    above. See audit_mass_ladder.py for why no link is currently derivable."""
     print()
     print("=" * 60)
-    print("The 4-bit minimum fermionic codec unit")
+    print("A 4-bit combinatorial count (independent of the mass data above)")
     print("=" * 60)
     print()
-    print("  One fermion hop requires 4 binary choices:")
+    print("  One fermion hop involves 4 binary choices:")
     print("    Bit 1: which site (i or j)")
     print("    Bit 2: which frame (before or after hop)")
     print("    Bit 3: real or imaginary wavefunction component")
     print("    Bit 4: sign of the phase")
     print()
-    print("  This gives 2^4 = 16 configurations per hop.")
-    print("  The mass ladder step is 4 bits = factor 2^4 = 16 in mass.")
+    print("  This gives 2^4 = 16 configurations per hop -- a combinatorial")
+    print("  observation about the codec, not a mass formula.")
     print()
-
-    print(f"  {'Step (bits)':>12}  {'Predicted mass (MeV)':>22}  "
-          f"{'Nearest particle':>20}")
-    print("-" * 58)
-
-    known_at = {
-        0:  ("electron",   0.511),
-        4:  ("—",          None),
-        8:  ("muon",     105.66),
-        12: ("tau",     1776.86),
-        16: ("—",          None),
-        17: ("W/Z",     ~85000),
-        18: ("Higgs",  125100.0),
-    }
-
-    for s in range(0, 20):
-        m_pred = M_ELECTRON * (2 ** s)
-        label  = known_at.get(s, ("", None))
-        name   = label[0]
-        actual = label[1]
-        if name:
-            actual_str = f"{name} ({actual:.0f} MeV)" if actual else name
-            print(f"  {s:>12}  {m_pred:>22.2f}  {actual_str:>20}")
-
-    print()
-    print("  No stable particle should exist above rung ~20,")
-    print("  corresponding to ~10x the Higgs mass (~1.25 TeV).")
-    print("  The LHC has found nothing above this scale.")
-    print("  This is a falsifiable prediction of the framework.")
+    print("  This count is NOT connected by any derivation in this")
+    print("  framework to the C_s formula of Paper VI, nor to the log2")
+    print("  mass gaps reported above. Presenting both numbers together")
+    print("  is not evidence that they are related; see Section 8 of the")
+    print("  paper and audit_mass_ladder.py for the full audit of why this")
+    print("  connection does not currently exist and no mass-scale or")
+    print("  new-particle predictions can be derived from it.")
 
 
 # ---------------------------------------------------------------------------

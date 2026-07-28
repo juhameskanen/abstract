@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 from numpy.typing import NDArray
 
 from multiclock import (
-    TRUE_K_RATE,
     SimulationResult,
     build_worldlines,
     combinatorial_entropy_bits,
@@ -18,63 +17,80 @@ from multiclock import (
     years_to_tbf,
 )
 import dicke_layer as dl
-from dicke_cascade import LevelSpec, run_cascade_series, run_parallel_series
+from dicke_cascade import (
+    LevelSpec,
+    run_cascade_series_retarded,
+    run_parallel_series_retarded,
+)
 
 FloatArray = NDArray[np.float64]
 
 
 def quantum_parallel_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec]):
     """Independent-per-level counterpart to quantum_cascade_series, using
-    run_parallel_series instead of run_cascade_series: every level reads
-    off the SAME shared (n_bits, k(t)) rather than a shrinking leftover
-    substrate, and nothing is multiplied across levels. Appropriate for
-    levels meant to represent coexisting categories (e.g. dark matter +
-    several visible fermion species) rather than a nested formation
-    hierarchy -- see run_parallel_series's docstring for why chaining is
-    the wrong choice for that case.
+    run_parallel_series_retarded instead of run_cascade_series_retarded:
+    every level reads off the SAME shared n_bits pool rather than a
+    shrinking leftover substrate, and nothing is multiplied across
+    levels. Appropriate for levels meant to represent coexisting
+    categories (e.g. dark matter + several visible fermion species)
+    rather than a nested formation hierarchy -- see
+    run_parallel_series's docstring for why chaining is the wrong
+    choice for that case.
+
+    Each level still gets its own retarded clock (tau_local =
+    width*floor(tau/width), lapse=1/width) and its own pending backlog,
+    exactly like quantum_cascade_series -- substrate chaining and clock
+    retardation are independent axes. A width-20 structure ticks its
+    own proper time slower whether or not it happens to be chained
+    inside another level's leftover, so "independent/coexisting" must
+    not mean "no time dilation."
     """
-    k_vals = dl.k_of_tau(n_bits, t_bf)
-    k_int = np.clip(np.round(k_vals).astype(int), 0, n_bits)
-    cascade = run_parallel_series(n_bits, k_int.astype(float), levels, mode="class")
+    cascade = run_parallel_series_retarded(n_bits, t_bf, levels, mode="class")
     matter_bits = {}
+    pending_bits = np.zeros_like(t_bf)
     for res in cascade:
         matter_bits[res.spec.width] = (
             res.n_windows_available * res.spec.width * res.cumulative_persistent_prob
         )
+        pending_bits = pending_bits + res.pending
+    k_vals = dl.k_of_tau(n_bits, t_bf)
+    k_int = np.clip(np.round(k_vals).astype(int), 0, n_bits)
     entropy_bits = n_bits * combinatorial_entropy_bits(n_bits, k_int.astype(float))
-    return cascade, matter_bits, entropy_bits, k_int
+    return cascade, matter_bits, entropy_bits, pending_bits, k_int
 
 
 def quantum_cascade_series(n_bits: int, t_bf: FloatArray, levels: list[LevelSpec]):
-    """Always uses dicke_cascade_v2's 'class' mode (counting-equation: any
-    arrangement of a excitations in the w-window counts, matching
-    multiclock.family_fractions_exact's count-only fall/bump/rise split).
+    """Retarded-clock cascade: each level's match probability and entropy
+    are evaluated on ITS OWN lagged clock (tau_local = width * floor(tau /
+    width), lapse = 1/width), exactly mirroring multiclock.retard() and
+    wavefunction_model.local_clock -- the "heavier structures advance
+    their own proper time more slowly" mechanism.  Each level also
+    carries a pending backlog (entropy known to the raw clock but not yet
+    caught up to by that level's own lagged clock), summed into
+    pending_bits and subtracted in the caller's size_measure_q, matching
+    the classical/wavefunction ledger equation exactly.
 
-    'specific' mode (one exact bit ordering) is deliberately NOT offered
-    here: it answers a different question (how much distinguishing
-    information is in one particular microstate) that has no counterpart
-    in the classical statistical-shadow model at all -- the verified
-    classical<->quantum correspondence (window_marginal <-> 
-    family_fractions_exact) is a counts-only object throughout. Chaining
-    'specific' probabilities across a multi-level cascade also compounds
-    the C(w,a) combinatorial suppression multiplicatively level over
-    level, so the total is dominated by whichever scale is listed first
-    regardless of the rest of --scales -- see the module docstring in
-    dicke_cascade_v2.py, which already flags this. dl.pattern_probability
-    itself is still available in dicke_layer.py for other purposes (e.g.
-    a Solomonoff/description-length treatment of specific configurations),
-    just not wired into this spacetime/matter pipeline.
+    Always uses 'class' mode (counting-equation: any arrangement of a
+    excitations in the w-window counts) -- see dicke_cascade.py's
+    run_cascade_series docstring for why 'specific' mode is not used for
+    the matter signal.
+
+    Matter is the raw hump-family match probability with no extra
+    order-parameter weighting -- there is no matter_power free parameter
+    here anymore, matching the classical and wavefunction backends.
     """
-    k_vals = dl.k_of_tau(n_bits, t_bf)
-    k_int = np.clip(np.round(k_vals).astype(int), 0, n_bits)
-    cascade = run_cascade_series(n_bits, k_int.astype(float), levels, mode="class")
+    cascade = run_cascade_series_retarded(n_bits, t_bf, levels, mode="class")
     matter_bits = {}
+    pending_bits = np.zeros_like(t_bf)
     for res in cascade:
         matter_bits[res.spec.width] = (
             res.n_windows_available * res.spec.width * res.cumulative_persistent_prob
         )
+        pending_bits = pending_bits + res.pending
+    k_vals = dl.k_of_tau(n_bits, t_bf)
+    k_int = np.clip(np.round(k_vals).astype(int), 0, n_bits)
     entropy_bits = n_bits * combinatorial_entropy_bits(n_bits, k_int.astype(float))
-    return cascade, matter_bits, entropy_bits, k_int
+    return cascade, matter_bits, entropy_bits, pending_bits, k_int
 
 
 def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
@@ -83,10 +99,16 @@ def plot_results_cascade(sim: SimulationResult, levels: list[LevelSpec],
     n_bits = sim.n_bits
     widths = [lvl.width for lvl in levels]
 
-    series_fn = quantum_parallel_series if parallel else quantum_cascade_series
-    cascade, matter_bits, entropy_bits, k_int = series_fn(n_bits, t_bf, levels)
+    if parallel:
+        cascade, matter_bits, entropy_bits, pending_bits, k_int = quantum_parallel_series(
+            n_bits, t_bf, levels
+        )
+    else:
+        cascade, matter_bits, entropy_bits, pending_bits, k_int = quantum_cascade_series(
+            n_bits, t_bf, levels
+        )
     total_matter_bits = sum(matter_bits[w] for w in widths)
-    size_measure_q = np.clip((entropy_bits - total_matter_bits) / n_bits, 0.0, None)
+    size_measure_q = np.clip((entropy_bits - pending_bits - total_matter_bits) / n_bits, 0.0, None)
 
     cmap = plt.get_cmap("plasma")
     colors = [cmap(0.15 + 0.7 * i / max(len(levels) - 1, 1)) for i in range(len(levels))]
@@ -185,7 +207,6 @@ def main() -> None:
                               "same convention as emergent_structure_relativistic.py.")
     parser.add_argument("--steps", type=int, default=3000)
     parser.add_argument("--t_today", type=float, default=None)
-    parser.add_argument("--matter_power", type=float, default=1.0)
     parser.add_argument("--scales", type=str, default="6,12,20")
     parser.add_argument("--compositions", type=str, default=None,
                          help="a:b per scale, comma-separated, e.g. '1:5,2:10,3:17'. "
@@ -203,7 +224,7 @@ def main() -> None:
 
     sim = run_simulation(
         n_bits=args.n_bits, scales=[lvl.width for lvl in levels], steps=args.steps,
-        t_bf_max=args.t_bf_max, t_today=args.t_today, matter_power=args.matter_power,
+        t_bf_max=args.t_bf_max, t_today=args.t_today,
     )
 
     plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output,

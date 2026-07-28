@@ -1,5 +1,5 @@
 """
-dicke_cascade_v2.py -- specific-composition, persistence-aware multi-scale cascade.
+dicke_cascade.py -- specific-composition, persistence-aware multi-scale cascade.
 
 Builds the --scales cascade dicke_layer.py flagged as NOT YET BUILT, using
 three pieces already independently verified in this project rather than
@@ -95,6 +95,7 @@ from typing import Sequence
 import numpy as np
 
 import dicke_layer as dl
+from multiclock import combinatorial_entropy_bits
 
 
 @dataclass
@@ -201,6 +202,77 @@ class CascadeSeriesResult:
     entanglement_entropy: np.ndarray
 
 
+def run_parallel_series_retarded(
+    n_bits: int, tau_raw: np.ndarray, levels: Sequence[LevelSpec],
+    mode: str = "class",
+) -> list[CascadeSeriesResultRetarded]:
+    """Retarded-clock counterpart of run_parallel_series.
+
+    Chaining (substrate nesting) and retardation (per-width clock lag)
+    are independent axes: whether level i's substrate is level (i-1)'s
+    leftover, or the same shared n_bits every level reads from, says
+    nothing about whether a width-w structure ticks its own proper time
+    at lapse = 1/w. It does -- a width-20 structure retards its own
+    clock whether or not it happens to nest inside another level's
+    leftover. This function keeps run_parallel_series's independence
+    (no cumulative_a peeling, nothing multiplied across levels) while
+    giving every level its own tau_local = retard(tau_raw, width), same
+    as run_cascade_series_retarded.
+    """
+    if mode not in ("specific", "class"):
+        raise ValueError(f"mode must be 'specific' or 'class', got {mode!r}")
+    prob_fn = dl.pattern_probability if mode == "specific" else dl.class_probability
+
+    tau_raw = np.asarray(tau_raw, dtype=float)
+    results: list[CascadeSeriesResultRetarded] = []
+
+    k_true_full = dl.k_of_tau(n_bits, tau_raw)
+
+    for spec in levels:
+        if spec.width > n_bits:
+            zeros = np.zeros_like(tau_raw)
+            results.append(CascadeSeriesResultRetarded(
+                spec=spec, n_substrate=n_bits, survival_prob=0.0,
+                n_windows_available=0, lapse=1.0 / spec.width, tau_local=zeros,
+                match_prob=zeros, cumulative_match_prob=zeros,
+                cumulative_persistent_prob=zeros, entanglement_entropy=zeros,
+                pending=zeros,
+            ))
+            continue
+
+        tau_local = spec.width * np.floor(tau_raw / spec.width)
+        k_local_full = dl.k_of_tau(n_bits, tau_local)
+
+        k_true = np.clip(np.round(k_true_full), 0, n_bits)
+        k_eff = np.clip(np.round(k_local_full), 0, n_bits)
+
+        match_p = prob_fn(n_bits, k_eff, spec.a, spec.b)
+        surv_p = survival_probability(n_bits, spec.width, spec.width)
+        persistent = match_p * surv_p  # NOT multiplied against any other level
+
+        S_vN = np.array([
+            dl.entanglement_entropy(n_bits, int(round(kk)), spec.width) if kk > 0 else 0.0
+            for kk in k_eff
+        ])
+
+        entropy_true = n_bits * combinatorial_entropy_bits(n_bits, k_true)
+        entropy_eff = n_bits * combinatorial_entropy_bits(n_bits, k_eff)
+        pending = np.clip(entropy_true - entropy_eff, 0.0, None)
+
+        results.append(CascadeSeriesResultRetarded(
+            spec=spec, n_substrate=n_bits, survival_prob=surv_p,
+            n_windows_available=n_bits // spec.width, lapse=1.0 / spec.width,
+            tau_local=tau_local,
+            match_prob=match_p,
+            cumulative_match_prob=match_p.copy(),
+            cumulative_persistent_prob=persistent.copy(),
+            entanglement_entropy=S_vN,
+            pending=pending,
+        ))
+
+    return results
+
+
 def run_parallel_series(
     n_bits: int, k_array: np.ndarray, levels: Sequence[LevelSpec],
     mode: str = "class",
@@ -273,6 +345,115 @@ def run_parallel_series(
             cumulative_persistent_prob=persistent.copy(),  # own survival only, not chained
             entanglement_entropy=S_vN,
         ))
+
+    return results
+
+
+@dataclass
+class CascadeSeriesResultRetarded:
+    """Same as CascadeSeriesResult, but computed on each level's OWN
+    retarded clock (tau_local = width * floor(tau_raw / width)) instead
+    of the shared raw tau_raw -- the Dicke-side counterpart of
+    multiclock.ScaleResult / wavefunction_model.QuantumScaleResult.
+
+    `pending` is the entropy-bit gap between what the raw tau_raw already
+    knows about this level's substrate and what this level's own lagged
+    clock has caught up to -- same ledger role as multiclock's
+    pool_true - pool_eff. Wider (heavier) levels retard more slowly
+    (lapse = 1/width), so they carry a larger, longer-lived pending
+    backlog -- this is the GR-like "more bits -> slower proper time"
+    effect, previously present in the classical/wavefunction backends
+    but absent here.
+    """
+    spec: LevelSpec
+    n_substrate: int
+    survival_prob: float
+    n_windows_available: int
+    lapse: float
+    tau_local: np.ndarray
+    match_prob: np.ndarray
+    cumulative_match_prob: np.ndarray
+    cumulative_persistent_prob: np.ndarray
+    entanglement_entropy: np.ndarray
+    pending: np.ndarray
+
+
+def run_cascade_series_retarded(
+    n_bits: int, tau_raw: np.ndarray, levels: Sequence[LevelSpec],
+    mode: str = "class",
+) -> list[CascadeSeriesResultRetarded]:
+    """Retarded-clock counterpart of run_cascade_series.
+
+    The peeling of each level's fixed (a, b) target off the substrate is
+    time-independent (a, b are constants, not functions of k or tau), so
+    the leftover-substrate chain (n_substrate, cumulative_a) is exactly
+    the same bookkeeping as the unretarded version. What changes is WHICH
+    tau feeds dl.k_of_tau for each level's own match_prob/entanglement:
+    level i uses its own tau_local_i = retard(tau_raw, width_i), not the
+    shared tau_raw -- mirroring multiclock.retard()'s "a width-w structure
+    only advances its own clock every w raw flips" rule exactly.
+    """
+    if mode not in ("specific", "class"):
+        raise ValueError(f"mode must be 'specific' or 'class', got {mode!r}")
+    prob_fn = dl.pattern_probability if mode == "specific" else dl.class_probability
+
+    tau_raw = np.asarray(tau_raw, dtype=float)
+    results: list[CascadeSeriesResultRetarded] = []
+
+    n_substrate = n_bits
+    cumulative_a = 0
+    cumulative_match = np.ones_like(tau_raw)
+    survival_so_far = 1.0
+
+    k_true_full = dl.k_of_tau(n_bits, tau_raw)
+
+    for spec in levels:
+        if n_substrate <= 0 or spec.width > n_substrate:
+            zeros = np.zeros_like(tau_raw)
+            results.append(CascadeSeriesResultRetarded(
+                spec=spec, n_substrate=max(n_substrate, 0), survival_prob=0.0,
+                n_windows_available=0, lapse=1.0 / spec.width, tau_local=zeros,
+                match_prob=zeros, cumulative_match_prob=zeros,
+                cumulative_persistent_prob=zeros, entanglement_entropy=zeros,
+                pending=zeros,
+            ))
+            continue
+
+        tau_local = spec.width * np.floor(tau_raw / spec.width)
+        k_local_full = dl.k_of_tau(n_bits, tau_local)
+
+        k_substrate_true = np.clip(np.round(k_true_full - cumulative_a), 0, n_substrate)
+        k_substrate_eff = np.clip(np.round(k_local_full - cumulative_a), 0, n_substrate)
+
+        match_p = prob_fn(n_substrate, k_substrate_eff, spec.a, spec.b)
+        surv_p = survival_probability(n_bits, spec.width, spec.width)
+        survival_so_far *= surv_p
+
+        cumulative_match = cumulative_match * match_p
+        cumulative_persistent = cumulative_match * survival_so_far
+
+        S_vN = np.array([
+            dl.entanglement_entropy(n_substrate, int(round(kk)), spec.width) if kk > 0 else 0.0
+            for kk in k_substrate_eff
+        ])
+
+        entropy_true = n_substrate * combinatorial_entropy_bits(n_substrate, k_substrate_true)
+        entropy_eff = n_substrate * combinatorial_entropy_bits(n_substrate, k_substrate_eff)
+        pending = np.clip(entropy_true - entropy_eff, 0.0, None)
+
+        results.append(CascadeSeriesResultRetarded(
+            spec=spec, n_substrate=n_substrate, survival_prob=surv_p,
+            n_windows_available=n_substrate // spec.width, lapse=1.0 / spec.width,
+            tau_local=tau_local,
+            match_prob=match_p,
+            cumulative_match_prob=cumulative_match.copy(),
+            cumulative_persistent_prob=cumulative_persistent.copy(),
+            entanglement_entropy=S_vN,
+            pending=pending,
+        ))
+
+        n_substrate = n_substrate - spec.width
+        cumulative_a += spec.a
 
     return results
 

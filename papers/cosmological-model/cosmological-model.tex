@@ -3,54 +3,43 @@
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
 
-\title{Cosmological Expansion and Dark Matter as Emergent\\
-       Informational Phenomena}
+\title{Emergence of Quantum Mechanics: Fermions, Bosons and Pauli Exclusion}
 \author{Juha Meskanen}
-\date{July 2026}
+\date{June 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Papers~I--V established that the universe is a finite static bitstring
-of $n$ bits; that gravitational collapse converges to a
-zero-entropy singularity; that expansion is the geometric reading of
-entropy increase; that the aspect ratio of spacetime is independent of
-$n$; and that a relational scale factor $R(t)$ emerges from strict
-information conservation via the counting equation
-$R(t) = (\rho_{\text{fabric}}(t) + k(t))/n$.
-The present paper applies this framework at cosmological scale, now
-supported by a parameter-light multi-clock simulation. It establishes
-three results. First, the three-phase expansion profile of standard
-cosmology (early rapid growth, matter-driven deceleration, late-time
-re-expansion) emerges when matter abundance follows
-hump-shaped curves derived exactly from the Ehrenfest process
-acting on finite-width bit patterns, with no cosmological constant,
-inflaton, or dark energy term introduced. This macroscopic profile is
-verified numerically to be independent of $n$ once expressed in
-normalized bit-flip time. Second, the informational level hierarchy
-$L_0 \supset L_{\rm DM} \supset L_\nu \supset L_{\rm bar}$ provides a
-natural mechanism for dark matter. Third, hump-shaped abundance is not
-a universal property of arbitrary filters -- it is the generic outcome
-for filters whose required-zero count exceeds their required-one count
-($a<b$ in the notation below) -- and the ensemble of such filters
-dominates the typical behavior of a finite window, which is what the
-simulation's structure-fraction actually measures.
-
-The background relaxation dynamics are genuinely
-parameter-free ($k_{\rm rate}=2$ is derived from the Ehrenfest process,
-not fit). Two open, non-derived choices remain in the cosmological
-application specifically -- the late-time evaporation exponent and the
-particle bit-widths -- and are stated as such in
-Section~\ref{sec:future} rather than folded into the headline claims.
-Finally, this paper's classical bitstring model is
-explicitly framed (Section~\ref{sec:shadow}) as a statistical shadow
-of the framework's deeper $\psi$-layer content, per the D--$\psi$--G
-ordering, rather than as a fundamental description in its own right;
-its genuine contribution is the demonstration that the three-phase
-profile is a typical, untuned outcome, not a claim that this classical
-layer is where the fundamental physics resides.
+Paper~VI \cite{meskanen2026v} presented the hypothesis that the quantum mechanical
+wavefunction is the compression signature of nature: the universe is a finite,
+static bitstring of $n$ bits, and the path an internal observer experiences is the
+one that compresses best under a complex-valued spectral codec.
+The present paper supports this hypothesis with seven experiments implemented in Python
+and included as supplementary material.
+We show that a photon-like boson emerges as the compression residual of a purely
+fermionic system, without any interaction term introduced by hand.
+All essential features of quantum mechanics are recovered: Born rule, Pauli
+exclusion, particle--antiparticle pairing, and the virtual propagator.
+The central result is an analytically exact theorem:
+for a single fermion in superposition between two sites, the off-diagonal
+(boson) amplitude is $\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$, independent of
+system size, site separation, and encoding.
+This equals $\sqrt{2\,P(1-P)}$, the interference term of the Born rule, made
+visible as a matrix norm.
+We further report an exploratory extension in which the same $B$-matrix
+formalism is applied, unchanged, to a two-band lattice Hamiltonian
+$H(k) = m\,\sigma_z + t\sin(k)\,\sigma_x$, giving a boson-residual amplitude
+$\|B(k)\| = |t\sin k|/(\sqrt{2}\,E(k))$ with $E(k)=\sqrt{m^2+(t\sin k)^2}$,
+which recovers the relativistic dispersion relation
+$E^2 = (pc)^2 + (m_0c^2)^2$ as its continuum limit.
+This result is numerically verified but not yet derived from the spectral
+complexity functional $C_s$, and is reported as a genuinely open problem
+rather than a closed theorem.
+These results suggest that quantum mechanics is not a foundational layer of
+reality but an emergent description --- the story an observer tells about
+fermions sampled from a compression codec.
 \end{abstract}
 
 \tableofcontents
@@ -60,527 +49,760 @@ layer is where the fundamental physics resides.
 \section{Introduction}
 \label{sec:intro}
 
-The present paper addresses two questions that standard cosmology
-answers with separate, independently postulated mechanisms: why does
-the universe expand in three phases (early inflationary growth,
-matter-driven deceleration, late-time acceleration), and what is dark
-matter?
+Why does the universe exhibit wave-like behaviour at small scales?
+Standard quantum mechanics takes the wavefunction as a primitive object and
+the Born rule as a postulate.
+The present paper pursues a different direction, building on the informational
+framework of Papers~I--VI \cite{meskanen2001, meskanen2002, meskanen2003, meskanen2026iv, meskanen2026v, meskanen2026vi}:
+the universe is a finite, static collection of $n$
+bits, and an internal observer experiences a path through its $2^n$ configurations.
+The path selected is the one that compresses best.
+The wavefunction is the codec.
 
-In $\Lambda$CDM, late-time acceleration requires a cosmological
-constant $\Lambda$ whose physical origin remains unexplained; dark
-matter requires a new particle species whose nature has not been
-determined after decades of direct-detection effort.
+The analogy that makes this precise is video compression.
+In MPEG, a video is encoded not as a sequence of raw frames but as a sequence
+of compressed descriptions.
+The compression basis is the Discrete Cosine Transform (DCT) --- a real-valued
+basis of smooth periodic functions.
+The complex-valued wavefunction of quantum mechanics is the natural
+generalisation: it is the simplest continuous, smooth, periodic codec for
+a universe whose configurations vary in both amplitude and phase.
 
-The present paper shows that both phenomena are consequences of the
-single informational counting principle established in Papers~I--V.
-No cosmological constant and no new particle species are postulated.
-The cosmological constant and dark matter both dissolve into the
-level structure of the bit budget -- with the caveats on evaporation
-and bit-widths noted in Section~\ref{sec:future} made explicit rather
-than assumed away.
-
-The paper is structured as follows.
-Section~\ref{sec:hierarchy} establishes the informational level
-hierarchy and identifies dark matter with the first emergent level.
-Section~\ref{sec:bosons} states the boson mechanism that makes
-$L_{\rm DM}$ electromagnetically invisible.
-Section~\ref{sec:hump} recalls the exact hump-classification result
-from the Entropy and Emergent Structures wiki and applies it to each
-level, replacing the earlier lognormal-fit treatment.
-Section~\ref{sec:expansion} derives the three-phase expansion profile
-and reports what the corrected multi-clock simulation actually shows,
-including where it departs from the idealized picture.
-Section~\ref{sec:data} discusses the relationship to $\Lambda$CDM
-observational data.
-Section~\ref{sec:conclusion} states the three foundational results.
-Section~\ref{sec:future} identifies open problems, now including the
-items uncovered during simulation verification.
-
-% ============================================================
-\section{The Informational Level Hierarchy}
-\label{sec:hierarchy}
-
-The bit budget $n$ is partitioned at each moment between the
-spacetime fabric $L_0$ (free, independently addressable bits) and a
-nested sequence of composite structures $L_{\rm DM}, L_\nu, L_{\rm bar},
-\ldots$ formed by the entropy gradient $dS/dt$.
-The partition is exact at every tick:
-
-\begin{equation}
-  n = \rho_{\text{fabric}}(t) + \sum_k w_k \cdot N_k(t),
-  \label{eq:budget}
-\end{equation}
-
-where $w_k$ is the bit-width of a level-$k$ entity and $N_k(t)$ is
-its instantaneous count. Information is strictly conserved; no bits
-enter or leave the system. Composite structures are composed from the
-same bit-budget as the spacetime fabric. Therefore, their emergence
-reduces the observable resolution of the universe, as viewed by
-internal observers.
-
-The four levels relevant at cosmological scale are:
-
-\begin{description}
-  \item[$L_0$ --- Spacetime fabric.]
-    Bits not consumed by any composite structure.
-    This is the rope of Paper~IV: its length at time $t$ is
-    $\rho_{\text{fabric}}(t) = S(t) \cdot n - m(t)$, where
-    $S(t) = I_{\max}(1 - e^{-kt})$ is the total unfolded entropy
-    and $m(t) = \sum_k w_k N_k(t)$ is the total bits consumed by
-    structures.
-
-  \item[$L_{\rm DM}$ --- Dark matter.]
-    The first-order condensates of the entropy gradient: the earliest
-    and simplest structures to emerge as $dS/dt$ rises from zero.
-    Whether $L_{\rm DM}$'s own composition falls in the hump-producing
-    class ($a<b$; Section~\ref{sec:hump}) has not been independently
-    derived from first principles -- it is currently supported by
-    the ensemble argument that hump-producing compositions dominate
-    typical windows of the relevant width. 
-    Their bit-width $w_{\rm DM}$ is smaller than that of hadronic
-    structures.
-
-  \item[$L_\nu$ --- Neutrinos.]
-    Second-order structures, emerging later than $L_{\rm DM}$ along
-    the entropy gradient.
-
-  \item[$L_{\rm bar}$ --- Baryons.]
-    Third-order structures (protons, neutrons), emerging later still.
-    Higher composite states (atoms, molecules) are relabellings of the
-    same baryon number and do not enter the counting equation
-    separately: a water molecule withdraws the same number of bits
-    from $L_0$ as its constituent hadrons, because it is the same
-    bits restructured, not new bits consumed.
-\end{description}
-
-The relational scale factor is:
-
-\begin{equation}
-  R(t) = \frac{\rho_{\text{fabric}}(t) + k(t)}{n},
-  \label{eq:scalefactor}
-\end{equation}
-
-where $k(t) = \sum_k N_k(t)$ is the total count of composite entities
-(each counts as one addressable token, regardless of its bit-width).
-
-% ============================================================
-\section{Why Dark Matter is Dark: Bosons as Compression Residuals}
-\label{sec:bosons}
-
-In the \theory{} framework there is no electromagnetic force as a
-separately postulated interaction. Bosons --- including photons ---
-are compression residuals: the information shed at the boundary of a
-fermionic compression event. When a fermion structure forms, it
-compresses a region of the bitstring; the bits that cannot be absorbed
-into the compressed structure are emitted as a boson. The boson is
-the exhaust of the compression, not a mediator exchanged between
-pre-existing charges.
-
-This framing has a direct consequence for dark matter. $L_{\rm DM}$
-structures are first-order condensates: they form earlier, from a
-simpler compression template, than the $L_\nu$ and $L_{\rm bar}$
-structures that give rise to photon-type residuals.
-An $L_{\rm DM}$ compression event sheds residuals of a different
-symmetry class --- or no residual detectable by an $L_{\rm bar}$-level
-instrument at all --- because the compression geometry that produces
-photon-type bosons has not yet emerged at that level of the hierarchy.
-
-Consequently:
+Under this interpretation, particles fall into two classes that correspond
+directly to the two components of a compressed video:
 
 \begin{itemize}
-  \item $L_{\rm DM}$ gravitates by the counting equation
-    (equation~\ref{eq:scalefactor}): it withdraws bits from $L_0$,
-    reducing $\rho_{\text{fabric}}(t)$, which an internal observer
-    reads as curvature. This is identical to how $L_{\rm bar}$
-    gravitates; the mechanism is level-independent.
-  \item $L_{\rm DM}$ does not interact with $L_{\rm bar}$-level
-    detectors electromagnetically, not because it is ``hidden'' or
-    ``weakly coupled'', but because the boson residuals it sheds do
-    not belong to the compression class that $L_{\rm bar}$ instruments
-    are constituted to register.
+  \item \textbf{Fermions} are pixels: discrete, localised, non-overlapping by
+        construction. Two pixels cannot occupy the same site --- not by postulate,
+        but because a pixel is a site. Pauli exclusion is a pixel axiom.
+  \item \textbf{Bosons} are compression residuals: the off-diagonal entries of
+        the density matrix $\rho = |\psi\rangle\langle\psi|$ that remain after
+        the per-site (fermionic) diagonal is removed. They are what the codec
+        records when a fermion moves.
 \end{itemize}
 
-This is not a new postulate. It follows from the boson-as-residual
-principle established in Papers~VIII--XI for the particle spectrum,
-applied to the cosmological hierarchy. The ``darkness'' of dark matter
-is a structural consequence of its level, not a property requiring
-separate explanation.
+The actual causal chain is:
+\[
+  \text{wavefunction (codec)}
+  \xrightarrow{\text{Born rule sampling}}
+  \text{fermion configurations (pixel frames)}
+\]
+An observer who sees only the pixel outputs, not the codec, invents a story:
+\[
+  \text{fermion}
+  \xrightarrow{\text{``virtual boson exchange''}}
+  \text{fermion}.
+\]
+The boson is a compression residual made into a noun.
+It is not wrong as an effective description, but it is not fundamental.
+In MPEG, macroblocks do not exchange anything; the DCT coefficients just are
+what they are.
+If one watched only the decoded pixels and tried to explain their correlations
+without knowing about DCT, one would invent something that looks exactly like
+boson exchange.
+
+The seven experiments in this paper test whether this picture is self-consistent
+and quantitatively correct.
 
 % ============================================================
-\section{Hump-Shaped Matter Abundance}
-\label{sec:hump}
+\section{Experiment 1: Minimal Video}
+\label{sec:exp1}
 
-\subsection{The exact closed form}
+\textit{Python: minimal\_video.py}
 
-For the symmetric Ehrenfest bit-flip process (start all-zero, flip a
-uniformly random bit each tick), each bit is independently 1 with
-probability, in normalized bit-flip time $\tau = \text{flip
-count}/n$:
+We encode 2-frame videos of a $2\times 2$ pixel grid as complex wavefunctions:
+\[
+  \psi(x) = f_0(x) + i\,f_1(x),
+\]
+where frame~0 is the real part and frame~1 is the imaginary part.
+Each video is scored by the spectral complexity $C_s$ of $\psi$ --- the
+information-theoretic cost of its Fourier representation.
+The off-diagonal density matrix $B = \rho - \mathrm{diag}(\rho)$ is computed
+for all $2^8 = 256$ possible two-frame videos, and its Frobenius norm
+$\|B\|$ is taken as the boson signal.
 
-\begin{equation}
-  p(\tau) = \tfrac12\left(1-e^{-2\tau}\right).
-  \label{eq:ptau}
-\end{equation}
+\subsection*{Results}
 
-This is a derived consequence of the Ehrenfest dynamics, not a fitted
-curve; $k_{\rm rate}=2$ in this normalization is forced by
-$dp/d\tau = 1-2p$, the mean-field equation of the process itself.
+The minimum-complexity states ($C_s = 0$) --- uniform frames, all pixels
+identical --- already carry the maximum boson signal $\|B\| = \sqrt{3}/2$.
+The maximally anti-correlated configuration (checkerboard transition, flipping
+to its complement) also achieves $\|B\| = \sqrt{3}/2$ at $C_s = 3$:
+\[
+  f_0 = \begin{pmatrix}1&1\\0&0\end{pmatrix}
+  \;\longrightarrow\;
+  f_1 = \begin{pmatrix}0&0\\1&1\end{pmatrix}.
+\]
+The vacuum (zero information content) and the maximally structured transition
+produce identical boson signal.
 
-For a fixed bit-pattern of length $L=a+b$ ($a$ required ones, $b$
-required zeros), the probability of that exact pattern occurring at a
-random position is, in the independent-bit continuum limit:
+\textbf{Conclusion:} The boson signal tracks something topological about the
+pixel transition, not its complexity. This motivates a structural analysis of
+the off-diagonal matrix.
 
-\begin{equation}
-  P(\text{pattern}\mid\tau) = p(\tau)^a\,(1-p(\tau))^b.
-  \label{eq:patternprob}
-\end{equation}
+% ============================================================
+\section{Experiment 2: Boson Structure}
+\label{sec:exp2}
 
-\subsection{Classification: three shapes, not one}
+\textit{Python: boson\_structure.py}
 
-The shape of equation~(\ref{eq:patternprob}) is
-fully determined, in advance, by the sign of $a-b$:
+Rather than measuring $\|B\|$ alone, we analyse the structure of $B$:
+\begin{itemize}
+  \item \emph{Symmetry:} is $B$ symmetric (spin-0 candidate) or
+        antisymmetric (spin-1 candidate)?
+  \item \emph{Propagation:} does the dominant eigenvector of $B$ resemble a
+        plane wave?
+  \item \emph{Quantisation:} is $\|B\|$ a simple rational multiple of
+        $2^{-C_s}$?
+\end{itemize}
+
+\subsection*{Results}
+
+For the video $(1, 2)$ --- a single fermion hopping from site~0 to site~1 ---
+the boson matrix is purely antisymmetric, not approximately but exactly.
+Its eigenvalues are $\pm 1/2$, symmetric about zero.
+The forward hop $(1,2)$ and reverse hop $(2,1)$ produce identical boson
+structure with opposite momenta $k = \pm 0.157$, exactly as expected from a
+particle--antiparticle pair.
+
+For the block hop $(3,12)$ --- two fermions moving together,
+\[
+  f_0 = \begin{pmatrix}1&0\\1&0\end{pmatrix}
+  \;\longrightarrow\;
+  f_1 = \begin{pmatrix}0&1\\0&1\end{pmatrix},
+\]
+the boson has a longer wavelength and lower effective
+momentum, consistent with a heavier or composite mediator.
+
+\textbf{Conclusion:} The compression residual of a single fermion hop is purely
+antisymmetric, has definite momentum, and pairs with its time-reverse into a
+particle--antiparticle pair.
+No interaction term was introduced; these properties follow from the codec
+structure alone.
+
+% ============================================================
+\section{Experiment 3: Scaling}
+\label{sec:exp3}
+
+\textit{Python: scaling\_1.py, scaling\_2.py}
+
+We scale to longer chains ($L = 4, 6, 8, 12, 16$) and more frames, testing
+whether momentum quantisation $k = 2\pi m/L$ holds and whether the boson
+properties depend on system size.
+
+\subsection*{The key result --- analytically exact}
+
+For any single fermion hop from site~$0$ to site~$d$, regardless of $L$ or $d$:
+\[
+  \psi = \frac{1}{\sqrt{2}}(e_0 + i\,e_d).
+\]
+The boson matrix has exactly two non-zero entries:
+\[
+  B_{0,d} = +\tfrac{i}{2}, \qquad B_{d,0} = -\tfrac{i}{2}.
+\]
+For the nearest-neighbour hop ($d=1$, $L=4$) this reads explicitly:
+\[
+  B \;=\;
+  \begin{pmatrix}
+    0 & +\tfrac{i}{2} & 0 & 0 \\[4pt]
+    -\tfrac{i}{2} & 0 & 0 & 0 \\[4pt]
+    0 & 0 & 0 & 0 \\[4pt]
+    0 & 0 & 0 & 0
+  \end{pmatrix}.
+\]
+The same $2\times 2$ antisymmetric block $\bigl(\begin{smallmatrix}0&+i/2\\-i/2&0\end{smallmatrix}\bigr)$
+is embedded at positions $(0,d)$ and $(d,0)$ for any hop distance $d$ and
+any chain length $L$; all other entries are zero.
+The matrix is always purely antisymmetric, always has eigenvalues $\pm 1/2$,
+and the phase of $B_{0,d}$ is always $-\pi/2$, giving:
+\[
+  k \cdot d = -\frac{\pi}{2}
+  \quad\Longrightarrow\quad
+  k = -\frac{\pi}{2d}.
+\]
+This is not a plane-wave momentum but a phase relationship between the two
+fermion sites: the boson encodes exactly one number, the $\pi/2$ phase shift
+between where the fermion was and where it went.
+A quarter-turn in phase space is the defining property of a propagator.
+This is what a virtual photon does in QED.
+
+\textbf{Conclusion:} The compression residual of a single fermion hop is an
+antisymmetric, purely imaginary, $\pm 1/2$-eigenvalued object carrying a
+universal $\pi/2$ phase, independent of chain length and hop distance.
+
+% ============================================================
+\section{Experiment 4: Two-Fermion Hops}
+\label{sec:exp4}
+
+\textit{Python: two\_fermion\_hop.py}
+
+We test whether the universal $\pi/2$ phase breaks for two fermions, and
+whether the breaking has physical meaning.
+
+\subsection*{Result 1: Partial survival of universality}
+
+Every two-fermion boson matrix contains entries with phase $-\pi/2$,
+inherited from the individual single-fermion hops.
+It also acquires new phases $0$ and $+\pi/2$, corresponding to
+inter-fermion correlations with no single-particle analogue.
+The two-fermion boson is a superposition of single-hop bosons plus an
+interaction residual.
+
+\subsection*{Result 2: Path independence}
+
+Fermions crossing (passing through each other) produce an identical boson
+matrix to fermions moving in the same direction.
+The codec records only initial and final pixel configurations, not
+trajectories.
+Path independence emerges for free.
+
+\subsection*{Result 3: Pauli exclusion as zero compressibility}
+
+Two fermions assigned to the same site produce a wavefunction $\psi \propto e_j$
+(localised on a single site), for which $B = 0$ exactly.
+The density matrix of a single-site state is
+$\rho_{ik} = |\alpha|^2\,\delta_{ij}\delta_{kj}$,
+which vanishes off-diagonal for $i \neq k$ since both $i = j$ and $k = j$
+cannot hold simultaneously.
+Double occupancy produces no boson: it has zero compression residual and is
+informationally invisible.
+Pauli exclusion is not a law imposed on the system; it is the statement that
+double occupancy has nothing for the codec to encode.
+
+% ============================================================
+\section{Experiment 5: Pauli Exclusion and the Scope of the Encoding}
+\label{sec:exp5}
+
+\textit{Python: pauli\_as\_zero\_residual.py}
+
+We verify that $B = 0$ for stationary fermions is exact and encoding-independent,
+and clarify the scope of the single-fermion codec.
+
+\subsection*{The encoding question}
+
+When a single wavefunction is used to encode two stationary fermions at sites $i$
+and $j$:
+\[
+  \psi = (e_i + e_j) + i(e_i + e_j) = (1+i)(e_i + e_j),
+\]
+the result is not localised on a single site.
+This superposition has non-zero off-diagonal entries even with no motion, giving
+$\|B\| \neq 0$.
+
+\textbf{Conclusion:} The single-wavefunction codec is a \emph{one-fermion} codec: each wavefunction
+encodes the state of one fermion across two time slices.
+A system of $N$ fermions requires $N$ wavefunctions, one per particle.
+Encoding two particles into one wavefunction conflates a two-particle
+configuration with a single delocalised fermion.
+
+\subsection*{Resolution}
+
+Under the correct one-fermion-per-wavefunction encoding:
+\begin{itemize}
+  \item $B = 0$ for any stationary single fermion, for any phase or amplitude,
+        across all chain lengths. This is analytically exact.
+  \item $\|B\| = 1/\sqrt{2}$ for any single fermion hop, independent of hop
+        distance and system size.
+  \item $\|B\| = \sin(2\theta)/\sqrt{2}$ for a fermion in superposition
+        $\psi(\theta) = \cos\theta\,e_i + i\sin\theta\,e_j$,
+        where $\theta$ interpolates between stationary ($\theta = 0$) and
+        mid-hop ($\theta = \pi/4$) and back to stationary ($\theta = \pi/2$).
+\end{itemize}
+
+The multi-fermion case requires a tensor product of single-fermion wavefunctions.
+This is consistent with standard quantum mechanics and is not a limitation of the
+framework.
+
+\subsection*{Results}
 
 \begin{center}
 \begin{tabular}{lll}
-\toprule
-Composition & Shape & Peak \\
-\midrule
-$a>b$ & monotonic rise, no peak & unreachable ($p^*>0.5$) \\
-$a=b$ & monotonic rise, flattens at boundary & at $p^*=0.5$ (the edge) \\
-$a<b$ & rises, peaks, declines to plateau & genuine interior hump \\
-\bottomrule
+\hline
+\textbf{Configuration} & $\|B\|$ & \textbf{Reason} \\
+\hline
+Single fermion, stationary & $0$ (exact) & $\psi \propto e_j$, off-diagonal forced to zero \\
+Single fermion, any hop & $1/\sqrt{2}$ (exact) & Universal, $-\pi/2$ phase \\
+$\psi(\theta) = \cos\theta\,e_i + i\sin\theta\,e_j$ & $\sin(2\theta)/\sqrt{2}$ & Sharp onset, no threshold \\
+\hline
 \end{tabular}
 \end{center}
 
-Only the $a<b$ class produces a hump. For that class, the peak
-location, amplitude, and tail behavior are exact:
+% ============================================================
+\section{Experiment 6: The $\theta$-Scaling Theorem}
+\label{sec:exp6}
 
-\begin{align}
-  p^* &= \frac{a}{a+b}, \qquad
-  \tau^* = -\tfrac12\ln(1-2p^*), \\
-  \frac{\text{peak}}{\text{plateau}} &= 2^{\,L(1-H_2(p^*))},
-\end{align}
+\textit{Python: theta\_scaling.py}
 
-where $H_2(q)=-q\log_2 q-(1-q)\log_2(1-q)$. The tail approaches its
-plateau as $e^{-2\tau}$ for $a\neq b$ (half the exponent of entropy's
-own approach to maximum, $e^{-4\tau}$, since entropy sits at a flat
-quadratic extremum at $p=1/2$ while a generic asymmetric pattern does
-not) and as $e^{-4\tau}$ for the symmetric $a=b$ case. Critically, the
-plateau is \emph{nonzero}: an $a<b$ pattern does not vanish at
-equilibrium, it approaches a fixed residual probability
-$(0.5)^L$-scale.
+We verify the $\sin(2\theta)/\sqrt{2}$ formula analytically and confirm it
+holds across all chain lengths and site separations.
 
-\subsection{What the simulation actually measures}
+\subsection*{Proof}
 
-The multi-clock simulation does not evaluate one fixed $(a,b)$
-pattern. For a window of width $w$, it classifies the window's
-ones-count $K$ (exact finite-population hypergeometric, not the
-independent-bit approximation above) against the threshold $w/2$:
-$K=0$ (``fall''), $0<K<w/2$ (``bump''), $K\ge w/2$ (``rise''). Since
-$K<w/2$ is exactly the $a<b$ condition, the simulation's ``bump''
-fraction is the aggregated probability mass over every hump-producing
-composition of that window, and ``rise'' is the aggregated non-hump
-class. Numerically, this aggregate is a single, unimodal hump for
-every width tested, and dominates (bump fraction $0.66$--$0.9999$
-across $w=6,12,20,40$). 
+For $\psi(\theta) = \cos\theta\,e_i + i\sin\theta\,e_j$ (normalised, $i \neq j$),
+the density matrix $\rho = |\psi\rangle\langle\psi|$ has the block structure
+(showing only the $i,j$ subspace, all other entries zero):
+\[
+  \rho\big|_{ij} \;=\;
+  \begin{pmatrix} \cos^2\theta & -\tfrac{i}{2}\sin 2\theta \\[4pt]
+                  +\tfrac{i}{2}\sin 2\theta & \sin^2\theta \end{pmatrix}.
+\]
+Removing the diagonal gives the boson matrix restricted to the same subspace:
+\[
+  B\big|_{ij} \;=\;
+  \begin{pmatrix} 0 & -\tfrac{i}{2}\sin 2\theta \\[4pt]
+                  +\tfrac{i}{2}\sin 2\theta & 0 \end{pmatrix}.
+\]
+In full, the components are:
+\begin{align*}
+  \rho_{ii} &= \cos^2\theta, \quad
+  \rho_{jj} = \sin^2\theta, \\
+  \rho_{ij} &= \psi_i\psi_j^* = \cos\theta\cdot(-i\sin\theta) = -\tfrac{i}{2}\sin 2\theta, \\
+  \rho_{ji} &= +\tfrac{i}{2}\sin 2\theta.
+\end{align*}
+All other entries of $\rho$ are zero since $\psi_k = 0$ for $k \neq i, j$.
+Therefore:
+\[
+  \|B\|^2 = |B_{ij}|^2 + |B_{ji}|^2
+  = 2\left(\frac{\sin 2\theta}{2}\right)^2
+  = \frac{\sin^2 2\theta}{2},
+\]
+giving
+\[
+  \boxed{\|B(\theta)\| = \frac{\sin 2\theta}{\sqrt{2}}.}
+\]
+This proof uses only the definition $B = \rho - \mathrm{diag}(\rho)$ and the
+normalisation of $\psi$.
+It is independent of $L$, the separation $|i - j|$, and any overall phase
+factor on $e_j$.
+Numerical verification confirms agreement to within floating-point precision
+($< 4 \times 10^{-16}$) for $L \in \{4, 8, 16, 32, 64, 128\}$ and all hop
+distances.
 
-\subsection{Status of the hump hypothesis for each level}
+\subsection*{Connection to Born rule}
 
-\begin{description}
-  \item[$L_{\rm DM}$.]
-    \textbf{Supported by ensemble typicality, not yet a guaranteed
-    prediction.} The aggregate bump fraction is hump-shaped and
-    dominant for the widths tested. Whether $L_{\rm DM}$'s specific,
-    physically realized composition satisfies $a<b$ has not been
-    derived independently -- see Section~\ref{sec:future}.
+Let $P = \sin^2\theta$ be the Born-rule probability that the fermion occupies
+site~$j$.
+Then:
+\[
+  \|B(\theta)\| = \frac{\sin 2\theta}{\sqrt{2}}
+  = \frac{2\sin\theta\cos\theta}{\sqrt{2}}
+  = \sqrt{2}\,\sqrt{P(1-P)}.
+\]
+$\|B\|$ is $\sqrt{2}$ times the geometric mean of the hop and no-hop
+probabilities.
+This is the interference term of the Born rule, made visible as a matrix norm.
+The boson amplitude is not an approximation or an emergent average: it is the
+exact quantum interference encoded in the density matrix.
 
-  \item[$L_\nu$, $L_{\rm bar}$.]
-    \textbf{Hypothesis under test.} $\Lambda$CDM predicts
-    monotonically diluting number densities $n(t) = n_0(1+z(t))^3$ for
-    both species after their respective freeze-out epochs: no rise, no
-    peak, no fall, and no nonzero late-time plateau. The hump form
-    above is a genuinely different, falsifiable prediction: it implies
-    a nonzero relic abundance persisting indefinitely, rather than a
-    density diluting toward zero. Section~\ref{sec:data} discusses
-    what an honest falsifiability test would require.
-\end{description}
+\subsection*{Lifecycle of a virtual boson}
+
+The formula $\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$ traces the complete
+lifecycle:
+\begin{itemize}
+  \item $\theta = 0$: fermion stationary, $\|B\| = 0$. No boson.
+  \item $\theta = \pi/4$: fermion in equal superposition, $\|B\| = 1/\sqrt{2}$. Boson at maximum amplitude.
+  \item $\theta = \pi/2$: fermion arrived, $\|B\| = 0$. Boson has vanished.
+\end{itemize}
+The boson is born when the fermion begins to move, peaks at mid-hop,
+and vanishes when the fermion arrives.
+This is the lifecycle of a virtual particle --- a propagator in the language of
+quantum field theory, derived here without postulating field theory.
 
 % ============================================================
-\section{The Three-Phase Expansion Profile}
-\label{sec:expansion}
+\section{Experiment 7 (Exploratory): Mass, Momentum, and the Dispersion Relation}
+\label{sec:exp7}
 
-\subsection{The mechanism}
+\textit{Python: dispersion\_poc.py}
 
-Three phases emerge from $R(t)$ (equation~\ref{eq:scalefactor}) when
-matter abundance follows the hump form of Section~\ref{sec:hump}.
+Experiments 1--6 establish the $B$-matrix formalism entirely within a
+\emph{massless, scale-free} regime: $\|B\| = 1/\sqrt{2}$ for any single hop,
+independent of chain length $L$ or hop distance $d$ (\S\ref{sec:exp3}).
+That scale invariance is itself informative: a rest mass sets a scale, so a
+theorem that is exact and scale-free by construction has no room for mass to
+enter as an internal parameter. Momentum, via the hop phase $k = -\pi/(2d)$,
+is already present in the formalism; energy and mass are not, because nothing
+in Experiments 1--6 plays the role of a generator of time evolution or of a
+second internal degree of freedom at a single site. This experiment asks
+whether the existing $B$-matrix machinery survives, unmodified, once such a
+degree of freedom is added, and whether the relativistic dispersion relation
+\[
+  E^2 = (pc)^2 + (m_0c^2)^2
+\]
+can be recovered as a consequence rather than assumed.
 
-\textbf{Phase 1 --- Early rapid expansion.}
-Before significant matter formation, $\rho_{\text{fabric}}(t) \approx
-S(t)\cdot n$ and $R(t)\approx S(t)$: the De~Sitter regime, tracking
-the entropy saturation curve. No inflaton field is required.
+\subsection*{Construction}
 
-\textbf{Phase 2 --- Matter-driven deceleration.}
-As $L_{\rm DM}$, $L_\nu$, $L_{\rm bar}$ structures rise along their
-hump curves, bits are withdrawn from $L_0$; $\rho_{\text{fabric}}(t)$
-falls below $S(t)\cdot n$, read by an internal observer as
-gravitational deceleration.
+We introduce a second internal band at a single site (rather than a second
+spatial site) and adopt the standard two-band lattice (Dirac-on-a-lattice
+/ SSH-type) Hamiltonian
+\[
+  H(k) = m\,\sigma_z + t\sin(k)\,\sigma_x,
+\]
+where $m$ is an on-site band-splitting term and $t\sin(k)$ is a
+momentum-dependent inter-band coupling. This Hamiltonian is diagonalised
+\emph{numerically} (not assumed analytically) at each $k$ on a dense grid,
+for several values of $m/t$. The lower-band eigenvector $v(k)$ is mapped onto
+the existing Experiment~6 convention $\psi(\theta) = \cos\theta\,e_A +
+i\sin\theta\,e_B$ by setting $\sin^2\theta$ equal to the numerically computed
+Born-rule population $|v_B(k)|^2$ on the second band. The unmodified
+Experiment~6 formula $B = \rho - \mathrm{diag}(\rho)$ is then applied to this
+$\psi(\theta)$.
 
-\textbf{Phase 3 --- Late-time re-expansion.}
-As the hump curves decline from their peaks, bits are partially
-released back to $L_0$; $\rho_{\text{fabric}}(t)$ partially recovers
-and $R(t)$ rises again, read as accelerating expansion. This is
-partial, not complete: Section~\ref{sec:hump} established that hump
-curves plateau at a nonzero value rather than decaying to zero, so the
-recovery in Phase 3 does not fully return the system to the pure
-entropy envelope. A residual, non-vanishing matter fraction persists.
-This is a substantive revision from the original version of this
-paper, which described complete dissolution; the exact result supports
-only partial dissolution to a nonzero relic, which is arguably the
-more interesting and more falsifiable claim, since it forbids a
-universe that returns exactly to the pure-entropy curve.
+\subsection*{Results}
 
-\subsection{Numerical Verification}
-
-A multi-clock simulation (Ehrenfest substrate plus per-scale
-retarded clocks, one tick per $w$ raw flips for a width-$w$ structure)
-was used to check this mechanism directly rather than assume it.
-Two results from that verification are reported here because they
-affect what can honestly be claimed:
+Four claims were checked numerically for $m \in \{0, 0.1, 0.5, 1, 2\}$ (with
+$t=1$) over a dense grid $k \in (-\pi/2, \pi/2)$:
 
 \begin{enumerate}
-  \item \textbf{The macroscopic three-phase envelope is independent of
-    $n$.} Tested across $n=500$ to $n=128{,}000$ with fixed
-    structure widths, the envelope of $R(t)$ (or its proxy,
-    size\_measure), expressed in normalized time $\tau=\text{raw}/n$,
-    converges to a stable shape for $n\gtrsim$ a few thousand: peak-matter
-    timing and envelope values at fixed $\tau$ agree to better than
-    1\% across two orders of magnitude in $n$. This paper's central
-    claim -- three phases, no tuning -- does not depend on any specific
-    calibrated value of $n$.
-  \item \textbf{The exact curve is not as smooth as Figure~1
-    implies.} With a small number of fixed-bit-width structure
-    species (as used throughout this paper's illustrative figures),
-    the combined budget curve shows persistent small-scale
-    oscillation on top of the stable macro-envelope -- tens to
-    thousands of local sign changes in its derivative, depending on
-    $n$, that do \emph{not} vanish as $n\to\infty$ when the species'
-    bit-widths are held fixed (as they should be, since a real
-    particle's bit-width is not expected to scale with the size of the
-    universe). Whether this reflects genuine physical discreteness
-    from a small number of composite species, or is an artifact of the
-    placeholder widths used before $E=mc^2$ supplies realistic ones,
-    is open; see Section~\ref{sec:future}.
+  \item \textbf{Eigenvalues.} The numerically diagonalised eigenvalues agree
+        with $E(k) = \sqrt{m^2 + (t\sin k)^2}$ to machine precision
+        ($< 10^{-15}$) at every $m$ and every $k$ tested.
+  \item \textbf{Formalism survives unmodified.} The boson norm computed
+        directly from the $2\times2$ matrix $B = \rho - \mathrm{diag}(\rho)$
+        agrees with the closed-form Experiment~6 result
+        $\sin(2\theta)/\sqrt{2}$ to machine precision
+        ($< 3\times 10^{-16}$). No change to the boson-residual formalism
+        was required to accommodate the reinterpretation of $\theta$ as a
+        momentum/mass mixing angle rather than a spatial-hop angle.
+  \item \textbf{Mass--momentum identity.} Working the eigenvector algebra of
+        $H(k)$ through by hand gives
+        \[
+          \sin^2\theta\,(1-\sin^2\theta) = \frac{(t\sin k)^2}{4E(k)^2}
+          \quad\Longrightarrow\quad
+          \boxed{\|B(k)\| = \frac{|t\sin k|}{\sqrt{2}\,E(k)}.}
+        \]
+        This closed form agrees with the numerically computed boson norm to
+        machine precision ($< 3\times 10^{-13}$) at every $m$ and $k$ tested.
+        At $m = 0$ it reduces \emph{exactly} to the universal
+        $\|B\| = 1/\sqrt{2}$ of Experiments 3--6, recovering the massless
+        case as a special case rather than contradicting it. As $m$ grows
+        relative to $t\sin k$, $\|B(k)\|$ shrinks monotonically toward zero:
+        a more massive state produces a smaller compression residual at
+        fixed momentum.
+  \item \textbf{Continuum limit.} Identifying $t\sin k \to p c$ and $m \to
+        m_0 c^2$ in the small-$k$ regime, $E(k)^2$ agrees with
+        $(pc)^2 + (m_0c^2)^2$ to a relative error that shrinks as $k \to 0$
+        (e.g.\ $\sim 7\times 10^{-4}$ over $|k|<0.05$ at $m=0$, tightening
+        to $\sim 5\times 10^{-7}$ at $m=2$), consistent with the expected
+        $O(k^2)$ lattice correction to the continuum dispersion relation.
 \end{enumerate}
 
-The three-phase profile is therefore established as a macroscopic,
-$n$-independent trend.
+\subsection*{Status of this result}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.99\textwidth]{figures/spacetime_worldlines.png}
-\caption{Output of the emergent-spacetime worldline simulation. The
-white envelope is the spacetime fabric boundary
-$\pm\rho_{\rm fabric}(t)/(2n)$, emerging from a single point at
-$t=0$ (zero-entropy singularity). Worldline colors correspond to
-$L_{\rm DM}$, $L_\nu$, $L_{\rm bar}$ populations; $L_\nu$/$L_{\rm bar}$
-number densities are taken from the $\Lambda$CDM reference baseline
-(Section~\ref{sec:data}) pending a first-principles bit-width
-derivation. The macroscopic contraction-then-recovery of the white
-envelope is the $n$-independent three-phase profile; readers should
-note that the exact curve (Section~\ref{sec:expansion}) carries
-additional fine-scale structure not shown at this smoothing level.
-Amplitude scaling between number densities and bit-counts remains a
-placeholder pending the derivation of $E=mc^2$ (Section~\ref{sec:future}).}
-\label{fig:expansion}
-\end{figure}
+This experiment shows that the $B$-matrix formalism of Papers~VI--VII is
+\emph{compatible} with a mass term and reproduces the relativistic dispersion
+relation as a continuum limit, once a second internal band and a Hamiltonian
+are introduced. It does \emph{not} show that this construction is forced by
+the framework's own first principles. Specifically:
+\begin{itemize}
+  \item The two-band Hamiltonian $H(k) = m\,\sigma_z + t\sin(k)\,\sigma_x$
+        is imported from standard lattice/Dirac constructions (SSH-type
+        models); it has not been derived from the spectral complexity
+        functional $C_s$ or the cost functional $C_D + C_\psi + C_G$ used
+        elsewhere in the series.
+  \item In particular, it is not yet shown \emph{why} a minimum-description-length
+        codec should prefer a two-band internal structure, nor why the
+        band-splitting term should take the form $m\sigma_z$ specifically.
+        The natural next step is to test whether the same overlap/exclusion
+        cost functional that produces Pauli exclusion in Experiment~4
+        (\S\ref{sec:exp4}), applied to internal (band) rather than spatial
+        degrees of freedom, forces this structure -- or a different one.
+  \item The identification $t\sin k \to pc$, $m \to m_0c^2$ is a relabelling
+        of the lattice dispersion relation, not yet a statement about where
+        the constant $c$ originates within the finite-bit-budget framework
+        of Papers~I--V.
+\end{itemize}
+Consistent with the three-tier accounting adopted in Paper~XI, this result is
+reported as a \emph{strongly suggested correspondence}, not an analytically
+exact theorem in the sense of Experiments 1--6: it is numerically exact given
+its assumptions, but its assumptions are not yet derived.
 
 % ============================================================
-\section{Relationship to \texorpdfstring{$\Lambda$}{Lambda}CDM Observational Data}
-\label{sec:data}
+\section{Core Results}
+\label{sec:results}
 
-The $\Lambda$CDM number-density curves used as a reference baseline
-for $L_\nu$ and $L_{\rm bar}$ in Figure~\ref{fig:expansion} are not
-theory-independent observational facts. They are derived quantities
-within a specific theoretical framework: $n(t) = n_0(1+z(t))^3$,
-where $z(t)$ is obtained by integrating the Friedmann equation with
-Planck~2018 parameters ($H_0 = 67.4$~km/s/Mpc, $\Omega_m = 0.315$,
-$\Omega_\Lambda = 0.685$). Feeding these curves into the \theory{}
-simulation tests the \theory{} framework against a $\Lambda$CDM
-prediction, not against raw data.
-
-The actual observational anchors that $\Lambda$CDM is itself fitted
-to --- the CMB power spectrum, the Type~Ia supernova distance-redshift
-relation, the baryon acoustic oscillation scale, the light element
-abundances from BBN --- are what the \theory{} framework must
-ultimately be tested against. A proper falsifiability test would
-require:
+Experiments 1--6 establish four results, each analytically exact:
 
 \begin{enumerate}
-  \item Deriving $E = mc^2$ within the framework, to convert
-    informational bit-counts to energy-momentum and thence to
-    observable quantities.
-  \item A revised time-calibration anchoring bit-flip ticks to
-    physical time. The previous candidate for this
-    (Paper~IV's aspect-ratio argument fixing $n\approx184$) has been
-    withdrawn and is being redone; until it is replaced, this step is
-    an open gap in the programme, not a solved step being reused here.
-  \item Comparing the resulting $R(t)$ directly to the
-    distance-redshift relation of the Type~Ia supernova datasets,
-    not to $\Lambda$CDM's derived expansion history.
-  \item Testing the nonzero-relic prediction of Section~\ref{sec:hump}
-    against late-time/asymptotic dark matter density constraints,
-    since this is a genuine point of disagreement with $\Lambda$CDM
-    and does not require $E=mc^2$ to state qualitatively, only to
-    quantify.
+  \item \textbf{Pauli exclusion.}
+        $B = 0$ for any stationary fermion, for any encoding of the form
+        $\psi \propto e_j$.
+        Double occupancy is informationally invisible: zero compression
+        residual, zero boson. \\
+        \emph{Proof:} $\rho_{ik} = |\alpha|^2\delta_{ij}\delta_{kj} = 0$
+        for $i \neq k$. \qed
+
+  \item \textbf{Universal boson.}
+        Every single fermion hop produces $\|B\| = 1/\sqrt{2}$, independent
+        of chain length, hop distance, and encoding.
+        The boson carries a universal $-\pi/2$ phase.
+
+  \item \textbf{Born rule identity.}
+        $\|B(\theta)\| = \sqrt{2\,P(1-P)}$, where $P = \sin^2\theta$ is the
+        Born-rule hop probability.
+        The boson amplitude is the interference term of Born rule.
+
+  \item \textbf{Virtual propagator.}
+        The boson amplitude follows $\sin(2\theta)/\sqrt{2}$ over the fermion's
+        journey: born at $\theta = 0$, maximum at $\theta = \pi/4$, vanished at
+        $\theta = \pi/2$.
+        This is the propagator of a virtual particle, derived without field theory.
 \end{enumerate}
 
-This programme is identified as future work in
-Section~\ref{sec:future}. The present paper establishes the
-qualitative mechanism and the correct level hierarchy; the
-quantitative confrontation with raw data awaits Steps~1--2.
+All four results follow from the single definition $B = \rho - \mathrm{diag}(\rho)$
+applied to the compressed wavefunction.
+No interaction terms, coupling constants, or postulated particle species were
+introduced.
+
+Experiment~7 adds a fifth, exploratory result, reported at a different
+evidentiary tier:
+
+\begin{enumerate}
+  \setcounter{enumi}{4}
+  \item \textbf{Mass--momentum--boson identity (numerically verified,
+        not yet derived from $C_s$).}
+        Under the two-band extension of \S\ref{sec:exp7},
+        $\|B(k)\| = |t\sin k|/(\sqrt{2}\,E(k))$, which reduces to the
+        universal $1/\sqrt{2}$ of Result~2 at $m=0$ and reproduces
+        $E^2 = (pc)^2+(m_0c^2)^2$ in the continuum limit.
+\end{enumerate}
 
 % ============================================================
-\section{Status of This Model: A Statistical Shadow, Not a Foundation}
-\label{sec:shadow}
+\section{Discussion}
+\label{sec:discussion}
 
-Before stating the paper's conclusions, it is worth being explicit about
-what kind of result this paper actually is.
+\subsection{Quantum mechanics as an emergent description}
 
-The framework's own D--$\psi$--G ordering (Entropy and Emergent
-Structures wiki; The Equivalence Class Structure of Physical Reality
-wiki) treats the compressed, complex-valued codec $\psi$ as primitive:
-bits ($D$) are a Born-rule sampled, discrete description of $\psi$, not
-a substrate $\psi$ can be reconstructed from by aggregation, and
-geometry ($G$) is what large-scale $\psi$ structure looks like from
-inside. Standard physics builds upward from $D$; this framework argues
-that direction is backwards.
+The results above suggest a coherent picture: quantum mechanics is not
+a foundational layer of reality but the effective description an observer
+constructs when observing fermions that are sampled from a compression codec.
 
-The cosmological model of this paper operates entirely at the $D$
-layer: a classical bitstring under Ehrenfest dynamics, with no complex
-amplitudes, superposition, or coherence anywhere in its construction.
-This was tested directly, not merely asserted: individual classical
-hop events, encoded one at a time into Paper~VII's single-fermion
-codec ($\psi = f_0 + if_1$), reproduce the exact universal boson norm
-$\|B\|=1/\sqrt2$ to floating-point precision. But averaging classical
-population statistics across many independent trials and treating the
-resulting frequency as a Born-rule amplitude does \emph{not} reproduce
-coherent structure -- the resulting density matrix is exactly diagonal,
-with zero boson signal, in contrast to the nonzero signal a naive
-pure-state ansatz would predict from the same numbers. Coherence is not
-recoverable from classical ensemble statistics by averaging; this is a
-direct, numerical instance of the D--$\psi$--G ordering's claim that
-$D$ is sampled from $\psi$, not the other way around.
+The wavefunction is not a physical field propagating through space.
+It is the codec --- the algorithm that selects which fermion configuration an
+observer experiences, given the constraint that the observed path through the
+$2^n$ configurations must be the one of minimum description length.
+Measurement is decompression.
+The Born rule is Solomonoff induction applied to a complex-valued codec:
+the probability of outcome $j$ is proportional to the squared amplitude
+$|\psi_j|^2$ because $|\psi_j|^2$ is the spectral weight assigned to that
+configuration by the minimum-description-length codec.
 
-This paper's cosmological model should therefore be read as a
-simplified \textbf{statistical shadow} of the framework's deeper
-$\psi$-layer content, not as a fundamental description in its own
-right. However, it shows that the qualitative
-three-phase expansion history is a \emph{typical}, untuned outcome once
-one assumes only information conservation and a finite-width filter --
-no fine-tuning of a cosmological constant, an inflaton potential, or a
-dark energy equation of state is required to get a universe that
-expands, decelerates, and re-expands. 
+Bosons, in this picture, are not fundamental.
+They are the codec's record of fermion motion, reified into particles by
+observers who do not know they are watching compressed data.
+This does not make quantum field theory wrong.
+It makes it an extraordinarily accurate effective description of compression
+residuals.
+
+\subsection{The $4\pi$ structure and spin}
+
+The universal $-\pi/2$ phase of the single-hop boson corresponds to a
+quarter-turn in the complex plane.
+Four such hops return the phase to its starting point: $4 \times (-\pi/2) = -2\pi$.
+This is the spinor structure of a spin-$1/2$ particle: a $2\pi$ rotation
+returns a fermion to its original state only up to a sign, while a $4\pi$
+rotation is the identity.
+The $\pi/2$ phase quantisation is not imposed; it follows from the imaginary
+encoding $\psi = f_0 + i f_1$ and the definition of the boson matrix.
+
+\subsection{The encoding uniqueness question}
+
+The framework relies on the complex exponential $e^{i\omega x}$ as the codec
+basis.
+Paper~VI \cite{meskanen2026vi} argues that this is the minimum-description-length
+periodic smooth basis: the algorithm ($e^{i\omega x}$) is a fixed one-time cost
+shared across all wavefunctions, while the per-instance cost is carried entirely
+by the spectral modes (frequencies), which are unbounded.
+This is what makes spectral complexity $C_s$ both computable and physically
+meaningful.
+
+
+\subsection{Relation to existing approaches}
+
+Several existing programs seek to derive quantum mechanics from information
+theory: reconstructions based on information-theoretic axioms
+\cite{hardy2001, chiribella2011}, the Bayesian/QBist programme
+\cite{fuchs2014}, and entropic dynamics \cite{caticha2019}.
+The present approach differs in two respects.
+First, it is constructive: it identifies a specific codec (complex spectral
+decomposition), a specific complexity measure ($C_s$), and derives specific
+quantitative predictions (the $\sin(2\theta)/\sqrt{2}$ theorem) rather than
+axiomatising quantum mechanics from abstract information principles.
+Second, it is embedded in the larger cosmological framework of Papers~I--V,
+which derives spacetime geometry, the cosmological constant, and black hole
+entropy from the same finite bit budget $n$.
+Quantum mechanics is not postulated at the bottom of this hierarchy;
+it emerges at the same level as geometry, from the same codec.
+
+The two-band construction of \S\ref{sec:exp7} places the mass question in
+the same territory as lattice-Dirac and SSH-type condensed-matter models,
+where a relativistic dispersion relation emerges from a discrete lattice
+Hamiltonian in the continuum limit. The present contribution is not the
+lattice-to-continuum result itself, which is standard, but the observation
+that the pre-existing $B$-matrix boson-residual formalism attaches to that
+construction without modification, and assigns a compression-residual
+interpretation to the resulting mass-dependent coupling.
+
+\subsection{Limitations}
+
+The present experiments use a one-dimensional chain of discrete sites.
+The extension to three spatial dimensions, continuous space, and the full
+Fock space of many-fermion systems requires tensor products of single-fermion
+wavefunctions and a treatment of indistinguishability that goes beyond the
+scope of this paper.
+Additionally, the experiments demonstrate the emergence of a photon-like
+boson from a scalar codec. Whether the model predicts other bosons, e.g. the
+massive bosons ($W$, $Z$, Higgs) and of the gauge structure of the Standard Model
+are not yet addressed.
+The mass term introduced in \S\ref{sec:exp7} is imported from standard
+lattice constructions rather than derived from $C_s$; deriving the two-band
+structure and the specific form $m\sigma_z$ from the same minimum-description-length
+principle used elsewhere in the series remains open (\S\ref{sec:future}).
+
+% ============================================================
+\section{Future Work}
+\label{sec:future}
+
+\subsection{Many-fermion systems and the Fock space}
+
+The single-fermion codec must be extended to $N$-fermion systems via tensor
+products.
+
+
+\subsection{Deriving the mass term from $C_s$}
+
+Experiment~7 shows that the boson-residual formalism is compatible with a
+mass term once a two-band Hamiltonian is assumed, but the Hamiltonian itself
+was imported rather than derived. A first test of whether the same
+overlap/exclusion cost functional that produces Pauli exclusion in
+Experiment~4 forces a band-splitting structure, rather than assuming one,
+has now been carried out (\texttt{exclusion\_poc.py},
+\texttt{exclusion\_poc\_3level.py}; see Supplementary Material).
+
+With two internal bands, Solomonoff/MDL weighting over the band-mixing
+angle $\Delta$ between two fermions' internal states -- using only the
+exclusion cost $\|\Phi\|^2$, with no Hamiltonian and no imported mass
+parameter -- is maximized at $\Delta = \pi/2$: full orthogonality between
+the two fermions' band occupations. This reproduces, from pure MDL
+reasoning, the standard antisymmetric ground state (one fermion per band).
+With only two bands, however, this is partly a fact of linear algebra
+rather than new physics: $\Lambda^2(\mathbb{C}^2)$ is one-dimensional, so the
+reduced single-particle density matrix is forced to the maximally mixed
+state $\mathrm{diag}(1/2,1/2)$, with zero boson residual, for \emph{any}
+choice of the two orbitals. A two-band system therefore cannot, even in
+principle, support a variable residual for a mass term to attach to.
+
+Extending to three internal bands changes this. Because
+$\Lambda^2(\mathbb{C}^3)$ is three-dimensional, the occupied two-fermion
+subspace can be tilted relative to the fixed band basis, and the reduced
+single-particle boson residual $\|B_1\|$ -- evaluated in that fixed basis,
+not the particle's own natural-orbital basis, where it is always exactly
+zero -- becomes nonzero and varies continuously with the tilt angle, up to
+a maximum of $1/(2\sqrt2) \approx 0.354$. This is a genuinely new degree of
+freedom, absent by construction in the two-band case, and it is the first
+structure identified in this framework with the right qualitative shape --
+a continuously variable, band-off-diagonal coherence -- for a mass-like
+parameter to be built from.
+
+Neither script derives an energy scale: both use only counting/overlap
+(exclusion cost or Slater-determinant coherence), never a dynamical term or
+an imported constant with units of energy. Converting ``$\Delta$ is forced
+to $\pi/2$'' or ``the residual coherence varies with tilt'' into ``the two
+bands differ by a specific rest-mass energy $m$'' remains open, and
+plausibly requires relating cost-in-bits to cost-in-energy (e.g.\ via an
+analogue of $k_BT$ or $\hbar\omega$) rather than a relabelling. Until that
+step is taken, Result~5 remains at its current evidentiary tier rather than
+being upgraded to an analytically exact theorem on the footing of
+Results~1--4.
+
+\subsection{Connection to the Friedmann equation}
+
+Paper~VI identified the analytic derivation of the Friedmann equation from
+the relational scale factor $R(t)$. Worldlines in GR are themselves compressible.
+An elliptic orbit is a single Fourier mode --- the minimum-complexity trajectory
+consistent with the conserved quantities of the system. PoC to show
+these most probable path through the $2^n$ yield objects orbiting each
+reproducing Keplerian dynamics without a force law.
+
+
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper establishes three results.
+We have shown that a photon-like boson emerges from a purely fermionic system
+compressed by a complex-valued spectral codec, without postulating interactions,
+coupling constants, or particle species.
+The central result is:
+\[
+  \|B(\theta)\| = \frac{\sin 2\theta}{\sqrt{2}} = \sqrt{2\,P(1-P)},
+\]
+where $P = \sin^2\theta$ is the Born-rule hop probability.
+The boson amplitude is the interference term of the Born rule.
+Pauli exclusion follows from the analytical result $B = 0$ for single-site
+states.
+The virtual propagator lifecycle --- born, peaked, vanished --- follows from
+the $\theta$-dependence of $\|B\|$.
 
-\textbf{First}, the three-phase expansion profile of standard
-cosmology --- early rapid growth, matter-driven deceleration,
-late-time re-expansion --- emerges from the relational scale factor
-$R(t)$ when matter abundance follows the exact hump form of
-Section~\ref{sec:hump}, with no cosmological constant, inflaton field,
-or dark energy term. This macroscopic profile is verified to be
-independent of $n$. The late-time re-expansion is partial, not
-complete: the framework predicts a nonzero relic matter fraction
-persisting indefinitely, which is a point of genuine disagreement with
-$\Lambda$CDM rather than a re-derivation of it.
+These results are analytically exact, encoding-independent, and hold for all
+system sizes and hop distances.
+They suggest that quantum mechanics is an emergent description: the story
+an observer constructs to explain fermions that are sampled from a
+minimum-description-length codec operating on a finite universe of $n$ bits.
 
-\textbf{Second}, dark matter is identified with the first-order
-emergent level $L_{\rm DM}$ of the informational hierarchy. It
-gravitates via the counting equation by exactly the same mechanism
-as ordinary matter --- by withdrawing bits from the spacetime fabric
---- and is electromagnetically invisible not because it is weakly
-coupled but because it sheds compression residuals of a different
-symmetry class than the photon-type bosons that $L_{\rm bar}$-level
-detectors are constituted to register.
-
-\textbf{Third}, hump-shaped abundance is the generic, dominant outcome
-for finite windows in a relaxing bitstring -- not a universal property
-of every filter, but the typical one, since hump-producing
-compositions ($a<b$) dominate the aggregate probability mass for the
-widths tested. This predicts a disagreement with $\Lambda$CDM's monotonic
-dilution.
-
-% ============================================================
-\section{Open Problems}
-\label{sec:future}
-
-\subsection*{Derivation of $E = mc^2$}
-
-The amplitude scaling between
-informational bit-counts and physical energy-momentum is the critical
-missing link, pursued in the discrete counting arena $\mathcal{C}_D$.
-
-
-\subsection*{The late-time evaporation exponent is not derived}
-
-The multi-clock simulation's matter definition reweights the exact
-structure fraction by an order-parameter power, $\eta(\tau)^p$. This
-exponent is not fixed by the combinatorics -- it is a free choice with
-large physical consequences: $p=0$ (no reweighting, using the exact
-bump fraction directly) leaves a substantial relic ($\sim$73\% of peak
-matter survives to late times in the tested configuration); $p=1$
-drives matter to near-total evaporation ($<0.01\%$ of peak survives).
-Given Section~\ref{sec:hump}'s exact result that the underlying bump
-fraction itself plateaus rather than vanishing, $p=0$ is closer to
-what the bare combinatorics support, and is the better default absent
-a derivation; $p=1$ was the earlier default and should not be treated
-as the theory's prediction until an exponent is actually derived from
-the model rather than chosen for its late-time behavior.
-
-\subsection*{Structure bit-widths are placeholders}
-
-The widths used in illustrative figures ($6$, $12$, $20$ bits) are not
-derived from the actual $L_{\rm DM}/L_\nu/L_{\rm bar}$ spectrum; they
-await the $E=mc^2$ derivation above. Preliminary checks show the
-qualitative macro-envelope (Section~\ref{sec:expansion}) is not
-sensitive to the specific placeholder values, but the fine-scale
-discreteness noted there may be, and should be re-examined once
-realistic widths are available.
-
-\subsection*{The 5:1 Dark-Matter-to-Baryon Ratio}
-
-Unchanged in substance from the previous version: if visible matter
-forms from dark matter via the same hump mechanism applied
-recursively, self-similarity would predict
-$N_{\rm bar}/N_{\rm fabric} = (N_{\rm DM}/N_{\rm fabric})^2$, a
-power-law relation between levels. The observed ratio
-$\rho_{\rm DM}/\rho_{\rm bar}\approx5$ remains a target this relation
-should reproduce once bit-widths and $E=mc^2$ are available; the
-numerical coincidence with the lepton mass ladder's bit-counting
-(Paper~VIII) and with the WIMP mass range is noted as suggestive, not
-as a derived result.
-
-\subsection*{Quantitative Confrontation with Raw Observational Anchors}
-
-As discussed in Section~\ref{sec:data}, the proper falsifiability
-test is a direct comparison of $R(t)$ to the Type~Ia supernova
-distance-redshift relation and the CMB power spectrum. This requires
-completing the $E=mc^2$ derivation and replacing the withdrawn time
-anchor.
+We additionally reported an exploratory extension (Experiment~7) in which
+the same boson-residual formalism, applied to a two-band lattice Hamiltonian,
+reproduces the relativistic dispersion relation $E^2=(pc)^2+(m_0c^2)^2$ as a
+continuum limit. This result is numerically exact given its assumptions, but
+those assumptions -- a two-band internal structure and a specific
+band-splitting term -- are not yet derived from the spectral complexity
+functional $C_s$. We report it as a genuinely open problem, in keeping with
+the three-tier accounting standard of distinguishing exact results, strongly
+suggested correspondences, and open problems, rather than as a closed
+derivation of relativistic mass from first principles.
 
 % ============================================================
 \section*{Supplementary Material}
 \label{sec:supplementary}
 
+Python experiments:
+
 \begin{itemize}
-  \item \texttt{cosmic\_d.py}: Discrete, classical statistical bitstring cosmic timeline simulation. 
-  \item \texttt{cosmic\_d\_anim.py}: Discrete, classical statistical bitstring cosmic timeline animation. 
-  \item \texttt{cosmic\_psi.py}: Fundamental $\psi$ timeline simulation model.
-  \item \texttt{dicke\_cascade.py}, \texttt{dicke\_layer.py}, \texttt{multiclock.py} - common functionality.
+  \item \texttt{wavefunction.py} --- Wavefunction class with spectral
+        complexity $C_s$ and Solomonoff weight $2^{-C_s}$.
+  \item \texttt{minimal\_video.py} --- Minimal $2\times 2$, 2-frame video:
+        enumerate all 256 configurations, compute $C_s$ and boson signal.
+  \item \texttt{boson\_structure.py}, \texttt{boson\_structure\_2.py} ---
+        Symmetry, propagation, and quantisation analysis of the off-diagonal
+        density matrix.
+  \item \texttt{scaling\_1.py}, \texttt{scaling\_2.py} --- Longer chains
+        ($L = 4$--$16$), more frames; momentum quantisation test.
+  \item \texttt{two\_fermion\_hop.py} --- Two-fermion hops; phase universality,
+        path independence, Pauli exclusion.
+  \item \texttt{pauli\_as\_zero\_residual.py} --- Encoding scope and
+        analytical proof of $B = 0$ for stationary fermions.
+  \item \texttt{theta\_scaling.py} --- Numerical and analytical verification
+        of $\|B(\theta)\| = \sin(2\theta)/\sqrt{2}$ across all $L$.
+  \item \texttt{dispersion\_poc.py} --- Two-band lattice Hamiltonian
+        $H(k) = m\sigma_z + t\sin(k)\sigma_x$; numerical diagonalisation;
+        verification of $\|B(k)\| = |t\sin k|/(\sqrt{2}E(k))$ and of the
+        continuum-limit recovery of $E^2=(pc)^2+(m_0c^2)^2$.
+  \item \texttt{exclusion\_poc.py} --- Tests whether the same overlap/exclusion
+    cost that produces Pauli exclusion for spatial sites in Experiment~4 also
+    operates on the internal band degree of freedom of Experiment~7. Finds
+    that Solomonoff/MDL weighting over the band-mixing angle $\Delta$ between
+    two fermions' internal states, using only the exclusion cost (no
+    Hamiltonian, no imported mass parameter), is maximized at
+    $\Delta = \pi/2$ -- full orthogonality between the two fermions' band
+    occupations -- reproducing the standard antisymmetric one-fermion-per-band
+    ground state from pure MDL reasoning. Does not yet yield an energy scale.
+  \item \texttt{exclusion\_poc\_3level.py} --- Follow-up testing whether
+    $\geq 3$ internal bands admit a residual boson coherence, in the fixed
+    band basis, that a 2-band system cannot have even in principle (since
+    $\Lambda^2(\mathbb{C}^2)$ is one-dimensional). Finds a nonzero,
+    continuously tunable residual $\|B_1\|$ (up to $1/(2\sqrt2)\approx 0.354$
+    at maximal tilt) once the occupied two-fermion subspace is tilted
+    relative to the band axes -- a new continuous degree of freedom absent
+    in the 2-band case, though not yet tied to a specific mass value.
 \end{itemize}
 
 \printbibliography

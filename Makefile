@@ -6,7 +6,7 @@
 PAPERS_LIST := \
 	papers:Papers \
 	book:Introduction_to_the_Theory \
-#	ghghnd:Good_Heavens_Gods?_Hell_No,_Dogs!
+	ghghnd:Good_Heavens_Gods?_Hell_No,_Dogs!
 
 NAME=abstract
 

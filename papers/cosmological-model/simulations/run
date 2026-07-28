@@ -1,0 +1,24 @@
+
+# configure
+scales="6,12,20"
+t_bf_max=2.0
+bits=1024
+
+# The wavefunction backend's three-stage recovery target is the analytic
+# p->0.5 remnant floor (equilibrium_residual_fraction), not zero, and needs
+# more internal time than the other two backends to relax onto it. 2.0 is
+# too short (end_excess/peak_excess ~ 15% at that point); ~4-6 converges to
+# machine precision against the analytic prediction. See README.md.
+wavefunction_t_bf_max=6.0
+
+python3 cosmic.py statistical --n_bits $bits --scales $scales --t_bf_max $t_bf_max  --output classical.png
+python3 cosmic.py dicke  --n_bits $bits --scales $scales --t_bf_max $t_bf_max --output dicke.png
+python3 cosmic.py wavefunction \
+  --n_bits $bits \
+  --scales $scales \
+  --phase_strength 0.9 \
+  --spatial_modes 3 \
+  --temporal_modes 3 \
+  --pair_range 1 \
+  --t_bf_max $wavefunction_t_bf_max \
+  --output wavefunction.png

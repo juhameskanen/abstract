@@ -147,7 +147,6 @@ body.tex: fermion-boson-duality/fermion-boson-duality.tex
 body.tex: real-theory-of-everything/real-theory-of-everything.tex
 body.tex: emergence-of-spacetime/emergence-of-spacetime.tex
 body.tex: emergence-of-qm/emergence-of-qm.tex
-body.tex: quantum-cosmology/quantum-cosmology.tex
 body.tex: black-hole-singularities/black-hole-singularities.tex
 body.tex: emergence-of-gr/emergence-of-gr.tex
 body.tex: introduction/introduction.tex

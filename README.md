@@ -24,7 +24,7 @@ where $\textbf{D}$ is discrete, $\boldsymbol{\psi}$ spectral and $\textbf{G}$ ge
 - **[The Visualized Theory](gallery.md)** — Gallery of simulations showing emergent gravity, inertia, and atomic structures.
 - **[Papers & HTML Versions](https://juhameskanen.github.io/abstract/)** — Compiled papers (HTML + PDF).
 - **[Project Wiki](https://github.com/juhameskanen/abstract/wiki)** — Research notes and discussions.
-- **[Spectral Complexity](https://pypi.org/project/wavefunction)** — Complex-valued wavefunction class for **Spectral Complexity** measure. 
+- **[Spectral Complexity](https://pypi.org/project/wavefunction)** — Complex-valued wavefunction class for **Spectral Complexity** measure.
 - **[CHANGELOG](CHANGELOG.md)** — Project history.
 - **[LICENSE](LICENSE.md)** — License information.
 
@@ -34,7 +34,7 @@ where $\textbf{D}$ is discrete, $\boldsymbol{\psi}$ spectral and $\textbf{G}$ ge
 
 Usage for academic study and non-commercial research is permitted with proper citation.
 
-**Disclaimer**  
+**Disclaimer**
 THE THEORY IS PROVIDED "AS IS". Use at your own risk of ontological crisis or wavefunction collapse.
 
 ---

@@ -59,15 +59,15 @@ for d in [1, 2, 3, 4]:
     print()
 
 # The key insight: for a single hop 0→d, psi = (e0 + i*ed)/√2
-# where e0, ed are unit vectors. The boson matrix is:
-# B_ij = ψi* ψj for i≠j
-# ψ = [1,0,...,0,i,0,...]/√2  (1 at 0, i at d)
-# So B_{0,d} = ψ0*.ψd = (1/√2)*(i/√2) = i/2
-#    B_{d,0} = ψd*.ψ0 = (-i/√2)*(1/√2) = -i/2
-# ALL other B entries = 0 (since ψj=0 for j≠0,d)
+# where e0, ed are unit vectors. rho = outer(psi, psi.conj()), so
+# B_ij = psi_i * conj(psi_j) for i≠j (NOT psi_i* psi_j).
+# psi = [1,0,...,0,i,0,...]/√2  (1 at 0, i at d)
+# So B_{0,d} = psi_0 * conj(psi_d) = (1/√2)*conj(i/√2) = (1/√2)*(-i/√2) = -i/2
+#    B_{d,0} = psi_d * conj(psi_0) = (i/√2)*(1/√2) = +i/2
+# ALL other B entries = 0 (since psi_j=0 for j≠0,d)
 # So the boson matrix is EXACTLY a 2x2 antisymmetric block embedded in LxL
 print("Analytical check: for hop 0→d, boson matrix is a 2×2 block")
-print("B_{0,d} = +i/2,  B_{d,0} = -i/2,  all other entries = 0")
+print("B_{0,d} = -i/2,  B_{d,0} = +i/2,  all other entries = 0")
 print("This is ALWAYS purely antisymmetric, regardless of L or d.")
 print()
 print("Eigenvalues of this 2×2 block: ±1/2")
@@ -90,4 +90,4 @@ for d in range(1, L):
     phase_corr = np.angle(B[0, d])   # phase of the off-diagonal element
     k_true = phase_corr / d if d > 0 else 0
     print(f"  d={d}: B[0,d] = {B[0,d]:.4f}  phase = {phase_corr:.4f}  k=phase/d = {k_true:.4f}  k·d/π = {k_true*d/np.pi:.4f}")
-
+    
