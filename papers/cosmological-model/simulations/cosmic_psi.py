@@ -218,6 +218,10 @@ def main() -> None:
                               "e.g. dark matter + several visible fermion species that coexist "
                               "rather than one nesting inside another's leftover substrate.")
     parser.add_argument("--output", type=str, default="cascade.png")
+    parser.add_argument("--anim", action="store_true",
+                         help="Render the time-dilation animation (GIF) instead of the static plot.")
+    parser.add_argument("--frames", type=int, default=150, help="Animation frames (--anim only).")
+    parser.add_argument("--fps", type=int, default=20, help="Animation fps (--anim only).")
 
     args = parser.parse_args()
     levels = parse_levels(args.scales, args.compositions)
@@ -227,8 +231,31 @@ def main() -> None:
         t_bf_max=args.t_bf_max, t_today=args.t_today,
     )
 
-    plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output,
-                          parallel=args.parallel)
+    if args.anim:
+        from anim_common import LevelAnimSpec, render_time_dilation_animation
+        series_fn = quantum_parallel_series if args.parallel else quantum_cascade_series
+        cascade, matter_bits, entropy_bits, pending_bits, _k_int = series_fn(
+            sim.n_bits, sim.t_bf, levels
+        )
+        total_matter_bits = sum(matter_bits[w] for w in [lvl.width for lvl in levels])
+        size_measure_q = np.clip(
+            (entropy_bits - pending_bits - total_matter_bits) / sim.n_bits, 0.0, None
+        )
+        anim_levels = [
+            LevelAnimSpec(width=lvl.width, tau_local=res.tau_local, lapse=res.lapse,
+                           matter_series=matter_bits[lvl.width])
+            for lvl, res in zip(levels, cascade)
+        ]
+        mode_label = "parallel" if args.parallel else "cascaded"
+        output = args.output if args.output.endswith((".gif", ".mp4")) else "time_dilation_dicke.gif"
+        render_time_dilation_animation(
+            sim.t_bf, sim.t_bf_max, size_measure_q, anim_levels, output,
+            n_slots=args.slots, frames=args.frames, fps=args.fps,
+            title=f"Dicke/psi-layer backend ({mode_label}): worldlines growing at different rates",
+        )
+    else:
+        plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output,
+                              parallel=args.parallel)
 
 
 if __name__ == "__main__":

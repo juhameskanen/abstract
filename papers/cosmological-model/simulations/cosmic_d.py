@@ -175,6 +175,10 @@ def main() -> None:
     parser.add_argument("--scales", type=str, default="6,12,20")
     parser.add_argument("--slots", type=int, default=50)
     parser.add_argument("--output", type=str, default="emergent_structure_relativistic.png")
+    parser.add_argument("--anim", action="store_true",
+                         help="Render the time-dilation animation (GIF) instead of the static plot.")
+    parser.add_argument("--frames", type=int, default=150, help="Animation frames (--anim only).")
+    parser.add_argument("--fps", type=int, default=20, help="Animation fps (--anim only).")
 
     args = parser.parse_args()
     scales = parse_scales(args.scales)
@@ -184,7 +188,21 @@ def main() -> None:
         t_today=args.t_today,
         matter_power=args.matter_power,
     )
-    plot_results(sim, slots_per_scale=args.slots, output_path=args.output)
+    if args.anim:
+        from anim_common import LevelAnimSpec, render_time_dilation_animation
+        levels = [
+            LevelAnimSpec(width=lvl.width, tau_local=lvl.tau_local, lapse=lvl.lapse,
+                           matter_series=matter)
+            for lvl, matter in zip(sim.levels, sim.per_scale_matter)
+        ]
+        output = args.output if args.output.endswith((".gif", ".mp4")) else "time_dilation_statistical.gif"
+        render_time_dilation_animation(
+            sim.t_bf, sim.t_bf_max, sim.size_measure, levels, output,
+            n_slots=args.slots, frames=args.frames, fps=args.fps,
+            title="Statistical backend: worldlines growing at different rates (time dilation)",
+        )
+    else:
+        plot_results(sim, slots_per_scale=args.slots, output_path=args.output)
 
 
 if __name__ == "__main__":

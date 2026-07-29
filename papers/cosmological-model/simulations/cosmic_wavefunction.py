@@ -95,11 +95,21 @@ def plot_results(result, output_path: str, slots_per_scale: int = 50) -> None:
         y_slots, active = build_worldlines(
             level.matter_count, slots_per_scale, seed=int(level.width)
         )
+        # FIX (item 2): each level's worldlines must advance along its OWN
+        # retarded clock (level.tau_local), not the shared global x-axis.
+        # Previously every level was plotted at x = result.tau_norm
+        # (identical for all scales), so no worldline could ever visibly
+        # lag another regardless of width -- the differential-aging data
+        # already computed in level.tau_local was never actually reaching
+        # the plot. level.tau_local is a sample-and-hold ("block") step
+        # function of tau_raw, so heavier (wider) levels now visibly pause
+        # between jumps rather than advancing in lockstep with light ones.
+        x_level = level.tau_local / result.n_bits
         for slot_idx, y0 in enumerate(y_slots):
             mask = active[:, slot_idx]
             if np.any(mask):
                 ax_space.plot(
-                    x[mask],
+                    x_level[mask],
                     y0 * result.size_measure[mask],
                     color=color,
                     lw=0.55,
@@ -232,6 +242,10 @@ def main() -> None:
     parser.add_argument("--samples", type=int, default=4096, help="Born samples used for a numerical shadow check.")
     parser.add_argument("--slots", type=int, default=50)
     parser.add_argument("--output", type=str, default="general_wavefunction_cosmology.png")
+    parser.add_argument("--anim", action="store_true",
+                         help="Render the time-dilation animation (GIF) instead of the static plot.")
+    parser.add_argument("--frames", type=int, default=150, help="Animation frames (--anim only).")
+    parser.add_argument("--fps", type=int, default=20, help="Animation fps (--anim only).")
     args = parser.parse_args()
 
     scales = parse_scales(args.scales)
@@ -251,7 +265,21 @@ def main() -> None:
         clock_mode=args.clock_mode,
         phase_config=phase_config,
     )
-    plot_results(result, args.output, slots_per_scale=args.slots)
+    if args.anim:
+        from anim_common import LevelAnimSpec, render_time_dilation_animation
+        levels = [
+            LevelAnimSpec(width=lvl.width, tau_local=lvl.tau_local, lapse=lvl.lapse,
+                           matter_series=lvl.matter_count)
+            for lvl in result.levels
+        ]
+        output = args.output if args.output.endswith((".gif", ".mp4")) else "time_dilation_wavefunction.gif"
+        render_time_dilation_animation(
+            result.t_bf, float(result.t_bf[-1]), result.size_measure, levels, output,
+            n_slots=args.slots, frames=args.frames, fps=args.fps,
+            title="Wavefunction backend: worldlines growing at different rates (time dilation)",
+        )
+    else:
+        plot_results(result, args.output, slots_per_scale=args.slots)
 
     peak_idx = int(np.argmax(result.total_matter_bits))
     peak_t = float(result.t_bf[peak_idx])
@@ -266,7 +294,8 @@ def main() -> None:
     sampled_p = float(np.mean(samples))
     diag = result.diagnostics
 
-    print(f"Saved -> {args.output}")
+    if not args.anim:
+        print(f"Saved -> {args.output}")
     print(f"Born shadow at peak matter: analytic p={state.p:.6f}, sampled p={sampled_p:.6f}, error={abs(sampled_p-state.p):.3e}")
     print(f"Complex codec: {phase_config.term_count} generated coefficients, phase strength={phase_config.strength:g}")
     print(f"One-bit entanglement at peak matter: S={result.qubit_entanglement[peak_idx]:.6f} bits")
