@@ -1,4 +1,4 @@
-# $D \text{ - } \psi \text{ - } G$
+# $G \text{ - } \psi \text{ - } D$
 
 ## Master Equations
 
@@ -13,10 +13,16 @@ where $\mathcal{C}_O[\gamma]$ is the total description cost of history $\gamma$ 
 The cost functional decomposes into three regimes:
 
 $$
-\textbf{D} - \boldsymbol{\psi} - \textbf{G}
+\textbf{G} - \boldsymbol{\psi} - \textbf{D}
 $$
 
 where $\textbf{D}$ is discrete, $\boldsymbol{\psi}$ spectral and $\textbf{G}$ geometric description of structure $O$.
+
+The predictable physics emerges:
+
+$$
+\text{law (short } \psi\text{)} \;\Rightarrow\; \text{predictable } D \;\Rightarrow\; \text{small } \mathcal{C}_D \;\Rightarrow\; \text{large } \mathbb{P}(\gamma\mid O)
+$$
 
 
 ## Contents
