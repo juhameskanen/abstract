@@ -1,5 +1,5 @@
 """
-Shared 3D-particle renderer, usable by all three cosmology backends.
+Shared 3D-particle-density renderer, usable by all three cosmology backends.
 
 WHAT THIS IS AND IS NOT
 ------------------------
@@ -9,27 +9,44 @@ per-level lapse/retarded clock, and size_measure as a resolution
 scalar). It says nothing about the number of spatial dimensions or the
 topology of any metric.
 
-Embedding worldlines into 3D space with spherical symmetry -- as this
-module does for visualization -- is a rendering choice, not a
-consequence of the model. This generalizes (and replaces) the original
-one-off snapshot script, which already flagged this honestly. Only the
-following are derived quantities pulled from the run:
-  - size_measure(tau)              -- the FRW-like background radius
-  - lvl.tau_local, lvl.lapse       -- each level's own retarded clock
-  - lvl.matter_series              -- drives which comoving "slots" are
-                                       active at a given tau (via the
-                                       same build_worldlines() used by
-                                       the existing 2D worldline panel
-                                       and by --anim)
+Embedding this relaxation into 3D space with spherical symmetry -- as
+this module does for visualization -- is a rendering choice, not a
+consequence of the model. Only the following are derived quantities
+pulled from the run:
+  - size_measure(tau)     -- the FRW-like background radius R(tau).
+                              Radius IS coordinate time here: R(tau) is
+                              monotonic, so every sampled point's radius
+                              is simply a record of when it was sampled.
+  - lvl.matter_series      -- per-scale structure/matter count at each
+                              tau, used ONLY as the (relative) sampling
+                              rate for how many points to draw at that
+                              tau -- i.e. a population-density readout,
+                              not a particle count with tracked identity.
 
 Everything else here is an arbitrary placement choice made only for
-the picture:
-  - the 3D unit direction assigned to each comoving slot
-  - the comoving radius fraction assigned to each slot
-  - marker size as a function of level lapse
+the picture: the isotropic random direction assigned to each sampled
+point. Marker size (by level lapse) is likewise cosmetic.
 
-None of this is derived from or asserted as part of the theory. It is
-flagged in every figure this module produces.
+WHAT CHANGED (and why)
+-----------------------
+An earlier version of this module assigned each comoving "slot" a
+fixed direction and let it stay active/inactive across many frames,
+then optionally drew a trail connecting its positions over time. That
+implied persistent particle identity and literal motion. But the
+underlying model (`build_worldlines` / matter_series) only ever
+defines a population COUNT at each tau via a hypergeometric-style
+structure-count statistic -- there is no equation of motion and no
+tracked identity anywhere in multiclock.py. Drawing continuous tracks
+therefore asserted something the model does not compute.
+
+This version instead draws, independently at every tau in the run, a
+fresh stochastic (Poisson) number of points whose count is driven by
+that level's matter_series(tau), places each at an independent random
+direction, and permanently deposits them at radius R(tau) -- then
+never revisits or moves them again. The result is a single accumulated
+point cloud: a density map of "how much of this scale's structure
+existed near this moment in cosmic history," honestly rendered as
+population density rather than as tracked individual worldlines.
 """
 from __future__ import annotations
 
@@ -44,14 +61,12 @@ import matplotlib.animation as animation
 from matplotlib.lines import Line2D
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (registers the 3d projection)
 
-from multiclock import build_worldlines
-
 CAVEAT = (
     "ILLUSTRATIVE: 3D embedding + spherical symmetry assumed for rendering only "
-    "-- not derived from or asserted by the model. Particle directions/comoving "
-    "radii are arbitrary placement choices; only each level's active-slot "
-    "fraction (from matter_series) and the background size_measure(tau) are "
-    "quantities produced by the run."
+    "-- not derived from or asserted by the model. Points are a stochastic "
+    "population-density sample (radius = coordinate time via size_measure, "
+    "direction is arbitrary/isotropic); they are NOT tracked particles or "
+    "worldlines -- there is no persistent identity or equation of motion here."
 )
 
 
@@ -64,64 +79,46 @@ def _sphere_wireframe(r: float, n: int = 16):
     return x, y, z
 
 
-def _assign_3d_directions(n_slots: int, seed: int) -> np.ndarray:
-    """Arbitrary unit direction * comoving-radius-fraction per slot.
+def _sample_level_cloud(matter_series: np.ndarray, R: np.ndarray, rate_per_step: float,
+                         seed: int) -> tuple[np.ndarray, np.ndarray]:
+    """Stochastically sample points for one level, accumulated over the full run.
 
-    Flagged: this is a placement choice for the picture, exactly like
-    the fixed comoving_pos/comoving_r dicts in the original script,
-    generalized to any number of slots and made deterministic per level
-    via `seed` (so re-running with the same scales reproduces the same
-    picture) instead of being hand-picked per scale.
+    At every tau index t, draw a Poisson count with mean
+    `rate_per_step * frac(t)` (frac = matter_series normalized to its own
+    max), assign each a fresh isotropic random direction, and place it at
+    radius R[t] -- i.e. AT the moment it was sampled, permanently. No point,
+    once placed, is ever moved or re-sampled.
+
+    Returns (points[N,3], creation_idx[N]) where creation_idx records the
+    tau-index each point belongs to, so callers can reveal the cloud
+    cumulatively (up to a given tau) for the snapshot grid / animation.
     """
     rng = np.random.default_rng(seed)
-    vec = rng.normal(size=(n_slots, 3))
-    vec /= np.linalg.norm(vec, axis=1, keepdims=True)
-    radius_frac = rng.uniform(0.15, 1.0, size=n_slots)
-    return vec * radius_frac[:, None]
+    denom = max(float(np.max(matter_series)), 1e-12)
+    frac = np.clip(matter_series / denom, 0.0, None)
+    counts = rng.poisson(frac * rate_per_step)
+    total = int(counts.sum())
+    if total == 0:
+        return np.zeros((0, 3)), np.zeros((0,), dtype=int)
+    creation_idx = np.repeat(np.arange(len(matter_series)), counts)
+    vecs = rng.normal(size=(total, 3))
+    vecs /= np.linalg.norm(vecs, axis=1, keepdims=True)
+    points = vecs * R[creation_idx, None]
+    return points, creation_idx
 
 
-def _first_active_indices(active: np.ndarray) -> np.ndarray:
-    """First timestep index each particle (column) goes active, or -1 if never."""
-    n_particles = active.shape[1]
-    out = np.full(n_particles, -1, dtype=int)
-    for p in range(n_particles):
-        idxs = np.flatnonzero(active[:, p])
-        if idxs.size:
-            out[p] = idxs[0]
-    return out
-
-
-def _trail_points(direction, R, first_idx, upto_idx, max_points):
-    """Subsampled path of a single particle from its activation to `upto_idx`.
-
-    Not a new derived quantity: it is the same (direction * R(t)) position
-    used for the marker itself, just evaluated at intermediate t rather than
-    only at the current frame -- i.e. "where this particle's marker would
-    have been plotted at earlier times," subsampled for render speed.
-    """
-    if first_idx < 0 or first_idx > upto_idx:
-        return None
-    span = upto_idx - first_idx + 1
-    k = min(max_points, span)
-    idxs = np.unique(np.linspace(first_idx, upto_idx, k).astype(int))
-    return direction[None, :] * R[idxs, None]
-
-
-def _build_level_data(levels, n_particles):
+def _build_level_clouds(levels, t_bf, R, rate_per_step: float):
     cmap = plt.get_cmap("plasma")
     colors = [
         cmap(0.15 + 0.7 * i / max(len(levels) - 1, 1)) for i in range(len(levels))
     ]
-    level_data = []
+    level_clouds = []
     for lvl, color in zip(levels, colors):
-        # Reuses the SAME derived active-slot logic as the existing 2D
-        # worldline panel and the --anim renderer -- only the embedding
-        # (2D comoving y vs 3D direction) differs.
-        _, active = build_worldlines(lvl.matter_series, n_particles, seed=int(lvl.width))
-        directions = _assign_3d_directions(n_particles, seed=int(lvl.width) + 97)
-        first_active = _first_active_indices(active)
-        level_data.append((directions, active, first_active, color, lvl))
-    return level_data
+        points, creation_idx = _sample_level_cloud(
+            lvl.matter_series, R, rate_per_step, seed=int(lvl.width)
+        )
+        level_clouds.append((points, creation_idx, color, lvl))
+    return level_clouds
 
 
 def render_3d_particles(
@@ -130,51 +127,39 @@ def render_3d_particles(
     levels: list,
     output: str,
     animate: bool = False,
-    n_particles: int = 40,
+    n_particles: int = 3,
     frames: int = 150,
     fps: int = 20,
-    tracks: bool = False,
-    track_points: int = 60,
-    title: str = "Worldlines as particles (illustrative 3D + spherical symmetry)",
+    title: str = "Particle population density (illustrative 3D + spherical symmetry)",
 ) -> None:
-    """Render worldlines as particles in a 3D comoving embedding.
+    """Render each level's population density as an accumulated 3D point cloud.
 
     `levels` is a list of anim_common.LevelAnimSpec (or any object with
-    .width, .tau_local, .lapse, .matter_series) -- the same backend-
-    agnostic description already used by --anim, so each CLI script can
-    build it once and pass it to both renderers.
+    .width, .matter_series, .lapse) -- the same backend-agnostic
+    description already used by --anim.
 
-    animate=False -> static multi-snapshot grid (like the original script).
-    animate=True  -> rotating GIF/MP4, particles moving outward with the
-                      background as it expands.
-    tracks=True   -> also draw each particle's history path (trail) from
-                      the moment it became active up to the current frame,
-                      subsampled to `track_points`. Slower, especially
-                      combined with --anim and many particles.
+    `n_particles` is now the max EXPECTED points sampled per timestep, per
+    scale (Poisson rate), not a fixed particle-per-scale count -- total
+    points over the whole run scale with roughly steps * n_particles * (mean
+    normalized matter fraction).
+
+    animate=False -> static multi-snapshot grid, each panel showing the
+                      cloud accumulated up to that point in cosmic history.
+    animate=True  -> rotating GIF/MP4 that grows the cloud over the run,
+                      background sphere expanding alongside it.
     """
     R = np.asarray(size_measure, dtype=float)
     lim = float(np.max(np.abs(R))) * 1.05 if np.max(np.abs(R)) > 0 else 1.0
-    level_data = _build_level_data(levels, n_particles)
+    level_clouds = _build_level_clouds(levels, t_bf, R, rate_per_step=float(n_particles))
 
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     if not animate:
-        _render_snapshots(t_bf, R, level_data, lim, output, title, tracks, track_points)
+        _render_snapshots(t_bf, R, level_clouds, lim, output, title)
     else:
-        _render_animation(t_bf, R, level_data, lim, output, frames, fps, title,
-                           tracks, track_points)
+        _render_animation(t_bf, R, level_clouds, lim, output, frames, fps, title)
 
 
-def _draw_trails(ax, level_data, R, upto_idx, track_points):
-    for directions, active, first_active, color, lvl in level_data:
-        for p in range(directions.shape[0]):
-            if first_active[p] < 0 or first_active[p] > upto_idx:
-                continue
-            pts = _trail_points(directions[p], R, first_active[p], upto_idx, track_points)
-            if pts is not None and len(pts) > 1:
-                ax.plot(pts[:, 0], pts[:, 1], pts[:, 2], color=color, alpha=0.35, lw=0.8)
-
-
-def _render_snapshots(t_bf, R, level_data, lim, output, title, tracks, track_points):
+def _render_snapshots(t_bf, R, level_clouds, lim, output, title):
     n = len(t_bf)
     fracs = [0.02, 0.05, 0.12, 0.30, 0.6, 1.0]
     idxs = [int(f * (n - 1)) for f in fracs]
@@ -184,17 +169,14 @@ def _render_snapshots(t_bf, R, level_data, lim, output, title, tracks, track_poi
         ax = fig.add_subplot(2, 3, panel + 1, projection="3d")
         x, y, z = _sphere_wireframe(R[idx], n=18)
         ax.plot_wireframe(x, y, z, color="gray", alpha=0.25, lw=0.4)
-        if tracks:
-            _draw_trails(ax, level_data, R, idx, track_points)
-        for directions, active, first_active, color, lvl in level_data:
-            mask = active[idx]
+        for points, creation_idx, color, lvl in level_clouds:
+            mask = creation_idx <= idx
             if not np.any(mask):
                 continue
-            pts = directions[mask] * R[idx]
-            marker_size = 10 + 60 * lvl.lapse
+            marker_size = 6 + 30 * lvl.lapse
             ax.scatter(
-                pts[:, 0], pts[:, 1], pts[:, 2],
-                color=color, s=marker_size, alpha=0.85, depthshade=True,
+                points[mask, 0], points[mask, 1], points[mask, 2],
+                color=color, s=marker_size, alpha=0.5, depthshade=True,
             )
         ax.set_xlim(-lim, lim)
         ax.set_ylim(-lim, lim)
@@ -203,15 +185,14 @@ def _render_snapshots(t_bf, R, level_data, lim, output, title, tracks, track_poi
         ax.set_box_aspect([1, 1, 1])
         ax.set_axis_off()
 
-    track_note = " Trails show each particle's path since activation." if tracks else ""
-    fig.suptitle(f"{title}\n{CAVEAT}{track_note}", fontsize=9)
+    fig.suptitle(f"{title}\n{CAVEAT}", fontsize=9)
     fig.tight_layout(rect=(0, 0, 1, 0.90))
     fig.savefig(output, dpi=130)
     plt.close(fig)
     print(f"saved -> {output}")
 
 
-def _render_animation(t_bf, R, level_data, lim, output, frames, fps, title, tracks, track_points):
+def _render_animation(t_bf, R, level_clouds, lim, output, frames, fps, title):
     n_frames_total = len(t_bf)
     stride = max(1, n_frames_total // frames)
     frame_indices = np.arange(0, n_frames_total, stride)
@@ -229,15 +210,14 @@ def _render_animation(t_bf, R, level_data, lim, output, frames, fps, title, trac
     legend_handles = [
         Line2D([0], [0], marker="o", color="none", markerfacecolor=color,
                markersize=8, label=f"w={lvl.width:g}  (lapse=1/{lvl.width:g})")
-        for _, _, _, color, lvl in level_data
+        for _, _, color, lvl in level_clouds
     ]
     ax.legend(handles=legend_handles, loc="upper left", fontsize=8,
               facecolor="#111115", edgecolor="gray", labelcolor="white")
 
     fig.suptitle(title, fontsize=11, fontweight="bold")
     time_text = fig.text(0.5, 0.03, "", ha="center", fontsize=10, fontweight="bold")
-    track_note = " Trails show each particle's path since activation." if tracks else ""
-    caption = fig.text(0.5, 0.005, CAVEAT + track_note, ha="center", fontsize=6.5, wrap=True)
+    caption = fig.text(0.5, 0.005, CAVEAT, ha="center", fontsize=6.5, wrap=True)
 
     def update(frame_idx):
         idx = frame_indices[frame_idx]
@@ -252,15 +232,12 @@ def _render_animation(t_bf, R, level_data, lim, output, frames, fps, title, trac
 
         x, y, z = _sphere_wireframe(R[idx], n=16)
         ax.plot_wireframe(x, y, z, color="gray", alpha=0.2, lw=0.3)
-        if tracks:
-            _draw_trails(ax, level_data, R, idx, track_points)
-        for directions, active, first_active, color, lvl in level_data:
-            mask = active[idx]
+        for points, creation_idx, color, lvl in level_clouds:
+            mask = creation_idx <= idx
             if np.any(mask):
-                pts = directions[mask] * R[idx]
-                marker_size = 10 + 60 * lvl.lapse
-                ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2],
-                           color=color, s=marker_size, alpha=0.85)
+                marker_size = 6 + 30 * lvl.lapse
+                ax.scatter(points[mask, 0], points[mask, 1], points[mask, 2],
+                           color=color, s=marker_size, alpha=0.5)
         ax.view_init(elev=20, azim=frame_idx * 1.2)
         time_text.set_text(f"coordinate time \u03c4 = {t_bf[idx]:8.1f}")
         return []
@@ -279,31 +256,32 @@ def _render_animation(t_bf, R, level_data, lim, output, frames, fps, title, trac
 # ===========================================================================
 
 def add_3d_cli_args(parser) -> None:
-    """Add --3d, --n_particles, --tracks, --track_points to an argparse parser.
+    """Add --3d and --n_particles to an argparse parser.
 
     Assumes --anim, --frames, --fps, and --output are already added by the
     caller (all three backend scripts already have these).
     """
     parser.add_argument("--3d", dest="three_d", action="store_true",
-                         help="Add a 3D view: worldlines rendered as particles in an "
-                              "illustrative 3D + spherically symmetric embedding "
-                              "(NOT derived -- flagged in the output). Alone this "
-                              "produces a static multi-snapshot grid; combined with "
-                              "--anim it produces a rotating GIF/MP4 instead.")
-    parser.add_argument("--n_particles", type=int, default=40,
-                         help="Particles per scale in the 3D view (--3d only).")
-    parser.add_argument("--tracks", action="store_true",
-                         help="Draw each particle's history path since it became "
-                              "active (--3d only). Slower, especially with --anim.")
-    parser.add_argument("--track_points", type=int, default=60,
-                         help="Max subsampled points per trail (--tracks only).")
+                         help="Add a 3D view: each level's population density "
+                              "rendered as a stochastically-sampled point cloud "
+                              "in an illustrative 3D + spherically symmetric "
+                              "embedding (radius = coordinate time; NOT tracked "
+                              "particles/worldlines -- flagged in the output). "
+                              "Alone this produces a static multi-snapshot grid; "
+                              "combined with --anim it produces a rotating "
+                              "GIF/MP4 that grows the cloud over the run instead.")
+    parser.add_argument("--n_particles", type=int, default=3,
+                         help="Max expected points sampled per timestep, per "
+                              "scale, in the 3D view (Poisson rate; --3d only). "
+                              "Total points over the whole run scale with "
+                              "roughly steps * n_particles * mean matter "
+                              "fraction.")
 
 
 def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
                  title: str) -> None:
     """Call render_3d_particles from a backend's main(), reading the shared
-    --3d/--anim/--frames/--fps/--tracks/--track_points args. No-op if --3d
-    wasn't passed.
+    --3d/--anim/--frames/--fps/--n_particles args. No-op if --3d wasn't passed.
     """
     if not getattr(args, "three_d", False):
         return
@@ -314,6 +292,5 @@ def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
         t_bf, size_measure, levels, threed_output,
         animate=args.anim, n_particles=args.n_particles,
         frames=args.frames, fps=args.fps,
-        tracks=args.tracks, track_points=args.track_points,
         title=title,
     )
