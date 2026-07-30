@@ -246,6 +246,8 @@ def main() -> None:
                          help="Render the time-dilation animation (GIF) instead of the static plot.")
     parser.add_argument("--frames", type=int, default=150, help="Animation frames (--anim only).")
     parser.add_argument("--fps", type=int, default=20, help="Animation fps (--anim only).")
+    from render_3d import add_3d_cli_args
+    add_3d_cli_args(parser)
     args = parser.parse_args()
 
     scales = parse_scales(args.scales)
@@ -265,13 +267,17 @@ def main() -> None:
         clock_mode=args.clock_mode,
         phase_config=phase_config,
     )
-    if args.anim:
-        from anim_common import LevelAnimSpec, render_time_dilation_animation
+    levels = None
+    if args.anim or args.three_d:
+        from anim_common import LevelAnimSpec
         levels = [
             LevelAnimSpec(width=lvl.width, tau_local=lvl.tau_local, lapse=lvl.lapse,
                            matter_series=lvl.matter_count)
             for lvl in result.levels
         ]
+
+    if args.anim:
+        from anim_common import render_time_dilation_animation
         output = args.output if args.output.endswith((".gif", ".mp4")) else "time_dilation_wavefunction.gif"
         render_time_dilation_animation(
             result.t_bf, float(result.t_bf[-1]), result.size_measure, levels, output,
@@ -280,6 +286,13 @@ def main() -> None:
         )
     else:
         plot_results(result, args.output, slots_per_scale=args.slots)
+
+    if args.three_d:
+        from render_3d import dispatch_3d
+        dispatch_3d(
+            args, result.t_bf, result.size_measure, levels,
+            title="Wavefunction backend: worldlines as particles (illustrative 3D + spherical symmetry)",
+        )
 
     peak_idx = int(np.argmax(result.total_matter_bits))
     peak_t = float(result.t_bf[peak_idx])

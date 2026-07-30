@@ -222,6 +222,8 @@ def main() -> None:
                          help="Render the time-dilation animation (GIF) instead of the static plot.")
     parser.add_argument("--frames", type=int, default=150, help="Animation frames (--anim only).")
     parser.add_argument("--fps", type=int, default=20, help="Animation fps (--anim only).")
+    from render_3d import add_3d_cli_args
+    add_3d_cli_args(parser)
 
     args = parser.parse_args()
     levels = parse_levels(args.scales, args.compositions)
@@ -231,8 +233,11 @@ def main() -> None:
         t_bf_max=args.t_bf_max, t_today=args.t_today,
     )
 
-    if args.anim:
-        from anim_common import LevelAnimSpec, render_time_dilation_animation
+    size_measure_q = None
+    anim_levels = None
+    mode_label = "parallel" if args.parallel else "cascaded"
+    if args.anim or args.three_d:
+        from anim_common import LevelAnimSpec
         series_fn = quantum_parallel_series if args.parallel else quantum_cascade_series
         cascade, matter_bits, entropy_bits, pending_bits, _k_int = series_fn(
             sim.n_bits, sim.t_bf, levels
@@ -246,7 +251,9 @@ def main() -> None:
                            matter_series=matter_bits[lvl.width])
             for lvl, res in zip(levels, cascade)
         ]
-        mode_label = "parallel" if args.parallel else "cascaded"
+
+    if args.anim:
+        from anim_common import render_time_dilation_animation
         output = args.output if args.output.endswith((".gif", ".mp4")) else "time_dilation_dicke.gif"
         render_time_dilation_animation(
             sim.t_bf, sim.t_bf_max, size_measure_q, anim_levels, output,
@@ -256,6 +263,14 @@ def main() -> None:
     else:
         plot_results_cascade(sim, levels, slots_per_scale=args.slots, output_path=args.output,
                               parallel=args.parallel)
+
+    if args.three_d:
+        from render_3d import dispatch_3d
+        dispatch_3d(
+            args, sim.t_bf, size_measure_q, anim_levels,
+            title=f"Dicke/psi-layer backend ({mode_label}): worldlines as particles "
+                  f"(illustrative 3D + spherical symmetry)",
+        )
 
 
 if __name__ == "__main__":

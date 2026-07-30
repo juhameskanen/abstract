@@ -179,6 +179,8 @@ def main() -> None:
                          help="Render the time-dilation animation (GIF) instead of the static plot.")
     parser.add_argument("--frames", type=int, default=150, help="Animation frames (--anim only).")
     parser.add_argument("--fps", type=int, default=20, help="Animation fps (--anim only).")
+    from render_3d import add_3d_cli_args
+    add_3d_cli_args(parser)
 
     args = parser.parse_args()
     scales = parse_scales(args.scales)
@@ -188,13 +190,18 @@ def main() -> None:
         t_today=args.t_today,
         matter_power=args.matter_power,
     )
-    if args.anim:
-        from anim_common import LevelAnimSpec, render_time_dilation_animation
+
+    levels = None
+    if args.anim or args.three_d:
+        from anim_common import LevelAnimSpec
         levels = [
             LevelAnimSpec(width=lvl.width, tau_local=lvl.tau_local, lapse=lvl.lapse,
                            matter_series=matter)
             for lvl, matter in zip(sim.levels, sim.per_scale_matter)
         ]
+
+    if args.anim:
+        from anim_common import render_time_dilation_animation
         output = args.output if args.output.endswith((".gif", ".mp4")) else "time_dilation_statistical.gif"
         render_time_dilation_animation(
             sim.t_bf, sim.t_bf_max, sim.size_measure, levels, output,
@@ -203,6 +210,13 @@ def main() -> None:
         )
     else:
         plot_results(sim, slots_per_scale=args.slots, output_path=args.output)
+
+    if args.three_d:
+        from render_3d import dispatch_3d
+        dispatch_3d(
+            args, sim.t_bf, sim.size_measure, levels,
+            title="Statistical backend: worldlines as particles (illustrative 3D + spherical symmetry)",
+        )
 
 
 if __name__ == "__main__":
