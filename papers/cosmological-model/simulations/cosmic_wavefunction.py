@@ -268,7 +268,7 @@ def main() -> None:
         phase_config=phase_config,
     )
     levels = None
-    if args.anim or args.three_d:
+    if args.anim or args.three_d or args.bigbang:
         from anim_common import LevelAnimSpec
         levels = [
             LevelAnimSpec(width=lvl.width, tau_local=lvl.tau_local, lapse=lvl.lapse,
@@ -291,6 +291,15 @@ def main() -> None:
         from render_3d import dispatch_3d
         from multiclock import TRUE_K_RATE
         dispatch_3d(
+            args, result.t_bf, result.size_measure, levels,
+            n_bits=result.n_bits, k_rate=TRUE_K_RATE,
+            title="Wavefunction backend: particle population density (illustrative 3D + spherical symmetry)",
+        )
+
+    if args.bigbang:
+        from render_3d import dispatch_bigbang
+        from multiclock import TRUE_K_RATE
+        dispatch_bigbang(
             args, result.t_bf, result.size_measure, levels,
             n_bits=result.n_bits, k_rate=TRUE_K_RATE,
             title="Wavefunction backend: particle population density (illustrative 3D + spherical symmetry)",

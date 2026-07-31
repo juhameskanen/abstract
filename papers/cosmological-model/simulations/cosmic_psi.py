@@ -236,7 +236,7 @@ def main() -> None:
     size_measure_q = None
     anim_levels = None
     mode_label = "parallel" if args.parallel else "cascaded"
-    if args.anim or args.three_d:
+    if args.anim or args.three_d or args.bigbang:
         from anim_common import LevelAnimSpec
         series_fn = quantum_parallel_series if args.parallel else quantum_cascade_series
         cascade, matter_bits, entropy_bits, pending_bits, _k_int = series_fn(
@@ -267,6 +267,15 @@ def main() -> None:
     if args.three_d:
         from render_3d import dispatch_3d
         dispatch_3d(
+            args, sim.t_bf, size_measure_q, anim_levels,
+            n_bits=sim.n_bits, k_rate=sim.k_rate,
+            title=f"Dicke/psi-layer backend ({mode_label}): particle population density "
+                  f"(illustrative 3D + spherical symmetry)",
+        )
+
+    if args.bigbang:
+        from render_3d import dispatch_bigbang
+        dispatch_bigbang(
             args, sim.t_bf, size_measure_q, anim_levels,
             n_bits=sim.n_bits, k_rate=sim.k_rate,
             title=f"Dicke/psi-layer backend ({mode_label}): particle population density "

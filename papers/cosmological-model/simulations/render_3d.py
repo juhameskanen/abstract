@@ -84,6 +84,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.lines import Line2D
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (registers the 3d projection)
+from scipy.ndimage import gaussian_filter1d
 
 from multiclock import ground_truth_pool
 from dicke_layer import default_composition
@@ -95,6 +96,17 @@ CAVEAT = (
     "population-density sample (radius = coordinate time via size_measure, "
     "direction is arbitrary/isotropic); they are NOT tracked particles or "
     "worldlines -- there is no persistent identity or equation of motion here."
+)
+
+BIGBANG_CAVEAT = (
+    "ILLUSTRATIVE: as above (stochastic population-density sample, arbitrary "
+    "isotropic direction, no tracked identity), but shown NON-CUMULATIVELY -- "
+    "each frame/panel draws ONLY the slice of points whose sampling tau falls "
+    "since the previous frame/panel, at the shell radius R(tau) for that "
+    "instant, then discards them. Nothing here is 'revealed' or accumulated; "
+    "it is a fresh thin shell every step, matching the model's own reading of "
+    "each point as a permanent deposit AT that moment, not a moving/persisting "
+    "object."
 )
 
 
@@ -294,6 +306,238 @@ def _render_animation(t_bf, R, level_clouds, lim, output, frames, fps, title):
 
 
 # ===========================================================================
+# "True big bang" view: non-cumulative -- each frame/panel shows ONLY the
+# slice of points created since the previous one, not everything sampled so
+# far. This is the same underlying point clouds as --3d (_build_level_clouds
+# is reused unchanged); only the reveal logic differs.
+# ===========================================================================
+
+def _slice_mask(creation_idx: np.ndarray, prev_idx: int, idx: int) -> np.ndarray:
+    """Points sampled strictly after `prev_idx`, up to and including `idx`."""
+    return (creation_idx > prev_idx) & (creation_idx <= idx)
+
+
+def _direction_hist(points: np.ndarray, n_theta: int = 36, n_phi: int = 18):
+    """2D histogram of point directions over (azimuth, polar) bins on the
+    unit sphere. Returns (hist[n_theta, n_phi], theta_edges, phi_edges)."""
+    theta_edges = np.linspace(-np.pi, np.pi, n_theta + 1)
+    phi_edges = np.linspace(0, np.pi, n_phi + 1)
+    if len(points) == 0:
+        return np.zeros((n_theta, n_phi)), theta_edges, phi_edges
+    norms = np.linalg.norm(points, axis=1)
+    norms[norms == 0] = 1.0
+    d = points / norms[:, None]
+    theta = np.arctan2(d[:, 1], d[:, 0])
+    phi = np.arccos(np.clip(d[:, 2], -1.0, 1.0))
+    hist, _, _ = np.histogram2d(theta, phi, bins=[theta_edges, phi_edges])
+    return hist, theta_edges, phi_edges
+
+
+def _heatmap_shell(ax, r: float, points_list: list[np.ndarray], n_theta: int = 90,
+                    n_phi: int = 45, cmap_name: str = "inferno",
+                    blob_sigma_deg: float = 14.0):
+    """Draw one slice's combined density as a colored shell surface at radius r.
+
+    A slice typically has only a handful of points per level, so a raw
+    histogram (the previous version of this function) is almost all empty
+    cells -- it renders as isolated hard-edged rectangles, not a heatmap.
+    Instead, each point is spread into a soft angular Gaussian blob
+    (sigma = `blob_sigma_deg`, wrapped correctly in azimuth) via
+    scipy.ndimage.gaussian_filter1d, so a few points read as a continuous
+    glowing patch -- a real (if simple) kernel density estimate on the
+    sphere, not a threshold or a fade timer. Normalization is PER SLICE
+    (this slice's own peak -> full brightness): with only a few points per
+    frame, referencing a fixed/global scale would make almost every frame
+    look empty, so this trades absolute-density comparability across frames
+    for each frame actually being visible.
+    """
+    if r <= 0:
+        return
+    combined = np.zeros((n_theta, n_phi))
+    theta_edges = phi_edges = None
+    for pts in points_list:
+        hist, theta_edges, phi_edges = _direction_hist(pts, n_theta, n_phi)
+        combined += hist
+    if theta_edges is None or combined.sum() <= 0:
+        return
+
+    sigma_theta = max(0.5, (n_theta / 360.0) * blob_sigma_deg)
+    sigma_phi = max(0.5, (n_phi / 180.0) * blob_sigma_deg)
+    smoothed = gaussian_filter1d(combined, sigma=sigma_theta, axis=0, mode="wrap")
+    smoothed = gaussian_filter1d(smoothed, sigma=sigma_phi, axis=1, mode="nearest")
+
+    peak = float(smoothed.max())
+    if peak <= 0:
+        return
+    grid = (smoothed / peak).T  # shape (n_phi, n_theta), matches facecolors layout
+
+    TH, PH = np.meshgrid(theta_edges, phi_edges)
+    x = r * np.cos(TH) * np.sin(PH)
+    y = r * np.sin(TH) * np.sin(PH)
+    z = r * np.cos(PH)
+
+    cmap = plt.get_cmap(cmap_name)
+    # Keep colors in the vivid part of the colormap (0.35-1.0) even for dim
+    # patches, so faint spots don't degrade to a near-black/grey smudge.
+    facecolors = cmap(0.35 + 0.65 * grid)
+    visible = grid > 0.04
+    facecolors[..., 3] = np.where(visible, np.clip(0.55 + 0.4 * grid, 0.0, 0.95), 0.0)
+    ax.plot_surface(x, y, z, facecolors=facecolors, rstride=1, cstride=1,
+                     linewidth=0, antialiased=False, shade=False)
+
+
+def render_bigbang(
+    t_bf: np.ndarray,
+    size_measure: np.ndarray,
+    levels: list,
+    output: str,
+    n_bits: int,
+    k_rate: float,
+    animate: bool = True,
+    n_particles: int = 3,
+    frames: int = 150,
+    fps: int = 20,
+    heatmap: bool = False,
+    title: str = "True big-bang view: one slice at a time (illustrative 3D + spherical symmetry)",
+) -> None:
+    """Render each level's population density NON-cumulatively: every frame
+    (or, without --anim, every panel) shows only the slice of points sampled
+    since the previous one -- a fresh expanding shell -- rather than the
+    ever-growing accumulated cloud produced by --3d.
+
+    heatmap=False -> scattered points, colored per level (as in --3d).
+    heatmap=True  -> the slice is instead binned into a density heatmap and
+                      drawn as a colored shell surface at that instant's
+                      radius (hot = many points landed in that patch this
+                      slice).
+    """
+    R = np.asarray(size_measure, dtype=float)
+    lim = float(np.max(np.abs(R))) * 1.05 if np.max(np.abs(R)) > 0 else 1.0
+    level_clouds = _build_level_clouds(levels, t_bf, R, rate_per_step=float(n_particles),
+                                        n_bits=int(round(n_bits)), k_rate=k_rate)
+
+    Path(output).parent.mkdir(parents=True, exist_ok=True)
+    if not animate:
+        _render_bigbang_snapshots(t_bf, R, level_clouds, lim, output, title, heatmap)
+    else:
+        _render_bigbang_animation(t_bf, R, level_clouds, lim, output, frames, fps, title, heatmap)
+
+
+def _render_bigbang_snapshots(t_bf, R, level_clouds, lim, output, title, heatmap):
+    n = len(t_bf)
+    fracs = [0.02, 0.05, 0.12, 0.30, 0.6, 1.0]
+    idxs = [int(f * (n - 1)) for f in fracs]
+
+    fig = plt.figure(figsize=(15, 9))
+    prev_idx = -1
+    for panel, idx in enumerate(idxs):
+        ax = fig.add_subplot(2, 3, panel + 1, projection="3d")
+        if heatmap:
+            # No wireframe here: it sits at the exact same radius as the
+            # heatmap shell, and matplotlib's 3D depth-sorting z-fights the
+            # two into a grey haze. The colored shell itself already marks
+            # the boundary.
+            slice_points = [points[_slice_mask(creation_idx, prev_idx, idx)]
+                             for points, creation_idx, _color, _lvl in level_clouds]
+            _heatmap_shell(ax, R[idx], slice_points)
+        else:
+            x, y, z = _sphere_wireframe(R[idx], n=18)
+            ax.plot_wireframe(x, y, z, color="gray", alpha=0.25, lw=0.4)
+            for points, creation_idx, color, lvl in level_clouds:
+                mask = _slice_mask(creation_idx, prev_idx, idx)
+                if not np.any(mask):
+                    continue
+                marker_size = 6 + 30 * lvl.lapse
+                ax.scatter(
+                    points[mask, 0], points[mask, 1], points[mask, 2],
+                    color=color, s=marker_size, alpha=0.7, depthshade=True,
+                )
+        ax.set_xlim(-lim, lim)
+        ax.set_ylim(-lim, lim)
+        ax.set_zlim(-lim, lim)
+        ax.set_title(f"t={t_bf[idx]:.0f}  (R={R[idx]:.3f})", fontsize=9)
+        ax.set_box_aspect([1, 1, 1])
+        ax.set_axis_off()
+        prev_idx = idx
+
+    fig.suptitle(f"{title}\n{BIGBANG_CAVEAT}", fontsize=8.5)
+    fig.tight_layout(rect=(0, 0, 1, 0.90))
+    fig.savefig(output, dpi=130)
+    plt.close(fig)
+    print(f"saved -> {output}")
+
+
+def _render_bigbang_animation(t_bf, R, level_clouds, lim, output, frames, fps, title, heatmap):
+    n_frames_total = len(t_bf)
+    stride = max(1, n_frames_total // frames)
+    frame_indices = np.arange(0, n_frames_total, stride)
+    if frame_indices[-1] != n_frames_total - 1:
+        frame_indices = np.append(frame_indices, n_frames_total - 1)
+
+    fig = plt.figure(figsize=(9, 8.5))
+    ax = fig.add_subplot(111, projection="3d")
+    ax.set_xlim(-lim, lim)
+    ax.set_ylim(-lim, lim)
+    ax.set_zlim(-lim, lim)
+    ax.set_box_aspect([1, 1, 1])
+    ax.set_axis_off()
+
+    legend_handles = [
+        Line2D([0], [0], marker="o", color="none", markerfacecolor=color,
+               markersize=8, label=f"w={lvl.width:g}  (lapse=1/{lvl.width:g})")
+        for _, _, color, lvl in level_clouds
+    ]
+
+    fig.suptitle(title, fontsize=11, fontweight="bold")
+    time_text = fig.text(0.5, 0.03, "", ha="center", fontsize=10, fontweight="bold")
+    caption = fig.text(0.5, 0.005, BIGBANG_CAVEAT, ha="center", fontsize=6.2, wrap=True)
+
+    state = {"prev_idx": -1}
+
+    def update(frame_idx):
+        idx = frame_indices[frame_idx]
+        prev_idx = state["prev_idx"]
+        ax.cla()
+        ax.set_xlim(-lim, lim)
+        ax.set_ylim(-lim, lim)
+        ax.set_zlim(-lim, lim)
+        ax.set_box_aspect([1, 1, 1])
+        ax.set_axis_off()
+
+        if heatmap:
+            # Static outermost wireframe (final size, very faint) for scale
+            # context only -- NOT at R[idx], so it never coincides with the
+            # heatmap shell and can't z-fight it.
+            x, y, z = _sphere_wireframe(lim / 1.05, n=16)
+            ax.plot_wireframe(x, y, z, color="gray", alpha=0.08, lw=0.3)
+            slice_points = [points[_slice_mask(creation_idx, prev_idx, idx)]
+                             for points, creation_idx, _color, _lvl in level_clouds]
+            _heatmap_shell(ax, R[idx], slice_points)
+        else:
+            ax.legend(handles=legend_handles, loc="upper left", fontsize=8,
+                      facecolor="#111115", edgecolor="gray", labelcolor="white")
+            x, y, z = _sphere_wireframe(R[idx], n=16)
+            ax.plot_wireframe(x, y, z, color="gray", alpha=0.2, lw=0.3)
+            for points, creation_idx, color, lvl in level_clouds:
+                mask = _slice_mask(creation_idx, prev_idx, idx)
+                if np.any(mask):
+                    marker_size = 6 + 30 * lvl.lapse
+                    ax.scatter(points[mask, 0], points[mask, 1], points[mask, 2],
+                               color=color, s=marker_size, alpha=0.85)
+
+        ax.view_init(elev=20, azim=frame_idx * 1.2)
+        time_text.set_text(f"coordinate time \u03c4 = {t_bf[idx]:8.1f}   (this slice only)")
+        state["prev_idx"] = idx
+        return []
+
+    ani = animation.FuncAnimation(fig, update, frames=len(frame_indices), blit=False)
+    writer = animation.PillowWriter(fps=fps)
+    ani.save(output, writer=writer, dpi=100)
+    plt.close(fig)
+    print(f"saved -> {output}  (frames={len(frame_indices)}, stride={stride}, fps={fps})")
+
+
+# ===========================================================================
 # Shared CLI wiring, so each backend script (cosmic_wavefunction.py,
 # cosmic_d.py, cosmic_psi.py) adds --3d with one line instead of
 # duplicating argparse/dispatch code.
@@ -320,6 +564,36 @@ def add_3d_cli_args(parser) -> None:
                               "Total points over the whole run scale with "
                               "roughly steps * n_particles * mean matter "
                               "fraction.")
+    parser.add_argument("--bigbang", action="store_true",
+                         help="Add a 'true big bang' 3D view: same population-"
+                              "density point clouds as --3d, but shown "
+                              "NON-cumulatively -- each frame/panel reveals "
+                              "only the slice of points sampled since the "
+                              "previous one (a fresh expanding shell), rather "
+                              "than --3d's ever-growing accumulated ball that "
+                              "reveals existing structure slice by slice. "
+                              "Independent of --3d; both can be requested in "
+                              "the same run. Respects --anim/--frames/--fps "
+                              "the same way --3d does, but uses its OWN, much "
+                              "higher point rate -- see --bigbang_particles.")
+    parser.add_argument("--bigbang_particles", type=int, default=40,
+                         help="Max expected points sampled per timestep, per "
+                              "scale, for --bigbang (Poisson rate; --bigbang "
+                              "only). Deliberately separate from and much "
+                              "higher than --n_particles: --3d accumulates "
+                              "points over the WHOLE run, so a low per-step "
+                              "rate still fills in over many frames, but "
+                              "--bigbang only ever shows a single instant's "
+                              "slice, so it needs a much denser per-step rate "
+                              "to not look sparse. Raise further (e.g. 100-300) "
+                              "for a denser-looking universe; render time and "
+                              "GIF size scale roughly linearly with this.")
+    parser.add_argument("--heatmap", action="store_true",
+                         help="With --bigbang: render each non-cumulative "
+                              "slice as a binned density heatmap on the shell "
+                              "surface (hot = many points landed in that "
+                              "patch this slice) instead of individually "
+                              "scattered points. Ignored without --bigbang.")
 
 
 def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
@@ -343,4 +617,26 @@ def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
         animate=args.anim, n_particles=args.n_particles,
         frames=args.frames, fps=args.fps,
         title=title,
+    )
+
+
+def dispatch_bigbang(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
+                      title: str, n_bits: int, k_rate: float) -> None:
+    """Call render_bigbang from a backend's main(), reading the shared
+    --bigbang/--heatmap/--anim/--frames/--fps/--bigbang_particles args. No-op
+    if --bigbang wasn't passed.
+    """
+    if not getattr(args, "bigbang", False):
+        return
+    out_path = Path(args.output)
+    suffix = ".gif" if args.anim else ".png"
+    bigbang_output = str(out_path.with_name(f"{out_path.stem}_bigbang{suffix}"))
+    render_bigbang(
+        t_bf, size_measure, levels, bigbang_output,
+        n_bits=n_bits, k_rate=k_rate,
+        animate=args.anim, n_particles=getattr(args, "bigbang_particles", 40),
+        frames=args.frames, fps=args.fps,
+        heatmap=getattr(args, "heatmap", False),
+        title=title.replace("particle population density",
+                             "true big-bang view: one slice at a time"),
     )
