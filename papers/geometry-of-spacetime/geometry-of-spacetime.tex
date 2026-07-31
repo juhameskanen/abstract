@@ -3,143 +3,256 @@
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
 
-\title{Spacetime Resolution from the Multi-Clock Emergent-Structure Model}
+\title{Resolution of Spacetime}
 
 \author{Juha Meskanen}
-\date{July 2026}
+\date{June 2026}
 
 \begin{document}
 
 \maketitle
 
-\section{Setup}
- 
-The universe is a finite bitstring of length $n$, evolving under the
-symmetric Ehrenfest process (one of the $n$ positions chosen uniformly and
-flipped, at each raw tick). Its entropy per bit is
-$S(\tau) = \log_2\binom{n}{k(\tau)}/n$, with $k(\tau)$ the exact ones-count
-at bit-flip time $\tau$. The entropy-unfolded bit budget is
-$n\cdot S(\tau)$, and the portion of it actually resolved into fabric and
-non-decayed structure at time $\tau$ is $n\cdot R(\tau)$, where
-$R(\tau) \in [0,1]$ is the size measure validated in the emergent-structure
-script. Nothing here depends on which coherence scales, if any, are chosen
-to decompose that structure further.
- 
-\section{Spatial Resolution}
- 
-The model works entirely in bit-count space, not configuration-count space:
-$R(\tau)$ is a fraction of $n$, never of $2^n$. The honest spatial
-resolution is therefore linear in $n$:
-\begin{equation}
-  \Delta x(\tau) = R(\tau)\cdot n \cdot \ell_P,
-  \qquad
-  \Delta x_{\max} = n\,\ell_P,
-  \label{eq:dxmax}
-\end{equation}
-the second equality holding in the limit $\tau\to\infty$, where matter has
-fully decayed and $R(\tau)\to S(\tau)\to 1$. 
- 
-\section{Temporal Resolution}
- 
-There is no single temporal resolution. The
-model supports two distinct, non-interchangeable notions.
- 
-\subsection{Global relaxation time (substrate-level)}
- 
-The time for the whole $n$-bit string's Ehrenfest process to reach
-statistical equilibrium is the mixing time of the random walk on the
-$n$-cube: flipping one uniformly chosen coordinate per step has a total-variation
-cutoff at $\frac{n}{2}\ln n$ steps \cite{diaconis1996}. Identifying one raw
-tick with one Planck time:
-\begin{equation}
-  \Delta t_{\rm relax}(n) = \frac{n}{2}\ln n \cdot t_P.
-  \label{eq:trelax}
-\end{equation}
+\begin{abstract}
+A static, finite informational universe is defined by \(n\) bits.  
+The \(2^n\) arrangements of those bits constitute the entire 
+configuration space. Time is not fundamental; it emerges as the 
+ordinal index of a random walk through the most compressible 
+configurations. Because the total information is finite, both 
+spatial and temporal resolution of any emergent spacetime must 
+likewise be finite.  
 
- 
-\subsection{Per-structure proper-time lapse}
- 
-Any emergent structure encoded in $w$ bits is blind to anything finer than
-$w$ raw flips: it ticks its own clock once per $w$ raw ticks. This is a
-general rule holding for arbitrary $w\in\{1,\dots,n\}$, not a claim about
-any particular, physically privileged scale:
+There is no external metaphysics and no predefined rule that 
+selects one resolution convention over another. The only selection 
+principle available is typicality: the measure-dominated, most 
+probable outcome under the natural dynamics on the configuration 
+space. Spectral complexity---the informational cost of encoding 
+the modes of a wavefunction---supplies the compressibility measure 
+that identifies the typical path.  
+
+Under that path the elementary bits behave as structureless spacetime 
+fabric. Emergent microstructures appear with a characteristic 
+hump-shaped probability, consume part of the finite bit budget, and 
+thereby reduce the observable resolution. The resulting geometry is 
+a chain whose links are bits and whose knots are the microstructures; 
+each knot shortens the chain. The same finite-budget logic applied 
+to clocks yields differential aging. The typical evolution of such a 
+chain produces a three-stage expansion profile without fine-tuning.
+\end{abstract}
+
+\section{The finite informational premise}
+
+We assume a static, timeless universe whose entire content is a 
+finite collection of \(n\) bits. Bits themselves are not 
+ontologically privileged; they are merely one convenient binary 
+representation of a finite amount of information. Any other finite 
+alphabet would serve equally well.
+
+The configuration space therefore consists of exactly \(2^n\) 
+distinct arrangements. No continuous manifold, no continuous time 
+parameter, and no infinite reservoir of information are postulated. 
+All that exists is the set of \(2^n\) discrete states together with 
+the combinatorial structure that relates them.
+
+\section{Emergence of ordinal time}
+
+Time is the ordinal index of a random walk through the most 
+compressible configurations. The minimal---and hence most 
+compressible---path is the path of least change between consecutive 
+configurations. That path is realised by a fair random bit-flip 
+mutation of an \(n\)-bit string: at each discrete tick one of the 
+\(n\) bits is chosen uniformly and flipped.
+
+This dynamics is the Ehrenfest process. Let \(m\) be the number of 
+1-bits and \(p=m/n\). The expected change in one tick is
 \begin{equation}
-  \Delta t_w = w\cdot t_P,
-  \qquad
-  N_w = \frac{1}{w} \quad\text{(lapse)}.
-  \label{eq:lapse}
+  \mathbb{E}[\Delta m]=\frac{n-m}{n}-\frac{m}{n}=1-2p.
 \end{equation}
- 
-\section{Aspect Ratios}
- 
-Two aspect ratios follow, corresponding to the two temporal notions above.
-Both are stated as functions of the free symbols $n$ (and $w$, where
-relevant) — no value is substituted.
- 
-\subsection{Global aspect ratio}
- 
+In the continuum limit one obtains the ordinary differential equation
 \begin{equation}
-  \mathcal{A}_{\rm global}(n) = \frac{\Delta x_{\max}}{\Delta t_{\rm relax}}
-  = \frac{n\,\ell_P}{\tfrac{n}{2}\ln n\cdot t_P}
-  = \frac{2}{\ln n}\cdot c.
-  \label{eq:aglobal}
+  \frac{dp}{dt}=\frac{1-2p}{n},
 \end{equation}
- 
-\begin{lemma}[Monotonicity]
-$\mathcal{A}_{\rm global}(n)$ is strictly decreasing for $n > 1$.
-\end{lemma}
-\begin{proof}
-$\dfrac{d}{dn}\dfrac{2}{\ln n} = -\dfrac{2}{n(\ln n)^2} < 0$ for all $n>1$.
-\end{proof}
- 
-This is a structural
-consequence of working in linear bit-count space, not a numerical
-adjustment.
- 
-\subsection{Per-scale aspect ratio}
- 
+where \(t\) is the raw flip count (``bit-flip time''). Starting from 
+the all-zero state \(p(0)=0\) the solution is
 \begin{equation}
-  \mathcal{A}_w(n) = \frac{\Delta x_{\max}}{\Delta t_w} = \frac{n}{w}\cdot c,
-  \qquad 1 \le w \le n.
-  \label{eq:aw}
+  p(t)=\frac12\bigl(1-e^{-2t/n}\bigr).
 \end{equation}
- 
-\begin{corollary}[Boundary cases]
-At $w = n$ (the coarsest admissible structure, the whole string acting as
-a single unit), $\mathcal{A}_n(n) = c$ exactly, independent of $n$. At
-$w = 1$ (the finest admissible structure, a single bit),
-$\mathcal{A}_1(n) = n\cdot c$.
-\end{corollary}
- 
-The $w=n$ case is an unforced identity — it requires no fitted constant,
-no $4\pi$-type correction, and holds for every $n$. It is the one place in
-this note where a dimensionless constant of exactly 1 (in units of $c$)
-appears without being put in by hand.
- 
-\section{Future Work}
- 
+The relaxation timescale is therefore \(O(n)\) ticks. Rescaling to 
+the dimensionless coordinate \(\tau=t/n\) yields the universal curve
+\begin{equation}
+  p(\tau)=\frac12\bigl(1-e^{-2\tau}\bigr),\qquad\tau\in[0,\infty).
+\end{equation}
+The associated Shannon entropy per bit is
+\begin{equation}
+  \frac{S(\tau)}{n}=H_2\bigl(p(\tau)\bigr),
+\end{equation}
+where \(H_2(q)=-q\log_2 q-(1-q)\log_2(1-q)\).
+
+A further change of variable
+\begin{equation}
+  x(\tau)=1-e^{-2\tau}\in[0,1)
+\end{equation}
+produces a bounded time coordinate whose entropy is simply
+\begin{equation}
+  \frac{S(x)}{n}=H_2\bigl(x/2\bigr).
+\end{equation}
+This is the universal entropy curve that any physical time scale is 
+ultimately mapped onto.
+
+Compressibility is measured by spectral complexity: the number of 
+bits required to encode the modes (frequencies and phases) of a 
+wavefunction. The Ehrenfest trajectory is the path of least spectral 
+complexity; it is therefore the typical path under the natural measure 
+on configuration space. Solomonoff induction, when formulated with 
+spectral rather than Kolmogorov complexity, preferentially samples 
+exactly this trajectory.
+
+\section{Resolution of spacetime}
+
+Because only \(n\) bits of information exist, any emergent geometry 
+can possess only finitely many distinguishable spatial cells and only 
+finitely many distinguishable temporal ticks. This is the principle 
+of \emph{resolution of spacetime}:
+
+\begin{quote}
+  The spatial resolution of any region and the temporal resolution 
+  of any clock are bounded by the finite informational budget of 
+  the underlying bit-string.
+\end{quote}
+
+No external rule dictates how that budget is to be partitioned into 
+space and time. The only admissible answer is typicality: the 
+partition that dominates the measure under the Ehrenfest dynamics.
+
+\subsection{Maximal theoretical resolution}
+
+In the absence of any emergent structure the entire entropy budget 
+is available for geometry. The maximal theoretical resolution is 
+therefore the pure entropy curve itself:
+\begin{equation}
+  R_{\mathrm{max}}(\tau)=\frac{S(\tau)}{n}=H_2\bigl(p(\tau)\bigr).
+\end{equation}
+This is the resolution an internal observer would measure if the 
+bit-string remained completely unstructured.
+
+\subsection{Spatial resolution -- the chain of knots}
+
+Bits may be pictured as structureless spacetime fabric---the links of 
+a chain. Microstructures form when local windows of the chain adopt 
+particular compositions. Each microstructure is a knot: it is made 
+from the same links that previously contributed to the length of the 
+chain, and once the knot is tied those links are no longer available 
+to resolve distance. If a knot consumes \(w\) bits, the observable 
+spatial resolution drops by \(w\) for every such knot. The residual 
+budget
+\begin{equation}
+  R_Q(\tau)=R_{\mathrm{max}}(\tau)-\frac{1}{n}\sum\text{(bits locked in knots)}
+\end{equation}
+is the only quantity still available to an internal observer as 
+spatial resolution.
+
+\subsection{Temporal resolution -- differential aging}
+
+A structure of width \(w\) can advance its own proper time only after 
+a full set of \(w\) elementary flips has occurred. Its retarded clock 
+is therefore the sample-and-hold quantisation
+\begin{equation}
+  \tau_{\mathrm{local}}(w)=w\cdot\bigl\lfloor\tau/w\bigr\rfloor,
+\end{equation}
+with associated lapse \(1/w\). Heavier knots age more slowly with 
+respect to the universal raw coordinate \(\tau\). The informational 
+backlog that the raw clock has already registered but the retarded 
+clock has not yet seen is the pending entropy of that scale. Pending 
+bits remain part of the finite budget; they simply have not yet been 
+experienced by the local observer.
+
+The same chain-of-knots analogy applies temporally: each knot 
+introduces a coarser ticking rate, stretching the perceived duration 
+of events that occur at that scale.
+
+\section{Emergence of patterns and the dominance of the hump}
+
+For a fixed window of length \(L\) with composition \((a,b)\) 
+(\(a+b=L\)) the probability of that exact pattern under the 
+independent-bit continuum limit is
+\begin{equation}
+  P(\text{pattern}\mid\tau)=p(\tau)^a\bigl(1-p(\tau)\bigr)^b.
+\end{equation}
+Three exact results follow at once.
+
+\begin{enumerate}
+  \item Zero/one-start complementation symmetry is exact for all \(\tau\).
+  \item Only the composition \((a,b)\) matters; every permutation of 
+        a given composition yields the identical curve.
+  \item On the reachable domain \(p\in[0,1/2]\) there are exactly 
+        three qualitative shapes, classified by the sign of \(a-b\):
+        \begin{itemize}
+          \item \(a>b\): monotonic rise (peak lies beyond equilibrium);
+          \item \(a=b\): monotonic rise that flattens at the boundary;
+          \item \(a<b\): genuine interior hump.
+        \end{itemize}
+\end{enumerate}
+
+Only the hump class (\(a<b\)) produces a rise-peak-decline profile. 
+Moreover, when each composition is weighted by its combinatorial 
+multiplicity \(\binom{L}{a}\), the hump class dominates the measure 
+for almost the entire relaxation. The window occupancy is binomial 
+with mean \(Lp(\tau)<L/2\) at every finite \(\tau\); consequently the 
+mass of the hump region exceeds the mass of the non-hump region until 
+a crossover \(\tau_c\) that recedes toward infinity as \(L\) grows. 
+For any practically observable window length the hump is therefore 
+the typical outcome.
+
+The peak location, amplitude and asymptotic decay of a hump are fixed 
+by elementary formulae:
+\begin{align}
+  p^*&=\frac{a}{a+b},&
+  \tau^*&=-\frac12\ln(1-2p^*),\\
+  \frac{\text{peak}}{\text{plateau}}&=2^{L\bigl(1-H_2(p^*)\bigr)}.
+\end{align}
+No free parameters are required.
+
+\section{The typical expansion profile}
+
+Because microstructures consume part of the finite bit budget, the 
+observable resolution \(R_Q\) is necessarily smaller than the maximal 
+resolution \(R_{\mathrm{max}}\). The typical history of a chain of 
+knots therefore exhibits three successive regimes:
+
 \begin{itemize}
-  \item \textbf{The value of $n$.} 
+  \item rapid early growth of \(R_Q\) while knots are still rare;
+  \item matter-loading slowdown once the hump populations lock a 
+        non-negligible fraction of the budget into knots;
+  \item late recovery as the hump populations decline and the residual 
+        informational floor is approached.
 \end{itemize}
- 
-\section{Summary}
- 
-\begin{center}
-\begin{tabular}{lll}
-\hline
-Quantity & Prior claim (retracted) & This note \\
-\hline
-Spatial resolution & $2^n \ell_P$ & $n\,\ell_P$ (linear) \\
-Temporal resolution & single value, $n\ln n\,t_P$ & two notions: Eq.~\ref{eq:trelax}, Eq.~\ref{eq:lapse} \\
-Global aspect ratio & $2^n/(n\ln n)$, increasing & $2/\ln n$, decreasing \\
 
-\hline
-\end{tabular}
-\end{center}
+This three-stage profile is not imposed by hand. It is the measure-
+dominated behaviour of the only dynamics that is typical under spectral 
+complexity. The fine-tuning problem is thereby dissolved: the observed 
+expansion history is simply what a typical finite informational universe 
+looks like from the inside.
 
+\section{Conclusion}
 
-\section*{Supplementary Materials}
+Spacetime resolution is the direct geometric consequence of a finite 
+informational substrate. Once \(n\) is finite, both the number of 
+distinguishable spatial cells and the number of distinguishable 
+temporal ticks are bounded. The pure entropy curve supplies the maximal 
+theoretical resolution; every emergent knot reduces that resolution by 
+the number of bits it consumes. Temporal resolution is coarsened by the 
+same knots through retarded clocks whose lapse is the reciprocal of 
+their width.
 
+All concrete choices---the Ehrenfest path, the dominance of the hump, 
+the conversion of residual budget into spatial length, the differential 
+aging of clocks---are selected solely by typicality. There is no 
+external rulebook. The only answer to any question about how spacetime 
+is resolved is: the answer that dominates the measure.
+
+Continuous geometries appear only in the formal limit \(n\to\infty\). 
+For any realistic finite \(n\) the resolution of spacetime remains 
+finite, discrete, and fully determined by the underlying bit-string 
+and the typical path through its configurations.
 
 \printbibliography
 \end{document}
