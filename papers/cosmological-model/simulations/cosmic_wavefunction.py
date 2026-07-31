@@ -289,9 +289,11 @@ def main() -> None:
 
     if args.three_d:
         from render_3d import dispatch_3d
+        from multiclock import TRUE_K_RATE
         dispatch_3d(
             args, result.t_bf, result.size_measure, levels,
-            title="Wavefunction backend: worldlines as particles (illustrative 3D + spherical symmetry)",
+            n_bits=result.n_bits, k_rate=TRUE_K_RATE,
+            title="Wavefunction backend: particle population density (illustrative 3D + spherical symmetry)",
         )
 
     peak_idx = int(np.argmax(result.total_matter_bits))

@@ -41,12 +41,36 @@ therefore asserted something the model does not compute.
 
 This version instead draws, independently at every tau in the run, a
 fresh stochastic (Poisson) number of points whose count is driven by
-that level's matter_series(tau), places each at an independent random
-direction, and permanently deposits them at radius R(tau) -- then
-never revisits or moves them again. The result is a single accumulated
-point cloud: a density map of "how much of this scale's structure
-existed near this moment in cosmic history," honestly rendered as
-population density rather than as tracked individual worldlines.
+that level's matter_series(tau), and permanently deposits them at
+radius R(tau) -- then never revisits or moves them again. The result
+is a single accumulated point cloud: a density map of "how much of
+this scale's structure existed near this moment in cosmic history,"
+honestly rendered as population density rather than as tracked
+individual worldlines.
+
+DIRECTION IS NO LONGER PURE NOISE, BUT IS STILL AN APPROXIMATION
+-------------------------------------------------------------------
+Each sampled point is also assigned a chain position s (uniform over
+[0, n_bits) -- positions are exchangeable in the underlying model, so
+this part is exact, not a placeholder). Its 3D direction is then a
+LOOKUP into a spatially-correlated direction field built once per
+level from pair_correlation.py's derived g(r): nearby chain positions
+get nearby directions, positions >= w apart get independent ones,
+matching the exact short-range/plateau shape derived analytically.
+
+This is still a real approximation, flagged honestly: g(r) is a ratio
+of match probabilities, not a linear field covariance, so turning it
+into a Gaussian-field smoothing kernel (spatial_field.py) is a
+reasonable but not unique translation -- validated to have the right
+SHAPE (strong correlation at small separations, falling off), but it
+does not reproduce g(r)'s exact hard cutoff at r=w (the smoothing
+leaves a longer decaying tail instead of the derived model's sharp
+plateau). The field is also built once per level using a single
+representative k (that level's own peak-matter time), not the full
+time-varying k(tau) -- another explicit simplification. Time
+persistence (derived in persistence.py) is NOT yet wired in here: a
+knot's position s is still drawn independently at each sampling time,
+with no correlation across nearby t yet.
 """
 from __future__ import annotations
 
@@ -60,6 +84,10 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.lines import Line2D
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (registers the 3d projection)
+
+from multiclock import ground_truth_pool
+from dicke_layer import default_composition
+from spatial_field import build_direction_field
 
 CAVEAT = (
     "ILLUSTRATIVE: 3D embedding + spherical symmetry assumed for rendering only "
@@ -80,14 +108,17 @@ def _sphere_wireframe(r: float, n: int = 16):
 
 
 def _sample_level_cloud(matter_series: np.ndarray, R: np.ndarray, rate_per_step: float,
-                         seed: int) -> tuple[np.ndarray, np.ndarray]:
+                         direction_field: np.ndarray, seed: int) -> tuple[np.ndarray, np.ndarray]:
     """Stochastically sample points for one level, accumulated over the full run.
 
     At every tau index t, draw a Poisson count with mean
     `rate_per_step * frac(t)` (frac = matter_series normalized to its own
-    max), assign each a fresh isotropic random direction, and place it at
-    radius R[t] -- i.e. AT the moment it was sampled, permanently. No point,
-    once placed, is ever moved or re-sampled.
+    max). Each point gets a chain position s drawn uniformly over
+    [0, n_bits) (positions are exchangeable in the model -- this part is
+    exact) and its direction is a LOOKUP into `direction_field[s]` (the
+    spatially-correlated field from spatial_field.build_direction_field),
+    not a fresh independent draw. It's placed at radius R[t] permanently.
+    No point, once placed, is ever moved or re-sampled.
 
     Returns (points[N,3], creation_idx[N]) where creation_idx records the
     tau-index each point belongs to, so callers can reveal the cloud
@@ -101,21 +132,31 @@ def _sample_level_cloud(matter_series: np.ndarray, R: np.ndarray, rate_per_step:
     if total == 0:
         return np.zeros((0, 3)), np.zeros((0,), dtype=int)
     creation_idx = np.repeat(np.arange(len(matter_series)), counts)
-    vecs = rng.normal(size=(total, 3))
-    vecs /= np.linalg.norm(vecs, axis=1, keepdims=True)
+    n_bits = direction_field.shape[0]
+    chain_positions = rng.integers(0, n_bits, size=total)
+    vecs = direction_field[chain_positions]
     points = vecs * R[creation_idx, None]
     return points, creation_idx
 
 
-def _build_level_clouds(levels, t_bf, R, rate_per_step: float):
+def _build_level_clouds(levels, t_bf, R, rate_per_step: float, n_bits: int, k_rate: float):
     cmap = plt.get_cmap("plasma")
     colors = [
         cmap(0.15 + 0.7 * i / max(len(levels) - 1, 1)) for i in range(len(levels))
     ]
     level_clouds = []
     for lvl, color in zip(levels, colors):
+        w = int(round(lvl.width))
+        # Representative k: this level's own peak-matter time (explicit
+        # simplification -- the field is built once, not re-fit per tau).
+        peak_idx = int(np.argmax(lvl.matter_series))
+        _, k_local = ground_truth_pool(lvl.tau_local[peak_idx:peak_idx + 1], n_bits, k_rate)
+        k_ref = float(k_local[0])
+        a, _b = default_composition(w)
+        field = build_direction_field(n_bits, w, k_ref, a, seed=w + 97)
+
         points, creation_idx = _sample_level_cloud(
-            lvl.matter_series, R, rate_per_step, seed=int(lvl.width)
+            lvl.matter_series, R, rate_per_step, field, seed=w
         )
         level_clouds.append((points, creation_idx, color, lvl))
     return level_clouds
@@ -126,6 +167,8 @@ def render_3d_particles(
     size_measure: np.ndarray,
     levels: list,
     output: str,
+    n_bits: int,
+    k_rate: float,
     animate: bool = False,
     n_particles: int = 3,
     frames: int = 150,
@@ -150,7 +193,8 @@ def render_3d_particles(
     """
     R = np.asarray(size_measure, dtype=float)
     lim = float(np.max(np.abs(R))) * 1.05 if np.max(np.abs(R)) > 0 else 1.0
-    level_clouds = _build_level_clouds(levels, t_bf, R, rate_per_step=float(n_particles))
+    level_clouds = _build_level_clouds(levels, t_bf, R, rate_per_step=float(n_particles),
+                                        n_bits=int(round(n_bits)), k_rate=k_rate)
 
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     if not animate:
@@ -279,9 +323,14 @@ def add_3d_cli_args(parser) -> None:
 
 
 def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
-                 title: str) -> None:
+                 title: str, n_bits: int, k_rate: float) -> None:
     """Call render_3d_particles from a backend's main(), reading the shared
     --3d/--anim/--frames/--fps/--n_particles args. No-op if --3d wasn't passed.
+
+    n_bits/k_rate should be the SAME sim.n_bits/sim.k_rate the backend's own
+    run_simulation() call produced, so the correlated direction field uses
+    the exact same k(tau) the physics pipeline uses -- no separate/drifting
+    copy of the relaxation parameters.
     """
     if not getattr(args, "three_d", False):
         return
@@ -290,6 +339,7 @@ def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
     threed_output = str(out_path.with_name(f"{out_path.stem}_3d{suffix}"))
     render_3d_particles(
         t_bf, size_measure, levels, threed_output,
+        n_bits=n_bits, k_rate=k_rate,
         animate=args.anim, n_particles=args.n_particles,
         frames=args.frames, fps=args.fps,
         title=title,

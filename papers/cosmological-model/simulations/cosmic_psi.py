@@ -268,7 +268,8 @@ def main() -> None:
         from render_3d import dispatch_3d
         dispatch_3d(
             args, sim.t_bf, size_measure_q, anim_levels,
-            title=f"Dicke/psi-layer backend ({mode_label}): worldlines as particles "
+            n_bits=sim.n_bits, k_rate=sim.k_rate,
+            title=f"Dicke/psi-layer backend ({mode_label}): particle population density "
                   f"(illustrative 3D + spherical symmetry)",
         )
 

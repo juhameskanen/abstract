@@ -1,0 +1,7 @@
+steps=1500
+t_bf_max=2
+flags="--3d --anim"
+
+python cosmic_d.py --steps $steps --t_bf_max $t_bf_max $flags --output discrete.gif
+python cosmic_psi.py --steps $steps --t_bf_max $t_bf_max $flags --output dicke.gif
+python cosmic_wavefunction.py --steps $steps --anim --t_bf_max $t_bf_max $flags --output wavefunction.gif

@@ -215,7 +215,8 @@ def main() -> None:
         from render_3d import dispatch_3d
         dispatch_3d(
             args, sim.t_bf, sim.size_measure, levels,
-            title="Statistical backend: worldlines as particles (illustrative 3D + spherical symmetry)",
+            n_bits=sim.n_bits, k_rate=sim.k_rate,
+            title="Statistical backend: particle population density (illustrative 3D + spherical symmetry)",
         )
 
 
