@@ -1,9 +1,10 @@
 n_bits=1024
 steps=1500
 t_bf_max=2
+slots=500
 flags="--anim --bigbang --heatmap"
 # --anim
 
-python cosmic_d.py --n_bits $n_bits --steps $steps --t_bf_max $t_bf_max $flags --output discrete.gif
-python cosmic_psi.py --n_bits $n_bits --steps $steps --t_bf_max $t_bf_max $flags --output dicke.gif
-python cosmic_wavefunction.py --n_bits $n_bits --steps $steps --anim --t_bf_max $t_bf_max $flags --output wavefunction.gif
+python cosmic_d.py --slots $slots --n_bits $n_bits --steps $steps --t_bf_max $t_bf_max $flags --output discrete.gif
+python cosmic_psi.py --slots $slots --n_bits $n_bits --steps $steps --t_bf_max $t_bf_max $flags --output dicke.gif
+python cosmic_wavefunction.py --slots $slots --n_bits $n_bits --steps $steps --anim --t_bf_max $t_bf_max $flags --output wavefunction.gif
