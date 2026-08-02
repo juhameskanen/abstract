@@ -48,29 +48,43 @@ this scale's structure existed near this moment in cosmic history,"
 honestly rendered as population density rather than as tracked
 individual worldlines.
 
-DIRECTION IS NO LONGER PURE NOISE, BUT IS STILL AN APPROXIMATION
+DIRECTION IS NOW SPACETIME-CORRELATED, BUT STILL AN APPROXIMATION
 -------------------------------------------------------------------
 Each sampled point is also assigned a chain position s (uniform over
 [0, n_bits) -- positions are exchangeable in the underlying model, so
-this part is exact, not a placeholder). Its 3D direction is then a
-LOOKUP into a spatially-correlated direction field built once per
-level from pair_correlation.py's derived g(r): nearby chain positions
-get nearby directions, positions >= w apart get independent ones,
-matching the exact short-range/plateau shape derived analytically.
+this part is exact, not a placeholder). Its 3D direction is a LOOKUP
+into a field built once per level from BOTH derived correlations:
+pair_correlation.py's g(r) (nearby positions, same instant) AND the
+new joint_kernel.py/persistence.py (nearby positions AND nearby
+sampling times, jointly) -- see spacetime_field.py. Nearby (position,
+time) pairs get correlated directions; distant ones don't, matching
+the derived short-range/plateau shapes on both axes.
 
-This is still a real approximation, flagged honestly: g(r) is a ratio
-of match probabilities, not a linear field covariance, so turning it
-into a Gaussian-field smoothing kernel (spatial_field.py) is a
-reasonable but not unique translation -- validated to have the right
-SHAPE (strong correlation at small separations, falling off), but it
-does not reproduce g(r)'s exact hard cutoff at r=w (the smoothing
-leaves a longer decaying tail instead of the derived model's sharp
-plateau). The field is also built once per level using a single
-representative k (that level's own peak-matter time), not the full
-time-varying k(tau) -- another explicit simplification. Time
-persistence (derived in persistence.py) is NOT yet wired in here: a
-knot's position s is still drawn independently at each sampling time,
-with no correlation across nearby t yet.
+An earlier version tried to instead make each point's position literally
+WALK from frame to frame, using the derived correlations as a per-particle
+transition probability. That failed conceptually, not just numerically:
+conditional "probability a nearby window also matches" values overlap and
+sum well past 1 across nearby positions, because the model has no
+single-particle exclusivity -- it describes a correlated density FIELD
+(many positions simultaneously more/less likely), not one tracked
+object's motion. spacetime_field.py's fix is to keep the existing
+independent-per-frame Poisson sampling (below) but make the ASSIGNED
+DIRECTION a smooth function of (position, time) jointly, so nearby
+samples in both space and time cohere -- without any particle identity,
+transition kernel, or exclusivity assumption anywhere.
+
+This is still a real approximation, flagged honestly: g(r) and the joint
+kernel are probability ratios, not linear field covariances, so turning
+them into a Gaussian-field smoothing kernel is a reasonable but not
+unique translation -- validated to have the right SHAPE on both axes
+(strong correlation at small separations/time-gaps, falling off), but
+not the derived model's exact hard cutoffs. The field is also built
+once per level using a single representative k (that level's own
+peak-matter time), not the full time-varying k(tau) -- another explicit
+simplification. The temporal kernel is truncated at a small number of
+frames (dt_max, default 3) for tractability, since both correlations
+plateau quickly -- a truncation, not a claim that correlation vanishes
+beyond it.
 """
 from __future__ import annotations
 
@@ -88,7 +102,7 @@ from scipy.ndimage import gaussian_filter1d
 
 from multiclock import ground_truth_pool
 from dicke_layer import default_composition
-from spatial_field import build_direction_field
+from spacetime_field import build_spacetime_field
 
 CAVEAT = (
     "ILLUSTRATIVE: 3D embedding + spherical symmetry assumed for rendering only "
@@ -120,17 +134,24 @@ def _sphere_wireframe(r: float, n: int = 16):
 
 
 def _sample_level_cloud(matter_series: np.ndarray, R: np.ndarray, rate_per_step: float,
-                         direction_field: np.ndarray, seed: int) -> tuple[np.ndarray, np.ndarray]:
+                         direction_field: np.ndarray, stride: int,
+                         seed: int) -> tuple[np.ndarray, np.ndarray]:
     """Stochastically sample points for one level, accumulated over the full run.
 
     At every tau index t, draw a Poisson count with mean
     `rate_per_step * frac(t)` (frac = matter_series normalized to its own
     max). Each point gets a chain position s drawn uniformly over
     [0, n_bits) (positions are exchangeable in the model -- this part is
-    exact) and its direction is a LOOKUP into `direction_field[s]` (the
-    spatially-correlated field from spatial_field.build_direction_field),
-    not a fresh independent draw. It's placed at radius R[t] permanently.
-    No point, once placed, is ever moved or re-sampled.
+    exact) and its direction is a LOOKUP into `direction_field[s, frame]`
+    (the spacetime-correlated field from spacetime_field.build_spacetime_field)
+    -- correlated across BOTH nearby positions and nearby sampling times, not
+    a fresh independent draw and not position-only. It's placed at radius
+    R[t] permanently. No point, once placed, is ever moved or re-sampled.
+
+    `stride` maps a point's raw tau-index (creation_idx) down to the coarser
+    frame-bucket axis the field was built over (field.shape[1] frames,
+    stride raw ticks each) -- the same discretization used elsewhere for
+    animation frames, so field correlation lines up with what gets rendered.
 
     Returns (points[N,3], creation_idx[N]) where creation_idx records the
     tau-index each point belongs to, so callers can reveal the cloud
@@ -144,18 +165,24 @@ def _sample_level_cloud(matter_series: np.ndarray, R: np.ndarray, rate_per_step:
     if total == 0:
         return np.zeros((0, 3)), np.zeros((0,), dtype=int)
     creation_idx = np.repeat(np.arange(len(matter_series)), counts)
-    n_bits = direction_field.shape[0]
+    n_bits, n_frames_field, _ = direction_field.shape
     chain_positions = rng.integers(0, n_bits, size=total)
-    vecs = direction_field[chain_positions]
+    frame_buckets = np.clip(creation_idx // stride, 0, n_frames_field - 1)
+    vecs = direction_field[chain_positions, frame_buckets]
     points = vecs * R[creation_idx, None]
     return points, creation_idx
 
 
-def _build_level_clouds(levels, t_bf, R, rate_per_step: float, n_bits: int, k_rate: float):
+def _build_level_clouds(levels, t_bf, R, rate_per_step: float, n_bits: int, k_rate: float,
+                         frames: int = 150):
     cmap = plt.get_cmap("plasma")
     colors = [
         cmap(0.15 + 0.7 * i / max(len(levels) - 1, 1)) for i in range(len(levels))
     ]
+    n_steps = len(t_bf)
+    stride = max(1, n_steps // frames)
+    n_frames_field = n_steps // stride + 1
+
     level_clouds = []
     for lvl, color in zip(levels, colors):
         w = int(round(lvl.width))
@@ -165,10 +192,11 @@ def _build_level_clouds(levels, t_bf, R, rate_per_step: float, n_bits: int, k_ra
         _, k_local = ground_truth_pool(lvl.tau_local[peak_idx:peak_idx + 1], n_bits, k_rate)
         k_ref = float(k_local[0])
         a, _b = default_composition(w)
-        field = build_direction_field(n_bits, w, k_ref, a, seed=w + 97)
+        field = build_spacetime_field(n_bits, w, k_ref, a, n_frames=n_frames_field,
+                                       ticks_per_frame=float(stride), seed=w + 97)
 
         points, creation_idx = _sample_level_cloud(
-            lvl.matter_series, R, rate_per_step, field, seed=w
+            lvl.matter_series, R, rate_per_step, field, stride, seed=w
         )
         level_clouds.append((points, creation_idx, color, lvl))
     return level_clouds
@@ -206,7 +234,7 @@ def render_3d_particles(
     R = np.asarray(size_measure, dtype=float)
     lim = float(np.max(np.abs(R))) * 1.05 if np.max(np.abs(R)) > 0 else 1.0
     level_clouds = _build_level_clouds(levels, t_bf, R, rate_per_step=float(n_particles),
-                                        n_bits=int(round(n_bits)), k_rate=k_rate)
+                                        n_bits=int(round(n_bits)), k_rate=k_rate, frames=frames)
 
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     if not animate:
@@ -414,7 +442,7 @@ def render_bigbang(
     R = np.asarray(size_measure, dtype=float)
     lim = float(np.max(np.abs(R))) * 1.05 if np.max(np.abs(R)) > 0 else 1.0
     level_clouds = _build_level_clouds(levels, t_bf, R, rate_per_step=float(n_particles),
-                                        n_bits=int(round(n_bits)), k_rate=k_rate)
+                                        n_bits=int(round(n_bits)), k_rate=k_rate, frames=frames)
 
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     if not animate:
