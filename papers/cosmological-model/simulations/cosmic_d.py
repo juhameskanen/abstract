@@ -192,7 +192,7 @@ def main() -> None:
     )
 
     levels = None
-    if args.anim or args.three_d or args.bigbang:
+    if args.anim or args.three_d or args.bigbang or args.worldlines:
         from anim_common import LevelAnimSpec
         levels = [
             LevelAnimSpec(width=lvl.width, tau_local=lvl.tau_local, lapse=lvl.lapse,
@@ -222,6 +222,14 @@ def main() -> None:
     if args.bigbang:
         from render_3d import dispatch_bigbang
         dispatch_bigbang(
+            args, sim.t_bf, sim.size_measure, levels,
+            n_bits=sim.n_bits, k_rate=sim.k_rate,
+            title="Statistical backend: particle population density (illustrative 3D + spherical symmetry)",
+        )
+
+    if args.worldlines:
+        from render_3d import dispatch_worldlines
+        dispatch_worldlines(
             args, sim.t_bf, sim.size_measure, levels,
             n_bits=sim.n_bits, k_rate=sim.k_rate,
             title="Statistical backend: particle population density (illustrative 3D + spherical symmetry)",

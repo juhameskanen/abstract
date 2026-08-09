@@ -98,11 +98,13 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.lines import Line2D
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (registers the 3d projection)
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from scipy.ndimage import gaussian_filter1d
 
-from multiclock import ground_truth_pool
+from multiclock import ground_truth_pool, retard
 from dicke_layer import default_composition
 from spacetime_field import build_spacetime_field
+from persistence import persistence, _ehrenfest_matrix
 
 CAVEAT = (
     "ILLUSTRATIVE: 3D embedding + spherical symmetry assumed for rendering only "
@@ -122,6 +124,102 @@ BIGBANG_CAVEAT = (
     "each point as a permanent deposit AT that moment, not a moving/persisting "
     "object."
 )
+
+
+WORLDLINE_CAVEAT = (
+    "ILLUSTRATIVE: 3D embedding + spherical symmetry assumed for rendering "
+    "only. Each line IS a real object the model defines, not a rendering "
+    "fiction: a knot is seeded where a width-w window matches its scale's "
+    "composition (a,b); its persistence over raw ticks is the model's own "
+    "exact Ehrenfest survival probability P(still matched); its radius at "
+    "raw tau t is R(retard(t,w)) -- the level's own retarded clock, staircased "
+    "in steps of w raw ticks -- not the background R(t). Direction is fixed "
+    "at birth (chain position doesn't move) and taken from the same "
+    "g(r)-correlated field used elsewhere. A knot's death tau is where its "
+    "own persistence curve first drops below --death_frac."
+)
+
+
+def _death_age_raw_ticks(n_bits: int, w: int, a: int, death_frac: float,
+                          max_delta: int = 200000) -> int:
+    """Smallest raw-tick delta at which persistence(n_bits, w, a, delta)
+    first drops below death_frac, computed once per (n_bits, w, a) via
+    repeated small (w+1)x(w+1) matrix multiplication (cheap -- w is a
+    handful of bits). Falls back to max_delta if it never crosses within
+    that many ticks (e.g. death_frac set too low)."""
+    p = w / n_bits
+    M = _ehrenfest_matrix(w)
+    T = (1 - p) * np.eye(w + 1) + p * M
+    Tk = np.eye(w + 1)
+    for delta in range(1, max_delta + 1):
+        Tk = Tk @ T
+        if Tk[a, a] < death_frac:
+            return delta
+    return max_delta
+
+
+def _build_level_worldlines(levels, t_bf, R_of_tau, birth_rate: float, n_bits: int,
+                             k_rate: float, death_frac: float = 0.5, frames: int = 150):
+    """Seed persistent knots per level (Poisson births weighted by that
+    level's own matter_series, same birth process already used for the
+    non-persistent point clouds) and give each one a real lifespan and a
+    real radial growth law, both read off the model's own derived
+    quantities -- no new mechanism, no tracked equation of motion invented.
+
+    Returns a list of (knots, color, lvl) per level, where knots is a list
+    of (s, direction[3], birth_tau, death_tau).
+    """
+    cmap = plt.get_cmap("plasma")
+    colors = [cmap(0.15 + 0.7 * i / max(len(levels) - 1, 1)) for i in range(len(levels))]
+    n_steps = len(t_bf)
+    stride = max(1, n_steps // frames)
+    n_frames_field = n_steps // stride + 1
+
+    out = []
+    for lvl, color in zip(levels, colors):
+        w = int(round(lvl.width))
+        rng = np.random.default_rng(w + 1000)
+        peak_idx = int(np.argmax(lvl.matter_series))
+        _, k_local = ground_truth_pool(lvl.tau_local[peak_idx:peak_idx + 1], n_bits, k_rate)
+        k_ref = float(k_local[0])
+        a, _b = default_composition(w)
+        field = build_spacetime_field(n_bits, w, k_ref, a, n_frames=n_frames_field,
+                                       ticks_per_frame=float(stride), seed=w + 97)
+
+        denom = max(float(np.max(lvl.matter_series)), 1e-12)
+        frac = np.clip(lvl.matter_series / denom, 0.0, None)
+        counts = rng.poisson(frac * birth_rate)
+        total = int(counts.sum())
+        death_age = _death_age_raw_ticks(n_bits, w, a, death_frac)
+
+        knots = []
+        if total > 0:
+            birth_idx = np.repeat(np.arange(n_steps), counts)
+            s_pos = rng.integers(0, n_bits, size=total)
+            frame_buckets = np.clip(birth_idx // stride, 0, n_frames_field - 1)
+            dirs = field[s_pos, frame_buckets]
+            birth_tau = t_bf[birth_idx]
+            death_tau = np.minimum(birth_tau + death_age, t_bf[-1])
+            for i in range(total):
+                knots.append((s_pos[i], dirs[i], float(birth_tau[i]), float(death_tau[i])))
+        out.append((knots, color, lvl))
+    return out
+
+
+def _worldline_segments(knots, R_of_tau, retard_fn, cur_tau: float, n_pts: int = 24):
+    """Build one polyline per knot from its birth up to min(cur_tau, death),
+    radius at each sampled tau = R(retard(tau, w)) -- a real staircase, not
+    a smooth interpolation, since that's what the level's own clock does."""
+    segs = []
+    for s, d, birth_tau, death_tau in knots:
+        end_tau = min(cur_tau, death_tau)
+        if end_tau <= birth_tau:
+            continue
+        taus = np.linspace(birth_tau, end_tau, n_pts)
+        radii = R_of_tau(retard_fn(taus))
+        pts = radii[:, None] * d[None, :]
+        segs.append(pts)
+    return segs
 
 
 def _sphere_wireframe(r: float, n: int = 16):
@@ -565,6 +663,139 @@ def _render_bigbang_animation(t_bf, R, level_clouds, lim, output, frames, fps, t
     print(f"saved -> {output}  (frames={len(frame_indices)}, stride={stride}, fps={fps})")
 
 
+def render_bigbang_worldlines(
+    t_bf: np.ndarray,
+    size_measure: np.ndarray,
+    levels: list,
+    output: str,
+    n_bits: int,
+    k_rate: float,
+    animate: bool = True,
+    birth_rate: float = 0.3,
+    death_frac: float = 0.5,
+    frames: int = 150,
+    fps: int = 20,
+    title: str = "True big-bang view: knot worldlines (illustrative 3D + spherical symmetry)",
+) -> None:
+    """Render each level's persistent knots as actual radial worldlines,
+    using only quantities the model already derives:
+      - birth: Poisson, weighted by lvl.matter_series (same process as the
+        non-persistent point clouds elsewhere in this file).
+      - direction: fixed at birth, from the same g(r)-correlated field.
+      - radius(tau): R(retard(tau, w)) -- the level's own retarded clock,
+        NOT the background R(tau) directly.
+      - death: first raw-tick delta where the exact Ehrenfest persistence
+        P(still matched) drops below death_frac.
+    No new tracked equation of motion or identity mechanism is introduced;
+    every ingredient above already existed in multiclock.py/persistence.py.
+    """
+    R = np.asarray(size_measure, dtype=float)
+    lim = float(np.max(np.abs(R))) * 1.05 if np.max(np.abs(R)) > 0 else 1.0
+
+    def R_of_tau(tau):
+        return np.interp(tau, t_bf, R)
+
+    level_worldlines = _build_level_worldlines(
+        levels, t_bf, R_of_tau, birth_rate=birth_rate, n_bits=n_bits,
+        k_rate=k_rate, death_frac=death_frac, frames=frames,
+    )
+
+    Path(output).parent.mkdir(parents=True, exist_ok=True)
+    if not animate:
+        _render_worldline_snapshots(t_bf, R, R_of_tau, level_worldlines, lim, output, title)
+    else:
+        _render_worldline_animation(t_bf, R, R_of_tau, level_worldlines, lim, output,
+                                     frames, fps, title)
+
+
+def _render_worldline_snapshots(t_bf, R, R_of_tau, level_worldlines, lim, output, title):
+    n = len(t_bf)
+    fracs = [0.05, 0.15, 0.30, 0.5, 0.75, 1.0]
+    idxs = [int(f * (n - 1)) for f in fracs]
+
+    fig = plt.figure(figsize=(15, 9))
+    for panel, idx in enumerate(idxs):
+        cur_tau = float(t_bf[idx])
+        ax = fig.add_subplot(2, 3, panel + 1, projection="3d")
+        x, y, z = _sphere_wireframe(R[idx], n=18)
+        ax.plot_wireframe(x, y, z, color="gray", alpha=0.2, lw=0.4)
+        for knots, color, lvl in level_worldlines:
+            w = int(round(lvl.width))
+            retard_fn = lambda taus, w=w: retard(taus, w)
+            segs = _worldline_segments(knots, R_of_tau, retard_fn, cur_tau)
+            if not segs:
+                continue
+            lc = Line3DCollection(segs, colors=[color] * len(segs), linewidths=1.1, alpha=0.75)
+            ax.add_collection3d(lc)
+        ax.set_xlim(-lim, lim)
+        ax.set_ylim(-lim, lim)
+        ax.set_zlim(-lim, lim)
+        ax.set_title(f"t={cur_tau:.0f}  (R={R[idx]:.3f})", fontsize=9)
+        ax.set_box_aspect([1, 1, 1])
+        ax.set_axis_off()
+
+    fig.suptitle(title, fontsize=11, fontweight="bold")
+    fig.text(0.5, 0.945, WORLDLINE_CAVEAT, ha="center", va="top", fontsize=6.4, wrap=True)
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
+    fig.savefig(output, dpi=130)
+    plt.close(fig)
+    print(f"saved -> {output}")
+
+
+def _render_worldline_animation(t_bf, R, R_of_tau, level_worldlines, lim, output,
+                                 frames, fps, title):
+    n_frames_total = len(t_bf)
+    stride = max(1, n_frames_total // frames)
+    frame_indices = np.arange(0, n_frames_total, stride)
+    if frame_indices[-1] != n_frames_total - 1:
+        frame_indices = np.append(frame_indices, n_frames_total - 1)
+
+    retard_fns = {int(round(lvl.width)): (lambda taus, w=int(round(lvl.width)): retard(taus, w))
+                  for _, _, lvl in level_worldlines}
+
+    fig = plt.figure(figsize=(9, 8.5))
+    ax = fig.add_subplot(111, projection="3d")
+    ax.set_box_aspect([1, 1, 1])
+    ax.set_axis_off()
+
+    legend_handles = [
+        Line2D([0], [0], color=color, lw=2, label=f"w={lvl.width:g}  (lapse=1/{lvl.width:g})")
+        for _, color, lvl in level_worldlines
+    ]
+    fig.suptitle(title, fontsize=11, fontweight="bold")
+    time_text = fig.text(0.5, 0.03, "", ha="center", fontsize=10, fontweight="bold")
+    fig.text(0.5, 0.005, WORLDLINE_CAVEAT, ha="center", fontsize=5.6, wrap=True)
+
+    def update(frame_idx):
+        idx = frame_indices[frame_idx]
+        cur_tau = float(t_bf[idx])
+        ax.cla()
+        ax.set_xlim(-lim, lim)
+        ax.set_ylim(-lim, lim)
+        ax.set_zlim(-lim, lim)
+        ax.set_box_aspect([1, 1, 1])
+        ax.set_axis_off()
+        ax.legend(handles=legend_handles, loc="upper left", fontsize=8,
+                  facecolor="#111115", edgecolor="gray", labelcolor="white")
+        x, y, z = _sphere_wireframe(R[idx], n=16)
+        ax.plot_wireframe(x, y, z, color="gray", alpha=0.2, lw=0.3)
+        for knots, color, lvl in level_worldlines:
+            w = int(round(lvl.width))
+            segs = _worldline_segments(knots, R_of_tau, retard_fns[w], cur_tau)
+            if segs:
+                lc = Line3DCollection(segs, colors=[color] * len(segs), linewidths=1.0, alpha=0.8)
+                ax.add_collection3d(lc)
+        ax.view_init(elev=20, azim=frame_idx * 1.2)
+        time_text.set_text(f"coordinate time \u03c4 = {cur_tau:8.1f}")
+        return []
+
+    ani = animation.FuncAnimation(fig, update, frames=len(frame_indices), blit=False)
+    writer = animation.PillowWriter(fps=fps)
+    ani.save(output, writer=writer, dpi=100)
+    plt.close(fig)
+    print(f"saved -> {output}  (frames={len(frame_indices)}, stride={stride}, fps={fps})")
+
+
 # ===========================================================================
 # Shared CLI wiring, so each backend script (cosmic_wavefunction.py,
 # cosmic_d.py, cosmic_psi.py) adds --3d with one line instead of
@@ -622,6 +853,26 @@ def add_3d_cli_args(parser) -> None:
                               "surface (hot = many points landed in that "
                               "patch this slice) instead of individually "
                               "scattered points. Ignored without --bigbang.")
+    parser.add_argument("--worldlines", action="store_true",
+                         help="Add a knot-worldline 3D view: persistent knots "
+                              "(not resampled points) seeded per level, each "
+                              "growing radially at R(retard(tau,w)) -- its own "
+                              "scale's retarded clock -- until its exact "
+                              "Ehrenfest persistence probability drops below "
+                              "--death_frac. This is what actually produces a "
+                              "non-round ('bumpy') surface, since heavier "
+                              "(wider) knots systematically lag to smaller "
+                              "radius. Independent of --3d/--bigbang.")
+    parser.add_argument("--worldline_rate", type=float, default=0.3,
+                         help="Poisson birth rate per raw tick, per scale, for "
+                              "--worldlines knots. Lower than --bigbang_particles "
+                              "since each knot persists (draws a whole line) "
+                              "rather than being resampled fresh every tick.")
+    parser.add_argument("--death_frac", type=float, default=0.5,
+                         help="With --worldlines: a knot's death tau is the "
+                              "first point where its own persistence "
+                              "probability (exact Ehrenfest survival) drops "
+                              "below this fraction.")
 
 
 def dispatch_3d(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
@@ -667,4 +918,27 @@ def dispatch_bigbang(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: l
         heatmap=getattr(args, "heatmap", False),
         title=title.replace("particle population density",
                              "true big-bang view: one slice at a time"),
+    )
+
+
+def dispatch_worldlines(args, t_bf: np.ndarray, size_measure: np.ndarray, levels: list,
+                         title: str, n_bits: int, k_rate: float) -> None:
+    """Call render_bigbang_worldlines from a backend's main(), reading the
+    shared --worldlines/--worldline_rate/--death_frac/--anim/--frames/--fps
+    args. No-op if --worldlines wasn't passed.
+    """
+    if not getattr(args, "worldlines", False):
+        return
+    out_path = Path(args.output)
+    suffix = ".gif" if args.anim else ".png"
+    worldlines_output = str(out_path.with_name(f"{out_path.stem}_worldlines{suffix}"))
+    render_bigbang_worldlines(
+        t_bf, size_measure, levels, worldlines_output,
+        n_bits=n_bits, k_rate=k_rate,
+        animate=args.anim,
+        birth_rate=getattr(args, "worldline_rate", 0.3),
+        death_frac=getattr(args, "death_frac", 0.5),
+        frames=args.frames, fps=args.fps,
+        title=title.replace("particle population density",
+                             "knot worldlines"),
     )
