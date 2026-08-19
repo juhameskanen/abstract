@@ -1,84 +1,97 @@
 #!/usr/bin/env python3
 """
 Observer as a shortest-description-length path in a growing-entropy 2D
-complex-valued spectrally compressed universe -- v4.
+complex-valued spectrally compressed universe -- v5.
+
 The ultimate goal: define the observer and the rest follows as typical (most probable) outcome
-due to solomonof induction with "spectral complexity" measure. 
+due to solomonof induction with "spectral complexity" measure.
 
 This POC should demonstrate the following:
 
-The universe is static and timeless, described by the total wavefunction,
- with information content of n bits. 
+1. The universe is static and timeless, with information content of n bits.
 
-The wavefunction of the universe can be decomposed to nearly infinite
-ensembles, which can be arranged into increasing entropy order.
+2. The information (bits) can arranged to represent both code (the most trivial continuous
+periodic function sin) and data (frequencies and phases of modes) to describe all possible
+representations of observer.
 
-Time emerges as walk through these ensembles. We are interested in walks
-that contain the specified observer (as universes without the observer cannot be observed by the observer)
+3. The wavefunction of the universe can be decomposed to nearly infinite
+ensembles, which can be arranged into increasing entropy order. This is a TREND, not a rule
+imposed frame-to-frame: no consecutive pair of ensembles is forced to have higher entropy than
+the last. What we assume is only the compression-level ordering (Hamming-weight-truncated
+Hadamard coefficients, see get_hamming_ordered_hadamard_basis); whether that ordering happens
+to produce a broadly increasing entropy trend -- and how noisy that trend is -- is something the
+simulation reports (--seed-sweep), not something asserted or enforced. We will later show the
+trend itself emerges from Solomonoff induction rather than being hand-picked.
 
-Those walks that has minimal description length dominate the measure. So the
+4. Time emerges as walk through these ensembles. We are interested in walks
+that contain the specified observer (as universes without the observer cannot be observed by the observer).
+
+5. Those walks that has minimal description length dominate the measure. So the
 observer most likely find themselves within one of the most compressible (minimal wavefunction) walks.
 These are walks with smooth predictable dynamics, as such information compresses best.
 
-The compression codec is the wavefunction, complex-valued,
+6. The compression codec is the wavefunction, complex-valued,
 MPEG-like, over ensembles (over time). MDL is measured over the entire WALK (path), not per frame!
 
-"Walk through all possible paths from zero entropy; shortest
-description length dominates the measure." This is a
-literal Viterbi dynamic program over the branch graph:
+7. Walk through all possible paths from zero entropy (Wootters style internal emergent time); shortest
+description length dominates the measure. Implemented here as an exact Viterbi DP over the branch
+graph -- NOTE: this finds the single maximum-a-posteriori path, i.e. an approximation to the full
+2^-L-weighted Solomonoff measure over ALL paths, not the measure itself. Treat it as that:
  - state at frame j = a coarse cell c (candidate observer location)
- - emission cost(c, j)  = -log2 P(c | k_j)          (Born/Shannon
-                                                             code length)
-       - transition cost(c', c) = lambda * ||pos(c') - pos(c)||  (motion-
-         vector cost -- exactly what MPEG pays for a moving region: cheap
-         if it's roughly the same place, expensive if it teleports)
-   The path minimizing total accumulated cost is the one with shortest
-   description length, i.e. the one a Solomonoff-style measure 2^-L
-   weights highest -- "the path the observer most likely finds
-   themselves on." This replaces BOTH the old fidelity gate and the
-   old multi-branch blob cloud with a single selected trajectory,
-   found by exact DP (not sampling).
-   "Presence" (--presence) now means: is the winning path's cell
-   probability at this frame far enough above the uniform baseline
-   to represent real compression gain, not noise. Frames failing that
-   (or outside the entropy validity band) are marked not-visible.
+ - emission cost(c, j)  = -log2 P(c | k_j)          (Born/Shannon code length)
+ - transition cost(c', c) = lambda * ||pos(c') - pos(c)||  (motion-vector cost -- exactly what
+   MPEG pays for a moving region: cheap if it's roughly the same place, expensive if it teleports)
+   "Presence" (--presence) now means: is the winning path's cell probability at this frame far
+   enough above the uniform baseline to represent real compression gain, not noise. Frames failing
+   that (or outside the entropy validity band) are marked not-visible.
 
-Spectral - geometric mapping. thed raster probability 
-amplitudes define the observer." At each frame the observer's
-visual IS a masked contour of the REAL |psi(x,y)|^2 raster, cropped
-to the winning path's coarse-cell block (plus one block of padding
-for context) and contoured at real, data-derived levels. If the
-true amplitude structure there is a ring, a ring is what renders.
+8. Spectral - geometric mapping. The raster probability amplitudes define the observer. At each
+frame the observer's visual IS a masked contour of the REAL |psi(x,y,z,t)|^2 raster, cropped to the
+winning path's coarse-cell block (plus one block of padding for context) and contoured at real,
+data-derived levels. If the true amplitude structure there is a ring, a ring is what renders.
+NOTE (still true in v5): the geometry rendered here is a flat 2D raster. The header's aspiration
+in items 10-11 below (3+1 D, spherical symmetry, singularity at zero information) is NOT what is
+implemented yet -- this is the next piece of work.
 
-Spectral complexity: this is Kolmogorov complexity in principle, but as the
-actual algorithm (the sin() function) cost is constant, per class, its impact
-is vanishingly small. The  actual dominant complexity emerges from the data - the
-informational cost of frequencies and phases. 
+9. Spectral complexity: this is Kolmogorov complexity in principle, but as the actual algorithm
+(the sin() function) cost is per class and therefore its impact is vanishingly small and constant.
+The actual dominant complexity emerges from the data -- the informational cost of frequencies and
+phases.
 
-Missing proper spectral -> geometry mapping. Zero information (or as close zero as minimal wavefunciton allows) should
-map to geometric singularity. Any geometric interpretation of "one state" should then map to
-a geometric point. Its classical statistical "bitstring" equivalence is all-zero bitstring.
-All possible ways to map or interpret the bitstring as "positiosn" yield the same geometric object - a point.
-Similary, when starting out from zero mode, one mode etc. wavefunction ensembles, their
-geometric projections should collapse to geometric point (geometry with no micro structures).
+10. Spectral -> geometry mapping (NOT implemented yet -- next focus area). Observer should sense
+living in 3+1 geometric space with spherical symmetry (observational fact, to be derived, not
+assumed). High dimensional Hilbert space can be mapped to geometric space in infinitely many ways.
+Why three, why spherical? We assume those emerge from Solomonoff induction, as the simplest minimal
+solutions with shortest description length.
 
-Expected outcome;
+11. Zero information (or as close to zero as the minimal wavefunction allows) should therefore map
+to geometric singularity -- any geometric interpretation of "one state" should then map to a
+geometric point. Its classical statistical "bitstring" equivalence is all-zero bitstring. All
+possible ways to map, slice, express or interpret the bitstring as "positions" yield the same
+geometric object -- a point. Similarly, when starting out from zero-mode, one-mode etc. wavefunction
+ensembles, their geometric projections should collapse to a geometric point (geometry with no
+micro structures).
+
+Expected outcome:
 - universe starts minimally simple, just black image, the probability amplitudes should be
-zero everywhere, no emergent micro structuures, let alone observer.
-- as entropy increases probability amplitudes rise gradually and the heat map begins to glow minimally
-trivial structures that get more complex with time, soon observer memerges and later vanishes as
-entropy goes up and emergent structures vanish to make room for structureless "noise"
-- observer does not jump chaotically, it emerges, moves smootly, and vanish.
+practically zero everywhere, no emergent micro structures, let alone observer.
+- as entropy increases probability amplitudes rise gradually and the heat map begins to glow
+minimally trivial structures that get more complex with time, soon observer emerges and later
+vanishes as entropy goes up and emergent structures vanish to make room for structureless "noise"
+- observer does not jump chaotically, it emerges, moves smoothly as the probability amplitudes peak,
+and vanish. For most of the time the universe contains no observer.
 
-
-Observer as a shortest-description-length path in a growing-entropy 2D
-complex-valued spectrally compressed universe -- v4 (render fix).
-
+ON PARAMETER COUNT (design direction, not yet fully realized): the goal is a ONE-parameter theory
+-- --observer defines the observer, and the rest (--resolution, --n, --min-record-bits, --s-max)
+should follow rather than be tunable. --presence and --jump-cost are still hand-set thresholds
+(honestly flagged in group (1)/(3) below) and remain candidates for being derived away in a later
+version. Everything in group (4) is pure rendering/optimization and carries no theoretical content.
 """
 
 import argparse
 import math
 import sys
+from collections import Counter
 
 import numpy as np
 from scipy.ndimage import zoom as ndimage_zoom
@@ -88,10 +101,6 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib.animation import FuncAnimation, PillowWriter
 
-# Upsampling factor used to build the contour field. Matches (in spirit) the
-# 'bicubic' interpolation matplotlib applies to the *displayed* background so
-# that contour lines are drawn on geometry as smooth as what the eye compares
-# them against, instead of raw marching-squares on the coarse observer-cell grid.
 CONTOUR_UPSAMPLE = 6
 
 
@@ -165,19 +174,11 @@ def probs_to_grid(spatial_probs, idx_to_xy, side):
 
 
 def build_smooth_field(grid: np.ndarray, upsample: int = CONTOUR_UPSAMPLE) -> np.ndarray:
-    """Cubic-spline upsample of a raw raster field, order-3 (bicubic-like),
-    for use as the CONTOUR field so it matches the smoothness of the
-    bicubic-interpolated background image. Cubic splines can ring slightly
-    below zero near sharp edges, so we clip back to a physical (>=0) field."""
     smooth = ndimage_zoom(grid, upsample, order=3, mode="nearest")
     return np.clip(smooth, 0, None)
 
 
 def region_mask(shape, box, side, upsample, pad_blocks=1):
-    """Boolean mask (True = masked OUT) for the padded observer-cell box,
-    expressed in upsampled-pixel coordinates. Used with np.ma.masked_array
-    so the contour simply isn't drawn outside the region -- no hard zero
-    cliff is introduced at the boundary the way masked_region() used to do."""
     x0, y0, bp = box
     xlo = max(0, x0 - pad_blocks * bp)
     ylo = max(0, y0 - pad_blocks * bp)
@@ -208,25 +209,6 @@ def coarse_cell_geometry(observer_bits: int, side: int):
 # ---------------------------------------------------------------------------
 
 def solve_typical_path(cell_probs_by_frame, cell_centers, max_candidates, jump_cost_weight):
-    """
-    jump_cost_weight (lambda) has units of BITS PER PIXEL. Total path cost is
-    a single MDL code length in bits:
-
-        L(path) = sum_j [ -log2 P(cell_j | k_j) ]        <- amplitude code
-                + sum_j [ lambda * ||pos_j - pos_{j-1}|| ]  <- motion code
-
-    The first term is not a free choice -- it's the Born-rule/Shannon code
-    length straight from the wavefunction. The second term is *also* an MDL
-    code length in the same spirit (a smoothly-moving path is cheaper to
-    describe than a teleporting one, exactly like a video codec's motion
-    vectors), but bits and pixels are different units, so lambda is the
-    necessary exchange rate between them. It cannot be derived from nothing
-    -- some exchange rate must be chosen for the two code lengths to be
-    commensurable at all -- but it CAN be made scale-consistent rather than
-    an arbitrary magic number: see resolve_defaults()'s derivation of
-    --jump-cost, which pins lambda to grid geometry instead of hand-tuning
-    it per --resolution/--n combination.
-    """
     n_frames = len(cell_probs_by_frame)
     eps = 1e-300
 
@@ -275,60 +257,6 @@ def solve_typical_path(cell_probs_by_frame, cell_centers, max_candidates, jump_c
 # ---------------------------------------------------------------------------
 
 def parse_args():
-    """
-    Reclassified around the observer-centric theory: define the OBSERVER,
-    let everything else follow as the typical/most-compressible outcome.
-
-    (1) OBSERVER DEFINITION -- together these ARE what "an observer" means
-        in this model. None of them is derived from the wavefunction; they
-        are the recognition criteria we, the ones asking the question,
-        impose in order to say "a record formed here." That's unavoidable
-        for the same reason a particle detector needs a sigma-level -- but
-        it's honest to keep them as one deliberate bundle rather than
-        pretending some are "physics" and others are "just thresholds."
-            --observer          size of the observer's memory register (qubits)
-            --min-record-bits   entropy floor: below this, rho_A carries no
-                                 distinguishable record at all
-            --s-max              entropy ceiling: above this, rho_A is
-                                 thermalized/mixed, record washed out
-            --presence           how far the winning path's cell probability
-                                 must clear the uniform baseline to count as
-                                 "there" rather than noise
-
-    (2) EMERGENT -- NOT free parameters at all. These follow from (1):
-            --resolution   derived as EXACTLY enough spatial qubits to give
-                            the observer register a well-defined position
-                            (side = 2^(observer/2)) -- no unused context
-                            padding unless you override it by hand.
-            --n             derived by SEARCH: the smallest total wavefunction
-                            (fewest hidden/environment qubits beyond the
-                            observer's own footprint) at which the observer
-                            definition in (1) is actually satisfiable
-                            somewhere along the compression sweep. This is
-                            "sufficiently large for the observer to emerge,"
-                            taken literally, as an output rather than a guess.
-
-    (3) OPTIONAL CONTINUITY PRIOR -- OFF by default, and deliberately not
-        part of (1) or (2):
-            --jump-cost   Pure Solomonoff induction over the wavefunction
-                           gives you exactly sum_j [-log2 P(cell_j | k_j)]
-                           as the path's description length -- nothing about
-                           frame-to-frame spatial proximity. Any term that
-                           rewards nearby cells across frames is an EXTRA
-                           assumption (real observers persist continuously)
-                           that the wavefunction's own measure does not
-                           supply. So the theory-pure default is 0: each
-                           frame's cell is chosen independently by minimal
-                           description length alone, and whether the
-                           resulting path *happens* to look continuous
-                           becomes something to check, not something built
-                           in. Set > 0 only if you want to explicitly test a
-                           continuity-prior variant against the pure one.
-
-    (4) PERFORMANCE ONLY -- no physical or definitional meaning; changes
-        runtime and rendering fidelity, not the answer.
-            --max-candidates, --frames, --seed, --output, --scan-frames
-    """
     p = argparse.ArgumentParser(
         description="Observer as the shortest-description-length path through a "
                     "growing-entropy 2D universe. Define the observer; the universe "
@@ -350,55 +278,42 @@ def parse_args():
 
     emergent = p.add_argument_group("(2) emergent -- derived from (1), not independent inputs")
     emergent.add_argument("--resolution", type=int, default=None,
-        help="Spatial raster side (power of 2). Default: 2^(observer/2) -- exactly enough "
-             "to give the observer a well-defined position, no more. Override to add "
-             "spatial context padding around the observer's footprint.")
+        help="Spatial raster side (power of 2). Default: 2^(observer/2).")
     emergent.add_argument("--n", type=int, default=None,
-        help="Total wavefunction qubits. Default: found by SEARCH -- the smallest universe "
-             "(fewest hidden/environment qubits) at which the observer definition in (1) "
-             "is satisfiable anywhere in the compression sweep. Set explicitly to skip the "
-             "search and force a specific universe size.")
+        help="Total wavefunction qubits. Default: found by SEARCH.")
 
     prior = p.add_argument_group("(3) optional continuity prior -- off by default")
     prior.add_argument("--jump-cost", type=float, default=0.0,
-        help="Bits-per-pixel weight on spatial continuity across frames. Default: 0.0 "
-             "(pure Solomonoff induction on the wavefunction alone -- no external "
-             "assumption that the observer persists continuously). See parse_args "
-             "docstring category (3) before setting this above zero.")
+        help="Bits-per-pixel weight on spatial continuity across frames. Default: 0.0.")
 
-    perf = p.add_argument_group("(4) performance only -- no physical meaning")
+    perf = p.add_argument_group("(4) performance / validation only -- no physical meaning")
     perf.add_argument("--max-candidates", type=int, default=48,
         help="Beam width (candidate cells/frame) for the exact DP. Default: 48.")
-    perf.add_argument("--output", type=str, default="observer_typical_path_v4")
+    perf.add_argument("--output", type=str, default="observer_typical_path_v5")
     perf.add_argument("--seed", type=int, default=42,
-        help="Which realization of the random static phases to draw. Like --presence, an "
-             "unavoidable free choice -- every run necessarily picks *some* phase "
-             "realization -- rather than something derivable from the definition alone.")
+        help="Which realization of the random static phases to draw (single-run mode), "
+             "or the seed used to GENERATE the seed list for --seed-sweep.")
     perf.add_argument("--frames", type=int, default=120,
-        help="Frames sampled along k for the FINAL rendered animation.")
+        help="Frames sampled along k for the FINAL rendered animation (single-run mode).")
     perf.add_argument("--scan-frames", type=int, default=16,
-        help="Coarser frame count used only while SEARCHING for the minimal --n (cheap "
-             "existence check per candidate universe size, not the final render).")
+        help="Coarser frame count used while SEARCHING for the minimal --n, and for every "
+             "run inside --seed-sweep (cheap existence check, not the final render).")
+    perf.add_argument("--seed-sweep", type=int, default=0,
+        help="If > 0, skip the single-seed render entirely and instead run the minimal-n "
+             "search across this many random seeds, reporting how often the emerge-then-fade "
+             "observer arc appears. This is the statistical check for whether the arc is "
+             "'typical' rather than an artifact of one --seed.")
     return p.parse_args()
 
 
 def resolve_defaults(args):
-    """
-    Resolve category (1)+(2) parameters that were left unset. --observer is
-    the one true independent input; --resolution follows from it directly
-    (a formula, not a search). --n is intentionally NOT resolved here -- it
-    requires actually running sweeps to find the minimal universe that
-    supports the observer definition, so that search lives in
-    find_minimal_n() / main(), after this function has fixed everything
-    else the search needs to hold constant.
-    """
     if args.observer % 2 != 0:
         sys.exit(f"--observer must be even. Got {args.observer}.")
     if args.observer <= 0 or args.observer > 16:
         sys.exit(f"--observer must be in (0,16]. Got {args.observer}.")
 
     if args.resolution is None:
-        args.resolution = 2 ** (args.observer // 2)  # exactly enough grid for the register
+        args.resolution = 2 ** (args.observer // 2)
 
     res = args.resolution
     if res < 2 or (res & (res - 1)) != 0:
@@ -418,22 +333,26 @@ def resolve_defaults(args):
         sys.exit(f"--jump-cost must be >= 0. Got {args.jump_cost}.")
     if args.max_candidates < 1:
         sys.exit(f"--max-candidates must be >= 1. Got {args.max_candidates}.")
+    if args.seed_sweep < 0:
+        sys.exit(f"--seed-sweep must be >= 0. Got {args.seed_sweep}.")
 
     s_max = args.s_max if args.s_max is not None else 0.98 * args.observer
     if args.min_record_bits >= s_max:
         sys.exit(f"--min-record-bits ({args.min_record_bits}) must be < --s-max ({s_max:.2f}).")
 
-    return n_per_axis, spatial_qubits, s_max
+    max_hidden = 20 - spatial_qubits
+    if max_hidden < 1:
+        sys.exit(f"--observer={args.observer} already uses all {spatial_qubits} spatial "
+                  f"qubits available up to the n<=20 tractability ceiling; no room left "
+                  f"for any hidden/environment qubits, so no record can ever form. "
+                  f"Lower --observer.")
 
+    return n_per_axis, spatial_qubits, s_max, max_hidden
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # Core sweep: build the compression sweep for one candidate universe size,
-# solve the typical path, and assemble per-frame results. Used twice: cheaply
-# during find_minimal_n()'s search, and once at full fidelity for the render.
+# solve the typical path, and assemble per-frame results.
 # ---------------------------------------------------------------------------
 
 def simulate_universe(n_qubits, n_per_axis, spatial_qubits, s_max, args, num_frames,
@@ -442,7 +361,7 @@ def simulate_universe(n_qubits, n_per_axis, spatial_qubits, s_max, args, num_fra
     side = 2 ** n_per_axis
     n_a = args.observer
     n_b = n_qubits - n_a
-    hidden_qubits = n_qubits - spatial_qubits  # qubits summed out of the VISUAL raster
+    hidden_qubits = n_qubits - spatial_qubits
 
     hadamard_order = get_hamming_ordered_hadamard_basis(n_qubits)
     rng = np.random.default_rng(args.seed)
@@ -503,42 +422,25 @@ def simulate_universe(n_qubits, n_per_axis, spatial_qubits, s_max, args, num_fra
     return results, total_cost, uniform_spatial
 
 
-def find_minimal_n(args, n_per_axis, spatial_qubits, s_max, idx_to_xy, cell_centers):
+# ---------------------------------------------------------------------------
+# Minimal-n search: single-run wrapper (prints + exits) and a silent core
+# usable by both the single-run CLI path and the seed sweep.
+# ---------------------------------------------------------------------------
+
+def search_minimal_n(args, n_per_axis, spatial_qubits, s_max, max_hidden,
+                      idx_to_xy, cell_centers, verbose=True):
     """
-    Literalizes 'sufficiently large for the observer to emerge': search
-    upward in hidden/environment qubits (n = spatial_qubits + hidden) for
-    the SMALLEST total wavefunction at which the observer definition
-    (--observer, --min-record-bits, --s-max, --presence) is actually
-    satisfied by at least one frame of the winning path, somewhere in the
-    compression sweep. n is an OUTPUT of the observer definition, not an
-    independent input to it.
-
-    Success criterion is deliberately stronger than "appears at all": the
-    theory's actual prediction (see module docstring) is emerge -> persist
-    -> VANISH as entropy keeps climbing past the record band into
-    thermalization. A bath of just 1-2 hidden qubits can satisfy "appears
-    somewhere" trivially and then just stay visible for the rest of the
-    sweep (S(rho_A) plateaus well under s_max because a tiny bath can't
-    carry the observer's reduced state up to full mixing) -- that's a real
-    but degenerate case, not the emerge-and-fade arc the theory predicts.
-    So "found" here requires the winning path to be visible at at least one
-    frame AND not still visible at the final frame -- i.e. enough bath
-    exists for the record to also wash back out again before the sweep ends.
-
-    hidden=0 means n_b (qubits traced out of rho_A) = 0 too, so rho_A stays
-    exactly pure (S=0) at every k -- no record can ever form -- which is why
-    the search always has to start above 0.
+    Search upward in hidden/environment qubits for the smallest total
+    wavefunction at which the observer definition is satisfied AND later
+    fades again (see module docstring / v4 rationale). Never exits --
+    returns (n_found_or_None, results_at_that_n_or_None, status_str) so it
+    can be called repeatedly across seeds without killing the sweep.
     """
-    max_hidden = 20 - spatial_qubits
-    if max_hidden < 1:
-        sys.exit(f"--observer={args.observer} already uses all {spatial_qubits} spatial "
-                  f"qubits available up to the n<=20 tractability ceiling; no room left "
-                  f"for any hidden/environment qubits, so no record can ever form. "
-                  f"Lower --observer.")
-
-    print(f"searching for the smallest universe where the observer both emerges AND "
-          f"later vanishes again (observer={args.observer} qubits, record band "
-          f"[{args.min_record_bits:.2f}, {s_max:.2f}) bits, presence>={args.presence}x)...")
+    if verbose:
+        print(f"searching for the smallest universe where the observer both emerges AND "
+              f"later vanishes again (observer={args.observer} qubits, record band "
+              f"[{args.min_record_bits:.2f}, {s_max:.2f}) bits, presence>={args.presence}x, "
+              f"seed={args.seed})...")
     for hidden in range(1, max_hidden + 1):
         n_try = spatial_qubits + hidden
         results, _, _ = simulate_universe(n_try, n_per_axis, spatial_qubits, s_max, args,
@@ -546,14 +448,114 @@ def find_minimal_n(args, n_per_axis, spatial_qubits, s_max, idx_to_xy, cell_cent
                                            build_smooth=False)
         emerges = any(r["visible"] for r in results)
         fades_again = emerges and not results[-1]["visible"]
-        status = ("emerges and fades" if fades_again else
-                   "emerges but never fades (bath too small to thermalize it)" if emerges else
-                   "never emerges")
-        print(f"  n={n_try:2d} (hidden={hidden:2d})  ->  {status}")
+        if verbose:
+            status = ("emerges and fades" if fades_again else
+                       "emerges but never fades (bath too small to thermalize it)" if emerges else
+                       "never emerges")
+            print(f"  n={n_try:2d} (hidden={hidden:2d})  ->  {status}")
         if fades_again:
-            return n_try
-    sys.exit(f"No universe up to n=20 satisfies this observer definition. Try a smaller "
-              f"--observer, a looser --presence, or a wider [--min-record-bits, --s-max) band.")
+            return n_try, results, "emerges and fades"
+    # loop finished without ever fading again; report the last hidden-qubit
+    # count tried so the caller can distinguish "emerges but never fades"
+    # (bath too small to thermalize) from "never emerges at all"
+    if emerges:
+        return None, results, "emerges but never fades"
+    return None, None, "never emerges (up to n=20)"
+
+
+def find_minimal_n(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_xy, cell_centers):
+    """Single-run CLI wrapper: same search, but exits with a clear message on failure."""
+    n_found, results, status = search_minimal_n(
+        args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_xy, cell_centers, verbose=True)
+    if n_found is None:
+        sys.exit(f"No universe up to n=20 satisfies this observer definition (status: {status}). "
+                  f"Try a smaller --observer, a looser --presence, or a wider "
+                  f"[--min-record-bits, --s-max) band.")
+    return n_found
+
+
+# ---------------------------------------------------------------------------
+# Multi-seed validation sweep
+# ---------------------------------------------------------------------------
+
+def run_seed_sweep(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_xy, cell_centers):
+    """
+    Statistical check for the word 'typical': run the minimal-n search across
+    many independent phase realizations (seeds) and report how often the
+    emerge -> persist -> fade observer arc actually appears, how big a
+    universe it took, and where in the sweep the emergence peaked. A single
+    --seed run can't distinguish 'this is what typical observers look like'
+    from 'this is what seed 42 looks like' -- this can.
+    """
+    n_seeds = args.seed_sweep
+    gen = np.random.default_rng(args.seed)
+    seeds = [int(x) for x in gen.integers(0, 2 ** 31 - 1, size=n_seeds)]
+
+    print(f"seed sweep: {n_seeds} independent phase realizations, observer={args.observer} qubits, "
+          f"scan_frames={args.scan_frames}, presence>={args.presence}x, jump_cost={args.jump_cost}")
+    print(f"(seed list generated from --seed {args.seed}; base run parameters otherwise unchanged)\n")
+
+    records = []
+    saved_seed = args.seed
+    for i, s in enumerate(seeds):
+        args.seed = s
+        n_found, results, status = search_minimal_n(
+            args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_xy, cell_centers,
+            verbose=False)
+        rec = {"seed": s, "n": n_found, "status": status}
+        if results is not None:
+            vis = [r for r in results if r["visible"]]
+            if vis:
+                rec["window_frac"] = len(vis) / len(results)
+                peak = max(results, key=lambda r: r["emergence"])
+                rec["peak_k_frac"] = peak["k"] / results[-1]["k"]
+                rec["peak_s"] = peak["s_a"]
+        records.append(rec)
+        print(f"  [{i + 1:3d}/{n_seeds}] seed={s:11d}  n={str(n_found):>4}  status={status}")
+    args.seed = saved_seed
+
+    succ = [r for r in records if r["status"] == "emerges and fades"]
+    frac_succ = len(succ) / n_seeds
+    print(f"\nseed sweep summary ({n_seeds} seeds, observer={args.observer}):")
+    print(f"  emerge-then-fade observer arc: {len(succ)}/{n_seeds}  ({100 * frac_succ:.0f}%)")
+
+    if succ:
+        ns = np.array([r["n"] for r in succ], dtype=float)
+        print(f"  minimal n required: mean={ns.mean():.2f}  std={ns.std():.2f}  "
+              f"range=[{int(ns.min())},{int(ns.max())}]  mode={Counter(ns.astype(int)).most_common(1)[0][0]}")
+        wf = np.array([r["window_frac"] for r in succ if "window_frac" in r])
+        if len(wf):
+            print(f"  visible-window width (frac. of scan frames): mean={wf.mean():.2f}  std={wf.std():.2f}")
+        pf = np.array([r["peak_k_frac"] for r in succ if "peak_k_frac" in r])
+        if len(pf):
+            print(f"  emergence peak position (frac. of sweep, 0=start 1=end): "
+                  f"mean={pf.mean():.2f}  std={pf.std():.2f}")
+
+    other_status = Counter(r["status"] for r in records if r["status"] != "emerges and fades")
+    for st, cnt in other_status.items():
+        print(f"  {st}: {cnt}/{n_seeds}")
+
+    if succ and len(succ) >= 3:
+        ns = np.array([r["n"] for r in succ], dtype=float)
+        pf = np.array([r["peak_k_frac"] for r in succ if "peak_k_frac" in r])
+        fig, axes = plt.subplots(1, 2, figsize=(9, 3.5))
+        n_bins = np.arange(ns.min() - 0.5, ns.max() + 1.5, 1)
+        axes[0].hist(ns, bins=n_bins, color="steelblue", edgecolor="white")
+        axes[0].set_xlabel("minimal n (qubits)")
+        axes[0].set_ylabel("seeds")
+        axes[0].set_title(f"minimal universe size\n({len(succ)}/{n_seeds} seeds succeeded)")
+        if len(pf):
+            axes[1].hist(pf, bins=12, range=(0, 1), color="mediumorchid", edgecolor="white")
+            axes[1].set_xlabel("emergence peak (frac. of sweep)")
+            axes[1].set_ylabel("seeds")
+            axes[1].set_title("where in the sweep the observer\nis most 'in focus'")
+        plt.tight_layout()
+        hist_path = f"{args.output}_seed_sweep.png"
+        plt.savefig(hist_path, dpi=130)
+        plt.close(fig)
+        print(f"\nSaved seed-sweep histograms to {hist_path}")
+
+    return records
 
 
 # ---------------------------------------------------------------------------
@@ -562,7 +564,7 @@ def find_minimal_n(args, n_per_axis, spatial_qubits, s_max, idx_to_xy, cell_cent
 
 def main():
     args = parse_args()
-    n_per_axis, spatial_qubits, s_max = resolve_defaults(args)
+    n_per_axis, spatial_qubits, s_max, max_hidden = resolve_defaults(args)
     idx_to_xy, _ = morton_maps(n_per_axis)
     cell_centers, cell_boxes = coarse_cell_geometry(args.observer, args.resolution)
 
@@ -571,8 +573,12 @@ def main():
     print(f"resolution (emergent) = {args.resolution}x{args.resolution}  "
           f"(exactly {2 * n_per_axis} spatial qubits for a {args.observer}-qubit observer)")
 
+    if args.seed_sweep > 0:
+        run_seed_sweep(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_xy, cell_centers)
+        return
+
     if args.n is None:
-        n_qubits = find_minimal_n(args, n_per_axis, spatial_qubits, s_max, idx_to_xy, cell_centers)
+        n_qubits = find_minimal_n(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_xy, cell_centers)
         print(f"n (emergent) = {n_qubits}  (D={2**n_qubits:,}) -- smallest universe in which "
               f"this observer definition is satisfiable")
     else:
@@ -607,7 +613,6 @@ def main():
     peak_i = int(np.argmax([r["emergence"] for r in results]))
     print(f"emergence probability peaks at k={results[peak_i]['k']} "
           f"(S={results[peak_i]['s_a']:.2f} bits, emergence={results[peak_i]['emergence']:.2f})")
-
 
     # --- Render ---
     fig = plt.figure(figsize=(14, 7.5))
@@ -657,24 +662,12 @@ def main():
 
     title = fig.suptitle("")
 
-    # Contour levels as fixed fractions of the SAME global scale the background
-    # colormap uses (vmin=0, vmax=global_max_contrast). This is what fixes the
-    # "40% brightness renders as a full-strength contour" problem: a frame
-    # whose local peak is only 40% of the video-wide max now draws faint/no
-    # contour, matching how dark it correctly looks against the background.
     fixed_levels = [0.25 * global_max_smooth_contrast,
                      0.55 * global_max_smooth_contrast,
                      0.85 * global_max_smooth_contrast]
-    # Pixel-center extent so the upsampled contour field lines up exactly with
-    # imshow's default extent for the raw side x side background array.
     contour_extent = (-0.5, side - 0.5, -0.5, side - 0.5)
 
     def masked_smooth_field(r):
-        """Clip the smoothed contrast field to the winning cell's padded box
-        via masking (not zeroing). A masked array simply isn't contoured
-        outside the mask -- there's no artificial value discontinuity at the
-        box edge, so the box's straight sides no longer get traced as if they
-        were real amplitude structure."""
         mask = region_mask(r["smooth_contrast"].shape, cell_boxes[r["cell"]], side, CONTOUR_UPSAMPLE)
         return np.ma.masked_array(r["smooth_contrast"], mask=mask)
 
@@ -688,9 +681,6 @@ def main():
 
         if r["visible"]:
             field = masked_smooth_field(r)
-            # Only draw levels that actually fall under this frame's real
-            # (unmasked) peak -- otherwise a genuinely faint frame would still
-            # get a full triple-contour outline at levels it never reaches.
             levels = [lv for lv in fixed_levels if lv < field.max()]
             if levels:
                 cs = ax_grid.contour(field, levels=levels, extent=contour_extent,
