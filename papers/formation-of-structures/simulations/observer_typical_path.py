@@ -1,91 +1,292 @@
 #!/usr/bin/env python3
 """
 Observer as a shortest-description-length path in a growing-entropy 2D
-complex-valued spectrally compressed universe -- v5.
+complex-valued spectrally compressed universe.
 
-The ultimate goal: define the observer and the rest follows as typical (most probable) outcome
-due to solomonof induction with "spectral complexity" measure.
+This header is written to be self-reconstructing: the argument, the reason
+for every design choice, and the empirical result that validated the key
+mechanism are all recorded here, not just in the code or in conversation.
+Someone re-reading only this docstring should be able to (a) restate the
+theory's claim, (b) understand why THIS specific construction was chosen
+over alternatives, and (c) rebuild the simulation from scratch if the file
+were lost.
 
-This POC should demonstrate the following:
 
-1. The universe is static and timeless, with information content of n bits.
+The argument (one-parameter theory)
+-----------------------------------
+Define an observer: a finite subsystem (a qubit register, --observer bits)
+capable of holding a distinguishable record (non-trivial reduced entropy,
+neither pure nor maximally mixed). Ask: within the space of ALL possible
+universes (wavefunctions) that could contain such an observer, which ones
+does the observer typically find itself in?
 
-2. The information (bits) can arranged to represent both code (the most trivial continuous
-periodic function sin) and data (frequencies and phases of modes) to describe all possible
-representations of observer.
+Solomonoff induction answers this without any extra physical assumption:
+the measure 2^-L(x) over any set of possible objects/paths x is dominated
+by whichever ones have short description length L(x). A universe/walk that
+is smooth and predictable has a short description (few bits: "keep doing
+what you were doing"); a chaotic, jumpy one needs its randomness spelled
+out bit by bit and so has near-maximal description length. Therefore an
+observer embedded in a "typical" (measure-dominant) universe should
+generically find its surroundings smooth, continuous, and predictable --
+NOT because continuity is imposed as a law, but because the measure over
+all possible universes is overwhelmingly concentrated on the continuous,
+compressible ones. This is the one real input of the theory: --observer.
+Everything else below is claimed to follow, and where it doesn't yet
+(section "STATUS", below), that's flagged explicitly.
 
-3. The wavefunction of the universe can be decomposed to nearly infinite
-ensembles, which can be arranged into increasing entropy order. This is a TREND, not a rule
-imposed frame-to-frame: no consecutive pair of ensembles is forced to have higher entropy than
-the last. What we assume is only the compression-level ordering (Hamming-weight-truncated
-Hadamard coefficients, see get_hamming_ordered_hadamard_basis); whether that ordering happens
-to produce a broadly increasing entropy trend -- and how noisy that trend is -- is something the
-simulation reports (--seed-sweep), not something asserted or enforced. We will later show the
-trend itself emerges from Solomonoff induction rather than being hand-picked.
 
-4. Time emerges as walk through these ensembles. We are interested in walks
-that contain the specified observer (as universes without the observer cannot be observed by the observer).
+WHY A SPECTRAL / MPEG-LIKE CODEC, SPECIFICALLY
+------------------------------------------------
+The argument above needs SOME compression codec to make "short description
+length" concrete and computable. Any codec that is (i) continuous -- small
+changes in the underlying data produce small changes in the reconstructed
+signal, not jumps -- and (ii) algorithmically minimal -- the decoder itself
+costs a near-constant, vanishing number of bits regardless of how much data
+it's fed -- would in principle serve the argument above equally well; the
+theory does not require THIS codec uniquely. A spectral / Fourier-family
+codec (of which the classical MPEG/JPEG progressive-frequency scheme is the
+familiar real-world example) is used here for three reasons, and it matters
+that these are three DIFFERENT KINDS of reason, not restatements of each
+other:
+  1. Algorithmically minimal: the decoder is a single fixed transform
+     (here, the Fast Walsh-Hadamard Transform, playing the role JPEG's IDCT
+     or MPEG's IDCT-per-macroblock plays) -- constant code cost, satisfying
+     the "vanishing algorithm cost" requirement below.
+  2. Continuous by construction: adding one more spectral coefficient
+     perturbs the reconstructed field smoothly, never discontinuously.
+  3. Empirically motivated, NOT derived: physical reality already appears
+     to be built from wave/field superpositions (this is an appeal to what
+     we observe, not a Solomonoff-measure argument) -- a reasonable prior
+     for which codec family to explore first, but a different KIND of
+     justification than (1)/(2). Keep these threads visibly separate:
+     (1)+(2) are in-principle checkable claims about this model; (3) is
+     motivation for why this codec family over an unmotivated alternative.
 
-5. Those walks that has minimal description length dominate the measure. So the
-observer most likely find themselves within one of the most compressible (minimal wavefunction) walks.
-These are walks with smooth predictable dynamics, as such information compresses best.
 
-6. The compression codec is the wavefunction, complex-valued,
-MPEG-like, over ensembles (over time). MDL is measured over the entire WALK (path), not per frame!
+THE ACTUAL MECHANISM: CONTINUITY OF THE SWEEP, NOT ITEM-LEVEL COMPLEXITY
+---------------------------------------------------------------------------
+An earlier draft of this header described the compression-level ordering
+(which basis coefficients get included as the "clock" k advances) as
+"Kolmogorov-complexity-ordered" -- lowest-complexity data first. That
+framing is WRONG and was empirically falsified (see EMPIRICAL VALIDATION
+below); it is kept here, crossed out in spirit, only so nobody re-derives
+it and re-runs into the same dead end.
 
-7. Walk through all possible paths from zero entropy (Wootters style internal emergent time); shortest
-description length dominates the measure. Implemented here as an exact Viterbi DP over the branch
-graph -- NOTE: this finds the single maximum-a-posteriori path, i.e. an approximation to the full
-2^-L-weighted Solomonoff measure over ALL paths, not the measure itself. Treat it as that:
- - state at frame j = a coarse cell c (candidate observer location)
- - emission cost(c, j)  = -log2 P(c | k_j)          (Born/Shannon code length)
- - transition cost(c', c) = lambda * ||pos(c') - pos(c)||  (motion-vector cost -- exactly what
-   MPEG pays for a moving region: cheap if it's roughly the same place, expensive if it teleports)
-   "Presence" (--presence) now means: is the winning path's cell probability at this frame far
-   enough above the uniform baseline to represent real compression gain, not noise. Frames failing
-   that (or outside the entropy validity band) are marked not-visible.
+What actually matters is not the complexity of individual included
+coefficients, but the CONTINUITY OF THE WALK through spectral space as a
+whole: does each step from k to k+1 change the set of "on" coefficients by
+a small, bounded amount in spectral-weight terms, or by a large one? A
+walk-selection rule with this property produces, at every k, a state whose
+partial spectral content is a coherently band-limited (blurred) version of
+the final state -- exactly the progressive-JPEG picture. A walk-selection
+rule WITHOUT this property can be just as short to describe (e.g. plain
+binary counting order) yet still fails, because consecutive steps can flip
+many spectral-weight bits at once.
 
-8. Spectral - geometric mapping. The raster probability amplitudes define the observer. At each
-frame the observer's visual IS a masked contour of the REAL |psi(x,y,z,t)|^2 raster, cropped to the
-winning path's coarse-cell block (plus one block of padding for context) and contoured at real,
-data-derived levels. If the true amplitude structure there is a ring, a ring is what renders.
-NOTE (still true in v5): the geometry rendered here is a flat 2D raster. The header's aspiration
-in items 10-11 below (3+1 D, spherical symmetry, singularity at zero information) is NOT what is
-implemented yet -- this is the next piece of work.
+Concretely: order the D=2^n_qubits computational basis states by Hamming
+weight (popcount) of their index, ascending, ties broken by index
+(get_hamming_ordered_hadamard_basis). Build the wavefunction at compression
+level k by taking the first k basis states in this order, giving them
+independently drawn random phases (fixed per run, --seed), normalizing, and
+applying the FWHT to get the state in the computational/position basis
+(fwht). This is a Fourier-family truncation where "frequency" is popcount:
+adding one more state at a time changes total spectral weight by at most
+one Hamming-weight step, so the walk is maximally continuous in the
+relevant sense.
 
-9. Spectral complexity: this is Kolmogorov complexity in principle, but as the actual algorithm
-(the sin() function) cost is per class and therefore its impact is vanishingly small and constant.
-The actual dominant complexity emerges from the data -- the informational cost of frequencies and
-phases.
 
-10. Spectral -> geometry mapping (NOT implemented yet -- next focus area). Observer should sense
-living in 3+1 geometric space with spherical symmetry (observational fact, to be derived, not
-assumed). High dimensional Hilbert space can be mapped to geometric space in infinitely many ways.
-Why three, why spherical? We assume those emerge from Solomonoff induction, as the simplest minimal
-solutions with shortest description length.
+EMPIRICAL VALIDATION (ordering_control_test.py -- reproduce this before
+trusting anything else in this file)
+---------------------------------------------------------------------------
+Tested five walk-selection rules, same D=2^12 basis, same 15 independent
+phase draws (--seed) per rule, same observer=6 / hidden=6 budget:
 
-11. Zero information (or as close to zero as the minimal wavefunction allows) should therefore map
-to geometric singularity -- any geometric interpretation of "one state" should then map to a
-geometric point. Its classical statistical "bitstring" equivalence is all-zero bitstring. All
-possible ways to map, slice, express or interpret the bitstring as "positions" yield the same
-geometric object -- a point. Similarly, when starting out from zero-mode, one-mode etc. wavefunction
-ensembles, their geometric projections should collapse to a geometric point (geometry with no
-micro structures).
+  ordering          mean Spearman(k, S(rho_A))    emerges-and-fades
+  hamming (popcount asc)      1.000 (std 0.000)        15/15
+  reverse_hamming (desc)      1.000 (std 0.000)        15/15
+  natural (binary counting)   1.000 (std 0.000)          4/15
+  reverse_natural              1.000 (std 0.000)          0/15
+  random (shuffled)          0.79  (std 0.19, noisy)      2/15
 
-Expected outcome:
-- universe starts minimally simple, just black image, the probability amplitudes should be
-practically zero everywhere, no emergent micro structures, let alone observer.
-- as entropy increases probability amplitudes rise gradually and the heat map begins to glow
-minimally trivial structures that get more complex with time, soon observer emerges and later
-vanishes as entropy goes up and emergent structures vanish to make room for structureless "noise"
-- observer does not jump chaotically, it emerges, moves smoothly as the probability amplitudes peak,
-and vanish. For most of the time the universe contains no observer.
+Two findings, both load-bearing:
+  (a) Entropy-vs-k monotonicity is a WEAK test -- any deterministic,
+      non-random walk gets a clean monotone trend, including binary
+      counting. It does not by itself distinguish good walk rules from bad
+      ones. Random walks fail this too (noisy, non-monotone), confirming
+      SOME structure is necessary, just not confirming which.
+  (b) Reliable observer emergence (a legible, presence-thresholded,
+      persistent-then-fading record) is the STRONG test, and it tracks
+      spectral continuity specifically: both popcount directions succeed
+      (15/15, direction-symmetric -- consistent with Solomonoff induction
+      caring about the SHORTNESS of the ordering rule, which popcount-asc
+      and popcount-desc share, not its direction), while binary counting
+      -- an equally short rule that is NOT spectrally continuous -- mostly
+      or entirely fails (4/15, 0/15 reversed). This is the evidence that
+      motivates the "continuity of the sweep" mechanism above over the
+      earlier "low complexity first" framing.
 
-ON PARAMETER COUNT (design direction, not yet fully realized): the goal is a ONE-parameter theory
--- --observer defines the observer, and the rest (--resolution, --n, --min-record-bits, --s-max)
-should follow rather than be tunable. --presence and --jump-cost are still hand-set thresholds
-(honestly flagged in group (1)/(3) below) and remain candidates for being derived away in a later
-version. Everything in group (4) is pure rendering/optimization and carries no theoretical content.
+Open follow-up, not yet run: test a walk rule that is spectrally graded but
+NOT literally popcount (e.g. shuffled within each popcount class, or a
+different monotone function of popcount) to determine whether popcount
+specifically is required or any comparably continuous grading suffices.
+
+
+THIS POC DEMONSTRATES
+------------------------------------------------------------------------------
+1. The universe is static and timeless, with information content of n bits
+   (--n, or found by search -- see IMPLEMENTATION SUMMARY).
+
+2. The n bits encode both code (the FWHT decoder -- fixed, vanishing cost)
+   and data (which spectral coefficients are on, and their phases) that
+   together describe every possible representation of the observer.
+
+3. The wavefunction decomposes into a near-infinite family of ensembles
+   (one per compression level k) that trend toward higher entropy as k
+   grows -- a TREND, not a rule forced frame-to-frame (see ordering
+   discussion above; verified empirically, not assumed).
+
+4. Time emerges as a walk through these ensembles, restricted to walks that
+   contain the specified observer (a universe without the observer cannot
+   be observed by it).
+
+5. Walks of minimal description length dominate the measure: the observer
+   typically finds itself on one of the most compressible walks, i.e. the
+   smoothest, most spectrally-continuous ones (see THE ACTUAL MECHANISM).
+   This has to be demonstrated by the wavefunction's own behavior, not
+   imposed on the path-selection algorithm -- see item 7's note on the
+   removed --jump-cost parameter.
+
+6. The codec is the wavefunction itself, complex-valued, spectral/MPEG-like
+   over ensembles (over emergent time). MDL is scored over the WHOLE walk,
+   not per frame: total path cost is the sum of each frame's own code
+   length, and that sum is minimized exactly when every frame independently
+   picks its own highest-probability cell -- see item 7.
+
+7. Implemented as per-frame maximum-likelihood cell selection
+   (solve_typical_path): at frame j, the winning cell is
+   argmax_c P(c | k_j), i.e. the cell minimizing that frame's own
+   Born/Shannon code length -log2 P(c | k_j). The reported "total path
+   description length" sums these per-frame code lengths over the whole
+   walk -- consistent with item 6, since summing independent per-frame
+   minima IS the minimum-total-cost walk when there is no cross-frame term.
+   "Presence" (--presence): the winning cell's probability must clear the
+   uniform baseline by this factor to count as a real record rather than
+   noise; frames failing that (or outside the entropy validity band
+   [--min-record-bits, --s-max)) are marked not-visible.
+   REMOVED (v8): an earlier version added an explicit MPEG-style
+   motion-vector cost (lambda * ||pos(c')-pos(c)||, a --jump-cost CLI
+   parameter, framed as a Viterbi DP over a branch graph) to penalize
+   spatial jumps between frames. This was a hand-coded continuity PRIOR
+   imposed on the algorithm -- exactly the kind of predefined rule item 5's
+   own argument says should NOT be needed: smoothness is supposed to emerge
+   because smooth walks compress best and dominate the measure, not because
+   the selection algorithm is penalized for jumping. It was also already
+   inert at every setting actually used: default --jump-cost=0.0 makes the
+   transition term vanish identically, so the DP was provably reducing to
+   this same per-frame argmax the whole time -- removing it changes no
+   prior numerical result. Any discontinuity that now shows up in the
+   winning path across frames is real information about the physics (the
+   probability landscape moved abruptly, or comparably-likely modes are
+   competing), not something smoothed away by the algorithm -- treat path
+   jumps as a diagnostic to look at, not a bug to suppress.
+
+8. Spectral-geometric mapping (CURRENT, PLACEHOLDER): the observer's visual
+   at each frame is a masked contour of the REAL |psi(x,y)|^2 raster,
+   cropped to the winning path's cell block and contoured at real,
+   data-derived levels -- not a stylized stand-in. BUT the embedding space
+   itself (a flat 2D Morton raster) is a placeholder, not a derived result
+   -- see STATUS below. This item demonstrates "does a legible, stable
+   structure emerge, persist, and fade," which does not require the
+   embedding to be correct, only honest about what it is.
+
+9. Spectral complexity: the DECODER (FWHT) cost is constant and vanishing
+   per frame; the complexity that actually varies with k is the DATA cost
+   -- how many coefficient phases must be specified, roughly linear in k.
+   "Kolmogorov complexity of the ordering" was a misleading way to describe
+   this (see THE ACTUAL MECHANISM); the fix is to talk about description
+   length of the WALK-SELECTION RULE and spectral continuity, not about a
+   complexity ranking of individual basis coefficients.
+
+10. Spectral -> geometry mapping (NOT implemented -- next focus area, see
+    STATUS). Why 3+1 D, why spherical symmetry, is meant to be derived from
+    Solomonoff induction over possible Hilbert-space -> geometric-space
+    embeddings (shortest description length again), not assumed.
+
+11. Zero information should map to a geometric singularity/point (also not
+    yet implemented as a literal claim -- current 2D raster only shows this
+    qualitatively, as "near-zero contrast everywhere").
+
+Expected qualitative outcome (already reproduced by the sim): near-zero k
+-> flat/black raster, no structure; as k grows, structure gradually
+brightens and localizes; a legible, smoothly-moving observer record
+emerges, persists, then dissolves back into thermalized noise as k
+approaches D. The observer does not teleport; for most of the sweep no
+observer is visible at all.
+
+
+IMPLEMENTATION SUMMARY (enough to rebuild from scratch)
+------------------------------------------------------------------------------
+- Basis: n_qubits-qubit computational basis, D=2^n_qubits states.
+- Walk order: get_hamming_ordered_hadamard_basis -- sort state indices by
+  (popcount, index).
+- Per compression level k: zero-init a D-vector, set the first k
+  (walk-ordered) entries to independently-drawn uniform-random phases
+  (--seed), L2-normalize, apply fwht (orthonormal Fast Walsh-Hadamard
+  Transform) to get the computational/position-basis state psi_comp.
+- Spatial raster: reshape/marginalize |psi_comp|^2 over spatial_qubits
+  (Morton/Z-order interleaved x,y bits, morton_maps) vs. hidden_qubits
+  (environment, summed out) -- probs_to_grid.
+- Observer register: n_a = --observer qubits, treated as the leading
+  spatial_qubits when --resolution is left at its default (2^(observer/2)),
+  so diag(partial_trace(psi_comp, n_a, n_b)) is EXACTLY the spatial
+  marginal (verified numerically) -- the observer's reduced density matrix
+  IS the position distribution in this default configuration.
+  von_neumann_entropy(rho_a) = S(rho_A), the record-formation entropy.
+- Path selection: solve_typical_path -- per-frame argmax, no DP (see item 7).
+- Universe size n: search upward in hidden/environment qubits
+  (find_minimal_n / search_minimal_n) for the smallest n at which the
+  observer definition (record band + presence) is satisfiable AND later
+  fades again -- n is an OUTPUT of the observer definition, not a free
+  input, per the one-parameter goal below.
+- --seed-sweep N: statistical validation across N independent phase draws,
+  reporting how often the emerge-then-fade arc appears (this is the
+  'typical' claim, tested rather than asserted).
+
+
+STATUS / open items
+------------------------------------------------------------------------------
+- ONE-PARAMETER GOAL (not yet fully realized): --observer should be the
+  only theoretically-meaningful input; --resolution and --n already follow
+  from it by default. --min-record-bits and --s-max also default to
+  functions of --observer (5%/98% of its bit capacity) but are still
+  declared in the SAME CLI group as --observer and --presence (group (1),
+  "this IS the theory's one input") rather than in group (2) ("emergent"),
+  and the 5%/98% constants themselves are unexplained -- this grouping vs.
+  STATUS-text mismatch is a known, still-open inconsistency, not yet fixed.
+  --presence remains a genuinely independent hand-set threshold. 
+- COARSE-CELL DEGENERACY: at default settings, block_px works out to 1 --
+  "coarse cells" are currently single pixels, not blocks. Either this is
+  fine (decide explicitly) or --resolution needs to be decoupled from
+  --observer to get real spatial coarse-graining.
+- GEOMETRY MAPPING (items 10-11): not implemented. Candidate first step
+  under discussion: test whether the raster's emergent structure is
+  isotropic (no axis privileged by the Morton encoding) before attempting
+  an MDL-optimal embedding-dimension search.
+- ORDERING FOLLOW-UP: popcount-vs-not-popcount spectrally-graded orderings,
+  to isolate whether popcount specifically is required (see EMPIRICAL
+  VALIDATION open follow-up).
+- EMERGENCE-CURVE HONESTY: the plotted "emergence" score is
+  sin(pi*u)*localization, where u sweeps 0->1 across the entropy record
+  band. Given entropy trends upward with k for almost any deterministic
+  walk (see EMPIRICAL VALIDATION), the sin(pi*u) factor's bump SHAPE is
+  close to guaranteed by the band definition alone and is not itself
+  evidence of anything; only the localization factor (whether the winning
+  cell's probability actually beats uniform) carries real information.
+  State this next to the plot, not just here.
+- SEQUENCY WORDING: ties within a popcount tier are broken by raw index,
+  not Gray-code bit-reversal, so this is coarse frequency-band ordering,
+  not true Walsh sequency order -- scope "spectral order" language down to
+  that.
 """
 
 import argparse
@@ -98,7 +299,6 @@ from scipy.ndimage import zoom as ndimage_zoom
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 from matplotlib.animation import FuncAnimation, PillowWriter
 
 CONTOUR_UPSAMPLE = 6
@@ -205,51 +405,77 @@ def coarse_cell_geometry(observer_bits: int, side: int):
 
 
 # ---------------------------------------------------------------------------
-# Shortest-description-length path search (Viterbi DP over the branch graph)
+# Shortest-description-length path search (per-frame argmax; see item 7 --
+# no DP/branch-graph structure remains as of v8, see STATUS)
 # ---------------------------------------------------------------------------
 
-def solve_typical_path(cell_probs_by_frame, cell_centers, max_candidates, jump_cost_weight):
+def solve_typical_path(cell_probs_by_frame):
+    """
+    Per-frame maximum-likelihood cell selection -- the shortest-description-
+    length "path" IS simply the highest-probability cell at every frame,
+    independently. There is no cross-frame term (no motion-vector / jump
+    cost): the theory's claim is that smooth, predictable trajectories
+    emerge because they compress best and dominate the measure, which has
+    to be demonstrated by the physics (the wavefunction's own spectral
+    continuity, see module docstring) producing a smoothly-shifting
+    probability landscape -- NOT by an auxiliary hand-coded penalty on
+    jumps in the selection algorithm itself. (An earlier version had a
+    --jump-cost parameter doing exactly that; removed -- see STATUS.
+    Mathematically it was already inert at its default of 0.0: with no
+    jump-cost term, the Viterbi DP over the branch graph collapses exactly
+    to this independent per-frame argmax, since the transition cost
+    contributes nothing and the accumulated path cost is just a running sum
+    of per-frame code lengths.)
+
+    Any real discontinuity that shows up in the resulting path -- the
+    winning cell jumping between frames -- is now genuine information about
+    the physics (the probability landscape itself moved abruptly, or
+    several comparably-likely modes are competing) rather than something
+    smoothed away by the algorithm.
+    """
     n_frames = len(cell_probs_by_frame)
     eps = 1e-300
 
-    candidates_per_frame = [
-        np.argsort(probs)[::-1][:max_candidates] for probs in cell_probs_by_frame
-    ]
-
-    dp = {int(c): -math.log2(max(cell_probs_by_frame[0][c], eps)) for c in candidates_per_frame[0]}
-    backptr = [None] * n_frames
-
-    for j in range(1, n_frames):
-        probs_j = cell_probs_by_frame[j]
-        prev_items = list(dp.items())
-        dp_next = {}
-        bp_j = {}
-        for c in candidates_per_frame[j]:
-            c = int(c)
-            emit = -math.log2(max(probs_j[c], eps))
-            cx, cy = cell_centers[c]
-            best_cost, best_prev = math.inf, None
-            for pc, pcost in prev_items:
-                pcx, pcy = cell_centers[pc]
-                dist = math.hypot(cx - pcx, cy - pcy)
-                total = pcost + jump_cost_weight * dist + emit
-                if total < best_cost:
-                    best_cost, best_prev = total, pc
-            dp_next[c] = best_cost
-            bp_j[c] = best_prev
-        dp = dp_next
-        backptr[j] = bp_j
-
-    end_c = min(dp, key=dp.get)
-    total_cost = dp[end_c]
-
-    path = [None] * n_frames
-    path[-1] = end_c
-    for j in range(n_frames - 1, 0, -1):
-        path[j - 1] = backptr[j][path[j]]
-
+    path = [int(np.argmax(probs)) for probs in cell_probs_by_frame]
     path_probs = [float(cell_probs_by_frame[j][path[j]]) for j in range(n_frames)]
+    total_cost = float(sum(-math.log2(max(p, eps)) for p in path_probs))
     return path, path_probs, total_cost
+
+
+def path_jump_distances(path, cell_centers):
+    """
+    Pure diagnostic, computed AFTER path selection and fed into nothing --
+    it cannot bias the result, only report on it. For each frame after the
+    first, the Euclidean distance (in raster pixels) between this frame's
+    winning cell and the previous frame's winning cell. First frame gets
+    None (no previous frame to compare to). This is the quantitative
+    version of "the observer does not teleport": if that claim is true, the
+    distances restricted to the visible window should be small compared to
+    the distance between two independently-random cells (see
+    random_pair_expected_distance) -- not merely look small in a GIF.
+    """
+    dists = [None]
+    for j in range(1, len(path)):
+        cx, cy = cell_centers[path[j]]
+        pcx, pcy = cell_centers[path[j - 1]]
+        dists.append(math.hypot(cx - pcx, cy - pcy))
+    return dists
+
+
+def random_pair_expected_distance(cell_centers, n_samples=2000, rng=None):
+    """Baseline for path_jump_distances: mean distance between two cells
+    chosen independently at random, estimated by sampling (exact enumeration
+    is O(n_cells^2), too slow once --observer is large). Used so a reported
+    jump distance can be judged against "no better than chance" rather than
+    presented as small in isolation."""
+    rng = rng or np.random.default_rng(0)
+    keys = np.array(list(cell_centers.keys()))
+    a = rng.choice(keys, size=n_samples)
+    b = rng.choice(keys, size=n_samples)
+    dists = [math.hypot(cell_centers[int(x)][0] - cell_centers[int(y)][0],
+                        cell_centers[int(x)][1] - cell_centers[int(y)][1])
+             for x, y in zip(a, b)]
+    return float(np.mean(dists))
 
 
 # ---------------------------------------------------------------------------
@@ -282,14 +508,8 @@ def parse_args():
     emergent.add_argument("--n", type=int, default=None,
         help="Total wavefunction qubits. Default: found by SEARCH.")
 
-    prior = p.add_argument_group("(3) optional continuity prior -- off by default")
-    prior.add_argument("--jump-cost", type=float, default=0.0,
-        help="Bits-per-pixel weight on spatial continuity across frames. Default: 0.0.")
-
-    perf = p.add_argument_group("(4) performance / validation only -- no physical meaning")
-    perf.add_argument("--max-candidates", type=int, default=48,
-        help="Beam width (candidate cells/frame) for the exact DP. Default: 48.")
-    perf.add_argument("--output", type=str, default="observer_typical_path_v5")
+    perf = p.add_argument_group("(3) performance / validation only -- no physical meaning")
+    perf.add_argument("--output", type=str, default="observer_typical_path_v8")
     perf.add_argument("--seed", type=int, default=42,
         help="Which realization of the random static phases to draw (single-run mode), "
              "or the seed used to GENERATE the seed list for --seed-sweep.")
@@ -329,10 +549,6 @@ def resolve_defaults(args):
 
     if args.presence <= 0:
         sys.exit(f"--presence must be > 0. Got {args.presence}.")
-    if args.jump_cost < 0:
-        sys.exit(f"--jump-cost must be >= 0. Got {args.jump_cost}.")
-    if args.max_candidates < 1:
-        sys.exit(f"--max-candidates must be >= 1. Got {args.max_candidates}.")
     if args.seed_sweep < 0:
         sys.exit(f"--seed-sweep must be >= 0. Got {args.seed_sweep}.")
 
@@ -396,7 +612,8 @@ def simulate_universe(n_qubits, n_per_axis, spatial_qubits, s_max, args, num_fra
 
     cell_probs_by_frame = [f["cell_probs"] for f in frames]
     path, path_probs, total_cost = solve_typical_path(
-        cell_probs_by_frame, cell_centers, args.max_candidates, args.jump_cost)
+        cell_probs_by_frame)
+    jump_dists = path_jump_distances(path, cell_centers)
 
     n_cells = 2 ** n_a
     uniform_p = 1.0 / n_cells
@@ -404,11 +621,11 @@ def simulate_universe(n_qubits, n_per_axis, spatial_qubits, s_max, args, num_fra
     uniform_bits = math.log2(n_cells)
 
     results = []
-    for f, c, p in zip(frames, path, path_probs):
+    for f, c, p, jd in zip(frames, path, path_probs, jump_dists):
         entropy_ok = args.min_record_bits <= f["s_a"] < s_max
         gain = uniform_bits - (-math.log2(max(p, 1e-300)))
         visible = entropy_ok and (p >= presence_floor)
-        results.append({**f, "cell": c, "p": p, "gain": gain, "visible": visible})
+        results.append({**f, "cell": c, "p": p, "gain": gain, "visible": visible, "jump_dist": jd})
 
     ratio_arr = np.array([r["p"] / uniform_p for r in results])
     max_ratio = float(ratio_arr.max())
@@ -492,7 +709,7 @@ def run_seed_sweep(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_x
     seeds = [int(x) for x in gen.integers(0, 2 ** 31 - 1, size=n_seeds)]
 
     print(f"seed sweep: {n_seeds} independent phase realizations, observer={args.observer} qubits, "
-          f"scan_frames={args.scan_frames}, presence>={args.presence}x, jump_cost={args.jump_cost}")
+          f"scan_frames={args.scan_frames}, presence>={args.presence}x")
     print(f"(seed list generated from --seed {args.seed}; base run parameters otherwise unchanged)\n")
 
     records = []
@@ -510,6 +727,9 @@ def run_seed_sweep(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_x
                 peak = max(results, key=lambda r: r["emergence"])
                 rec["peak_k_frac"] = peak["k"] / results[-1]["k"]
                 rec["peak_s"] = peak["s_a"]
+                vis_jumps = [r["jump_dist"] for r in vis if r["jump_dist"] is not None]
+                if vis_jumps:
+                    rec["mean_jump_visible"] = float(np.mean(vis_jumps))
         records.append(rec)
         print(f"  [{i + 1:3d}/{n_seeds}] seed={s:11d}  n={str(n_found):>4}  status={status}")
     args.seed = saved_seed
@@ -530,6 +750,13 @@ def run_seed_sweep(args, n_per_axis, spatial_qubits, s_max, max_hidden, idx_to_x
         if len(pf):
             print(f"  emergence peak position (frac. of sweep, 0=start 1=end): "
                   f"mean={pf.mean():.2f}  std={pf.std():.2f}")
+        mj = np.array([r["mean_jump_visible"] for r in succ if "mean_jump_visible" in r])
+        if len(mj):
+            random_baseline = random_pair_expected_distance(cell_centers)
+            print(f"  mean path jump distance in visible window: mean={mj.mean():.2f}px "
+                  f"std={mj.std():.2f}px  (vs. {random_baseline:.2f}px expected under "
+                  f"independent random cell choice) -- this is the quantitative version of "
+                  f"'the observer does not teleport'")
 
     other_status = Counter(r["status"] for r in records if r["status"] != "emerges and fades")
     for st, cnt in other_status.items():
@@ -590,10 +817,6 @@ def main():
                       f"dense implementation.")
         print(f"n (forced by --n) = {n_qubits}  (D={2**n_qubits:,})")
 
-    print(f"jump-cost (continuity prior) = {args.jump_cost}"
-          + ("  [pure Solomonoff: no continuity assumption]" if args.jump_cost == 0 else "")
-          + f"   max-candidates = {args.max_candidates}")
-
     results, total_cost, uniform_spatial = simulate_universe(
         n_qubits, n_per_axis, spatial_qubits, s_max, args, args.frames,
         idx_to_xy, cell_centers, build_smooth=True)
@@ -613,6 +836,18 @@ def main():
     peak_i = int(np.argmax([r["emergence"] for r in results]))
     print(f"emergence probability peaks at k={results[peak_i]['k']} "
           f"(S={results[peak_i]['s_a']:.2f} bits, emergence={results[peak_i]['emergence']:.2f})")
+
+    vis_jumps = [r["jump_dist"] for r in results if r["visible"] and r["jump_dist"] is not None]
+    all_jumps = [r["jump_dist"] for r in results if r["jump_dist"] is not None]
+    random_baseline = random_pair_expected_distance(cell_centers)
+    if vis_jumps:
+        print(f"path jump distance in visible window: mean={np.mean(vis_jumps):.2f}px "
+              f"max={np.max(vis_jumps):.2f}px  (vs. {random_baseline:.2f}px expected under "
+              f"independent random cell choice, side={side}px)")
+    print(f"path jump distance over WHOLE sweep: mean={np.mean(all_jumps):.2f}px "
+          f"max={np.max(all_jumps):.2f}px  (vs. {random_baseline:.2f}px random baseline) -- "
+          f"expect this to be much larger than the visible-window figure, since most of the "
+          f"sweep has no real record and the argmax cell is picking noise")
 
     # --- Render ---
     fig = plt.figure(figsize=(14, 7.5))

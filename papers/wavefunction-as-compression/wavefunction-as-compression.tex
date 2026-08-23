@@ -188,14 +188,26 @@ informational cost required to uniquely specify the amplitudes, frequencies,
 and phases of the spectral modes composing $\Psi$:
 \[
 C_s(\Psi) = C_{\mathrm{base}} + \sum_{i=1}^{N}
-\left[ C(\phi_i) + C(A_i) + \frac{\omega_i}{\Delta\omega} \right]
+\left[ C(A_i) + (1+\kappa)\,\frac{\omega_i}{\Delta\omega} \right]
 \]
 where $C_{\mathrm{base}}$ is the $\mathcal{O}(1)$ cost of the underlying
-trigonometric subroutines, $C(\phi_i)$ is the fixed-width bit cost of
-encoding the phase $\phi_i \in [0, 2\pi)$, $C(A_i)$ is the bit depth
-required to encode amplitude $A_i$, and $\omega_i / \Delta\omega$ is the
-dominant term representing the linear resource cost of tracking mode
-frequency $\omega_i$ relative to the minimum resolution $\Delta\omega$.
+trigonometric subroutines, $C(A_i)$ is the bit depth required to encode
+amplitude $A_i$, and $\omega_i/\Delta\omega$ is the linear resource cost of
+resolving mode $i$ at frequency $\omega_i$ relative to the system's minimum
+frequency resolution $\Delta\omega$.
+
+Frequency and phase are Nyquist-bandwidth costs: representing a mode of
+frequency $\omega_i$ requires $O(\omega_i/\Delta\omega)$ samples to avoid
+aliasing, and pinning down its phase to the precision the reference basis
+can actually resolve costs the same order. Because $\Delta\omega$ is already
+set by the system's coherence extent ($\Delta\omega \sim 2\pi/L$) via the
+Fourier uncertainty relation, the phase cost doesn't introduce a new length
+scale — it rescales the coefficient on the term already present. $\kappa$
+is an $\mathcal{O}(1)$ constant carrying the relative weight of
+phase-resolution against frequency-counting cost; there is no a priori
+reason to expect $\kappa=1$, and it should be treated as an open parameter
+of the model, fixed either by an independent argument or by matching to a
+known physical constant (see below).
 \end{definition}
 
 Three properties of this measure are essential.
@@ -207,19 +219,26 @@ computable from the spectral decomposition of any state.
 across neighbouring states. Small perturbations in frequency or amplitude
 produce small changes in complexity.
 
-\textbf{Linear frequency scaling.} The dominant cost term $\omega_i /
-\Delta\omega$ scales linearly with frequency. This mirrors the physical
-relation $E = \hbar\omega$: energy scales linearly with frequency.
-Under Solomonoff suppression $P \propto 2^{-C_s}$, this linear cost
-produces exponential suppression of high-frequency modes:
+\textbf{Linear frequency- and phase-scaling.} The dominant cost term
+$(1+\kappa)\,\omega_i/\Delta\omega$ scales linearly with frequency. This
+mirrors the physical relation $E=\hbar\omega$: energy scales linearly with
+frequency. Under Solomonoff suppression $P \propto 2^{-C_s}$, this linear
+cost produces exponential suppression of high-frequency modes:
+
 \[
 P \propto 2^{-\omega/\Delta\omega} = e^{-(\ln 2)\,\omega/\Delta\omega},
 \]
+
 which is a Boltzmann distribution with $\beta = \ln 2 / \Delta\omega$.
-The identification $\hbar = \Delta\omega / \ln 2$ connects the minimum
-frequency resolution of the spectral complexity measure to Planck's
-constant. This is not a derivation but a precise identification that
-warrants further investigation.
+
+The identification
+
+\[
+\hbar = \frac{\Delta\omega}{(1+\kappa)\,\ln 2}
+\]
+
+connects the minimum frequency resolution of the spectral complexity
+measure to Planck's constant. 
 
 \subsection{Resolution of the Boltzmann Brain Problem}
 
