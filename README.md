@@ -1,5 +1,11 @@
 # $G \text{ - } \psi \text{ - } D$
 
+## Summary
+
+One fundamental existential axiom ("the observer exists"), four hard-to-reject experimental assumptions,
+and then strict mathematical derivation backed by simulation.
+
+
 ## Master Equations
 
 The central object is a Boltzmann-like probability measure over histories $\gamma$ compatible with a structure $O$:
