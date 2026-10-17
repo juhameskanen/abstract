@@ -2,7 +2,7 @@
 
 ## Summary
 
-One fundamental existential axiom ("the observer exists"), four hard-to-reject experimental assumptions, and then strict mathematical derivation backed by simulations.
+One fundamental existential axiom ("the observer exists"), four hard-to-reject experimental assumptions, and then strict mathematical derivation backed by simulations [The Four Axioms](https://github.com/juhameskanen/abstract/wiki/The-Four-Axioms).
 
 This is a theory of physics, not philosophy. However, defining our first principles inevitably touches upon foundational ontology. The philosophical bedrock—answering what fundamentally exists—is outlined in the [Ontology](https://github.com/juhameskanen/abstract/wiki/Ontology)
 
