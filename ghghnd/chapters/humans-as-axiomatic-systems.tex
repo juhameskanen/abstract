@@ -25,27 +25,33 @@ Let us make a third assumption:
 
 \textbf{Axiom 3:} The Church--Turing Thesis holds.
 
-
-It states that all physical processes can, in principle, be simulated by a device known as a Turing machine. Modern computers are essentially Turing machines. The Church--Turing Thesis has never been formally proven, but if it were false, we would have good reason to worry about keeping our money in bank accounts.
+It states that all physical processes can, in principle, be simulated by a device known as a Turing machine. Modern computers are essentially Turing machines.
+The Church--Turing Thesis has never been formally proven, but if it were false, we would have good reason to worry about keeping our money in bank accounts.
 
 From these three assumptions, it follows that humans can be simulated by a Turing machine---or, in its modern incarnation, a computer. 
 
 
 \section{DNA Simulation Thought Experiments}
 
-Suppose we digitize a human genome and run it on a computer simulating a universe governed by the same laws of physics as our own. As the simulation executes, the DNA evolves into a conscious, pain-sensitive observer. The simulated human experiences an expanding universe where time flows from past to future, and tooth pain is real.
+Suppose we digitize a human genome, say Alice, and run it on a computer simulating a universe governed by the same laws of physics as our own.
+As the simulation executes, the DNA evolves into a conscious, pain-sensitive observer.
+The simulated human experiences an expanding universe where time flows from past to future, and tooth pain is real.
 
 
 \subsection*{Optimizing Code}
 
-All software programs consist of two kinds of information: code ($c$) and data ($d$). In a DNA simulation, the code would describe the laws of physics, such as quantum mechanics and gravity. The data would include the digitized DNA and a sufficiently large section of the surrounding universe. Let us assume the simulation software consists of a roughly equal amount of code and data.
+All software programs consist of two kinds of information: code ($c$) and data ($d$).
+In a DNA simulation, the code would describe the laws of physics, such as quantum mechanics and gravity.
+The data would include the digitized DNA and a sufficiently large section of the surrounding universe.
+Let us assume the simulation software consists of a roughly equal amount of code and data.
 
 \[
 1.0 = \frac{\operatorname{sizeof}(\text{cccccccccccccccccccccccc})}
           {\operatorname{sizeof}(\text{dddddddddddddddddddddddd})}
 \]
 
-A well-known technique for optimizing slow, CPU-intensive code is to use lookup tables, which replace computation with precomputed data. For example, one can replace all \texttt{sqrt()} computations:
+A well-known technique for optimizing slow, CPU-intensive code is to use lookup tables, which replace computation with precomputed data.
+For example, one can replace all \texttt{sqrt()} computations:
 
 \begin{verbatim}
 result = sqrt(arg);
@@ -57,7 +63,9 @@ with precomputed values:
 result = sqrt_lookuptable[arg];
 \end{verbatim}
 
-Empirically, software programs yield identical results regardless of how the result was computed. $2+2=4$, and it does not matter if we replace all $2+2$ equations in our code with a precomputed value of $4$. This optimization therefore cannot affect the simulation's output, nor the observer's experience of time or pain. Delaying or accelerating computation affects only the external runtime, not the internal state transitions of the simulated system.
+Empirically, software programs yield identical results regardless of how the result was computed. $2+2=4$, and it does not matter if we replace all $2+2$ equations in our code with a precomputed value of $4$.
+This optimization therefore cannot affect the simulation's output, nor the observer's experience of time or pain.
+Delaying or accelerating computation affects only the external runtime, not the internal state transitions of the simulated system.
 
 However, this optimization has the effect of reducing the amount of code and increasing the amount of data in our DNA simulation:
 
@@ -66,7 +74,10 @@ However, this optimization has the effect of reducing the amount of code and inc
           {\operatorname{sizeof}(\text{ddddddddddddddddddddddddddd})}
 \]
 
-Now, imagine we gradually optimize the DNA simulation by replacing algorithmic components with lookup tables. As a consequence, the number of CPU cycles required to run the simulation decreases. Suppose we take this optimization to the extreme: all computation is replaced by a static dataset encoding the entire execution trace.
+Now, imagine we gradually optimize the DNA simulation by replacing algorithmic components with lookup tables.
+As a consequence, the number of CPU cycles required to run the simulation decreases. This results slightly different implementation
+of exactly the same simulation - Alice. 
+Suppose we take this optimization to the extreme: all computation is replaced by a static dataset encoding the entire execution trace.
 
 \[
 0.0 = r = \frac{\operatorname{sizeof}(\text{})}
@@ -75,25 +86,35 @@ Now, imagine we gradually optimize the DNA simulation by replacing algorithmic c
 
 As a result, we don't have anything to run on a computer. It is just a massive hard drive of data.
 
-Does the simulated human still experience time and pain? 
+Does simulated Alice still experience time and pain? 
 
-The answer, within the axiomatic model, is yes. Affirming otherwise would certainly imply the existence of a new physical constant in our books of physics: a minimum code-data ratio required for consciousness to emerge.
+The answer, within the axiomatic model, is yes. Affirming otherwise would certainly imply the existence of a new physical constant in our books of physics:
+a minimum code-data ratio required for consciousness to emerge.
 
-As such a constant would contradict the initial axioms, the temporal structure and pain, therefore, must emerge from the internal relationships among states, not from the external runtime.
-From the internal perspective of the simulated observer, time still flows from past to future and pain is real.
+As such a constant would contradict the initial axioms, the temporal structure and pain, therefore, must emerge from the internal relationships among states,
+not from the external runtime.
+From the internal perspective of the simulated observer Alice, time still flows from past to future and pain is real.
 
-In conclusion, a static dataset can fully specify a universe containing conscious observers with subjective time. Consequently, time and pain must be properties of simulated observers, not fundamental properties of the universe.
+In conclusion, a static dataset can fully specify a universe containing conscious observers with subjective time.
+Consequently, time and pain must be properties of simulated observers, not fundamental properties of the universe.
+
+Another obvious conclusion we can draw from this thought experiment is that Alice is not a single sequence of ones and zeros (a bitstring).
+Instead, an enormous number of different execution traces—representing different implementations of the same simulation procedure—describe the same Alice.
+Alice is an equivalence class rather than a specific bit pattern.
 
 
 \subsection*{Multi-threaded Simulation}
 
-When a single DNA simulation---let's call her Alice---runs on a computer, the execution trace is easy to study. Every CPU instruction drives the computer (and Alice) to a new state. From Alice's perspective, time flows forward, and the effect of each CPU cycle can be mapped to a simulated particle in her world.
+When a single DNA simulation---let's call her Alice---runs on a computer, the execution trace is easy to study.
+Every CPU instruction drives the computer (and Alice) to a new state.
+From Alice's perspective, time flows forward, and the effect of each CPU cycle can be mapped to a simulated particle in her world.
 
 \[
 | \text{Alice}|\text{Alice}|\text{Alice}|\text{Alice}|\dots|
 \]
 
-However, consider a system running multiple DNA simulations concurrently---say, Alice and Bob---where thread scheduling is governed by quantum randomness. The resulting execution trace interleaves their simulated lives in segments of unpredictable length.
+However, consider a system running multiple DNA simulations concurrently---say, Alice and Bob---where thread scheduling is governed by quantum randomness.
+The resulting execution trace interleaves their simulated lives in segments of unpredictable length.
 
 \[
 |\text{AliceAliceAli}|\text{BobBobB}|\text{AliceA}|\text{BobBo}|\text{Alic}|\text{BobB}\dots|
@@ -101,7 +122,11 @@ However, consider a system running multiple DNA simulations concurrently---say, 
 
 Since both single- and multi-threaded computers are computationally equivalent, each observer must experience a coherent, continuous timeline.
 
-Now, let's gradually shorten the number of CPU cycles until each thread is limited to running a single CPU cycle before switching. Let's also add more DNA simulations, like Robert, John, and Jill. As the number of concurrent simulations increases, the execution trace becomes increasingly fragmented. Additionally, modern multi-threaded systems often include many extra threads for operating system tasks, such as listening for network requests. This injects fragments of irrelevant data into the execution trace. In the limit of infinitely many perfectly interleaved simulations, the execution trace approaches pure white noise.
+Now, let's gradually shorten the number of CPU cycles until each thread is limited to running a single CPU cycle before switching.
+Let's also add more DNA simulations, like Robert, John, and Jill. As the number of concurrent simulations increases, the execution trace becomes increasingly fragmented.
+Additionally, modern multi-threaded systems often include many extra threads for operating system tasks, such as listening for network requests.
+This injects fragments of irrelevant data into the execution trace.
+In the limit of infinitely many perfectly interleaved simulations, the execution trace approaches pure white noise.
 
 \[
 |\text{A}| \text{B}| \text{OS}| \text{R}| \text{J}| \text{OS}| \text{l}| \text{Ji}| \text{i}| \text{ce}| \text{b}| \text{ob}| \text{n}| \text{l}| \dots|
@@ -109,19 +134,25 @@ Now, let's gradually shorten the number of CPU cycles until each thread is limit
 
 Is Alice still conscious?
 
-The answer, again within the axiomatic model, is yes. Empirically, multi-threaded computers function reliably regardless of how few CPU cycles are allocated per thread switch or how narrow the CPU’s internal registers are. From each observer's internal perspective, time still flows from past to future.
+The answer, again within the axiomatic model, is yes.
+Empirically, multi-threaded computers function reliably regardless of how few CPU cycles are allocated per thread switch or how narrow the CPU’s internal registers are.
+From each observer's internal perspective, time still flows from past to future.
 
 This raises an obvious question: how does Alice know which sequences belong to her and which do not, in order to remain conscious?
 
-Conclusion: if there is any way to interpret static noisy data as a ``conscious observer,'' then that is exactly what happens: a conscious observer emerges. If the initial assumptions hold, consciousness, pain, and subjective time can emerge from static data that resembles pure static noise.
+Conclusion: if there is any way to interpret static noisy data as a ``conscious observer,'' then that is exactly what happens:
+a conscious observer emerges.
+If the initial assumptions hold, consciousness, pain, and subjective time can emerge internally from static data that externally resembles pure static noise.
 
 
 \section{Causality}
 
-This idea fights against common sense. One might think that virtual universes only come into existence when a simulation is actively executed—that the computer must be powered on to run the simulation code for the simulated world to exist.
+The idea that static data, such as a long sequence of bits, or perhaps a high resolution image, can contain emergent conscious observers fights against common sense.
+One might think that virtual universes only come into existence when a simulation is actively executed—that the computer surely must be powered on to run the simulation
+code for the simulated world to exist.
 If the simulation computer is never started, it seems obvious that no simulated virtual world emerges: no consciousness, and certainly no pain.
 
-However, static data (such as the full execution trace of a simulation) has no inherent notion of time.
+However, as the two thought experimens show, this assumption does not hold. And static data (such as the full execution trace of a simulation) has no inherent notion of time.
 There is no external reader stepping through the data in any particular order, like from left to right.
 Modern disk operating systems also physically scatter data across the hard drive in no particular order.
 
@@ -129,17 +160,21 @@ We cannot touch the virtual objects in those simulated universes.
 We cannot measure the distance between our computer and the simulated particles.
 We cannot measure the time it takes for the ``execution'' to create the virtual world.
 One cannot argue that one created the other.
-What appears as static information (e.g., the execution trace of a computer) to us external observers appears as an expanding universe and conscious experience to the simulated human observing the data from within.
-This relationship is representational, not causal.
+What appears as static information (e.g., the execution trace of a computer) to us external observers appears as an expanding universe and
+conscious experience to the simulated human observing the data from within.
+
+This relationship is representational, not causal. One doesn't create the other. 
+
 The computer and the simulated universe are two sides of the same coin: distinct arrangements of the same information.
 
 
 \section{Parallel Universes}
 
-And there are more than just two sides on the coin.
+There are more than just two sides on the coin.
 Consider an execution trace of $N$ bits. These bits can be arranged in $2^N$ ways.
 Apparently, most of them describe chaotic universes with no conscious observers.
-One, however, describes our identical simulated twins---Alice, Bob, and others. And one describes something we call a computer, which is simulating a computationally heavy procedure---DNA.
+One, however, describes our identical simulated twins---Alice, Bob, and others.
+And one describes something we call a computer, which is simulating a computationally heavy procedure---DNA.
 
 
 \section{Philosophical Zombies}
@@ -169,7 +204,8 @@ If a system's behavior is entirely determined by its physical components and the
 If their behavior is identical, then their internal states, including consciousness and pain, must also be identical.
 $2+2=4$ holds for both bananas and apples.
 If the original's behavior is driven by the experience of pain, the simulation must have that experience too.
-Otherwise, there would be a contradiction.
+Otherwise, there would be a contradiction - two identical axiomatic systems - real human and its virtual counterpart - would behave differently.
+$2+2$ would yield different answer for bananas and apples.
 
 Correspondingly, the P-Zombie is an impossibility. If Axioms 1--4 hold, the P-Zombie premise collapses:
 \begin{itemize}
@@ -181,12 +217,13 @@ Correspondingly, the P-Zombie is an impossibility. If Axioms 1--4 hold, the P-Zo
 \subsection*{Falsification of the Hypothesis}
 
 While full-scale DNA simulations are currently beyond our computational reach, this limitation is secondary to the theoretical framework.
-Much like our inability to calculate the highest possible prime numbers, the current technical ceiling does not invalidate the underlying logic; what matters is that such simulations are possible in principle.
+Much like our inability to calculate the highest possible prime numbers, the current technical ceiling does not invalidate the underlying logic;
+what matters is that such simulations are possible in principle.
 
 As soon as computational technology allows for high-fidelity biological modeling, we will be able to test whether a simulated human truly experiences subjective states, such as pain.
 This provides a clear path for empirical validation.
 We can simulate a statistically significant sample of human subjects and study their behavior via monitors, exactly as we play virtual games.
-This time, however, the avatars in the game are fully self-contained simulated copies of us.
+This time, however, the avatars in the game are fully self-contained simulated copies of us, not just hollow high resolution polygon meshes. 
 By comparing the simulated subjects' responses to those of their real-world counterparts, we can measure the difference.
 If the simulated subjects exhibit the necessary biological reactions but lack the qualitative experience (qualia) of pain, their behavior should be different compared to us humans.
 Should this be the case, the arguments presented here collapse. This would indicate that at least one of the four initial axioms is invalid.
@@ -195,13 +232,16 @@ Should this be the case, the arguments presented here collapse. This would indic
 
 \section{Pre-computing the Data}
 
-One might argue that replacing code with precomputed data does not truly eliminate computation. The computation simply occurred earlier, when the lookup tables were created, and therefore the optimization argument collapses: static data alone would not be sufficient for subjective experience.
+One might argue that replacing code with precomputed data does not truly eliminate computation.
+The computation simply occurred earlier, when the lookup tables were created, and therefore the optimization argument collapses:
+static data alone would not be sufficient for subjective experience.
 
 This objection fails for the following reason.
 
-Software is fundamentally order-critical. The sequence in which elementary operations are executed is essential.
-Swapping the order of even relatively simple operations often destroys the correctness of the program entirely.
-In a system as complex as a full-scale DNA simulation, changing the execution order would almost certainly crash the simulation or produce complete nonsense instead of a coherent Alice.
+Software (Turing Machine) is fundamentally order-critical. The sequence in which elementary operations are executed is essential.
+Swapping the order of even relatively simple operations destroys the correctness of the program entirely.
+In a system as complex as a full-scale DNA simulation, changing the execution order would almost certainly crash the simulation or produce
+complete nonsense instead of a coherent Alice.
 
 However, when we precompute lookup tables, the order in which we calculate those values is entirely irrelevant to the final result.
 What matters is only that the precomputed values correctly correspond to the inputs they will receive during execution. 
@@ -210,8 +250,9 @@ In other words: the temporal order in which the programmer (or the optimizer) co
 The final static data structure encodes the correct mappings regardless of the history of its creation.
 
 Thus, the optimization process remains valid. We can gradually transform a fully running, causally ordered simulation into pure static data while preserving the exact output.
-If subjective experience depended on the real-time execution of those precomputations, we would require some form of metaphysical or non-computable process to explain why the experience survives the optimization.
-This would directly contradict Axiom 3 (that all relevant processes are computable).
+If subjective experience depended on the real-time execution of those precomputations, we would require some form of metaphysical or
+non-computable process to explain why the experience survives the optimization.
+This would directly contradict the initial axioms, that all relevant processes are computable and no superficial or metaphysical processes play role in the operation of DNA.
 
 The optimization argument therefore stands: subjective experience persists in purely static information.
 
@@ -219,22 +260,10 @@ The optimization argument therefore stands: subjective experience persists in pu
 
 \section{Conclusions}
 
+If these four assumptions hold, then consciousness, subjective time, and pain can emerge entirely from the internal relational structure of static information.
+They do not require ongoing external computation or a privileged execution process.
+Consequently, time is not fundamental to the universe but intrinsic to the observer.
+At its most fundamental level, the universe can be static, substrate-free, and abstract.
 
-If the four assumptions hold, then the following conclusions follow directly:
-
-\begin{itemize}
-    \item Consciousness, subjective time, and pain can emerge entirely from the internal relational structure of static information.
-    \item These properties do not require ongoing external computation or a privileged ``execution'' process.
-    \item Time is not fundamental to the universe but intrinsic to the observer.
-    \item The universe, at its most fundamental level, can be regarded as static, semantically neutral and abstract information.
-\end{itemize}
-
-Should future high-fidelity simulations of humans show no subjective experience despite matching all measurable behavior (including pain responses),
-at least one of the four initial assumptions would be falsified. 
-
-Until such counter-evidence appears, we assume the four axioms hold, and summarise them under one principle:
-
-\begin{principle}{Internal Emergence Principle (IEP)}{iep}
 Consciousness is a property of certain finite information structures, not of processes acting upon them.
-Any configuration space large enough to contain such structures contains consciousness.
-\end{principle}
+Any configuration space large enough to contain such structures necessarily contains consciousness.
