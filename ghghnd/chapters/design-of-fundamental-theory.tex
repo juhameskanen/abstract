@@ -3,34 +3,28 @@
 
 \section{Minimal Requirements}
 
-To build a fundamental theory of physics, one obviously needs to know the minimum requirements
+To build a fundamental theory of physics, one needs to know the minimum requirements
 for a theory to qualify as a fundamental one.
 
-Based on common sense, the theory must answer three basic questions:
+Based on conventional view, such a theory must answer three basic questions:
 what exists, how likely different possibilities are, and how complex structures arise from simple rules.
+These three questions are often referred to as ontology, measure, and emergence, respectively.
 
-A candidate theory must therefore specify three ingredients: ontology, measure, and emergence.
 
 \subsection*{1. Ontology (What exists)}
 
-First, we must define the basic building blocks of reality.
-This means specifying a well-defined space of possible states of the system.
-In other words: what are the most elementary ``things'' the theory talks about?
+These are the basic building blocks of reality, well-defined space of possible states of the system.
 For example, in Quantum Mechanics, the basic objects are quantum fields (or state vectors in Hilbert space) defined over spacetime.
-All particles and interactions are described as excitations of these fields.
 
 \subsection*{2. Measure (What is typical or likely)}
 
-A theory must also explain what is typical among all possible states.
-Not all states are equally relevant: some are more probable or more ``natural'' than others.
-This requires a rule that assigns weights or probabilities to different states in the state space.
+A theory must also explain what is typical among all possible states, to allow for predictions and explanations of observed phenomena.
 For example, in Quantum Field Theory, the Born rule assigns probabilities to measurement outcomes
 based on the quantum state. This tells us which outcomes are likely to be observed.
 
 \subsection*{3. Emergence (How structure arises)}
 
-Third, a fundamental theory must explain how complex structures arise from simple underlying rules.
-This is the bridge between microscopic laws and the macroscopic hierarchical structures we observe.
+A fundamental theory must explain how complex structures arise from the basic building blocks - the ontology.
 For example, chemistry emerges from Quantum Field Theory.
 atoms form molecules, and molecules form complex structures, even though the underlying description
 is entirely in terms of quantum fields and their interactions.
@@ -41,11 +35,9 @@ is entirely in terms of quantum fields and their interactions.
 Without ontology, the theory has nothing to describe. Without a measure, the theory cannot make predictions.
 Without emergence, the theory cannot connect to the macroscopic hierarchical structures we observe.
 
-As with any well-designed modular software, the design should also be mutually orthogonal without cyclic dependencies.
+As with any well-designed modular software, the three layers should be mutually orthogonal without cyclic dependencies.
 Ontology defines the domain. Measure provides weighting on that domain, so it depends on the ontology.
-Emergence depends on both ontology and measure. This yields a clean layered design free of cyclic dependencies.
-
-\textbf{The dependency stack:}
+Emergence depends on both ontology and measure. 
 
 \[
 \begin{array}{c}
@@ -57,14 +49,13 @@ Emergence depends on both ontology and measure. This yields a clean layered desi
 \end{array}
 \]
 
-Of the three pillars, emergence is arguably the least fundamental.
 Given a sufficiently rich ontology together with a suitable measure or dynamical law, higher-level structure may arise automatically.
 In that sense, emergence can often be viewed as a consequence rather than an independent primitive.
 
 
 \section{Classifying Current Theories}
 
-Many candidate theories implement the three ingredients to varying degrees of completeness.
+So that's the the ideal theory. However, none of the candidate theories implement the three ingredients. 
 
 \subsection*{Ontology (What Exists)}
 \begin{itemize}
@@ -91,12 +82,9 @@ Many candidate theories implement the three ingredients to varying degrees of co
 \end{itemize}
 
 
-Then there is String theory / M-theory, Loop Quantum Gravity, Quantum information, and many more 
-somewhat blurring the line between ontology and measure.
+String theory / M-theory, Loop Quantum Gravity, Quantum information, Many-worlds, holographic approaches, and many more 
+blurr the line between ontology and measure. 
 
-Even with interpretations of Many-Worlds or holographic approaches the separation between ontology and measure can become fuzzy as the measure may appear partly emergent from the dynamics or entanglement structure.
-
-Whoever designed the universe might have been in a hurry.
 
 
 \section{Conclusions}
@@ -112,4 +100,4 @@ But the price to pay is maximized abstractness and a completely dissolved sense 
 
 By minimizing ontology we maximize abstractness, which points toward a unified, complete theory. By maximizing ontology, we imply there is no ultimate Theory of Everything---only a list of highly successful, unexplained assumptions. 
 
-Does the universe have a solid foundation, or is it abstract all the way down?
+Does the universe even have a solid foundation (well defined ontology defining what exists), or is it abstract all the way down?

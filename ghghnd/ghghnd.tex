@@ -6,18 +6,25 @@
 
 \begin{document}
 
+\frontmatter
+\pagestyle{empty} % Suppresses headers/footers/page numbers for the cover block
+
 \input{cover/cover}
 \input{cover/info}
 \input{cover/changelog}
 
-\frontmatter
+\cleardoublepage
+\pagestyle{plain} % Restores normal page styling for foreword/preface
 \input{chapters/foreword}
 \input{chapters/preface}
+
+\cleardoublepage
 \tableofcontents
 
 \mainmatter
 \input{chapters/introduction}
 \input{chapters/source-of-concsiousness}
+\input{chapters/life}
 \input{chapters/religions}
 \input{chapters/magic}
 \input{chapters/science-vs-religion}
@@ -26,36 +33,44 @@
 \input{chapters/design-of-fundamental-theory}
 \input{chapters/quantum-gravity}
 \input{chapters/first-principles}
-\input{chapters/life}
 \input{chapters/quantum-mechanics}
-\input{chapters/qft-implementation}
 \input{chapters/general-relativity}
-\input{chapters/spacetime}
+
+%\input{chapters/qft-implementation}
+%\input{chapters/gr-implementation}
+
 \input{chapters/unification-problem}
 \input{chapters/doctrines-of-math}
 \input{chapters/dna}
 \input{chapters/dna-simulation}
 \input{chapters/humans-as-axiomatic-systems}
 \input{chapters/time}
-\input{chapters/heaven}
-\input{chapters/free-will}
+
 \input{chapters/methodological-epilogue}
 \input{chapters/from-something-to-nothing}
 \input{chapters/from-nothing-to-something}
+
 \input{chapters/observer-filter}
 \input{chapters/ait}
 \input{chapters/qm-as-compression}
-\input{chapters/geometric-mdl}
+
 \input{chapters/internal-describility}
-\input{chapters/framework-of-everything}
-\input{chapters/proof-of-concept}
-\input{chapters/fermions}
-\input{chapters/wdw}
-\input{chapters/hard-problem}
-\input{chapters/observer-implications}
-\input{chapters/novelty}
-\input{chapters/closure}
-\input{chapters/postword}
+
+
+
+%\input{chapters/heaven}
+%\input{chapters/free-will}
+
+%\input{chapters/geometric-mdl}
+%\input{chapters/framework-of-everything}
+%\input{chapters/proof-of-concept}
+%\input{chapters/fermions}
+%\input{chapters/wdw}
+%\input{chapters/hard-problem}
+%\input{chapters/observer-implications}
+%\input{chapters/novelty}
+%\input{chapters/closure}
+%\input{chapters/postword}
 
 \backmatter
 

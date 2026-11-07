@@ -1,27 +1,111 @@
 \chapter{General Relativity}
 \label{chap:general-relativity}
 
-\section{The Role of the Observer}
+\section*{The Role of the Observer}
 
 General relativity does not concern itself with observations.
 The universe exists with or without intelligent, conscious observers or their interpretations of collapsing wavefunctions.
-As far as general relativity is concerned, observers are no different from rocks.
-A psychosocially complex, traumatized, and poorly maintained human falling into a black hole is treated no differently from a rock of the exact same mass.
+A psychosocially complex, traumatized, and poorly maintained human falling into a black hole follows exactly the same path as a rock released from the same place with the same velocity.
+Mass and composition do not matter for the motion of a test body; mass matters only for how strongly the body disturbs the geometry itself.
+
+This does not mean that observers are ignored. Rather, the physics is made \emph{independent} of any observer's description.
+Coordinates are mere labels, and no choice of labels is privileged (\emph{general covariance}).
+Two observers may disagree about what they see, and both can be right, because they are describing the same geometry from different places.
+
+Like quantum mechanics, general relativity is among the most thoroughly tested theories in physics.
+It explains the anomalous precession of Mercury's orbit, the bending of starlight observed during the 1919 eclipse, and the gravitational 
+redshift measured in the Pound--Rebka experiment.
+It is built into every GPS satellite: their clocks gain about $45\,\mu\mathrm{s}$ per day from weaker gravity and lose about $7\,\mu\mathrm{s}$ per day 
+from their motion, and without correcting for the net effect the system would drift by kilometers within a day.
+In 2015 LIGO detected gravitational waves from merging black holes, and the Event Horizon Telescope has since imaged the shadows of two supermassive ones.
 
 
-\subsection*{The Einstein Field Equations}
+\section*{The Geometric Nature of Gravity}
 
-The universe is geometric by nature. 
+The universe is geometric by nature.
+While Quantum Field Theory (QFT) deals with the field values at each point of the universe, General Relativity (GR) defines the distances between those points and the rules for traversing them.
+Mathematically, the universe is modeled as a four-dimensional smooth differentiable manifold $\mathcal{M}$ equipped with a metric tensor $g_{\mu\nu}$.
 
-The dynamics of the geometry are governed by the famous Einstein field equations:
+The metric determines distances, time intervals, angles, and the causal structure of reality.
+The infinitesimal spacetime interval is given by:
+
 \begin{equation}
-G_{\mu\nu} = 8\pi G \, T_{\mu\nu},
+ds^2 = g_{\mu\nu} \, dx^\mu dx^\nu.
 \end{equation}
-where $G_{\mu\nu}$ is the Einstein tensor:
+
+This single, elegant geometric object entirely replaces the Newtonian gravitational potential, absolute space, and absolute time.
+Crucially, the metric is not a passive background grid; it is dynamic.
+Spacetime geometry actively responds to the distribution of matter and energy. It's signature is $(-,+,+,+)$) Lorentzian, 
+meaning that it has one time dimension and three spatial dimensions, which allows for the existence of light cones and causal relationships. 
+
+
+\subsection*{Free Fall as Geometry}
+
+Newton's theory of gravity already implies that the inertial mass that resists acceleration is exactly equal to the gravitational mass that feels the pull. 
+This is the \emph{weak} equivalence principle, and it is why all bodies fall alike.
+Einstein took it a step further. In a small, freely falling laboratory, there is no way to tell that gravity is present at all: locally, the laws of physics reduce to those of special relativity.
+This is the (Einstein) Equivalence Principle, and it is the step that leads to geometry.
+
+In Newtonian mechanics, a falling object accelerates because a physical force pulls on it.
+In General Relativity, no force acts at all.
+Instead, the particle is simply trying to move in a straight line, or ``follow its nose'', through a curved spacetime.
+It follows a \emph{geodesic}:
+
+\begin{equation}
+\frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\nu\rho} \frac{dx^\nu}{d\lambda} \frac{dx^\rho}{d\lambda} = 0,
+\end{equation}
+
+where $\Gamma^\mu_{\nu\rho}$ represents the Christoffel symbols constructed from the metric, and $\lambda$ is an affine parameter along the path.
+For massive particles one may choose $\lambda$ to be the proper time $\tau$; for light, proper time does not exist and a general affine parameter is needed.
+
+This equation is the ultimate lazy-evaluation algorithm: it describes pure, unforced inertial motion.
+Gravity disappears locally. 
+What we perceive as gravitational attraction is the way nearby geodesics converge or spread apart in curved spacetime: 
+this is the \emph{tidal} effect, which cannot be removed by choosing a free-falling frame.
+
+\subsection*{The Newtonian Limit}
+
+For a weak, static gravitational potential $\Phi$ (with $|\Phi| \ll c^2$) and slow-moving bodies, the metric is approximately
+\begin{equation}
+g_{00} \approx -\left(1 + \frac{2\Phi}{c^2}\right),
+\end{equation}
+and the geodesic equation reduces to Newton's $\ddot{\mathbf{x}} = -\nabla \Phi$.
+The Newtonian force of gravity is thus the shadow of the time component of the metric.
+The same expression gives the weak-field time dilation, $d\tau \approx (1 + \Phi/c^2)\,dt$, which is what the GPS satellites experience.
+
+
+\subsection*{Curvature}
+
+The curvature of spacetime is encoded in the \textbf{Riemann} curvature tensor:
+\begin{equation}
+R^\mu_{\;\nu\rho\sigma}.
+\end{equation}
+It measures the failure of parallel transported vectors to return unchanged after transport around infinitesimal loops.
+Contractions of the Riemann tensor yield the \textbf{Ricci} tensor $R_{\mu\nu}$ and the Ricci scalar $R$, which summarize the curvature relevant to volume distortion and geodesic convergence.
+
+Just as a general matrix can be split into a trace part, a symmetric traceless part, and an antisymmetric part, the Riemann tensor can be decomposed into simpler pieces.
+In four dimensions it has 20 independent components: 10 belong to the \textbf{Ricci} part and 10 to the \textbf{Weyl} part.
+The Ricci part is fixed, through the field equations below, by the matter present locally, and it vanishes in vacuum.
+The Weyl part is not determined locally by matter. It is the \emph{free} gravitational field: the long-range field of a black hole, 
+the tidal field of distant sources, and gravitational waves (not again, nature waves!).
+In vacuum the tidal forces are entirely due to the Weyl curvature; inside matter, both parts contribute.
+
+The most intuitive way to understand the Ricci scalar (also known as the scalar curvature, denoted $R$ without tensor subscripts) 
+is as a measure of how much the volume of a small region in curved space deviates from that in flat, Euclidean space.
+The sign matters: on a sphere (positive curvature) a small ball has less volume than in flat space, and in a saddle-like space (negative curvature) it has more.
+
+
+\section*{The Einstein Field Equations}
+
+The dynamics of the geometry are governed by the famous Einstein field equations. In units where $c=1$:
+\begin{equation}
+G_{\mu\nu} + \Lambda g_{\mu\nu} = 8\pi G \, T_{\mu\nu},
+\end{equation}
+where $\Lambda$ is the cosmological constant (very small, but nonzero according to observations of the accelerating expansion of the universe), and $G_{\mu\nu}$ is the Einstein tensor:
 \begin{equation}
 G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R,
 \end{equation}
-and $T_{\mu\nu}$ is the stress–energy tensor, which encodes energy density, momentum density, pressure, and shear stress.
+and $T_{\mu\nu}$ is the stress--energy tensor, which encodes energy density, momentum density, pressure, and shear stress.
 
 These equations equate geometry with matter.
 As the physicist John Wheeler famously summarized: \emph{Spacetime tells matter how to move. Matter tells spacetime how to curve.}
@@ -31,70 +115,28 @@ It states that the covariant divergence of the Einstein tensor vanishes identica
 \begin{equation}
 \nabla^\mu G_{\mu\nu} = 0.
 \end{equation}
-Because the field equations equate $G_{\mu\nu}$ with the stress–energy tensor $T_{\mu\nu}$, this identity mathematically \textbf{forces} the local conservation of energy and momentum:
+Because the field equations equate $G_{\mu\nu}$ (up to the constant term, whose divergence also vanishes) with the stress--energy tensor $T_{\mu\nu}$, this identity mathematically \textbf{forces} the local conservation of energy and momentum of matter:
 \begin{equation}
 \nabla^\mu T_{\mu\nu} = 0.
 \end{equation}
+It also implies that matter moves along geodesics.
 Conservation of energy isn't an extra rule programmed into the universe; it is a logical consequence of the geometry itself.
+A word of caution: this is a \emph{local} statement.
+The energy of the gravitational field itself is not part of $T_{\mu\nu}$, and in general (an expanding universe, for example) there is no global conserved energy.
+
+\subsection*{Gravitational Waves}
+
+Because the Weyl curvature can exist in vacuum, geometry can carry itself through empty space.
+Gravitational waves are ripples in the metric that propagate at the speed of light.
+When two black holes merge, a tiny fraction of their mass is radiated away as such ripples, and when they pass the Earth 
+they stretch and squeeze the arms of the LIGO detectors by less than the width of a proton.
+Their detection in 2015 was a direct confirmation that the metric is a dynamic, physical entity.
 
 
-
-\section{The Geometric Nature of Gravity}
-
-While Quantum Field Theory (QFT) deals with the ``values'' inside the cells of the universe, General Relativity (GR) defines the ``distance'' between those cells and the rules for traversing them.
-Mathematically, we model this universe as a four-dimensional differentiable manifold $\mathcal{M}$ equipped with a metric tensor $g_{\mu\nu}$.
-
-The metric determines distances, time intervals, angles, and the causal structure of reality.
-The infinitesimal spacetime interval is given by:
-\begin{equation}
-ds^2 = g_{\mu\nu} \, dx^\mu dx^\nu.
-\end{equation}
-
-This single, elegant geometric object entirely replaces the Newtonian gravitational potential, absolute space, and absolute time.
-Crucially, the metric is not a passive background grid; it is dynamic.
-Spacetime geometry actively responds to the distribution of matter and energy.
-
-\subsection*{Free Fall as Geometry}
-
-The so-called Equivalence Principle states that inertial mass and gravitational mass are identical.
-In Newtonian mechanics, a falling object accelerates because a physical force pulls on it.
-In General Relativity, no force acts at all. 
-
-Instead, the particle is simply trying to move in a straight line, or ``follow its nose'' through a curved environment.
-It follows a \emph{geodesic}:
-\begin{equation}
-\frac{d^2 x^\mu}{d\tau^2} + \Gamma^\mu_{\nu\rho} \frac{dx^\nu}{d\tau} \frac{dx^\rho}{d\tau} = 0,
-\end{equation}
-where $\Gamma^\mu_{\nu\rho}$ represents the Christoffel symbols constructed from the metric. 
-
-This equation is the ultimate lazy-evaluation algorithm: it describes pure, unforced inertial motion.
-Gravity disappears locally. What we perceive as gravitational attraction is just nearby geodesics naturally converging in curved space.
-
-
-\subsection*{Curvature}
-
-Just like a transformation matrix can be decomposed into four
-basic transformations, such as rotation and scale matrices, also
-Riemann curvature tensor can be decomposed to various other tensors. 
-
-The curvature of spacetime is encoded in the \textbf{Riemann} curvature tensor:
-\begin{equation}
-R^\mu_{\;\nu\rho\sigma}.
-\end{equation}
-It measures the failure of parallel transported vectors to return unchanged after transport around infinitesimal loops.
-Contractions of the Riemann tensor yield the \textbf{Ricci} tensor $R_{\mu\nu}$ and the Ricci scalar $R$, which summarize the curvature relevant to volume distortion and geodesic convergence.
-
-While the \textbf{Ricci} tensor describes how matter locally curves spacetime, it does not tell the whole story.
-The Riemann tensor can be decomposed into the \textbf{Ricci} curvature, which vanishes in a vacuum, and the \textbf{Weyl} curvature, which does not.
-The Weyl tensor is responsible for tidal forces and allows gravitational influence to propagate through the vacuum of space as gravitational waves (not again, nature waves!)
-
-The most intuitive way to understand the Ricci scalar (also known as the scalar curvature, denoted as $R$ without tensor subscripts) is to think of it as a measure how much the volume of a region in curved space deviates from a flat, Euclidean space.
-
-
-\section{Time as a Personal Issue}
+\section*{Time as a Personal Issue}
 
 Because the metric $g_{\mu\nu}$ varies depending on where you are and how much mass is around, time itself is geometry-dependent.
-For a stationary observer:
+For a \emph{static} observer (one who stays at fixed spatial coordinates):
 \begin{equation}
 d\tau = \sqrt{-g_{00}} \, dt.
 \end{equation}
@@ -102,68 +144,110 @@ Clocks at different gravitational potentials tick at different rates.
 This means time is not a global, absolute clock.
 It is, in fact, a deeply personal issue.
 
-To demonstrate this, let us imagine an average programmer in a safe orbit around a black hole.
-As a thought experiment, we will consider the scenario of the programmer pushing his wife into the black hole.
-While this is undoubtedly a terrible thing to do, it serves as an excellent scientific test---provided we keep in mind that it is purely hypothetical, and not a recommendation.
+To demonstrate this, let us imagine an average programmer hovering at a safe distance from a supermassive black hole, held in place by his rocket engines.
+As a thought experiment, we will consider the scenario of the programmer asking his wife to jump into the black hole.
+While this is undoubtedly a terrible thing to do, it serves as an excellent scientific test, provided we keep in mind that it is purely hypothetical, and not a recommendation.
 
 The closer the falling wife gets to the event horizon, the slower she appears to fall from her husband's perspective.
-To him, she will never actually seem to cross it.
-A distant husband would have to wait an infinite amount of time to watch his wife pass the point of no return.
+The light she sends is increasingly redshifted and dims exponentially, so within a fraction of a second he can no longer see her at all.
+In the husband's point of view, she never reaches the horizon, and the coordinate time $t$ at which she arrives is infinite.
 
-Things look very different from the wife's point of view (as usual!).
-For her, there is no dramatic physical boundary at the event horizon.
-Her watch keeps ticking normally.
-As she falls, she can look back and see the light from the outside universe perfectly well.
-Because of gravitational blueshift and time dilation, the outside universe appears sped up and energetic.
-Yet, because she is falling so quickly, she has only a limited proper time---seconds or minutes---before hitting the singularity.
-She crosses the horizon smoothly, seeing only a finite slice of the universe's future, and meets her doom inside.
+Things look very different from the wife's point of view (as usual ;)).
+For her, there is no dramatic physical boundary at the event horizon of a supermassive black hole.
+Her watch keeps ticking normally, and she crosses the horizon in a finite proper time.
+She does not feel anything unusual about the crossing.
+Contrary to what one might guess, the outside universe does not simply appear sped up and blueshifted.
+The Doppler redshift from her motion away from the source competes with the gravitational blueshift; for light arriving from straight above, 
+falling from rest far away, the net effect at the horizon is a redshift by a factor of two, while light from other directions is blueshifted.
+She sees only a finite slice of the outside universe's future, because her proper time is limited.
+That time is short: the longest possible proper time between the horizon and the singularity of a non-rotating black hole is $\pi G M/c^3$, 
+which is about a minute for the supermassive black hole at the center of our galaxy, and less than a millisecond for a black hole of ten solar masses.
 
-Black holes eventually evaporate via Hawking radiation.
-Since the husband sees his wife take almost ``infinite time'' to cross the horizon,
-and the black hole will eventually evaporate in a finite (albeit unimaginably long) time,
-there is a small chance that the black hole disappears just before she even hits the singularity.
-The horizon can shrink faster than she can cross it, or the singularity vanishes before her proper time can run out.
+According to Hawking, black holes radiate and finally evaporate. This is a theoretical prediction that has not been observed. Assuming this is true, could this save her?
+Could the black hole evaporate just before she hits the singularity?
 
-Not all information that passes through the event horizon is necessarily lost. You can't even trust black holes!
+According to Hawking, it takes of the order of $10^{67}$ years for a solar-mass black hole to evaporate, and vastly longer for a supermassive one.
+Her proper time runs out in minutes. So it is highly unlikely that the black hole will evaporate before she reaches the singularity.
+What evaporation changes is the husband's side of the story: in the far future he can eventually collect the radiation emitted from the horizon region, 
+and whether this radiation carries the information of what fell in is another question, namely Hawking's information paradox.
 
 Of course, surviving such a trip is strictly the domain of science fiction anyway.
+For a stellar-mass black hole, the tidal forces at the horizon are already enormous, and they would ``spaghettify'' and tear any observer apart before she even reached it.
+For a supermassive one, these tides may not be fatal at the event horizon, but eventually become fatal close to the singularity.
 
-Fierce tidal forces would ``spaghettify'' and tear any observer apart.
-To resolve the clash of two different perspectives, some physicists argue that the horizon isn't a peaceful gateway at all,
-but a raging ``firewall'' of quantum energy that would vaporize the wife the moment she touched it.
-So the programmer's wife would also get burned quite badly - receive a highly boosted cosmic sunburn as a parting gift.
+Furthermore, some physicists argue that the smooth horizon is an illusion.
+The \emph{firewall} hypothesis (Almheiri, Marolf, Polchinski and Sully, 2012) was proposed to address the information paradox: 
+if the radiation is to carry the information out, quantum mechanics seems to demand that the horizon of an old black hole be a 
+raging wall of quantum energy that would vaporize the wife the moment she touched it.
 
-On the bright side, she would find her husband aging rapidly relative to her---if that is any consolation!
-
-\section{General Relativity as Constraint: The Block Universe}
-
-Unlike quantum mechanics, which is a theory of states evolving tick-by-tick in time, General Relativity is a theory of \emph{consistent four-dimensional configurations}.
-
-Given suitable boundary conditions, the Einstein equations constrain the allowed geometries of the entire cosmos.
-Time evolution is not fundamental; it is simply a human slicing of a four-dimensional structure.
-The equations are elliptic-hyperbolic constraints on geometry.
-This is why the initial value problem is so subtle, global solutions are rare, and exact solutions are highly symmetric.
-Spacetime is not computed step-by-step; it exists as a self-consistent, static whole.
-
-This suggests that we live in a static Block Universe.
-The falling observer and the frozen observer are both real; they are simply viewing the same static, 4D geometric structure from different perspectives.
-The past, the present, and the future all exist simultaneously as the geometry of four-dimensional spacetime.
-Change is an illusion of the observer; reality is simply the geometry of the whole.
+The earlier idea of \emph{black hole complementarity}, on the other hand, was proposed precisely to reconcile the two perspectives, 
+arguing that the husband and the wife describe the same reality in incompatible but individually consistent ways, and that no single observer can compare them.
+The matter is unresolved. It is possible that the programmer's wife might receive a highly boosted cosmic sunburn as a parting gift.
+She will also notice her husbends to age faster. 
 
 
 
-\section{Unexplained Assumptions}
+\section*{General Relativity as Constraint: The Block Universe}
 
-General Relativity says that gravity isn't a force, but the shape of the container.
-However, it describes the behavior of the container without explaining the fabric of the container itself. 
+Unlike quantum mechanics, which is usually presented as a theory of states evolving tick-by-tick in time, General Relativity is a theory of four-dimensional geometry.
+In the relativity of simultaneity, different observers disagree about which events are ``at the same time'', so there is no unique, observer-independent ``now'' that sweeps through the universe.
+A natural, if philosophical, conclusion is the \emph{block universe} (eternalism): the past, the present, and the future exist as the 
+geometry of four-dimensional spacetime. 
 
-Then the theory predicts points of infinite density. The singularity at the center of a black hole is not a mere coordinate glitch, but a point of ultimate physical breakdown:
-a place where all of the matter from a collapsed star (say, ten times the mass of our Sun) is crushed down into a region of literally zero radius ($r = 0$).
-This forces the density and the curvature of spacetime to become infinite ($\rho \rightarrow \infty$, $R \rightarrow \infty$).
 
-Furthermore, GR treats spacetime as a perfectly smooth manifold.
-It works flawlessly until one zooms in to the so-called Planck scale---the threshold where the smooth geometry of General Relativity collides with the discrete,
-pixelated fluctuations of Quantum Mechanics. 
+
+
+\section*{Unexplained Assumptions}
+
+General Relativity says that gravity isn't a force, but the shape of the geometry of spacetime.
+However, it describes the behavior of the spacetime without explaining what the spacetime is. 
+
+Then the theory predicts its own downfall. The singularity of a black hole is not a mere coordinate glitch, 
+but a place of genuine physical breakdown. It is a mistake to imagine it as a point at the center of the hole.
+Inside the horizon, the radial coordinate $r$ becomes timelike, and $r=0$ is not a place in space but a moment in the future of everything that falls in, as inevitable as tomorrow.
+The Ricci scalar is zero in the vacuum outside the collapsing star, so it is not what diverges.
+The quantity that blows up is the tidal curvature (the Weyl part), which one can see in the Kretschmann scalar $R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} \propto G^2M^2/r^6$.
+The robust statement, proved in the Penrose--Hawking singularity theorems, is that geodesics end after a finite proper time, a property known as geodesic incompleteness.
+(The popular claim of ``infinite density'' follows from specific models of collapse, such as a pressureless dust ball.)
+GR cannot tell us what happens next.
+
+Furthermore, GR treats spacetime as a smooth manifold, and it has been verified to work remarkably well, but only in regimes far from the Planck scale (about $10^{-35}\,\mathrm{m}$), where we have no tests at all.
+Contrary to a common impression, neither quantum mechanics nor quantum field theory says that spacetime is ``pixelated''; their fields are continuous, as described in the previous chapter.
+The trouble is that GR, treated as a quantum field theory, is non-renormalizable: it makes sense as an effective theory at low energies, but it is expected to break down near the Planck scale, where a deeper theory must take over.
+Some approaches to quantum gravity, such as loop quantum gravity, do propose a discrete structure of space at that scale, but this remains a hypothesis.
 
 This fundamental clash is the main reason why many argue Einstein's theory of gravity, brilliant as it is, cannot be the final word.
 
+
+\section*{Two Pictures of the World}
+
+Put the two chapters side by side, and the differences are hard to miss.
+Quantum mechanics describes a state evolving in an external time; general relativity has no preferred time at all, and the geometry that defines ``time'' is itself the thing being solved for.
+Trying to quantize gravity runs directly into this \emph{problem of time}: the Wheeler--DeWitt equation, the natural analog of the Schr\"odinger equation, famously contains no time variable.
+
+The information paradox is where the two theories collide most sharply.
+Quantum mechanics demands that the evolution of the whole system be unitary, so that information is never destroyed.
+Hawking's calculation suggests that a black hole evaporates into thermal radiation that seems to carry no information about what fell in.
+Reconciling these (through complementarity, firewalls, or something yet unknown) is one of the central open problems in theoretical physics.
+
+Entanglement sits uneasily with the geometric picture of locality in which influences travel along the light cones of spacetime.
+Entangled correlations do not allow signaling, so there is no contradiction with relativity, but it is far from obvious how correlations that ignore distance can be accommodated in a geometry built out of distances.
+It is an intriguing hint that, in some approaches, the geometry of spacetime itself appears to be built out of entanglement.
+
+Finally, there is the observer.
+In quantum mechanics, the observer plays a central, if puzzling, role: measurement is where the wavefunction meets the world.
+In general relativity, as we have seen, the observer plays no role at all.
+A complete theory will have to explain how both of these can be true.
+
+
+\section*{What Is Spacetime?}
+
+Much of what is described above has been tested to remarkable precision, though some of it, such as Hawking radiation, firewalls, and the singularities themselves, is theoretical extrapolation that has never been observed.
+
+In the previous chapter, we asked what the quantum system is that the wavefunction describes.
+We can ask a similar question here.
+We have cataloged the properties of the metric, and we know how it responds to matter and how matter responds to it.
+
+What exactly is the spacetime that all of this describes?
+
+What is it made of, if anything, and what is it that we are actually looking at?

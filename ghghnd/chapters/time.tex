@@ -12,25 +12,26 @@ We record it frame by frame into an uncompressed, lossless digital archive.
 This is the straightforward, non-optimized implementation.
 
 What distinguishes this archive from ordinary media is that the coordinates are not flat 2D rasters,
-but 3D counterparts---``voxels''---where fundamental particles play the role of pixels. 
+but 3D counterparts, `voxels'', where fundamental particles play the role of pixels. 
 It is a complete, particle-level recording of the entire simulated universe, including Alice's body, her brain states, and every interaction. 
-This record is a virtual copy of real-world Alice---functionally identical at every relevant level.
+This video file is a virtual copy of real-world Alice,  identical at every relevant level.
 
 Now we begin optimizing the simulation code. 
 First, we replace every \texttt{log10()} call with a precomputed lookup table. 
-We run the simulation again. The resulting state-space archive is \emph{identical} to the original.
+We run the simulation again. The resulting state-space archive (video file) is \emph{identical} to the original.
 
 Next, we replace all \texttt{sqrt()} computations with precomputed values. 
-Again, the outputs are indistinguishable.
+Again, the output video files are indistinguishable.
 
 We continue this process, gradually replacing more and more active computation with static lookup tables. 
-At every run, the output data remains exactly the same. The only difference is the physical time required
-for the host hardware to generate it: the more we optimize, the faster the execution completes.
+At every run, the output video files remain exactly the same. The only difference is the physical time required
+for the host hardware to generate them: the more we optimize, the faster the execution completes.
 
 In the end, we optimize the simulation completely. 
-All active computation has been replaced by precomputed data. What remains are two sets of files of pure, static information: the execution traces of the gradually optimized simulations and their completed state-space counterparts.
+All active computation has been replaced by precomputed data. What remains are two sets of files of pure, static information: 
+the execution traces of the gradually optimized simulations and their completed video counterparts.
 
-All the generated records are indistinguishable from one another; only the code-to-data ratio of the process that created them differs. 
+All the generated video files are indistinguishable from one another; only the code-to-data ratio of the process that created them differs. 
 The execution traces themselves differ because the underlying implementation of each run was different.
 
 We can draw two major conclusions from this thought experiment:
@@ -71,17 +72,20 @@ However, this objection is easily overcome: the ``clock'' itself is internalized
 By making the temporal counter a variable within the data rather than a pulse from the hardware, the entire construction becomes self-contained. 
 Once the clock is moved inside the system, the machine ceases to be a running process and becomes a static ``block universe.''
 
-In set-theoretic language, we simply embed the computer and the software into a super-set of both. 
-What remains is a static set, where ``running'' is merely a specific internal structure that supports the \nameref{principle:iep} developed in the previous chapter. 
+In set-theoretic language, the computer and the software is embedded into a super-set of both. 
+What remains is a static set, where running is merely a specific internal structure. 
 
-This self-mutating computer provides the bridge to understanding how entire universes---complete with conscious beings experiencing the flow of time and the reality of pain and joy---arise purely from static information without the need for outside intervention or a pre-existing flow of time.
+This self-mutating computer provides the bridge to understanding how entire universes, with conscious beings experiencing the flow of time and the reality of pain and joy, 
+arise purely from static information without the need for outside intervention or a pre-existing flow of time.
 
 
 \section{Physics Supporting an Informationally Static, Timeless Universe}
 
-\textbf{The Wheeler-DeWitt Equation \& The Problem of Time:} In quantum cosmology, applying the Schrödinger equation to the universe as a whole yields $\hat{H}|\Psi\rangle = 0$. The global wave function of the universe is completely static; fundamental time does not exist.
+\textbf{The Wheeler-DeWitt Equation \& The Problem of Time:} In quantum cosmology, applying the Schrödinger equation to the universe as a whole yields $\hat{H}|\Psi\rangle = 0$. 
+The global wave function of the universe is completely static; fundamental time does not exist.
 
-\textbf{The Block Universe of General Relativity:} Einstein’s relativity eliminates a universal "now." Past, present, and future are merely geometric coordinates within a static four-dimensional spacetime block, rather than events being created or destroyed.
+\textbf{The Block Universe of General Relativity:} Einstein’s relativity eliminates a universal "now." Past, present, and future are merely geometric coordinates within a static 
+four-dimensional spacetime block, rather than events being created or destroyed.
 
 \textbf{Quantum Unitarity and Information Conservation:} Quantum evolution is strictly unitary ($U^\dagger U = 1$), meaning the total information of a closed system is preserved perfectly. The modern resolution to the Black Hole Information Paradox (via the Holographic Principle/AdS-CFT) reaffirms that information can never be destroyed or truly created.
 
@@ -92,56 +96,26 @@ This self-mutating computer provides the bridge to understanding how entire univ
 \textbf{The Feynman Path Integral Formulation:} Quantum mechanics relies on summing over all possible histories simultaneously. In an information-first framework, this implies that all observer-compatible continuations ($\Gamma_O$) exist statically, with probabilities determined by their constraints rather than a chronological unfolding.
 
 
-\section{The Combinatorial Argument}
-
-The above self-mutating computer thought experiment, while intuitive, is actually unnecessary. 
-The existence of all possible observers follows directly from combinatorics, with no process, 
-no mutation rule, and no external reader required.
-
-From the \nameref{principle:iep}, a conscious observer such 
-as Alice is fully encodable as a finite bitstring of length $k$. Now consider the complete set 
-of all bitstrings of length $N$, where $N \gg k$. This set contains $2^N$ elements. By elementary 
-combinatorics, every possible bitstring of length $k$ appears as a substring within this set. 
-Alice is therefore guaranteed to exist within it---not as a consequence of any generative process, 
-but as a straightforward consequence of the structure of the set itself.
-
-No simulation needs to be initiated. No computer needs to be powered on. The question ``but 
-who is running it?'' has no more purchase here than the question ``who is running the number 
-seven?'' The number seven does not require a specific piece of chalk on a specific blackboard 
-to exist. Similarly, Alice does not require a specific physical process to instantiate her. 
-The bitstring encoding her conscious experience exists as a mathematical object, and its 
-existence is independent of any physical representation or computational process.
-
-A computer running a DNA simulation is one particular 
-physical representation of a structure that exists independently of it, just as a mark on a 
-blackboard is one particular physical representation of the number seven.
-
-The set of all bitstrings of length $N$ is therefore not merely a space of potential observers. 
-It is a space in which all observers whose encoding fits within $N$ bits are already present, 
-including every possible Alice, every possible universe she could inhabit, and every possible 
-experience she could have within it.
-
-
 
 \section{Conclusion: Time as a Representational Gauge}
 
-Together, these thought experiments illustrate a profound structural truth: any external feature—including a clock, a CPU, or time itself—can be entirely internalized by embedding it within a joint system.
+Together, these thought experiments illustrate that any external feature, including a clock, a CPU, or time itself, can be entirely internalized by embedding it within a joint system.
 
-This internalization completely reframes the physics of time. 
-In modern quantum cosmology, this is modeled by the Page-Wootters mechanism,
-which demonstrates that the global universe can be completely static, while time emerges purely as a relational correlation between an internalized clock subsystem and the rest of the system's states. 
-
-We can push this realization to its logical conclusion:
+In modern quantum cosmology, this is modeled by the Page-Wootters mechanism, which demonstrates that the global universe can be completely static, while time 
+emerges purely as a relational correlation between an internalized clock subsystem and the rest of the system's states. 
 
 \begin{enumerate}
-    \item \textbf{The Totality is Timeless:} The Static Informational Totality ($\mathbf{U}$) does not execute, run, or tick. It is a timeless, static ensemble of raw, uninterpreted configurations ($\mathbf{2}^S$). 
-    \item \textbf{Time is an Interpretive Slice:} The ``flow of time'' is not a fundamental property of the bits. It is part of the interpretive framework selected by the observer to achieve maximal relational compression.
-    \item \textbf{Temporal Order is Gauge-Dependent:} Just as an 8-bit word can be read as LSB or MSB, a static execution trace can be permuted or read in any direction. The choice of which internal variable serves as the ``clock parameter'' $\lambda$ is a representational choice. Time is therefore a gauge choice, and the apparent dynamics of the universe are gauge-dependent.
+    \item \textbf{The Universe is Timeless:} The static informational description ($\mathbf{U}$) does not execute, run, or tick. 
+    It is a timeless, static ensemble of raw, uninterpreted configurations of information ($\mathbf{2}^S$). 
+    \item \textbf{Time is an Interpretive Slice:} The flow of time is not a fundamental property of the information. 
+    It is part of the interpretive framework selected by the observer to achieve maximal relational compression.
+    \item \textbf{Temporal Order is Gauge-Dependent:} Just as an 8-bit word can be read as LSB or MSB, a static execution trace can be permuted or read in any direction. 
+    The choice of which internal variable serves as the clock parameter $\lambda$ is a representational choice. 
+    Time is therefore a gauge choice, and the apparent dynamics of the universe are gauge-dependent.
 \end{enumerate}
 
-What we call ``the passage of time'' is the structure discovered by an intelligent observer within a static block of information.
+What we call the passage of time is the structure discovered by an intelligent observer within a static block of information.
 
 The clock does not drive the universe; the clock and the universe are entangled readings of the same information.
-
 
 

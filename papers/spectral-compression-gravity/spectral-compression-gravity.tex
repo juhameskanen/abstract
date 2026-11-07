@@ -1,0 +1,538 @@
+\documentclass[11pt]{article}
+\input{../../preamble.tex}
+\input{../../paper_preamble.tex}
+
+% Base URL of the folder that holds the Python tests 
+\newcommand{\repo}{https://github.com/juhameskanen/abstract/blob/main/tests}
+% \testfile{name.py} typesets the file name as a link into \repo
+\newcommand{\testfile}[1]{\href{\repo/#1}{\texttt{\detokenize{#1}}}}
+
+
+\newcommand{\flag}[1]{\textbf{[#1]}}
+
+\newtheorem{assumption}{Assumption}
+
+
+\addbibresource{../references.bib}
+
+\title{Spectral Compression and the Emergence of Gravity:\\
+A Consistency Study of the Heat-Kernel Structure of a Spectral Description Cost}
+\author{Juha\\[2pt]\small The Abstract Universe Project}
+\date{Draft, 7 November 2026}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\begin{abstract}
+The Wavefunction Compression Principle asserts that the quantum wavefunction is the
+universe's data-compression scheme, with the probability of a state falling as $2^{-C_s}$,
+where $C_s$ is a \emph{spectral complexity} (a description cost counted over spectral modes).
+This study asks whether such a cost, once the geometry is promoted to a variable, contains
+general relativity. We study the functional $C[g]=\Tr f(L_g/\Lambda^2)$ for a smooth cutoff
+$f$ and a Dirac-type operator $L_g$, and test its heat-kernel structure numerically against
+exact or highly accurate spectra on spheres, products of spheres, tori, and a planar
+inhomogeneous background. Under the explicitly listed assumptions, we find: (i) the volume and
+Einstein--Hilbert terms appear with the standard coefficients, and the sign of the
+Einstein--Hilbert term is correct only for spinor-type operators; (ii) a magnetic flux
+background acts as a source whose effect on the stationary geometry matches Einstein--Maxwell,
+with $G/e^2$ fixed by the cutoff moments; (iii) the Maxwell term follows from varying the gauge
+field and is proportional to $f(0)$; (iv) with the per-mode linear cost applied only to occupied modes and
+the identification $\beta=\kappa/\Delta\omega$, the stationary conditions on $S^3\times S^1$ reproduce
+the Einstein static universe; (v) in a planar weak-field setting the response reproduces
+$\nabla^2\Phi=4\pi G\rho$ with the same $G$. These are \emph{consistency checks of the local
+spectral action with a specific matter coupling}, not a derivation of gravity from the
+compression principle: several inputs (cutoff shape, a hand-tuned cosmological counterterm,
+Euclidean signature, the occupied-mode prescription, $D=4$) remain assumed. All failures and
+corrections encountered along the way are logged in Section~\ref{sec:failures}.
+Every numerical claim is tied to a script in the accompanying repository.
+\end{abstract}
+
+
+
+\section{Starting point and scope}\label{sec:start}
+
+\subsection{The compression paper}
+The starting text (chapter ``The Deep Nature of Quantum Mechanics'') proposes that the
+wavefunction is a dense spectral encoding, analogous to a DCT in video compression, and replaces
+Kolmogorov complexity by a computable \emph{spectral complexity}
+\begin{equation}
+C_s(\Psi)=\mathrm{Cost(base)}+\sum_{i=1}^{N}\Big[\mathrm{Cost}(\phi_i)+\mathrm{Cost}(A_i)
++\frac{\omega_i}{\Delta\omega}\Big],
+\label{eq:Cs}
+\end{equation}
+with Solomonoff \cite{solomonoff1964} weights $P\propto 2^{-C_s}$, i.e.\ a Boltzmann factor in which $\Delta\omega$
+plays the role of a temperature. Simulations (not reproduced here) starting from a minimal-entropy
+state, with spectral cost and an observer filter, produce smooth evolving structure,
+interference patterns and lattice-like symmetric structures. The paper leaves open the origin of
+gravitational curvature.
+
+\subsection{Inputs assumed, but not tested here}
+The following are statements either assumed, or derived earlier of the framework.
+Nothing in the present note derives or tests them.
+\begin{itemize}
+\item Spacetime is $D=4$ (this is assumed for now; believed to emerge as the most probable dimension).
+\item The counted object is the whole 4D history (spectral cost over the entire walk).
+\item The probability of emergent microstructure is lognormal in time, giving a three-fold
+expansion curve; we sit near the peak where probability of emergence of matter is highest, and the Hubble rate is therefore minimal.
+\end{itemize}
+
+\subsection{Scope}
+We ask a narrow question: \emph{if the spectral cost is a functional of the geometry, what does
+it contain?} We do not address the observer filter, the origin of the cutoff, Lorentzian
+signature, or the selection of dimension.
+
+
+
+\section{Framework}
+\label{sec:framework}
+
+\subsection{Spectral cost of a geometry}
+
+Let $L_g=-(\nabla^2+E)$ be a Laplace-type operator on a closed Riemannian 4-manifold $(M,g)$,
+and $f$ a smooth, rapidly decaying cutoff profile, $\Lambda$ the cutoff scale ($\Lambda=1$ in
+all numerics). Define
+
+\begin{equation}
+C[g]=\Tr f(L_g/\Lambda^2).
+\end{equation}
+
+For smooth $f$ the standard heat-kernel (Seeley--DeWitt) expansion gives \cite{gilkey1995invariance,vassilevich2003heat}
+
+\begin{equation}
+C[g]\simeq\frac{1}{16\pi^2}\Big[f_4\Lambda^4\!\!\int\!\!\sqrt g\,\Tr\mathbf 1
++f_2\Lambda^2\!\!\int\!\!\sqrt g\,\Tr\!\Big(\tfrac R6+E\Big)
++f_0\!\!\int\!\!\sqrt g\,\Tr a_4(x)+\dots\Big],
+\label{eq:HK}
+\end{equation}
+
+with moments $f_2=\int_0^\infty f\,\dd x$, $f_4=\int_0^\infty x f(x)\,\dd x$, $f_0=f(0)$.
+This is the structure of the Chamseddine--Connes spectral action \cite{chamseddine1997spectral} and is related to
+Sakharov's induced gravity \cite{sakharov1967vacuum}. Here the cutoff $f$ is a free choice.
+
+\subsection{Operators}
+
+For a Dirac operator, $D^2=\nabla^*\nabla+R/4$, so $E=-R/4$ and the curvature term in
+\eqref{eq:HK} is $\tfrac R6-\tfrac R4=-\tfrac R{12}$ per component. For a minimally coupled
+scalar, $E=0$ and the coefficient is $+\tfrac R6$. We write $\xi$ for the coefficient in
+$L=-\nabla^2+\xi R$; $\xi=\tfrac14$ mimics the Dirac $a_0$ and $a_2$ terms (but not the spin-curvature
+terms of $a_4$). Spinor dimension in 4D is $4$.
+
+\subsection{Cost to action}
+
+We write the Euclidean weight as $e^{-\kappa C}$ and set $\kappa=\ln 2$ in numbers, following
+$P=2^{-C}$. \flag{free parameter} Matching the curvature term to the Euclidean
+Einstein--Hilbert action $S_E\supset-\tfrac1{16\pi G}\!\int\! R$ gives (with $\Tr\mathbf 1=4$)
+
+\begin{equation}
+G=\frac{3\pi}{\kappa f_2\Lambda^{2}}\quad(\text{up to the stated field content}),
+\label{eq:G}
+\end{equation}
+
+so $G$ is not an independent input but is tied to $\kappa f_2$.
+Matching the gauge-field term from the Dirac operator in a $U(1)$ background gives
+$1/e^2=\kappa f_0/(6\pi^2)$ (Section~\ref{sec:flux}).
+
+\subsection{Assumptions register}\label{sec:assumptions}
+\begin{center}
+\small
+\begin{tabular}{@{}l p{11.5cm}@{}}
+\toprule
+A1 & Smooth cutoff profile $f$; its shape and the scale $\Lambda$ are free. Hard cutoffs fail (Section~\ref{sec:sphere2}).\\
+A2 & Cost-to-action factor $\kappa$ (taken as $\ln 2$ in numbers); $G\propto1/\kappa$.\\
+A3 & Modes are spinor-type (this fixes the sign of the Einstein--Hilbert term). Field content (multiplicity 4) is assumed.\\
+A4 & Euclidean signature, and the whole 4D history as the counted object.\\
+A5 & A hand-chosen volume counterterm ($\epsilon$, or $m$) cancels the leading $\Lambda^4$ volume term. Not derived.\\
+A6 & Flux sector $n$ is a fixed, quantized background; no mechanism selects it.\\
+A7 & Matter: the linear cost $\omega/\Delta\omega$ acts only on \emph{occupied} modes, with $\beta=\kappa/\Delta\omega$ (Section~\ref{sec:static}).\\
+A8 & In the planar test, quanta are dust-like and couple as $N\rho$ (Section~\ref{sec:planar}); not simulated.\\
+A9 & Dimension $D=4$ is an input.\\
+A10 & The $\xi=\tfrac14$ scalar operator stands in for Dirac in the planar test ($a_4$ spin terms not matched).\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+
+\section{Tests}
+\label{sec:tests}
+
+All tests use numpy/scipy; each script prints its own tables. Scripts are in the repository
+folder referenced by \texttt{\textbackslash repo} (edit the macro at the top of this file).
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll p{8cm}@{}}
+\toprule
+Section & Script & Checks\\
+\midrule
+\ref{sec:sphere2} & \testfile{spectral_weyl_check.py} & Weyl law (torus, inconclusive); curvature term on icosphere \\
+\ref{sec:sphere2} & \testfile{sphere_cost_scan.py} & $S^2$, $C(R)$ for several $f$ \\
+\ref{sec:s4} & \testfile{s4_cost_scan.py} & $S^4$, scalar vs Dirac sign of $R$-term\\
+\ref{sec:s2s2} & \testfile{s2xs2_cost_scan.py} & $S^2\times S^2$, anisotropy, stationary point\\
+\ref{sec:flux} & \testfile{flux_s2xs2.py} & Flux source, Einstein--Maxwell correspondence\\
+\ref{sec:maxwell} & \testfile{maxwell_from_spectrum.py} & Variation of $A$; Maxwell term; gauge invariance\\
+\ref{sec:static} & \testfile{two_scenarios_static_universe.py} & $S^3\times S^1$ static universe, two readings of the linear cost\\
+\ref{sec:planar} & \testfile{poisson_inhomogeneous.py} & Planar inhomogeneous test, Poisson limit\\
+\ref{sec:planar} & \testfile{poisson_eps_scaling.py} & Amplitude extrapolation of the planar Hessian\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{Two-dimensional warm-up: \texorpdfstring{$S^2$}{S2} and a discretized sphere}
+\label{sec:sphere2}
+
+\textbf{Scripts:} \testfile{spectral_weyl_check.py}, \testfile{sphere_cost_scan.py}.
+
+
+In $d=2$ the curvature term $\int R$ is topological, so these runs test the machinery, not the dynamics.
+For smooth $f$ the prediction is $C(R)\simeq f_2\,(\Lambda R)^2+\tfrac13 f(0)$ on a round sphere of radius $R$.
+With exact spectra ($\lambda_l=l(l+1)/R^2$) and $R\in[4,14]$:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$f$ & fit $a$ & predicted $f_2$ & fit $b$ & predicted $f(0)/3$\\
+\midrule
+$e^{-x}$ & 1.0000 & 1.0000 & 0.336 & 0.333\\
+$xe^{-x}$ & 1.0000 & 1.0000 & $-0.003$ & 0\\
+$x\,\theta(1-x)$ (linear cost, hard cutoff) & 0.516 & 0.5 & 0.60 & 0\\
+$x^2\theta(1-x)$ (control) & 0.349 & 0.333 & 0.61 & 0\\
+$\theta(1-x)$ (hard step) & 1.016 & 1.0 & 0.92 & 0.333\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Smooth cutoffs match with residual $\sim\!2\times10^{-3}$. Hard cutoffs give residuals $\sim10$
+from modes crossing the cutoff (Weyl fluctuations) and distorted fits.
+\textbf{Consequence:} the linear cost with a sharp cutoff cannot be used to read off geometry; a smooth
+cutoff is required.
+
+On an icosphere with the cotangent Laplacian and lumped mass matrix (2562 nodes), $K(t)-1/t$ tracks
+the exact sphere value ($0.362$ vs.\ $0.347$ at $t=0.2$; $0.365$ vs.\ $0.362$ at $t=0.4$), the
+lowest eigenvalues are $2.000$ and $5.99$ (exact $2$, $6$), and the error at $t=0.05$ falls from
+$1.28$ to $0.28$ between 642 and 2562 nodes. A discrete spectrum therefore carries the curvature
+coefficient.
+
+\textbf{Inconclusive:} the Weyl counting test on a $40\times40$ torus gave ratios $0.93$--$1.32$, and the random-graph
+control gave $1.2$--$1.9$. Staircase noise from degeneracies dominates, so this test does not
+discriminate geometry from no geometry at this size and should not be cited.
+
+
+\subsection{\texorpdfstring{$S^4$}{S4}: scalar versus Dirac}
+\label{sec:s4}
+\textbf{Script:} \testfile{s4_cost_scan.py}.
+
+On the round $S^4$ (exact scalar spectrum $l(l+3)/R^2$; Dirac $D^2$ eigenvalues $(n+2)^2/R^2$) the prediction from \eqref{eq:HK} is
+\begin{align}
+\text{scalar:}&\quad C\simeq\tfrac16 f_4R^4+\tfrac13 f_2R^2+f_0\tfrac{29}{90},\\
+\text{Dirac:}&\quad C\simeq\tfrac23 f_4R^4-\tfrac23 f_2R^2+f_0\,a_4^{D}.
+\end{align}
+For $f=e^{-x}$ ($f_2=f_4=1$), fitted vs.\ predicted coefficients:
+\begin{center}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & $R^4$ fit & $R^4$ pred. & $R^2$ fit & $R^2$ pred.\\
+\midrule
+scalar & 0.1667 & 0.1667 & $+0.333$ & $+0.333$\\
+Dirac & 0.6667 & 0.6667 & $-0.667$ & $-0.667$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Residuals are $10^{-3}$ to $10^{-5}$. \textbf{The $R^2$ term is the Einstein--Hilbert term; its sign is operator dependent:} the scalar spectrum gives the wrong
+sign for Euclidean gravity ($S_E\supset-\int R/16\pi G$), the spinor spectrum the right one.
+The control $f=x^2e^{-x}$ obeys the same expansion with different coefficients, so the check
+validates the machinery, not the choice of $f$.
+
+\textbf{No usable extremum.} For Dirac the asymptotic formula has a stationary point at
+$R^2\Lambda^2=f_2/(2f_4)=0.5$, outside the regime where the expansion holds; the exact $C(R)$ tends to $\approx0$ as
+$R\to0$. In this measure small universes are the cheapest. The volume term is $O(\Lambda^4)$ and the
+curvature term $O(\Lambda^2)$, so any saddle sits at Planck size unless the volume term is cancelled (A5).
+
+
+\subsection{\texorpdfstring{$S^2\times S^2$}{S2xS2}: anisotropy and a stationary point}
+\label{sec:s2s2}
+\textbf{Script:} \testfile{s2xs2_cost_scan.py}.
+
+With $x=r_1^2$, $y=r_2^2$, the prediction is
+\begin{align}
+\text{scalar:}&\quad C\simeq f_4xy+\tfrac{f_2}{3}(x+y)+a_4,\\
+\text{Dirac:}&\quad C\simeq 4f_4xy-\tfrac{2f_2}{3}(x+y)+a_4.
+\end{align}
+
+For $f=xe^{-x}$ ($f_2=1,f_4=2$, $f(0)=0$ so $a_4$ drops) the fits over $r_{1,2}\in[3,9]$ give
+$a=2.0000$, $b=+0.333$ (scalar) and $a=8.0000$, $b=-0.6665$ (Dirac), matching $f_4$, $f_2/3$, $4f_4$, $-2f_2/3$.
+With $C=a\,xy+b(x+y)$ the stationary conditions require $x=y=-b/a$, which needs $b<0$: only the Dirac sign has a
+stationary point. The pure cost puts it at Planck size, so we subtract a hand-chosen volume term
+$\mu\,xy$ with $\mu=a(1-\epsilon)$ \flag{A5, free parameter}. Then, for $\epsilon=0.01$ and $0.004$, the exact stationary points
+are $x=y=8.33$ and $20.83$ (analytic $-b/(a\epsilon)$), with Hessian eigenvalues $\mp 0.08$ and $\mp 0.032$.
+There is one negative direction (volume-preserving anisotropy), a feature I believe is
+shared by Euclidean Einstein gravity, but I have not checked this against the literature.
+The scalar case has no stationary point (the solver did not converge).
+The stationary point at $r_1=r_2$ is guaranteed by symmetry; the informative parts are the sign
+requirement and the Hessian.
+
+
+\subsection{A flux source: Einstein--Maxwell correspondence}
+\label{sec:flux}
+\textbf{Script:} \testfile{flux_s2xs2.py}.
+
+Put a $U(1)$ magnetic flux $n$ through $S^2(r_2)$ (field strength $B=n/2y$) and use the exact charged Dirac spectrum
+(on $S^2$: $k(k+|n|)/y$, multiplicity $2(2k+|n|)$, plus $|n|$ zero modes; this standard
+monopole result is validated by the fit below). Evaluating the heat-kernel $a_4$ coefficient (standard Gilkey formula; my own evaluation)
+for the Dirac operator on $S^2\times S^2$ gives
+\begin{equation}
+C\simeq4f_4xy-\tfrac23f_2(x+y)+f_0\Big[\tfrac{40-24(x/y+y/x)}{360}+\tfrac{n^2x}{3y}\Big].
+\label{eq:Cflux}
+\end{equation}
+The gauge-field term in the $a_4$ density is $\tfrac1{16\pi^2}\tfrac23 f_{\mu\nu}f^{\mu\nu}$, so
+$\Delta C=\tfrac{f_0}{24\pi^2}\int f_{\mu\nu}f^{\mu\nu}$. For $f=e^{-x}$, the difference between exact and
+\eqref{eq:Cflux} is $\sim10^{-3}$ at $n=0$ and at most $0.04$ at $n=3$.
+
+\textbf{Stationary points} of $C-\mu\,xy$ with $\epsilon=0.01$ (A5, A6):
+
+\begin{center}
+\small
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$n$ & analytic $(x,y)$ & exact $(x,y)$ & $x/y$\\
+\midrule
+0 & (16.67, 16.67) & (16.67, 16.67) & 1.000\\
+1 & (17.22, 16.15) & (17.21, 16.16) & 1.065\\
+2 & (19.89, 14.34) & (19.85, 14.37) & 1.381\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Flux on $S^2(r_2)$ shrinks it and enlarges the other sphere, the direction required by Einstein--Maxwell.
+The Hessian keeps one negative eigenvalue. Comparing with the Euclidean Einstein--Maxwell equations
+(which I wrote myself and which deserve an independent check) gives
+$1/x=1/y-2\pi G n^2/(e^2y^2)$, matching the cost iff
+
+\begin{equation}
+\frac{2\pi G}{e^2}=\frac{f_0}{f_2}.
+\label{eq:Ge}
+\end{equation}
+
+An independent action-level match gives $G=3\pi/(\kappa f_2)$ and $1/e^2=\kappa f_0/(6\pi^2)$; the ratio
+reproduces \eqref{eq:Ge} and $\kappa$ drops out.
+
+\textbf{Control ($f=xe^{-x}$, $f(0)=0$).} The Maxwell term sits at $a_4$ and multiplies $f(0)$, so no leading-order
+flux effect is expected. At $n=2$ the exact result is $x/y=0.988$: small, in the opposite direction, attributed (but not shown) to a
+subleading term. \textbf{Gravity and matter couple through different moments of $f$:} curvature and volume through
+$f_2,f_4$; the gauge term through $f(0)$.
+
+\textbf{Limits.} The flux $n$ is a fixed quantized background; the gauge field was not varied here;
+$n$ is not selected by anything; at fixed geometry, $\Delta C=f_0n^2x/(3y)$ would suppress flux
+sectors by $2^{-n^2x/3y}$ (assuming $\kappa=\ln2$), a mild effect not tested jointly with geometry readjustment.
+
+
+\subsection{Varying the gauge field: Maxwell from the spectrum}
+\label{sec:maxwell}
+\textbf{Script:} \testfile{maxwell_from_spectrum.py}.
+
+On flat $T^2(L)\times T^2(L)$ ($L=20$, no curvature) a charge-1 field $A_2=a\cos(kx_1)$ (transverse) enters the Dirac operator.
+With $f=e^{-x}$ the cost factorizes and the exact spectrum is obtained by Fourier-basis
+diagonalization (sanity check against the $A=0$ trace: agreement to 8 digits). The prediction is
+$\Delta C=f_0L^4a^2k^2/(24\pi^2)$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$k$ & $\Delta C/\mathrm{pred}$ ($f=e^{-x}$) & $\Delta C/\mathrm{pred}$ (control $f=xe^{-x}$)\\
+\midrule
+0.314 & 0.9805 & 0.019\\
+0.628 & 0.9243 & 0.073\\
+0.942 & 0.838 & 0.147\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Doubling the amplitude $a$ quadruples $\Delta C$ to four digits. A pure-gauge field $A_1=a\cos(kx_1)$ gives $\Delta C\approx10^{-12}$.
+The response is $\propto k^2$ for transverse fields and zero for longitudinal ones: the Maxwell structure
+$k^2\delta^{\mu\nu}-k^\mu k^\nu$. The quadratic form is positive for $k\neq0$, so the only stationary point is $a=0$ and the field equation is $\partial_\mu f^{\mu\nu}=0$.
+The ratio falls roughly as $1-0.2\,k^2/\Lambda^2$ (a higher-derivative correction not derived here); the control vanishes as $k\to0$
+as expected for $f(0)=0$.
+\textbf{Limits:} only the quadratic response about $A=0$ on flat tori; no charged sources, no non-abelian fields, no nonlinear response.
+
+
+\subsection{Static universe: two readings of the per-mode cost}
+\label{sec:static}
+
+\textbf{Script:} \testfile{two_scenarios_static_universe.py}.
+
+\paragraph{The mismatch.} The cost \eqref{eq:Cs} sums over the active modes of a state, whereas the spectral cost sums over all
+eigenmodes of the geometry's operator. We test two bridges on $S^3(r)\times S^1(\beta)$ with $\beta\gg1/\Lambda$,
+Dirac modes $\omega_n=(n+\tfrac32)/r$:
+\begin{description}
+\item[Scenario 1:] full spectral geometry term with smooth $f$, plus the linear cost $N\omega_0/\Delta\omega$ on $N$ \emph{occupied} quanta
+of the lowest mode, with the identification $\beta=\kappa/\Delta\omega$ \flag{A7, assumption}. The identification makes the matter
+cost proportional to $\beta$, so varying $\beta$ gives the Hamiltonian constraint with the matter energy in it.
+\item[Scenario 2:] the linear cost on \emph{all} modes with no separate geometry term (vacuum cost $E(r)=\sum_n 2(n+1)(n+2)\,\omega_ne^{-\omega_n^2}$).
+\end{description}
+
+\paragraph{Scenario 1.} The exact geometry term is $e_1(r)=\tfrac12r^3-\tfrac14r$ (no $1/r$ or $1/r^3$ corrections at the 5-digit level),
+matching the heat-kernel coefficients. Imposing both stationarity conditions (with the counterterm $m$ solved for) gives
+the Einstein-static-universe radius $r^2=12N/(\kappa f_2)$ with $G$ from \eqref{eq:G}:
+
+\begin{center}
+\small
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$N$ & $r$ (exact) & $r^2/r^2_{\mathrm{Einstein}}$\\
+\midrule
+5 & 9.304 & 1.0000\\
+10 & 13.158 & 1.0000\\
+20 & 18.608 & 1.0000\\
+40 & 26.315 & 1.0000\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Note:} The ratio is exactly 1 because $e_1$ has no corrections, so this is an algebraic check: the two stationarity conditions
+reproduce the Hamiltonian constraint and the pressure equation, with the same $G$ in the curvature term and the source coupling. It is not independent evidence
+for the linear cost. A matter cost scaling as $r^{-s}$ passes for $s=0$ (dust-like, $r=129.843$), $s=1$ (radiation-like, $13.158$) and
+$s=2$ ($6.004$), each equal to the Einstein-static radius, at $N=10$. So the test does not single out linear-in-$\omega$: whatever cost is
+proportional to $\beta$ gravitates as energy. If $\Delta\omega$ were independent of $\beta$, the $\beta$-equation would contain no matter
+(argued algebraically, not run).
+
+\paragraph{Scenario 2.} The vacuum cost fits $E(r)=r^3-\tfrac14r+c/r$, with the same Einstein--Hilbert-like coefficient $-\tfrac14$ and
+a Casimir-like $c=-0.0354$, matching $-17/480$ once the third Euler--Maclaurin term is included. With the $\beta$-equation imposed,
+the $r$-condition is $F(r)=rE'-3E=-2Br-4c/r$ with $B=-\tfrac14$ and $c<0$, i.e.\ both terms positive. Numerically $F=0.82,\,2.53,\,5.01,\,10.0$ at $r=1,5,10,20$ and there is no root on $[0.2,20]$:
+\textbf{no static solution.} The vacuum term adds to the curvature term and does not oppose it. The sign of $c$
+depends on the field content (Dirac counting assumed here), so I do not claim scenario 2 is excluded for every field content. Scenario 2 also has no tunable matter and, with $f(0)=0$, no Maxwell term at leading order.
+
+\paragraph{Conclusion.} Scenario 1 works with three requirements: a distinction between occupied and unoccupied modes, the identification
+$\beta=\kappa/\Delta\omega$, and a separate smooth $f$ with $f(0)\neq0$ for the gauge sector.
+
+
+\subsection{Planar inhomogeneous test: the Poisson limit}
+\label{sec:planar}
+\textbf{Scripts:} \testfile{poisson_inhomogeneous.py}, \testfile{poisson_eps_scaling.py}.
+
+\paragraph{Setup.} Metric $ds^2=N(z)^2\dd\tau^2+e^{2\sigma(z)}(\dd x^2+\dd y^2+\dd z^2)$, long $\tau$-circle, large transverse area, $z$ periodic with $L_z=40$.
+The operator is $L=-\nabla_4^2+\xi R_4$ with $\xi=\tfrac14$ and multiplicity $4$ (A10), $f=e^{-x}$. With $N=1+\delta\cos kz$ and $\sigma=\epsilon\cos kz$, the heat-kernel prediction
+is $C/(\beta A_\perp)\simeq\tfrac1{4\pi^2}\!\int\!\dd z\,Ne^{3\sigma}[f_4+f_2(\tfrac16-\xi)R_3]$ (the total derivative in $R_4$ drops). After
+tuning away the volume term (A5), the Hessian at amplitude $\cos kz$ is
+\begin{equation}
+C_{\epsilon\delta}=C_{\epsilon\epsilon}=\frac{L_z}{8\pi^2}\,4f_2\big(\tfrac16-\xi\big)k^2,\qquad C_{\delta\delta}=0 .
+\end{equation}
+The spectrum is computed with a Fourier-pseudospectral discretization in $z$ and Gauss quadrature over $\omega$ and $k_\perp$.
+Sanity check $C_0=L_z/4\pi^2$ agrees to 14 digits (after fixing the Nyquist artifact, Section~\ref{sec:failures}).
+
+\paragraph{Results ($\xi=\tfrac14$), amplitude-extrapolated.}
+\begin{center}
+\small
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$k$ & $C_{\epsilon\delta}$ (units $L_z/8\pi^2$) & predicted $-k^2/3$ & $C_{\epsilon\epsilon}/C_{\epsilon\delta}$\\
+\midrule
+0.314 & $-0.0326$ & $-0.0329$ & 0.970\\
+0.471 & $-0.0724$ & $-0.0740$ & 0.933\\
+0.628 & $-0.1265$ & $-0.1316$ & 0.880\\
+\bottomrule
+\end{tabular}
+\end{center}
+The $k^2$ slope extrapolates to $f_{2,\mathrm{eff}}=1.00$, so $G_{\mathrm{eff}}=3\pi/(\kappa f_2)\approx13.6$ (cutoff units, $\kappa=\ln2$): the same $G$ as in the static test. With matter coupled as
+$N\rho$ (A8), the constraint gives $\sigma=4\pi G\rho_a/k^2$; with $\Phi=N-1$ this is $\nabla^2\Phi=4\pi G\rho$, an attractive potential.
+The $\sigma$-equation requires $C_{\epsilon\epsilon}=C_{\epsilon\delta}$ (Newtonian gauge $N-1=-\sigma$); the ratio tends to 1 as $k\to0$. Also $C_{\delta\delta}=0.0487\,k^4$:
+linear in the lapse at leading order, with an $a_4$-type $k^4$ correction.
+Deviations grow like $k^2/\Lambda^2$ (about $0.1k^2$ for $C_{\epsilon\delta}$, $0.3k^2$ for the ratio), so Poisson holds only for wavelengths well above $1/\Lambda$.
+
+\paragraph{Controls.} $\xi=0$ (minimal scalar): $C_{\epsilon\delta}>0$ (about $+\tfrac23k^2$), i.e.\ repulsive gravity.
+$\xi=\tfrac16$ (conformal): no systematic $k^2$ term, i.e.\ no gravitational coupling. The check discriminates, and the spinor-type
+curvature coupling sets the sign.
+
+\paragraph{Limits.} Planar symmetry and weak field only; matter not simulated (assumed to couple as $N\rho_{\mathrm{loc}}$,
+dust-like); no point source with $1/r$ falloff; no nonlinear response; no Lorentzian dynamics.
+
+
+\section{Summary of relations obtained}
+\label{sec:summary}
+Under Assumptions A1--A10, with $\Lambda=1$:
+
+\begin{align}
+G&=\frac{3\pi}{\kappa f_2}, & \frac1{e^2}&=\frac{\kappa f_0}{6\pi^2}, & \frac{2\pi G}{e^2}&=\frac{f_0}{f_2},\\
+\Delta C_{\mathrm{gauge}}&=\frac{f_0}{24\pi^2}\!\int\! f_{\mu\nu}f^{\mu\nu}, &
+r^2_{\mathrm{static}}&=\frac{12N}{\kappa f_2}, & \nabla^2\Phi&=4\pi G\rho.
+\end{align}
+
+Gravity (curvature and volume) is carried by the energy-weighted moments $f_2,f_4$ and the gauge coupling by $f(0)$; the
+ratio $G/e^2$ is $\kappa$-independent and fixed by the cutoff profile.
+
+
+\section{Failures, corrections and weak points}
+\label{sec:failures}
+This is a complete log of what did not work or was corrected during the work.
+\begin{enumerate}
+\item \textbf{Hard cutoffs fail} (Section~\ref{sec:sphere2}): sawtooth from mode crossings, wrong constant term; the linear cost needs a smooth cutoff.
+\item \textbf{Weyl counting test inconclusive} on a $40\times40$ torus; the random-graph control did not separate (ratios $1.2$--$1.9$ vs.\ $0.93$--$1.32$).
+\item \textbf{No usable extremum} on $S^2$/$S^4$ without the hand-tuned volume counterterm: the exact $C(R)\to0$ as $R\to0$; the asymptotic stationary
+point at $R^2\Lambda^2=0.5$ lies outside the expansion's validity. The cosmological-constant problem is not addressed; any saddle is Planck sized unless A5 holds.
+I did not separate the non-monotone sawtooth of hard-cutoff $C(R)$ from a real minimum.
+\item \textbf{Scalar operator gives the wrong sign} of the curvature term (no stationary geometry on $S^2\times S^2$; repulsive in the planar test).
+\item \textbf{Control $f=xe^{-x}$ in the flux test} gave $x/y=0.988$ at $n=2$ (small, opposite direction) rather than exactly $1$; attributed, not derived, to a subleading term.
+\item \textbf{Static-universe agreement is algebraic}: $e_1(r)$ has no corrections, and the controls $s=0,1,2$ also pass, so the test does not single out linear-in-$\omega$.
+\item \textbf{Scenario 2 has no static solution} (for Dirac counting).
+\item \textbf{Higher-derivative corrections} in the Maxwell and Poisson tests ($\sim0.2k^2$, $0.1k^2$, $0.3k^2$) were measured, not derived.
+\item \textbf{Euclidean instability:} the stationary points have a negative Hessian direction; I believe this matches Euclidean Einstein gravity but did not verify.
+\end{enumerate}
+\textbf{Errors of mine that were caught and fixed} (included for the record; the numbers above are post-correction):
+\begin{itemize}
+\item In the planar test, an even Fourier grid left a spurious Nyquist zero mode, giving a 9\% error in the sanity check; fixed with an odd grid, after which the check agrees to 14 digits. The first run's numbers were discarded.
+\item The first run of the static-universe script crashed in the controls section (root bracket too narrow), so the scenario-2 search did not run; fixed and rerun.
+\item My first Euler--Maclaurin estimate of the Casimir-like coefficient ($-1/48$) omitted a term; the fit gives $-0.0354=-17/480$. I also wrote the scenario-2 stationarity condition with a wrong sign for the $B$ term at first; the corrected form shows no root.
+\end{itemize}
+\textbf{Not independently verified:} the Gilkey $a_4$ evaluation (self-computed, validated only by the numerical fits above), the Euclidean Einstein--Maxwell equations
+used in Section~\ref{sec:flux}, the monopole-Dirac spectrum (validated through the fit), and the claim that the sign structure matches the Chamseddine--Connes result (recalled from the literature).
+
+
+\section{What has not been shown}
+\label{sec:open}
+
+\begin{itemize}
+\item A derivation of the cutoff $f$, $\Lambda$, $\kappa$ or the cosmological cancellation $\epsilon$.
+\item Lorentzian signature and causality; the Euclidean cost over the whole history is assumed.
+\item The origin of $D=4$.
+\item The occupied-mode prescription and $\beta=\kappa/\Delta\omega$ from the simulation's observer filter; $N$ is a free input.
+\item Full Einstein equations with dynamical matter; non-planar sources; nonlinear response; non-abelian gauge fields; charged sources; selection of the flux sector.
+\item Any test of the lognormal expansion picture.
+\end{itemize}
+
+
+\section{Proposed stress tests}
+\label{sec:stress}
+\begin{enumerate}
+\item \textbf{Cutoff dependence.} Repeat all tests for several smooth $f$ (including ones with $f(0)=0$, $f(0)\neq0$, different $f_2/f_4$); quantify which conclusions are cutoff independent.
+\item \textbf{Independent verification of formulas.} Re-derive the $a_4$ gauge and curvature coefficients symbolically and against Vassilevich's tables; check the Euclidean Einstein--Maxwell equations independently.
+\item \textbf{Other geometries.} Non-Einstein metrics, $S^2\times S^2$ with unequal gauge flux, $\mathbb{CP}^2$, squashed spheres; spherically symmetric point sources ($1/r$).
+\item \textbf{Dynamical gauge sector.} Sum over flux sectors with the exact weights; vary $A$ nonperturbatively; non-abelian extension.
+\item \textbf{Numerics robustness.} Grid, quadrature and basis-size convergence; confirm that $O(\epsilon^2)$ and $O(k^2)$ corrections scale as claimed.
+\item \textbf{Higher-order terms.} Compute the $a_6$ corrections and compare with the measured $0.1$--$0.3\,k^2$ deviations.
+\item \textbf{Occupied versus all modes on real states.} Apply the cost literally to the simulation's sampled wavefunctions and see whether the $\beta=\kappa/\Delta\omega$ identification emerges or must be imposed.
+\item \textbf{Observer filter and the cosmological term.} Determine whether the observer-filter selection can supply $\epsilon$ and the lognormal time dependence.
+\item \textbf{Dimension dependence.} Repeat with $D=3,5,6$ using a documented normalization convention to see whether $D=4$ is singled out.
+\item \textbf{Lorentzian signature and stability.} Study the negative Hessian modes and the conformal-factor problem; attempt a Lorentzian treatment.
+\item \textbf{Adversarial controls.} For every ``conservation''-type or consistency check, evaluate it on a deliberately wrong alternative and flag tautologies, as done here for $\xi$, $f(0)$, $s$ and the matter-cost scaling.
+\end{enumerate}
+
+
+\section{Reproducibility}
+
+All scripts use \texttt{numpy} and \texttt{scipy} (Python~3). Each is run as \texttt{python <script>} and prints its own tables.
+Runtimes are seconds to a few minutes. Script-to-section mapping is given in Section~\ref{sec:tests}; edit the macro
+\texttt{\textbackslash repo} at the top of this file to point to your repository.
+
+\section*{Acknowledgments}
+
+The numerical exploration and drafting of this note were assisted by Claude (Anthropic). The scientific direction,
+assumptions and framework are the author's. The results have not been independently reviewed.
+
+\end{document}

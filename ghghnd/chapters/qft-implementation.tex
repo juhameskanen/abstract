@@ -80,148 +80,171 @@ To simulate the Standard Model we need multiple fields, one for each fundamental
 
 \subsection*{Second Quantization: Allowing Particle Number to Change}
 
-The true conceptual jump from ordinary quantum mechanics to quantum field theory is not relativity alone.
-It is the abandonment of fixed particle number.
+The true conceptual jump from ordinary quantum mechanics to quantum field
+theory is not relativity alone. It is the abandonment of fixed particle number.
 
-In introductory QM, one typically studies a wavefunction describing exactly one particle:
+In introductory QM, one studies a wavefunction for exactly $N$ particles,
+$\Psi(\mathbf{x}_1,\dots,\mathbf{x}_N,t)$, with $N$ assumed from the start and
+never changing. This works remarkably well for atoms, molecules, and
+condensed matter. At high energies, nature does not respect this restriction:
 \[
-\Psi(\mathbf{x}, t)
+\gamma \rightarrow e^- + e^+ ,
+\qquad
+e^- + e^+ \rightarrow \gamma + \gamma .
 \]
-or perhaps a fixed number of particles:
-\[
-\Psi(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_N, t)
-\]
+A fixed-$N$ Hilbert space is no longer sufficient. We need a single space that
+contains states with every particle number at once. This is the idea of
+\textbf{second quantization}.
 
-The number of particles is assumed from the beginning and never changes.
-This works remarkably well for low-energy systems such as atoms, molecules, and condensed matter systems.
+\subsubsection*{Conventions}
 
-However, at sufficiently high energies, nature does not respect this restriction.
-Particles can be created, annihilated, or transformed into entirely different particles:
-\[
-\gamma \rightarrow e^- + e^+
-\]
-\[
-e^- + e^+ \rightarrow \gamma + \gamma
-\]
-
-A fixed-particle Hilbert space is therefore no longer sufficient.
-We need a framework capable of describing states with arbitrary particle number.
-
-This leads to the idea of \textbf{second quantization}.
+Throughout we use natural units $\hbar = c = 1$ and the mostly-plus metric
+signature $(-+++)$, so that $k\cdot x = \mathbf{k}\cdot\mathbf{x} - \omega t$.
+To avoid infinities in the bookkeeping, we first put the system in a cubic box
+of side $L$ and volume $V = L^3$ with periodic boundary conditions. The allowed
+momenta are then discrete, $\mathbf{k} = 2\pi\mathbf{n}/L$ with
+$\mathbf{n}\in\mathbb{Z}^3$, and we take $L\to\infty$ at the end.
 
 \subsubsection*{From Wavefunctions to Occupation Numbers}
 
-Instead of tracking individual particles directly, QFT tracks the occupation of field modes.
-
-For each momentum mode $\mathbf{k}$, we associate an occupation number:
+Instead of tracking individual particles, QFT tracks the occupation of modes.
+Each allowed momentum $\mathbf{k}$ carries an occupation number
 \[
-n_{\mathbf{k}} = 0,1,2,\dots
+n_{\mathbf{k}} = 0,1,2,\dots \quad\text{(bosons)},
+\qquad
+n_{\mathbf{k}} = 0,1 \quad\text{(fermions)}.
 \]
-
-A quantum state is then described by listing how many quanta occupy each mode:
+A state is specified by listing how many quanta sit in each mode,
 \[
-|n_{\mathbf{k}_1}, n_{\mathbf{k}_2}, n_{\mathbf{k}_3}, \dots \rangle
+|n_{\mathbf{k}_1}, n_{\mathbf{k}_2}, n_{\mathbf{k}_3},\dots\rangle ,
 \]
+called a \textbf{Fock state}. The vacuum $|0\rangle$ has every $n_{\mathbf{k}}=0$.
 
-This is called a \textbf{Fock state}.
+\subsubsection*{Creation and Annihilation Operators}
 
-The vacuum state contains no particles at all:
+For each mode we introduce an annihilation operator $a_{\mathbf{k}}$ and its
+adjoint, the creation operator $a^\dagger_{\mathbf{k}}$. Their action on a mode
+occupied by $n$ bosons is
 \[
-|0\rangle
+a^\dagger_{\mathbf{k}}\,|n\rangle = \sqrt{n+1}\,|n+1\rangle ,
+\qquad
+a_{\mathbf{k}}\,|n\rangle = \sqrt{n}\,|n-1\rangle ,
+\qquad
+a_{\mathbf{k}}|0\rangle = 0 .
 \]
-
-A single-particle excitation with momentum $\mathbf{k}$ is created by applying a creation operator:
+A state with $n$ identical bosons in one mode is therefore
 \[
-a^\dagger(\mathbf{k}) |0\rangle
+\frac{(a^\dagger_{\mathbf{k}})^n}{\sqrt{n!}}\,|0\rangle .
 \]
+The number operator $\hat n_{\mathbf{k}} = a^\dagger_{\mathbf{k}}a_{\mathbf{k}}$
+counts the quanta in a mode.
 
-Two identical bosons in the same mode:
+Quantum statistics lives entirely in the algebra of these operators.
+\textbf{Bosons} obey commutation relations:
 \[
-\frac{(a^\dagger(\mathbf{k}))^2}{\sqrt{2!}} |0\rangle
+[a_{\mathbf{k}}, a^\dagger_{\mathbf{k}'}] = \delta_{\mathbf{k}\mathbf{k}'},
+\qquad
+[a_{\mathbf{k}}, a_{\mathbf{k}'}] = [a^\dagger_{\mathbf{k}}, a^\dagger_{\mathbf{k}'}] = 0 .
 \]
-
-The operators satisfy algebraic rules encoding quantum statistics.
-
-For bosons:
+\textbf{Fermions} obey anticommutation relations:
 \[
-[a(\mathbf{k}), a^\dagger(\mathbf{k}')] =
-\delta^{(3)}(\mathbf{k}-\mathbf{k}')
+\{a_{\mathbf{k}}, a^\dagger_{\mathbf{k}'}\} = \delta_{\mathbf{k}\mathbf{k}'},
+\qquad
+\{a_{\mathbf{k}}, a_{\mathbf{k}'}\} = \{a^\dagger_{\mathbf{k}}, a^\dagger_{\mathbf{k}'}\} = 0 .
 \]
-
-For fermions:
+The Pauli exclusion principle follows from the last relation, not from the
+first: setting $\mathbf{k}=\mathbf{k}'$ in $\{a^\dagger,a^\dagger\}=0$ gives
+$2(a^\dagger_{\mathbf{k}})^2=0$, so
 \[
-\{a(\mathbf{k}), a^\dagger(\mathbf{k}')\} =
-\delta^{(3)}(\mathbf{k}-\mathbf{k}')
+(a^\dagger_{\mathbf{k}})^2 = 0 .
 \]
-
-The fermionic anticommutation relation automatically produces the Pauli exclusion principle:
-\[
-(a^\dagger)^2 = 0
-\]
-
-Meaning that two identical fermions cannot occupy the same quantum state.
+Two identical fermions cannot occupy the same quantum state.
 
 \subsubsection*{The Field Operator}
 
-The quantum field itself is no longer an ordinary function.
-It becomes an operator-valued object:
+The quantum field is no longer an ordinary function. It is an operator-valued
+object, built from all the creation and annihilation operators. For the
+simplest case, a free real scalar field of mass $m$ (a spin-0 boson),
 \[
-\hat{\phi}(x)
+\hat{\phi}(\mathbf{x},t)
+=
+\frac{1}{\sqrt{V}}\sum_{\mathbf{k}}
+\frac{1}{\sqrt{2\omega_{\mathbf{k}}}}
+\left(
+a_{\mathbf{k}}\, e^{i(\mathbf{k}\cdot\mathbf{x}-\omega_{\mathbf{k}}t)}
++
+a^\dagger_{\mathbf{k}}\, e^{-i(\mathbf{k}\cdot\mathbf{x}-\omega_{\mathbf{k}}t)}
+\right),
+\qquad
+\omega_{\mathbf{k}}=\sqrt{\mathbf{k}^2+m^2}.
 \]
-
-Roughly speaking, the field operator is built from all creation and annihilation modes:
+In the limit $L\to\infty$ the sum becomes an integral,
+$\frac{1}{V}\sum_{\mathbf{k}}\to\int\!\frac{d^3k}{(2\pi)^3}$, and rescaling
+$a_{\mathbf{k}}\to a(\mathbf{k})/\sqrt{V}$ gives
 \[
 \hat{\phi}(x)
 =
-\int \frac{d^3k}{(2\pi)^3}
+\int\!\frac{d^3k}{(2\pi)^3}\,\frac{1}{\sqrt{2\omega_{\mathbf{k}}}}
 \left(
-a(\mathbf{k}) e^{-ikx}
+a(\mathbf{k})\, e^{ik\cdot x}
 +
-a^\dagger(\mathbf{k}) e^{ikx}
-\right)
+a^\dagger(\mathbf{k})\, e^{-ik\cdot x}
+\right),
+\qquad
+[a(\mathbf{k}),a^\dagger(\mathbf{k}')]=(2\pi)^3\delta^{(3)}(\mathbf{k}-\mathbf{k}').
 \]
+Compare the first term with the plane waves of the previous section: each mode
+is exactly $e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}$. The only change is that
+$\omega = k^2/2m$ has been replaced by $\omega_{\mathbf{k}}=\sqrt{k^2+m^2}$.
+That replacement is the hinge between non-relativistic QM and relativistic QFT.
+(For $k\ll m$, $\omega_{\mathbf{k}}\approx m + k^2/2m$, so the old dispersion
+relation is recovered up to the rest energy.)
 
-This expression is enormously important conceptually.
+The factor $1/\sqrt{2\omega_{\mathbf{k}}}$ is not decoration. It is what makes
+the field and its conjugate momentum $\hat\pi=\dot{\hat\phi}$ satisfy the
+canonical relation $[\hat\phi(\mathbf{x},t),\hat\pi(\mathbf{y},t)]=i\,\delta^{(3)}(\mathbf{x}-\mathbf{y})$.
 
-The annihilation operator removes a particle from a momentum mode.
-The creation operator adds one.
-The field therefore becomes a machine capable of changing particle number dynamically.
+The annihilation operator removes a quantum from a mode, and the creation
+operator adds one. The field is therefore a machine that changes particle
+number. Particles are no longer fundamental objects; they are excitations
+produced by the field acting on the vacuum, as in $a^\dagger(\mathbf{k})|0\rangle$.
 
-In this sense, particles are no longer fundamental objects.
-They are excitations generated by the field operators acting on the vacuum.
+\subsubsection*{The Field as a Collection of Oscillators}
 
-\subsubsection*{A Programmer's Interpretation}
-
-In ordinary QM, one could imagine the wavefunction as a single object being updated over time.
-
-In QFT, the architecture changes completely.
-
-The system now resembles:
-\begin{itemize}
-\item a potentially infinite collection of oscillatory modes,
-\item a shared vacuum state,
-\item and operators that modify the occupation of those modes.
-\end{itemize}
-
-Conceptually, the theory behaves less like a simulation of individual particles and more like a distributed state machine operating on an infinite-dimensional Hilbert space.
-
-The familiar ``particle'' picture survives only as an approximation valid when localized excitations behave independently.
+Each mode contributes an independent harmonic oscillator to the Hamiltonian:
+\[
+\hat H = \sum_{\mathbf{k}}\omega_{\mathbf{k}}
+\left(a^\dagger_{\mathbf{k}}a_{\mathbf{k}}+\tfrac12\right).
+\]
+The $\tfrac12$ is the zero-point energy of each oscillator. Summed over
+infinitely many modes it diverges, which is our first encounter with an infinity
+(it is harmless for the physics, since only energy differences are observable
+without gravity, and then it becomes the cosmological constant problem).
 
 
 \subsection*{The Field as a Collection of Oscillators}
 
 In the free theory, a quantum field in momentum space is equivalent to a set of harmonic oscillators, one per momentum mode.
 
-\begin{lstlisting}[language=C++, caption=Free Quantum Field (Momentum Space)]
-class QuantumField {
-    const double m;  // Mass of quanta of this field
-    // In practice: continuous or discretized over a box
-    std::map<Vector3, QuantumOscillator> modes; // or FFT-based grid
+\begin{lstlisting}[language=C++, caption=Free Bosonic Field as a Fock State (Single Mode Shown)]
+struct FockMode {
+    int n = 0;  // occupation number of this momentum mode
 
-    void createParticle(Vector3 k, double amplitude = 1.0) {
-        modes[k].n++;           // Apply creation operator
-        // In full QFT this acts on the Fock state
+    // a^dagger |n> = sqrt(n+1) |n+1>
+    double create()  { double amp = std::sqrt(n + 1.0); n++; return amp; }
+
+    // a |n> = sqrt(n) |n-1>, and a|0> = 0
+    double annihilate() {
+        if (n == 0) return 0.0;
+        double amp = std::sqrt((double)n); n--; return amp;
     }
+};
+
+class QuantumField {
+    double m;                              // mass of the quanta
+    std::map<Vector3, FockMode> modes;     // one oscillator per momentum
+    // The state is a *vector* in the Fock space; this map holds a single
+    // basis state |{n_k}>. A general state is a superposition of such maps.
 };
 \end{lstlisting}
 

@@ -3,14 +3,6 @@
 
 \section{Introduction: Physics as Computation}
 
-Traditionally, physics has viewed the universe through the lens of continuous equations and calculus.
-However, our previous thought experiments suggest a radical alternative: the universe is not composed of physical ``stuff'' like particles, but of discrete information—bits. 
-
-If the laws of physics emerge from bits via decompression, then we landed in the world of computation and computers.
-Our most powerful analytical tool is no longer a telescope, but a computer.
-Under the \textbf{Church-Turing Thesis}, there is a fundamental equivalence between mathematics and computation.
-Whether we use the abstract tape of a Turing machine or the silicon circuits of a modern PC, the underlying logic remains identical.
-
 There is a theory called \emph{Algorithmic Information Theory} (AIT), pioneered in the 1960s by Ray Solomonoff, Andrey Kolmogorov, and Gregory Chaitin.
 AIT shifts the focus from what a system \emph{is} to the absolute computational work required to \emph{describe} it. 
 
@@ -20,8 +12,8 @@ Traditionally, physics uses \emph{Shannon entropy} to quantify uncertainty.
 However, Shannon's entropy is strictly a statistical measure: it tells you how surprising a message is relative to a pre-existing probability distribution of an entire ensemble.
 It cannot tell anything about the intrinsic information content of a single, isolated object.
 
-AIT fixes this.
-Instead of analyzing infinite ensembles, it asks a simple question about individual objects: what is the shortest computer program that can generate this specific data string?
+AIT offers a solution to this problem. Instead of analyzing infinite ensembles, it asks a simple question about individual objects: what is the shortest computer 
+program that can generate this specific data string?
 
 
 \section{Kolmogorov Complexity}
@@ -45,13 +37,15 @@ The mathematical link between description length and probability finds its ultim
 While Kolmogorov complexity quantifies the static information content of an isolated object,
 Solomonoff induction shifts the focus to optimal prediction: \emph{Given a sequence of observed data, what is the probability of the next bit?}
 
-To answer this, Solomonoff formulated the \textbf{Universal Prior} $M(x)$, which assigns a prior probability to a binary string $x$ based on all possible computer programs running on a Universal Turing Machine $U$ that can generate it. Formally, the probability of encountering a sequence starting with $x$ is defined as:
+To answer this, Solomonoff formulated the \textbf{Universal Prior} $M(x)$, which assigns a prior probability to a binary string $x$ based on all 
+possible computer programs running on a Universal Turing Machine $U$ that can generate it. Formally, the probability of encountering a sequence starting with $x$ is defined as:
 
 \[
 M(x) = \sum_{p: U(p) = x*} 2^{-|p|}
 \]
 
-where $x$ represents any arbitrary output sequence that begins with the prefix $x$, and $|p|$ is the length of the program $p$ in bits. Because the terms scale exponentially as $2^{-|p|}$, the sum is aggressively dominated by the absolute shortest programs capable of producing the observed data. 
+where $x$ represents any arbitrary output sequence that begins with the prefix $x$, and $|p|$ is the length of the program $p$ in bits. 
+Because the terms scale exponentially as $2^{-|p|}$, the sum is aggressively dominated by the absolute shortest programs capable of producing the observed data. 
 
 This formulation mathematically mirrors our earlier thought experiment from Chapter~\nameref{chap:the-filter}.
 In the coin-tossed universe, we derived that the probability of an observer's existence scales strictly with their minimal description length:
@@ -62,43 +56,45 @@ P(\text{Alice}) = 2^{-m}
 
 where $m$ is the length of the macro-structural blueprint. 
 
-So it seems what our miniature coin universe demonstrated through intuitive combinatorics is functionally identical to the foundational premise of the Solomonoff Universal Prior and the Levin--Chaitin Algorithmic Coding Theorem.
+So it seems what our miniature coin universe demonstrated through intuitive combinatorics is functionally identical to the foundational premise of the Solomonoff Universal Prior 
+and the Levin--Chaitin Algorithmic Coding Theorem.
 By generating microstates uniformly at random, the emergence of any macroscopic structure is governed not by raw chance, but by the absolute brevity of its compressed description length.
-
 
 This relationship proves that simplicity, probability, and compressibility are mathematically equivalent.
 Shorter programs contribute exponentially more statistical weight than longer ones. 
 
-This provides an airtight, formal mathematical proof for our coin and pixel thought experiments: objects with short, elegant, recursive descriptions are exponentially more likely to spontaneously manifest than chaotic, uncompressible noise. 
+This provides an airtight, formal mathematical proof for our coin and pixel thought experiments: objects with short, elegant, recursive descriptions are exponentially more likely to 
+spontaneously manifest than chaotic, uncompressible noise. 
 
 
 \section{The Failure of Kolmogorov Complexity in Physics}
 
-To test the compression idea, let us apply ZIP compression (the closest thing to ideal Kolmogorov) to our \nameref{chap:from-nothing-to-something} big-bang simulations. We run
-the simulations many times, compress them and then pick those that compress the best.
+To test the compression idea, one can apply ZIP compression (the closest thing to ideal Kolmogorov) to our \nameref{chap:from-nothing-to-something} big-bang simulations. We run
+the simulations many times, compress them and then make a random selection.
 
 What do we see? 
 
-Still chaos.
+Just chaos.
 
 No beautiful spiral galaxies. All simulations still consistently yield chaotic noise. 
 
 AIT mathematically guarantees that simple, compressed universes are exponentially more probable than random ones.
 
-Predictable smooth data compresses best.
+Predictable smooth data should compresses best.
 
 So why does our Big Bang simulations still end in a chaotic explosion of Boltzmann noise?
 
 Why don't realistic physical laws—such as General Relativity or basic planetary motion—spontaneously crystallize out of minimal description length?
 
-
 It seems the standard Kolmogorov complexity suffers from two fatal, foundational flaws that prevent it from being the compression system of the universe:
 
 First, it is discrete. Even small changes in its input may yield big jumps in the compressed file size. It is difficult to see how any smooth predictable physics emerge based on such a shaky,
-non-continuous behavior. How could reasoning, predicting and decision making work in the universe in which probabilities jump chaotically based on how individual bits happen to be arranged?
-This is in strike contradiction with our earlier conclusions (Alice as Equivalence class).
+non-continuous behavior. How could reasoning, predicting and decision making work in the universe in which probabilities jump chaotically based on how a few bits happen to be arranged?
+
+This is in strike contradiction with our earlier conclusions (Alice as Equivalence class), which demonstrated that the same Alice DNA simulation can be written as huge number of different bitstrings.
 
 Another problem is that Kolmogorov complexity is not even computable.
+
 Due to its reliance on the halting problem, $K(x)$ is fundamentally uncomputable.
 There is no algorithm that can take an arbitrary string and calculate its exact minimal program length.
 It can only ever estimate upper bounds - the best possible theoretical compression one can ever hope to achieve with computers. 
