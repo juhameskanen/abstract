@@ -31,7 +31,7 @@ jobs:
             texlive-fonts-recommended \
             texlive-science \
             texlive-bibtex-extra \
-            biber latexmk
+            biber latexmk tex4ht
 
       - name: Run HTML Build via Makefile
         run: |
