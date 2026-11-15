@@ -80,8 +80,7 @@ subjective experience $S$ reliably results:
 A_1: D \;\rightarrow\; H \;\rightarrow\; S.
 \]
 This is an empirical claim supported by all available biological evidence.
-Rejecting it requires identifying an alternative mechanism by which conscious
-observers arise, for which no evidence exists.
+
 
 \subsection*{Axiom 2: Physical Closure}
 
@@ -91,24 +90,24 @@ process plays any role:
 \[
 A_2: (H, U) \;\in\; \mathrm{System}(P, D).
 \]
-Rejecting this axiom requires positing a non-physical causal influence on
-biological processes, for which no experimental evidence exists.
 
-\subsection*{Axiom 3: Computability of Physical Processes}
 
-The physical processes underlying DNA and the human organism fall within the
+\subsection*{Axiom 3: Church-Turing Thesis}
+
+Church-Turing Thesis holds. The physical processes underlying DNA and the human organism fall within the
 computable. A sufficiently powerful computing system can, in principle,
 simulate them to arbitrary precision:
+
 \[
 A_3: \forall\; \text{physically realisable process } \mathcal{P}
 \text{ described by } P,\;
 \exists\; \text{computation } \mathcal{C} : \mathcal{C} \equiv \mathcal{P}.
 \]
+
 This is a weaker claim than the full Church-Turing thesis: we require only
-that the specific class of processes DNA relies on is computable, not that
-all physical processes are. Rejecting this axiom requires identifying a
-property in DNA that requires infinite precision,
-for which no evidence exists.
+that the specific class of processes DNA relies on is computable to a level
+sufficient for biological processes to work, not that
+all physical processes are. 
 
 \subsection*{Axiom 4: Causal Efficacy of Subjective Experience}
 
@@ -118,25 +117,37 @@ without it:
 \[
 A_4: H + S \;\neq\; H.
 \]
-Rejecting this axiom commits one to accepting that subjective experience
-is causally inert not affecting the behavior of a human.
-
-% ============================================================
-\section{Deduction 1: Substrate Independence and Time as an Internal Property}
-\label{sec:deductions}
-
-We present two thought experiments to establish that the universe we observe
-must be ultimately substrate independent and timeless.
 
 
-\subsection{The Optimisation Argument}
+\section{Deduction 1: Human as an Axiomatic System}
 
-Consider a digitized human DNA, and a simulation of it running on a computer.
+From $A_1$ and $A_2$ it follows that human must be an axiomatic system.
+
+From $A_3$ it follows that humans can be simulated in a computer, which
+is an implementation of an axiomatic system.
+
+From $A_4$ it follows that simulated humans too must be pain sensitive.
+Both real and simulated entities share the same axiomatic structure.
+
+
+\section{Deduction 3: Substrate Independence}
+
 If consciousness is produced by human DNA, it must also be produced by an
 identical digital simulation. Both entities share the same axiomatic structure;
 just as the equation $2 + 2 = 4$ holds true regardless of whether it is applied
 to apples or bananas, mathematical equivalence remains invariant across
 biological and digital mediums.
+
+
+
+\section{Deduction 4: Time as an Internal Property}
+
+We present a though experiment to establish that the universe we observe
+must be ultimately static and timeless, and that time emerges as internal
+property of observer. 
+
+
+Consider a digitized human DNA, and a simulation of it running on a computer.
 
 The simulation consists of code (the laws of physics as implemented) and data (the state of the
 simulated universe at each timestep). Denote the running simulation
@@ -178,15 +189,8 @@ laws of $A_2$, contradicting the completeness of that axiom.
   solely from the internal structure of information.
 \end{quote}
 
-\begin{quote}
-  \textbf{Conclusion 2.} The optimisation argument yields a family of distinct execution
-  traces $\{T_1, T_2, \ldots\}$, each encoding the same observer state sequence.
-  The observer Alice $E_{\mathrm{int}}$ is not any particular trace but the equivalence
-  class $[A] = \{T_i : T_i \sim T_j \iff E_{\mathrm{int}}(T_i) = E_{\mathrm{int}}(T_j)\}$.
-  Real-world Alice is one member of this class, not a privileged representative.
-\end{quote}
 
-\subsection{The Multi-threaded Argument}
+\section{Consciousness Emerges as Internal Propery of Noise}
 
 Consider a multi-threaded computer running two DNA simulations concurrently:
 $\tau_A$ (Alice) and $\tau_B$ (Bob), with a minimal time slice of one CPU

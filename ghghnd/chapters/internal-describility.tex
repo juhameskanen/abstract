@@ -1,19 +1,17 @@
 \chapter{The Interpretive Problem}
 \label{chap:interpretation-problem}
 
-\section{The Mystery}
+\section{Semantic Nakedness}
 
-Suppose we possessed a complete physical description of the universe:
-the exact information for every particle state, every quantum amplitude, and the full spacetime metric.
+When humans interpret the output of a computer monitor, they rely on an astronomical stack of shared conventions (encoding standards,
+pixel geometry, scan order, handedness, row length, etc.). Changing these conventions can render the identical underlying data unrecognizable or meaningless.
 
-What is this information fundamentally? In an informational framework, we may represent it as a bitstring—a raw sequence of binary distinctions.
+A raw informational structure does not announce what it represents. 
 
-This introduces a fundamental problem: a raw informational structure does not announce what it represents.
 The exact same finite set of bits can be interpreted as a number, a computation, an entire universe, random noise, or nothing at all.
 
 
-
-\section{Semantic Nakedness}
+\subsection*{Base}
 
 Consider Alice using a decimal system, motivated by biological convenience (ten fingers):
 \[
@@ -58,7 +56,7 @@ For an 8-bit word:
 
 The physical state is identical; only the interpretation differs.
 
-\subsection*{Reading Order and Indexing}
+\subsection*{Reading Order}
 
 Even ordering conventions are not intrinsic.
 A bitstring such as $001$ may correspond to different values depending on bit significance:
@@ -77,14 +75,13 @@ The CPU, instruction set, and storage devices are themselves physically instanti
 At the level of raw physical state, there is no intrinsic separation between ``code'' and ``data''.
 This distinction arises solely through an interpretive layer.
 
-The global state of an $n$-bit system occupies a configuration space of size $2^n$.
 Computation, or any other semantics, arises only from relations between states under a chosen interpretive rule.
 
 
 \section{Interpretive Explosion}
 
 A raw bitstring does not intrinsically contain logic, syntax, semantics, truth conditions, or consistency relations.
-These arise only after selecting an interpretive scheme.
+These arise only after selecting an interpretive scheme - with the presense of an interpreter (observer).
 
 As the number of bits increases, the space of possible interpretations grows combinatorially.
 A single finite configuration admits a vast number of syntactically valid decompositions into code/data partitions,
@@ -93,42 +90,6 @@ memory layouts, instruction interpretations, and execution histories.
 While the state space itself contains only $2^n$ configurations, the number of possible transition functions is $(2^n)^{2^n}$.
 For $n=3$ bits this is already $8^8 = 16\,777\,216$.
 For $n=10$ the number has thousands of digits.
-
-This vast explosion of possible interpretive rules implies that neither a universe nor a computer can be regarded as fundamental in isolation.
-The interpretive rule space grows enormously faster than state space. And vast majority of these interpretations describe nothing like Turing Machine.
-
-Because Turing Machines and mathematics are equivalent systems, they are a tiny subset of all possible interpretations, the overwhelming majority of interpretations yield no recognizable computation, 
-mathematics, or physics.
-
-
-\begin{figure}[htbp]
-    \centering
-    \begin{tikzpicture}[scale=1.1]
-        
-        % 1. Static information
-        \draw[thick, fill=blue!5, draw=blue!40] (0,0) circle (4.2cm);
-        \node[align=center, font=\small\bfseries, color=blue!80!black] at (0, 3.7) 
-            {Static Information ($\mathbf{U}$) \\ \small  $\mathbf{2}^S$ (Semantically Silent)};
-
-        % 2. The Interpretational Explosion
-        \draw[thick, fill=orange!10, draw=orange!50, dashed] (0,-0.4) circle (3.1cm);
-        \node[align=center, font=\small\bfseries, color=orange!80!black] at (0, 2.1) 
-            {The Interpretive Landscape \\ \small Combinatorial Explosion of Mappings};
-
-        % 3. The Mathematical Slice
-        \draw[thick, fill=teal!15, draw=teal!60] (0,-0.8) circle (1.8cm);
-        \node[align=center, font=\small\bfseries, color=teal!80!black] at (0, 0.4) 
-            {The Mathematical Slice \\ \small Gauge Orbits \\ \small \& Invariant Relations};
-
-        % Explanatory Filter Arrows (Left side)
-        \draw[-{Stealth[scale=1.2]}, thick, gray, dashed] (-3.8, 0) to [bend right=15] node[midway, left, font=\tiny, align=right] {Information\\Filter} (-2.3, -0.4);
-        \draw[-{Stealth[scale=1.2]}, thick, gray, dashed] (-2.0, -0.6) to [bend right=15] node[midway, left, font=\tiny, align=right] {Mathematics\\Filter} (-1.1, -0.9);
-        \draw[-{Stealth[scale=1.2]}, thick, gray, dashed] (-0.9, -1.1) to [bend right=15] node[midway, left, font=\tiny, align=right] {Observer\\Filter} (-0.4, -1.3);
-
-    \end{tikzpicture}
-    \caption{The structure of observer. }
-    \label{fig:interpretation-hierarchy}
-\end{figure}
 
 
 
@@ -157,74 +118,63 @@ What ultimately matters is not the precise arrangement of symbols, but the invar
 \text{information} \ \longrightarrow \ \text{interpretation} \ \longrightarrow \ \text{relational structure (invariant)}
 \]
 
-Because interpretation is not an external reading imposed on a bitstring, but an internal relation between informational substructures within the same static informational totality, 
-this relational structure is more primitive than computation, mathematics, or any particular semantics.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{tikzpicture}[
-        node distance=1.0cm and 1.6cm,
-        box/.style={rectangle, draw, rounded corners=4pt, minimum width=4.8cm, minimum height=1.1cm, align=center, font=\small},
-        base/.style={box, fill=blue!10, thick},
-        observer/.style={box, fill=green!10, thick},
-        emergent/.style={box, fill=violet!10, thick},
-        arrow/.style={->, thick, >=stealth}
-    ]
-
-    % Level 0 - Raw U
-    \node[base] (U) {Static Informational Totality \\ \textbf{U} \\ \small (Raw Configurations / Set $\mathbf{2}^S$)};
-
-    % Level 1 - Interpretation
-    \node[observer, below=of U] (Interp) {Interpretive Frameworks \\ \small (Representational Labels)};
-    \node[observer, right=of Interp] (Obs) {Observers \\ \small (Self-Locating Structures)};
-      
-    % Level 2 - Structures
-    \node[emergent, below=of Obs] (Stable) {Observer Classes \\ \small (Equivalence Classes + MDL)};
-    
-    \node[emergent, below left=0.8cm and 0.3cm of Stable] (Math) {Mathematics \\ \small (Invariant relational patterns)};
-    \node[emergent, below=of Stable] (Physics) {Physics \& Laws};
-    \node[emergent, below right=0.8cm and 0.3cm of Stable] (Time) {Relational Time \\ \small (Page-Wootters style $\lambda$)};
-    \node[emergent, below=of Physics] (Exp) {Observation \\ \small (Internal discovery)};
-    
-    % Arrows
-    \draw[arrow] (U) -- (Interp);
-    \draw[arrow] (U) -- (Obs);
-    \draw[arrow] (Interp) -- (Obs);
-    \draw[arrow] (Obs) -- (Stable);
-    \draw[arrow] (Stable) -- (Math);
-    \draw[arrow] (Stable) -- (Physics);
-    \draw[arrow] (Stable) -- (Time);
-    \draw[arrow] (Stable) -- (Exp);
-    
-    % Self-containment loop
-    \draw[->, thick, dashed, bend right=30] (Obs) to node[auto, left, font=\tiny] {self-contained in U} (U);
-    
-    \end{tikzpicture}
-    \caption{Structure of emergence in the Self-Interpretive Information Principle (SIIP)}
-    \label{fig:sii-emergence}
-\end{figure}
 
 
-For example, when humans interpret the output of a computer monitor, they rely on an astronomical stack of shared conventions (encoding standards,
-pixel geometry, scan order, handedness, row length, etc.). Changing these conventions can render the identical underlying data unrecognizable or meaningless.
+\section{The Observer as Information}
+
+In static, timeless universe interpretation is not an external reading imposed on a bitstring of the universe, but
+an internal relation between informational substructures.
+
+The interpretive rule space grows enormously faster than state space. 
+
+The DNA simulation in Chapter~\nameref{chap:running-dna-simulation} traces out just one single axiomatic description of Alice, a subset, of what is called the Alice equivalence class. 
+The number of ways the information in the simulation can be interpreted as Alice is astronomically larger. Vast majority of them do not correspond to any recognizable computation, 
+mathematics.
+
+
+\begin{tikzpicture}[scale=1.0, font=\small]
+  % Unknown: the outside (assumption: drawn as the surrounding region)
+  \draw[thick, dashed, gray, fill=gray!5, rounded corners=8pt] (-4.7,-4.7) rectangle (4.7,5.5);
+  \node[font=\small\bfseries, gray!70!black] at (0,5.0) {Unknown};
+
+  % Circles tangent at the bottom (y = -4.2) so each layer has a top band for its label
+  \draw[thick, fill=blue!5, draw=blue!40]     (0,0)     circle (4.2cm);
+  \draw[thick, fill=orange!10, draw=orange!50, dashed] (0,-0.9)  circle (3.3cm);
+  \draw[thick, fill=teal!15, draw=teal!60]    (0,-1.8)  circle (2.4cm);
+  \draw[thick, fill=green!15, draw=teal!70]   (0,-2.7)  circle (1.5cm);
+
+  \node[align=center, font=\small\bfseries, blue!80!black]   at (0,3.3)  {Static Information ($\mathbf{U}$)\\\footnotesize $2^n$ states (semantically silent)};
+  \node[align=center, font=\small\bfseries, orange!80!black] at (0,1.5)  {Interpretive Landscape\\\footnotesize combinatorial explosion of mappings};
+  \node[align=center, font=\small\bfseries, teal!80!black]   at (0,-0.3) {Mathematical Slice\\\footnotesize gauge orbits \& invariant relations};
+  \node[align=center, font=\small\bfseries, teal!80!black]   at (0,-2.7) {Alice\\\footnotesize equivalence class};
+
+  % Filters: each crosses exactly one boundary, at the circle's left edge
+  \draw[-{Stealth}, thick, gray] (-3.9,-0.9) -- (-3.0,-0.9) node[midway, above, font=\tiny, align=center] {Information\\filter};
+  \draw[-{Stealth}, thick, gray] (-2.9,-1.8) -- (-2.0,-1.8) node[midway, above, font=\tiny, align=center] {Mathematics\\filter};
+  \draw[-{Stealth}, thick, gray] (-2.0,-2.7) -- (-1.1,-2.7) node[midway, above, font=\tiny, align=center] {Observer\\filter};
+\end{tikzpicture}
 
 
 
 \section{The Core Thesis}
 
-By synthesizing the semantic nakedness of raw data with the mathematical necessity of gauge invariance, we arrive at the foundational thesis of this framework:
+By synthesizing the semantic nakedness of raw data with the mathematical necessity of gauge invariance, we arrive at the thesis:
 
 \begin{principle}{Self-Interpretive Information Principle (SIIP)}
 {siip}
 The raw informational substrate is semantically silent.
 
-Within this silent substrate exists a vast landscape of possible interpretive frameworks, equivalence classes, and self-locating observers.
+Within this silent substrate exists a vast landscape of possible interpretive frameworks, equivalence classes, and emergent self-running observers.
 \end{principle}
+
+
+Or perhaps:
 
 \begin{principle}{Internal-Emergence Principle (IEP)}
 {iep}
 
-In static universe, observers emerge as built-in interpreters, running all possible interpretations in parallel. Those interpretations that are conscious, find themselve within the largest equivalence class of them. 
+In static universe, observers emerge as built-in interpreters, running all possible interpretations in parallel. Those interpretations that are self-aware, 
+find themselve within the largest equivalence class of them. 
 
 \end{principle}
 
@@ -237,7 +187,7 @@ The preceding analysis allows us to revisit and resolve Eugene Wigner's famous p
 
 The effectiveness is an emergent consequence of data compression.
 
-We find ourselves within a configuration of minimal description, because that maximizes our probability of existence.
+We find ourselves within an equivalence class of minimal description, because that dominates the measure  maximizing our probability of existence.
 
 The shortest possible description of observers is one in which observers consist of the same informational substructures, a concept well known in software engineering.
 
@@ -247,8 +197,7 @@ Consequently, mathematics is unreasonably effective because the interpreters the
 
 This perspective dissolves Wigner's paradox. The universe does not need to be inherently mathematical; it only needs to be rich enough in raw information to allow compressed structures to form.
 
-
-\section{Conclusion}
+Mathematics is the ultimate emergent compession language, not a fundamental substrate of the universe.
 
 Mathematics works so well because we are highly unified filters.
 
@@ -256,27 +205,16 @@ Invariant relational structure is fundamental; mathematics is the observer-disco
 
 
 
-
-\section{To Be Refined}
-
-
-The universe beyond the observer is undefined. We neither assert nor deny an observer-independent external universe.
-Whether such a universe exists, and what its nature might be, is beyond the framework's ability to establish.
-
-The framework deals with what can be internally interpreted by observers, not with an assumed external ontology.
-
-No external substrate, physical laws, or metaphysical information channels are assumed.
-
-\subsection*{Reality}
-
-Reality emerges through observer intersection
+\subsection*{Reality and Physics}
 
 Suppose we have two observers, Alice and Bob.
 
-- Alice has an internally realized informational structure \(O_A\).
-- Bob has an internally realized informational structure \(O_B\).
-- Each has their own observer walk and subjective experience.
-- Some of their observations, interpretations, and informational structures overlap.
+\begin{itemize}
+ \item Alice has an internally realized informational structure \(O_A\).
+ \item Bob has an internally realized informational structure \(O_B\).
+ \item Each has their own observer walk and subjective experience (dreams, thoughts, feelings etc.)
+ \item Some of their observations, interpretations, and informational structures overlap.
+\end{itemize}
 
 We can express the idea schematically:
 
@@ -292,19 +230,37 @@ With more observers:
 R=\bigcap\_{i=1}^{N}O_i
 \]
 
-This is a conceptual expression rather than yet a formal mathematical definition: the observer structures would first need a common representation in which their overlap can be defined.
-
-The important point is that reality is not something observers independently access from outside. Rather, what we call objective reality is the part of their internally realized worlds that they share.
 
 \begin{itemize}
-  
 \item Subjective reality: What an individual observer internally experiences.
-\item Shared reality: What multiple observers independently experience or establish in common.
 \item Objective reality: The stable, reproducible intersection of many independent observer perspectives.
 \end{itemize}
 
-Independent observers share highly compatible descriptions, those shared structures compress well.
 
-In other words, shared reality might not be an arbitrary intersection of observer perspectives. It might be the intersection of structures that survive independent interpretation.
 
+In a self-contained, static universe, everything an observer sees must already exist inside their own information structure. 
+Alice contains Bob's structure, and Bob contains Alice's. Reality is the invariant equivalence class born from this mutual symmetry.
+
+Mathematics is an emergent compression engine operating inside the observer's mind. It allows Alice to re-map her internal data in astronomically many ways:
+
+Imagination/Dreaming: Transformations that describe configurations outside her local trajectory.
+
+Reality (Planning/Prediction): Transformations whose ordinal mappings match the physical configurations she subsequently traverses.
+
+Math feels objective and universal because observers share identical low-level sub-structures. 
+Just as software engineering uses modular code to save resources, the underlying dynamics of the system favor minimal description length. 
+Alice and Bob reason with the same mathematics because they are built from the same shared structural primitives.
+
+In static timeless universe, whatever Alice observes as Bob, must already be encoded into the structure of Alice herself. Vast majority of 
+the interpretations of the information in Alice describe Alice-like structures, namely Bob, and six billion others that we observe.
+
+As a compression language, mathematics allow also descrptions that Alice cannot observe in her structure. This is what Alice calls her 
+dreams, thoughts, and imagination.  
+
+Some of those reinterpretations (compressed descriptions) may actually be part of her structure, she will only discover it later (when her 
+walk through configurations coincide). This is what Alice calls "planning the future". 
+
+For example, two arrangements giving the same Alice, like $2+2+2$ and $2\cdot3$, is the equivalence class. 
+A mapping Alice computes about her “future” counts as reality if the ordinal configurations she later passes through match it, 
+and as imagination if they don't. 
 
