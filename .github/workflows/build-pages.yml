@@ -28,7 +28,8 @@ jobs:
             texlive-latex-recommended texlive-latex-extra \
             texlive-fonts-recommended texlive-extra-utils \
             texlive-science \
-            texlive-bibtex-extra biber
+            texlive-bibtex-extra biber \
+	    texlive-full
 
       - name: Run HTML Build via Makefile
         run: |
