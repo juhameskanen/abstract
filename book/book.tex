@@ -12,63 +12,177 @@
 \tableofcontents
 
 \mainmatter
-\input{history}
-%\input{introduction}
-%\input{first-principles}
-%\input{qualia}
-%\input{four-axioms}
+
+
+\chapter{The First Principle}
+
+\section{Ontology: What Fundamentally Exists}
+
+The current laws of physics assume a lot, such as 19-26 constants, fields, spacetime structure. 
+A theory that assumes "something" is incomplete by definition. It is a theory of everything minus assumptions the theory does not explain. 
+
+\[
+\text{ToE}_{\text{incomplete}} = \text{ToE}_{\text{complete}} \land \neg \text{Assumptions}
+\]
+
+The other extreme is a theory that does not assume anything. However, assuming nothing is already an assumption. 
+
+
+\section{Primary Assumption}
+
+Therefore, we assume there is an observer, capable of observing.
+
+The theory should not depend on any other assumptions, metaphysical or external. The presence of such assumptions would imply predefined rules. 
+This would immediately raise the question of who or what established those rules in the first place.
+
+
+\section{The Fundamental Substrate}
+
+
+\subsection*{Finite or Infinite?}
+
+If the fundamental nature of everything were finite, one could immediately ask: finite by how much? 
+Why $n$ bits rather than $n + 1$ ? 
+What sets that number? 
+Any fixed finite limit appears contingent and calls for a deeper explanatory layer. 
+For this reason we do not assume finiteness. 
+
+
+\subsection*{Informational?}
+
+We do not assume information as primitive. 
+Information presupposes distinguishability, at its simplest, binary distinction. 
+But if a binary object is allowed as elementary primitive, then why not continuous too? 
+Declaring reality to be fundamentally digital is itself a substantive ontological commitment that nothing prior licenses.
+
+
+We therefore do not presuppose that the fundamental nature of everything is finite, discrete, informational, mathematical, or governed by prior external laws.
+
+We do not claim to know what that fundamental nature is. It is not part of the framework.
+
+We assume only one thing: the observer exists.
+
+This acts as our digital version of Descartes' *"I think, therefore I am."* 
+It grounds the theory in an undeniable observational fact.
 
 
 
+\chapter{Four Observation as Axioms}
+
+We don't know how to implement consciousness. However, DNA seems to contain the instructions.
+
+We make the following four assumptions:
+
+\textbf{Axiom 1: Genetic Encoding}
+\label{subsec:axiom1}
+
+DNA is the blueprint of a conscious, pain-sensitive human organism. Given
+DNA $D$ and a suitable physical environment, a conscious human with
+subjective experience reliably results:
+
+\textbf{Axiom 2: Physical Closure}
+
+\label{subsec:axiom2}
+
+The human organism and its environment are composed entirely of
+ordinary physical matter governed by physical laws. No non-physical
+process plays any role.
+
+\textbf{Axiom 3: Weak Church-Turing Thesis}
+\label{subsec:axiom3}
+
+Church-Turing Thesis holds. The physical processes underlying DNA and the human organism fall within the
+computable. A sufficiently powerful computing system can, in principle,
+simulate them to arbitrary precision:
+
+This is a weaker claim than the full Church-Turing thesis: we require only
+that the specific class of processes DNA relies on is computable to a level
+sufficient for biological processes to work, not that
+all physical processes are. 
+
+\textbf{Axiom 4: Causal Efficacy of Subjective Experience}
+\label{subsec:axiom4}
+
+Subjective experience is not epiphenomenal. A human with subjective
+experience $S$ (for example, pain) behaves differently than the same human
+without it:
+
+\[
+A_4: H + S \;\neq\; H.
+\]
 
 
-\chapter{The Observable Assumptions}
+\section{Human as an Axiomatic System}
 
-[TODO]
+From $A_1$ and $A_2$ it follows that human must be an axiomatic system.
 
-\chapter{Pain Hypothesis}
+From $A_3$ it follows that humans can be simulated in a computer, which
+is an implementation of an axiomatic system.
 
-[TODO]
+From $A_4$ it follows that simulated humans must be pain sensitive too.
 
-\chapter{Optimization Argument}
+\section{Substrate Independence}
 
-[TODO]
-
-\chapter{Multi-Threading Argument}
-
-[TODO]
-
-\chapter{Alice as Equivalence Class}
-
-[TODO]
-
-\chapter{Representational Equivalence}
-
-[TODO]
-
-\chapter{Substrate Invariance}
-
-[TODO]
-
-\chapter{Internal Interpretation Space}
-
-Two's complement -> interpretation space
-
-[TODO]
-
-\chapter{Layers of Emergence}
-
-Bitstring -> $2^n$ configurations total
-
-Mathematics (Turing Machine) is a small sub-set of total $2^n$
-
-Observable physics (Alice) is a sub-set of Mathematics
+If consciousness is produced by human DNA, it must also be produced by an
+identical digital simulation. Both entities share the same axiomatic structure;
+just as the equation $2 + 2 = 4$ holds true regardless of whether it is applied
+to apples or bananas, mathematical equivalence remains invariant across
+biological and digital mediums.
 
 
+\chapter{Time as Internal Property of Observer}
 
+We present a though experiment to establish that the universe we observe
+must be ultimately static and timeless, and that time emerges as internal
+property of observer. 
 
-%\input{ab-initio}
-%\input{substrate-independency}
+\section{The Optimization Thought Experiment}
+
+Consider a digitized human DNA, and a simulation of it running on a computer.
+
+The simulation consists of code (the laws of physics as implemented) and data (the state of the
+simulated universe at each timestep). Denote the running simulation
+$T_{\mathrm{alg}}$. The simulation generates a simulated human, say Alice.
+
+Now optimise the simulation code progressively by introducing lookup tables: replace
+computed transitions with precomputed results. At each step, the external
+runtime decreases while the internal state sequence --- the ordered record of
+Alice's experiences, perceptions, and actions --- remains identical. Carry
+this optimisation to completion, replacing all computation with a static,
+precomputed dataset $T_{\mathrm{data}}$: the full execution trace, stored as
+a bitstring.
+
+Let $E_{\mathrm{int}}$ denote Alice's internal experience (her felt sequence
+of states) and $E_{\mathrm{ext}}$ denote the external runtime of the
+computer (the number of CPU cycles executed). Code optimisation affects
+$E_{\mathrm{ext}}$ but preserves $E_{\mathrm{int}}$ by construction:
+\[
+\mathrm{Optimise}(T_{\mathrm{alg}}) \;\rightarrow\; T_{\mathrm{data}}
+\;\implies\;
+E_{\mathrm{int}}(T_{\mathrm{alg}}) \equiv E_{\mathrm{int}}(T_{\mathrm{data}}).
+\]
+
+In the limit $T_{\mathrm{data}}$, the external runtime $E_{\mathrm{ext}}$
+is zero: no state transitions are executed; the complete execution trace
+exists as static data. Does Alice's consciousness persist in $T_{\mathrm{data}}$?
+
+Suppose it does not. Then there exists a minimum code-to-data ratio below
+which consciousness ceases. This minimum ratio is a new physical constant:
+a threshold property of information processing not derivable from $A_1$
+through $A_4$. Its existence would constitute an addition to the physical
+laws of $A_2$, contradicting the completeness of that axiom.
+
+\section{Conclusion}
+
+Consciousness is a property of the information
+structure of the execution trace, not of the process that generates it.
+
+A static bitstring encoding a conscious observer's state sequence contains
+that observer's conscious experience. 
+
+Time and subjective experience emerge
+solely from the internal structure of information.
+
 
 \backmatter
 

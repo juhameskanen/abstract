@@ -1,0 +1,3 @@
+# Force all auxiliary and bibliography files into the .tmp directory
+$out_dir = '.tmp';
+$bibtex_use = 2; # Auto-detect and run bibtex/biber if needed
