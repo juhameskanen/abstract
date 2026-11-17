@@ -2,30 +2,7 @@
 \input{../preamble.tex}
 \input{../book_preamble.tex}
 
-% ------------------------------------------------------------------
-% Identifiers and references.
-% Requires amsthm. If your preambles already define 'axiom' or
-% 'corollary', remove those definitions to avoid "already defined".
-% One counter per kind, continuous through the book: do NOT add the
-% [chapter] option, or numbering would restart in every chapter.
-% ------------------------------------------------------------------
-\theoremstyle{definition}
-\newtheorem{primitive}{Primitive}
-\newtheorem{deduction}{Deduction}
-\renewcommand{\theprimitive}{P\arabic{primitive}}
-\renewcommand{\theaxiom}{A\arabic{axiom}}
-\renewcommand{\thededuction}{D\arabic{deduction}}
-%\newtheorem{definition}{Definition}
-%\renewcommand{\thedefinition}{Df\arabic{definition}}
-
-% \setcounter{primitive}{-1}  % uncomment to number the primitive P0
-
-% \Ref{label} prints P1, A3, D2, ... exactly as in the environment heading
-%\newcommand{\Ref}[1]{\ref{#1}}
-% The full assumption set. Never hardcode a count or a range.
-\newcommand{\AssumptionSet}{the primitive and the observational axioms}
-
-\graphicspath{{cover/}{chapters/}{chapters/figures/}}
+\graphicspath{{figures/}}
 
 \begin{document}
 
@@ -175,7 +152,7 @@ But no such ratio exists in a Turing machine: the division of a
 computation into code and data is not part of the computation itself. The
 same state sequence can be produced with any split, and a universal machine
 treats code as data. By \Ref{ax:church-turing} the processes underlying
-Alice are computable, and by \Ref{ax:causal} the role of $S$ is in her
+Alice are computable, and by \Ref{ax:pain} the role of $S$ is in her
 behavior, that is, in the state sequence, which is the same at every stage.
 A threshold on the code-to-data ratio would therefore contradict
 \Ref{ax:church-turing}. Hence $S$ persists.
@@ -218,7 +195,7 @@ trace? Suppose it does. Then there is a thread density, or a degree of
 contiguity, below which $S$ vanishes. But no such threshold exists in a
 Turing machine: the scheduling of threads is not part of any single
 computation. Alice's state sequence is the same however it is interleaved
-with others, and by \Ref{ax:church-turing} and \Ref{ax:causal} the role of
+with others, and by \Ref{ax:church-turing} and \Ref{ax:pain} the role of
 $S$ is in that sequence. A threshold on thread density would therefore
 contradict \Ref{ax:church-turing}. Hence $S$ is present at every finite
 $N$.
@@ -286,7 +263,7 @@ Then the simulation would not capture the processes underlying Alice,
 contradicting \Ref{ax:church-turing}, and by \Ref{ax:closure} the process
 cannot be non-physical.
 
-The same follows from \Ref{ax:causal}. The experience $S$ makes a
+The same follows from \Ref{ax:pain}. The experience $S$ makes a
 difference to behavior, and the computer reproduces that behavior through
 its transitions alone. The effect of $S$ on behavior is therefore already
 contained in the computation, and a separate cause has nothing left to
@@ -547,9 +524,6 @@ call reality.
   \]
 \end{definition}
 
-% TODO: say how corresponding structure in different observers' universes
-% is identified, since the observers are different information structures.
-
 Reality is therefore not an independent container that observers inhabit.
 It is what they have in common.
 
@@ -626,9 +600,8 @@ arrangement contains does not matter to her (\Ref{ded:structureless}).
 \end{deduction}
 
 
-The more ways information can be arranged to describe an observer, the higher
-the probability of excistence. The shorter the description of the observer,
-the bigger the equivalence class of the observer.
+The shorter the description length of the observer, the more ways information can be arranged
+to describe an observer, and the higher the probability of excistence of the observer. 
 
 What produces the shortest description within the context of a Turing
 machine (\Ref{ax:church-turing})? Compression. A description consists of
@@ -641,7 +614,7 @@ The code costs bits once. It pays off only if it shortens the data by more
 than it costs.
 
 Chapter~\ref{ch:time} showed that consciousness does not depend on how a
-computation is split into code and data. That remains true: the split does
+computation is split into code and data. The split does
 not enter the experience. It enters only the length of the description, and
 with it the weight $\mu$.
 
@@ -674,7 +647,7 @@ We observe that the microscopic world waves.
 A microcosmos that waves everywhere is the signature of 
 compression.
 
-\begin{deduction}[Quantum mechanics as the codec]\label{ded:codec}
+\begin{deduction}[Laws of Physics as the codec]\label{ded:codec}
   Quantum mechanics is the compression codec of the observer. The
   wavefunction is the compressed description, and the rules that render it
   as the experienced world are the code.
