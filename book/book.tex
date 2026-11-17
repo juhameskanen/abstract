@@ -2,6 +2,29 @@
 \input{../preamble.tex}
 \input{../book_preamble.tex}
 
+% ------------------------------------------------------------------
+% Identifiers and references.
+% Requires amsthm. If your preambles already define 'axiom' or
+% 'corollary', remove those definitions to avoid "already defined".
+% One counter per kind, continuous through the book: do NOT add the
+% [chapter] option, or numbering would restart in every chapter.
+% ------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{primitive}{Primitive}
+\newtheorem{deduction}{Deduction}
+\renewcommand{\theprimitive}{P\arabic{primitive}}
+\renewcommand{\theaxiom}{A\arabic{axiom}}
+\renewcommand{\thededuction}{D\arabic{deduction}}
+%\newtheorem{definition}{Definition}
+%\renewcommand{\thedefinition}{Df\arabic{definition}}
+
+% \setcounter{primitive}{-1}  % uncomment to number the primitive P0
+
+% \Ref{label} prints P1, A3, D2, ... exactly as in the environment heading
+%\newcommand{\Ref}[1]{\ref{#1}}
+% The full assumption set. Never hardcode a count or a range.
+\newcommand{\AssumptionSet}{the primitive and the observational axioms}
+
 \graphicspath{{cover/}{chapters/}{chapters/figures/}}
 
 \begin{document}
@@ -14,174 +37,684 @@
 \mainmatter
 
 
+
 \chapter{The First Principle}
+\label{ch:first-principle}
 
-\section{Ontology: What Fundamentally Exists}
+\section{Motivation}
 
-The current laws of physics assume a lot, such as 19-26 constants, fields, spacetime structure. 
-A theory that assumes "something" is incomplete by definition. It is a theory of everything minus assumptions the theory does not explain. 
+The laws of physics, as currently formulated, assume a great deal: roughly
+two dozen free constants, a collection of fields, and a spacetime structure
+in which they act. A theory that assumes all this is a theory of everything
+\emph{minus} whatever it assumes and does not explain.
 
-\[
-\text{ToE}_{\text{incomplete}} = \text{ToE}_{\text{complete}} \land \neg \text{Assumptions}
-\]
+The opposite extreme is a theory that assumes nothing. But ``we assume
+nothing'' is itself an assumption, and a self-referential one: it is a
+statement made within the system about the system. No system can stand
+outside itself and declare itself assumption-free.
 
-The other extreme is a theory that does not assume anything. However, assuming nothing is already an assumption. 
-
-
-\section{Primary Assumption}
-
-Therefore, we assume there is an observer, capable of observing.
-
-The theory should not depend on any other assumptions, metaphysical or external. The presence of such assumptions would imply predefined rules. 
-This would immediately raise the question of who or what established those rules in the first place.
+At least one assumption is therefore unavoidable. This is the foundational
+definition of an axiomatic system.
 
 
-\section{The Fundamental Substrate}
+\section{The Primitive}
+
+The only fact that cannot be denied is: \textbf{I am}.
+Any denial would itself have to be made by someone.
+
+\begin{primitive}[Observer]\label{pr:observer}
+  There is an observer.
+\end{primitive}
+
+We make no claim about what the observer is.
 
 
-\subsection*{Finite or Infinite?}
+%% =================================================================
+\chapter{The Axiomatic Foundation}
+\label{ch:axioms}
 
-If the fundamental nature of everything were finite, one could immediately ask: finite by how much? 
-Why $n$ bits rather than $n + 1$ ? 
-What sets that number? 
-Any fixed finite limit appears contingent and calls for a deeper explanatory layer. 
-For this reason we do not assume finiteness. 
+We take the following observational assumptions as axioms.
 
-
-\subsection*{Informational?}
-
-We do not assume information as primitive. 
-Information presupposes distinguishability, at its simplest, binary distinction. 
-But if a binary object is allowed as elementary primitive, then why not continuous too? 
-Declaring reality to be fundamentally digital is itself a substantive ontological commitment that nothing prior licenses.
+\begin{axiom}[Genetic Encoding]\label{ax:genetic}
+  DNA is the blueprint of a conscious, pain-sensitive human organism. Given
+  DNA $D$ and the observed physical environment, a conscious human with
+  subjective experience emerges.
+\end{axiom}
 
 
-We therefore do not presuppose that the fundamental nature of everything is finite, discrete, informational, mathematical, or governed by prior external laws.
-
-We do not claim to know what that fundamental nature is. It is not part of the framework.
-
-We assume only one thing: the observer exists.
-
-This acts as our digital version of Descartes' *"I think, therefore I am."* 
-It grounds the theory in an undeniable observational fact.
+\begin{axiom}[Physical Closure]\label{ax:closure}
+  The human organism and its environment are composed entirely of
+  ordinary physical matter governed by physical laws. No non-physical
+  process plays any role.
+\end{axiom}
 
 
+\begin{axiom}[Weak Church-Turing Thesis]\label{ax:church-turing}
+  The physical processes underlying DNA and the human organism are
+  computable: a sufficiently powerful computing system can, in principle,
+  simulate them to arbitrary precision.
 
-\chapter{Four Observation as Axioms}
+  This is weaker than the full Church-Turing thesis. We do not claim that
+  all physical processes are computable, only that the class of processes
+  on which DNA and the organism rely is.
+\end{axiom}
 
-We don't know how to implement consciousness. However, DNA seems to contain the instructions.
 
-We make the following four assumptions:
+\begin{axiom}[Pain Has Measurable Effects]\label{ax:pain}
+  Subjective experience is not epiphenomenal. A human with subjective
+  experience $S$ (for example, pain) behaves differently from the same human
+  without it:
+  \[
+    B(H_S) \neq B(H_{\neg S}).
+  \]
+\end{axiom}
 
-\textbf{Axiom 1: Genetic Encoding}
-\label{subsec:axiom1}
-
-DNA is the blueprint of a conscious, pain-sensitive human organism. Given
-DNA $D$ and a suitable physical environment, a conscious human with
-subjective experience reliably results:
-
-\textbf{Axiom 2: Physical Closure}
-
-\label{subsec:axiom2}
-
-The human organism and its environment are composed entirely of
-ordinary physical matter governed by physical laws. No non-physical
-process plays any role.
-
-\textbf{Axiom 3: Weak Church-Turing Thesis}
-\label{subsec:axiom3}
-
-Church-Turing Thesis holds. The physical processes underlying DNA and the human organism fall within the
-computable. A sufficiently powerful computing system can, in principle,
-simulate them to arbitrary precision:
-
-This is a weaker claim than the full Church-Turing thesis: we require only
-that the specific class of processes DNA relies on is computable to a level
-sufficient for biological processes to work, not that
-all physical processes are. 
-
-\textbf{Axiom 4: Causal Efficacy of Subjective Experience}
-\label{subsec:axiom4}
-
-Subjective experience is not epiphenomenal. A human with subjective
-experience $S$ (for example, pain) behaves differently than the same human
-without it:
-
-\[
-A_4: H + S \;\neq\; H.
-\]
+This is observational: the effects of pain on behavior can be measured,
+just as the effects of the elementary forces in physics can be measured.
 
 
 \section{Human as an Axiomatic System}
 
-From $A_1$ and $A_2$ it follows that human must be an axiomatic system.
+From \Ref{ax:genetic} and \Ref{ax:closure} it follows that a human is an
+axiomatic system.
 
-From $A_3$ it follows that humans can be simulated in a computer, which
-is an implementation of an axiomatic system.
+From \Ref{ax:church-turing} it follows that a human can be simulated in a
+computer, which is an implementation of an axiomatic system.
 
-From $A_4$ it follows that simulated humans must be pain sensitive too.
+From \Ref{ax:pain} it follows that a simulated humans must feel pain.
 
-\section{Substrate Independence}
-
-If consciousness is produced by human DNA, it must also be produced by an
-identical digital simulation. Both entities share the same axiomatic structure;
-just as the equation $2 + 2 = 4$ holds true regardless of whether it is applied
-to apples or bananas, mathematical equivalence remains invariant across
-biological and digital mediums.
+\begin{deduction}[Substrate independence]\label{ded:substrate}
+  Subjective experience does not depend on the medium in which the
+  axiomatic system is implemented: biological, mechanical, or digital.
+\end{deduction}
 
 
-\chapter{Time as Internal Property of Observer}
+%% =================================================================
+\chapter{Time as an Internal Property of the Observer}
+\label{ch:time}
 
-We present a though experiment to establish that the universe we observe
-must be ultimately static and timeless, and that time emerges as internal
-property of observer. 
+We present two thought experiments. They show that the universe can be
+static, structureless and timeless without any loss to the observer and,
+since the theory assumes nothing further, that it is so: time is then an
+internal property of the observer.
+
 
 \section{The Optimization Thought Experiment}
+\label{sec:optimization}
 
-Consider a digitized human DNA, and a simulation of it running on a computer.
+Consider a digitized human DNA and a simulation of it running on a computer.
+The simulation consists of code (the laws of physics as implemented) and
+data (the state of the simulated universe at each timestep). Denote the
+running simulation $T_{\mathrm{alg}}$. It generates a simulated human, Alice.
 
-The simulation consists of code (the laws of physics as implemented) and data (the state of the
-simulated universe at each timestep). Denote the running simulation
-$T_{\mathrm{alg}}$. The simulation generates a simulated human, say Alice.
+Let $E_{\mathrm{int}}$ denote Alice's internal experience, the ordered
+sequence of her felt states, and $E_{\mathrm{ext}}$ the external runtime
+of the computer, measured in CPU cycles executed.
 
-Now optimise the simulation code progressively by introducing lookup tables: replace
-computed transitions with precomputed results. At each step, the external
-runtime decreases while the internal state sequence --- the ordered record of
-Alice's experiences, perceptions, and actions --- remains identical. Carry
-this optimisation to completion, replacing all computation with a static,
-precomputed dataset $T_{\mathrm{data}}$: the full execution trace, stored as
-a bitstring.
-
-Let $E_{\mathrm{int}}$ denote Alice's internal experience (her felt sequence
-of states) and $E_{\mathrm{ext}}$ denote the external runtime of the
-computer (the number of CPU cycles executed). Code optimisation affects
-$E_{\mathrm{ext}}$ but preserves $E_{\mathrm{int}}$ by construction:
+Now optimize the code progressively by introducing lookup tables: replace
+computed transitions with precomputed results. At each step $E_{\mathrm{ext}}$
+decreases, while Alice's sequence of states is unchanged, since each lookup
+returns exactly what the computation it replaces would have returned. Hence
 \[
-\mathrm{Optimise}(T_{\mathrm{alg}}) \;\rightarrow\; T_{\mathrm{data}}
-\;\implies\;
-E_{\mathrm{int}}(T_{\mathrm{alg}}) \equiv E_{\mathrm{int}}(T_{\mathrm{data}}).
+  \mathrm{Optimize}(T_{\mathrm{alg}}) \;\rightarrow\; T_{\mathrm{data}}
+  \;\implies\;
+  E_{\mathrm{int}}(T_{\mathrm{alg}}) \equiv E_{\mathrm{int}}(T_{\mathrm{data}}).
 \]
 
-In the limit $T_{\mathrm{data}}$, the external runtime $E_{\mathrm{ext}}$
-is zero: no state transitions are executed; the complete execution trace
-exists as static data. Does Alice's consciousness persist in $T_{\mathrm{data}}$?
+Every stage that still computes is a computing system implementing the
+axiomatic system of Alice, so by \Ref{ded:substrate} subjective
+experience $S$ is present at every such stage. Carry the optimization
+through. First the entire execution trace is stored as a bitstring
+$T_{\mathrm{data}}$, and the machine only reads it out, one state per step.
+The final stage removes even the reader: no state transition is executed,
+$E_{\mathrm{ext}} = 0$, and the trace exists as static data.
 
-Suppose it does not. Then there exists a minimum code-to-data ratio below
-which consciousness ceases. This minimum ratio is a new physical constant:
-a threshold property of information processing not derivable from $A_1$
-through $A_4$. Its existence would constitute an addition to the physical
-laws of $A_2$, contradicting the completeness of that axiom.
+Does Alice's consciousness persist in this final stage? Suppose it does
+not. Then there is a ratio of code to data below which $S$ vanishes.
+But no such ratio exists in a Turing machine: the division of a
+computation into code and data is not part of the computation itself. The
+same state sequence can be produced with any split, and a universal machine
+treats code as data. By \Ref{ax:church-turing} the processes underlying
+Alice are computable, and by \Ref{ax:causal} the role of $S$ is in her
+behavior, that is, in the state sequence, which is the same at every stage.
+A threshold on the code-to-data ratio would therefore contradict
+\Ref{ax:church-turing}. Hence $S$ persists.
 
-\section{Conclusion}
+Consciousness is thus a property of the information structure of the
+execution trace, not of the process that generates it. A static bitstring
+encoding a conscious observer's state sequence contains that observer's
+conscious experience. Runtime plays no role in anything Alice experiences,
+and to assume that the universe nevertheless runs would add an assumption
+beyond \AssumptionSet.
 
-Consciousness is a property of the information
-structure of the execution trace, not of the process that generates it.
+\begin{deduction}[Static, timeless universe]\label{ded:static}
+  The theory holds the universe to be static. Time, as the observer
+  experiences it, is the order of states within $E_{\mathrm{int}}$: a
+  feature of the internal structure of the information.
+\end{deduction}
 
-A static bitstring encoding a conscious observer's state sequence contains
-that observer's conscious experience. 
+Different optimizations of the same DNA simulation yield different
+execution traces with the same $E_{\mathrm{int}}$. Call two traces
+equivalent if they yield the same $E_{\mathrm{int}}$.
 
-Time and subjective experience emerge
-solely from the internal structure of information.
+\begin{deduction}[Observer equivalence class]\label{ded:equivalence}
+  Alice is not a single bitstring but an equivalence class of bitstrings.
+\end{deduction}
+
+
+\section{The Multi-threading Thought Experiment}
+\label{sec:multithreading}
+
+Consider a multi-threaded computer running $N$ DNA simulations
+concurrently, one of which generates Alice (trace $T_A$), with a time
+slice of one CPU cycle per thread. The execution trace of the computer is
+an interleaved sequence of segments from all threads. As $N$ grows, the
+bits originating from $T_A$ are separated by ever larger intervals of
+unrelated data. Without knowing which bits are Alice's, the trace
+approaches white noise: no structure is visible in it.
+
+Does Alice's consciousness depend on the contiguity of her bits in this
+trace? Suppose it does. Then there is a thread density, or a degree of
+contiguity, below which $S$ vanishes. But no such threshold exists in a
+Turing machine: the scheduling of threads is not part of any single
+computation. Alice's state sequence is the same however it is interleaved
+with others, and by \Ref{ax:church-turing} and \Ref{ax:causal} the role of
+$S$ is in that sequence. A threshold on thread density would therefore
+contradict \Ref{ax:church-turing}. Hence $S$ is present at every finite
+$N$.
+
+\begin{deduction}[Structureless substrate]\label{ded:structureless}
+  Consciousness does not depend on the contiguity or density of its
+  encoding in any trace. Viewed as a whole, the trace can therefore be
+  structureless: unordered, with no laws visible in it.
+\end{deduction}
+
+
+\section{Result}
+
+Together, Section~\ref{sec:optimization} and
+Section~\ref{sec:multithreading} show that the universe can be static
+(\Ref{ded:static}) and structureless (\Ref{ded:structureless}) without any
+loss to the observer. Neither runtime nor ordering plays a role in
+anything the observer experiences, and to assume that they exist would add
+an assumption beyond \AssumptionSet.
+
+\begin{deduction}[Static, unstructured, timeless universe]\label{ded:universe}
+  The theory holds the universe to be fundamentally static, unstructured
+  and timeless. Time and the laws of physics are internal features of the
+  emergent observer.
+\end{deduction}
+
+
+
+
+\chapter{Real and Abstract}
+\label{ch:abstract}
+
+Chapter~\ref{ch:time} showed that the universe can be static,
+structureless and timeless. We now ask whether, beneath the observer's
+description, there must also be a ``real'' substrate. We show that there
+need not be: the division into a real substrate and an abstract
+description does not exist.
+
+
+\section{The Wooden Computer}
+\label{sec:wooden}
+
+Implement the simulation of Alice as a computer built of wooden spheres,
+which play the role of electrons, and wooden ports, which play the role
+of logic gates. It has $n$ wooden bits. By \Ref{ded:substrate}, Alice's
+experience $S$ is present in it.
+
+A single wooden part describes nothing of Alice. Only the arrangement of
+all $n$ bits describes her experience. The laws of physics describe how
+the parts move; they do not describe a step from the motion of the parts
+to an experience. We ask whether such a step exists.
+
+
+\section{The Relation Is Not Causal}
+\label{sec:not-causal}
+
+Suppose the computer causes Alice's experience. The computer's
+computation consists of transitions from one state of the computer to the
+next. By \Ref{ax:church-turing} the processes underlying Alice are
+computable, so the simulation captures them completely: every step by
+which Alice's state follows from her previous state is such a transition.
+A step in which the states of the computer produce $S$ would be a further
+process underlying her experience that is not among those transitions.
+Then the simulation would not capture the processes underlying Alice,
+contradicting \Ref{ax:church-turing}, and by \Ref{ax:closure} the process
+cannot be non-physical.
+
+The same follows from \Ref{ax:causal}. The experience $S$ makes a
+difference to behavior, and the computer reproduces that behavior through
+its transitions alone. The effect of $S$ on behavior is therefore already
+contained in the computation, and a separate cause has nothing left to
+add.
+
+Chapter~\ref{ch:time} points the same way. In the final stage of the
+optimization experiment no process is executed, $E_{\mathrm{ext}} = 0$,
+yet $S$ is present (\Ref{ded:static}). In the multi-threading experiment
+no contiguity or density of the arrangement is required
+(\Ref{ded:structureless}). Neither the running of the computer nor the
+form of its arrangement is a cause of $S$.
+
+\begin{deduction}[Representational relation]\label{ded:representational}
+  The relation between the computer and Alice's experience is not causal.
+  It is representational: what appears to us as a wooden computer appears,
+  from Alice's internal perspective, as an expanding universe and pain.
+\end{deduction}
+
+
+\section{No Privileged Level}
+\label{sec:no-privileged}
+
+The $n$ bits of the computer have $2^n$ arrangements. The mapping that
+reads one arrangement as Alice, given the code of a human DNA, is a
+specification: an axiomatic choice of how to read the bits. Other
+mappings read the other $2^n - 1$ arrangements as other descriptions, and
+nothing in a Turing machine ranks one arrangement, or one mapping, above
+the rest. To claim that one of them is real and the others are not would
+be to claim something beyond a Turing machine.
+
+We know that the simulated Alice is simulated, and as such abstract: she
+is described by the computer, not produced by it
+(\Ref{ded:representational}). Yet Alice, being a human, satisfies
+\Ref{ax:genetic} through \Ref{ax:church-turing} within her own
+observation. She will discover that she can simulate her own existence,
+as we did, and she too takes herself to be real. By
+\Ref{ax:church-turing} every measurement she carries out in her simulated
+universe matches the corresponding measurement we make in ours.
+
+Suppose our level, at which the simulation was built, is real and hers is
+not. Then ``real'' is a property that distinguishes our level from hers
+and yet changes no measurement at either. It is not part of any
+computation, so it would have to be a new variable in the procedure from
+DNA to human, one that marks the outermost level of the recursion as
+special. That is an assumption beyond \AssumptionSet.
+
+There is a sharper argument. A cause stands in a definite order to its
+effect: before, after, or simultaneous. A causal relation between an event
+of the computer and an event of Alice's experience therefore requires an
+ordering between the two. Each has an ordering of its own: the events of
+the computer are ordered by its runtime $E_{\mathrm{ext}}$, and Alice's
+states by their order within $E_{\mathrm{int}}$ (\Ref{ded:static}). That
+each has its own ordering is not in dispute. The question is whether the
+two orderings are related, that is, whether there is a common clock.
+ 
+There is none. Optimization changes $E_{\mathrm{ext}}$ without changing
+$E_{\mathrm{int}}$, down to $E_{\mathrm{ext}} = 0$. The interleaving of
+threads spreads Alice's states over the trace by any amount. In both cases
+the order of her states is intact. Whatever relation one fixes between a
+tick of the computer and a state of Alice can be altered without altering
+Alice. To place such a relation anyway would add a fact that bridges the
+computer and her experience without being a process in either. That would
+be a non-physical bridge, which \Ref{ax:closure} excludes. Without a common
+ordering no event of the computer is before, after or simultaneous with any
+event of Alice's experience, and the relation between them cannot be
+causal.
+
+
+\section{Result}
+
+Alice and we stand in the same position. No level of the recursion is
+privileged and no measurement distinguishes them, so what holds for her
+level holds for ours. The simulated Alice is abstract, and so are we: the
+physical world in which our own computer stands is, like hers, a
+description and not a substrate.
+
+By abstract we mean that the universe consists of information and the
+relations internal to it, with no further ``real'' ingredient beneath.
+
+
+\begin{deduction}[Abstract universe]\label{ded:abstract}
+  The theory holds the universe to be abstract by nature: there is no
+  division into a real substrate and an abstract description. The universe
+  is thus not only static, structureless and timeless
+  (\Ref{ded:universe}), but also abstract.
+\end{deduction}
+
+
+
+
+\chapter{Definition of Reality}
+\label{ch:reality}
+
+Chapters~\ref{ch:time} and~\ref{ch:abstract} showed that the universe is
+static, timeless and abstract: there is no real substrate beneath the
+observer's description. We now ask what, in that case, reality is.
+
+
+\section{The Internal Perspective}
+\label{sec:internal}
+
+We observe that we are a small part of a very large universe.
+
+
+\begin{axiom}[Internal Perspective]\label{ax:internal}
+  The observer observes herself, the human $H$, to be a small part of the
+  much larger universe $U_O$ that she observes:
+  \[
+    H \subset U_O.
+  \]
+\end{axiom}
+
+This is the ordinary picture: the observer is contained in a universe that
+is far larger than she is, and information reaches her from outside
+(Figure~\ref{fig:contained}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Large universe as observed
+    \draw[thick, fill=blue!5, draw=blue!60!black] (0,0) ellipse (4cm and 2.5cm);
+    \node[anchor=north east, blue!60!black] at (3.5, 2) {\textbf{Observed universe ($U_O$)}};
+
+    % Distant structures in U_O
+    \fill[gray!60] (-2.5,1) circle (0.1);
+    \fill[gray!60] (-3,-0.5) circle (0.15);
+    \fill[gray!60] (2,-1.2) circle (0.08);
+    \fill[gray!60] (2.8,0.5) circle (0.12);
+
+    % The observed self, a small part inside
+    \draw[thick, fill=orange!20, draw=orange!80!black] (-0.5,-0.5) circle (0.8cm);
+    \node[orange!90!black] at (-0.5,-0.5) {\textbf{$H$}};
+
+    % Signals as the ordinary picture assumes them
+    \draw[->, dashed, thick, gray!80] (2, -1.2) -- (0.3, -0.5);
+    \draw[->, dashed, thick, gray!80] (-2.5, 1) -- (-1.1, -0.1);
+\end{tikzpicture}
+\caption{\textbf{The internal perspective ($H \subset U_O$).}
+  The ordinary picture. The observed self $H$ is a small part of an
+  immense observed universe $U_O$. Information appears to cross a boundary
+  from outside to inside.}
+\label{fig:contained}
+\end{figure}
+
+
+\section{Inversion of Containment}
+\label{sec:inversion}
+
+The picture of Figure~\ref{fig:contained} is how things appear from
+inside. It cannot be how they are structured. A signal that crosses from
+outside the observer to inside would be a causal relation between an event
+elsewhere and her experience. But the universe is static
+(\Ref{ded:static}): nothing is executed, and no bit here is flipped
+because another bit was flipped far away. Nor is there a real substrate
+beneath the description through which anything could be carried
+(\Ref{ded:abstract}). So nothing reaches the observer from outside.
+
+All the dynamics, the passage of time, and the information we appear to
+receive through our eyes and senses must therefore already be present in
+us. They are features of $E_{\mathrm{int}}$, the ordered record of the
+observer's states, and that record is the observer (\Ref{ded:equivalence}).
+We are not a subset of the universe: it is the other way around.
+
+\begin{deduction}[Inversion of containment]\label{ded:inversion}
+  Everything the observer observes is contained in the observer:
+  \[
+    U_O \subset O.
+  \]
+\end{deduction}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Large observer as the boundary
+    \draw[thick, fill=orange!5, draw=orange!60!black] (0,0) ellipse (4cm and 2.5cm);
+    \node[anchor=north east, orange!60!black] at (3.5, 2) {\textbf{Observer ($O$)}};
+
+    % Observed universe completely inside the observer
+    \draw[thick, fill=blue!10, draw=blue!60!black] (0,-0.2) ellipse (2.5cm and 1.5cm);
+    \node[blue!90!black] at (0, 0.5) {\textbf{Observed universe ($U_O$)}};
+
+    % Features of the universe are now features of the observer's state
+    \fill[blue!40!black] (-1,-0.5) circle (0.1);
+    \fill[blue!40!black] (1,-0.3) circle (0.1);
+    \node[gray!80, font=\footnotesize] at (0, -0.8) {Observer's bitstring};
+\end{tikzpicture}
+\caption{\textbf{The inversion of containment ($U_O \subset O$).}
+  Because the universe is static and abstract (\Ref{ded:static},
+  \Ref{ded:abstract}), no signal crosses from outside the observer. Any
+  universe she observes is therefore contained \emph{within} the
+  informational limits of the observer herself.}
+\label{fig:inverted}
+\end{figure}
+
+
+\section{Observer and Universe Are Identical}
+\label{sec:identity}
+
+Two statements now stand. By \Ref{ax:internal}, the observed self $H$ is a
+small part of $U_O$. By \Ref{ded:inversion}, $U_O$ is a part of the
+observer $O$. They do not conflict: the second says that the observer
+contains the universe, and the first says that, inside that universe, the
+human she observes herself to be is small.
+
+The observer also has no content beyond what she observes. She is
+determined by $E_{\mathrm{int}}$ alone (\Ref{ded:equivalence}), and
+$E_{\mathrm{int}}$ is the experience of $U_O$. Hence $O \subset U_O$ as
+well.
+
+\begin{deduction}[Identity of observer and universe]\label{ded:identity}
+  The observer and her universe are the same set:
+  \[
+    O = U_O.
+  \]
+  The smallness of $H$ belongs to the internal perspective, not to the
+  structure.
+\end{deduction}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % A single unified boundary where O and U_O coincide
+    \draw[ultra thick, fill=purple!5, draw=purple!80!black] (0,0) ellipse (3.5cm and 2.2cm);
+
+    \node[purple!90!black, font=\large] at (0,0.3) {\textbf{$O = U_O$}};
+    \node[gray!70, font=\small] at (0,-0.5) {Observer-universe identity};
+
+    % Internal structure of the single set
+    \draw[thick, color=purple!40, step=0.4cm] (-2,-1) grid (2,1);
+
+    % The observed self, a small part of the whole
+    \draw[thick, fill=orange!20, draw=orange!80!black] (-2.6,0.2) circle (0.4cm);
+    \node[orange!90!black] at (-2.6,0.2) {\textbf{$H$}};
+\end{tikzpicture}
+\caption{\textbf{The identity ($O = U_O$).}
+  The internal perspective ($H \subset U_O$) and the inversion
+  ($U_O \subset O$) are both kept. The observer and her universe are one
+  static information structure, and the observed self $H$ is a small part
+  of it.}
+\label{fig:identity}
+\end{figure}
+
+
+\section{Other Observers}
+\label{sec:others}
+
+We observe other humans: Bob, and billions more. Each has DNA, and by
+\Ref{ax:genetic} each is a conscious human, that is, an observer. By the
+preceding deductions each has her own universe, $O_i = U_{O_i}$.
+
+These universes are not identical. What they have in common is what we
+call reality.
+
+\begin{definition}[Reality]\label{df:reality}
+  Reality is the structure shared by the universes of all observers:
+  \[
+    R = \bigcap_i U_{O_i}.
+  \]
+\end{definition}
+
+% TODO: say how corresponding structure in different observers' universes
+% is identified, since the observers are different information structures.
+
+Reality is therefore not an independent container that observers inhabit.
+It is what they have in common.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % Scope for opacity mixing
+    \begin{scope}[fill opacity=0.15]
+        \fill[red!80!black] (-2,0) circle (3cm);
+        \fill[blue!80!black] (2,0) circle (3cm);
+        \fill[green!60!black] (0,2.5) circle (2.8cm);
+    \end{scope}
+
+    % Outlines
+    \draw[thick, red!80!black] (-2,0) circle (3cm) node[left=1.8cm, red!90!black] {\textbf{$U_{O_1}$}};
+    \draw[thick, blue!80!black] (2,0) circle (3cm) node[right=1.8cm, blue!90!black] {\textbf{$U_{O_2}$}};
+    \draw[thick, green!60!black] (0,2.5) circle (2.8cm) node[above=1.6cm, green!80!black] {\textbf{$U_{O_3}$}};
+
+    % Central shared intersection
+    \begin{scope}
+        \clip (-2,0) circle (3cm);
+        \clip (2,0) circle (3cm);
+        \clip (0,2.5) circle (2.8cm);
+        \fill[purple!40] (0,0) circle (5cm);
+    \end{scope}
+
+    % Label for reality
+    \node[purple!90!black, font=\bfseries, text width=2.5cm, align=center] at (0,0.8) {Reality\\$R = \bigcap U_{O_i}$};
+\end{tikzpicture}
+\caption{\textbf{Reality as what observers share.} Reality is not an
+  independent container that observers inhabit. It is the structure
+  ($R = \bigcap_i U_{O_i}$) common to the universes of independent
+  observers.}
+\label{fig:intersection}
+\end{figure}
+
+\begin{deduction}[Reality lies within every observer]\label{ded:reality-within}
+  For every observer, $R \subset U_{O_i} = O_i$. No observer is contained
+  in reality; reality is contained in each observer.
+\end{deduction}
+
+
+
+\chapter{Why the Observer Finds Order}
+\label{ch:measure}
+
+\section{The Problem}
+\label{sec:problem}
+
+Chapters~\ref{ch:time} to~\ref{ch:reality} lead to a foundation without
+structure: static, timeless and abstract (\Ref{ded:universe},
+\Ref{ded:abstract}). In the picture of $n$ bits, it is a bitstring with no
+rules. Yet what we observe is the opposite: a smooth, lawlike universe.
+Without any pre-existing rule, nothing in the foundation could make it so.
+
+The objection takes the form of Boltzmann's fluctuation argument. If
+observers arise as chance configurations in a structureless substrate,
+almost all of them should find themselves in chaos, not in order.
+
+The only explanation left to lean on is that we exist because we can.
+
+
+\section{Existence}
+\label{sec:existence}
+
+Among the $2^n$ arrangements of the $n$ bits there are arrangements that
+describe an observer. The observer is the class of arrangements that yield
+the same $E_{\mathrm{int}}$ (\Ref{ded:equivalence}), and what else an
+arrangement contains does not matter to her (\Ref{ded:structureless}).
+
+\begin{deduction}[Existence]\label{ded:existence}
+  An observer exists if the class of arrangements that describe her
+  exists. Nothing further is required.
+\end{deduction}
+
+
+The more ways information can be arranged to describe an observer, the higher
+the probability of excistence. The shorter the description of the observer,
+the bigger the equivalence class of the observer.
+
+What produces the shortest description within the context of a Turing
+machine (\Ref{ax:church-turing})? Compression. A description consists of
+code, the compression algorithm, and data, the compressed structure of the
+observer:
+\[
+  L = \ell_{\mathrm{code}} + \ell_{\mathrm{data}}.
+\]
+The code costs bits once. It pays off only if it shortens the data by more
+than it costs.
+
+Chapter~\ref{ch:time} showed that consciousness does not depend on how a
+computation is split into code and data. That remains true: the split does
+not enter the experience. It enters only the length of the description, and
+with it the weight $\mu$.
+
+Smooth, predictable structure is what compresses well. Structure without
+regularity does not compress, and its shortest description is about as
+long as the structure itself. By \Ref{ded:identity} the observer's
+experience is her universe $U_O$. An observer whose universe is smooth and
+lawlike therefore has a short $L$ and a large weight. An observer whose
+universe is chaotic has a long $L$ and a weight suppressed exponentially.
+
+
+\begin{deduction}[Order]\label{ded:order}
+  The observer finds herself in a smooth, lawlike universe because
+  smooth, predictable data compresses best: her description is shortest,
+  and her weight $2^{-L}$ largest, there.
+\end{deduction}
+
+
+\section{The Wave Signature}
+\label{sec:waves}
+
+We observe that the microscopic world waves.
+
+\begin{axiom}[Wave Description]\label{ax:waves}
+  The microscopic world is described by wavefunctions: complex amplitudes
+  that superpose and interfere, with outcomes distributed by their squared
+  magnitude.
+\end{axiom}
+
+A microcosmos that waves everywhere is the signature of 
+compression.
+
+\begin{deduction}[Quantum mechanics as the codec]\label{ded:codec}
+  Quantum mechanics is the compression codec of the observer. The
+  wavefunction is the compressed description, and the rules that render it
+  as the experienced world are the code.
+\end{deduction}
+
+
+\section{Result}
+
+The foundation has no rules, yet the observer finds a lawlike world. The
+lawfulness is not a rule that precedes her. It is the structure of her
+shortest description, and the laws of physics are the code of its codec.
+Together with Chapter~\ref{ch:time}, where time and the laws were found to
+be internal to the observer, the regularity of physics is the form that
+compression takes.
+
+
+\chapter{Definitions}
+
+\begin{definition}[Axiomatic system]\label{df:axiomatic}
+  An axiomatic system is a finite specification (the axioms) together with
+  rules that determine what follows from it. What follows is determined
+  by the axioms and the rules alone.
+\end{definition}
+
+Mathematics is the standard example: axioms and rules of inference
+determine the theorems.
+
+\begin{definition}[Implementation]\label{df:implementation}
+  A system implements an axiomatic system if its sequence of states
+  corresponds one-to-one to what follows from the axioms under the rules.
+\end{definition}
+
+A Turing machine implements an axiomatic system. The program and initial
+tape are the axioms, the transition table is the rules, and the
+computation is the sequence of what follows.
+
+From \Ref{ax:genetic} and \Ref{ax:closure} it follows that a human is an
+axiomatic system. DNA $D$ and the observed environment are the
+specification, the physical laws are the rules, and by \Ref{ax:closure}
+nothing else plays a role. The human is what follows.
 
 
 \backmatter
