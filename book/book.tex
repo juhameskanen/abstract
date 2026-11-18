@@ -599,9 +599,36 @@ arrangement contains does not matter to her (\Ref{ded:structureless}).
   exists. Nothing further is required.
 \end{deduction}
 
+This does not yet say which class we are likely to find ourselves in.
 
-The shorter the description length of the observer, the more ways information can be arranged
-to describe an observer, and the higher the probability of excistence of the observer. 
+
+\section{The Measure}
+\label{sec:measure}
+
+Given information of $n$ bits, if every arrangement counted equally and we were drawn from them,
+the fraction of smooth arrangements, in this sense, is below $2^{-c}$: vanishingly small.
+
+An arrangement belongs to the class of an observer when it contains
+a description of her. The more ways the information can be arranged to
+describe the observer, the higher the probability in measure. The shortest description
+dominates the class.
+
+This is the measure of algorithmic information theory. No external machine reads the description: the code that
+reads it is part of the description.
+
+\begin{deduction}[Shorter descriptions dominate]\label{ded:measure}
+  The weight of an observer $O$ is
+  \[
+    \mu(O) \sim 2^{-L(O)},
+  \]
+  where $L(O)$ is the length of her description. An observer
+  whose description is shorter by $k$ bits has a weight larger by a factor
+  of about $2^k$.
+\end{deduction}
+
+
+\section{Compression}
+\label{sec:compression}
 
 What produces the shortest description within the context of a Turing
 machine (\Ref{ax:church-turing})? Compression. A description consists of
@@ -614,7 +641,7 @@ The code costs bits once. It pays off only if it shortens the data by more
 than it costs.
 
 Chapter~\ref{ch:time} showed that consciousness does not depend on how a
-computation is split into code and data. The split does
+computation is split into code and data. That remains true: the split does
 not enter the experience. It enters only the length of the description, and
 with it the weight $\mu$.
 
@@ -625,6 +652,10 @@ experience is her universe $U_O$. An observer whose universe is smooth and
 lawlike therefore has a short $L$ and a large weight. An observer whose
 universe is chaotic has a long $L$ and a weight suppressed exponentially.
 
+The fluctuation objection loses its force. A lone observer in chaos who
+experiences our smooth universe has the same $E_{\mathrm{int}}$ as we do,
+and so is the same observer (\Ref{ded:equivalence}). What counts is the
+description of the experience, not the surroundings.
 
 \begin{deduction}[Order]\label{ded:order}
   The observer finds herself in a smooth, lawlike universe because
@@ -644,10 +675,13 @@ We observe that the microscopic world waves.
   magnitude.
 \end{axiom}
 
-A microcosmos that waves everywhere is the signature of 
+A smooth field is determined by a few spectral amplitudes. Store these and
+the rule that sums the waves, and the field follows. That is spectral
+compression: amplitudes as the compressed data, the summing rule as the
+code. A microcosmos that waves everywhere is the signature of this
 compression.
 
-\begin{deduction}[Laws of Physics as the codec]\label{ded:codec}
+\begin{deduction}[Quantum mechanics as the codec]\label{ded:codec}
   Quantum mechanics is the compression codec of the observer. The
   wavefunction is the compressed description, and the rules that render it
   as the experienced world are the code.
@@ -662,6 +696,351 @@ shortest description, and the laws of physics are the code of its codec.
 Together with Chapter~\ref{ch:time}, where time and the laws were found to
 be internal to the observer, the regularity of physics is the form that
 compression takes.
+
+
+\chapter{Interpretation}
+\label{ch:interpretation}
+
+Chapter~\ref{ch:measure} asked why the observer finds order. This chapter
+asks what the bits of the observer are, and what is left for experience to
+do.
+
+
+\section{Self and Observed}
+\label{sec:split}
+
+The observer is a finite, static bitstring (Chapters~\ref{ch:time}
+to~\ref{ch:reality}). Read in the order of $E_{\mathrm{int}}$, she divides
+at every step into two parts: the conscious self $O_{\mathrm{self}}$ and
+the observed $O_{\mathrm{obs}}$, the part the self discovers. As the order
+advances, the self finds new ways to read the information in her as a
+universe around her. It appears as if signals, light rays for example,
+carried information from outside through her eyes to her inside. The split,
+the order and the signals are all ways of reading the same bits.
+
+
+\section{Freedom of Interpretation}
+\label{sec:freedom}
+
+Chapter~\ref{ch:time} gave one freedom: the class of arrangements that
+yield the same $E_{\mathrm{int}}$ (\Ref{ded:equivalence}). There is a
+larger one. The same bits can be read in many ways that give the same split
+and the same sequence. Eight bits are $255$ or $-1$, depending on whether
+they are read as unsigned or in two's complement. Bytes can be read in
+big-endian or little-endian order, the bits as an integer or a
+floating-point number, with $8$ or $64$ bits per integer. Each of these is
+one reading among many, and the bits do not prefer any of them.
+
+\begin{deduction}[Freedom of interpretation]\label{ded:interpretation}
+  The observer is not only the class of arrangements that yield her
+  $E_{\mathrm{int}}$ but also the class of all ways of reading them that
+  yield the same split and the same sequence.
+\end{deduction}
+
+
+\section{Mathematics Is a Slice}
+\label{sec:slice}
+
+A bitstring can describe anything, from meaningless noise to highly
+compressible structure. A reading in which part of the string is a Turing
+machine, with code, tape and rules (\Ref{ax:church-turing}), requires the
+bits to be divided and read in one particular way. By the counting of
+Chapter~\ref{ch:measure}, such structured readings are a vanishing fraction
+of all readings. Chapter~\ref{ch:measure} compared observers with each
+other. Here the readings of the bits are compared. Only a vanishing slice
+of the structured readings describes an observer who observes mathematics
+and Turing machines.
+
+\begin{deduction}[Mathematics is a slice]\label{ded:math-slice}
+  The universe cannot be ultimately mathematical. Mathematics is one
+  reading among a vast number of readings of the same bits.
+\end{deduction}
+
+Mathematics is therefore something the observer uses, a compression tool
+for part of what she reads, and not the ground she stands on.
+
+
+\section{The Bare String}
+\label{sec:bare}
+
+\begin{definition}[Bare string]\label{df:bare-string}
+  The bare string is the finite bitstring taken before any reading.
+\end{definition}
+
+The bare string is unstructured, static and timeless (\Ref{ded:universe}).
+Every observer is a reading of it, and mathematics is one of those
+readings.
+
+\begin{deduction}[Emergence from the bare string]\label{ded:bare}
+  The observer emerges from the bare string, not from mathematics.
+\end{deduction}
+
+
+\section{Qualia}
+\label{sec:qualia}
+
+We do not claim to know what qualia is. We observe that we have it
+(\Ref{ax:pain}), and ask where in a finite static bitstring it can
+operate.
+
+In the mathematical slice the rules fix the next symbol: $2 + 2 = 4$ holds
+with or without pain. Qualia cannot reach into the computation to change a
+symbol, since the effect of experience on behavior is already contained in
+it (\Ref{ded:representational}). A finite static bitstring has little else
+to offer: its bits, their arrangement, and the way they are read. Qualia is
+not a further bit or arrangement, because any such addition belongs to the
+mathematical slice, where it changes nothing the rules do not already fix.
+What remains is the way the bits are read.
+
+The space of readings outside the mathematical slice is vast
+(\Ref{ded:math-slice}). Qualia has room to operate there, as a heuristic
+filter over a space in which algorithmic filters are inefficient.
+
+\begin{deduction}[Qualia in the space of readings]\label{ded:qualia}
+  By elimination, qualia operates in the space of readings of the bare
+  string, outside the mathematical slice.
+\end{deduction}
+
+
+\section{Result}
+
+A computer that implements Alice (Chapter~\ref{ch:axioms}) is one reading
+of the bare string. Subjective experience is present in it
+(\Ref{ded:substrate}) as part of the reading it carries, not as something
+its mechanism produces (\Ref{ded:representational}). The observer is a
+mixture of mathematics and what mathematics does not describe, and the
+second part is by far the larger.
+
+
+
+\chapter{The Effectiveness of Mathematics}
+\label{ch:mathematics}
+
+\section{The Puzzle}
+\label{sec:puzzle}
+
+Eugene Wigner asked why mathematics describes the natural world so well,
+the ``unreasonable effectiveness of mathematics in the natural sciences''.
+Chapter~\ref{ch:interpretation} sharpens the puzzle. If mathematics is only
+a slice of the readings of the bare string (\Ref{ded:math-slice}), and the
+universe is not ultimately mathematical, why should mathematics fit it?
+
+We resolve it with what the preceding chapters established: the measure
+favors the shortest description (\Ref{ded:measure}), and what the observer
+observes is part of her (\Ref{ded:identity}).
+
+
+\section{Shared Substructure}
+\label{sec:shared}
+
+Other observers are part of the universe an observer observes, so their
+description is part of hers (\Ref{ded:identity}). If they are built from the
+same informational substructures as she is, those substructures are
+described once and reused, as a library is linked once in software instead
+of being copied into every program. Her description is shorter, and by
+\Ref{ded:measure} her weight larger. This is what we observe: by
+\Ref{ax:genetic}, the same genetic code makes every human. The dominant
+class therefore consists of observers built from the same blocks.
+
+\begin{deduction}[Shared substructure]\label{ded:shared}
+  Observers in the dominant class are built from the same informational
+  substructures. They are highly unified.
+\end{deduction}
+
+
+\section{Convergence}
+\label{sec:convergence}
+
+Chapter~\ref{ch:interpretation} left a question open. The readings of the
+bits are many, and the bits do not prefer one. Yet observers agree on how
+to read them. Reuse answers this. The shortest description shares the
+reading together with the blocks: there is one code, used by all. Mathematics
+is the part of that code that observers use to compress what they read
+(\Ref{ded:math-slice}). Observers agree on mathematics because it is the
+same code, and not because it is imposed from outside.
+
+\begin{deduction}[Convergence]\label{ded:convergence}
+  Mathematics converges across observers: it is the shared compression
+  code of unified observers.
+\end{deduction}
+
+
+\section{Effectiveness}
+\label{sec:effectiveness}
+
+Agreement among observers is not yet effectiveness. The puzzle is that the
+code fits nature. By \Ref{ded:identity}, the nature an observer observes is
+part of the same description as the observer herself. The code that
+composes her also composes what she observes. Mathematics does not need to
+bridge from one realm to another: there is a single description, and
+mathematics is the code it was compressed with.
+
+The universe does not need to be inherently mathematical. It needs only to
+be rich enough in raw information for compressed structures to form
+(\Ref{ded:bare}).
+
+\begin{deduction}[Effectiveness]\label{ded:effectiveness}
+  Mathematics is effective because the observer and what she observes are
+  one compressed description. The universe is not inherently mathematical.
+\end{deduction}
+
+
+\section{Symmetry}
+\label{sec:symmetry}
+
+A symmetric structure is one part together with the transformation that
+repeats it. That is reuse again, now within the universe, and it
+compresses. Symmetric structures have shorter descriptions and so larger
+weight (\Ref{ded:measure}). The mathematics that observers discover is full
+of symmetries because symmetry is how a repeated structure is described
+once.
+
+\begin{deduction}[Symmetry]\label{ded:symmetry}
+  Symmetry is compression. Reuse among observers and symmetry within the
+  universe are one principle: describe once, use many times.
+\end{deduction}
+
+
+\section{Result}
+
+Mathematics is the compression language that observers share, and it
+describes the structure they discover. It is not a fundamental substrate of
+the universe (\Ref{ded:math-slice}). Wigner's puzzle arises only if
+mathematics and nature are two separate things that happen to fit. Here
+they are one description.
+
+
+
+
+\chapter{The Formal Theory}
+\label{ch:formal}
+
+The preceding chapters followed from the axioms. This chapter states the
+theory formally: general relativity and quantum mechanics are two
+compression schemes, and the observer sits at their joint optimum. We mark
+what follows from the axioms, what only corresponds to known physics, and
+what is open.
+
+
+\section{Two Descriptions}
+\label{sec:two}
+
+The observer can be described in two ways. Geometrically, as a space of
+three dimensions plus time with a topology, in which she is a region with an
+inside (\Ref{ax:internal}). Spectrally, as complex amplitudes
+(\Ref{ax:waves}). Neither description is a copy of the other. The mapping
+between them is many-to-many, an instance of the freedom of
+interpretation (\Ref{ded:interpretation}).
+
+An MPEG movie illustrates the relation. The screen has a shape and a
+topology, and the stream is a compressed spectral description of what is
+drawn on it. Here the screen is not a flat rectangle with uniform space but
+a curved space of three dimensions plus time, with any topology.
+
+
+\section{The Joint Description}
+\label{sec:joint}
+
+Let $G$ denote the geometric description of the observer and $\psi$ the
+spectral one. A description of the observer consists of the pair, and its
+length is
+\[
+  L(G,\psi) = L(G) + L(\psi \mid G) \;\approx\; L(\psi) + L(G \mid \psi),
+\]
+where, by the chain rule of algorithmic information, the two splits agree
+up to terms that grow only logarithmically. The weight of the observer is
+$\mu(O) \sim 2^{-L}$, with $L$ the length of her shortest joint
+description (\Ref{ded:measure}). Equivalently, the cost is
+$C = C_g + C_s$, a geometric part and a spectral part, and the observer
+sits where $C$ is stationary and minimal in both $G$ and $\psi$.
+
+In general relativity, matter tells spacetime how to curve, and spacetime
+tells matter how to move. The relation here has the same form. The geometry
+tells how the observer is most efficiently encoded spectrally, and the
+spectral encoding tells how she is most compactly described geometrically.
+
+\begin{deduction}[Joint description]\label{ded:joint}
+  The weight of the observer is set by the pair $(G,\psi)$. Neither
+  description is prior: each fixes how the other is most compactly given.
+\end{deduction}
+
+From the observer's (or a least from Human obsever's) internal perspective,  geometry is primary, since it is
+what she lives in. Structurally neither description is prior, and the
+observer owes her weight to their joint relation.
+
+
+\section{Why Geometry}
+\label{sec:geometry}
+
+We observe that the observer senses a geometric space with an inside, and
+not a space of amplitudes. The reason lies in the cost of boundaries. A
+sharp boundary has a spectrum that decays slowly, so describing it to a
+fixed accuracy takes many high-frequency amplitudes. Geometrically a
+boundary is a surface, a few parameters. Information that crosses the
+boundary of the human $H$ adds further amplitudes to describe what is
+irrelevant to her. This lengthens $L$ and suppresses her weight
+(\Ref{ded:measure}).
+
+\begin{deduction}[Geometric isolation]\label{ded:isolation}
+  Observers whose descriptions isolate them geometrically dominate the
+  measure. Informational boundaries are expensive to describe spectrally
+  and cheap to describe geometrically, so the observer senses a geometric
+  space with a well-defined inside.
+\end{deduction}
+
+
+\section{The Spectral Side}
+\label{sec:spectral}
+
+By \Ref{ded:codec}, quantum mechanics is the compression codec of the
+observer: the sequence of $\psi$ is the compressed description of her whole
+record. The microscopic structures she observes are typical members of what
+$\psi$ renders, with frequencies given by $|\psi|^2$ (\Ref{ax:waves}).
+Sampling and evolution are relations in a static structure and not
+processes.
+
+\begin{conjecture}[Unitary evolution]\label{conj:evolution}
+  The sequence of $\psi$ follows a rule of unitary evolution, the
+  Schr\"odinger equation. The later part of the sequence is computed from
+  the earlier by a rule that conserves total weight, which is what makes the
+  sequence compressible.
+\end{conjecture}
+
+
+\section{Gravity as a Gradient}
+\label{sec:gravity}
+
+Where one geometric structure contains more of the observer's own
+substructures, her description is shorter (\Ref{ded:shared}).
+
+\begin{conjecture}[Gravity as a gradient of weight]\label{conj:gravity}
+  Large-scale structure curves the geometric space because the geometric
+  interpretation of the weight gradient of the observer's microscopic
+  structures is a compression system. Attraction is the geometric reading
+  of that gradient.
+\end{conjecture}
+
+
+
+\section{Status}
+\label{sec:status}
+
+\begin{center}
+\begin{tabular}{@{}l p{0.72\textwidth}@{}}
+\hline
+Results & The weight of an observer (\Ref{ded:measure}); the joint
+  description (\Ref{ded:joint}); geometric isolation (\Ref{ded:isolation});
+  quantum mechanics as the codec (\Ref{ded:codec}). \\
+Correspondences & General relativity as the geometric side; unitary
+  evolution and the Born statistics as the spectral side
+  (\Ref{conj:evolution}). \\
+Open & The cost functionals and the exact complexity measure; the
+  Newtonian and general relativistic limits (\Ref{conj:gravity}); the
+  exclusion principle for fermions, which should emerge from the measure
+  without being put in, and is the sharpest test. \\
+\hline
+\end{tabular}
+\end{center}
 
 
 \chapter{Definitions}
