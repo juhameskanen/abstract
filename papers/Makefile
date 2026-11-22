@@ -10,6 +10,7 @@ PAPERS_LIST := \
 	informational-derivation-of-reality:The_Axiomatic_Foundations_of_Reality \
 	black-hole-singularities:Black_Hole_Singularities_as_Zero_Entropy_States \
 	emergence-of-spacetime:Emergent_Spacetime_Structures_from_Zero-Entropy_Initial_States \
+	unary-hypothesis:From_Unary_to_Binary_Distinctions \
 	geometry-of-spacetime:The_Geometry_of_Spacetime_as_an_Information-Theoretic_Structure \
 	emergence-of-gr:Space-time_Curvature_as_an_Information-Theoretic_Structure \
 	wavefunction-as-compression:Wavefunction_as_Compression \
@@ -143,6 +144,7 @@ $(NAME).tex: $(HEADER_TEX) body.tex $(FOOTER_TEX) Makefile
 body.tex: geometry-of-spacetime/geometry-of-spacetime.tex
 body.tex: informational-action/informational-action.tex
 body.tex: wavefunction-as-compression/wavefunction-as-compression.tex
+body.tex: unary-hypothesis/unary-hypothesis.tex
 body.tex: fermion-boson-duality/fermion-boson-duality.tex
 body.tex: real-theory-of-everything/real-theory-of-everything.tex
 body.tex: emergence-of-spacetime/emergence-of-spacetime.tex
