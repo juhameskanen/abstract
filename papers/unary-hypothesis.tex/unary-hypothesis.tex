@@ -1,0 +1,386 @@
+\documentclass[11pt]{article}
+\input{../../preamble.tex}
+\input{../../paper_preamble.tex}
+\addbibresource{../references.bib}
+
+
+\newcommand{\unit}{\circ}                 % a unary unit
+\newcommand{\bnd}{\,\big|\,}              % the observer/rest boundary
+
+\title{From Unary to Binary Distinction\\
+\large Observer-relative separation without a binary primitive}
+
+\author{Juha Meskanen}
+\date{2019}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is binary an essential primitive for information? We show that it is not.
+We start from a collection $U$ of indistinguishable
+units with no order, no meaning and no distinction between its elements. We
+assume that an observer exists and is part of $U$, since a theory of
+everything cannot place its observer outside itself. Given this assumption,
+$U$ splits into the observer and the rest, and the split is a two-way
+distinction that requires no binary elements. Binary distinction is therefore
+not a property of the units. It is a relation between the observer and what it
+observes, and it is present in any description of $U$, binary ones included.
+All splits exist and none is privileged: order, code, data, machine,
+mathematics and noise emerge as properties of a given split, not of $U$.
+
+The scope is the transition from unary to binary distinction only. Natural
+numbers can be read off the split when the observer is one unit and the
+observed part is finite. Binary numerals and richer structure are available once binary distinction is present, and are not treated here.
+\end{abstract}
+
+\section{Primitive existence}
+
+Let $U$ be a collection of everything, used informally. A literal universal set
+is excluded by standard set theory and would contain this paper's own
+mathematics, so $U$ should be read as a cardinal or as a model. We take $U$ to
+be an unordered collection of indistinguishable units,
+\[
+U=\{u_i\}_{i\in I},
+\]
+and write $n=|U|$ for its cardinality.
+The symbols $u_i$ are mathematical placeholders and do not imply that
+the units have individual identities.
+
+$U$ has the following properties.
+\begin{enumerate}
+  \item No external interpreter exists.
+  \item No intrinsic ordering exists.
+  \item No unit carries semantic meaning.
+  \item No distinction between states is intrinsically defined.
+\end{enumerate}
+Consequently $U$ is invariant under arbitrary permutations,
+\[
+\pi(U)=U,\qquad \pi\in\mathrm{Sym}(U),
+\]
+where $\mathrm{Sym}(U)$ is the group of all permutations of $U$. The only
+quantity left unchanged by every permutation is the cardinality $|U|=n$.
+$U$ is a monolithic existence of $n$ indistinguishable units.
+We call this structure a \emph{unary collection}.
+
+\section{Internal observation}
+
+\textbf{Assumption.} An observer exists, and it is a proper part of $U$.
+
+A theory with no external interpreter cannot place its observer outside $U$.
+Taking the observer and everything else as the two classes of the resulting
+split,
+\[
+U=R\cup D,\qquad R\cap D=\varnothing,\qquad R\neq\varnothing,\quad D\neq\varnothing,
+\]
+where $R$ is the observer (reader) and $D$ is the rest (the read). Writing
+$r=|R|$ and $d=|D|$, we have $r+d=n$ (cardinal addition).
+
+Four points about this partition.
+\begin{enumerate}
+  \item \textbf{The two classes are implied by the assumption.} The existence
+  of an internal observer gives its complement. The
+  purpose of the construction is to show that this suffices for a binary
+  distinction even when the units are unary. The two classes are
+  distinguished by their roles, and in general also by their cardinalities
+  $(r,d)$. 
+  \item \textbf{No split is privileged.} At the level of $U$ the permutation
+  symmetry is never broken. Every partition into reader and read exists, and
+  nothing in $U$ selects one over another. ``This part is the reader'' is a
+  statement relative to a split. Any single split has stabilizer
+  $\mathrm{Sym}(R)\times\mathrm{Sym}(D)$, so from the point of view of that
+  split the symmetry is reduced.
+  \item \textbf{The boundary belongs to the reader.} The boundary
+  $R\bnd D$ is not a unit and is not part of $U$. It is a relational property
+  held on the reader's side of the split. A familiar case is a 64-bit
+  floating-point word: no separator between sign, exponent and mantissa is
+  stored in the bits. The field layout lives in the interpreter, and two
+  interpreters with different conventions, for instance different endianness,
+  read the same bit string as different values. A unary collection therefore
+  needs no second symbol to mark a boundary.
+  \item \textbf{The reader can itself be rich.} $R$ is a collection of units,
+  so the same mechanism applies inside it: a sub-observer within $R$ splits $R$
+  again. The structure of the reader needs no source other than the one that
+  gives the observed its structure. Recursive splits exist (Assumption 2).
+  The observer is rich enough to use them, including to define order and positional weighting.
+\end{enumerate}
+
+\section{The minimum cardinality for nontrivial separation}
+
+A valid observer requires at least one unit, and the observed requires at least
+one further unit:
+\[
+r\ge 1,\qquad d\ge 1,
+\]
+so
+\[
+n\ge 2 .
+\]
+Two units permit the elementary separation
+\[
+\unit\bnd\unit ,
+\]
+which has only one cardinality profile, $(r,d)=(1,1)$. Its two parts differ by
+role and not by cardinality.
+
+To obtain two distinct cardinality profiles we need
+\[
+(r,d)=(1,2)\quad\text{and}\quad(r,d)=(2,1),
+\]
+and both become possible when
+\[
+\boxed{n_{\min}=3.}
+\]
+The two roles are distinguished by the split itself: $R$ is the observer by
+definition, so $(1,2)$ and $(2,1)$ differ without any prior labeling of the
+units. For three units the profiles are
+\[
+\unit\bnd\unit\unit\qquad\text{and}\qquad\unit\unit\bnd\unit ,
+\]
+and the observer and the observed exchange their relative cardinalities.
+
+Two units suffice for a single observer--data separation. Three units are the
+minimum for two distinct profiles. The latter is a choice of criterion and not
+a necessity, and $n_{\min}=3$ is a side result that the later sections do not
+use.
+
+\emph{Remark (infinite $U$).} Cardinal profiles are available when $U$ is
+infinite as well, for example $(1,|U|)$, $(|U|,1)$ and $(|U|,|U|)$, and
+possibly profiles with two different infinite cardinals when $|U|$ is large
+enough. We do not develop this here.
+
+\section{Natural-number representation}
+
+Consider the special case in which the observer consists of exactly one unit,
+$|R|=1$. This is a choice made for the counting construction and not a
+consequence of the split. The remaining units constitute the data, $|D|=d$.
+When $d$ is a finite number we can read the split as a natural-number
+representation,
+\[
+\boxed{m=|D|,\qquad\text{equivalently}\qquad n=m+1 \;\;(\text{finite case}).}
+\]
+The additional unit is the observer, and the remaining units are the observed
+cardinality. For example:
+\[
+\begin{array}{c|c|c}
+\text{Unary collection} & \text{Separation} & \text{Value}\\\hline
+\unit\unit & \unit\bnd\unit & 1\\
+\unit\unit\unit & \unit\bnd\unit\unit & 2\\
+\unit\unit\unit\unit & \unit\bnd\unit\unit\unit & 3\\
+\unit\unit\unit\unit\unit & \unit\bnd\unit\unit\unit\unit & 4
+\end{array}
+\]
+Here $\unit$ denotes a unit and $\bnd$ denotes the boundary, which is not a
+unit. The case $n=2$ is the degenerate profile of Section~3 and gives the
+value~$1$.
+
+Three remarks. First, $m=|D|$ is a definition and $n=m+1$ is the subtraction
+of the observer, so the claim is that the split \emph{can be read as} a natural
+number, not that numbers are derived. Second, since $D\neq\varnothing$, this
+construction yields positive integers only. Zero would correspond to an empty
+$D$, which the split excludes. Third, a one-unit observer has no state with
+which to count, so the counting is done in the authors' arithmetic, as stated
+in Section~1.
+
+\emph{Remark (infinite case).} If $D$ is infinite, removing one unit does not
+change the cardinality, so $m=n-1$ has no meaning and no natural number
+results. Natural numbers arise from observer-relative counting only when the
+observed part is finite. We do not claim more.
+
+The units themselves have not acquired identities, positions or symbols. The
+numerical reading arises from the internal partition. The number is not a
+property of an individual unit but of the relation between observer and
+observed.
+
+\section{Where binary distinction enters}
+
+The split of Section~2 has two roles,
+\[
+\mathcal{B}=\{R,D\},
+\]
+and these roles constitute a binary distinction. This distinction is not
+derived from a purely unary starting point. It is implied by Assumption~1: it
+is the observer/rest relation, and it is present in any description of $U$.
+What is not needed is a binary element. Intrinsic binary states are not a
+primitive, while a relational two-way distinction is unavoidable once an
+observer is present.
+
+Labeling the roles
+\[
+0=\text{not observer},\qquad 1=\text{observer}
+\]
+is a convention of the reader and does not describe the units. The same holds
+for bit strings in general. The pattern $111$ is $7$ as an unsigned integer,
+$-1$ in 3-bit two's complement, and ``three'' as a unary tally. Its meaning
+belongs to an interpretation, and the pattern does not fix it. The same
+applies to the field layout of a floating-point word, as in Section~2.
+
+\paragraph{Comparison of collections.}
+\begin{itemize}
+  \item \emph{A unary collection.} The units are indistinguishable. A split
+  into $R$ and $D$ is distinguished only by the cardinalities $(r,d)$. The
+  distinction is relational and is created by the split.
+  \item \emph{A binary collection.} Each element is intrinsically in one of two
+  distinguishable states. A split is distinguished by the same cardinalities
+  and also by the states of the elements in each part. This is additional
+  structure that a unary collection does not have. Order is not part of it:
+  both collections are unordered, and any order is supplied by the reader.
+\end{itemize}
+A split of a unary collection is already a binary distinction, so binary
+elements are not needed to obtain one. Binary is therefore not an essential
+primitive of information, if ``binary'' means intrinsic two-valued states.
+
+\paragraph{Remark on the blank.} A Turing machine with a single symbol still
+distinguishes mark from blank. That distinction lives in the machine's
+alphabet, that is, on the reader's side, in the same way as the field layout of
+a floating-point word. It is a property of the reader and not of the units.
+
+\paragraph{What this section does not show.} It does not show that any
+particular information content emerges. It shows only that distinction, and
+with it the possibility of information, arises relative to a split.
+
+\section{From binary distinction to binary numerals}
+
+A distinction between two classes is not by itself a binary numeral system. To
+construct binary numerals we need one further operation, recursive separation.
+Suppose an observed collection is repeatedly partitioned into two possible
+classes. Each separation introduces a binary decision
+\[
+b_i\in\{0,1\},
+\]
+and a sequence of such decisions gives
+\[
+(b_{k-1},b_{k-2},\ldots,b_0).
+\]
+Once positional significance is defined, the corresponding integer is
+\[
+\boxed{N=\sum_{i=0}^{k-1}b_i\,2^i .}
+\]
+This is the conventional binary representation. The powers of two arise from
+the recursive positional structure: each successive position distinguishes
+twice as many configurations as the preceding one. Zero appears here as the
+value of the digit $b_i=0$ and of the all-zero string.
+
+The recursive operation and the positional convention are additional
+mathematical structure. They do not follow from a single observer--data
+partition, and we assume them. The same recursion applies inside the observer
+$R$, which is how the reader can acquire structure of the same kind as the
+observed (Section~2, point~4).
+
+\section{Consequences}
+
+The construction reverses the conventional foundational assumption. Instead of
+beginning with binary states and subsequently introducing an interpreter, we
+begin with an undifferentiated collection $U$ and assume that its observer is
+internal. The resulting hierarchy is
+\[
+\begin{aligned}
+&\text{Unary existence: the collection } U\\
+&\quad\downarrow\\
+&\text{Internal observer/rest split (all splits exist, none privileged)}\\
+&\quad\downarrow\\
+&\text{Two complementary classes}\\
+&\quad\downarrow\\
+&\text{Binary distinction (relative to a split)}\\
+&\quad\downarrow\\
+&\text{Recursive binary representation (additional structure).}
+\end{aligned}
+\]
+Information is not assumed to exist in $U$. A distinction that makes
+interpretation possible arises relative to a split. Binary representation is
+therefore not the fundamental nature of information. It is a particularly
+simple alphabet available to an observer that can distinguish itself from what
+it observes.
+
+\paragraph{The unary case of the positional formula}
+
+The positional formula of Section~6 can be applied to a string of marks by
+extending the same reader-supplied convention. Let a reader assign an order to
+the marks $b_{k-1},\ldots,b_0$ and a weight $w^i$ to position $i$, so that the
+value is
+\[
+N_w=\sum_{i=0}^{k-1} b_i\,w^i .
+\]
+The order, the index $i$ and the weight are conventions of the reader, as are
+cardinality and the boundary $R\bnd D$ in the earlier sections. None of them is
+a property of the marks.
+
+For $w=2$ the weights differ between positions, so the value depends on the
+reader's ordering. For example,
+\[
+111 \;\mapsto\; 1\cdot2^2+1\cdot2^1+1\cdot2^0=7,
+\]
+and the string $110$ is $6$ when read with the most significant position first,
+and $3$ when read with the least significant position first. Two readers using
+different conventions can therefore disagree about the same string.
+
+For $w=1$ every weight equals $1$, since $1^i=1$:
+\[
+\unit\unit\unit \;\mapsto\; 1\cdot1^2+1\cdot1^1+1\cdot1^0=3 ,
+\qquad
+N_1=\sum_{i=0}^{k-1} b_i .
+\]
+The value is the number of marks and is the same for every ordering the reader
+may choose. This check is weak and should not be read as evidence for the
+permutation symmetry of $U$. The order independence of $N_1$ follows from the
+commutativity of addition, so it would pass equally for any symmetric function
+of the marks, for example $\sum_i b_i^2$. It is consistent with the symmetry of
+Section~1 but does not support it.
+
+If every $b_i$ is $1$, then $N_1=k$ and the marks carry no distinction at all.
+If blanks are allowed, $b_i\in\{0,1\}$, then $N_1$ is the number of ones in a
+binary string, and a binary distinction between mark and blank has been
+reintroduced on the reader's side (see the remark on the blank in Section~5).
+With the usual digit set $\{0,\ldots,w-1\}$, base $w=1$ would allow only the
+digit $0$. We therefore regard the unary case as the degenerate case of the
+positional formula and not as a positional numeral system in the full sense.
+Positional weighting with $w>1$ requires an order, and this is the additional
+structure that binary numerals need beyond a unary collection.
+
+\section{Assumptions}
+
+\begin{enumerate}
+  \item An observer exists, and it is a proper part of $U$. All two-ness in
+  the paper is as strong as this assumption.
+  \item All splits of $U$ into reader and read exist, and none is privileged.
+  \item $U$ is used informally as a collection of everything. A cardinal or a
+  model avoids the problems of a literal universal set.
+  \item Cardinality ($n$, $r$, $d$) and the arithmetic of cardinals are used as
+  descriptive notation by the authors.
+  \item The two-block split is the minimal structure. Refinements (three or
+  more classes, recursion, machines) require observer structure that is not
+  derived here.
+  \item The criterion behind $n_{\min}=3$ (two distinct cardinality profiles)
+  is a choice.
+  \item Natural-number representation uses $|R|=1$ and a finite $D$
+  (Section~4), and yields positive integers only.
+  \item Recursion and positional weighting are additional structure
+  (Section~6). The same recursion applies inside the observer, which is the
+  assumed source of the reader's structure.
+  \item What makes a split capable of interpretation, and in particular what
+  makes structure inside $R$ be about $D$, is left open.
+  \item (Optional) The observer is finite: $r<\infty$. This is motivated by the
+  empirical observation that observers do not encounter actual infinities. It
+  does not by itself fix $|U|$. If $|U|$ is infinite, a finite observer reads
+  only a finite part of $D$, which requires structure beyond the two-class
+  split of Section~2.
+\end{enumerate}
+
+\section{Conclusion}
+
+An unordered collection of indistinguishable units does not by itself
+constitute an informational representation. Assuming that the observer is
+internal splits $U$ into the observer and the rest, and this gives a two-way
+distinction without an external interpreter and without binary elements. In
+this sense binary is not an essential primitive of information: intrinsic
+two-valued states are not needed, and the two-valued distinction that is
+needed is relational. Natural numbers can be read off the split when the
+observer is one unit and the observed part is finite. Binary numerals require a
+further recursive and positional construction, and richer structure on either
+side of the split is outside the scope of this paper.
+
+\medskip
+\noindent\textbf{Existence does not require information. Information requires
+distinction, and distinction can emerge internally through observation.}
+
+\end{document}
