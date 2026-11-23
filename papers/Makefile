@@ -11,6 +11,7 @@ PAPERS_LIST := \
 	black-hole-singularities:Black_Hole_Singularities_as_Zero_Entropy_States \
 	emergence-of-spacetime:Emergent_Spacetime_Structures_from_Zero-Entropy_Initial_States \
 	unary-hypothesis:From_Unary_to_Binary_Distinctions \
+	unary-tutorial:Unary_Calculus \
 	geometry-of-spacetime:The_Geometry_of_Spacetime_as_an_Information-Theoretic_Structure \
 	emergence-of-gr:Space-time_Curvature_as_an_Information-Theoretic_Structure \
 	wavefunction-as-compression:Wavefunction_as_Compression \

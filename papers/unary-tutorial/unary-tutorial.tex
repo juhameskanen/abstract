@@ -1,0 +1,204 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,columns=fullflexible,frame=single,
+        framerule=0.3pt,xleftmargin=1em,xrightmargin=1em,showstringspaces=false,
+        literate={ε}{{$\varepsilon$}}1}
+\newcommand{\m}{\texttt{|}}
+\title{A Tutorial on Unary Arithmetic\\\large Numbers as strings of marks, no counting required}
+\author{Companion to \emph{From Unary to Binary System}}
+\date{2024}
+\begin{document}
+\maketitle
+
+\section{Motivation}
+The companion paper starts from a featureless infinity. Dividing it cannot give the
+parts any intrinsic property, so each part is again the same infinity and the parts
+are interchangeable: unary digits. A collection of $n$ of them is characterised by
+$n$ alone and is invariant under $\mathrm{Sym}(n)$, so it has no order and no
+arithmetic of its own. An observer that is all of the collection, having no outside,
+can experience it only as a traversal through its readings. Time is the order of the
+traversal, and the natural number $k$ is the position of a frame, so the successor
+is the observer's own progress and no counting outside it is needed. Binary
+numerals enter later, as the compressed address of a position (Section~\ref{sec:bin}),
+and the digits stay unary throughout. This tutorial concerns the arithmetic that can
+be carried out on the resulting numerals by string operations alone.
+
+\section{The idea}
+A \emph{unary numeral} is a string of identical marks. We write the mark as \m{}, so
+\m\m\m{} is the number three and the empty string $\varepsilon$ is zero. There are no
+place values and no other symbols. The only thing that distinguishes one numeral
+from another is how many marks it has.
+
+In the paper's nested traversal $S_0\subset S_1\subset\dots\subset S_n$, frame $k$ marks
+$k$ digits, and the numeral $k$ is the marked part: a prefix of the full string of $n$
+marks, with $\varepsilon$ the initial frame. Two remarks on scope:
+\begin{itemize}
+  \item The operations are conventions applied by a reader. A bare collection of
+        unary digits has no arithmetic of its own. The code in \texttt{unary.py} is
+        one such reader.
+  \item The traversal itself yields only the successor. Addition, multiplication and
+        the rest are defined on top of it, as string operations.
+\end{itemize}
+The rule of the game is that no operation may convert to a machine integer or call
+\texttt{len()}. The single exception is \texttt{to\_int}, a reading taken from outside
+so that we can display and test the answer. In the paper the count is the observer's own
+progress, and \texttt{to\_int} plays no part in it.
+
+\section{Reading, writing, and order}
+\begin{lstlisting}
+>>> F = Unary.from_int
+>>> F(3), F(0)
+(|||, ε)
+\end{lstlisting}
+\textbf{Order is a prefix test.} Because every numeral is a run of marks,
+$a\le b$ exactly when $a$ is a prefix of $b$. No counting is needed, only matching
+from the left.
+\begin{lstlisting}
+def __le__(self, o): return o.s.startswith(self.s)
+\end{lstlisting}
+\textbf{Successor} appends one mark. Everything else is built from this.
+
+\section{Addition: concatenation}
+\[
+  \m\m\m \;+\; \m\m\m\m \;=\; \m\m\m\m\m\m\m
+\]
+\begin{lstlisting}
+def __add__(self, o): return Unary(self.s + o.s)
+\end{lstlisting}
+Associativity and the identity $\varepsilon$ are properties of concatenation.
+
+\paragraph{Why addition commutes here.} For strings over a two-letter alphabet,
+concatenation does \emph{not} commute: $01\cdot 10 \neq 10\cdot 01$. With a one-letter
+alphabet every string is a run of the same mark, so $a\cdot b = b\cdot a$ automatically.
+Commutativity of unary addition is therefore a consequence of having no
+distinctions between marks, which echoes the permutation invariance of
+$U$ in the paper. The same fact explains why the order-independence remark in Section~5 of the paper is weak:
+it holds for any symmetric function of the marks.
+
+\section{Subtraction: removing a suffix}
+$a-b$ is defined when $b\le a$ and removes $b$ from the end of $a$.
+\begin{lstlisting}
+def __sub__(self, o):
+    if not o <= self: raise ValueError("a - b undefined for b > a ...")
+    return Unary(self.s.removesuffix(o.s))
+\end{lstlisting}
+\begin{lstlisting}
+>>> F(5) - F(2)
+|||
+>>> F(2) - F(3)
+ValueError: a - b undefined for b > a in the naturals
+\end{lstlisting}
+Subtraction is partial because the naturals have no negatives. Nothing else is
+needed.
+
+\section{Multiplication: substitution}
+Replace each mark of $a$ by a copy of $b$.
+\[
+  \m\m\m \times \m\m\m\m
+  \;\Rightarrow\; (\m\m\m\m)(\m\m\m\m)(\m\m\m\m)
+  \;=\; \m\m\m\m\m\m\m\m\m\m\m\m
+\]
+\begin{lstlisting}
+def __mul__(self, o): return Unary(self.s.replace(D, o.s))
+\end{lstlisting}
+Multiplying by $\varepsilon$ erases every mark (the result is $\varepsilon$), and multiplying by a
+single mark leaves the numeral unchanged. Commutativity is not obvious from the
+rule, since ``$a$ copies of $b$'' and ``$b$ copies of $a$'' are different recipes.
+The rectangle picture shows they give the same number of marks:
+arrange $a$ rows of $b$ marks and read the columns instead of the rows.
+Distributivity is the same picture cut into two blocks.
+
+\section{Division, powers and the gcd}
+\textbf{Division} is repeated subtraction: remove $b$ from $a$ until you cannot,
+counting the removals with a growing numeral.
+\begin{lstlisting}
+>>> divmod(F(13), F(4))
+(|||, |)
+\end{lstlisting}
+\textbf{Powers} are repeated multiplication starting from a single mark, so
+$a^{\varepsilon}=\m$. The code gives $0^0=1$, the usual convention.
+\begin{lstlisting}
+>>> F(2) ** F(3)
+||||||||
+\end{lstlisting}
+\textbf{Greatest common divisor} is Euclid's algorithm using only the remainder:
+\begin{lstlisting}
+>>> F(12).gcd(F(18))
+||||||
+\end{lstlisting}
+
+\section{Converting to binary}\label{sec:bin}
+Binary is a compression of unary. The conversion shows why.
+
+\paragraph{Unary to binary: pair off the marks.}
+Group the marks into pairs. A leftover single mark means the next bit is $1$,
+no leftover means $0$. The pairs become a new, shorter numeral, and the process
+repeats. Bits come out least significant first.
+\[
+\m\m\m\m\m\m\;\to\; \underbrace{\m\m}\,\underbrace{\m\m}\,\underbrace{\m\m}
+\;:\;\text{no leftover},\; 0;\;\; 3\text{ pairs}\to 1\text{ pair}+1\text{ left},\; 1;\;\;
+1\text{ pair}\to 1\text{ left},\;1
+\]
+Reading the bits from the last to the first gives $110$, the binary form of six.
+\begin{lstlisting}
+>>> F(6).to_binary()
+110
+\end{lstlisting}
+\paragraph{Binary to unary: Horner's rule.} Start from $\varepsilon$. For each bit,
+double the string (concatenate it with itself) and append a mark if the bit is $1$.
+\begin{lstlisting}
+>>> Unary.from_binary("1101")
+|||||||||||||
+\end{lstlisting}
+This is thirteen marks. The doubling step is the same as multiplying by two, so
+this is Horner's method for evaluating $\sum b_i 2^i$.
+
+\paragraph{The size difference.} A unary numeral for $n$ has $n$ marks. Its binary
+form has about $\log_2 n$ bits. The conversion shrinks the string at the cost of
+introducing a second symbol and a positional convention. This is the
+additional structure of the paper's Section~5: binary numerals need an order and a
+weight per position, which a collection of unary digits does not supply.
+
+\paragraph{Where the weights come from.} In the paper the weight $2^j$ of digit $j$
+is not a property of the digit. Let the observer traverse the subsets of $n$ unary
+digits in counter order, so that frame $k$ marks digit $j$ iff bit $j$ of $k$ is $1$.
+Digit $j$ then flips with period $2^j$, and a reader recovers its weight from the flip
+timing alone, whatever physical digits happen to play each role. The script
+\texttt{traversal.py} checks this for $n=8$ (256 frames, roles $1,2,4,\dots,128$, invariant
+under random relabelling). It also shows that the unary chain reaching 256 frames needs
+255 digits, against 8 for the counter, so the bit string is the compressed address of a
+position in the unary traversal.
+
+\section{What this does and does not show}
+\begin{itemize}
+  \item \textbf{Verified.} (\texttt{unary.py}) For all pairs $0\le a,b\le 12$ the string results for $+,-,\times$,
+        $\div$, order, gcd (and powers for small inputs) agree with ordinary integer
+        arithmetic, and binary conversion round-trips for $0\le n<200$.
+  \item \textbf{The machinery is not unary.} The host language implements
+        \texttt{replace}, \texttt{startswith} and \texttt{removesuffix} using its own
+        counting and a rich alphabet. The tutorial claims only that the
+        \emph{numerals} and the \emph{rules on them} need no binary.
+  \item \textbf{The converter uses a second symbol.} \texttt{to\_binary} marks pairs with
+        \texttt{\#}, and its output is a string over $\{0,1\}$. This is the reader
+        introducing a binary distinction on its side, as the paper says it must.
+  \item \textbf{Cost.} Unary arithmetic is slow and long: multiplication
+        takes time proportional to $ab$, and $a^b$ has $a^b$ marks. That is the
+        price of having no positional structure.
+\end{itemize}
+
+\section*{Exercises}
+\begin{enumerate}
+  \item Prove that $a\le b$ iff there is a $c$ with $a+c=b$, using only prefixes.
+  \item Show $(a+b)\times c = a\times c + b\times c$ using substitution.
+  \item Replace \texttt{to\_binary} by a version that never builds the symbol
+        \texttt{\#}. Is it possible with only the original mark?
+  \item Write \texttt{to\_ternary} using groups of three marks.
+  \item Give a numeral-level argument that $\gcd(a,b)=\gcd(b,a \bmod b)$.
+  \item In \texttt{traversal.py}, replace the counter order by a Gray code. What are the
+        flip periods, and can the digit roles still be read off?
+\end{enumerate}
+\end{document}
