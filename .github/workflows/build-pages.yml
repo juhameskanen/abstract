@@ -32,8 +32,9 @@ jobs:
             texlive-science \
             texlive-bibtex-extra \
             texlive-extra-utils \
-            biber latexmk tex4ht
-
+            biber latexmk tex4ht \
+            dvipng
+	    
       - name: Run HTML Build via Makefile
         run: |
           make html
