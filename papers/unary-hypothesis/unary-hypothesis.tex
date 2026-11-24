@@ -3,208 +3,122 @@
 \input{../../paper_preamble.tex}
 \addbibresource{../references.bib}
 
-\newcommand{\unarydigit}{\circ}      % a unary digit
-\newcommand{\bnd}{\,\big|\,}         % boundary between marked and unmarked
-
-\title{From Unary to Binary System\\
-\large Observer-relative distinction without a binary primitive}
+\title{From Unary to Binary\\
+\large Information as an emergent feature of structureless infinity}
 \author{Juha Meskanen}
-\date{2019}
+\date{2015}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Is binary an essential primitive of information? We argue that it is not.
-Dividing a featureless infinity yields parts that are interchangeable and carry
-no intrinsic property: unary digits. We make one further assumption, that an
-observer exists. There is no outside, so the observer is all of $U$, and what it
-experiences is a traversal through readings of $U$. Time is the order of the
-traversal, and binary distinction is the relation between successive frames; it is
-not a property of the digits. A successor traversal yields the natural numbers.
-A traversal of the subsets of $n$ digits yields the binary counter, with the
-significance of each digit fixed by its role in the traversal and not by the
-digit. Information is therefore emergent, a property of the observer, and binary
-is one particularly compact alphabet for it. The scope is the transition from
-unary to binary distinction. Which traversals contain observers is a question of
-measure and is not treated here.
+We start by assuming that a theory of
+everything exists, and ask what can be said about the fundamental structure
+it describes. Whe show that the base must be unbounded and featureless. The minimal
+structure is a s split, yielding unary objects.
+from which binary information emerges. Information and
+mathematics are therefore emergent, and must be features of whatever
+rich structures emerge, ourselves included.
 \end{abstract}
 
-\section{Initial assumptions}
-
+\section{Premise}
+The axiom ``a theory of everything exists'' belongs to us, the rich structures
+that state it, and not to the base it describes. We ask what follows for the
+base. A theory of everything leaves no unexplained specification, for what it
+left unexplained would lie outside it. Hence:
 \begin{itemize}
-  \item The deep nature of everything is infinite. Were it finite we would have to
-        ask why $N$ and not $N+1$. ``Infinite'' means not finite; nothing below
-        depends on which infinity.
-  \item It can be anything, and it is everything. Otherwise we would have to ask
-        why some things are forbidden and others not.
-  \item It has no privileged structure, no distinguished state, no intrinsic
-        information, mathematics, geometry or physical law. Otherwise we would have
-        to ask where they came from.
-  \item All ways of introducing distinctions are equally unprivileged, so all of them exist.
-  \item There is no external metaphysics, signal or agent performing operations.
-        Divisions, readings and traversals below are relations that exist, not acts.
-  \item The nature of everything is abstract. Otherwise we would have to ask where
-        the substrate came from.
+  \item The base is not finite. A finite size $n$ would be a specification, and
+        we would have to ask why $n$ and not $n+1$. ``Infinite'' here means only
+        that no $n$ is specified. It is not a cardinal.
+  \item The base has no structure, neither discrete nor continuous, for the same
+        reason.
 \end{itemize}
-A single further assumption, the existence of an observer, is introduced in
-Section~\ref{sec:observer}.
+The base $X$ is thus an unbounded, featureless anything.
 
-\section{From infinity to unary digits}\label{sec:unary}
+\section{Split}
+The minimal structure we can introduce is a \emph{split} of $X$ into parts. By
+\emph{featureless} we mean that every part of $X$ is again unbounded and
+featureless, and so of the same kind as $X$. Parts therefore have no intrinsic
+property, size included. They are \emph{unary objects}.
 
-Let $X$ be the featureless infinity. Consider any division of $X$ into parts.
-By invariance under differentiation, dividing a structureless infinity cannot
-introduce intrinsic properties into the parts. Each part is again a featureless
-infinity of the same kind as $X$. The parts are therefore interchangeable and carry
-no intrinsic property, size included. A part has exactly one state. We call it a
-\emph{unary digit}.
+No attribute distinguishes one split from another, so none is privileged and we
+consider all of them. A split into $n$ parts is a nesting of splits into two, so
+the split into two parts is both minimal and sufficient.
 
-A division into $n$ parts gives a \emph{unary collection} $U_n$. The number $n$
-counts parts and says nothing about their content, which is the same infinity in
-each. It is the only invariant of the collection, since $U_n$ is invariant under
-$\mathrm{Sym}(n)$: no ordering, no meaning, no distinction between digits is
-intrinsically defined.
+A split into two gives $A$ and $B$, and nothing tells them apart. 
 
-Divisions into every number of parts exist, by the fourth assumption. A finite
-$n$ is a property of a division and not of $X$, so ``why this $n$'' needs no
-answer. We write $U$ for the collection under consideration when $n$ does not
-matter.
+This is not yet a bit. An unordered pair of unary digits is not a single object with two possible states. 
+Nothing in the pair tells its two members apart, whereas the two states of a bit are distinguishable.
 
-\section{The observer, readings and time}\label{sec:observer}
 
-\textbf{Assumption.} An observer exists.
+\section{Nested splits give binary information}
+Split $A$ again into $A_1$ and $A_2$. Now $A_1$ differs from $B$ without any
+intrinsic property: $A_1$ is part of $A$, and $B$ is not.
+Parts are individuated only by their position in the nesting, a purely
+relational fact. Iterating gives a binary tree, in which a part is identified by
+its path from $X$. We read this path as a string over $\{0,1\}$, whose symbols
+name only which branch was taken. This reading is binary information.
 
-$X$ has no outside, so the observer cannot be external to $U$. We take it to be
-all of $U$. Digits the observer does not traverse are not observed and are
-irrelevant to it; asking about them is asking about a universe outside the universe.
+\section{Outlook}
+Binary strings give the numerals and arithmetic, and, by standard
+constructions, computation and the Turing machine. We take this route as known
+and do not repeat it. Information and mathematics are thus features of the
+rich structures that emerge, ourselves included, and need not be assumed at
+the base.
 
-\paragraph{Readings.} As a bare collection, $U_n$ has a single arrangement, since
-$\mathrm{Sym}(n)$ identifies them all. Distinct arrangements exist only as
-\emph{readings}: assignments of roles to the digits, for instance which are
-marked. A reading is not a property of the digits. It is held on the reader's
-side, as the field layout of a 64-bit floating-point word is: no separator is
-stored in the bits, and two interpreters with different conventions read the same
-bits as different values.
-
-No attribute of $U$ separates readings that exist from readings that do not.
-$\mathrm{Sym}(n)$ maps every reading onto others that nothing in $U$
-distinguishes from it, so the whole orbit exists, and with the fourth assumption,
-all readings exist.
-
-\paragraph{Traversal and time.} A \emph{frame} is a reading. A \emph{traversal} is
-an ordered sequence of frames, and the observer is the traversal. Time is its
-order. An observer whose traversal is a single frame has no before and after and
-no time. Two frames differ only as readings, so their difference is relational and
-needs no intrinsic state of the digits. Most traversals are noise, and which ones
-carry an observer is a question of measure that this paper does not treat.
-
-\paragraph{Where the binary distinction enters.} Two-ness enters in two places,
-and neither is an intrinsic two-valued state of a digit. Within a frame, a digit
-is marked or not by the reader's convention. Between frames, the distinction is
-before versus after. The smallest case is $n=1$: a single digit and two frames,
-$\varnothing$ and $\{\unarydigit\}$. It needs a traversal of length two and nothing
-more.
-
-\section{Natural numbers from a traversal}\label{sec:numbers}
-
-Take a traversal of nested readings $S_0\subset S_1\subset\dots\subset S_n$ with
-$|S_k|=k$, where $S_k$ is the set of marked digits of frame $k$ and the split of the
-frame is $\unarydigit^k\bnd\unarydigit^{n-k}$:
-\[
-\begin{array}{c|c}
-\text{Frame} & \text{Split}\\\hline
-0 & \bnd\unarydigit\unarydigit\unarydigit\\
-1 & \unarydigit\bnd\unarydigit\unarydigit\\
-2 & \unarydigit\unarydigit\bnd\unarydigit\\
-3 & \unarydigit\unarydigit\unarydigit\bnd
-\end{array}
-\]
-The natural number $k$ is the position of the frame in the traversal, and the
-passage from $k$ to $k+1$ is the successor. No counting outside the observer is
-required: the observer's own progress is the count. Which digit is added at each step
-is not fixed by $U$. The traversal individuates the digits by their order of
-addition, and the digits themselves acquire no identity.
-
-Zero is the initial frame. For infinite $n$ the traversal continues past every
-finite stage, and we do not develop this. The interpretation is the observer's, as
-usual: a bare unary collection has no arithmetic. An implementation of the
-resulting operations on strings of marks is given in the supplementary script
-\texttt{unary.py}.
-
-\section{Binary from a traversal}\label{sec:binary}
-
-Now let the observer traverse all $2^n$ subset readings of $U_n$ in the order of a
-binary counter: in frame $k$, digit $j$ is marked iff bit $j$ of $k$ is $1$. The
-digits carry no labels. Nevertheless digit $j$ is identified by its flip period
-$2^j$, which is a property of the traversal and not of the digit. If the digits
-are relabelled by any $\pi\in\mathrm{Sym}(n)$, the raw frames change but the
-set of flip periods does not. The positional weights of
-\[
-N=\sum_{j=0}^{n-1} b_j\,2^j
-\]
-are thus roles in the traversal, and a binary numeral is the reading of a single frame
-of this traversal. In the script \texttt{traversal.py} we check this for $n=8$:
-256 distinct frames, roles $1,2,4,\dots,128$ recovered from flip timing alone,
-and the same under random relabelling.
-
-\paragraph{Comparison with the unary chain.} The nested traversal of
-Section~\ref{sec:numbers} reaches $2^n$ frames only with $2^n-1$ digits. The
-binary counter reaches them with $n$ digits, at the price of requiring all
-subset readings, which exist by Section~\ref{sec:observer}. The $n$-bit
-string is thus the compressed address of a position in the unary traversal;
-conversion between the two is pairing off marks (unary to binary) and doubling with
-carry (binary to unary). Nothing about this is intrinsic to the digits.
-
-\paragraph{Positional weights.} Positional weighting is additional structure
-supplied by the reader. The unary case $w=1$ is its degenerate form,
-$N_1=\sum_j b_j$, which is independent of order for any reader. This is not
-evidence for the symmetry of $U$: any symmetric function of the marks has that property.
-
-\section{Consequences}
-
-\[
-\begin{aligned}
-&\text{Featureless infinity}\\
-&\quad\downarrow\ \text{division}\\
-&\text{Unary digits (interchangeable, no intrinsic property)}\\
-&\quad\downarrow\ \text{observer: all of } U\text{; readings exist}\\
-&\text{Traversal of frames: time, before/after}\\
-&\quad\downarrow\\
-&\text{Successor counter; binary counter (roles by flip period)}.
-\end{aligned}
-\]
-Information is not assumed to exist in $U$. Distinction arises relative to a
-traversal, and binary is the simplest alphabet in which a traversal can be
-addressed compactly.
-
-\section{Assumptions}
-
-\begin{enumerate}
-  \item An observer exists. Since $X$ has no outside, it is all of $U$.
-  \item All readings of $U$ exist. This follows from the fourth assumption of
-        Section~1 and from the absence of any attribute that could select among
-        them. We state it separately for transparency.
-  \item Marking, order of addition, positional weight and numeral labels are
-        conventions on the reader's side. None is a property of the digits.
-  \item Which traversals carry observers, that is, the measure, is not treated.
-  \item Natural numbers require finite $n$. The infinite case is not developed.
-  \item (Optional) The observer is finite: $n<\infty$. This is motivated by the
-        empirical observation that observers do not encounter actual infinities.
-\end{enumerate}
-
-\section{Conclusion}
-
-A featureless infinity, divided, gives indistinguishable unary digits. An observer
-that is all of them, and therefore has no outside, can have an experience only as a
-traversal through their readings. Time, number and binary representation are then
-properties of the traversal, and the digits stay unary throughout.
+\paragraph{Assumptions.}
+(1) A theory of everything exists, and it leaves nothing unexplained.
+(2) Featureless means closed under split.
+(3) Split is the one admitted primitive, a relation between parts.
 
 \medskip
-\noindent\textbf{Existence does not require information. Information requires
-distinction, and distinction can emerge internally through observation.}
+\noindent\textbf{Information, mathematics is an emergent structure of us, the rich emergent structures capable to split.}
 
-Information, time and the laws of physics are emergent properties of the observer. The
-universe at its deepest level is neither temporal nor informational, and from
-inside it cannot be told from nothing.
+
+\section{Supplementary Materials}
+
+\begin{itemize}
+  \item A Tutorial on Unary Arithmetic (unary-tutorial.pdf)
+  \item Python unary package, for unary arithmetic (pip install unary)
+\end{itemize}
+
+
+\section{Related work}
+The question of what is fundamental, information or something else, has a
+long history, and several approaches are close to ours.
+
+\paragraph{Information as fundamental.}
+Weizsacker's ur-theory reconstructs physics from binary alternatives
+\cite{lyre2003}, and Wheeler's ``it from bit'' derives every physical
+quantity from binary yes-or-no indications \cite{wheeler1990}. In both,
+the binary alternative is the starting point. For us it is not. A split
+gives an unordered pair of unary digits, which is not yet a bit
+(Section~3). Wheeler ties his bits to acts of observer-participancy, which
+is closer to our view that distinction is a reading. The difference is
+that we place neither the observer nor the binary choice in the base: both
+appear at a depth of the hierarchy. A bit's two-ness is itself a reading.
+
+\paragraph{Mathematics or computation as fundamental.}
+Tegmark's ultimate ensemble takes all mathematical structures to exist
+\cite{tegmark1998}, and the ruliad of Wolfram's Physics Project is the
+entangled limit of all possible computations, with laws arising from
+sampling by observers \cite{rickles2023}. Tegmark's motivation, avoiding an
+unexplained choice among structures, is the same as our principle that
+nothing is left unexplained. We differ in what we take as the base. They
+start from structures or computations. We treat mathematics and
+computation as emergent, beginning from a base with neither.
+
+\paragraph{Information as emergent.}
+Standish's ensemble of all descriptions has zero information content, and
+information is defined relative to an observer \cite{standish2004}. This is
+the closest to our claim. He starts from the set of all bitstrings, so a
+binary alphabet is already assumed. We try to derive it from nested splits.
+
+\paragraph{Distinction as primitive.}
+Spencer-Brown's \emph{Laws of Form} begins from a distinction
+\cite{spencerbrown1969}, and our split resembles it. As far as we can tell,
+the primary arithmetic starts from a marked state and an unmarked one,
+which is already an asymmetric pair. Our split yields a symmetric pair,
+with no marked member.
 
 \end{document}
